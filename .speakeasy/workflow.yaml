@@ -14,3 +14,6 @@ targets:
     discord:
         target: typescript
         source: Discord-OAS
+        publish:
+            npm:
+                token: $npm_token
