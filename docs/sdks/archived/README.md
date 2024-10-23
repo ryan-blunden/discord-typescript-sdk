@@ -1,0 +1,2 @@
+# Archived
+(*channels.threads.archived*)

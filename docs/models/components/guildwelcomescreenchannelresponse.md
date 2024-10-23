@@ -1,0 +1,21 @@
+# GuildWelcomeScreenChannelResponse
+
+## Example Usage
+
+```typescript
+import { GuildWelcomeScreenChannelResponse } from "discord-sdk/models/components";
+
+let value: GuildWelcomeScreenChannelResponse = {
+  channelId: "<value>",
+  description: "vestment excluding owlishly behind",
+};
+```
+
+## Fields
+
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `channelId`        | *string*           | :heavy_check_mark: | N/A                |
+| `description`      | *string*           | :heavy_check_mark: | N/A                |
+| `emojiId`          | *string*           | :heavy_minus_sign: | N/A                |
+| `emojiName`        | *string*           | :heavy_minus_sign: | N/A                |

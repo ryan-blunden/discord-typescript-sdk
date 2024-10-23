@@ -1,0 +1,27 @@
+# GithubReview
+
+## Example Usage
+
+```typescript
+import { GithubReview } from "discord-sdk/models/components";
+
+let value: GithubReview = {
+  user: {
+    id: 654297,
+    login: "Mohammed96",
+    htmlUrl: "https://spirited-jogging.name/",
+    avatarUrl: "https://musty-place.name",
+  },
+  htmlUrl: "https://corny-submitter.net",
+  state: "Wisconsin",
+};
+```
+
+## Fields
+
+| Field                                                          | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `user`                                                         | [components.GithubUser](../../models/components/githubuser.md) | :heavy_check_mark:                                             | N/A                                                            |
+| `body`                                                         | *string*                                                       | :heavy_minus_sign:                                             | N/A                                                            |
+| `htmlUrl`                                                      | *string*                                                       | :heavy_check_mark:                                             | N/A                                                            |
+| `state`                                                        | *string*                                                       | :heavy_check_mark:                                             | N/A                                                            |
