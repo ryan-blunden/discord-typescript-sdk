@@ -46,25 +46,25 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add https://github.com/ryan-blunden/discord-typescript-sdk
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add https://github.com/ryan-blunden/discord-typescript-sdk
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add https://github.com/ryan-blunden/discord-typescript-sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
+yarn add https://github.com/ryan-blunden/discord-typescript-sdk zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
@@ -176,9 +176,9 @@ run();
 
 ### [channelMessages](docs/sdks/channelmessages/README.md)
 
-* [updateMultipart](docs/sdks/channelmessages/README.md#updatemultipart)
 * [updateJson](docs/sdks/channelmessages/README.md#updatejson)
 * [updateForm](docs/sdks/channelmessages/README.md#updateform)
+* [updateMultipart](docs/sdks/channelmessages/README.md#updatemultipart)
 
 ### [channelPermissions](docs/sdks/channelpermissions/README.md)
 
@@ -210,9 +210,9 @@ run();
 * [deleteGroupDmUser](docs/sdks/channels/README.md#deletegroupdmuser)
 * [follow](docs/sdks/channels/README.md#follow)
 * [getMessage](docs/sdks/channels/README.md#getmessage)
+* [createMessageMultipart](docs/sdks/channels/README.md#createmessagemultipart)
 * [createMessageJson](docs/sdks/channels/README.md#createmessagejson)
 * [createMessageForm](docs/sdks/channels/README.md#createmessageform)
-* [createMessageMultipart](docs/sdks/channels/README.md#createmessagemultipart)
 * [createThread](docs/sdks/channels/README.md#createthread)
 * [triggerTyping](docs/sdks/channels/README.md#triggertyping)
 * [pinMessage](docs/sdks/channels/README.md#pinmessage)

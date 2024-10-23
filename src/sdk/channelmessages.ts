@@ -11,17 +11,6 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class ChannelMessages extends ClientSDK {
-  async updateMultipart(
-    request: operations.UpdateMessageMultipartRequest,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(channelMessagesUpdateMultipart(
-      this,
-      request,
-      options,
-    ));
-  }
-
   async updateJson(
     request: operations.UpdateMessageJsonRequest,
     options?: RequestOptions,
@@ -38,6 +27,17 @@ export class ChannelMessages extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.MessageResponse> {
     return unwrapAsync(channelMessagesUpdateForm(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  async updateMultipart(
+    request: operations.UpdateMessageMultipartRequest,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(channelMessagesUpdateMultipart(
       this,
       request,
       options,

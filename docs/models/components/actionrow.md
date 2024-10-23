@@ -9,6 +9,7 @@ let value: ActionRow = {
   components: [
     {
       customId: "<id>",
+      label: "<value>",
     },
   ],
 };
