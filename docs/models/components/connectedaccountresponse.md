@@ -1,0 +1,30 @@
+# ConnectedAccountResponse
+
+## Example Usage
+
+```typescript
+import { ConnectedAccountResponse } from "@ryan.blunden/discord-sdk/models/components";
+
+let value: ConnectedAccountResponse = {
+  id: "<id>",
+  friendSync: false,
+  showActivity: false,
+  twoWayLink: false,
+  verified: false,
+};
+```
+
+## Fields
+
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                               | *string*                                                                                                           | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `name`                                                                                                             | *string*                                                                                                           | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |
+| `type`                                                                                                             | *string*                                                                                                           | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `friendSync`                                                                                                       | *boolean*                                                                                                          | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `integrations`                                                                                                     | [components.ConnectedAccountIntegrationResponse](../../models/components/connectedaccountintegrationresponse.md)[] | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |
+| `showActivity`                                                                                                     | *boolean*                                                                                                          | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `twoWayLink`                                                                                                       | *boolean*                                                                                                          | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `verified`                                                                                                         | *boolean*                                                                                                          | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `visibility`                                                                                                       | *number*                                                                                                           | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `revoked`                                                                                                          | *boolean*                                                                                                          | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |
