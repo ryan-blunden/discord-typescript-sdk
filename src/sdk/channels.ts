@@ -290,17 +290,6 @@ export class Channels extends ClientSDK {
     ));
   }
 
-  async createMessageJson(
-    request: operations.CreateMessageJsonRequest,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(channelsCreateMessageJson(
-      this,
-      request,
-      options,
-    ));
-  }
-
   async createMessageForm(
     request: operations.CreateMessageFormRequest,
     options?: RequestOptions,
@@ -317,6 +306,17 @@ export class Channels extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.MessageResponse> {
     return unwrapAsync(channelsCreateMessageMultipart(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  async createMessageJson(
+    request: operations.CreateMessageJsonRequest,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(channelsCreateMessageJson(
       this,
       request,
       options,

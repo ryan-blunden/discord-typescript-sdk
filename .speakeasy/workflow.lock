@@ -2,16 +2,17 @@ speakeasyVersion: 1.420.0
 sources:
     Discord-OAS:
         sourceNamespace: discord-oas
-        sourceRevisionDigest: sha256:de148ea38d1b07ecb8db180cf7725c37ff086c9e3b65152d8daf08e7dfc2a67a
-        sourceBlobDigest: sha256:cfa0f9a1ffdfc73358ae2cd04f294356ed2f14cbfde1018de90c429382116c56
+        sourceRevisionDigest: sha256:37506a5ff9f4d312d5415b45bae53f861e6da7ec13f5223d6e1a25fd4e93252c
+        sourceBlobDigest: sha256:f297e9d309671d6aefc5b518317f84ba6760e9cc394c857c93ac3c7ed5d7af72
         tags:
             - latest
+            - main
 targets:
     discord:
         source: Discord-OAS
         sourceNamespace: discord-oas
-        sourceRevisionDigest: sha256:de148ea38d1b07ecb8db180cf7725c37ff086c9e3b65152d8daf08e7dfc2a67a
-        sourceBlobDigest: sha256:cfa0f9a1ffdfc73358ae2cd04f294356ed2f14cbfde1018de90c429382116c56
+        sourceRevisionDigest: sha256:37506a5ff9f4d312d5415b45bae53f861e6da7ec13f5223d6e1a25fd4e93252c
+        sourceBlobDigest: sha256:f297e9d309671d6aefc5b518317f84ba6760e9cc394c857c93ac3c7ed5d7af72
     discord2:
         source: Discord-OAS
         sourceNamespace: discord-oas

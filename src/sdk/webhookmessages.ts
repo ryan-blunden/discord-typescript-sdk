@@ -25,6 +25,19 @@ export class WebhookMessages extends ClientSDK {
     ));
   }
 
+  async updateMultipart(
+    request: operations.UpdateWebhookMessageMultipartRequest,
+    security?: operations.UpdateWebhookMessageMultipartSecurity | undefined,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(webhookMessagesUpdateMultipart(
+      this,
+      request,
+      security,
+      options,
+    ));
+  }
+
   async updateJson(
     request: operations.UpdateWebhookMessageJsonRequest,
     security?: operations.UpdateWebhookMessageJsonSecurity | undefined,
@@ -44,19 +57,6 @@ export class WebhookMessages extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.MessageResponse> {
     return unwrapAsync(webhookMessagesUpdateForm(
-      this,
-      request,
-      security,
-      options,
-    ));
-  }
-
-  async updateMultipart(
-    request: operations.UpdateWebhookMessageMultipartRequest,
-    security?: operations.UpdateWebhookMessageMultipartSecurity | undefined,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(webhookMessagesUpdateMultipart(
       this,
       request,
       security,

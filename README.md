@@ -176,9 +176,9 @@ run();
 
 ### [channelMessages](docs/sdks/channelmessages/README.md)
 
+* [updateMultipart](docs/sdks/channelmessages/README.md#updatemultipart)
 * [updateJson](docs/sdks/channelmessages/README.md#updatejson)
 * [updateForm](docs/sdks/channelmessages/README.md#updateform)
-* [updateMultipart](docs/sdks/channelmessages/README.md#updatemultipart)
 
 ### [channelPermissions](docs/sdks/channelpermissions/README.md)
 
@@ -210,9 +210,9 @@ run();
 * [deleteGroupDmUser](docs/sdks/channels/README.md#deletegroupdmuser)
 * [follow](docs/sdks/channels/README.md#follow)
 * [getMessage](docs/sdks/channels/README.md#getmessage)
-* [createMessageJson](docs/sdks/channels/README.md#createmessagejson)
 * [createMessageForm](docs/sdks/channels/README.md#createmessageform)
 * [createMessageMultipart](docs/sdks/channels/README.md#createmessagemultipart)
+* [createMessageJson](docs/sdks/channels/README.md#createmessagejson)
 * [createThread](docs/sdks/channels/README.md#createthread)
 * [triggerTyping](docs/sdks/channels/README.md#triggertyping)
 * [pinMessage](docs/sdks/channels/README.md#pinmessage)
@@ -499,9 +499,9 @@ run();
 ### [webhookMessages](docs/sdks/webhookmessages/README.md)
 
 * [deleteOriginal](docs/sdks/webhookmessages/README.md#deleteoriginal)
+* [updateMultipart](docs/sdks/webhookmessages/README.md#updatemultipart)
 * [updateJson](docs/sdks/webhookmessages/README.md#updatejson)
 * [updateForm](docs/sdks/webhookmessages/README.md#updateform)
-* [updateMultipart](docs/sdks/webhookmessages/README.md#updatemultipart)
 
 ### [webhooks](docs/sdks/webhooks/README.md)
 
