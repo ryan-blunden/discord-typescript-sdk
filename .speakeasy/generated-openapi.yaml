@@ -4492,8 +4492,8 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildRoles
-      x-speakeasy-name-override: create
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: createRole
     patch:
       operationId: "bulk_update_guild_roles"
       requestBody:
