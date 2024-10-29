@@ -2,18 +2,19 @@ speakeasyVersion: 1.423.1
 sources:
     Discord-OAS:
         sourceNamespace: discord-oas
-        sourceRevisionDigest: sha256:285fe56f0101ebb819aecb8093ae9f75fa818e25c11fc5a7761f30111efbc79f
-        sourceBlobDigest: sha256:dd4d02c1dfe2107ee9863fde590c1d858fa8c530900da2677cc941510a9f8d39
+        sourceRevisionDigest: sha256:2e4867df006318dddb597bbfacdeac34de6d55c3ecd080066da50240d093c3fb
+        sourceBlobDigest: sha256:a96d233336b2dec69c84024e617c7bc5ebef21a56a0485e0767089498b3cc22b
         tags:
             - latest
+            - create-guilds-role
 targets:
     discord:
         source: Discord-OAS
         sourceNamespace: discord-oas
-        sourceRevisionDigest: sha256:285fe56f0101ebb819aecb8093ae9f75fa818e25c11fc5a7761f30111efbc79f
-        sourceBlobDigest: sha256:dd4d02c1dfe2107ee9863fde590c1d858fa8c530900da2677cc941510a9f8d39
+        sourceRevisionDigest: sha256:2e4867df006318dddb597bbfacdeac34de6d55c3ecd080066da50240d093c3fb
+        sourceBlobDigest: sha256:a96d233336b2dec69c84024e617c7bc5ebef21a56a0485e0767089498b3cc22b
         codeSamplesNamespace: discord-oas-code-samples
-        codeSamplesRevisionDigest: sha256:0fbb0c5bcceef2c00d407acad1c1cacefc4293eca74fbe2feb550fe0a23e31b8
+        codeSamplesRevisionDigest: sha256:cfefefa34ea63ec4b66677355295952766a3eea2869cdb4ffa8bd4dfd9fa5d9e
     discord2:
         source: Discord-OAS
         sourceNamespace: discord-oas

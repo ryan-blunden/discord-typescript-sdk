@@ -1,6 +1,6 @@
 {
   "name": "@ryan.blunden/discord-sdk",
-  "version": "0.99.4",
+  "version": "0.99.5",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,
