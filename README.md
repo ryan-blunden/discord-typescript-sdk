@@ -301,10 +301,6 @@ run();
 
 * [preview](docs/sdks/guildprune/README.md#preview)
 
-### [guildRoles](docs/sdks/guildroles/README.md)
-
-* [create](docs/sdks/guildroles/README.md#create)
-
 ### [guilds](docs/sdks/guilds/README.md)
 
 * [create](docs/sdks/guilds/README.md#create)
@@ -348,6 +344,7 @@ run();
 * [getRole](docs/sdks/guilds/README.md#getrole)
 * [deleteRole](docs/sdks/guilds/README.md#deleterole)
 * [getRoles](docs/sdks/guilds/README.md#getroles)
+* [createRole](docs/sdks/guilds/README.md#createrole)
 * [bulkUpdateRoles](docs/sdks/guilds/README.md#bulkupdateroles)
 * [prune](docs/sdks/guilds/README.md#prune)
 * [banUser](docs/sdks/guilds/README.md#banuser)
@@ -506,9 +503,9 @@ run();
 ### [webhooks](docs/sdks/webhooks/README.md)
 
 * [getOriginalMessage](docs/sdks/webhooks/README.md#getoriginalmessage)
+* [updateOriginalMessageMultipart](docs/sdks/webhooks/README.md#updateoriginalmessagemultipart)
 * [updateOriginalMessageJson](docs/sdks/webhooks/README.md#updateoriginalmessagejson)
 * [updateOriginalMessageForm](docs/sdks/webhooks/README.md#updateoriginalmessageform)
-* [updateOriginalMessageMultipart](docs/sdks/webhooks/README.md#updateoriginalmessagemultipart)
 * [getMessage](docs/sdks/webhooks/README.md#getmessage)
 * [executeSlackWebhook](docs/sdks/webhooks/README.md#executeslackwebhook)
 * [getByToken](docs/sdks/webhooks/README.md#getbytoken)
@@ -634,7 +631,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`guildMembersAdd`](docs/sdks/guildmembers/README.md#add)
 - [`guildMembersGet`](docs/sdks/guildmembers/README.md#get)
 - [`guildPrunePreview`](docs/sdks/guildprune/README.md#preview)
-- [`guildRolesCreate`](docs/sdks/guildroles/README.md#create)
 - [`guildsAddMemberRole`](docs/sdks/guilds/README.md#addmemberrole)
 - [`guildsApplicationCommandPermissionsList`](docs/sdks/applicationcommandpermissions/README.md#list)
 - [`guildsApplicationCommandsBulkSet`](docs/sdks/discordapplicationcommands/README.md#bulkset)
@@ -648,6 +644,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`guildScheduledEventUsersList`](docs/sdks/guildscheduledeventusers/README.md#list)
 - [`guildsCreate`](docs/sdks/guilds/README.md#create)
 - [`guildsCreateEmoji`](docs/sdks/guilds/README.md#createemoji)
+- [`guildsCreateRole`](docs/sdks/guilds/README.md#createrole)
 - [`guildsCreateScheduledEvent`](docs/sdks/guilds/README.md#createscheduledevent)
 - [`guildsCreateSoundboardSound`](docs/sdks/guilds/README.md#createsoundboardsound)
 - [`guildsCreateTemplate`](docs/sdks/guilds/README.md#createtemplate)

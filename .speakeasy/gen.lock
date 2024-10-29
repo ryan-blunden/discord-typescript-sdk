@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: cfc8fa78-82f4-44ef-8443-f090f73bec38
 management:
-  docChecksum: d6e09d626537a822eec78fca1f4a63f5
+  docChecksum: bcdaa8e95479a90e81c0b503833cb179
   docVersion: "10"
-  speakeasyVersion: 1.420.0
-  generationVersion: 2.438.15
-  releaseVersion: 0.0.1
-  configChecksum: a83d6e9e48fc0d8b5e9fbee7d422685a
+  speakeasyVersion: 1.423.1
+  generationVersion: 2.442.11
+  releaseVersion: 0.99.4
+  configChecksum: 01dff9d5cb721746544e99a211cb2de1
   repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
   installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
   published: true
@@ -30,6 +30,7 @@ features:
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.1.0
+    tests: 0.7.0
     unions: 2.85.7
 generatedFiles:
   - .devcontainer/README.md
@@ -790,7 +791,6 @@ generatedFiles:
   - docs/sdks/guildinvites/README.md
   - docs/sdks/guildmembers/README.md
   - docs/sdks/guildprune/README.md
-  - docs/sdks/guildroles/README.md
   - docs/sdks/guilds/README.md
   - docs/sdks/guildscheduledevents/README.md
   - docs/sdks/guildscheduledeventusers/README.md
@@ -914,7 +914,6 @@ generatedFiles:
   - src/funcs/guildMembersAdd.ts
   - src/funcs/guildMembersGet.ts
   - src/funcs/guildPrunePreview.ts
-  - src/funcs/guildRolesCreate.ts
   - src/funcs/guildScheduledEventUsersList.ts
   - src/funcs/guildScheduledEventsGet.ts
   - src/funcs/guildScheduledEventsList.ts
@@ -936,6 +935,7 @@ generatedFiles:
   - src/funcs/guildsBulkUpdateRoles.ts
   - src/funcs/guildsCreate.ts
   - src/funcs/guildsCreateEmoji.ts
+  - src/funcs/guildsCreateRole.ts
   - src/funcs/guildsCreateScheduledEvent.ts
   - src/funcs/guildsCreateSoundboardSound.ts
   - src/funcs/guildsCreateTemplate.ts
@@ -1638,7 +1638,6 @@ generatedFiles:
   - src/sdk/guildinvites.ts
   - src/sdk/guildmembers.ts
   - src/sdk/guildprune.ts
-  - src/sdk/guildroles.ts
   - src/sdk/guilds.ts
   - src/sdk/guildscheduledevents.ts
   - src/sdk/guildscheduledeventusers.ts
