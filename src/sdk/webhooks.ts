@@ -45,19 +45,6 @@ export class Webhooks extends ClientSDK {
     ));
   }
 
-  async updateOriginalMessageJson(
-    request: operations.UpdateOriginalWebhookMessageJsonRequest,
-    security?: operations.UpdateOriginalWebhookMessageJsonSecurity | undefined,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(webhooksUpdateOriginalMessageJson(
-      this,
-      request,
-      security,
-      options,
-    ));
-  }
-
   async updateOriginalMessageForm(
     request: operations.UpdateOriginalWebhookMessageFormRequest,
     security?: operations.UpdateOriginalWebhookMessageFormSecurity | undefined,
@@ -79,6 +66,19 @@ export class Webhooks extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.MessageResponse> {
     return unwrapAsync(webhooksUpdateOriginalMessageMultipart(
+      this,
+      request,
+      security,
+      options,
+    ));
+  }
+
+  async updateOriginalMessageJson(
+    request: operations.UpdateOriginalWebhookMessageJsonRequest,
+    security?: operations.UpdateOriginalWebhookMessageJsonSecurity | undefined,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(webhooksUpdateOriginalMessageJson(
       this,
       request,
       security,

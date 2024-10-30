@@ -28,7 +28,6 @@ import { GuildIntegrations } from "./guildintegrations.js";
 import { GuildInvites } from "./guildinvites.js";
 import { GuildMembers } from "./guildmembers.js";
 import { GuildPrune } from "./guildprune.js";
-import { GuildRoles } from "./guildroles.js";
 import { Guilds } from "./guilds.js";
 import { GuildScheduledEvents } from "./guildscheduledevents.js";
 import { GuildScheduledEventUsers } from "./guildscheduledeventusers.js";
@@ -275,11 +274,6 @@ export class Discord extends ClientSDK {
   private _guildEmojis?: GuildEmojis;
   get guildEmojis(): GuildEmojis {
     return (this._guildEmojis ??= new GuildEmojis(this._options));
-  }
-
-  private _guildRoles?: GuildRoles;
-  get guildRoles(): GuildRoles {
-    return (this._guildRoles ??= new GuildRoles(this._options));
   }
 
   private _guildPrune?: GuildPrune;

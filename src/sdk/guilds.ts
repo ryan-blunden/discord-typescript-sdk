@@ -8,6 +8,7 @@ import { guildsBulkBanUsers } from "../funcs/guildsBulkBanUsers.js";
 import { guildsBulkUpdateRoles } from "../funcs/guildsBulkUpdateRoles.js";
 import { guildsCreate } from "../funcs/guildsCreate.js";
 import { guildsCreateEmoji } from "../funcs/guildsCreateEmoji.js";
+import { guildsCreateRole } from "../funcs/guildsCreateRole.js";
 import { guildsCreateScheduledEvent } from "../funcs/guildsCreateScheduledEvent.js";
 import { guildsCreateSoundboardSound } from "../funcs/guildsCreateSoundboardSound.js";
 import { guildsCreateTemplate } from "../funcs/guildsCreateTemplate.js";
@@ -574,6 +575,17 @@ export class Guilds extends ClientSDK {
     options?: RequestOptions,
   ): Promise<Array<components.GuildRoleResponse>> {
     return unwrapAsync(guildsGetRoles(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  async createRole(
+    request: operations.CreateGuildRoleRequest,
+    options?: RequestOptions,
+  ): Promise<components.GuildRoleResponse> {
+    return unwrapAsync(guildsCreateRole(
       this,
       request,
       options,
