@@ -7,6 +7,7 @@ sources:
         overlays:
             - location: .speakeasy/fixes-overlay.yaml
             - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            - location: .speakeasy/method-modifications-overlay.yaml
         output: .speakeasy/generated-openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryan-blunden/discord-oas
@@ -17,3 +18,7 @@ targets:
         publish:
             npm:
                 token: $npm_token
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryan-blunden/discord-oas-code-samples
+            blocking: false

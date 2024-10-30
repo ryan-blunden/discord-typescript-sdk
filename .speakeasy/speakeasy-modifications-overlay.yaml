@@ -616,14 +616,6 @@ actions:
       after: sdk.oauth2.getAuthorization()
       before: sdk.<no_group>.get_my_oauth2_authorization()
       type: method-name
-  - target: $["paths"]["/guilds/{guild_id}/roles"]["post"]
-    update:
-      x-speakeasy-group: guildRoles
-      x-speakeasy-name-override: create
-    x-speakeasy-metadata:
-      after: sdk.guildRoles.create()
-      before: sdk.<no_group>.create_guild_role()
-      type: method-name
   - target: $["paths"]["/guilds/{guild_id}/audit-logs"]["get"]
     update:
       x-speakeasy-group: guilds
