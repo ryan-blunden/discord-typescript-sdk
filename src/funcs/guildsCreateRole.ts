@@ -23,7 +23,7 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
-export async function guildRolesCreate(
+export async function guildsCreateRole(
   client: DiscordCore,
   request: operations.CreateGuildRoleRequest,
   options?: RequestOptions,

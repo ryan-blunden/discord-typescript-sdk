@@ -1,9 +1,9 @@
-speakeasyVersion: 1.420.0
+speakeasyVersion: 1.423.2
 sources:
     Discord-OAS:
         sourceNamespace: discord-oas
-        sourceRevisionDigest: sha256:b4fed2381f94a917e523cb5a95eaa6db2ce19604f42ea3d136700d8bc4110801
-        sourceBlobDigest: sha256:f297e9d309671d6aefc5b518317f84ba6760e9cc394c857c93ac3c7ed5d7af72
+        sourceRevisionDigest: sha256:25a621bc2ff58baed40bde015d76419ffefcb7f6abc687889a202de9dfee1035
+        sourceBlobDigest: sha256:a96d233336b2dec69c84024e617c7bc5ebef21a56a0485e0767089498b3cc22b
         tags:
             - latest
             - main
@@ -11,8 +11,10 @@ targets:
     discord:
         source: Discord-OAS
         sourceNamespace: discord-oas
-        sourceRevisionDigest: sha256:b4fed2381f94a917e523cb5a95eaa6db2ce19604f42ea3d136700d8bc4110801
-        sourceBlobDigest: sha256:f297e9d309671d6aefc5b518317f84ba6760e9cc394c857c93ac3c7ed5d7af72
+        sourceRevisionDigest: sha256:25a621bc2ff58baed40bde015d76419ffefcb7f6abc687889a202de9dfee1035
+        sourceBlobDigest: sha256:a96d233336b2dec69c84024e617c7bc5ebef21a56a0485e0767089498b3cc22b
+        codeSamplesNamespace: discord-oas-code-samples
+        codeSamplesRevisionDigest: sha256:c94b948412b3bddc756eb01a8a898c4d3385f939db4d91469dd51bfef3db4d32
     discord2:
         source: Discord-OAS
         sourceNamespace: discord-oas
@@ -28,6 +30,7 @@ workflow:
             overlays:
                 - location: .speakeasy/fixes-overlay.yaml
                 - location: .speakeasy/speakeasy-modifications-overlay.yaml
+                - location: .speakeasy/method-modifications-overlay.yaml
             output: .speakeasy/generated-openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryan-blunden/discord-oas
@@ -35,3 +38,10 @@ workflow:
         discord:
             target: typescript
             source: Discord-OAS
+            publish:
+                npm:
+                    token: $npm_token
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryan-blunden/discord-oas-code-samples
+                blocking: false
