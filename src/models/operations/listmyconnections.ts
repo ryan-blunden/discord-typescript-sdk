@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListMyConnectionsSecurity = {
   botToken?: string | undefined;
@@ -51,4 +54,22 @@ export namespace ListMyConnectionsSecurity$ {
   export const outboundSchema = ListMyConnectionsSecurity$outboundSchema;
   /** @deprecated use `ListMyConnectionsSecurity$Outbound` instead. */
   export type Outbound = ListMyConnectionsSecurity$Outbound;
+}
+
+export function listMyConnectionsSecurityToJSON(
+  listMyConnectionsSecurity: ListMyConnectionsSecurity,
+): string {
+  return JSON.stringify(
+    ListMyConnectionsSecurity$outboundSchema.parse(listMyConnectionsSecurity),
+  );
+}
+
+export function listMyConnectionsSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<ListMyConnectionsSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListMyConnectionsSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListMyConnectionsSecurity' from JSON`,
+  );
 }

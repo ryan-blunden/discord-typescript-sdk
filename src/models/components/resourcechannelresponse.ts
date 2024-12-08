@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   SettingsEmojiResponse,
   SettingsEmojiResponse$inboundSchema,
@@ -73,4 +76,22 @@ export namespace ResourceChannelResponse$ {
   export const outboundSchema = ResourceChannelResponse$outboundSchema;
   /** @deprecated use `ResourceChannelResponse$Outbound` instead. */
   export type Outbound = ResourceChannelResponse$Outbound;
+}
+
+export function resourceChannelResponseToJSON(
+  resourceChannelResponse: ResourceChannelResponse,
+): string {
+  return JSON.stringify(
+    ResourceChannelResponse$outboundSchema.parse(resourceChannelResponse),
+  );
+}
+
+export function resourceChannelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ResourceChannelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResourceChannelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResourceChannelResponse' from JSON`,
+  );
 }

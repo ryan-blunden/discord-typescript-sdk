@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type WebhookSlackEmbedField = {
   name?: string | null | undefined;
@@ -50,4 +53,22 @@ export namespace WebhookSlackEmbedField$ {
   export const outboundSchema = WebhookSlackEmbedField$outboundSchema;
   /** @deprecated use `WebhookSlackEmbedField$Outbound` instead. */
   export type Outbound = WebhookSlackEmbedField$Outbound;
+}
+
+export function webhookSlackEmbedFieldToJSON(
+  webhookSlackEmbedField: WebhookSlackEmbedField,
+): string {
+  return JSON.stringify(
+    WebhookSlackEmbedField$outboundSchema.parse(webhookSlackEmbedField),
+  );
+}
+
+export function webhookSlackEmbedFieldFromJSON(
+  jsonString: string,
+): SafeParseResult<WebhookSlackEmbedField, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WebhookSlackEmbedField$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WebhookSlackEmbedField' from JSON`,
+  );
 }

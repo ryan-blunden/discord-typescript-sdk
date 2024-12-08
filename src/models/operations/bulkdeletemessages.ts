@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BulkDeleteMessagesRequestBody = {
   messages: Array<string>;
@@ -48,6 +51,26 @@ export namespace BulkDeleteMessagesRequestBody$ {
   export const outboundSchema = BulkDeleteMessagesRequestBody$outboundSchema;
   /** @deprecated use `BulkDeleteMessagesRequestBody$Outbound` instead. */
   export type Outbound = BulkDeleteMessagesRequestBody$Outbound;
+}
+
+export function bulkDeleteMessagesRequestBodyToJSON(
+  bulkDeleteMessagesRequestBody: BulkDeleteMessagesRequestBody,
+): string {
+  return JSON.stringify(
+    BulkDeleteMessagesRequestBody$outboundSchema.parse(
+      bulkDeleteMessagesRequestBody,
+    ),
+  );
+}
+
+export function bulkDeleteMessagesRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkDeleteMessagesRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkDeleteMessagesRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkDeleteMessagesRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -97,4 +120,22 @@ export namespace BulkDeleteMessagesRequest$ {
   export const outboundSchema = BulkDeleteMessagesRequest$outboundSchema;
   /** @deprecated use `BulkDeleteMessagesRequest$Outbound` instead. */
   export type Outbound = BulkDeleteMessagesRequest$Outbound;
+}
+
+export function bulkDeleteMessagesRequestToJSON(
+  bulkDeleteMessagesRequest: BulkDeleteMessagesRequest,
+): string {
+  return JSON.stringify(
+    BulkDeleteMessagesRequest$outboundSchema.parse(bulkDeleteMessagesRequest),
+  );
+}
+
+export function bulkDeleteMessagesRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkDeleteMessagesRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkDeleteMessagesRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkDeleteMessagesRequest' from JSON`,
+  );
 }

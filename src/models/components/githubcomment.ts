@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GithubUser,
   GithubUser$inboundSchema,
@@ -75,4 +78,18 @@ export namespace GithubComment$ {
   export const outboundSchema = GithubComment$outboundSchema;
   /** @deprecated use `GithubComment$Outbound` instead. */
   export type Outbound = GithubComment$Outbound;
+}
+
+export function githubCommentToJSON(githubComment: GithubComment): string {
+  return JSON.stringify(GithubComment$outboundSchema.parse(githubComment));
+}
+
+export function githubCommentFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubComment, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubComment$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubComment' from JSON`,
+  );
 }

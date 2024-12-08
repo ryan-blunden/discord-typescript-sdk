@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UploadApplicationAttachmentSecurity = {
   botToken?: string | undefined;
@@ -64,6 +67,27 @@ export namespace UploadApplicationAttachmentSecurity$ {
   export type Outbound = UploadApplicationAttachmentSecurity$Outbound;
 }
 
+export function uploadApplicationAttachmentSecurityToJSON(
+  uploadApplicationAttachmentSecurity: UploadApplicationAttachmentSecurity,
+): string {
+  return JSON.stringify(
+    UploadApplicationAttachmentSecurity$outboundSchema.parse(
+      uploadApplicationAttachmentSecurity,
+    ),
+  );
+}
+
+export function uploadApplicationAttachmentSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<UploadApplicationAttachmentSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UploadApplicationAttachmentSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UploadApplicationAttachmentSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const UploadApplicationAttachmentRequestBody$inboundSchema: z.ZodType<
   UploadApplicationAttachmentRequestBody,
@@ -100,6 +124,28 @@ export namespace UploadApplicationAttachmentRequestBody$ {
     UploadApplicationAttachmentRequestBody$outboundSchema;
   /** @deprecated use `UploadApplicationAttachmentRequestBody$Outbound` instead. */
   export type Outbound = UploadApplicationAttachmentRequestBody$Outbound;
+}
+
+export function uploadApplicationAttachmentRequestBodyToJSON(
+  uploadApplicationAttachmentRequestBody:
+    UploadApplicationAttachmentRequestBody,
+): string {
+  return JSON.stringify(
+    UploadApplicationAttachmentRequestBody$outboundSchema.parse(
+      uploadApplicationAttachmentRequestBody,
+    ),
+  );
+}
+
+export function uploadApplicationAttachmentRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UploadApplicationAttachmentRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UploadApplicationAttachmentRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UploadApplicationAttachmentRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -154,4 +200,25 @@ export namespace UploadApplicationAttachmentRequest$ {
     UploadApplicationAttachmentRequest$outboundSchema;
   /** @deprecated use `UploadApplicationAttachmentRequest$Outbound` instead. */
   export type Outbound = UploadApplicationAttachmentRequest$Outbound;
+}
+
+export function uploadApplicationAttachmentRequestToJSON(
+  uploadApplicationAttachmentRequest: UploadApplicationAttachmentRequest,
+): string {
+  return JSON.stringify(
+    UploadApplicationAttachmentRequest$outboundSchema.parse(
+      uploadApplicationAttachmentRequest,
+    ),
+  );
+}
+
+export function uploadApplicationAttachmentRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UploadApplicationAttachmentRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UploadApplicationAttachmentRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UploadApplicationAttachmentRequest' from JSON`,
+  );
 }

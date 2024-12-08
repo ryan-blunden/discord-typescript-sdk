@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateGuildWelcomeScreenRequest = {
   guildId: string;
@@ -61,4 +64,24 @@ export namespace UpdateGuildWelcomeScreenRequest$ {
   export const outboundSchema = UpdateGuildWelcomeScreenRequest$outboundSchema;
   /** @deprecated use `UpdateGuildWelcomeScreenRequest$Outbound` instead. */
   export type Outbound = UpdateGuildWelcomeScreenRequest$Outbound;
+}
+
+export function updateGuildWelcomeScreenRequestToJSON(
+  updateGuildWelcomeScreenRequest: UpdateGuildWelcomeScreenRequest,
+): string {
+  return JSON.stringify(
+    UpdateGuildWelcomeScreenRequest$outboundSchema.parse(
+      updateGuildWelcomeScreenRequest,
+    ),
+  );
+}
+
+export function updateGuildWelcomeScreenRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildWelcomeScreenRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildWelcomeScreenRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildWelcomeScreenRequest' from JSON`,
+  );
 }

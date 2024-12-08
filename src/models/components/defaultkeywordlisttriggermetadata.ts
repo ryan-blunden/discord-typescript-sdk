@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DefaultKeywordListTriggerMetadata = {
   allowList?: Array<string> | null | undefined;
@@ -56,4 +59,24 @@ export namespace DefaultKeywordListTriggerMetadata$ {
     DefaultKeywordListTriggerMetadata$outboundSchema;
   /** @deprecated use `DefaultKeywordListTriggerMetadata$Outbound` instead. */
   export type Outbound = DefaultKeywordListTriggerMetadata$Outbound;
+}
+
+export function defaultKeywordListTriggerMetadataToJSON(
+  defaultKeywordListTriggerMetadata: DefaultKeywordListTriggerMetadata,
+): string {
+  return JSON.stringify(
+    DefaultKeywordListTriggerMetadata$outboundSchema.parse(
+      defaultKeywordListTriggerMetadata,
+    ),
+  );
+}
+
+export function defaultKeywordListTriggerMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<DefaultKeywordListTriggerMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DefaultKeywordListTriggerMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DefaultKeywordListTriggerMetadata' from JSON`,
+  );
 }

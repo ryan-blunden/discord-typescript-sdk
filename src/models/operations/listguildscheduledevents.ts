@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListGuildScheduledEventsRequest = {
   guildId: string;
@@ -65,6 +68,26 @@ export namespace ListGuildScheduledEventsRequest$ {
   export type Outbound = ListGuildScheduledEventsRequest$Outbound;
 }
 
+export function listGuildScheduledEventsRequestToJSON(
+  listGuildScheduledEventsRequest: ListGuildScheduledEventsRequest,
+): string {
+  return JSON.stringify(
+    ListGuildScheduledEventsRequest$outboundSchema.parse(
+      listGuildScheduledEventsRequest,
+    ),
+  );
+}
+
+export function listGuildScheduledEventsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildScheduledEventsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildScheduledEventsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildScheduledEventsRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const ListGuildScheduledEventsResponseBody$inboundSchema: z.ZodType<
   ListGuildScheduledEventsResponseBody,
@@ -106,4 +129,25 @@ export namespace ListGuildScheduledEventsResponseBody$ {
     ListGuildScheduledEventsResponseBody$outboundSchema;
   /** @deprecated use `ListGuildScheduledEventsResponseBody$Outbound` instead. */
   export type Outbound = ListGuildScheduledEventsResponseBody$Outbound;
+}
+
+export function listGuildScheduledEventsResponseBodyToJSON(
+  listGuildScheduledEventsResponseBody: ListGuildScheduledEventsResponseBody,
+): string {
+  return JSON.stringify(
+    ListGuildScheduledEventsResponseBody$outboundSchema.parse(
+      listGuildScheduledEventsResponseBody,
+    ),
+  );
+}
+
+export function listGuildScheduledEventsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildScheduledEventsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListGuildScheduledEventsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildScheduledEventsResponseBody' from JSON`,
+  );
 }

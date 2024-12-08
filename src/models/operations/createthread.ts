@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateThreadChannelsThreadsRequestRequestBody =
   | components.CreateForumThreadRequest
@@ -57,6 +60,33 @@ export namespace CreateThreadChannelsThreadsRequestRequestBody$ {
     CreateThreadChannelsThreadsRequestRequestBody$outboundSchema;
   /** @deprecated use `CreateThreadChannelsThreadsRequestRequestBody$Outbound` instead. */
   export type Outbound = CreateThreadChannelsThreadsRequestRequestBody$Outbound;
+}
+
+export function createThreadChannelsThreadsRequestRequestBodyToJSON(
+  createThreadChannelsThreadsRequestRequestBody:
+    CreateThreadChannelsThreadsRequestRequestBody,
+): string {
+  return JSON.stringify(
+    CreateThreadChannelsThreadsRequestRequestBody$outboundSchema.parse(
+      createThreadChannelsThreadsRequestRequestBody,
+    ),
+  );
+}
+
+export function createThreadChannelsThreadsRequestRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateThreadChannelsThreadsRequestRequestBody,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateThreadChannelsThreadsRequestRequestBody$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateThreadChannelsThreadsRequestRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -114,4 +144,22 @@ export namespace CreateThreadRequest$ {
   export const outboundSchema = CreateThreadRequest$outboundSchema;
   /** @deprecated use `CreateThreadRequest$Outbound` instead. */
   export type Outbound = CreateThreadRequest$Outbound;
+}
+
+export function createThreadRequestToJSON(
+  createThreadRequest: CreateThreadRequest,
+): string {
+  return JSON.stringify(
+    CreateThreadRequest$outboundSchema.parse(createThreadRequest),
+  );
+}
+
+export function createThreadRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateThreadRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateThreadRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateThreadRequest' from JSON`,
+  );
 }

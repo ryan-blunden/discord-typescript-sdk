@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RequestBody = {
   id?: string | undefined;
@@ -72,6 +75,20 @@ export namespace RequestBody$ {
   export type Outbound = RequestBody$Outbound;
 }
 
+export function requestBodyToJSON(requestBody: RequestBody): string {
+  return JSON.stringify(RequestBody$outboundSchema.parse(requestBody));
+}
+
+export function requestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<RequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const BulkUpdateGuildChannelsRequest$inboundSchema: z.ZodType<
   BulkUpdateGuildChannelsRequest,
@@ -119,4 +136,24 @@ export namespace BulkUpdateGuildChannelsRequest$ {
   export const outboundSchema = BulkUpdateGuildChannelsRequest$outboundSchema;
   /** @deprecated use `BulkUpdateGuildChannelsRequest$Outbound` instead. */
   export type Outbound = BulkUpdateGuildChannelsRequest$Outbound;
+}
+
+export function bulkUpdateGuildChannelsRequestToJSON(
+  bulkUpdateGuildChannelsRequest: BulkUpdateGuildChannelsRequest,
+): string {
+  return JSON.stringify(
+    BulkUpdateGuildChannelsRequest$outboundSchema.parse(
+      bulkUpdateGuildChannelsRequest,
+    ),
+  );
+}
+
+export function bulkUpdateGuildChannelsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkUpdateGuildChannelsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkUpdateGuildChannelsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkUpdateGuildChannelsRequest' from JSON`,
+  );
 }

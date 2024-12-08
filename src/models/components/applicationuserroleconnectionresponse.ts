@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ApplicationUserRoleConnectionResponse = {
   platformName?: string | null | undefined;
@@ -63,4 +66,25 @@ export namespace ApplicationUserRoleConnectionResponse$ {
     ApplicationUserRoleConnectionResponse$outboundSchema;
   /** @deprecated use `ApplicationUserRoleConnectionResponse$Outbound` instead. */
   export type Outbound = ApplicationUserRoleConnectionResponse$Outbound;
+}
+
+export function applicationUserRoleConnectionResponseToJSON(
+  applicationUserRoleConnectionResponse: ApplicationUserRoleConnectionResponse,
+): string {
+  return JSON.stringify(
+    ApplicationUserRoleConnectionResponse$outboundSchema.parse(
+      applicationUserRoleConnectionResponse,
+    ),
+  );
+}
+
+export function applicationUserRoleConnectionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationUserRoleConnectionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationUserRoleConnectionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationUserRoleConnectionResponse' from JSON`,
+  );
 }

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type QuarantineUserActionMetadata = {};
 
@@ -34,4 +37,24 @@ export namespace QuarantineUserActionMetadata$ {
   export const outboundSchema = QuarantineUserActionMetadata$outboundSchema;
   /** @deprecated use `QuarantineUserActionMetadata$Outbound` instead. */
   export type Outbound = QuarantineUserActionMetadata$Outbound;
+}
+
+export function quarantineUserActionMetadataToJSON(
+  quarantineUserActionMetadata: QuarantineUserActionMetadata,
+): string {
+  return JSON.stringify(
+    QuarantineUserActionMetadata$outboundSchema.parse(
+      quarantineUserActionMetadata,
+    ),
+  );
+}
+
+export function quarantineUserActionMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<QuarantineUserActionMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => QuarantineUserActionMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'QuarantineUserActionMetadata' from JSON`,
+  );
 }

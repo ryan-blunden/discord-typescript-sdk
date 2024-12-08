@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   InnerErrors,
   InnerErrors$inboundSchema,
@@ -48,4 +51,18 @@ export namespace ErrorDetails$ {
   export const outboundSchema = ErrorDetails$outboundSchema;
   /** @deprecated use `ErrorDetails$Outbound` instead. */
   export type Outbound = ErrorDetails$Outbound;
+}
+
+export function errorDetailsToJSON(errorDetails: ErrorDetails): string {
+  return JSON.stringify(ErrorDetails$outboundSchema.parse(errorDetails));
+}
+
+export function errorDetailsFromJSON(
+  jsonString: string,
+): SafeParseResult<ErrorDetails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ErrorDetails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ErrorDetails' from JSON`,
+  );
 }

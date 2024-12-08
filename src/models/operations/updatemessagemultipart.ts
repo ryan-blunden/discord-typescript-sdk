@@ -4,12 +4,18 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateMessageMultipartRequestBody = {
   allowedMentions?: components.MessageAllowedMentionsRequest | null | undefined;
   attachments?: Array<components.MessageAttachmentRequest> | null | undefined;
-  components?: Array<components.ActionRow> | null | undefined;
+  components?:
+    | Array<components.ActionRowComponentForMessageRequest>
+    | null
+    | undefined;
   content?: string | null | undefined;
   embeds?: Array<components.RichEmbed> | null | undefined;
   files0?: string | undefined;
@@ -44,8 +50,9 @@ export const UpdateMessageMultipartRequestBody$inboundSchema: z.ZodType<
   attachments: z.nullable(
     z.array(components.MessageAttachmentRequest$inboundSchema),
   ).optional(),
-  components: z.nullable(z.array(components.ActionRow$inboundSchema))
-    .optional(),
+  components: z.nullable(
+    z.array(components.ActionRowComponentForMessageRequest$inboundSchema),
+  ).optional(),
   content: z.nullable(z.string()).optional(),
   embeds: z.nullable(z.array(components.RichEmbed$inboundSchema)).optional(),
   "files[0]": z.string().optional(),
@@ -87,7 +94,10 @@ export type UpdateMessageMultipartRequestBody$Outbound = {
     | Array<components.MessageAttachmentRequest$Outbound>
     | null
     | undefined;
-  components?: Array<components.ActionRow$Outbound> | null | undefined;
+  components?:
+    | Array<components.ActionRowComponentForMessageRequest$Outbound>
+    | null
+    | undefined;
   content?: string | null | undefined;
   embeds?: Array<components.RichEmbed$Outbound> | null | undefined;
   "files[0]"?: string | undefined;
@@ -116,8 +126,9 @@ export const UpdateMessageMultipartRequestBody$outboundSchema: z.ZodType<
   attachments: z.nullable(
     z.array(components.MessageAttachmentRequest$outboundSchema),
   ).optional(),
-  components: z.nullable(z.array(components.ActionRow$outboundSchema))
-    .optional(),
+  components: z.nullable(
+    z.array(components.ActionRowComponentForMessageRequest$outboundSchema),
+  ).optional(),
   content: z.nullable(z.string()).optional(),
   embeds: z.nullable(z.array(components.RichEmbed$outboundSchema)).optional(),
   files0: z.string().optional(),
@@ -161,6 +172,26 @@ export namespace UpdateMessageMultipartRequestBody$ {
     UpdateMessageMultipartRequestBody$outboundSchema;
   /** @deprecated use `UpdateMessageMultipartRequestBody$Outbound` instead. */
   export type Outbound = UpdateMessageMultipartRequestBody$Outbound;
+}
+
+export function updateMessageMultipartRequestBodyToJSON(
+  updateMessageMultipartRequestBody: UpdateMessageMultipartRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateMessageMultipartRequestBody$outboundSchema.parse(
+      updateMessageMultipartRequestBody,
+    ),
+  );
+}
+
+export function updateMessageMultipartRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateMessageMultipartRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateMessageMultipartRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateMessageMultipartRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -215,4 +246,24 @@ export namespace UpdateMessageMultipartRequest$ {
   export const outboundSchema = UpdateMessageMultipartRequest$outboundSchema;
   /** @deprecated use `UpdateMessageMultipartRequest$Outbound` instead. */
   export type Outbound = UpdateMessageMultipartRequest$Outbound;
+}
+
+export function updateMessageMultipartRequestToJSON(
+  updateMessageMultipartRequest: UpdateMessageMultipartRequest,
+): string {
+  return JSON.stringify(
+    UpdateMessageMultipartRequest$outboundSchema.parse(
+      updateMessageMultipartRequest,
+    ),
+  );
+}
+
+export function updateMessageMultipartRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateMessageMultipartRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateMessageMultipartRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateMessageMultipartRequest' from JSON`,
+  );
 }

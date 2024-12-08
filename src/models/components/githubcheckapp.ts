@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GithubCheckApp = {
   name: string;
@@ -42,4 +45,18 @@ export namespace GithubCheckApp$ {
   export const outboundSchema = GithubCheckApp$outboundSchema;
   /** @deprecated use `GithubCheckApp$Outbound` instead. */
   export type Outbound = GithubCheckApp$Outbound;
+}
+
+export function githubCheckAppToJSON(githubCheckApp: GithubCheckApp): string {
+  return JSON.stringify(GithubCheckApp$outboundSchema.parse(githubCheckApp));
+}
+
+export function githubCheckAppFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubCheckApp, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubCheckApp$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubCheckApp' from JSON`,
+  );
 }

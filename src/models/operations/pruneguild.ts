@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type IncludeRoles = string | Array<string>;
 
@@ -46,6 +49,20 @@ export namespace IncludeRoles$ {
   export const outboundSchema = IncludeRoles$outboundSchema;
   /** @deprecated use `IncludeRoles$Outbound` instead. */
   export type Outbound = IncludeRoles$Outbound;
+}
+
+export function includeRolesToJSON(includeRoles: IncludeRoles): string {
+  return JSON.stringify(IncludeRoles$outboundSchema.parse(includeRoles));
+}
+
+export function includeRolesFromJSON(
+  jsonString: string,
+): SafeParseResult<IncludeRoles, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => IncludeRoles$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'IncludeRoles' from JSON`,
+  );
 }
 
 /** @internal */
@@ -102,6 +119,24 @@ export namespace PruneGuildRequestBody$ {
   export type Outbound = PruneGuildRequestBody$Outbound;
 }
 
+export function pruneGuildRequestBodyToJSON(
+  pruneGuildRequestBody: PruneGuildRequestBody,
+): string {
+  return JSON.stringify(
+    PruneGuildRequestBody$outboundSchema.parse(pruneGuildRequestBody),
+  );
+}
+
+export function pruneGuildRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<PruneGuildRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PruneGuildRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PruneGuildRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const PruneGuildRequest$inboundSchema: z.ZodType<
   PruneGuildRequest,
@@ -149,4 +184,22 @@ export namespace PruneGuildRequest$ {
   export const outboundSchema = PruneGuildRequest$outboundSchema;
   /** @deprecated use `PruneGuildRequest$Outbound` instead. */
   export type Outbound = PruneGuildRequest$Outbound;
+}
+
+export function pruneGuildRequestToJSON(
+  pruneGuildRequest: PruneGuildRequest,
+): string {
+  return JSON.stringify(
+    PruneGuildRequest$outboundSchema.parse(pruneGuildRequest),
+  );
+}
+
+export function pruneGuildRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<PruneGuildRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PruneGuildRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PruneGuildRequest' from JSON`,
+  );
 }

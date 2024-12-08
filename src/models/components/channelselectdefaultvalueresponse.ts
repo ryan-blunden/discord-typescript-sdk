@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ChannelSelectDefaultValueResponse = {
   type?: "user" | undefined;
@@ -47,4 +50,24 @@ export namespace ChannelSelectDefaultValueResponse$ {
     ChannelSelectDefaultValueResponse$outboundSchema;
   /** @deprecated use `ChannelSelectDefaultValueResponse$Outbound` instead. */
   export type Outbound = ChannelSelectDefaultValueResponse$Outbound;
+}
+
+export function channelSelectDefaultValueResponseToJSON(
+  channelSelectDefaultValueResponse: ChannelSelectDefaultValueResponse,
+): string {
+  return JSON.stringify(
+    ChannelSelectDefaultValueResponse$outboundSchema.parse(
+      channelSelectDefaultValueResponse,
+    ),
+  );
+}
+
+export function channelSelectDefaultValueResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ChannelSelectDefaultValueResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ChannelSelectDefaultValueResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChannelSelectDefaultValueResponse' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CommandPermissionResponse,
   CommandPermissionResponse$inboundSchema,
@@ -71,4 +74,22 @@ export namespace CommandPermissionsResponse$ {
   export const outboundSchema = CommandPermissionsResponse$outboundSchema;
   /** @deprecated use `CommandPermissionsResponse$Outbound` instead. */
   export type Outbound = CommandPermissionsResponse$Outbound;
+}
+
+export function commandPermissionsResponseToJSON(
+  commandPermissionsResponse: CommandPermissionsResponse,
+): string {
+  return JSON.stringify(
+    CommandPermissionsResponse$outboundSchema.parse(commandPermissionsResponse),
+  );
+}
+
+export function commandPermissionsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CommandPermissionsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CommandPermissionsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CommandPermissionsResponse' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateGuildTemplateRequestBody = {
   name?: string | undefined;
@@ -53,6 +56,26 @@ export namespace UpdateGuildTemplateRequestBody$ {
   export const outboundSchema = UpdateGuildTemplateRequestBody$outboundSchema;
   /** @deprecated use `UpdateGuildTemplateRequestBody$Outbound` instead. */
   export type Outbound = UpdateGuildTemplateRequestBody$Outbound;
+}
+
+export function updateGuildTemplateRequestBodyToJSON(
+  updateGuildTemplateRequestBody: UpdateGuildTemplateRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateGuildTemplateRequestBody$outboundSchema.parse(
+      updateGuildTemplateRequestBody,
+    ),
+  );
+}
+
+export function updateGuildTemplateRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildTemplateRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildTemplateRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildTemplateRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -105,4 +128,22 @@ export namespace UpdateGuildTemplateRequest$ {
   export const outboundSchema = UpdateGuildTemplateRequest$outboundSchema;
   /** @deprecated use `UpdateGuildTemplateRequest$Outbound` instead. */
   export type Outbound = UpdateGuildTemplateRequest$Outbound;
+}
+
+export function updateGuildTemplateRequestToJSON(
+  updateGuildTemplateRequest: UpdateGuildTemplateRequest,
+): string {
+  return JSON.stringify(
+    UpdateGuildTemplateRequest$outboundSchema.parse(updateGuildTemplateRequest),
+  );
+}
+
+export function updateGuildTemplateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildTemplateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildTemplateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildTemplateRequest' from JSON`,
+  );
 }

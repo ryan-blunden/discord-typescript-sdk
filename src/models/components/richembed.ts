@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   RichEmbedAuthor,
   RichEmbedAuthor$inboundSchema,
@@ -134,4 +137,18 @@ export namespace RichEmbed$ {
   export const outboundSchema = RichEmbed$outboundSchema;
   /** @deprecated use `RichEmbed$Outbound` instead. */
   export type Outbound = RichEmbed$Outbound;
+}
+
+export function richEmbedToJSON(richEmbed: RichEmbed): string {
+  return JSON.stringify(RichEmbed$outboundSchema.parse(richEmbed));
+}
+
+export function richEmbedFromJSON(
+  jsonString: string,
+): SafeParseResult<RichEmbed, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RichEmbed$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RichEmbed' from JSON`,
+  );
 }

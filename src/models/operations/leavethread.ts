@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type LeaveThreadRequest = {
   channelId: string;
@@ -51,4 +54,22 @@ export namespace LeaveThreadRequest$ {
   export const outboundSchema = LeaveThreadRequest$outboundSchema;
   /** @deprecated use `LeaveThreadRequest$Outbound` instead. */
   export type Outbound = LeaveThreadRequest$Outbound;
+}
+
+export function leaveThreadRequestToJSON(
+  leaveThreadRequest: LeaveThreadRequest,
+): string {
+  return JSON.stringify(
+    LeaveThreadRequest$outboundSchema.parse(leaveThreadRequest),
+  );
+}
+
+export function leaveThreadRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<LeaveThreadRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => LeaveThreadRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'LeaveThreadRequest' from JSON`,
+  );
 }

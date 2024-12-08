@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AddMyMessageReactionRequest = {
   channelId: string;
@@ -63,4 +66,24 @@ export namespace AddMyMessageReactionRequest$ {
   export const outboundSchema = AddMyMessageReactionRequest$outboundSchema;
   /** @deprecated use `AddMyMessageReactionRequest$Outbound` instead. */
   export type Outbound = AddMyMessageReactionRequest$Outbound;
+}
+
+export function addMyMessageReactionRequestToJSON(
+  addMyMessageReactionRequest: AddMyMessageReactionRequest,
+): string {
+  return JSON.stringify(
+    AddMyMessageReactionRequest$outboundSchema.parse(
+      addMyMessageReactionRequest,
+    ),
+  );
+}
+
+export function addMyMessageReactionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<AddMyMessageReactionRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddMyMessageReactionRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddMyMessageReactionRequest' from JSON`,
+  );
 }

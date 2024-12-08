@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteGuildSoundboardSoundRequest = {
   guildId: string;
@@ -58,4 +61,24 @@ export namespace DeleteGuildSoundboardSoundRequest$ {
     DeleteGuildSoundboardSoundRequest$outboundSchema;
   /** @deprecated use `DeleteGuildSoundboardSoundRequest$Outbound` instead. */
   export type Outbound = DeleteGuildSoundboardSoundRequest$Outbound;
+}
+
+export function deleteGuildSoundboardSoundRequestToJSON(
+  deleteGuildSoundboardSoundRequest: DeleteGuildSoundboardSoundRequest,
+): string {
+  return JSON.stringify(
+    DeleteGuildSoundboardSoundRequest$outboundSchema.parse(
+      deleteGuildSoundboardSoundRequest,
+    ),
+  );
+}
+
+export function deleteGuildSoundboardSoundRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildSoundboardSoundRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteGuildSoundboardSoundRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildSoundboardSoundRequest' from JSON`,
+  );
 }

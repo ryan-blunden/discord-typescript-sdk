@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateTextThreadWithoutMessageRequest = {
   name: string;
@@ -71,4 +74,25 @@ export namespace CreateTextThreadWithoutMessageRequest$ {
     CreateTextThreadWithoutMessageRequest$outboundSchema;
   /** @deprecated use `CreateTextThreadWithoutMessageRequest$Outbound` instead. */
   export type Outbound = CreateTextThreadWithoutMessageRequest$Outbound;
+}
+
+export function createTextThreadWithoutMessageRequestToJSON(
+  createTextThreadWithoutMessageRequest: CreateTextThreadWithoutMessageRequest,
+): string {
+  return JSON.stringify(
+    CreateTextThreadWithoutMessageRequest$outboundSchema.parse(
+      createTextThreadWithoutMessageRequest,
+    ),
+  );
+}
+
+export function createTextThreadWithoutMessageRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateTextThreadWithoutMessageRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateTextThreadWithoutMessageRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateTextThreadWithoutMessageRequest' from JSON`,
+  );
 }

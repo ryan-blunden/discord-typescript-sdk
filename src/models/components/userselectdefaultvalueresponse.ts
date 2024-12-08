@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UserSelectDefaultValueResponse = {
   type?: "user" | undefined;
@@ -46,4 +49,24 @@ export namespace UserSelectDefaultValueResponse$ {
   export const outboundSchema = UserSelectDefaultValueResponse$outboundSchema;
   /** @deprecated use `UserSelectDefaultValueResponse$Outbound` instead. */
   export type Outbound = UserSelectDefaultValueResponse$Outbound;
+}
+
+export function userSelectDefaultValueResponseToJSON(
+  userSelectDefaultValueResponse: UserSelectDefaultValueResponse,
+): string {
+  return JSON.stringify(
+    UserSelectDefaultValueResponse$outboundSchema.parse(
+      userSelectDefaultValueResponse,
+    ),
+  );
+}
+
+export function userSelectDefaultValueResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UserSelectDefaultValueResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UserSelectDefaultValueResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UserSelectDefaultValueResponse' from JSON`,
+  );
 }

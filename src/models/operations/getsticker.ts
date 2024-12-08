@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetStickerRequest = {
   stickerId: string;
@@ -61,6 +64,24 @@ export namespace GetStickerRequest$ {
   export type Outbound = GetStickerRequest$Outbound;
 }
 
+export function getStickerRequestToJSON(
+  getStickerRequest: GetStickerRequest,
+): string {
+  return JSON.stringify(
+    GetStickerRequest$outboundSchema.parse(getStickerRequest),
+  );
+}
+
+export function getStickerRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetStickerRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetStickerRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetStickerRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetStickerResponseBody$inboundSchema: z.ZodType<
   GetStickerResponseBody,
@@ -97,4 +118,22 @@ export namespace GetStickerResponseBody$ {
   export const outboundSchema = GetStickerResponseBody$outboundSchema;
   /** @deprecated use `GetStickerResponseBody$Outbound` instead. */
   export type Outbound = GetStickerResponseBody$Outbound;
+}
+
+export function getStickerResponseBodyToJSON(
+  getStickerResponseBody: GetStickerResponseBody,
+): string {
+  return JSON.stringify(
+    GetStickerResponseBody$outboundSchema.parse(getStickerResponseBody),
+  );
+}
+
+export function getStickerResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetStickerResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetStickerResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetStickerResponseBody' from JSON`,
+  );
 }

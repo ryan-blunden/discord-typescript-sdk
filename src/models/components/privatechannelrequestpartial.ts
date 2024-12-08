@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PrivateChannelRequestPartial = {
   name?: string | null | undefined;
@@ -46,4 +49,24 @@ export namespace PrivateChannelRequestPartial$ {
   export const outboundSchema = PrivateChannelRequestPartial$outboundSchema;
   /** @deprecated use `PrivateChannelRequestPartial$Outbound` instead. */
   export type Outbound = PrivateChannelRequestPartial$Outbound;
+}
+
+export function privateChannelRequestPartialToJSON(
+  privateChannelRequestPartial: PrivateChannelRequestPartial,
+): string {
+  return JSON.stringify(
+    PrivateChannelRequestPartial$outboundSchema.parse(
+      privateChannelRequestPartial,
+    ),
+  );
+}
+
+export function privateChannelRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<PrivateChannelRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PrivateChannelRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PrivateChannelRequestPartial' from JSON`,
+  );
 }

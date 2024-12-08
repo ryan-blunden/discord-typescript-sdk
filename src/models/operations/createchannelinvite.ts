@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateChannelInviteRequestBody =
   | components.CreateGroupDMInviteRequest
@@ -61,6 +64,26 @@ export namespace CreateChannelInviteRequestBody$ {
   export const outboundSchema = CreateChannelInviteRequestBody$outboundSchema;
   /** @deprecated use `CreateChannelInviteRequestBody$Outbound` instead. */
   export type Outbound = CreateChannelInviteRequestBody$Outbound;
+}
+
+export function createChannelInviteRequestBodyToJSON(
+  createChannelInviteRequestBody: CreateChannelInviteRequestBody,
+): string {
+  return JSON.stringify(
+    CreateChannelInviteRequestBody$outboundSchema.parse(
+      createChannelInviteRequestBody,
+    ),
+  );
+}
+
+export function createChannelInviteRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateChannelInviteRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateChannelInviteRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateChannelInviteRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -120,6 +143,24 @@ export namespace CreateChannelInviteRequest$ {
   export type Outbound = CreateChannelInviteRequest$Outbound;
 }
 
+export function createChannelInviteRequestToJSON(
+  createChannelInviteRequest: CreateChannelInviteRequest,
+): string {
+  return JSON.stringify(
+    CreateChannelInviteRequest$outboundSchema.parse(createChannelInviteRequest),
+  );
+}
+
+export function createChannelInviteRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateChannelInviteRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateChannelInviteRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateChannelInviteRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const CreateChannelInviteResponseBody$inboundSchema: z.ZodType<
   CreateChannelInviteResponseBody,
@@ -159,4 +200,24 @@ export namespace CreateChannelInviteResponseBody$ {
   export const outboundSchema = CreateChannelInviteResponseBody$outboundSchema;
   /** @deprecated use `CreateChannelInviteResponseBody$Outbound` instead. */
   export type Outbound = CreateChannelInviteResponseBody$Outbound;
+}
+
+export function createChannelInviteResponseBodyToJSON(
+  createChannelInviteResponseBody: CreateChannelInviteResponseBody,
+): string {
+  return JSON.stringify(
+    CreateChannelInviteResponseBody$outboundSchema.parse(
+      createChannelInviteResponseBody,
+    ),
+  );
+}
+
+export function createChannelInviteResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateChannelInviteResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateChannelInviteResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateChannelInviteResponseBody' from JSON`,
+  );
 }

@@ -4,12 +4,21 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserAvatarDecorationResponse,
   UserAvatarDecorationResponse$inboundSchema,
   UserAvatarDecorationResponse$Outbound,
   UserAvatarDecorationResponse$outboundSchema,
 } from "./useravatardecorationresponse.js";
+import {
+  UserPrimaryGuildResponse,
+  UserPrimaryGuildResponse$inboundSchema,
+  UserPrimaryGuildResponse$Outbound,
+  UserPrimaryGuildResponse$outboundSchema,
+} from "./userprimaryguildresponse.js";
 
 export type UserResponse = {
   id: string;
@@ -24,6 +33,7 @@ export type UserResponse = {
   accentColor?: number | null | undefined;
   globalName?: string | null | undefined;
   avatarDecorationData?: UserAvatarDecorationResponse | null | undefined;
+  clan?: UserPrimaryGuildResponse | null | undefined;
 };
 
 /** @internal */
@@ -45,6 +55,7 @@ export const UserResponse$inboundSchema: z.ZodType<
   global_name: z.nullable(z.string()).optional(),
   avatar_decoration_data: z.nullable(UserAvatarDecorationResponse$inboundSchema)
     .optional(),
+  clan: z.nullable(UserPrimaryGuildResponse$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "public_flags": "publicFlags",
@@ -71,6 +82,7 @@ export type UserResponse$Outbound = {
     | UserAvatarDecorationResponse$Outbound
     | null
     | undefined;
+  clan?: UserPrimaryGuildResponse$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -92,6 +104,7 @@ export const UserResponse$outboundSchema: z.ZodType<
   globalName: z.nullable(z.string()).optional(),
   avatarDecorationData: z.nullable(UserAvatarDecorationResponse$outboundSchema)
     .optional(),
+  clan: z.nullable(UserPrimaryGuildResponse$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     publicFlags: "public_flags",
@@ -112,4 +125,18 @@ export namespace UserResponse$ {
   export const outboundSchema = UserResponse$outboundSchema;
   /** @deprecated use `UserResponse$Outbound` instead. */
   export type Outbound = UserResponse$Outbound;
+}
+
+export function userResponseToJSON(userResponse: UserResponse): string {
+  return JSON.stringify(UserResponse$outboundSchema.parse(userResponse));
+}
+
+export function userResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UserResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UserResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UserResponse' from JSON`,
+  );
 }

@@ -94,19 +94,6 @@ export class Webhooks extends ClientSDK {
     ));
   }
 
-  async updateMessageForm(
-    request: operations.UpdateWebhookMessageFormRequest,
-    security?: operations.UpdateWebhookMessageFormSecurity | undefined,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(webhooksUpdateMessageForm(
-      this,
-      request,
-      security,
-      options,
-    ));
-  }
-
   async updateMessageMultipart(
     request: operations.UpdateWebhookMessageMultipartRequest,
     security?: operations.UpdateWebhookMessageMultipartSecurity | undefined,
@@ -126,6 +113,19 @@ export class Webhooks extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.MessageResponse> {
     return unwrapAsync(webhooksUpdateMessageJson(
+      this,
+      request,
+      security,
+      options,
+    ));
+  }
+
+  async updateMessageForm(
+    request: operations.UpdateWebhookMessageFormRequest,
+    security?: operations.UpdateWebhookMessageFormSecurity | undefined,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(webhooksUpdateMessageForm(
       this,
       request,
       security,

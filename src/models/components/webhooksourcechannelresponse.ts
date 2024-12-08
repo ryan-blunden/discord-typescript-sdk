@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type WebhookSourceChannelResponse = {
   id: string;
@@ -46,4 +49,24 @@ export namespace WebhookSourceChannelResponse$ {
   export const outboundSchema = WebhookSourceChannelResponse$outboundSchema;
   /** @deprecated use `WebhookSourceChannelResponse$Outbound` instead. */
   export type Outbound = WebhookSourceChannelResponse$Outbound;
+}
+
+export function webhookSourceChannelResponseToJSON(
+  webhookSourceChannelResponse: WebhookSourceChannelResponse,
+): string {
+  return JSON.stringify(
+    WebhookSourceChannelResponse$outboundSchema.parse(
+      webhookSourceChannelResponse,
+    ),
+  );
+}
+
+export function webhookSourceChannelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<WebhookSourceChannelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WebhookSourceChannelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WebhookSourceChannelResponse' from JSON`,
+  );
 }

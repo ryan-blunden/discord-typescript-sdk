@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteChannelRequest = {
   channelId: string;
@@ -63,6 +66,24 @@ export namespace DeleteChannelRequest$ {
   export type Outbound = DeleteChannelRequest$Outbound;
 }
 
+export function deleteChannelRequestToJSON(
+  deleteChannelRequest: DeleteChannelRequest,
+): string {
+  return JSON.stringify(
+    DeleteChannelRequest$outboundSchema.parse(deleteChannelRequest),
+  );
+}
+
+export function deleteChannelRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteChannelRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteChannelRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteChannelRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const DeleteChannelResponseBody$inboundSchema: z.ZodType<
   DeleteChannelResponseBody,
@@ -105,4 +126,22 @@ export namespace DeleteChannelResponseBody$ {
   export const outboundSchema = DeleteChannelResponseBody$outboundSchema;
   /** @deprecated use `DeleteChannelResponseBody$Outbound` instead. */
   export type Outbound = DeleteChannelResponseBody$Outbound;
+}
+
+export function deleteChannelResponseBodyToJSON(
+  deleteChannelResponseBody: DeleteChannelResponseBody,
+): string {
+  return JSON.stringify(
+    DeleteChannelResponseBody$outboundSchema.parse(deleteChannelResponseBody),
+  );
+}
+
+export function deleteChannelResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteChannelResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteChannelResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteChannelResponseBody' from JSON`,
+  );
 }

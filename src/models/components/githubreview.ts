@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GithubUser,
   GithubUser$inboundSchema,
@@ -69,4 +72,18 @@ export namespace GithubReview$ {
   export const outboundSchema = GithubReview$outboundSchema;
   /** @deprecated use `GithubReview$Outbound` instead. */
   export type Outbound = GithubReview$Outbound;
+}
+
+export function githubReviewToJSON(githubReview: GithubReview): string {
+  return JSON.stringify(GithubReview$outboundSchema.parse(githubReview));
+}
+
+export function githubReviewFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubReview, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubReview$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubReview' from JSON`,
+  );
 }

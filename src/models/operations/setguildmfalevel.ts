@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SetGuildMfaLevelRequestBody = {
   level?: 0 | undefined;
@@ -48,6 +51,26 @@ export namespace SetGuildMfaLevelRequestBody$ {
   export const outboundSchema = SetGuildMfaLevelRequestBody$outboundSchema;
   /** @deprecated use `SetGuildMfaLevelRequestBody$Outbound` instead. */
   export type Outbound = SetGuildMfaLevelRequestBody$Outbound;
+}
+
+export function setGuildMfaLevelRequestBodyToJSON(
+  setGuildMfaLevelRequestBody: SetGuildMfaLevelRequestBody,
+): string {
+  return JSON.stringify(
+    SetGuildMfaLevelRequestBody$outboundSchema.parse(
+      setGuildMfaLevelRequestBody,
+    ),
+  );
+}
+
+export function setGuildMfaLevelRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SetGuildMfaLevelRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SetGuildMfaLevelRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SetGuildMfaLevelRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -97,4 +120,22 @@ export namespace SetGuildMfaLevelRequest$ {
   export const outboundSchema = SetGuildMfaLevelRequest$outboundSchema;
   /** @deprecated use `SetGuildMfaLevelRequest$Outbound` instead. */
   export type Outbound = SetGuildMfaLevelRequest$Outbound;
+}
+
+export function setGuildMfaLevelRequestToJSON(
+  setGuildMfaLevelRequest: SetGuildMfaLevelRequest,
+): string {
+  return JSON.stringify(
+    SetGuildMfaLevelRequest$outboundSchema.parse(setGuildMfaLevelRequest),
+  );
+}
+
+export function setGuildMfaLevelRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<SetGuildMfaLevelRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SetGuildMfaLevelRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SetGuildMfaLevelRequest' from JSON`,
+  );
 }

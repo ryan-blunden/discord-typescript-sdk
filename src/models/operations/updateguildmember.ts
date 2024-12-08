@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateGuildMemberRequestBody = {
   nick?: string | null | undefined;
@@ -89,6 +92,26 @@ export namespace UpdateGuildMemberRequestBody$ {
   export type Outbound = UpdateGuildMemberRequestBody$Outbound;
 }
 
+export function updateGuildMemberRequestBodyToJSON(
+  updateGuildMemberRequestBody: UpdateGuildMemberRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateGuildMemberRequestBody$outboundSchema.parse(
+      updateGuildMemberRequestBody,
+    ),
+  );
+}
+
+export function updateGuildMemberRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildMemberRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildMemberRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildMemberRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpdateGuildMemberRequest$inboundSchema: z.ZodType<
   UpdateGuildMemberRequest,
@@ -141,4 +164,22 @@ export namespace UpdateGuildMemberRequest$ {
   export const outboundSchema = UpdateGuildMemberRequest$outboundSchema;
   /** @deprecated use `UpdateGuildMemberRequest$Outbound` instead. */
   export type Outbound = UpdateGuildMemberRequest$Outbound;
+}
+
+export function updateGuildMemberRequestToJSON(
+  updateGuildMemberRequest: UpdateGuildMemberRequest,
+): string {
+  return JSON.stringify(
+    UpdateGuildMemberRequest$outboundSchema.parse(updateGuildMemberRequest),
+  );
+}
+
+export function updateGuildMemberRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildMemberRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildMemberRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildMemberRequest' from JSON`,
+  );
 }

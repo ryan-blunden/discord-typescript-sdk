@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EntityMetadataStageInstanceResponse = {};
 
@@ -36,4 +39,25 @@ export namespace EntityMetadataStageInstanceResponse$ {
     EntityMetadataStageInstanceResponse$outboundSchema;
   /** @deprecated use `EntityMetadataStageInstanceResponse$Outbound` instead. */
   export type Outbound = EntityMetadataStageInstanceResponse$Outbound;
+}
+
+export function entityMetadataStageInstanceResponseToJSON(
+  entityMetadataStageInstanceResponse: EntityMetadataStageInstanceResponse,
+): string {
+  return JSON.stringify(
+    EntityMetadataStageInstanceResponse$outboundSchema.parse(
+      entityMetadataStageInstanceResponse,
+    ),
+  );
+}
+
+export function entityMetadataStageInstanceResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<EntityMetadataStageInstanceResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      EntityMetadataStageInstanceResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EntityMetadataStageInstanceResponse' from JSON`,
+  );
 }

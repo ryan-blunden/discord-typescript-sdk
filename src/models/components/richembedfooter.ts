@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RichEmbedFooter = {
   text?: string | null | undefined;
@@ -55,4 +58,20 @@ export namespace RichEmbedFooter$ {
   export const outboundSchema = RichEmbedFooter$outboundSchema;
   /** @deprecated use `RichEmbedFooter$Outbound` instead. */
   export type Outbound = RichEmbedFooter$Outbound;
+}
+
+export function richEmbedFooterToJSON(
+  richEmbedFooter: RichEmbedFooter,
+): string {
+  return JSON.stringify(RichEmbedFooter$outboundSchema.parse(richEmbedFooter));
+}
+
+export function richEmbedFooterFromJSON(
+  jsonString: string,
+): SafeParseResult<RichEmbedFooter, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RichEmbedFooter$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RichEmbedFooter' from JSON`,
+  );
 }

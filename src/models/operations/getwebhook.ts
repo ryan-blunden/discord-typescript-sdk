@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetWebhookRequest = {
   webhookId: string;
@@ -62,6 +65,24 @@ export namespace GetWebhookRequest$ {
   export type Outbound = GetWebhookRequest$Outbound;
 }
 
+export function getWebhookRequestToJSON(
+  getWebhookRequest: GetWebhookRequest,
+): string {
+  return JSON.stringify(
+    GetWebhookRequest$outboundSchema.parse(getWebhookRequest),
+  );
+}
+
+export function getWebhookRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWebhookRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWebhookRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWebhookRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetWebhookResponseBody$inboundSchema: z.ZodType<
   GetWebhookResponseBody,
@@ -101,4 +122,22 @@ export namespace GetWebhookResponseBody$ {
   export const outboundSchema = GetWebhookResponseBody$outboundSchema;
   /** @deprecated use `GetWebhookResponseBody$Outbound` instead. */
   export type Outbound = GetWebhookResponseBody$Outbound;
+}
+
+export function getWebhookResponseBodyToJSON(
+  getWebhookResponseBody: GetWebhookResponseBody,
+): string {
+  return JSON.stringify(
+    GetWebhookResponseBody$outboundSchema.parse(getWebhookResponseBody),
+  );
+}
+
+export function getWebhookResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWebhookResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWebhookResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWebhookResponseBody' from JSON`,
+  );
 }

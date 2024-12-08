@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   InviteChannelResponse,
   InviteChannelResponse$inboundSchema,
@@ -101,4 +104,22 @@ export namespace GroupDMInviteResponse$ {
   export const outboundSchema = GroupDMInviteResponse$outboundSchema;
   /** @deprecated use `GroupDMInviteResponse$Outbound` instead. */
   export type Outbound = GroupDMInviteResponse$Outbound;
+}
+
+export function groupDMInviteResponseToJSON(
+  groupDMInviteResponse: GroupDMInviteResponse,
+): string {
+  return JSON.stringify(
+    GroupDMInviteResponse$outboundSchema.parse(groupDMInviteResponse),
+  );
+}
+
+export function groupDMInviteResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GroupDMInviteResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GroupDMInviteResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GroupDMInviteResponse' from JSON`,
+  );
 }

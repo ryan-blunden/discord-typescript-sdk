@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TypingIndicatorResponse = {};
 
@@ -34,4 +37,22 @@ export namespace TypingIndicatorResponse$ {
   export const outboundSchema = TypingIndicatorResponse$outboundSchema;
   /** @deprecated use `TypingIndicatorResponse$Outbound` instead. */
   export type Outbound = TypingIndicatorResponse$Outbound;
+}
+
+export function typingIndicatorResponseToJSON(
+  typingIndicatorResponse: TypingIndicatorResponse,
+): string {
+  return JSON.stringify(
+    TypingIndicatorResponse$outboundSchema.parse(typingIndicatorResponse),
+  );
+}
+
+export function typingIndicatorResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<TypingIndicatorResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TypingIndicatorResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TypingIndicatorResponse' from JSON`,
+  );
 }

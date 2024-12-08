@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EmojiResponse,
   EmojiResponse$inboundSchema,
@@ -285,4 +288,22 @@ export namespace GuildWithCountsResponse$ {
   export const outboundSchema = GuildWithCountsResponse$outboundSchema;
   /** @deprecated use `GuildWithCountsResponse$Outbound` instead. */
   export type Outbound = GuildWithCountsResponse$Outbound;
+}
+
+export function guildWithCountsResponseToJSON(
+  guildWithCountsResponse: GuildWithCountsResponse,
+): string {
+  return JSON.stringify(
+    GuildWithCountsResponse$outboundSchema.parse(guildWithCountsResponse),
+  );
+}
+
+export function guildWithCountsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildWithCountsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildWithCountsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildWithCountsResponse' from JSON`,
+  );
 }

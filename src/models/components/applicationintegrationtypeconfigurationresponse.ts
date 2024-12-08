@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApplicationOAuth2InstallParamsResponse,
   ApplicationOAuth2InstallParamsResponse$inboundSchema,
@@ -72,4 +75,31 @@ export namespace ApplicationIntegrationTypeConfigurationResponse$ {
   /** @deprecated use `ApplicationIntegrationTypeConfigurationResponse$Outbound` instead. */
   export type Outbound =
     ApplicationIntegrationTypeConfigurationResponse$Outbound;
+}
+
+export function applicationIntegrationTypeConfigurationResponseToJSON(
+  applicationIntegrationTypeConfigurationResponse:
+    ApplicationIntegrationTypeConfigurationResponse,
+): string {
+  return JSON.stringify(
+    ApplicationIntegrationTypeConfigurationResponse$outboundSchema.parse(
+      applicationIntegrationTypeConfigurationResponse,
+    ),
+  );
+}
+
+export function applicationIntegrationTypeConfigurationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ApplicationIntegrationTypeConfigurationResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationIntegrationTypeConfigurationResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ApplicationIntegrationTypeConfigurationResponse' from JSON`,
+  );
 }

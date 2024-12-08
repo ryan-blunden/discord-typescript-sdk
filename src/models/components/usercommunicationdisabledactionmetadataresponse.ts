@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UserCommunicationDisabledActionMetadataResponse = {
   durationSeconds: number;
@@ -56,4 +59,31 @@ export namespace UserCommunicationDisabledActionMetadataResponse$ {
   /** @deprecated use `UserCommunicationDisabledActionMetadataResponse$Outbound` instead. */
   export type Outbound =
     UserCommunicationDisabledActionMetadataResponse$Outbound;
+}
+
+export function userCommunicationDisabledActionMetadataResponseToJSON(
+  userCommunicationDisabledActionMetadataResponse:
+    UserCommunicationDisabledActionMetadataResponse,
+): string {
+  return JSON.stringify(
+    UserCommunicationDisabledActionMetadataResponse$outboundSchema.parse(
+      userCommunicationDisabledActionMetadataResponse,
+    ),
+  );
+}
+
+export function userCommunicationDisabledActionMetadataResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UserCommunicationDisabledActionMetadataResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UserCommunicationDisabledActionMetadataResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UserCommunicationDisabledActionMetadataResponse' from JSON`,
+  );
 }

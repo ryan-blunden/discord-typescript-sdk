@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BulkBanUsersResponse = {
   bannedUsers: Array<string>;
@@ -57,4 +60,22 @@ export namespace BulkBanUsersResponse$ {
   export const outboundSchema = BulkBanUsersResponse$outboundSchema;
   /** @deprecated use `BulkBanUsersResponse$Outbound` instead. */
   export type Outbound = BulkBanUsersResponse$Outbound;
+}
+
+export function bulkBanUsersResponseToJSON(
+  bulkBanUsersResponse: BulkBanUsersResponse,
+): string {
+  return JSON.stringify(
+    BulkBanUsersResponse$outboundSchema.parse(bulkBanUsersResponse),
+  );
+}
+
+export function bulkBanUsersResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkBanUsersResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkBanUsersResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkBanUsersResponse' from JSON`,
+  );
 }

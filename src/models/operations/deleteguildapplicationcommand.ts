@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteGuildApplicationCommandSecurity = {
   botToken?: string | undefined;
@@ -61,6 +64,27 @@ export namespace DeleteGuildApplicationCommandSecurity$ {
   export type Outbound = DeleteGuildApplicationCommandSecurity$Outbound;
 }
 
+export function deleteGuildApplicationCommandSecurityToJSON(
+  deleteGuildApplicationCommandSecurity: DeleteGuildApplicationCommandSecurity,
+): string {
+  return JSON.stringify(
+    DeleteGuildApplicationCommandSecurity$outboundSchema.parse(
+      deleteGuildApplicationCommandSecurity,
+    ),
+  );
+}
+
+export function deleteGuildApplicationCommandSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildApplicationCommandSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteGuildApplicationCommandSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildApplicationCommandSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const DeleteGuildApplicationCommandRequest$inboundSchema: z.ZodType<
   DeleteGuildApplicationCommandRequest,
@@ -115,4 +139,25 @@ export namespace DeleteGuildApplicationCommandRequest$ {
     DeleteGuildApplicationCommandRequest$outboundSchema;
   /** @deprecated use `DeleteGuildApplicationCommandRequest$Outbound` instead. */
   export type Outbound = DeleteGuildApplicationCommandRequest$Outbound;
+}
+
+export function deleteGuildApplicationCommandRequestToJSON(
+  deleteGuildApplicationCommandRequest: DeleteGuildApplicationCommandRequest,
+): string {
+  return JSON.stringify(
+    DeleteGuildApplicationCommandRequest$outboundSchema.parse(
+      deleteGuildApplicationCommandRequest,
+    ),
+  );
+}
+
+export function deleteGuildApplicationCommandRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildApplicationCommandRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteGuildApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildApplicationCommandRequest' from JSON`,
+  );
 }

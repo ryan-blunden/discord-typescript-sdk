@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildNewMemberWelcomeRequest = {
   guildId: string;
@@ -51,4 +54,24 @@ export namespace GetGuildNewMemberWelcomeRequest$ {
   export const outboundSchema = GetGuildNewMemberWelcomeRequest$outboundSchema;
   /** @deprecated use `GetGuildNewMemberWelcomeRequest$Outbound` instead. */
   export type Outbound = GetGuildNewMemberWelcomeRequest$Outbound;
+}
+
+export function getGuildNewMemberWelcomeRequestToJSON(
+  getGuildNewMemberWelcomeRequest: GetGuildNewMemberWelcomeRequest,
+): string {
+  return JSON.stringify(
+    GetGuildNewMemberWelcomeRequest$outboundSchema.parse(
+      getGuildNewMemberWelcomeRequest,
+    ),
+  );
+}
+
+export function getGuildNewMemberWelcomeRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildNewMemberWelcomeRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildNewMemberWelcomeRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildNewMemberWelcomeRequest' from JSON`,
+  );
 }

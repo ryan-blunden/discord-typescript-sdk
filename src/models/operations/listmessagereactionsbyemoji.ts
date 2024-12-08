@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListMessageReactionsByEmojiRequest = {
   channelId: string;
@@ -76,4 +79,25 @@ export namespace ListMessageReactionsByEmojiRequest$ {
     ListMessageReactionsByEmojiRequest$outboundSchema;
   /** @deprecated use `ListMessageReactionsByEmojiRequest$Outbound` instead. */
   export type Outbound = ListMessageReactionsByEmojiRequest$Outbound;
+}
+
+export function listMessageReactionsByEmojiRequestToJSON(
+  listMessageReactionsByEmojiRequest: ListMessageReactionsByEmojiRequest,
+): string {
+  return JSON.stringify(
+    ListMessageReactionsByEmojiRequest$outboundSchema.parse(
+      listMessageReactionsByEmojiRequest,
+    ),
+  );
+}
+
+export function listMessageReactionsByEmojiRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListMessageReactionsByEmojiRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListMessageReactionsByEmojiRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListMessageReactionsByEmojiRequest' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetActiveGuildThreadsRequest = {
   guildId: string;
@@ -51,4 +54,24 @@ export namespace GetActiveGuildThreadsRequest$ {
   export const outboundSchema = GetActiveGuildThreadsRequest$outboundSchema;
   /** @deprecated use `GetActiveGuildThreadsRequest$Outbound` instead. */
   export type Outbound = GetActiveGuildThreadsRequest$Outbound;
+}
+
+export function getActiveGuildThreadsRequestToJSON(
+  getActiveGuildThreadsRequest: GetActiveGuildThreadsRequest,
+): string {
+  return JSON.stringify(
+    GetActiveGuildThreadsRequest$outboundSchema.parse(
+      getActiveGuildThreadsRequest,
+    ),
+  );
+}
+
+export function getActiveGuildThreadsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetActiveGuildThreadsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetActiveGuildThreadsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetActiveGuildThreadsRequest' from JSON`,
+  );
 }

@@ -6,3 +6,5 @@ Discord HTTP API (Preview): Preview of the Discord v10 HTTP API specification. S
 
 Discord Developer Documentation
 <https://discord.com/developers/docs>
+
+### Available Operations

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateStageInstanceRequestBody = {
   topic?: string | undefined;
@@ -62,6 +65,26 @@ export namespace UpdateStageInstanceRequestBody$ {
   export type Outbound = UpdateStageInstanceRequestBody$Outbound;
 }
 
+export function updateStageInstanceRequestBodyToJSON(
+  updateStageInstanceRequestBody: UpdateStageInstanceRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateStageInstanceRequestBody$outboundSchema.parse(
+      updateStageInstanceRequestBody,
+    ),
+  );
+}
+
+export function updateStageInstanceRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateStageInstanceRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateStageInstanceRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateStageInstanceRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpdateStageInstanceRequest$inboundSchema: z.ZodType<
   UpdateStageInstanceRequest,
@@ -109,4 +132,22 @@ export namespace UpdateStageInstanceRequest$ {
   export const outboundSchema = UpdateStageInstanceRequest$outboundSchema;
   /** @deprecated use `UpdateStageInstanceRequest$Outbound` instead. */
   export type Outbound = UpdateStageInstanceRequest$Outbound;
+}
+
+export function updateStageInstanceRequestToJSON(
+  updateStageInstanceRequest: UpdateStageInstanceRequest,
+): string {
+  return JSON.stringify(
+    UpdateStageInstanceRequest$outboundSchema.parse(updateStageInstanceRequest),
+  );
+}
+
+export function updateStageInstanceRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateStageInstanceRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateStageInstanceRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateStageInstanceRequest' from JSON`,
+  );
 }

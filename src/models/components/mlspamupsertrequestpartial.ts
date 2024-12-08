@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BlockMessageAction,
   BlockMessageAction$inboundSchema,
@@ -105,6 +108,26 @@ export namespace MLSpamUpsertRequestPartialActions$ {
   export type Outbound = MLSpamUpsertRequestPartialActions$Outbound;
 }
 
+export function mlSpamUpsertRequestPartialActionsToJSON(
+  mlSpamUpsertRequestPartialActions: MLSpamUpsertRequestPartialActions,
+): string {
+  return JSON.stringify(
+    MLSpamUpsertRequestPartialActions$outboundSchema.parse(
+      mlSpamUpsertRequestPartialActions,
+    ),
+  );
+}
+
+export function mlSpamUpsertRequestPartialActionsFromJSON(
+  jsonString: string,
+): SafeParseResult<MLSpamUpsertRequestPartialActions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MLSpamUpsertRequestPartialActions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MLSpamUpsertRequestPartialActions' from JSON`,
+  );
+}
+
 /** @internal */
 export const MLSpamUpsertRequestPartial$inboundSchema: z.ZodType<
   MLSpamUpsertRequestPartial,
@@ -202,4 +225,22 @@ export namespace MLSpamUpsertRequestPartial$ {
   export const outboundSchema = MLSpamUpsertRequestPartial$outboundSchema;
   /** @deprecated use `MLSpamUpsertRequestPartial$Outbound` instead. */
   export type Outbound = MLSpamUpsertRequestPartial$Outbound;
+}
+
+export function mlSpamUpsertRequestPartialToJSON(
+  mlSpamUpsertRequestPartial: MLSpamUpsertRequestPartial,
+): string {
+  return JSON.stringify(
+    MLSpamUpsertRequestPartial$outboundSchema.parse(mlSpamUpsertRequestPartial),
+  );
+}
+
+export function mlSpamUpsertRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<MLSpamUpsertRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MLSpamUpsertRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MLSpamUpsertRequestPartial' from JSON`,
+  );
 }

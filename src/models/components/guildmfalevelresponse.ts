@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GuildMFALevelResponse = {
   level?: 0 | undefined;
@@ -42,4 +45,22 @@ export namespace GuildMFALevelResponse$ {
   export const outboundSchema = GuildMFALevelResponse$outboundSchema;
   /** @deprecated use `GuildMFALevelResponse$Outbound` instead. */
   export type Outbound = GuildMFALevelResponse$Outbound;
+}
+
+export function guildMFALevelResponseToJSON(
+  guildMFALevelResponse: GuildMFALevelResponse,
+): string {
+  return JSON.stringify(
+    GuildMFALevelResponse$outboundSchema.parse(guildMFALevelResponse),
+  );
+}
+
+export function guildMFALevelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildMFALevelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildMFALevelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildMFALevelResponse' from JSON`,
+  );
 }

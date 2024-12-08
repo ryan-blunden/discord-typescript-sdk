@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ApplicationCommandOptionIntegerChoice = {
   name: string;
@@ -61,4 +64,25 @@ export namespace ApplicationCommandOptionIntegerChoice$ {
     ApplicationCommandOptionIntegerChoice$outboundSchema;
   /** @deprecated use `ApplicationCommandOptionIntegerChoice$Outbound` instead. */
   export type Outbound = ApplicationCommandOptionIntegerChoice$Outbound;
+}
+
+export function applicationCommandOptionIntegerChoiceToJSON(
+  applicationCommandOptionIntegerChoice: ApplicationCommandOptionIntegerChoice,
+): string {
+  return JSON.stringify(
+    ApplicationCommandOptionIntegerChoice$outboundSchema.parse(
+      applicationCommandOptionIntegerChoice,
+    ),
+  );
+}
+
+export function applicationCommandOptionIntegerChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationCommandOptionIntegerChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationCommandOptionIntegerChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationCommandOptionIntegerChoice' from JSON`,
+  );
 }

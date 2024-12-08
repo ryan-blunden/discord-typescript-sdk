@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateGuildSoundboardSoundRequest = {
   guildId: string;
@@ -59,4 +62,24 @@ export namespace CreateGuildSoundboardSoundRequest$ {
     CreateGuildSoundboardSoundRequest$outboundSchema;
   /** @deprecated use `CreateGuildSoundboardSoundRequest$Outbound` instead. */
   export type Outbound = CreateGuildSoundboardSoundRequest$Outbound;
+}
+
+export function createGuildSoundboardSoundRequestToJSON(
+  createGuildSoundboardSoundRequest: CreateGuildSoundboardSoundRequest,
+): string {
+  return JSON.stringify(
+    CreateGuildSoundboardSoundRequest$outboundSchema.parse(
+      createGuildSoundboardSoundRequest,
+    ),
+  );
+}
+
+export function createGuildSoundboardSoundRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildSoundboardSoundRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildSoundboardSoundRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildSoundboardSoundRequest' from JSON`,
+  );
 }

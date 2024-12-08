@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ChannelFollowerResponse = {
   channelId: string;
@@ -57,4 +60,22 @@ export namespace ChannelFollowerResponse$ {
   export const outboundSchema = ChannelFollowerResponse$outboundSchema;
   /** @deprecated use `ChannelFollowerResponse$Outbound` instead. */
   export type Outbound = ChannelFollowerResponse$Outbound;
+}
+
+export function channelFollowerResponseToJSON(
+  channelFollowerResponse: ChannelFollowerResponse,
+): string {
+  return JSON.stringify(
+    ChannelFollowerResponse$outboundSchema.parse(channelFollowerResponse),
+  );
+}
+
+export function channelFollowerResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ChannelFollowerResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ChannelFollowerResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChannelFollowerResponse' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BlockMessageActionMetadata = {
   customMessage?: string | null | undefined;
@@ -51,4 +54,22 @@ export namespace BlockMessageActionMetadata$ {
   export const outboundSchema = BlockMessageActionMetadata$outboundSchema;
   /** @deprecated use `BlockMessageActionMetadata$Outbound` instead. */
   export type Outbound = BlockMessageActionMetadata$Outbound;
+}
+
+export function blockMessageActionMetadataToJSON(
+  blockMessageActionMetadata: BlockMessageActionMetadata,
+): string {
+  return JSON.stringify(
+    BlockMessageActionMetadata$outboundSchema.parse(blockMessageActionMetadata),
+  );
+}
+
+export function blockMessageActionMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<BlockMessageActionMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BlockMessageActionMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BlockMessageActionMetadata' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageAllowedMentionsRequest = {
   parse?: Array<string> | null | undefined;
@@ -63,4 +66,24 @@ export namespace MessageAllowedMentionsRequest$ {
   export const outboundSchema = MessageAllowedMentionsRequest$outboundSchema;
   /** @deprecated use `MessageAllowedMentionsRequest$Outbound` instead. */
   export type Outbound = MessageAllowedMentionsRequest$Outbound;
+}
+
+export function messageAllowedMentionsRequestToJSON(
+  messageAllowedMentionsRequest: MessageAllowedMentionsRequest,
+): string {
+  return JSON.stringify(
+    MessageAllowedMentionsRequest$outboundSchema.parse(
+      messageAllowedMentionsRequest,
+    ),
+  );
+}
+
+export function messageAllowedMentionsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageAllowedMentionsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageAllowedMentionsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageAllowedMentionsRequest' from JSON`,
+  );
 }

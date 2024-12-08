@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FlagToChannelActionMetadata = {
   channelId: string;
@@ -51,4 +54,24 @@ export namespace FlagToChannelActionMetadata$ {
   export const outboundSchema = FlagToChannelActionMetadata$outboundSchema;
   /** @deprecated use `FlagToChannelActionMetadata$Outbound` instead. */
   export type Outbound = FlagToChannelActionMetadata$Outbound;
+}
+
+export function flagToChannelActionMetadataToJSON(
+  flagToChannelActionMetadata: FlagToChannelActionMetadata,
+): string {
+  return JSON.stringify(
+    FlagToChannelActionMetadata$outboundSchema.parse(
+      flagToChannelActionMetadata,
+    ),
+  );
+}
+
+export function flagToChannelActionMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<FlagToChannelActionMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FlagToChannelActionMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FlagToChannelActionMetadata' from JSON`,
+  );
 }

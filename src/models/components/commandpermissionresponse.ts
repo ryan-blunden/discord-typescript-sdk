@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CommandPermissionResponse = {
   id: string;
@@ -50,4 +53,22 @@ export namespace CommandPermissionResponse$ {
   export const outboundSchema = CommandPermissionResponse$outboundSchema;
   /** @deprecated use `CommandPermissionResponse$Outbound` instead. */
   export type Outbound = CommandPermissionResponse$Outbound;
+}
+
+export function commandPermissionResponseToJSON(
+  commandPermissionResponse: CommandPermissionResponse,
+): string {
+  return JSON.stringify(
+    CommandPermissionResponse$outboundSchema.parse(commandPermissionResponse),
+  );
+}
+
+export function commandPermissionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CommandPermissionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CommandPermissionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CommandPermissionResponse' from JSON`,
+  );
 }

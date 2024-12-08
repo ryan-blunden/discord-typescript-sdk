@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GuildChannelResponse,
   GuildChannelResponse$inboundSchema,
@@ -109,6 +112,20 @@ export namespace Channels$ {
   export type Outbound = Channels$Outbound;
 }
 
+export function channelsToJSON(channels: Channels): string {
+  return JSON.stringify(Channels$outboundSchema.parse(channels));
+}
+
+export function channelsFromJSON(
+  jsonString: string,
+): SafeParseResult<Channels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Channels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Channels' from JSON`,
+  );
+}
+
 /** @internal */
 export const ResolvedObjectsResponse$inboundSchema: z.ZodType<
   ResolvedObjectsResponse,
@@ -172,4 +189,22 @@ export namespace ResolvedObjectsResponse$ {
   export const outboundSchema = ResolvedObjectsResponse$outboundSchema;
   /** @deprecated use `ResolvedObjectsResponse$Outbound` instead. */
   export type Outbound = ResolvedObjectsResponse$Outbound;
+}
+
+export function resolvedObjectsResponseToJSON(
+  resolvedObjectsResponse: ResolvedObjectsResponse,
+): string {
+  return JSON.stringify(
+    ResolvedObjectsResponse$outboundSchema.parse(resolvedObjectsResponse),
+  );
+}
+
+export function resolvedObjectsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ResolvedObjectsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResolvedObjectsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResolvedObjectsResponse' from JSON`,
+  );
 }

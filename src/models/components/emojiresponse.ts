@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserResponse,
   UserResponse$inboundSchema,
@@ -85,4 +88,18 @@ export namespace EmojiResponse$ {
   export const outboundSchema = EmojiResponse$outboundSchema;
   /** @deprecated use `EmojiResponse$Outbound` instead. */
   export type Outbound = EmojiResponse$Outbound;
+}
+
+export function emojiResponseToJSON(emojiResponse: EmojiResponse): string {
+  return JSON.stringify(EmojiResponse$outboundSchema.parse(emojiResponse));
+}
+
+export function emojiResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<EmojiResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EmojiResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmojiResponse' from JSON`,
+  );
 }

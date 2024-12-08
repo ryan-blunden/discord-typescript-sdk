@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SoundboardPatchRequestPartial = {
   name?: string | undefined;
@@ -65,4 +68,24 @@ export namespace SoundboardPatchRequestPartial$ {
   export const outboundSchema = SoundboardPatchRequestPartial$outboundSchema;
   /** @deprecated use `SoundboardPatchRequestPartial$Outbound` instead. */
   export type Outbound = SoundboardPatchRequestPartial$Outbound;
+}
+
+export function soundboardPatchRequestPartialToJSON(
+  soundboardPatchRequestPartial: SoundboardPatchRequestPartial,
+): string {
+  return JSON.stringify(
+    SoundboardPatchRequestPartial$outboundSchema.parse(
+      soundboardPatchRequestPartial,
+    ),
+  );
+}
+
+export function soundboardPatchRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<SoundboardPatchRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SoundboardPatchRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SoundboardPatchRequestPartial' from JSON`,
+  );
 }

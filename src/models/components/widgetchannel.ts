@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type WidgetChannel = {
   id: string;
@@ -50,4 +53,18 @@ export namespace WidgetChannel$ {
   export const outboundSchema = WidgetChannel$outboundSchema;
   /** @deprecated use `WidgetChannel$Outbound` instead. */
   export type Outbound = WidgetChannel$Outbound;
+}
+
+export function widgetChannelToJSON(widgetChannel: WidgetChannel): string {
+  return JSON.stringify(WidgetChannel$outboundSchema.parse(widgetChannel));
+}
+
+export function widgetChannelFromJSON(
+  jsonString: string,
+): SafeParseResult<WidgetChannel, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WidgetChannel$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WidgetChannel' from JSON`,
+  );
 }
