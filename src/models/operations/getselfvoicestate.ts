@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetSelfVoiceStateRequest = {
   guildId: string;
@@ -51,4 +54,22 @@ export namespace GetSelfVoiceStateRequest$ {
   export const outboundSchema = GetSelfVoiceStateRequest$outboundSchema;
   /** @deprecated use `GetSelfVoiceStateRequest$Outbound` instead. */
   export type Outbound = GetSelfVoiceStateRequest$Outbound;
+}
+
+export function getSelfVoiceStateRequestToJSON(
+  getSelfVoiceStateRequest: GetSelfVoiceStateRequest,
+): string {
+  return JSON.stringify(
+    GetSelfVoiceStateRequest$outboundSchema.parse(getSelfVoiceStateRequest),
+  );
+}
+
+export function getSelfVoiceStateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetSelfVoiceStateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetSelfVoiceStateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetSelfVoiceStateRequest' from JSON`,
+  );
 }

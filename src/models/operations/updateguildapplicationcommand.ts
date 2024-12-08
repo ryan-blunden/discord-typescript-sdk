@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateGuildApplicationCommandSecurity = {
   botToken?: string | undefined;
@@ -62,6 +65,27 @@ export namespace UpdateGuildApplicationCommandSecurity$ {
     UpdateGuildApplicationCommandSecurity$outboundSchema;
   /** @deprecated use `UpdateGuildApplicationCommandSecurity$Outbound` instead. */
   export type Outbound = UpdateGuildApplicationCommandSecurity$Outbound;
+}
+
+export function updateGuildApplicationCommandSecurityToJSON(
+  updateGuildApplicationCommandSecurity: UpdateGuildApplicationCommandSecurity,
+): string {
+  return JSON.stringify(
+    UpdateGuildApplicationCommandSecurity$outboundSchema.parse(
+      updateGuildApplicationCommandSecurity,
+    ),
+  );
+}
+
+export function updateGuildApplicationCommandSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildApplicationCommandSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateGuildApplicationCommandSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildApplicationCommandSecurity' from JSON`,
+  );
 }
 
 /** @internal */
@@ -128,4 +152,25 @@ export namespace UpdateGuildApplicationCommandRequest$ {
     UpdateGuildApplicationCommandRequest$outboundSchema;
   /** @deprecated use `UpdateGuildApplicationCommandRequest$Outbound` instead. */
   export type Outbound = UpdateGuildApplicationCommandRequest$Outbound;
+}
+
+export function updateGuildApplicationCommandRequestToJSON(
+  updateGuildApplicationCommandRequest: UpdateGuildApplicationCommandRequest,
+): string {
+  return JSON.stringify(
+    UpdateGuildApplicationCommandRequest$outboundSchema.parse(
+      updateGuildApplicationCommandRequest,
+    ),
+  );
+}
+
+export function updateGuildApplicationCommandRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildApplicationCommandRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateGuildApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildApplicationCommandRequest' from JSON`,
+  );
 }

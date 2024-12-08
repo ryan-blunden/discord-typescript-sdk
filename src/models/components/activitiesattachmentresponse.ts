@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AttachmentResponse,
   AttachmentResponse$inboundSchema,
@@ -48,4 +51,24 @@ export namespace ActivitiesAttachmentResponse$ {
   export const outboundSchema = ActivitiesAttachmentResponse$outboundSchema;
   /** @deprecated use `ActivitiesAttachmentResponse$Outbound` instead. */
   export type Outbound = ActivitiesAttachmentResponse$Outbound;
+}
+
+export function activitiesAttachmentResponseToJSON(
+  activitiesAttachmentResponse: ActivitiesAttachmentResponse,
+): string {
+  return JSON.stringify(
+    ActivitiesAttachmentResponse$outboundSchema.parse(
+      activitiesAttachmentResponse,
+    ),
+  );
+}
+
+export function activitiesAttachmentResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ActivitiesAttachmentResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ActivitiesAttachmentResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ActivitiesAttachmentResponse' from JSON`,
+  );
 }

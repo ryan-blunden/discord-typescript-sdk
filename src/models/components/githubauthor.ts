@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GithubAuthor = {
   username?: string | null | undefined;
@@ -46,4 +49,18 @@ export namespace GithubAuthor$ {
   export const outboundSchema = GithubAuthor$outboundSchema;
   /** @deprecated use `GithubAuthor$Outbound` instead. */
   export type Outbound = GithubAuthor$Outbound;
+}
+
+export function githubAuthorToJSON(githubAuthor: GithubAuthor): string {
+  return JSON.stringify(GithubAuthor$outboundSchema.parse(githubAuthor));
+}
+
+export function githubAuthorFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubAuthor, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubAuthor$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubAuthor' from JSON`,
+  );
 }

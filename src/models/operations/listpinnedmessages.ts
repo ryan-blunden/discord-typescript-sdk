@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListPinnedMessagesRequest = {
   channelId: string;
@@ -51,4 +54,22 @@ export namespace ListPinnedMessagesRequest$ {
   export const outboundSchema = ListPinnedMessagesRequest$outboundSchema;
   /** @deprecated use `ListPinnedMessagesRequest$Outbound` instead. */
   export type Outbound = ListPinnedMessagesRequest$Outbound;
+}
+
+export function listPinnedMessagesRequestToJSON(
+  listPinnedMessagesRequest: ListPinnedMessagesRequest,
+): string {
+  return JSON.stringify(
+    ListPinnedMessagesRequest$outboundSchema.parse(listPinnedMessagesRequest),
+  );
+}
+
+export function listPinnedMessagesRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListPinnedMessagesRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListPinnedMessagesRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListPinnedMessagesRequest' from JSON`,
+  );
 }

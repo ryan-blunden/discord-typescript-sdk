@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetMyOauth2AuthorizationSecurity = {
   botToken?: string | undefined;
@@ -51,4 +54,24 @@ export namespace GetMyOauth2AuthorizationSecurity$ {
   export const outboundSchema = GetMyOauth2AuthorizationSecurity$outboundSchema;
   /** @deprecated use `GetMyOauth2AuthorizationSecurity$Outbound` instead. */
   export type Outbound = GetMyOauth2AuthorizationSecurity$Outbound;
+}
+
+export function getMyOauth2AuthorizationSecurityToJSON(
+  getMyOauth2AuthorizationSecurity: GetMyOauth2AuthorizationSecurity,
+): string {
+  return JSON.stringify(
+    GetMyOauth2AuthorizationSecurity$outboundSchema.parse(
+      getMyOauth2AuthorizationSecurity,
+    ),
+  );
+}
+
+export function getMyOauth2AuthorizationSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<GetMyOauth2AuthorizationSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetMyOauth2AuthorizationSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetMyOauth2AuthorizationSecurity' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BlockMessageAction,
   BlockMessageAction$inboundSchema,
@@ -102,6 +105,26 @@ export namespace MentionSpamUpsertRequestActions$ {
   export const outboundSchema = MentionSpamUpsertRequestActions$outboundSchema;
   /** @deprecated use `MentionSpamUpsertRequestActions$Outbound` instead. */
   export type Outbound = MentionSpamUpsertRequestActions$Outbound;
+}
+
+export function mentionSpamUpsertRequestActionsToJSON(
+  mentionSpamUpsertRequestActions: MentionSpamUpsertRequestActions,
+): string {
+  return JSON.stringify(
+    MentionSpamUpsertRequestActions$outboundSchema.parse(
+      mentionSpamUpsertRequestActions,
+    ),
+  );
+}
+
+export function mentionSpamUpsertRequestActionsFromJSON(
+  jsonString: string,
+): SafeParseResult<MentionSpamUpsertRequestActions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MentionSpamUpsertRequestActions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MentionSpamUpsertRequestActions' from JSON`,
+  );
 }
 
 /** @internal */
@@ -203,4 +226,22 @@ export namespace MentionSpamUpsertRequest$ {
   export const outboundSchema = MentionSpamUpsertRequest$outboundSchema;
   /** @deprecated use `MentionSpamUpsertRequest$Outbound` instead. */
   export type Outbound = MentionSpamUpsertRequest$Outbound;
+}
+
+export function mentionSpamUpsertRequestToJSON(
+  mentionSpamUpsertRequest: MentionSpamUpsertRequest,
+): string {
+  return JSON.stringify(
+    MentionSpamUpsertRequest$outboundSchema.parse(mentionSpamUpsertRequest),
+  );
+}
+
+export function mentionSpamUpsertRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<MentionSpamUpsertRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MentionSpamUpsertRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MentionSpamUpsertRequest' from JSON`,
+  );
 }

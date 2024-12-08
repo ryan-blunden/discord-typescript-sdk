@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApplicationCommandSubcommandOption,
   ApplicationCommandSubcommandOption$inboundSchema,
@@ -91,4 +94,31 @@ export namespace ApplicationCommandSubcommandGroupOption$ {
     ApplicationCommandSubcommandGroupOption$outboundSchema;
   /** @deprecated use `ApplicationCommandSubcommandGroupOption$Outbound` instead. */
   export type Outbound = ApplicationCommandSubcommandGroupOption$Outbound;
+}
+
+export function applicationCommandSubcommandGroupOptionToJSON(
+  applicationCommandSubcommandGroupOption:
+    ApplicationCommandSubcommandGroupOption,
+): string {
+  return JSON.stringify(
+    ApplicationCommandSubcommandGroupOption$outboundSchema.parse(
+      applicationCommandSubcommandGroupOption,
+    ),
+  );
+}
+
+export function applicationCommandSubcommandGroupOptionFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ApplicationCommandSubcommandGroupOption,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationCommandSubcommandGroupOption$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ApplicationCommandSubcommandGroupOption' from JSON`,
+  );
 }

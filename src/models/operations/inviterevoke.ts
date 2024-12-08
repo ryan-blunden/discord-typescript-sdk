@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type InviteRevokeRequest = {
   code: string;
@@ -53,6 +56,24 @@ export namespace InviteRevokeRequest$ {
   export type Outbound = InviteRevokeRequest$Outbound;
 }
 
+export function inviteRevokeRequestToJSON(
+  inviteRevokeRequest: InviteRevokeRequest,
+): string {
+  return JSON.stringify(
+    InviteRevokeRequest$outboundSchema.parse(inviteRevokeRequest),
+  );
+}
+
+export function inviteRevokeRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<InviteRevokeRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InviteRevokeRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InviteRevokeRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const InviteRevokeResponseBody$inboundSchema: z.ZodType<
   InviteRevokeResponseBody,
@@ -92,4 +113,22 @@ export namespace InviteRevokeResponseBody$ {
   export const outboundSchema = InviteRevokeResponseBody$outboundSchema;
   /** @deprecated use `InviteRevokeResponseBody$Outbound` instead. */
   export type Outbound = InviteRevokeResponseBody$Outbound;
+}
+
+export function inviteRevokeResponseBodyToJSON(
+  inviteRevokeResponseBody: InviteRevokeResponseBody,
+): string {
+  return JSON.stringify(
+    InviteRevokeResponseBody$outboundSchema.parse(inviteRevokeResponseBody),
+  );
+}
+
+export function inviteRevokeResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<InviteRevokeResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InviteRevokeResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InviteRevokeResponseBody' from JSON`,
+  );
 }

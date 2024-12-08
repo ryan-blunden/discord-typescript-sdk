@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateGuildFromTemplateRequestBody = {
   name: string;
@@ -55,6 +58,27 @@ export namespace CreateGuildFromTemplateRequestBody$ {
   export type Outbound = CreateGuildFromTemplateRequestBody$Outbound;
 }
 
+export function createGuildFromTemplateRequestBodyToJSON(
+  createGuildFromTemplateRequestBody: CreateGuildFromTemplateRequestBody,
+): string {
+  return JSON.stringify(
+    CreateGuildFromTemplateRequestBody$outboundSchema.parse(
+      createGuildFromTemplateRequestBody,
+    ),
+  );
+}
+
+export function createGuildFromTemplateRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildFromTemplateRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateGuildFromTemplateRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildFromTemplateRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const CreateGuildFromTemplateRequest$inboundSchema: z.ZodType<
   CreateGuildFromTemplateRequest,
@@ -100,4 +124,24 @@ export namespace CreateGuildFromTemplateRequest$ {
   export const outboundSchema = CreateGuildFromTemplateRequest$outboundSchema;
   /** @deprecated use `CreateGuildFromTemplateRequest$Outbound` instead. */
   export type Outbound = CreateGuildFromTemplateRequest$Outbound;
+}
+
+export function createGuildFromTemplateRequestToJSON(
+  createGuildFromTemplateRequest: CreateGuildFromTemplateRequest,
+): string {
+  return JSON.stringify(
+    CreateGuildFromTemplateRequest$outboundSchema.parse(
+      createGuildFromTemplateRequest,
+    ),
+  );
+}
+
+export function createGuildFromTemplateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildFromTemplateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildFromTemplateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildFromTemplateRequest' from JSON`,
+  );
 }

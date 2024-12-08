@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateGuildRequestRoleItem = {
   id: number;
@@ -75,4 +78,22 @@ export namespace CreateGuildRequestRoleItem$ {
   export const outboundSchema = CreateGuildRequestRoleItem$outboundSchema;
   /** @deprecated use `CreateGuildRequestRoleItem$Outbound` instead. */
   export type Outbound = CreateGuildRequestRoleItem$Outbound;
+}
+
+export function createGuildRequestRoleItemToJSON(
+  createGuildRequestRoleItem: CreateGuildRequestRoleItem,
+): string {
+  return JSON.stringify(
+    CreateGuildRequestRoleItem$outboundSchema.parse(createGuildRequestRoleItem),
+  );
+}
+
+export function createGuildRequestRoleItemFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildRequestRoleItem, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildRequestRoleItem$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildRequestRoleItem' from JSON`,
+  );
 }

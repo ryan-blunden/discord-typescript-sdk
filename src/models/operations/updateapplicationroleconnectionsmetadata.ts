@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateApplicationRoleConnectionsMetadataRequest = {
   applicationId: string;
@@ -75,4 +78,31 @@ export namespace UpdateApplicationRoleConnectionsMetadataRequest$ {
   /** @deprecated use `UpdateApplicationRoleConnectionsMetadataRequest$Outbound` instead. */
   export type Outbound =
     UpdateApplicationRoleConnectionsMetadataRequest$Outbound;
+}
+
+export function updateApplicationRoleConnectionsMetadataRequestToJSON(
+  updateApplicationRoleConnectionsMetadataRequest:
+    UpdateApplicationRoleConnectionsMetadataRequest,
+): string {
+  return JSON.stringify(
+    UpdateApplicationRoleConnectionsMetadataRequest$outboundSchema.parse(
+      updateApplicationRoleConnectionsMetadataRequest,
+    ),
+  );
+}
+
+export function updateApplicationRoleConnectionsMetadataRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateApplicationRoleConnectionsMetadataRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateApplicationRoleConnectionsMetadataRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateApplicationRoleConnectionsMetadataRequest' from JSON`,
+  );
 }

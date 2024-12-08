@@ -67,6 +67,7 @@ export async function applicationsGetEntitlements(
   const query = encodeFormQuery({
     "after": payload.after,
     "before": payload.before,
+    "exclude_deleted": payload.exclude_deleted,
     "exclude_ended": payload.exclude_ended,
     "guild_id": payload.guild_id,
     "limit": payload.limit,

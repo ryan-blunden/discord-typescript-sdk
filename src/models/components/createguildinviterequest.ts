@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateGuildInviteRequest = {
   maxAge?: number | null | undefined;
@@ -83,4 +86,22 @@ export namespace CreateGuildInviteRequest$ {
   export const outboundSchema = CreateGuildInviteRequest$outboundSchema;
   /** @deprecated use `CreateGuildInviteRequest$Outbound` instead. */
   export type Outbound = CreateGuildInviteRequest$Outbound;
+}
+
+export function createGuildInviteRequestToJSON(
+  createGuildInviteRequest: CreateGuildInviteRequest,
+): string {
+  return JSON.stringify(
+    CreateGuildInviteRequest$outboundSchema.parse(createGuildInviteRequest),
+  );
+}
+
+export function createGuildInviteRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildInviteRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildInviteRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildInviteRequest' from JSON`,
+  );
 }

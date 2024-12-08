@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateGroupDMInviteRequest = {
   maxAge?: number | null | undefined;
@@ -51,4 +54,22 @@ export namespace CreateGroupDMInviteRequest$ {
   export const outboundSchema = CreateGroupDMInviteRequest$outboundSchema;
   /** @deprecated use `CreateGroupDMInviteRequest$Outbound` instead. */
   export type Outbound = CreateGroupDMInviteRequest$Outbound;
+}
+
+export function createGroupDMInviteRequestToJSON(
+  createGroupDMInviteRequest: CreateGroupDMInviteRequest,
+): string {
+  return JSON.stringify(
+    CreateGroupDMInviteRequest$outboundSchema.parse(createGroupDMInviteRequest),
+  );
+}
+
+export function createGroupDMInviteRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGroupDMInviteRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGroupDMInviteRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGroupDMInviteRequest' from JSON`,
+  );
 }

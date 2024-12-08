@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListThreadMembersRequest = {
   channelId: string;
@@ -65,4 +68,22 @@ export namespace ListThreadMembersRequest$ {
   export const outboundSchema = ListThreadMembersRequest$outboundSchema;
   /** @deprecated use `ListThreadMembersRequest$Outbound` instead. */
   export type Outbound = ListThreadMembersRequest$Outbound;
+}
+
+export function listThreadMembersRequestToJSON(
+  listThreadMembersRequest: ListThreadMembersRequest,
+): string {
+  return JSON.stringify(
+    ListThreadMembersRequest$outboundSchema.parse(listThreadMembersRequest),
+  );
+}
+
+export function listThreadMembersRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListThreadMembersRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListThreadMembersRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListThreadMembersRequest' from JSON`,
+  );
 }

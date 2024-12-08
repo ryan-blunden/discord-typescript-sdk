@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ApplicationRoleConnectionsMetadataItemResponse = {
   type?: 1 | undefined;
@@ -78,4 +81,31 @@ export namespace ApplicationRoleConnectionsMetadataItemResponse$ {
   /** @deprecated use `ApplicationRoleConnectionsMetadataItemResponse$Outbound` instead. */
   export type Outbound =
     ApplicationRoleConnectionsMetadataItemResponse$Outbound;
+}
+
+export function applicationRoleConnectionsMetadataItemResponseToJSON(
+  applicationRoleConnectionsMetadataItemResponse:
+    ApplicationRoleConnectionsMetadataItemResponse,
+): string {
+  return JSON.stringify(
+    ApplicationRoleConnectionsMetadataItemResponse$outboundSchema.parse(
+      applicationRoleConnectionsMetadataItemResponse,
+    ),
+  );
+}
+
+export function applicationRoleConnectionsMetadataItemResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ApplicationRoleConnectionsMetadataItemResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationRoleConnectionsMetadataItemResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ApplicationRoleConnectionsMetadataItemResponse' from JSON`,
+  );
 }

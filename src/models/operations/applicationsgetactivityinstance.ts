@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ApplicationsGetActivityInstanceRequest = {
   applicationId: string;
@@ -59,4 +62,26 @@ export namespace ApplicationsGetActivityInstanceRequest$ {
     ApplicationsGetActivityInstanceRequest$outboundSchema;
   /** @deprecated use `ApplicationsGetActivityInstanceRequest$Outbound` instead. */
   export type Outbound = ApplicationsGetActivityInstanceRequest$Outbound;
+}
+
+export function applicationsGetActivityInstanceRequestToJSON(
+  applicationsGetActivityInstanceRequest:
+    ApplicationsGetActivityInstanceRequest,
+): string {
+  return JSON.stringify(
+    ApplicationsGetActivityInstanceRequest$outboundSchema.parse(
+      applicationsGetActivityInstanceRequest,
+    ),
+  );
+}
+
+export function applicationsGetActivityInstanceRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationsGetActivityInstanceRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationsGetActivityInstanceRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationsGetActivityInstanceRequest' from JSON`,
+  );
 }

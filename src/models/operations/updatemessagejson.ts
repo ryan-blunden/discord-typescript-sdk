@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateMessageJsonRequest = {
   channelId: string;
@@ -65,4 +68,22 @@ export namespace UpdateMessageJsonRequest$ {
   export const outboundSchema = UpdateMessageJsonRequest$outboundSchema;
   /** @deprecated use `UpdateMessageJsonRequest$Outbound` instead. */
   export type Outbound = UpdateMessageJsonRequest$Outbound;
+}
+
+export function updateMessageJsonRequestToJSON(
+  updateMessageJsonRequest: UpdateMessageJsonRequest,
+): string {
+  return JSON.stringify(
+    UpdateMessageJsonRequest$outboundSchema.parse(updateMessageJsonRequest),
+  );
+}
+
+export function updateMessageJsonRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateMessageJsonRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateMessageJsonRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateMessageJsonRequest' from JSON`,
+  );
 }

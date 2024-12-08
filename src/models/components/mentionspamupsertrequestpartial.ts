@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BlockMessageAction,
   BlockMessageAction$inboundSchema,
@@ -106,6 +109,28 @@ export namespace MentionSpamUpsertRequestPartialActions$ {
   export type Outbound = MentionSpamUpsertRequestPartialActions$Outbound;
 }
 
+export function mentionSpamUpsertRequestPartialActionsToJSON(
+  mentionSpamUpsertRequestPartialActions:
+    MentionSpamUpsertRequestPartialActions,
+): string {
+  return JSON.stringify(
+    MentionSpamUpsertRequestPartialActions$outboundSchema.parse(
+      mentionSpamUpsertRequestPartialActions,
+    ),
+  );
+}
+
+export function mentionSpamUpsertRequestPartialActionsFromJSON(
+  jsonString: string,
+): SafeParseResult<MentionSpamUpsertRequestPartialActions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      MentionSpamUpsertRequestPartialActions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MentionSpamUpsertRequestPartialActions' from JSON`,
+  );
+}
+
 /** @internal */
 export const MentionSpamUpsertRequestPartial$inboundSchema: z.ZodType<
   MentionSpamUpsertRequestPartial,
@@ -205,4 +230,24 @@ export namespace MentionSpamUpsertRequestPartial$ {
   export const outboundSchema = MentionSpamUpsertRequestPartial$outboundSchema;
   /** @deprecated use `MentionSpamUpsertRequestPartial$Outbound` instead. */
   export type Outbound = MentionSpamUpsertRequestPartial$Outbound;
+}
+
+export function mentionSpamUpsertRequestPartialToJSON(
+  mentionSpamUpsertRequestPartial: MentionSpamUpsertRequestPartial,
+): string {
+  return JSON.stringify(
+    MentionSpamUpsertRequestPartial$outboundSchema.parse(
+      mentionSpamUpsertRequestPartial,
+    ),
+  );
+}
+
+export function mentionSpamUpsertRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<MentionSpamUpsertRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MentionSpamUpsertRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MentionSpamUpsertRequestPartial' from JSON`,
+  );
 }

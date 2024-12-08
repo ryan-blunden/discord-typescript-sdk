@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PollAnswerCreateRequest,
   PollAnswerCreateRequest$inboundSchema,
@@ -81,4 +84,22 @@ export namespace PollCreateRequest$ {
   export const outboundSchema = PollCreateRequest$outboundSchema;
   /** @deprecated use `PollCreateRequest$Outbound` instead. */
   export type Outbound = PollCreateRequest$Outbound;
+}
+
+export function pollCreateRequestToJSON(
+  pollCreateRequest: PollCreateRequest,
+): string {
+  return JSON.stringify(
+    PollCreateRequest$outboundSchema.parse(pollCreateRequest),
+  );
+}
+
+export function pollCreateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<PollCreateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PollCreateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PollCreateRequest' from JSON`,
+  );
 }

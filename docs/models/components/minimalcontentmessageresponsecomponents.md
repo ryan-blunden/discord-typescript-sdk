@@ -3,71 +3,77 @@
 
 ## Supported Types
 
-### `components.MessageComponentActionRowResponse`
+### `components.ActionRowComponentResponse`
 
 ```typescript
-const value: components.MessageComponentActionRowResponse = {
+const value: components.ActionRowComponentResponse = {
   id: 314759,
 };
 ```
 
-### `components.MessageComponentButtonResponse`
+### `components.ButtonComponentResponse`
 
 ```typescript
-const value: components.MessageComponentButtonResponse = {
+const value: components.ButtonComponentResponse = {
   id: 632121,
 };
 ```
 
-### `components.MessageComponentChannelSelectResponse`
+### `components.ChannelSelectComponentResponse`
 
 ```typescript
-const value: components.MessageComponentChannelSelectResponse = {
+const value: components.ChannelSelectComponentResponse = {
   id: 147883,
   customId: "<id>",
 };
 ```
 
-### `components.MessageComponentInputTextResponse`
+### `components.MentionableSelectComponentResponse`
 
 ```typescript
-const value: components.MessageComponentInputTextResponse = {
+const value: components.MentionableSelectComponentResponse = {
   id: 955683,
   customId: "<id>",
 };
 ```
 
-### `components.MessageComponentMentionableSelectResponse`
+### `components.RoleSelectComponentResponse`
 
 ```typescript
-const value: components.MessageComponentMentionableSelectResponse = {
+const value: components.RoleSelectComponentResponse = {
   id: 127857,
   customId: "<id>",
 };
 ```
 
-### `components.MessageComponentRoleSelectResponse`
+### `components.StringSelectComponentResponse`
 
 ```typescript
-const value: components.MessageComponentRoleSelectResponse = {
+const value: components.StringSelectComponentResponse = {
   id: 776764,
   customId: "<id>",
+  options: [
+    {
+      label: "<value>",
+      value: "<value>",
+    },
+  ],
 };
 ```
 
-### `components.MessageComponentStringSelectResponse`
+### `components.TextInputComponentResponse`
 
 ```typescript
-const value: components.MessageComponentStringSelectResponse = {
+const value: components.TextInputComponentResponse = {
   id: 318614,
   customId: "<id>",
 };
 ```
 
-### `components.MessageComponentUserSelectResponse`
+### `components.UserSelectComponentResponse`
 
 ```typescript
-const value: components.MessageComponentUserSelectResponse = {
+const value: components.UserSelectComponentResponse = {
   id: 732906,
   customId: "<id>",
 };

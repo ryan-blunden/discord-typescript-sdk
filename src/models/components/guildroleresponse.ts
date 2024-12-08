@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GuildRoleTagsResponse,
   GuildRoleTagsResponse$inboundSchema,
@@ -101,4 +104,22 @@ export namespace GuildRoleResponse$ {
   export const outboundSchema = GuildRoleResponse$outboundSchema;
   /** @deprecated use `GuildRoleResponse$Outbound` instead. */
   export type Outbound = GuildRoleResponse$Outbound;
+}
+
+export function guildRoleResponseToJSON(
+  guildRoleResponse: GuildRoleResponse,
+): string {
+  return JSON.stringify(
+    GuildRoleResponse$outboundSchema.parse(guildRoleResponse),
+  );
+}
+
+export function guildRoleResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildRoleResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildRoleResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildRoleResponse' from JSON`,
+  );
 }

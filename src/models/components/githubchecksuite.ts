@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GithubCheckApp,
   GithubCheckApp$inboundSchema,
@@ -85,4 +88,22 @@ export namespace GithubCheckSuite$ {
   export const outboundSchema = GithubCheckSuite$outboundSchema;
   /** @deprecated use `GithubCheckSuite$Outbound` instead. */
   export type Outbound = GithubCheckSuite$Outbound;
+}
+
+export function githubCheckSuiteToJSON(
+  githubCheckSuite: GithubCheckSuite,
+): string {
+  return JSON.stringify(
+    GithubCheckSuite$outboundSchema.parse(githubCheckSuite),
+  );
+}
+
+export function githubCheckSuiteFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubCheckSuite, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubCheckSuite$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubCheckSuite' from JSON`,
+  );
 }

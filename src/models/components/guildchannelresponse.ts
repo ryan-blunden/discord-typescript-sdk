@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ChannelPermissionOverwriteResponse,
   ChannelPermissionOverwriteResponse$inboundSchema,
@@ -224,4 +227,22 @@ export namespace GuildChannelResponse$ {
   export const outboundSchema = GuildChannelResponse$outboundSchema;
   /** @deprecated use `GuildChannelResponse$Outbound` instead. */
   export type Outbound = GuildChannelResponse$Outbound;
+}
+
+export function guildChannelResponseToJSON(
+  guildChannelResponse: GuildChannelResponse,
+): string {
+  return JSON.stringify(
+    GuildChannelResponse$outboundSchema.parse(guildChannelResponse),
+  );
+}
+
+export function guildChannelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildChannelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildChannelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildChannelResponse' from JSON`,
+  );
 }

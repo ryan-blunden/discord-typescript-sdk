@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApplicationCommandInteractionMetadataResponse,
   ApplicationCommandInteractionMetadataResponse$inboundSchema,
@@ -74,6 +77,26 @@ export namespace TriggeringInteractionMetadata$ {
   export const outboundSchema = TriggeringInteractionMetadata$outboundSchema;
   /** @deprecated use `TriggeringInteractionMetadata$Outbound` instead. */
   export type Outbound = TriggeringInteractionMetadata$Outbound;
+}
+
+export function triggeringInteractionMetadataToJSON(
+  triggeringInteractionMetadata: TriggeringInteractionMetadata,
+): string {
+  return JSON.stringify(
+    TriggeringInteractionMetadata$outboundSchema.parse(
+      triggeringInteractionMetadata,
+    ),
+  );
+}
+
+export function triggeringInteractionMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<TriggeringInteractionMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TriggeringInteractionMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TriggeringInteractionMetadata' from JSON`,
+  );
 }
 
 /** @internal */
@@ -147,4 +170,26 @@ export namespace ModalSubmitInteractionMetadataResponse$ {
     ModalSubmitInteractionMetadataResponse$outboundSchema;
   /** @deprecated use `ModalSubmitInteractionMetadataResponse$Outbound` instead. */
   export type Outbound = ModalSubmitInteractionMetadataResponse$Outbound;
+}
+
+export function modalSubmitInteractionMetadataResponseToJSON(
+  modalSubmitInteractionMetadataResponse:
+    ModalSubmitInteractionMetadataResponse,
+): string {
+  return JSON.stringify(
+    ModalSubmitInteractionMetadataResponse$outboundSchema.parse(
+      modalSubmitInteractionMetadataResponse,
+    ),
+  );
+}
+
+export function modalSubmitInteractionMetadataResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ModalSubmitInteractionMetadataResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ModalSubmitInteractionMetadataResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ModalSubmitInteractionMetadataResponse' from JSON`,
+  );
 }

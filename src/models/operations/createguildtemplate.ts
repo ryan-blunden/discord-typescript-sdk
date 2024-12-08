@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateGuildTemplateRequestBody = {
   name: string;
@@ -54,6 +57,26 @@ export namespace CreateGuildTemplateRequestBody$ {
   export type Outbound = CreateGuildTemplateRequestBody$Outbound;
 }
 
+export function createGuildTemplateRequestBodyToJSON(
+  createGuildTemplateRequestBody: CreateGuildTemplateRequestBody,
+): string {
+  return JSON.stringify(
+    CreateGuildTemplateRequestBody$outboundSchema.parse(
+      createGuildTemplateRequestBody,
+    ),
+  );
+}
+
+export function createGuildTemplateRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildTemplateRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildTemplateRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildTemplateRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const CreateGuildTemplateRequest$inboundSchema: z.ZodType<
   CreateGuildTemplateRequest,
@@ -101,4 +124,22 @@ export namespace CreateGuildTemplateRequest$ {
   export const outboundSchema = CreateGuildTemplateRequest$outboundSchema;
   /** @deprecated use `CreateGuildTemplateRequest$Outbound` instead. */
   export type Outbound = CreateGuildTemplateRequest$Outbound;
+}
+
+export function createGuildTemplateRequestToJSON(
+  createGuildTemplateRequest: CreateGuildTemplateRequest,
+): string {
+  return JSON.stringify(
+    CreateGuildTemplateRequest$outboundSchema.parse(createGuildTemplateRequest),
+  );
+}
+
+export function createGuildTemplateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildTemplateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildTemplateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildTemplateRequest' from JSON`,
+  );
 }

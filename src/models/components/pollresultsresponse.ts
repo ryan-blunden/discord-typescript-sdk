@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PollResultsEntryResponse,
   PollResultsEntryResponse$inboundSchema,
@@ -65,4 +68,22 @@ export namespace PollResultsResponse$ {
   export const outboundSchema = PollResultsResponse$outboundSchema;
   /** @deprecated use `PollResultsResponse$Outbound` instead. */
   export type Outbound = PollResultsResponse$Outbound;
+}
+
+export function pollResultsResponseToJSON(
+  pollResultsResponse: PollResultsResponse,
+): string {
+  return JSON.stringify(
+    PollResultsResponse$outboundSchema.parse(pollResultsResponse),
+  );
+}
+
+export function pollResultsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PollResultsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PollResultsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PollResultsResponse' from JSON`,
+  );
 }

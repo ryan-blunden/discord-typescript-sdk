@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type InviteResolveSecurity = {
   botToken?: string | undefined;
@@ -68,6 +71,24 @@ export namespace InviteResolveSecurity$ {
   export type Outbound = InviteResolveSecurity$Outbound;
 }
 
+export function inviteResolveSecurityToJSON(
+  inviteResolveSecurity: InviteResolveSecurity,
+): string {
+  return JSON.stringify(
+    InviteResolveSecurity$outboundSchema.parse(inviteResolveSecurity),
+  );
+}
+
+export function inviteResolveSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<InviteResolveSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InviteResolveSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InviteResolveSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const InviteResolveRequest$inboundSchema: z.ZodType<
   InviteResolveRequest,
@@ -120,6 +141,24 @@ export namespace InviteResolveRequest$ {
   export type Outbound = InviteResolveRequest$Outbound;
 }
 
+export function inviteResolveRequestToJSON(
+  inviteResolveRequest: InviteResolveRequest,
+): string {
+  return JSON.stringify(
+    InviteResolveRequest$outboundSchema.parse(inviteResolveRequest),
+  );
+}
+
+export function inviteResolveRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<InviteResolveRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InviteResolveRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InviteResolveRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const InviteResolveResponseBody$inboundSchema: z.ZodType<
   InviteResolveResponseBody,
@@ -159,4 +198,22 @@ export namespace InviteResolveResponseBody$ {
   export const outboundSchema = InviteResolveResponseBody$outboundSchema;
   /** @deprecated use `InviteResolveResponseBody$Outbound` instead. */
   export type Outbound = InviteResolveResponseBody$Outbound;
+}
+
+export function inviteResolveResponseBodyToJSON(
+  inviteResolveResponseBody: InviteResolveResponseBody,
+): string {
+  return JSON.stringify(
+    InviteResolveResponseBody$outboundSchema.parse(inviteResolveResponseBody),
+  );
+}
+
+export function inviteResolveResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<InviteResolveResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InviteResolveResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InviteResolveResponseBody' from JSON`,
+  );
 }

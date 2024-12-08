@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetAnswerVotersRequest = {
   channelId: string;
@@ -71,4 +74,22 @@ export namespace GetAnswerVotersRequest$ {
   export const outboundSchema = GetAnswerVotersRequest$outboundSchema;
   /** @deprecated use `GetAnswerVotersRequest$Outbound` instead. */
   export type Outbound = GetAnswerVotersRequest$Outbound;
+}
+
+export function getAnswerVotersRequestToJSON(
+  getAnswerVotersRequest: GetAnswerVotersRequest,
+): string {
+  return JSON.stringify(
+    GetAnswerVotersRequest$outboundSchema.parse(getAnswerVotersRequest),
+  );
+}
+
+export function getAnswerVotersRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAnswerVotersRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAnswerVotersRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAnswerVotersRequest' from JSON`,
+  );
 }

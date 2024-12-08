@@ -4,14 +4,20 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Nonce = number | string;
 
 export type CreateMessageMultipartRequestBody = {
   allowedMentions?: components.MessageAllowedMentionsRequest | null | undefined;
   attachments?: Array<components.MessageAttachmentRequest> | null | undefined;
-  components?: Array<components.ActionRow> | null | undefined;
+  components?:
+    | Array<components.ActionRowComponentForMessageRequest>
+    | null
+    | undefined;
   content?: string | null | undefined;
   embeds?: Array<components.RichEmbed> | null | undefined;
   enforceNonce?: boolean | null | undefined;
@@ -65,6 +71,20 @@ export namespace Nonce$ {
   export type Outbound = Nonce$Outbound;
 }
 
+export function nonceToJSON(nonce: Nonce): string {
+  return JSON.stringify(Nonce$outboundSchema.parse(nonce));
+}
+
+export function nonceFromJSON(
+  jsonString: string,
+): SafeParseResult<Nonce, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Nonce$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Nonce' from JSON`,
+  );
+}
+
 /** @internal */
 export const CreateMessageMultipartRequestBody$inboundSchema: z.ZodType<
   CreateMessageMultipartRequestBody,
@@ -77,8 +97,9 @@ export const CreateMessageMultipartRequestBody$inboundSchema: z.ZodType<
   attachments: z.nullable(
     z.array(components.MessageAttachmentRequest$inboundSchema),
   ).optional(),
-  components: z.nullable(z.array(components.ActionRow$inboundSchema))
-    .optional(),
+  components: z.nullable(
+    z.array(components.ActionRowComponentForMessageRequest$inboundSchema),
+  ).optional(),
   content: z.nullable(z.string()).optional(),
   embeds: z.nullable(z.array(components.RichEmbed$inboundSchema)).optional(),
   enforce_nonce: z.nullable(z.boolean()).optional(),
@@ -129,7 +150,10 @@ export type CreateMessageMultipartRequestBody$Outbound = {
     | Array<components.MessageAttachmentRequest$Outbound>
     | null
     | undefined;
-  components?: Array<components.ActionRow$Outbound> | null | undefined;
+  components?:
+    | Array<components.ActionRowComponentForMessageRequest$Outbound>
+    | null
+    | undefined;
   content?: string | null | undefined;
   embeds?: Array<components.RichEmbed$Outbound> | null | undefined;
   enforce_nonce?: boolean | null | undefined;
@@ -166,8 +190,9 @@ export const CreateMessageMultipartRequestBody$outboundSchema: z.ZodType<
   attachments: z.nullable(
     z.array(components.MessageAttachmentRequest$outboundSchema),
   ).optional(),
-  components: z.nullable(z.array(components.ActionRow$outboundSchema))
-    .optional(),
+  components: z.nullable(
+    z.array(components.ActionRowComponentForMessageRequest$outboundSchema),
+  ).optional(),
   content: z.nullable(z.string()).optional(),
   embeds: z.nullable(z.array(components.RichEmbed$outboundSchema)).optional(),
   enforceNonce: z.nullable(z.boolean()).optional(),
@@ -222,6 +247,26 @@ export namespace CreateMessageMultipartRequestBody$ {
   export type Outbound = CreateMessageMultipartRequestBody$Outbound;
 }
 
+export function createMessageMultipartRequestBodyToJSON(
+  createMessageMultipartRequestBody: CreateMessageMultipartRequestBody,
+): string {
+  return JSON.stringify(
+    CreateMessageMultipartRequestBody$outboundSchema.parse(
+      createMessageMultipartRequestBody,
+    ),
+  );
+}
+
+export function createMessageMultipartRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateMessageMultipartRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateMessageMultipartRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateMessageMultipartRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const CreateMessageMultipartRequest$inboundSchema: z.ZodType<
   CreateMessageMultipartRequest,
@@ -269,4 +314,24 @@ export namespace CreateMessageMultipartRequest$ {
   export const outboundSchema = CreateMessageMultipartRequest$outboundSchema;
   /** @deprecated use `CreateMessageMultipartRequest$Outbound` instead. */
   export type Outbound = CreateMessageMultipartRequest$Outbound;
+}
+
+export function createMessageMultipartRequestToJSON(
+  createMessageMultipartRequest: CreateMessageMultipartRequest,
+): string {
+  return JSON.stringify(
+    CreateMessageMultipartRequest$outboundSchema.parse(
+      createMessageMultipartRequest,
+    ),
+  );
+}
+
+export function createMessageMultipartRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateMessageMultipartRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateMessageMultipartRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateMessageMultipartRequest' from JSON`,
+  );
 }

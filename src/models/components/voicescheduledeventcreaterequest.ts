@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EntityMetadataVoice,
   EntityMetadataVoice$inboundSchema,
@@ -104,4 +107,24 @@ export namespace VoiceScheduledEventCreateRequest$ {
   export const outboundSchema = VoiceScheduledEventCreateRequest$outboundSchema;
   /** @deprecated use `VoiceScheduledEventCreateRequest$Outbound` instead. */
   export type Outbound = VoiceScheduledEventCreateRequest$Outbound;
+}
+
+export function voiceScheduledEventCreateRequestToJSON(
+  voiceScheduledEventCreateRequest: VoiceScheduledEventCreateRequest,
+): string {
+  return JSON.stringify(
+    VoiceScheduledEventCreateRequest$outboundSchema.parse(
+      voiceScheduledEventCreateRequest,
+    ),
+  );
+}
+
+export function voiceScheduledEventCreateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<VoiceScheduledEventCreateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => VoiceScheduledEventCreateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VoiceScheduledEventCreateRequest' from JSON`,
+  );
 }

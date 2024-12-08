@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FollowChannelRequestBody = {
   webhookChannelId: string;
@@ -58,6 +61,24 @@ export namespace FollowChannelRequestBody$ {
   export type Outbound = FollowChannelRequestBody$Outbound;
 }
 
+export function followChannelRequestBodyToJSON(
+  followChannelRequestBody: FollowChannelRequestBody,
+): string {
+  return JSON.stringify(
+    FollowChannelRequestBody$outboundSchema.parse(followChannelRequestBody),
+  );
+}
+
+export function followChannelRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<FollowChannelRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FollowChannelRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FollowChannelRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const FollowChannelRequest$inboundSchema: z.ZodType<
   FollowChannelRequest,
@@ -105,4 +126,22 @@ export namespace FollowChannelRequest$ {
   export const outboundSchema = FollowChannelRequest$outboundSchema;
   /** @deprecated use `FollowChannelRequest$Outbound` instead. */
   export type Outbound = FollowChannelRequest$Outbound;
+}
+
+export function followChannelRequestToJSON(
+  followChannelRequest: FollowChannelRequest,
+): string {
+  return JSON.stringify(
+    FollowChannelRequest$outboundSchema.parse(followChannelRequest),
+  );
+}
+
+export function followChannelRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<FollowChannelRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FollowChannelRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FollowChannelRequest' from JSON`,
+  );
 }

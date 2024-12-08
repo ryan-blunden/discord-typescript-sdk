@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   NewMemberActionResponse,
   NewMemberActionResponse$inboundSchema,
@@ -101,4 +104,22 @@ export namespace GuildHomeSettingsResponse$ {
   export const outboundSchema = GuildHomeSettingsResponse$outboundSchema;
   /** @deprecated use `GuildHomeSettingsResponse$Outbound` instead. */
   export type Outbound = GuildHomeSettingsResponse$Outbound;
+}
+
+export function guildHomeSettingsResponseToJSON(
+  guildHomeSettingsResponse: GuildHomeSettingsResponse,
+): string {
+  return JSON.stringify(
+    GuildHomeSettingsResponse$outboundSchema.parse(guildHomeSettingsResponse),
+  );
+}
+
+export function guildHomeSettingsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildHomeSettingsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildHomeSettingsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildHomeSettingsResponse' from JSON`,
+  );
 }

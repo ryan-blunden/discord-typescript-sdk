@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateApplicationEmojiRequestBody = {
   name?: string | undefined;
@@ -50,6 +53,26 @@ export namespace UpdateApplicationEmojiRequestBody$ {
     UpdateApplicationEmojiRequestBody$outboundSchema;
   /** @deprecated use `UpdateApplicationEmojiRequestBody$Outbound` instead. */
   export type Outbound = UpdateApplicationEmojiRequestBody$Outbound;
+}
+
+export function updateApplicationEmojiRequestBodyToJSON(
+  updateApplicationEmojiRequestBody: UpdateApplicationEmojiRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateApplicationEmojiRequestBody$outboundSchema.parse(
+      updateApplicationEmojiRequestBody,
+    ),
+  );
+}
+
+export function updateApplicationEmojiRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateApplicationEmojiRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateApplicationEmojiRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateApplicationEmojiRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -104,4 +127,24 @@ export namespace UpdateApplicationEmojiRequest$ {
   export const outboundSchema = UpdateApplicationEmojiRequest$outboundSchema;
   /** @deprecated use `UpdateApplicationEmojiRequest$Outbound` instead. */
   export type Outbound = UpdateApplicationEmojiRequest$Outbound;
+}
+
+export function updateApplicationEmojiRequestToJSON(
+  updateApplicationEmojiRequest: UpdateApplicationEmojiRequest,
+): string {
+  return JSON.stringify(
+    UpdateApplicationEmojiRequest$outboundSchema.parse(
+      updateApplicationEmojiRequest,
+    ),
+  );
+}
+
+export function updateApplicationEmojiRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateApplicationEmojiRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateApplicationEmojiRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateApplicationEmojiRequest' from JSON`,
+  );
 }

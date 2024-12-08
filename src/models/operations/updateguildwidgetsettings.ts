@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateGuildWidgetSettingsRequestBody = {
   channelId?: string | null | undefined;
@@ -64,6 +67,27 @@ export namespace UpdateGuildWidgetSettingsRequestBody$ {
   export type Outbound = UpdateGuildWidgetSettingsRequestBody$Outbound;
 }
 
+export function updateGuildWidgetSettingsRequestBodyToJSON(
+  updateGuildWidgetSettingsRequestBody: UpdateGuildWidgetSettingsRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateGuildWidgetSettingsRequestBody$outboundSchema.parse(
+      updateGuildWidgetSettingsRequestBody,
+    ),
+  );
+}
+
+export function updateGuildWidgetSettingsRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildWidgetSettingsRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateGuildWidgetSettingsRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildWidgetSettingsRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpdateGuildWidgetSettingsRequest$inboundSchema: z.ZodType<
   UpdateGuildWidgetSettingsRequest,
@@ -113,4 +137,24 @@ export namespace UpdateGuildWidgetSettingsRequest$ {
   export const outboundSchema = UpdateGuildWidgetSettingsRequest$outboundSchema;
   /** @deprecated use `UpdateGuildWidgetSettingsRequest$Outbound` instead. */
   export type Outbound = UpdateGuildWidgetSettingsRequest$Outbound;
+}
+
+export function updateGuildWidgetSettingsRequestToJSON(
+  updateGuildWidgetSettingsRequest: UpdateGuildWidgetSettingsRequest,
+): string {
+  return JSON.stringify(
+    UpdateGuildWidgetSettingsRequest$outboundSchema.parse(
+      updateGuildWidgetSettingsRequest,
+    ),
+  );
+}
+
+export function updateGuildWidgetSettingsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildWidgetSettingsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildWidgetSettingsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildWidgetSettingsRequest' from JSON`,
+  );
 }

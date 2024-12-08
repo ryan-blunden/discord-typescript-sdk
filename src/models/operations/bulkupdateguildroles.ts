@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BulkUpdateGuildRolesRequestBody = {
   id?: string | null | undefined;
@@ -52,6 +55,26 @@ export namespace BulkUpdateGuildRolesRequestBody$ {
   export const outboundSchema = BulkUpdateGuildRolesRequestBody$outboundSchema;
   /** @deprecated use `BulkUpdateGuildRolesRequestBody$Outbound` instead. */
   export type Outbound = BulkUpdateGuildRolesRequestBody$Outbound;
+}
+
+export function bulkUpdateGuildRolesRequestBodyToJSON(
+  bulkUpdateGuildRolesRequestBody: BulkUpdateGuildRolesRequestBody,
+): string {
+  return JSON.stringify(
+    BulkUpdateGuildRolesRequestBody$outboundSchema.parse(
+      bulkUpdateGuildRolesRequestBody,
+    ),
+  );
+}
+
+export function bulkUpdateGuildRolesRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkUpdateGuildRolesRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkUpdateGuildRolesRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkUpdateGuildRolesRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -105,4 +128,24 @@ export namespace BulkUpdateGuildRolesRequest$ {
   export const outboundSchema = BulkUpdateGuildRolesRequest$outboundSchema;
   /** @deprecated use `BulkUpdateGuildRolesRequest$Outbound` instead. */
   export type Outbound = BulkUpdateGuildRolesRequest$Outbound;
+}
+
+export function bulkUpdateGuildRolesRequestToJSON(
+  bulkUpdateGuildRolesRequest: BulkUpdateGuildRolesRequest,
+): string {
+  return JSON.stringify(
+    BulkUpdateGuildRolesRequest$outboundSchema.parse(
+      bulkUpdateGuildRolesRequest,
+    ),
+  );
+}
+
+export function bulkUpdateGuildRolesRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkUpdateGuildRolesRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkUpdateGuildRolesRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkUpdateGuildRolesRequest' from JSON`,
+  );
 }

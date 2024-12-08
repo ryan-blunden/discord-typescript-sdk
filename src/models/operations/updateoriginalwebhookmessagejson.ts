@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateOriginalWebhookMessageJsonSecurity = {
   botToken?: string | undefined;
@@ -62,6 +65,33 @@ export namespace UpdateOriginalWebhookMessageJsonSecurity$ {
     UpdateOriginalWebhookMessageJsonSecurity$outboundSchema;
   /** @deprecated use `UpdateOriginalWebhookMessageJsonSecurity$Outbound` instead. */
   export type Outbound = UpdateOriginalWebhookMessageJsonSecurity$Outbound;
+}
+
+export function updateOriginalWebhookMessageJsonSecurityToJSON(
+  updateOriginalWebhookMessageJsonSecurity:
+    UpdateOriginalWebhookMessageJsonSecurity,
+): string {
+  return JSON.stringify(
+    UpdateOriginalWebhookMessageJsonSecurity$outboundSchema.parse(
+      updateOriginalWebhookMessageJsonSecurity,
+    ),
+  );
+}
+
+export function updateOriginalWebhookMessageJsonSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateOriginalWebhookMessageJsonSecurity,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateOriginalWebhookMessageJsonSecurity$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateOriginalWebhookMessageJsonSecurity' from JSON`,
+  );
 }
 
 /** @internal */
@@ -127,4 +157,31 @@ export namespace UpdateOriginalWebhookMessageJsonRequest$ {
     UpdateOriginalWebhookMessageJsonRequest$outboundSchema;
   /** @deprecated use `UpdateOriginalWebhookMessageJsonRequest$Outbound` instead. */
   export type Outbound = UpdateOriginalWebhookMessageJsonRequest$Outbound;
+}
+
+export function updateOriginalWebhookMessageJsonRequestToJSON(
+  updateOriginalWebhookMessageJsonRequest:
+    UpdateOriginalWebhookMessageJsonRequest,
+): string {
+  return JSON.stringify(
+    UpdateOriginalWebhookMessageJsonRequest$outboundSchema.parse(
+      updateOriginalWebhookMessageJsonRequest,
+    ),
+  );
+}
+
+export function updateOriginalWebhookMessageJsonRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateOriginalWebhookMessageJsonRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateOriginalWebhookMessageJsonRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateOriginalWebhookMessageJsonRequest' from JSON`,
+  );
 }

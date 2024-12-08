@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `{ [k: string]: models.ErrorDetails }`
+### `{ [k: string]: components.ErrorDetails }`
 
 ```typescript
-const value: { [k: string]: models.ErrorDetails } = {};
+const value: { [k: string]: components.ErrorDetails } = {};
 ```
 
 ### `components.InnerErrors`

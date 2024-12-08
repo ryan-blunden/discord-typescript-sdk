@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CrosspostMessageRequest = {
   channelId: string;
@@ -57,4 +60,22 @@ export namespace CrosspostMessageRequest$ {
   export const outboundSchema = CrosspostMessageRequest$outboundSchema;
   /** @deprecated use `CrosspostMessageRequest$Outbound` instead. */
   export type Outbound = CrosspostMessageRequest$Outbound;
+}
+
+export function crosspostMessageRequestToJSON(
+  crosspostMessageRequest: CrosspostMessageRequest,
+): string {
+  return JSON.stringify(
+    CrosspostMessageRequest$outboundSchema.parse(crosspostMessageRequest),
+  );
+}
+
+export function crosspostMessageRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CrosspostMessageRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CrosspostMessageRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CrosspostMessageRequest' from JSON`,
+  );
 }

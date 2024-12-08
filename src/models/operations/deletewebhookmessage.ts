@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteWebhookMessageSecurity = {
   botToken?: string | undefined;
@@ -58,6 +61,26 @@ export namespace DeleteWebhookMessageSecurity$ {
   export const outboundSchema = DeleteWebhookMessageSecurity$outboundSchema;
   /** @deprecated use `DeleteWebhookMessageSecurity$Outbound` instead. */
   export type Outbound = DeleteWebhookMessageSecurity$Outbound;
+}
+
+export function deleteWebhookMessageSecurityToJSON(
+  deleteWebhookMessageSecurity: DeleteWebhookMessageSecurity,
+): string {
+  return JSON.stringify(
+    DeleteWebhookMessageSecurity$outboundSchema.parse(
+      deleteWebhookMessageSecurity,
+    ),
+  );
+}
+
+export function deleteWebhookMessageSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteWebhookMessageSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteWebhookMessageSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteWebhookMessageSecurity' from JSON`,
+  );
 }
 
 /** @internal */
@@ -117,4 +140,24 @@ export namespace DeleteWebhookMessageRequest$ {
   export const outboundSchema = DeleteWebhookMessageRequest$outboundSchema;
   /** @deprecated use `DeleteWebhookMessageRequest$Outbound` instead. */
   export type Outbound = DeleteWebhookMessageRequest$Outbound;
+}
+
+export function deleteWebhookMessageRequestToJSON(
+  deleteWebhookMessageRequest: DeleteWebhookMessageRequest,
+): string {
+  return JSON.stringify(
+    DeleteWebhookMessageRequest$outboundSchema.parse(
+      deleteWebhookMessageRequest,
+    ),
+  );
+}
+
+export function deleteWebhookMessageRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteWebhookMessageRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteWebhookMessageRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteWebhookMessageRequest' from JSON`,
+  );
 }

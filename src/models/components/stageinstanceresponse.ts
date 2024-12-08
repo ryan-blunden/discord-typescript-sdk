@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type StageInstanceResponse = {
   guildId: string;
@@ -83,4 +86,22 @@ export namespace StageInstanceResponse$ {
   export const outboundSchema = StageInstanceResponse$outboundSchema;
   /** @deprecated use `StageInstanceResponse$Outbound` instead. */
   export type Outbound = StageInstanceResponse$Outbound;
+}
+
+export function stageInstanceResponseToJSON(
+  stageInstanceResponse: StageInstanceResponse,
+): string {
+  return JSON.stringify(
+    StageInstanceResponse$outboundSchema.parse(stageInstanceResponse),
+  );
+}
+
+export function stageInstanceResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<StageInstanceResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StageInstanceResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StageInstanceResponse' from JSON`,
+  );
 }

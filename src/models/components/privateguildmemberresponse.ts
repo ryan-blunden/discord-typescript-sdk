@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserAvatarDecorationResponse,
   UserAvatarDecorationResponse$inboundSchema,
@@ -128,4 +131,22 @@ export namespace PrivateGuildMemberResponse$ {
   export const outboundSchema = PrivateGuildMemberResponse$outboundSchema;
   /** @deprecated use `PrivateGuildMemberResponse$Outbound` instead. */
   export type Outbound = PrivateGuildMemberResponse$Outbound;
+}
+
+export function privateGuildMemberResponseToJSON(
+  privateGuildMemberResponse: PrivateGuildMemberResponse,
+): string {
+  return JSON.stringify(
+    PrivateGuildMemberResponse$outboundSchema.parse(privateGuildMemberResponse),
+  );
+}
+
+export function privateGuildMemberResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PrivateGuildMemberResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PrivateGuildMemberResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PrivateGuildMemberResponse' from JSON`,
+  );
 }

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApplicationResponse,
   ApplicationResponse$inboundSchema,
@@ -66,4 +69,24 @@ export namespace OAuth2GetAuthorizationResponse$ {
   export const outboundSchema = OAuth2GetAuthorizationResponse$outboundSchema;
   /** @deprecated use `OAuth2GetAuthorizationResponse$Outbound` instead. */
   export type Outbound = OAuth2GetAuthorizationResponse$Outbound;
+}
+
+export function oAuth2GetAuthorizationResponseToJSON(
+  oAuth2GetAuthorizationResponse: OAuth2GetAuthorizationResponse,
+): string {
+  return JSON.stringify(
+    OAuth2GetAuthorizationResponse$outboundSchema.parse(
+      oAuth2GetAuthorizationResponse,
+    ),
+  );
+}
+
+export function oAuth2GetAuthorizationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<OAuth2GetAuthorizationResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OAuth2GetAuthorizationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OAuth2GetAuthorizationResponse' from JSON`,
+  );
 }

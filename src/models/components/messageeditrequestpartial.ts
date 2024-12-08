@@ -4,12 +4,15 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  ActionRow,
-  ActionRow$inboundSchema,
-  ActionRow$Outbound,
-  ActionRow$outboundSchema,
-} from "./actionrow.js";
+  ActionRowComponentForMessageRequest,
+  ActionRowComponentForMessageRequest$inboundSchema,
+  ActionRowComponentForMessageRequest$Outbound,
+  ActionRowComponentForMessageRequest$outboundSchema,
+} from "./actionrowcomponentformessagerequest.js";
 import {
   MessageAllowedMentionsRequest,
   MessageAllowedMentionsRequest$inboundSchema,
@@ -35,7 +38,7 @@ export type MessageEditRequestPartial = {
   flags?: number | null | undefined;
   allowedMentions?: MessageAllowedMentionsRequest | null | undefined;
   stickerIds?: Array<string> | null | undefined;
-  components?: Array<ActionRow> | null | undefined;
+  components?: Array<ActionRowComponentForMessageRequest> | null | undefined;
   attachments?: Array<MessageAttachmentRequest> | null | undefined;
 };
 
@@ -51,7 +54,9 @@ export const MessageEditRequestPartial$inboundSchema: z.ZodType<
   allowed_mentions: z.nullable(MessageAllowedMentionsRequest$inboundSchema)
     .optional(),
   sticker_ids: z.nullable(z.array(z.string())).optional(),
-  components: z.nullable(z.array(ActionRow$inboundSchema)).optional(),
+  components: z.nullable(
+    z.array(ActionRowComponentForMessageRequest$inboundSchema),
+  ).optional(),
   attachments: z.nullable(z.array(MessageAttachmentRequest$inboundSchema))
     .optional(),
 }).transform((v) => {
@@ -68,7 +73,10 @@ export type MessageEditRequestPartial$Outbound = {
   flags?: number | null | undefined;
   allowed_mentions?: MessageAllowedMentionsRequest$Outbound | null | undefined;
   sticker_ids?: Array<string> | null | undefined;
-  components?: Array<ActionRow$Outbound> | null | undefined;
+  components?:
+    | Array<ActionRowComponentForMessageRequest$Outbound>
+    | null
+    | undefined;
   attachments?: Array<MessageAttachmentRequest$Outbound> | null | undefined;
 };
 
@@ -84,7 +92,9 @@ export const MessageEditRequestPartial$outboundSchema: z.ZodType<
   allowedMentions: z.nullable(MessageAllowedMentionsRequest$outboundSchema)
     .optional(),
   stickerIds: z.nullable(z.array(z.string())).optional(),
-  components: z.nullable(z.array(ActionRow$outboundSchema)).optional(),
+  components: z.nullable(
+    z.array(ActionRowComponentForMessageRequest$outboundSchema),
+  ).optional(),
   attachments: z.nullable(z.array(MessageAttachmentRequest$outboundSchema))
     .optional(),
 }).transform((v) => {
@@ -105,4 +115,22 @@ export namespace MessageEditRequestPartial$ {
   export const outboundSchema = MessageEditRequestPartial$outboundSchema;
   /** @deprecated use `MessageEditRequestPartial$Outbound` instead. */
   export type Outbound = MessageEditRequestPartial$Outbound;
+}
+
+export function messageEditRequestPartialToJSON(
+  messageEditRequestPartial: MessageEditRequestPartial,
+): string {
+  return JSON.stringify(
+    MessageEditRequestPartial$outboundSchema.parse(messageEditRequestPartial),
+  );
+}
+
+export function messageEditRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageEditRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageEditRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageEditRequestPartial' from JSON`,
+  );
 }
