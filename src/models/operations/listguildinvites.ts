@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListGuildInvitesRequest = {
   guildId: string;
@@ -59,6 +62,24 @@ export namespace ListGuildInvitesRequest$ {
   export type Outbound = ListGuildInvitesRequest$Outbound;
 }
 
+export function listGuildInvitesRequestToJSON(
+  listGuildInvitesRequest: ListGuildInvitesRequest,
+): string {
+  return JSON.stringify(
+    ListGuildInvitesRequest$outboundSchema.parse(listGuildInvitesRequest),
+  );
+}
+
+export function listGuildInvitesRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildInvitesRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildInvitesRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildInvitesRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const ListGuildInvitesResponseBody$inboundSchema: z.ZodType<
   ListGuildInvitesResponseBody,
@@ -98,4 +119,24 @@ export namespace ListGuildInvitesResponseBody$ {
   export const outboundSchema = ListGuildInvitesResponseBody$outboundSchema;
   /** @deprecated use `ListGuildInvitesResponseBody$Outbound` instead. */
   export type Outbound = ListGuildInvitesResponseBody$Outbound;
+}
+
+export function listGuildInvitesResponseBodyToJSON(
+  listGuildInvitesResponseBody: ListGuildInvitesResponseBody,
+): string {
+  return JSON.stringify(
+    ListGuildInvitesResponseBody$outboundSchema.parse(
+      listGuildInvitesResponseBody,
+    ),
+  );
+}
+
+export function listGuildInvitesResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildInvitesResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildInvitesResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildInvitesResponseBody' from JSON`,
+  );
 }

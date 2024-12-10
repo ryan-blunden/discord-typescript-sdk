@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageReactionCountDetailsResponse = {
   burst: number;
@@ -48,4 +51,25 @@ export namespace MessageReactionCountDetailsResponse$ {
     MessageReactionCountDetailsResponse$outboundSchema;
   /** @deprecated use `MessageReactionCountDetailsResponse$Outbound` instead. */
   export type Outbound = MessageReactionCountDetailsResponse$Outbound;
+}
+
+export function messageReactionCountDetailsResponseToJSON(
+  messageReactionCountDetailsResponse: MessageReactionCountDetailsResponse,
+): string {
+  return JSON.stringify(
+    MessageReactionCountDetailsResponse$outboundSchema.parse(
+      messageReactionCountDetailsResponse,
+    ),
+  );
+}
+
+export function messageReactionCountDetailsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageReactionCountDetailsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      MessageReactionCountDetailsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageReactionCountDetailsResponse' from JSON`,
+  );
 }

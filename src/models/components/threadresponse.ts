@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ThreadMemberResponse,
   ThreadMemberResponse$inboundSchema,
@@ -172,4 +175,18 @@ export namespace ThreadResponse$ {
   export const outboundSchema = ThreadResponse$outboundSchema;
   /** @deprecated use `ThreadResponse$Outbound` instead. */
   export type Outbound = ThreadResponse$Outbound;
+}
+
+export function threadResponseToJSON(threadResponse: ThreadResponse): string {
+  return JSON.stringify(ThreadResponse$outboundSchema.parse(threadResponse));
+}
+
+export function threadResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ThreadResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ThreadResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ThreadResponse' from JSON`,
+  );
 }

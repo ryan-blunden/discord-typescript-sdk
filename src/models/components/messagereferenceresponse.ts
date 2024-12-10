@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageReferenceResponse = {
   type?: 0 | null | undefined;
@@ -67,4 +70,22 @@ export namespace MessageReferenceResponse$ {
   export const outboundSchema = MessageReferenceResponse$outboundSchema;
   /** @deprecated use `MessageReferenceResponse$Outbound` instead. */
   export type Outbound = MessageReferenceResponse$Outbound;
+}
+
+export function messageReferenceResponseToJSON(
+  messageReferenceResponse: MessageReferenceResponse,
+): string {
+  return JSON.stringify(
+    MessageReferenceResponse$outboundSchema.parse(messageReferenceResponse),
+  );
+}
+
+export function messageReferenceResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageReferenceResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageReferenceResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageReferenceResponse' from JSON`,
+  );
 }

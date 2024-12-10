@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ErrorT,
   ErrorT$inboundSchema,
@@ -60,4 +63,18 @@ export namespace InnerErrors$ {
   export const outboundSchema = InnerErrors$outboundSchema;
   /** @deprecated use `InnerErrors$Outbound` instead. */
   export type Outbound = InnerErrors$Outbound;
+}
+
+export function innerErrorsToJSON(innerErrors: InnerErrors): string {
+  return JSON.stringify(InnerErrors$outboundSchema.parse(innerErrors));
+}
+
+export function innerErrorsFromJSON(
+  jsonString: string,
+): SafeParseResult<InnerErrors, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InnerErrors$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InnerErrors' from JSON`,
+  );
 }

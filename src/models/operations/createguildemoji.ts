@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateGuildEmojiRequestBody = {
   name: string;
@@ -58,6 +61,26 @@ export namespace CreateGuildEmojiRequestBody$ {
   export type Outbound = CreateGuildEmojiRequestBody$Outbound;
 }
 
+export function createGuildEmojiRequestBodyToJSON(
+  createGuildEmojiRequestBody: CreateGuildEmojiRequestBody,
+): string {
+  return JSON.stringify(
+    CreateGuildEmojiRequestBody$outboundSchema.parse(
+      createGuildEmojiRequestBody,
+    ),
+  );
+}
+
+export function createGuildEmojiRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildEmojiRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildEmojiRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildEmojiRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const CreateGuildEmojiRequest$inboundSchema: z.ZodType<
   CreateGuildEmojiRequest,
@@ -105,4 +128,22 @@ export namespace CreateGuildEmojiRequest$ {
   export const outboundSchema = CreateGuildEmojiRequest$outboundSchema;
   /** @deprecated use `CreateGuildEmojiRequest$Outbound` instead. */
   export type Outbound = CreateGuildEmojiRequest$Outbound;
+}
+
+export function createGuildEmojiRequestToJSON(
+  createGuildEmojiRequest: CreateGuildEmojiRequest,
+): string {
+  return JSON.stringify(
+    CreateGuildEmojiRequest$outboundSchema.parse(createGuildEmojiRequest),
+  );
+}
+
+export function createGuildEmojiRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildEmojiRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildEmojiRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildEmojiRequest' from JSON`,
+  );
 }

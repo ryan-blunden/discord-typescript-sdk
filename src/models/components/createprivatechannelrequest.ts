@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreatePrivateChannelRequest = {
   recipientId?: string | null | undefined;
@@ -61,4 +64,24 @@ export namespace CreatePrivateChannelRequest$ {
   export const outboundSchema = CreatePrivateChannelRequest$outboundSchema;
   /** @deprecated use `CreatePrivateChannelRequest$Outbound` instead. */
   export type Outbound = CreatePrivateChannelRequest$Outbound;
+}
+
+export function createPrivateChannelRequestToJSON(
+  createPrivateChannelRequest: CreatePrivateChannelRequest,
+): string {
+  return JSON.stringify(
+    CreatePrivateChannelRequest$outboundSchema.parse(
+      createPrivateChannelRequest,
+    ),
+  );
+}
+
+export function createPrivateChannelRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePrivateChannelRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePrivateChannelRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePrivateChannelRequest' from JSON`,
+  );
 }

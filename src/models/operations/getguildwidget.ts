@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildWidgetSecurity = {
   botToken?: string | undefined;
@@ -57,6 +60,24 @@ export namespace GetGuildWidgetSecurity$ {
   export type Outbound = GetGuildWidgetSecurity$Outbound;
 }
 
+export function getGuildWidgetSecurityToJSON(
+  getGuildWidgetSecurity: GetGuildWidgetSecurity,
+): string {
+  return JSON.stringify(
+    GetGuildWidgetSecurity$outboundSchema.parse(getGuildWidgetSecurity),
+  );
+}
+
+export function getGuildWidgetSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildWidgetSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildWidgetSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildWidgetSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetGuildWidgetRequest$inboundSchema: z.ZodType<
   GetGuildWidgetRequest,
@@ -99,4 +120,22 @@ export namespace GetGuildWidgetRequest$ {
   export const outboundSchema = GetGuildWidgetRequest$outboundSchema;
   /** @deprecated use `GetGuildWidgetRequest$Outbound` instead. */
   export type Outbound = GetGuildWidgetRequest$Outbound;
+}
+
+export function getGuildWidgetRequestToJSON(
+  getGuildWidgetRequest: GetGuildWidgetRequest,
+): string {
+  return JSON.stringify(
+    GetGuildWidgetRequest$outboundSchema.parse(getGuildWidgetRequest),
+  );
+}
+
+export function getGuildWidgetRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildWidgetRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildWidgetRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildWidgetRequest' from JSON`,
+  );
 }

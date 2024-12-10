@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildWidgetSettingsRequest = {
   guildId: string;
@@ -51,4 +54,24 @@ export namespace GetGuildWidgetSettingsRequest$ {
   export const outboundSchema = GetGuildWidgetSettingsRequest$outboundSchema;
   /** @deprecated use `GetGuildWidgetSettingsRequest$Outbound` instead. */
   export type Outbound = GetGuildWidgetSettingsRequest$Outbound;
+}
+
+export function getGuildWidgetSettingsRequestToJSON(
+  getGuildWidgetSettingsRequest: GetGuildWidgetSettingsRequest,
+): string {
+  return JSON.stringify(
+    GetGuildWidgetSettingsRequest$outboundSchema.parse(
+      getGuildWidgetSettingsRequest,
+    ),
+  );
+}
+
+export function getGuildWidgetSettingsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildWidgetSettingsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildWidgetSettingsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildWidgetSettingsRequest' from JSON`,
+  );
 }

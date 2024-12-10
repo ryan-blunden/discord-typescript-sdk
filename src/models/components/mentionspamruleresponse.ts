@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BlockMessageActionResponse,
   BlockMessageActionResponse$inboundSchema,
@@ -102,6 +105,26 @@ export namespace MentionSpamRuleResponseActions$ {
   export const outboundSchema = MentionSpamRuleResponseActions$outboundSchema;
   /** @deprecated use `MentionSpamRuleResponseActions$Outbound` instead. */
   export type Outbound = MentionSpamRuleResponseActions$Outbound;
+}
+
+export function mentionSpamRuleResponseActionsToJSON(
+  mentionSpamRuleResponseActions: MentionSpamRuleResponseActions,
+): string {
+  return JSON.stringify(
+    MentionSpamRuleResponseActions$outboundSchema.parse(
+      mentionSpamRuleResponseActions,
+    ),
+  );
+}
+
+export function mentionSpamRuleResponseActionsFromJSON(
+  jsonString: string,
+): SafeParseResult<MentionSpamRuleResponseActions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MentionSpamRuleResponseActions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MentionSpamRuleResponseActions' from JSON`,
+  );
 }
 
 /** @internal */
@@ -207,4 +230,22 @@ export namespace MentionSpamRuleResponse$ {
   export const outboundSchema = MentionSpamRuleResponse$outboundSchema;
   /** @deprecated use `MentionSpamRuleResponse$Outbound` instead. */
   export type Outbound = MentionSpamRuleResponse$Outbound;
+}
+
+export function mentionSpamRuleResponseToJSON(
+  mentionSpamRuleResponse: MentionSpamRuleResponse,
+): string {
+  return JSON.stringify(
+    MentionSpamRuleResponse$outboundSchema.parse(mentionSpamRuleResponse),
+  );
+}
+
+export function mentionSpamRuleResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MentionSpamRuleResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MentionSpamRuleResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MentionSpamRuleResponse' from JSON`,
+  );
 }

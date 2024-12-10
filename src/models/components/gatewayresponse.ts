@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GatewayResponse = {
   url: string;
@@ -42,4 +45,20 @@ export namespace GatewayResponse$ {
   export const outboundSchema = GatewayResponse$outboundSchema;
   /** @deprecated use `GatewayResponse$Outbound` instead. */
   export type Outbound = GatewayResponse$Outbound;
+}
+
+export function gatewayResponseToJSON(
+  gatewayResponse: GatewayResponse,
+): string {
+  return JSON.stringify(GatewayResponse$outboundSchema.parse(gatewayResponse));
+}
+
+export function gatewayResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GatewayResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GatewayResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GatewayResponse' from JSON`,
+  );
 }

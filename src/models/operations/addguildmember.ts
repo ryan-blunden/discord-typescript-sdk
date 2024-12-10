@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AddGuildMemberRequestBody = {
   nick?: string | null | undefined;
@@ -79,6 +82,24 @@ export namespace AddGuildMemberRequestBody$ {
   export type Outbound = AddGuildMemberRequestBody$Outbound;
 }
 
+export function addGuildMemberRequestBodyToJSON(
+  addGuildMemberRequestBody: AddGuildMemberRequestBody,
+): string {
+  return JSON.stringify(
+    AddGuildMemberRequestBody$outboundSchema.parse(addGuildMemberRequestBody),
+  );
+}
+
+export function addGuildMemberRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<AddGuildMemberRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddGuildMemberRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddGuildMemberRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const AddGuildMemberRequest$inboundSchema: z.ZodType<
   AddGuildMemberRequest,
@@ -131,4 +152,22 @@ export namespace AddGuildMemberRequest$ {
   export const outboundSchema = AddGuildMemberRequest$outboundSchema;
   /** @deprecated use `AddGuildMemberRequest$Outbound` instead. */
   export type Outbound = AddGuildMemberRequest$Outbound;
+}
+
+export function addGuildMemberRequestToJSON(
+  addGuildMemberRequest: AddGuildMemberRequest,
+): string {
+  return JSON.stringify(
+    AddGuildMemberRequest$outboundSchema.parse(addGuildMemberRequest),
+  );
+}
+
+export function addGuildMemberRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<AddGuildMemberRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddGuildMemberRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddGuildMemberRequest' from JSON`,
+  );
 }

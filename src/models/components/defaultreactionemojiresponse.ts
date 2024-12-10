@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DefaultReactionEmojiResponse = {
   emojiId?: string | null | undefined;
@@ -57,4 +60,24 @@ export namespace DefaultReactionEmojiResponse$ {
   export const outboundSchema = DefaultReactionEmojiResponse$outboundSchema;
   /** @deprecated use `DefaultReactionEmojiResponse$Outbound` instead. */
   export type Outbound = DefaultReactionEmojiResponse$Outbound;
+}
+
+export function defaultReactionEmojiResponseToJSON(
+  defaultReactionEmojiResponse: DefaultReactionEmojiResponse,
+): string {
+  return JSON.stringify(
+    DefaultReactionEmojiResponse$outboundSchema.parse(
+      defaultReactionEmojiResponse,
+    ),
+  );
+}
+
+export function defaultReactionEmojiResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DefaultReactionEmojiResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DefaultReactionEmojiResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DefaultReactionEmojiResponse' from JSON`,
+  );
 }

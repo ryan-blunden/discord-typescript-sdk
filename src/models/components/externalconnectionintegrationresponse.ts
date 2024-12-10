@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AccountResponse,
   AccountResponse$inboundSchema,
@@ -129,4 +132,25 @@ export namespace ExternalConnectionIntegrationResponse$ {
     ExternalConnectionIntegrationResponse$outboundSchema;
   /** @deprecated use `ExternalConnectionIntegrationResponse$Outbound` instead. */
   export type Outbound = ExternalConnectionIntegrationResponse$Outbound;
+}
+
+export function externalConnectionIntegrationResponseToJSON(
+  externalConnectionIntegrationResponse: ExternalConnectionIntegrationResponse,
+): string {
+  return JSON.stringify(
+    ExternalConnectionIntegrationResponse$outboundSchema.parse(
+      externalConnectionIntegrationResponse,
+    ),
+  );
+}
+
+export function externalConnectionIntegrationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ExternalConnectionIntegrationResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ExternalConnectionIntegrationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ExternalConnectionIntegrationResponse' from JSON`,
+  );
 }

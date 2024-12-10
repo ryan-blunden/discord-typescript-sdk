@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SpamLinkTriggerMetadataResponse = {};
 
@@ -34,4 +37,24 @@ export namespace SpamLinkTriggerMetadataResponse$ {
   export const outboundSchema = SpamLinkTriggerMetadataResponse$outboundSchema;
   /** @deprecated use `SpamLinkTriggerMetadataResponse$Outbound` instead. */
   export type Outbound = SpamLinkTriggerMetadataResponse$Outbound;
+}
+
+export function spamLinkTriggerMetadataResponseToJSON(
+  spamLinkTriggerMetadataResponse: SpamLinkTriggerMetadataResponse,
+): string {
+  return JSON.stringify(
+    SpamLinkTriggerMetadataResponse$outboundSchema.parse(
+      spamLinkTriggerMetadataResponse,
+    ),
+  );
+}
+
+export function spamLinkTriggerMetadataResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<SpamLinkTriggerMetadataResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SpamLinkTriggerMetadataResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SpamLinkTriggerMetadataResponse' from JSON`,
+  );
 }

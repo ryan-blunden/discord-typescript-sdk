@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateOriginalWebhookMessageMultipartSecurity = {
   botToken?: string | undefined;
@@ -13,7 +16,10 @@ export type UpdateOriginalWebhookMessageMultipartSecurity = {
 export type UpdateOriginalWebhookMessageMultipartRequestBody = {
   allowedMentions?: components.MessageAllowedMentionsRequest | null | undefined;
   attachments?: Array<components.MessageAttachmentRequest> | null | undefined;
-  components?: Array<components.ActionRow> | null | undefined;
+  components?:
+    | Array<components.ActionRowComponentForMessageRequest>
+    | null
+    | undefined;
   content?: string | null | undefined;
   embeds?: Array<components.RichEmbed> | null | undefined;
   files0?: string | undefined;
@@ -85,6 +91,33 @@ export namespace UpdateOriginalWebhookMessageMultipartSecurity$ {
   export type Outbound = UpdateOriginalWebhookMessageMultipartSecurity$Outbound;
 }
 
+export function updateOriginalWebhookMessageMultipartSecurityToJSON(
+  updateOriginalWebhookMessageMultipartSecurity:
+    UpdateOriginalWebhookMessageMultipartSecurity,
+): string {
+  return JSON.stringify(
+    UpdateOriginalWebhookMessageMultipartSecurity$outboundSchema.parse(
+      updateOriginalWebhookMessageMultipartSecurity,
+    ),
+  );
+}
+
+export function updateOriginalWebhookMessageMultipartSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateOriginalWebhookMessageMultipartSecurity,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateOriginalWebhookMessageMultipartSecurity$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateOriginalWebhookMessageMultipartSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpdateOriginalWebhookMessageMultipartRequestBody$inboundSchema:
   z.ZodType<
@@ -98,8 +131,9 @@ export const UpdateOriginalWebhookMessageMultipartRequestBody$inboundSchema:
     attachments: z.nullable(
       z.array(components.MessageAttachmentRequest$inboundSchema),
     ).optional(),
-    components: z.nullable(z.array(components.ActionRow$inboundSchema))
-      .optional(),
+    components: z.nullable(
+      z.array(components.ActionRowComponentForMessageRequest$inboundSchema),
+    ).optional(),
     content: z.nullable(z.string()).optional(),
     embeds: z.nullable(z.array(components.RichEmbed$inboundSchema)).optional(),
     "files[0]": z.string().optional(),
@@ -140,7 +174,10 @@ export type UpdateOriginalWebhookMessageMultipartRequestBody$Outbound = {
     | Array<components.MessageAttachmentRequest$Outbound>
     | null
     | undefined;
-  components?: Array<components.ActionRow$Outbound> | null | undefined;
+  components?:
+    | Array<components.ActionRowComponentForMessageRequest$Outbound>
+    | null
+    | undefined;
   content?: string | null | undefined;
   embeds?: Array<components.RichEmbed$Outbound> | null | undefined;
   "files[0]"?: string | undefined;
@@ -170,8 +207,9 @@ export const UpdateOriginalWebhookMessageMultipartRequestBody$outboundSchema:
     attachments: z.nullable(
       z.array(components.MessageAttachmentRequest$outboundSchema),
     ).optional(),
-    components: z.nullable(z.array(components.ActionRow$outboundSchema))
-      .optional(),
+    components: z.nullable(
+      z.array(components.ActionRowComponentForMessageRequest$outboundSchema),
+    ).optional(),
     content: z.nullable(z.string()).optional(),
     embeds: z.nullable(z.array(components.RichEmbed$outboundSchema)).optional(),
     files0: z.string().optional(),
@@ -216,6 +254,33 @@ export namespace UpdateOriginalWebhookMessageMultipartRequestBody$ {
   /** @deprecated use `UpdateOriginalWebhookMessageMultipartRequestBody$Outbound` instead. */
   export type Outbound =
     UpdateOriginalWebhookMessageMultipartRequestBody$Outbound;
+}
+
+export function updateOriginalWebhookMessageMultipartRequestBodyToJSON(
+  updateOriginalWebhookMessageMultipartRequestBody:
+    UpdateOriginalWebhookMessageMultipartRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateOriginalWebhookMessageMultipartRequestBody$outboundSchema.parse(
+      updateOriginalWebhookMessageMultipartRequestBody,
+    ),
+  );
+}
+
+export function updateOriginalWebhookMessageMultipartRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateOriginalWebhookMessageMultipartRequestBody,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateOriginalWebhookMessageMultipartRequestBody$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateOriginalWebhookMessageMultipartRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -283,4 +348,31 @@ export namespace UpdateOriginalWebhookMessageMultipartRequest$ {
     UpdateOriginalWebhookMessageMultipartRequest$outboundSchema;
   /** @deprecated use `UpdateOriginalWebhookMessageMultipartRequest$Outbound` instead. */
   export type Outbound = UpdateOriginalWebhookMessageMultipartRequest$Outbound;
+}
+
+export function updateOriginalWebhookMessageMultipartRequestToJSON(
+  updateOriginalWebhookMessageMultipartRequest:
+    UpdateOriginalWebhookMessageMultipartRequest,
+): string {
+  return JSON.stringify(
+    UpdateOriginalWebhookMessageMultipartRequest$outboundSchema.parse(
+      updateOriginalWebhookMessageMultipartRequest,
+    ),
+  );
+}
+
+export function updateOriginalWebhookMessageMultipartRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateOriginalWebhookMessageMultipartRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateOriginalWebhookMessageMultipartRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateOriginalWebhookMessageMultipartRequest' from JSON`,
+  );
 }

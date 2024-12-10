@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateThreadTagRequest = {
   name: string;
@@ -69,4 +72,22 @@ export namespace UpdateThreadTagRequest$ {
   export const outboundSchema = UpdateThreadTagRequest$outboundSchema;
   /** @deprecated use `UpdateThreadTagRequest$Outbound` instead. */
   export type Outbound = UpdateThreadTagRequest$Outbound;
+}
+
+export function updateThreadTagRequestToJSON(
+  updateThreadTagRequest: UpdateThreadTagRequest,
+): string {
+  return JSON.stringify(
+    UpdateThreadTagRequest$outboundSchema.parse(updateThreadTagRequest),
+  );
+}
+
+export function updateThreadTagRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateThreadTagRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateThreadTagRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateThreadTagRequest' from JSON`,
+  );
 }

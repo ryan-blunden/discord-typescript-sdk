@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SyncGuildTemplateRequest = {
   guildId: string;
@@ -55,4 +58,22 @@ export namespace SyncGuildTemplateRequest$ {
   export const outboundSchema = SyncGuildTemplateRequest$outboundSchema;
   /** @deprecated use `SyncGuildTemplateRequest$Outbound` instead. */
   export type Outbound = SyncGuildTemplateRequest$Outbound;
+}
+
+export function syncGuildTemplateRequestToJSON(
+  syncGuildTemplateRequest: SyncGuildTemplateRequest,
+): string {
+  return JSON.stringify(
+    SyncGuildTemplateRequest$outboundSchema.parse(syncGuildTemplateRequest),
+  );
+}
+
+export function syncGuildTemplateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<SyncGuildTemplateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SyncGuildTemplateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SyncGuildTemplateRequest' from JSON`,
+  );
 }

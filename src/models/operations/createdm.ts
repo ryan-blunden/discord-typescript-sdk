@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * 200 response for create_dm
@@ -48,4 +51,22 @@ export namespace CreateDmResponseBody$ {
   export const outboundSchema = CreateDmResponseBody$outboundSchema;
   /** @deprecated use `CreateDmResponseBody$Outbound` instead. */
   export type Outbound = CreateDmResponseBody$Outbound;
+}
+
+export function createDmResponseBodyToJSON(
+  createDmResponseBody: CreateDmResponseBody,
+): string {
+  return JSON.stringify(
+    CreateDmResponseBody$outboundSchema.parse(createDmResponseBody),
+  );
+}
+
+export function createDmResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDmResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateDmResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDmResponseBody' from JSON`,
+  );
 }

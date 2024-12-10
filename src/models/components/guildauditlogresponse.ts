@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApplicationCommandResponse,
   ApplicationCommandResponse$inboundSchema,
@@ -205,6 +208,20 @@ export namespace Integrations$ {
   export type Outbound = Integrations$Outbound;
 }
 
+export function integrationsToJSON(integrations: Integrations): string {
+  return JSON.stringify(Integrations$outboundSchema.parse(integrations));
+}
+
+export function integrationsFromJSON(
+  jsonString: string,
+): SafeParseResult<Integrations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Integrations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Integrations' from JSON`,
+  );
+}
+
 /** @internal */
 export const Webhooks$inboundSchema: z.ZodType<
   Webhooks,
@@ -246,6 +263,20 @@ export namespace Webhooks$ {
   export type Outbound = Webhooks$Outbound;
 }
 
+export function webhooksToJSON(webhooks: Webhooks): string {
+  return JSON.stringify(Webhooks$outboundSchema.parse(webhooks));
+}
+
+export function webhooksFromJSON(
+  jsonString: string,
+): SafeParseResult<Webhooks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Webhooks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Webhooks' from JSON`,
+  );
+}
+
 /** @internal */
 export const GuildScheduledEvents$inboundSchema: z.ZodType<
   GuildScheduledEvents,
@@ -285,6 +316,24 @@ export namespace GuildScheduledEvents$ {
   export const outboundSchema = GuildScheduledEvents$outboundSchema;
   /** @deprecated use `GuildScheduledEvents$Outbound` instead. */
   export type Outbound = GuildScheduledEvents$Outbound;
+}
+
+export function guildScheduledEventsToJSON(
+  guildScheduledEvents: GuildScheduledEvents,
+): string {
+  return JSON.stringify(
+    GuildScheduledEvents$outboundSchema.parse(guildScheduledEvents),
+  );
+}
+
+export function guildScheduledEventsFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildScheduledEvents, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildScheduledEvents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildScheduledEvents' from JSON`,
+  );
 }
 
 /** @internal */
@@ -332,6 +381,24 @@ export namespace AutoModerationRules$ {
   export const outboundSchema = AutoModerationRules$outboundSchema;
   /** @deprecated use `AutoModerationRules$Outbound` instead. */
   export type Outbound = AutoModerationRules$Outbound;
+}
+
+export function autoModerationRulesToJSON(
+  autoModerationRules: AutoModerationRules,
+): string {
+  return JSON.stringify(
+    AutoModerationRules$outboundSchema.parse(autoModerationRules),
+  );
+}
+
+export function autoModerationRulesFromJSON(
+  jsonString: string,
+): SafeParseResult<AutoModerationRules, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AutoModerationRules$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AutoModerationRules' from JSON`,
+  );
 }
 
 /** @internal */
@@ -473,4 +540,22 @@ export namespace GuildAuditLogResponse$ {
   export const outboundSchema = GuildAuditLogResponse$outboundSchema;
   /** @deprecated use `GuildAuditLogResponse$Outbound` instead. */
   export type Outbound = GuildAuditLogResponse$Outbound;
+}
+
+export function guildAuditLogResponseToJSON(
+  guildAuditLogResponse: GuildAuditLogResponse,
+): string {
+  return JSON.stringify(
+    GuildAuditLogResponse$outboundSchema.parse(guildAuditLogResponse),
+  );
+}
+
+export function guildAuditLogResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildAuditLogResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildAuditLogResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildAuditLogResponse' from JSON`,
+  );
 }

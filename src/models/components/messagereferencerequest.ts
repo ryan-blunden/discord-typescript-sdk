@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageReferenceRequest = {
   guildId?: string | null | undefined;
@@ -73,4 +76,22 @@ export namespace MessageReferenceRequest$ {
   export const outboundSchema = MessageReferenceRequest$outboundSchema;
   /** @deprecated use `MessageReferenceRequest$Outbound` instead. */
   export type Outbound = MessageReferenceRequest$Outbound;
+}
+
+export function messageReferenceRequestToJSON(
+  messageReferenceRequest: MessageReferenceRequest,
+): string {
+  return JSON.stringify(
+    MessageReferenceRequest$outboundSchema.parse(messageReferenceRequest),
+  );
+}
+
+export function messageReferenceRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageReferenceRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageReferenceRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageReferenceRequest' from JSON`,
+  );
 }

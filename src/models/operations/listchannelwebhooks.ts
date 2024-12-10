@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListChannelWebhooksRequest = {
   channelId: string;
@@ -59,6 +62,24 @@ export namespace ListChannelWebhooksRequest$ {
   export type Outbound = ListChannelWebhooksRequest$Outbound;
 }
 
+export function listChannelWebhooksRequestToJSON(
+  listChannelWebhooksRequest: ListChannelWebhooksRequest,
+): string {
+  return JSON.stringify(
+    ListChannelWebhooksRequest$outboundSchema.parse(listChannelWebhooksRequest),
+  );
+}
+
+export function listChannelWebhooksRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListChannelWebhooksRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListChannelWebhooksRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListChannelWebhooksRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const ListChannelWebhooksResponseBody$inboundSchema: z.ZodType<
   ListChannelWebhooksResponseBody,
@@ -98,4 +119,24 @@ export namespace ListChannelWebhooksResponseBody$ {
   export const outboundSchema = ListChannelWebhooksResponseBody$outboundSchema;
   /** @deprecated use `ListChannelWebhooksResponseBody$Outbound` instead. */
   export type Outbound = ListChannelWebhooksResponseBody$Outbound;
+}
+
+export function listChannelWebhooksResponseBodyToJSON(
+  listChannelWebhooksResponseBody: ListChannelWebhooksResponseBody,
+): string {
+  return JSON.stringify(
+    ListChannelWebhooksResponseBody$outboundSchema.parse(
+      listChannelWebhooksResponseBody,
+    ),
+  );
+}
+
+export function listChannelWebhooksResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListChannelWebhooksResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListChannelWebhooksResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListChannelWebhooksResponseBody' from JSON`,
+  );
 }

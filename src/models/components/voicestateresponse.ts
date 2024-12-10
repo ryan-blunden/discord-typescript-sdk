@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GuildMemberResponse,
   GuildMemberResponse$inboundSchema,
@@ -124,4 +127,22 @@ export namespace VoiceStateResponse$ {
   export const outboundSchema = VoiceStateResponse$outboundSchema;
   /** @deprecated use `VoiceStateResponse$Outbound` instead. */
   export type Outbound = VoiceStateResponse$Outbound;
+}
+
+export function voiceStateResponseToJSON(
+  voiceStateResponse: VoiceStateResponse,
+): string {
+  return JSON.stringify(
+    VoiceStateResponse$outboundSchema.parse(voiceStateResponse),
+  );
+}
+
+export function voiceStateResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<VoiceStateResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => VoiceStateResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VoiceStateResponse' from JSON`,
+  );
 }

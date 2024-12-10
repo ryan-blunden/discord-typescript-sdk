@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListGuildScheduledEventUsersRequest = {
   guildId: string;
@@ -77,4 +80,25 @@ export namespace ListGuildScheduledEventUsersRequest$ {
     ListGuildScheduledEventUsersRequest$outboundSchema;
   /** @deprecated use `ListGuildScheduledEventUsersRequest$Outbound` instead. */
   export type Outbound = ListGuildScheduledEventUsersRequest$Outbound;
+}
+
+export function listGuildScheduledEventUsersRequestToJSON(
+  listGuildScheduledEventUsersRequest: ListGuildScheduledEventUsersRequest,
+): string {
+  return JSON.stringify(
+    ListGuildScheduledEventUsersRequest$outboundSchema.parse(
+      listGuildScheduledEventUsersRequest,
+    ),
+  );
+}
+
+export function listGuildScheduledEventUsersRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildScheduledEventUsersRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListGuildScheduledEventUsersRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildScheduledEventUsersRequest' from JSON`,
+  );
 }

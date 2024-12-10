@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApplicationCommandAttachmentOptionResponse,
   ApplicationCommandAttachmentOptionResponse$inboundSchema,
@@ -151,6 +154,20 @@ export namespace Options$ {
   export type Outbound = Options$Outbound;
 }
 
+export function optionsToJSON(options: Options): string {
+  return JSON.stringify(Options$outboundSchema.parse(options));
+}
+
+export function optionsFromJSON(
+  jsonString: string,
+): SafeParseResult<Options, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Options$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Options' from JSON`,
+  );
+}
+
 /** @internal */
 export const ApplicationCommandSubcommandOptionResponse$inboundSchema:
   z.ZodType<ApplicationCommandSubcommandOptionResponse, z.ZodTypeDef, unknown> =
@@ -265,4 +282,31 @@ export namespace ApplicationCommandSubcommandOptionResponse$ {
     ApplicationCommandSubcommandOptionResponse$outboundSchema;
   /** @deprecated use `ApplicationCommandSubcommandOptionResponse$Outbound` instead. */
   export type Outbound = ApplicationCommandSubcommandOptionResponse$Outbound;
+}
+
+export function applicationCommandSubcommandOptionResponseToJSON(
+  applicationCommandSubcommandOptionResponse:
+    ApplicationCommandSubcommandOptionResponse,
+): string {
+  return JSON.stringify(
+    ApplicationCommandSubcommandOptionResponse$outboundSchema.parse(
+      applicationCommandSubcommandOptionResponse,
+    ),
+  );
+}
+
+export function applicationCommandSubcommandOptionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ApplicationCommandSubcommandOptionResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationCommandSubcommandOptionResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ApplicationCommandSubcommandOptionResponse' from JSON`,
+  );
 }

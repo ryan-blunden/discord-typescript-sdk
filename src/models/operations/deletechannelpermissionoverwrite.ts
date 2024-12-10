@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteChannelPermissionOverwriteRequest = {
   channelId: string;
@@ -59,4 +62,31 @@ export namespace DeleteChannelPermissionOverwriteRequest$ {
     DeleteChannelPermissionOverwriteRequest$outboundSchema;
   /** @deprecated use `DeleteChannelPermissionOverwriteRequest$Outbound` instead. */
   export type Outbound = DeleteChannelPermissionOverwriteRequest$Outbound;
+}
+
+export function deleteChannelPermissionOverwriteRequestToJSON(
+  deleteChannelPermissionOverwriteRequest:
+    DeleteChannelPermissionOverwriteRequest,
+): string {
+  return JSON.stringify(
+    DeleteChannelPermissionOverwriteRequest$outboundSchema.parse(
+      deleteChannelPermissionOverwriteRequest,
+    ),
+  );
+}
+
+export function deleteChannelPermissionOverwriteRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteChannelPermissionOverwriteRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteChannelPermissionOverwriteRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeleteChannelPermissionOverwriteRequest' from JSON`,
+  );
 }

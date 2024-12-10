@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateApplicationCommandSecurity = {
   botToken?: string | undefined;
@@ -59,6 +62,26 @@ export namespace UpdateApplicationCommandSecurity$ {
   export const outboundSchema = UpdateApplicationCommandSecurity$outboundSchema;
   /** @deprecated use `UpdateApplicationCommandSecurity$Outbound` instead. */
   export type Outbound = UpdateApplicationCommandSecurity$Outbound;
+}
+
+export function updateApplicationCommandSecurityToJSON(
+  updateApplicationCommandSecurity: UpdateApplicationCommandSecurity,
+): string {
+  return JSON.stringify(
+    UpdateApplicationCommandSecurity$outboundSchema.parse(
+      updateApplicationCommandSecurity,
+    ),
+  );
+}
+
+export function updateApplicationCommandSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateApplicationCommandSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateApplicationCommandSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateApplicationCommandSecurity' from JSON`,
+  );
 }
 
 /** @internal */
@@ -118,4 +141,24 @@ export namespace UpdateApplicationCommandRequest$ {
   export const outboundSchema = UpdateApplicationCommandRequest$outboundSchema;
   /** @deprecated use `UpdateApplicationCommandRequest$Outbound` instead. */
   export type Outbound = UpdateApplicationCommandRequest$Outbound;
+}
+
+export function updateApplicationCommandRequestToJSON(
+  updateApplicationCommandRequest: UpdateApplicationCommandRequest,
+): string {
+  return JSON.stringify(
+    UpdateApplicationCommandRequest$outboundSchema.parse(
+      updateApplicationCommandRequest,
+    ),
+  );
+}
+
+export function updateApplicationCommandRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateApplicationCommandRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateApplicationCommandRequest' from JSON`,
+  );
 }

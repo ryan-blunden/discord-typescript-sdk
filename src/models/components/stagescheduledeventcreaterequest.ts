@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EntityMetadataStageInstance,
   EntityMetadataStageInstance$inboundSchema,
@@ -106,4 +109,24 @@ export namespace StageScheduledEventCreateRequest$ {
   export const outboundSchema = StageScheduledEventCreateRequest$outboundSchema;
   /** @deprecated use `StageScheduledEventCreateRequest$Outbound` instead. */
   export type Outbound = StageScheduledEventCreateRequest$Outbound;
+}
+
+export function stageScheduledEventCreateRequestToJSON(
+  stageScheduledEventCreateRequest: StageScheduledEventCreateRequest,
+): string {
+  return JSON.stringify(
+    StageScheduledEventCreateRequest$outboundSchema.parse(
+      stageScheduledEventCreateRequest,
+    ),
+  );
+}
+
+export function stageScheduledEventCreateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<StageScheduledEventCreateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StageScheduledEventCreateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StageScheduledEventCreateRequest' from JSON`,
+  );
 }

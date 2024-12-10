@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GithubUser,
   GithubUser$inboundSchema,
@@ -71,4 +74,18 @@ export namespace GithubRelease$ {
   export const outboundSchema = GithubRelease$outboundSchema;
   /** @deprecated use `GithubRelease$Outbound` instead. */
   export type Outbound = GithubRelease$Outbound;
+}
+
+export function githubReleaseToJSON(githubRelease: GithubRelease): string {
+  return JSON.stringify(GithubRelease$outboundSchema.parse(githubRelease));
+}
+
+export function githubReleaseFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubRelease, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubRelease$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubRelease' from JSON`,
+  );
 }

@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AddGroupDmUserRequestBody = {
   accessToken?: string | null | undefined;
@@ -71,6 +74,24 @@ export namespace AddGroupDmUserRequestBody$ {
   export type Outbound = AddGroupDmUserRequestBody$Outbound;
 }
 
+export function addGroupDmUserRequestBodyToJSON(
+  addGroupDmUserRequestBody: AddGroupDmUserRequestBody,
+): string {
+  return JSON.stringify(
+    AddGroupDmUserRequestBody$outboundSchema.parse(addGroupDmUserRequestBody),
+  );
+}
+
+export function addGroupDmUserRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<AddGroupDmUserRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddGroupDmUserRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddGroupDmUserRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const AddGroupDmUserRequest$inboundSchema: z.ZodType<
   AddGroupDmUserRequest,
@@ -125,6 +146,24 @@ export namespace AddGroupDmUserRequest$ {
   export type Outbound = AddGroupDmUserRequest$Outbound;
 }
 
+export function addGroupDmUserRequestToJSON(
+  addGroupDmUserRequest: AddGroupDmUserRequest,
+): string {
+  return JSON.stringify(
+    AddGroupDmUserRequest$outboundSchema.parse(addGroupDmUserRequest),
+  );
+}
+
+export function addGroupDmUserRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<AddGroupDmUserRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddGroupDmUserRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddGroupDmUserRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const AddGroupDmUserResponseBody$inboundSchema: z.ZodType<
   AddGroupDmUserResponseBody,
@@ -161,4 +200,22 @@ export namespace AddGroupDmUserResponseBody$ {
   export const outboundSchema = AddGroupDmUserResponseBody$outboundSchema;
   /** @deprecated use `AddGroupDmUserResponseBody$Outbound` instead. */
   export type Outbound = AddGroupDmUserResponseBody$Outbound;
+}
+
+export function addGroupDmUserResponseBodyToJSON(
+  addGroupDmUserResponseBody: AddGroupDmUserResponseBody,
+): string {
+  return JSON.stringify(
+    AddGroupDmUserResponseBody$outboundSchema.parse(addGroupDmUserResponseBody),
+  );
+}
+
+export function addGroupDmUserResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<AddGroupDmUserResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddGroupDmUserResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddGroupDmUserResponseBody' from JSON`,
+  );
 }

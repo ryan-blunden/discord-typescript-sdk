@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EntityMetadataExternal = {
   location: string;
@@ -42,4 +45,22 @@ export namespace EntityMetadataExternal$ {
   export const outboundSchema = EntityMetadataExternal$outboundSchema;
   /** @deprecated use `EntityMetadataExternal$Outbound` instead. */
   export type Outbound = EntityMetadataExternal$Outbound;
+}
+
+export function entityMetadataExternalToJSON(
+  entityMetadataExternal: EntityMetadataExternal,
+): string {
+  return JSON.stringify(
+    EntityMetadataExternal$outboundSchema.parse(entityMetadataExternal),
+  );
+}
+
+export function entityMetadataExternalFromJSON(
+  jsonString: string,
+): SafeParseResult<EntityMetadataExternal, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EntityMetadataExternal$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EntityMetadataExternal' from JSON`,
+  );
 }

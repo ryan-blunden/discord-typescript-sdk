@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteAutoModerationRuleRequest = {
   guildId: string;
@@ -57,4 +60,24 @@ export namespace DeleteAutoModerationRuleRequest$ {
   export const outboundSchema = DeleteAutoModerationRuleRequest$outboundSchema;
   /** @deprecated use `DeleteAutoModerationRuleRequest$Outbound` instead. */
   export type Outbound = DeleteAutoModerationRuleRequest$Outbound;
+}
+
+export function deleteAutoModerationRuleRequestToJSON(
+  deleteAutoModerationRuleRequest: DeleteAutoModerationRuleRequest,
+): string {
+  return JSON.stringify(
+    DeleteAutoModerationRuleRequest$outboundSchema.parse(
+      deleteAutoModerationRuleRequest,
+    ),
+  );
+}
+
+export function deleteAutoModerationRuleRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteAutoModerationRuleRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteAutoModerationRuleRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteAutoModerationRuleRequest' from JSON`,
+  );
 }

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserResponse,
   UserResponse$inboundSchema,
@@ -52,4 +55,22 @@ export namespace GuildBanResponse$ {
   export const outboundSchema = GuildBanResponse$outboundSchema;
   /** @deprecated use `GuildBanResponse$Outbound` instead. */
   export type Outbound = GuildBanResponse$Outbound;
+}
+
+export function guildBanResponseToJSON(
+  guildBanResponse: GuildBanResponse,
+): string {
+  return JSON.stringify(
+    GuildBanResponse$outboundSchema.parse(guildBanResponse),
+  );
+}
+
+export function guildBanResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildBanResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildBanResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildBanResponse' from JSON`,
+  );
 }

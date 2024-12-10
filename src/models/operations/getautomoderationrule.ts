@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetAutoModerationRuleRequest = {
   guildId: string;
@@ -70,6 +73,26 @@ export namespace GetAutoModerationRuleRequest$ {
   export type Outbound = GetAutoModerationRuleRequest$Outbound;
 }
 
+export function getAutoModerationRuleRequestToJSON(
+  getAutoModerationRuleRequest: GetAutoModerationRuleRequest,
+): string {
+  return JSON.stringify(
+    GetAutoModerationRuleRequest$outboundSchema.parse(
+      getAutoModerationRuleRequest,
+    ),
+  );
+}
+
+export function getAutoModerationRuleRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAutoModerationRuleRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAutoModerationRuleRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAutoModerationRuleRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetAutoModerationRuleResponseBody$inboundSchema: z.ZodType<
   GetAutoModerationRuleResponseBody,
@@ -116,4 +139,24 @@ export namespace GetAutoModerationRuleResponseBody$ {
     GetAutoModerationRuleResponseBody$outboundSchema;
   /** @deprecated use `GetAutoModerationRuleResponseBody$Outbound` instead. */
   export type Outbound = GetAutoModerationRuleResponseBody$Outbound;
+}
+
+export function getAutoModerationRuleResponseBodyToJSON(
+  getAutoModerationRuleResponseBody: GetAutoModerationRuleResponseBody,
+): string {
+  return JSON.stringify(
+    GetAutoModerationRuleResponseBody$outboundSchema.parse(
+      getAutoModerationRuleResponseBody,
+    ),
+  );
+}
+
+export function getAutoModerationRuleResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAutoModerationRuleResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAutoModerationRuleResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAutoModerationRuleResponseBody' from JSON`,
+  );
 }

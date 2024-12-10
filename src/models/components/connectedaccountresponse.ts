@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ConnectedAccountIntegrationResponse,
   ConnectedAccountIntegrationResponse$inboundSchema,
@@ -104,4 +107,22 @@ export namespace ConnectedAccountResponse$ {
   export const outboundSchema = ConnectedAccountResponse$outboundSchema;
   /** @deprecated use `ConnectedAccountResponse$Outbound` instead. */
   export type Outbound = ConnectedAccountResponse$Outbound;
+}
+
+export function connectedAccountResponseToJSON(
+  connectedAccountResponse: ConnectedAccountResponse,
+): string {
+  return JSON.stringify(
+    ConnectedAccountResponse$outboundSchema.parse(connectedAccountResponse),
+  );
+}
+
+export function connectedAccountResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ConnectedAccountResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ConnectedAccountResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ConnectedAccountResponse' from JSON`,
+  );
 }

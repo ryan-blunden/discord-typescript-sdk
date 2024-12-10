@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListChannelInvitesRequest = {
   channelId: string;
@@ -59,6 +62,24 @@ export namespace ListChannelInvitesRequest$ {
   export type Outbound = ListChannelInvitesRequest$Outbound;
 }
 
+export function listChannelInvitesRequestToJSON(
+  listChannelInvitesRequest: ListChannelInvitesRequest,
+): string {
+  return JSON.stringify(
+    ListChannelInvitesRequest$outboundSchema.parse(listChannelInvitesRequest),
+  );
+}
+
+export function listChannelInvitesRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListChannelInvitesRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListChannelInvitesRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListChannelInvitesRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const ListChannelInvitesResponseBody$inboundSchema: z.ZodType<
   ListChannelInvitesResponseBody,
@@ -98,4 +119,24 @@ export namespace ListChannelInvitesResponseBody$ {
   export const outboundSchema = ListChannelInvitesResponseBody$outboundSchema;
   /** @deprecated use `ListChannelInvitesResponseBody$Outbound` instead. */
   export type Outbound = ListChannelInvitesResponseBody$Outbound;
+}
+
+export function listChannelInvitesResponseBodyToJSON(
+  listChannelInvitesResponseBody: ListChannelInvitesResponseBody,
+): string {
+  return JSON.stringify(
+    ListChannelInvitesResponseBody$outboundSchema.parse(
+      listChannelInvitesResponseBody,
+    ),
+  );
+}
+
+export function listChannelInvitesResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListChannelInvitesResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListChannelInvitesResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListChannelInvitesResponseBody' from JSON`,
+  );
 }

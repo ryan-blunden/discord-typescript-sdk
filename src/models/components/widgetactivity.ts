@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type WidgetActivity = {
   name: string;
@@ -42,4 +45,18 @@ export namespace WidgetActivity$ {
   export const outboundSchema = WidgetActivity$outboundSchema;
   /** @deprecated use `WidgetActivity$Outbound` instead. */
   export type Outbound = WidgetActivity$Outbound;
+}
+
+export function widgetActivityToJSON(widgetActivity: WidgetActivity): string {
+  return JSON.stringify(WidgetActivity$outboundSchema.parse(widgetActivity));
+}
+
+export function widgetActivityFromJSON(
+  jsonString: string,
+): SafeParseResult<WidgetActivity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WidgetActivity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WidgetActivity' from JSON`,
+  );
 }

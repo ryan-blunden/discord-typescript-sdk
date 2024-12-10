@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildVanityUrlRequest = {
   guildId: string;
@@ -51,4 +54,22 @@ export namespace GetGuildVanityUrlRequest$ {
   export const outboundSchema = GetGuildVanityUrlRequest$outboundSchema;
   /** @deprecated use `GetGuildVanityUrlRequest$Outbound` instead. */
   export type Outbound = GetGuildVanityUrlRequest$Outbound;
+}
+
+export function getGuildVanityUrlRequestToJSON(
+  getGuildVanityUrlRequest: GetGuildVanityUrlRequest,
+): string {
+  return JSON.stringify(
+    GetGuildVanityUrlRequest$outboundSchema.parse(getGuildVanityUrlRequest),
+  );
+}
+
+export function getGuildVanityUrlRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildVanityUrlRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildVanityUrlRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildVanityUrlRequest' from JSON`,
+  );
 }

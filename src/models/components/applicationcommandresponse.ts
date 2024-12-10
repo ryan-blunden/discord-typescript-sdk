@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApplicationCommandAttachmentOptionResponse,
   ApplicationCommandAttachmentOptionResponse$inboundSchema,
@@ -185,6 +188,26 @@ export namespace ApplicationCommandResponseOptions$ {
   export type Outbound = ApplicationCommandResponseOptions$Outbound;
 }
 
+export function applicationCommandResponseOptionsToJSON(
+  applicationCommandResponseOptions: ApplicationCommandResponseOptions,
+): string {
+  return JSON.stringify(
+    ApplicationCommandResponseOptions$outboundSchema.parse(
+      applicationCommandResponseOptions,
+    ),
+  );
+}
+
+export function applicationCommandResponseOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationCommandResponseOptions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ApplicationCommandResponseOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationCommandResponseOptions' from JSON`,
+  );
+}
+
 /** @internal */
 export const ApplicationCommandResponse$inboundSchema: z.ZodType<
   ApplicationCommandResponse,
@@ -338,4 +361,22 @@ export namespace ApplicationCommandResponse$ {
   export const outboundSchema = ApplicationCommandResponse$outboundSchema;
   /** @deprecated use `ApplicationCommandResponse$Outbound` instead. */
   export type Outbound = ApplicationCommandResponse$Outbound;
+}
+
+export function applicationCommandResponseToJSON(
+  applicationCommandResponse: ApplicationCommandResponse,
+): string {
+  return JSON.stringify(
+    ApplicationCommandResponse$outboundSchema.parse(applicationCommandResponse),
+  );
+}
+
+export function applicationCommandResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationCommandResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ApplicationCommandResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationCommandResponse' from JSON`,
+  );
 }

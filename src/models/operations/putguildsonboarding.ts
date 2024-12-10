@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PutGuildsOnboardingRequest = {
   guildId: string;
@@ -61,4 +64,22 @@ export namespace PutGuildsOnboardingRequest$ {
   export const outboundSchema = PutGuildsOnboardingRequest$outboundSchema;
   /** @deprecated use `PutGuildsOnboardingRequest$Outbound` instead. */
   export type Outbound = PutGuildsOnboardingRequest$Outbound;
+}
+
+export function putGuildsOnboardingRequestToJSON(
+  putGuildsOnboardingRequest: PutGuildsOnboardingRequest,
+): string {
+  return JSON.stringify(
+    PutGuildsOnboardingRequest$outboundSchema.parse(putGuildsOnboardingRequest),
+  );
+}
+
+export function putGuildsOnboardingRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<PutGuildsOnboardingRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PutGuildsOnboardingRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutGuildsOnboardingRequest' from JSON`,
+  );
 }

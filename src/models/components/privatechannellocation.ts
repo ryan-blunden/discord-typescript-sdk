@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PrivateChannelLocation = {
   id: string;
@@ -59,4 +62,22 @@ export namespace PrivateChannelLocation$ {
   export const outboundSchema = PrivateChannelLocation$outboundSchema;
   /** @deprecated use `PrivateChannelLocation$Outbound` instead. */
   export type Outbound = PrivateChannelLocation$Outbound;
+}
+
+export function privateChannelLocationToJSON(
+  privateChannelLocation: PrivateChannelLocation,
+): string {
+  return JSON.stringify(
+    PrivateChannelLocation$outboundSchema.parse(privateChannelLocation),
+  );
+}
+
+export function privateChannelLocationFromJSON(
+  jsonString: string,
+): SafeParseResult<PrivateChannelLocation, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PrivateChannelLocation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PrivateChannelLocation' from JSON`,
+  );
 }

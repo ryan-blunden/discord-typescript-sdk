@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RichEmbedAuthor = {
   name?: string | null | undefined;
@@ -59,4 +62,20 @@ export namespace RichEmbedAuthor$ {
   export const outboundSchema = RichEmbedAuthor$outboundSchema;
   /** @deprecated use `RichEmbedAuthor$Outbound` instead. */
   export type Outbound = RichEmbedAuthor$Outbound;
+}
+
+export function richEmbedAuthorToJSON(
+  richEmbedAuthor: RichEmbedAuthor,
+): string {
+  return JSON.stringify(RichEmbedAuthor$outboundSchema.parse(richEmbedAuthor));
+}
+
+export function richEmbedAuthorFromJSON(
+  jsonString: string,
+): SafeParseResult<RichEmbedAuthor, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RichEmbedAuthor$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RichEmbedAuthor' from JSON`,
+  );
 }

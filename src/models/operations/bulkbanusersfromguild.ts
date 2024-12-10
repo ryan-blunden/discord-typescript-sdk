@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BulkBanUsersFromGuildRequestBody = {
   userIds: Array<string>;
@@ -64,6 +67,26 @@ export namespace BulkBanUsersFromGuildRequestBody$ {
   export type Outbound = BulkBanUsersFromGuildRequestBody$Outbound;
 }
 
+export function bulkBanUsersFromGuildRequestBodyToJSON(
+  bulkBanUsersFromGuildRequestBody: BulkBanUsersFromGuildRequestBody,
+): string {
+  return JSON.stringify(
+    BulkBanUsersFromGuildRequestBody$outboundSchema.parse(
+      bulkBanUsersFromGuildRequestBody,
+    ),
+  );
+}
+
+export function bulkBanUsersFromGuildRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkBanUsersFromGuildRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkBanUsersFromGuildRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkBanUsersFromGuildRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const BulkBanUsersFromGuildRequest$inboundSchema: z.ZodType<
   BulkBanUsersFromGuildRequest,
@@ -111,4 +134,24 @@ export namespace BulkBanUsersFromGuildRequest$ {
   export const outboundSchema = BulkBanUsersFromGuildRequest$outboundSchema;
   /** @deprecated use `BulkBanUsersFromGuildRequest$Outbound` instead. */
   export type Outbound = BulkBanUsersFromGuildRequest$Outbound;
+}
+
+export function bulkBanUsersFromGuildRequestToJSON(
+  bulkBanUsersFromGuildRequest: BulkBanUsersFromGuildRequest,
+): string {
+  return JSON.stringify(
+    BulkBanUsersFromGuildRequest$outboundSchema.parse(
+      bulkBanUsersFromGuildRequest,
+    ),
+  );
+}
+
+export function bulkBanUsersFromGuildRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkBanUsersFromGuildRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkBanUsersFromGuildRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkBanUsersFromGuildRequest' from JSON`,
+  );
 }

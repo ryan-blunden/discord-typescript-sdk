@@ -4,12 +4,21 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserAvatarDecorationResponse,
   UserAvatarDecorationResponse$inboundSchema,
   UserAvatarDecorationResponse$Outbound,
   UserAvatarDecorationResponse$outboundSchema,
 } from "./useravatardecorationresponse.js";
+import {
+  UserPrimaryGuildResponse,
+  UserPrimaryGuildResponse$inboundSchema,
+  UserPrimaryGuildResponse$Outbound,
+  UserPrimaryGuildResponse$outboundSchema,
+} from "./userprimaryguildresponse.js";
 
 export type UserPIIResponse = {
   id: string;
@@ -24,6 +33,7 @@ export type UserPIIResponse = {
   accentColor?: number | null | undefined;
   globalName?: string | null | undefined;
   avatarDecorationData?: UserAvatarDecorationResponse | null | undefined;
+  clan?: UserPrimaryGuildResponse | null | undefined;
   mfaEnabled: boolean;
   locale?: "ar" | undefined;
   premiumType?: 0 | null | undefined;
@@ -50,6 +60,7 @@ export const UserPIIResponse$inboundSchema: z.ZodType<
   global_name: z.nullable(z.string()).optional(),
   avatar_decoration_data: z.nullable(UserAvatarDecorationResponse$inboundSchema)
     .optional(),
+  clan: z.nullable(UserPrimaryGuildResponse$inboundSchema).optional(),
   mfa_enabled: z.boolean(),
   locale: z.literal("ar").optional(),
   premium_type: z.nullable(z.literal(0)).optional(),
@@ -83,6 +94,7 @@ export type UserPIIResponse$Outbound = {
     | UserAvatarDecorationResponse$Outbound
     | null
     | undefined;
+  clan?: UserPrimaryGuildResponse$Outbound | null | undefined;
   mfa_enabled: boolean;
   locale: "ar";
   premium_type: 0 | null;
@@ -109,6 +121,7 @@ export const UserPIIResponse$outboundSchema: z.ZodType<
   globalName: z.nullable(z.string()).optional(),
   avatarDecorationData: z.nullable(UserAvatarDecorationResponse$outboundSchema)
     .optional(),
+  clan: z.nullable(UserPrimaryGuildResponse$outboundSchema).optional(),
   mfaEnabled: z.boolean(),
   locale: z.literal("ar").default("ar" as const),
   premiumType: z.nullable(z.literal(0).default(0 as const)),
@@ -136,4 +149,20 @@ export namespace UserPIIResponse$ {
   export const outboundSchema = UserPIIResponse$outboundSchema;
   /** @deprecated use `UserPIIResponse$Outbound` instead. */
   export type Outbound = UserPIIResponse$Outbound;
+}
+
+export function userPIIResponseToJSON(
+  userPIIResponse: UserPIIResponse,
+): string {
+  return JSON.stringify(UserPIIResponse$outboundSchema.parse(userPIIResponse));
+}
+
+export function userPIIResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UserPIIResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UserPIIResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UserPIIResponse' from JSON`,
+  );
 }

@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ExecuteSlackCompatibleWebhookSecurity = {
   botToken?: string | undefined;
@@ -62,6 +65,27 @@ export namespace ExecuteSlackCompatibleWebhookSecurity$ {
     ExecuteSlackCompatibleWebhookSecurity$outboundSchema;
   /** @deprecated use `ExecuteSlackCompatibleWebhookSecurity$Outbound` instead. */
   export type Outbound = ExecuteSlackCompatibleWebhookSecurity$Outbound;
+}
+
+export function executeSlackCompatibleWebhookSecurityToJSON(
+  executeSlackCompatibleWebhookSecurity: ExecuteSlackCompatibleWebhookSecurity,
+): string {
+  return JSON.stringify(
+    ExecuteSlackCompatibleWebhookSecurity$outboundSchema.parse(
+      executeSlackCompatibleWebhookSecurity,
+    ),
+  );
+}
+
+export function executeSlackCompatibleWebhookSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<ExecuteSlackCompatibleWebhookSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ExecuteSlackCompatibleWebhookSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ExecuteSlackCompatibleWebhookSecurity' from JSON`,
+  );
 }
 
 /** @internal */
@@ -126,4 +150,25 @@ export namespace ExecuteSlackCompatibleWebhookRequest$ {
     ExecuteSlackCompatibleWebhookRequest$outboundSchema;
   /** @deprecated use `ExecuteSlackCompatibleWebhookRequest$Outbound` instead. */
   export type Outbound = ExecuteSlackCompatibleWebhookRequest$Outbound;
+}
+
+export function executeSlackCompatibleWebhookRequestToJSON(
+  executeSlackCompatibleWebhookRequest: ExecuteSlackCompatibleWebhookRequest,
+): string {
+  return JSON.stringify(
+    ExecuteSlackCompatibleWebhookRequest$outboundSchema.parse(
+      executeSlackCompatibleWebhookRequest,
+    ),
+  );
+}
+
+export function executeSlackCompatibleWebhookRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ExecuteSlackCompatibleWebhookRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ExecuteSlackCompatibleWebhookRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ExecuteSlackCompatibleWebhookRequest' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteGuildRoleRequest = {
   guildId: string;
@@ -57,4 +60,22 @@ export namespace DeleteGuildRoleRequest$ {
   export const outboundSchema = DeleteGuildRoleRequest$outboundSchema;
   /** @deprecated use `DeleteGuildRoleRequest$Outbound` instead. */
   export type Outbound = DeleteGuildRoleRequest$Outbound;
+}
+
+export function deleteGuildRoleRequestToJSON(
+  deleteGuildRoleRequest: DeleteGuildRoleRequest,
+): string {
+  return JSON.stringify(
+    DeleteGuildRoleRequest$outboundSchema.parse(deleteGuildRoleRequest),
+  );
+}
+
+export function deleteGuildRoleRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildRoleRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteGuildRoleRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildRoleRequest' from JSON`,
+  );
 }

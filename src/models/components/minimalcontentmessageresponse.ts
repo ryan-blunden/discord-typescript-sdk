@@ -4,6 +4,27 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ActionRowComponentResponse,
+  ActionRowComponentResponse$inboundSchema,
+  ActionRowComponentResponse$Outbound,
+  ActionRowComponentResponse$outboundSchema,
+} from "./actionrowcomponentresponse.js";
+import {
+  ButtonComponentResponse,
+  ButtonComponentResponse$inboundSchema,
+  ButtonComponentResponse$Outbound,
+  ButtonComponentResponse$outboundSchema,
+} from "./buttoncomponentresponse.js";
+import {
+  ChannelSelectComponentResponse,
+  ChannelSelectComponentResponse$inboundSchema,
+  ChannelSelectComponentResponse$Outbound,
+  ChannelSelectComponentResponse$outboundSchema,
+} from "./channelselectcomponentresponse.js";
 import {
   GuildStickerResponse,
   GuildStickerResponse$inboundSchema,
@@ -11,59 +32,17 @@ import {
   GuildStickerResponse$outboundSchema,
 } from "./guildstickerresponse.js";
 import {
+  MentionableSelectComponentResponse,
+  MentionableSelectComponentResponse$inboundSchema,
+  MentionableSelectComponentResponse$Outbound,
+  MentionableSelectComponentResponse$outboundSchema,
+} from "./mentionableselectcomponentresponse.js";
+import {
   MessageAttachmentResponse,
   MessageAttachmentResponse$inboundSchema,
   MessageAttachmentResponse$Outbound,
   MessageAttachmentResponse$outboundSchema,
 } from "./messageattachmentresponse.js";
-import {
-  MessageComponentActionRowResponse,
-  MessageComponentActionRowResponse$inboundSchema,
-  MessageComponentActionRowResponse$Outbound,
-  MessageComponentActionRowResponse$outboundSchema,
-} from "./messagecomponentactionrowresponse.js";
-import {
-  MessageComponentButtonResponse,
-  MessageComponentButtonResponse$inboundSchema,
-  MessageComponentButtonResponse$Outbound,
-  MessageComponentButtonResponse$outboundSchema,
-} from "./messagecomponentbuttonresponse.js";
-import {
-  MessageComponentChannelSelectResponse,
-  MessageComponentChannelSelectResponse$inboundSchema,
-  MessageComponentChannelSelectResponse$Outbound,
-  MessageComponentChannelSelectResponse$outboundSchema,
-} from "./messagecomponentchannelselectresponse.js";
-import {
-  MessageComponentInputTextResponse,
-  MessageComponentInputTextResponse$inboundSchema,
-  MessageComponentInputTextResponse$Outbound,
-  MessageComponentInputTextResponse$outboundSchema,
-} from "./messagecomponentinputtextresponse.js";
-import {
-  MessageComponentMentionableSelectResponse,
-  MessageComponentMentionableSelectResponse$inboundSchema,
-  MessageComponentMentionableSelectResponse$Outbound,
-  MessageComponentMentionableSelectResponse$outboundSchema,
-} from "./messagecomponentmentionableselectresponse.js";
-import {
-  MessageComponentRoleSelectResponse,
-  MessageComponentRoleSelectResponse$inboundSchema,
-  MessageComponentRoleSelectResponse$Outbound,
-  MessageComponentRoleSelectResponse$outboundSchema,
-} from "./messagecomponentroleselectresponse.js";
-import {
-  MessageComponentStringSelectResponse,
-  MessageComponentStringSelectResponse$inboundSchema,
-  MessageComponentStringSelectResponse$Outbound,
-  MessageComponentStringSelectResponse$outboundSchema,
-} from "./messagecomponentstringselectresponse.js";
-import {
-  MessageComponentUserSelectResponse,
-  MessageComponentUserSelectResponse$inboundSchema,
-  MessageComponentUserSelectResponse$Outbound,
-  MessageComponentUserSelectResponse$outboundSchema,
-} from "./messagecomponentuserselectresponse.js";
 import {
   MessageEmbedResponse,
   MessageEmbedResponse$inboundSchema,
@@ -83,27 +62,51 @@ import {
   ResolvedObjectsResponse$outboundSchema,
 } from "./resolvedobjectsresponse.js";
 import {
+  RoleSelectComponentResponse,
+  RoleSelectComponentResponse$inboundSchema,
+  RoleSelectComponentResponse$Outbound,
+  RoleSelectComponentResponse$outboundSchema,
+} from "./roleselectcomponentresponse.js";
+import {
   StandardStickerResponse,
   StandardStickerResponse$inboundSchema,
   StandardStickerResponse$Outbound,
   StandardStickerResponse$outboundSchema,
 } from "./standardstickerresponse.js";
 import {
+  StringSelectComponentResponse,
+  StringSelectComponentResponse$inboundSchema,
+  StringSelectComponentResponse$Outbound,
+  StringSelectComponentResponse$outboundSchema,
+} from "./stringselectcomponentresponse.js";
+import {
+  TextInputComponentResponse,
+  TextInputComponentResponse$inboundSchema,
+  TextInputComponentResponse$Outbound,
+  TextInputComponentResponse$outboundSchema,
+} from "./textinputcomponentresponse.js";
+import {
   UserResponse,
   UserResponse$inboundSchema,
   UserResponse$Outbound,
   UserResponse$outboundSchema,
 } from "./userresponse.js";
+import {
+  UserSelectComponentResponse,
+  UserSelectComponentResponse$inboundSchema,
+  UserSelectComponentResponse$Outbound,
+  UserSelectComponentResponse$outboundSchema,
+} from "./userselectcomponentresponse.js";
 
 export type MinimalContentMessageResponseComponents =
-  | MessageComponentActionRowResponse
-  | MessageComponentMentionableSelectResponse
-  | MessageComponentRoleSelectResponse
-  | MessageComponentStringSelectResponse
-  | MessageComponentUserSelectResponse
-  | MessageComponentButtonResponse
-  | MessageComponentChannelSelectResponse
-  | MessageComponentInputTextResponse;
+  | ActionRowComponentResponse
+  | MentionableSelectComponentResponse
+  | RoleSelectComponentResponse
+  | StringSelectComponentResponse
+  | UserSelectComponentResponse
+  | ButtonComponentResponse
+  | ChannelSelectComponentResponse
+  | TextInputComponentResponse;
 
 export type MinimalContentMessageResponseStickers =
   | StandardStickerResponse
@@ -120,14 +123,14 @@ export type MinimalContentMessageResponse = {
   editedTimestamp?: Date | null | undefined;
   flags: number;
   components: Array<
-    | MessageComponentActionRowResponse
-    | MessageComponentMentionableSelectResponse
-    | MessageComponentRoleSelectResponse
-    | MessageComponentStringSelectResponse
-    | MessageComponentUserSelectResponse
-    | MessageComponentButtonResponse
-    | MessageComponentChannelSelectResponse
-    | MessageComponentInputTextResponse
+    | ActionRowComponentResponse
+    | MentionableSelectComponentResponse
+    | RoleSelectComponentResponse
+    | StringSelectComponentResponse
+    | UserSelectComponentResponse
+    | ButtonComponentResponse
+    | ChannelSelectComponentResponse
+    | TextInputComponentResponse
   >;
   resolved?: ResolvedObjectsResponse | null | undefined;
   stickers?:
@@ -143,26 +146,26 @@ export const MinimalContentMessageResponseComponents$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  MessageComponentActionRowResponse$inboundSchema,
-  MessageComponentMentionableSelectResponse$inboundSchema,
-  MessageComponentRoleSelectResponse$inboundSchema,
-  MessageComponentStringSelectResponse$inboundSchema,
-  MessageComponentUserSelectResponse$inboundSchema,
-  MessageComponentButtonResponse$inboundSchema,
-  MessageComponentChannelSelectResponse$inboundSchema,
-  MessageComponentInputTextResponse$inboundSchema,
+  ActionRowComponentResponse$inboundSchema,
+  MentionableSelectComponentResponse$inboundSchema,
+  RoleSelectComponentResponse$inboundSchema,
+  StringSelectComponentResponse$inboundSchema,
+  UserSelectComponentResponse$inboundSchema,
+  ButtonComponentResponse$inboundSchema,
+  ChannelSelectComponentResponse$inboundSchema,
+  TextInputComponentResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type MinimalContentMessageResponseComponents$Outbound =
-  | MessageComponentActionRowResponse$Outbound
-  | MessageComponentMentionableSelectResponse$Outbound
-  | MessageComponentRoleSelectResponse$Outbound
-  | MessageComponentStringSelectResponse$Outbound
-  | MessageComponentUserSelectResponse$Outbound
-  | MessageComponentButtonResponse$Outbound
-  | MessageComponentChannelSelectResponse$Outbound
-  | MessageComponentInputTextResponse$Outbound;
+  | ActionRowComponentResponse$Outbound
+  | MentionableSelectComponentResponse$Outbound
+  | RoleSelectComponentResponse$Outbound
+  | StringSelectComponentResponse$Outbound
+  | UserSelectComponentResponse$Outbound
+  | ButtonComponentResponse$Outbound
+  | ChannelSelectComponentResponse$Outbound
+  | TextInputComponentResponse$Outbound;
 
 /** @internal */
 export const MinimalContentMessageResponseComponents$outboundSchema: z.ZodType<
@@ -170,14 +173,14 @@ export const MinimalContentMessageResponseComponents$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MinimalContentMessageResponseComponents
 > = z.union([
-  MessageComponentActionRowResponse$outboundSchema,
-  MessageComponentMentionableSelectResponse$outboundSchema,
-  MessageComponentRoleSelectResponse$outboundSchema,
-  MessageComponentStringSelectResponse$outboundSchema,
-  MessageComponentUserSelectResponse$outboundSchema,
-  MessageComponentButtonResponse$outboundSchema,
-  MessageComponentChannelSelectResponse$outboundSchema,
-  MessageComponentInputTextResponse$outboundSchema,
+  ActionRowComponentResponse$outboundSchema,
+  MentionableSelectComponentResponse$outboundSchema,
+  RoleSelectComponentResponse$outboundSchema,
+  StringSelectComponentResponse$outboundSchema,
+  UserSelectComponentResponse$outboundSchema,
+  ButtonComponentResponse$outboundSchema,
+  ChannelSelectComponentResponse$outboundSchema,
+  TextInputComponentResponse$outboundSchema,
 ]);
 
 /**
@@ -193,6 +196,33 @@ export namespace MinimalContentMessageResponseComponents$ {
     MinimalContentMessageResponseComponents$outboundSchema;
   /** @deprecated use `MinimalContentMessageResponseComponents$Outbound` instead. */
   export type Outbound = MinimalContentMessageResponseComponents$Outbound;
+}
+
+export function minimalContentMessageResponseComponentsToJSON(
+  minimalContentMessageResponseComponents:
+    MinimalContentMessageResponseComponents,
+): string {
+  return JSON.stringify(
+    MinimalContentMessageResponseComponents$outboundSchema.parse(
+      minimalContentMessageResponseComponents,
+    ),
+  );
+}
+
+export function minimalContentMessageResponseComponentsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  MinimalContentMessageResponseComponents,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      MinimalContentMessageResponseComponents$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'MinimalContentMessageResponseComponents' from JSON`,
+  );
 }
 
 /** @internal */
@@ -235,6 +265,27 @@ export namespace MinimalContentMessageResponseStickers$ {
   export type Outbound = MinimalContentMessageResponseStickers$Outbound;
 }
 
+export function minimalContentMessageResponseStickersToJSON(
+  minimalContentMessageResponseStickers: MinimalContentMessageResponseStickers,
+): string {
+  return JSON.stringify(
+    MinimalContentMessageResponseStickers$outboundSchema.parse(
+      minimalContentMessageResponseStickers,
+    ),
+  );
+}
+
+export function minimalContentMessageResponseStickersFromJSON(
+  jsonString: string,
+): SafeParseResult<MinimalContentMessageResponseStickers, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      MinimalContentMessageResponseStickers$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MinimalContentMessageResponseStickers' from JSON`,
+  );
+}
+
 /** @internal */
 export const MinimalContentMessageResponse$inboundSchema: z.ZodType<
   MinimalContentMessageResponse,
@@ -254,14 +305,14 @@ export const MinimalContentMessageResponse$inboundSchema: z.ZodType<
   flags: z.number().int(),
   components: z.array(
     z.union([
-      MessageComponentActionRowResponse$inboundSchema,
-      MessageComponentMentionableSelectResponse$inboundSchema,
-      MessageComponentRoleSelectResponse$inboundSchema,
-      MessageComponentStringSelectResponse$inboundSchema,
-      MessageComponentUserSelectResponse$inboundSchema,
-      MessageComponentButtonResponse$inboundSchema,
-      MessageComponentChannelSelectResponse$inboundSchema,
-      MessageComponentInputTextResponse$inboundSchema,
+      ActionRowComponentResponse$inboundSchema,
+      MentionableSelectComponentResponse$inboundSchema,
+      RoleSelectComponentResponse$inboundSchema,
+      StringSelectComponentResponse$inboundSchema,
+      UserSelectComponentResponse$inboundSchema,
+      ButtonComponentResponse$inboundSchema,
+      ChannelSelectComponentResponse$inboundSchema,
+      TextInputComponentResponse$inboundSchema,
     ]),
   ),
   resolved: z.nullable(ResolvedObjectsResponse$inboundSchema).optional(),
@@ -295,14 +346,14 @@ export type MinimalContentMessageResponse$Outbound = {
   edited_timestamp?: string | null | undefined;
   flags: number;
   components: Array<
-    | MessageComponentActionRowResponse$Outbound
-    | MessageComponentMentionableSelectResponse$Outbound
-    | MessageComponentRoleSelectResponse$Outbound
-    | MessageComponentStringSelectResponse$Outbound
-    | MessageComponentUserSelectResponse$Outbound
-    | MessageComponentButtonResponse$Outbound
-    | MessageComponentChannelSelectResponse$Outbound
-    | MessageComponentInputTextResponse$Outbound
+    | ActionRowComponentResponse$Outbound
+    | MentionableSelectComponentResponse$Outbound
+    | RoleSelectComponentResponse$Outbound
+    | StringSelectComponentResponse$Outbound
+    | UserSelectComponentResponse$Outbound
+    | ButtonComponentResponse$Outbound
+    | ChannelSelectComponentResponse$Outbound
+    | TextInputComponentResponse$Outbound
   >;
   resolved?: ResolvedObjectsResponse$Outbound | null | undefined;
   stickers?:
@@ -330,14 +381,14 @@ export const MinimalContentMessageResponse$outboundSchema: z.ZodType<
   flags: z.number().int(),
   components: z.array(
     z.union([
-      MessageComponentActionRowResponse$outboundSchema,
-      MessageComponentMentionableSelectResponse$outboundSchema,
-      MessageComponentRoleSelectResponse$outboundSchema,
-      MessageComponentStringSelectResponse$outboundSchema,
-      MessageComponentUserSelectResponse$outboundSchema,
-      MessageComponentButtonResponse$outboundSchema,
-      MessageComponentChannelSelectResponse$outboundSchema,
-      MessageComponentInputTextResponse$outboundSchema,
+      ActionRowComponentResponse$outboundSchema,
+      MentionableSelectComponentResponse$outboundSchema,
+      RoleSelectComponentResponse$outboundSchema,
+      StringSelectComponentResponse$outboundSchema,
+      UserSelectComponentResponse$outboundSchema,
+      ButtonComponentResponse$outboundSchema,
+      ChannelSelectComponentResponse$outboundSchema,
+      TextInputComponentResponse$outboundSchema,
     ]),
   ),
   resolved: z.nullable(ResolvedObjectsResponse$outboundSchema).optional(),
@@ -370,4 +421,24 @@ export namespace MinimalContentMessageResponse$ {
   export const outboundSchema = MinimalContentMessageResponse$outboundSchema;
   /** @deprecated use `MinimalContentMessageResponse$Outbound` instead. */
   export type Outbound = MinimalContentMessageResponse$Outbound;
+}
+
+export function minimalContentMessageResponseToJSON(
+  minimalContentMessageResponse: MinimalContentMessageResponse,
+): string {
+  return JSON.stringify(
+    MinimalContentMessageResponse$outboundSchema.parse(
+      minimalContentMessageResponse,
+    ),
+  );
+}
+
+export function minimalContentMessageResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MinimalContentMessageResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MinimalContentMessageResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MinimalContentMessageResponse' from JSON`,
+  );
 }

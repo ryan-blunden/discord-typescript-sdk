@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SendSoundboardSoundRequest = {
   channelId: string;
@@ -60,4 +63,22 @@ export namespace SendSoundboardSoundRequest$ {
   export const outboundSchema = SendSoundboardSoundRequest$outboundSchema;
   /** @deprecated use `SendSoundboardSoundRequest$Outbound` instead. */
   export type Outbound = SendSoundboardSoundRequest$Outbound;
+}
+
+export function sendSoundboardSoundRequestToJSON(
+  sendSoundboardSoundRequest: SendSoundboardSoundRequest,
+): string {
+  return JSON.stringify(
+    SendSoundboardSoundRequest$outboundSchema.parse(sendSoundboardSoundRequest),
+  );
+}
+
+export function sendSoundboardSoundRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<SendSoundboardSoundRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SendSoundboardSoundRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SendSoundboardSoundRequest' from JSON`,
+  );
 }

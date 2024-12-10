@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UnpinMessageRequest = {
   channelId: string;
@@ -57,4 +60,22 @@ export namespace UnpinMessageRequest$ {
   export const outboundSchema = UnpinMessageRequest$outboundSchema;
   /** @deprecated use `UnpinMessageRequest$Outbound` instead. */
   export type Outbound = UnpinMessageRequest$Outbound;
+}
+
+export function unpinMessageRequestToJSON(
+  unpinMessageRequest: UnpinMessageRequest,
+): string {
+  return JSON.stringify(
+    UnpinMessageRequest$outboundSchema.parse(unpinMessageRequest),
+  );
+}
+
+export function unpinMessageRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UnpinMessageRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UnpinMessageRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UnpinMessageRequest' from JSON`,
+  );
 }

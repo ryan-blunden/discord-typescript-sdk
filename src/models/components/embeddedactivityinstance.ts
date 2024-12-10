@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GuildChannelLocation,
   GuildChannelLocation$inboundSchema,
@@ -63,6 +66,20 @@ export namespace Location$ {
   export const outboundSchema = Location$outboundSchema;
   /** @deprecated use `Location$Outbound` instead. */
   export type Outbound = Location$Outbound;
+}
+
+export function locationToJSON(location: Location): string {
+  return JSON.stringify(Location$outboundSchema.parse(location));
+}
+
+export function locationFromJSON(
+  jsonString: string,
+): SafeParseResult<Location, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Location$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Location' from JSON`,
+  );
 }
 
 /** @internal */
@@ -137,4 +154,22 @@ export namespace EmbeddedActivityInstance$ {
   export const outboundSchema = EmbeddedActivityInstance$outboundSchema;
   /** @deprecated use `EmbeddedActivityInstance$Outbound` instead. */
   export type Outbound = EmbeddedActivityInstance$Outbound;
+}
+
+export function embeddedActivityInstanceToJSON(
+  embeddedActivityInstance: EmbeddedActivityInstance,
+): string {
+  return JSON.stringify(
+    EmbeddedActivityInstance$outboundSchema.parse(embeddedActivityInstance),
+  );
+}
+
+export function embeddedActivityInstanceFromJSON(
+  jsonString: string,
+): SafeParseResult<EmbeddedActivityInstance, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EmbeddedActivityInstance$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmbeddedActivityInstance' from JSON`,
+  );
 }

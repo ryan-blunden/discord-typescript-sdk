@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BlockMessageActionResponse,
   BlockMessageActionResponse$inboundSchema,
@@ -102,6 +105,26 @@ export namespace SpamLinkRuleResponseActions$ {
   export const outboundSchema = SpamLinkRuleResponseActions$outboundSchema;
   /** @deprecated use `SpamLinkRuleResponseActions$Outbound` instead. */
   export type Outbound = SpamLinkRuleResponseActions$Outbound;
+}
+
+export function spamLinkRuleResponseActionsToJSON(
+  spamLinkRuleResponseActions: SpamLinkRuleResponseActions,
+): string {
+  return JSON.stringify(
+    SpamLinkRuleResponseActions$outboundSchema.parse(
+      spamLinkRuleResponseActions,
+    ),
+  );
+}
+
+export function spamLinkRuleResponseActionsFromJSON(
+  jsonString: string,
+): SafeParseResult<SpamLinkRuleResponseActions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SpamLinkRuleResponseActions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SpamLinkRuleResponseActions' from JSON`,
+  );
 }
 
 /** @internal */
@@ -207,4 +230,22 @@ export namespace SpamLinkRuleResponse$ {
   export const outboundSchema = SpamLinkRuleResponse$outboundSchema;
   /** @deprecated use `SpamLinkRuleResponse$Outbound` instead. */
   export type Outbound = SpamLinkRuleResponse$Outbound;
+}
+
+export function spamLinkRuleResponseToJSON(
+  spamLinkRuleResponse: SpamLinkRuleResponse,
+): string {
+  return JSON.stringify(
+    SpamLinkRuleResponse$outboundSchema.parse(spamLinkRuleResponse),
+  );
+}
+
+export function spamLinkRuleResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<SpamLinkRuleResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SpamLinkRuleResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SpamLinkRuleResponse' from JSON`,
+  );
 }

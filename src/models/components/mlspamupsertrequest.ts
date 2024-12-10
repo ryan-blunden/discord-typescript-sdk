@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BlockMessageAction,
   BlockMessageAction$inboundSchema,
@@ -104,6 +107,24 @@ export namespace MLSpamUpsertRequestActions$ {
   export type Outbound = MLSpamUpsertRequestActions$Outbound;
 }
 
+export function mlSpamUpsertRequestActionsToJSON(
+  mlSpamUpsertRequestActions: MLSpamUpsertRequestActions,
+): string {
+  return JSON.stringify(
+    MLSpamUpsertRequestActions$outboundSchema.parse(mlSpamUpsertRequestActions),
+  );
+}
+
+export function mlSpamUpsertRequestActionsFromJSON(
+  jsonString: string,
+): SafeParseResult<MLSpamUpsertRequestActions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MLSpamUpsertRequestActions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MLSpamUpsertRequestActions' from JSON`,
+  );
+}
+
 /** @internal */
 export const MLSpamUpsertRequest$inboundSchema: z.ZodType<
   MLSpamUpsertRequest,
@@ -201,4 +222,22 @@ export namespace MLSpamUpsertRequest$ {
   export const outboundSchema = MLSpamUpsertRequest$outboundSchema;
   /** @deprecated use `MLSpamUpsertRequest$Outbound` instead. */
   export type Outbound = MLSpamUpsertRequest$Outbound;
+}
+
+export function mlSpamUpsertRequestToJSON(
+  mlSpamUpsertRequest: MLSpamUpsertRequest,
+): string {
+  return JSON.stringify(
+    MLSpamUpsertRequest$outboundSchema.parse(mlSpamUpsertRequest),
+  );
+}
+
+export function mlSpamUpsertRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<MLSpamUpsertRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MLSpamUpsertRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MLSpamUpsertRequest' from JSON`,
+  );
 }

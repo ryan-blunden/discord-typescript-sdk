@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListApplicationCommandsSecurity = {
   botToken?: string | undefined;
@@ -58,6 +61,26 @@ export namespace ListApplicationCommandsSecurity$ {
   export type Outbound = ListApplicationCommandsSecurity$Outbound;
 }
 
+export function listApplicationCommandsSecurityToJSON(
+  listApplicationCommandsSecurity: ListApplicationCommandsSecurity,
+): string {
+  return JSON.stringify(
+    ListApplicationCommandsSecurity$outboundSchema.parse(
+      listApplicationCommandsSecurity,
+    ),
+  );
+}
+
+export function listApplicationCommandsSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<ListApplicationCommandsSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListApplicationCommandsSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListApplicationCommandsSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const ListApplicationCommandsRequest$inboundSchema: z.ZodType<
   ListApplicationCommandsRequest,
@@ -105,4 +128,24 @@ export namespace ListApplicationCommandsRequest$ {
   export const outboundSchema = ListApplicationCommandsRequest$outboundSchema;
   /** @deprecated use `ListApplicationCommandsRequest$Outbound` instead. */
   export type Outbound = ListApplicationCommandsRequest$Outbound;
+}
+
+export function listApplicationCommandsRequestToJSON(
+  listApplicationCommandsRequest: ListApplicationCommandsRequest,
+): string {
+  return JSON.stringify(
+    ListApplicationCommandsRequest$outboundSchema.parse(
+      listApplicationCommandsRequest,
+    ),
+  );
+}
+
+export function listApplicationCommandsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListApplicationCommandsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListApplicationCommandsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListApplicationCommandsRequest' from JSON`,
+  );
 }

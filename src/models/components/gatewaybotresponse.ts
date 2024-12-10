@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GatewayBotSessionStartLimitResponse,
   GatewayBotSessionStartLimitResponse$inboundSchema,
@@ -65,4 +68,22 @@ export namespace GatewayBotResponse$ {
   export const outboundSchema = GatewayBotResponse$outboundSchema;
   /** @deprecated use `GatewayBotResponse$Outbound` instead. */
   export type Outbound = GatewayBotResponse$Outbound;
+}
+
+export function gatewayBotResponseToJSON(
+  gatewayBotResponse: GatewayBotResponse,
+): string {
+  return JSON.stringify(
+    GatewayBotResponse$outboundSchema.parse(gatewayBotResponse),
+  );
+}
+
+export function gatewayBotResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GatewayBotResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GatewayBotResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GatewayBotResponse' from JSON`,
+  );
 }

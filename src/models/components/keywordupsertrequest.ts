@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BlockMessageAction,
   BlockMessageAction$inboundSchema,
@@ -104,6 +107,26 @@ export namespace KeywordUpsertRequestActions$ {
   export type Outbound = KeywordUpsertRequestActions$Outbound;
 }
 
+export function keywordUpsertRequestActionsToJSON(
+  keywordUpsertRequestActions: KeywordUpsertRequestActions,
+): string {
+  return JSON.stringify(
+    KeywordUpsertRequestActions$outboundSchema.parse(
+      keywordUpsertRequestActions,
+    ),
+  );
+}
+
+export function keywordUpsertRequestActionsFromJSON(
+  jsonString: string,
+): SafeParseResult<KeywordUpsertRequestActions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => KeywordUpsertRequestActions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'KeywordUpsertRequestActions' from JSON`,
+  );
+}
+
 /** @internal */
 export const KeywordUpsertRequest$inboundSchema: z.ZodType<
   KeywordUpsertRequest,
@@ -201,4 +224,22 @@ export namespace KeywordUpsertRequest$ {
   export const outboundSchema = KeywordUpsertRequest$outboundSchema;
   /** @deprecated use `KeywordUpsertRequest$Outbound` instead. */
   export type Outbound = KeywordUpsertRequest$Outbound;
+}
+
+export function keywordUpsertRequestToJSON(
+  keywordUpsertRequest: KeywordUpsertRequest,
+): string {
+  return JSON.stringify(
+    KeywordUpsertRequest$outboundSchema.parse(keywordUpsertRequest),
+  );
+}
+
+export function keywordUpsertRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<KeywordUpsertRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => KeywordUpsertRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'KeywordUpsertRequest' from JSON`,
+  );
 }

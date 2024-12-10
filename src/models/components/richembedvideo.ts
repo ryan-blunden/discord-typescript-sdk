@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RichEmbedVideo = {
   url?: string | null | undefined;
@@ -73,4 +76,18 @@ export namespace RichEmbedVideo$ {
   export const outboundSchema = RichEmbedVideo$outboundSchema;
   /** @deprecated use `RichEmbedVideo$Outbound` instead. */
   export type Outbound = RichEmbedVideo$Outbound;
+}
+
+export function richEmbedVideoToJSON(richEmbedVideo: RichEmbedVideo): string {
+  return JSON.stringify(RichEmbedVideo$outboundSchema.parse(richEmbedVideo));
+}
+
+export function richEmbedVideoFromJSON(
+  jsonString: string,
+): SafeParseResult<RichEmbedVideo, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RichEmbedVideo$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RichEmbedVideo' from JSON`,
+  );
 }

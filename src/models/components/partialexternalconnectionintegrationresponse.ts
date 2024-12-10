@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AccountResponse,
   AccountResponse$inboundSchema,
@@ -64,4 +67,31 @@ export namespace PartialExternalConnectionIntegrationResponse$ {
     PartialExternalConnectionIntegrationResponse$outboundSchema;
   /** @deprecated use `PartialExternalConnectionIntegrationResponse$Outbound` instead. */
   export type Outbound = PartialExternalConnectionIntegrationResponse$Outbound;
+}
+
+export function partialExternalConnectionIntegrationResponseToJSON(
+  partialExternalConnectionIntegrationResponse:
+    PartialExternalConnectionIntegrationResponse,
+): string {
+  return JSON.stringify(
+    PartialExternalConnectionIntegrationResponse$outboundSchema.parse(
+      partialExternalConnectionIntegrationResponse,
+    ),
+  );
+}
+
+export function partialExternalConnectionIntegrationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PartialExternalConnectionIntegrationResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PartialExternalConnectionIntegrationResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PartialExternalConnectionIntegrationResponse' from JSON`,
+  );
 }

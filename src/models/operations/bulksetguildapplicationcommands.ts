@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BulkSetGuildApplicationCommandsSecurity = {
   botToken?: string | undefined;
@@ -60,6 +63,33 @@ export namespace BulkSetGuildApplicationCommandsSecurity$ {
     BulkSetGuildApplicationCommandsSecurity$outboundSchema;
   /** @deprecated use `BulkSetGuildApplicationCommandsSecurity$Outbound` instead. */
   export type Outbound = BulkSetGuildApplicationCommandsSecurity$Outbound;
+}
+
+export function bulkSetGuildApplicationCommandsSecurityToJSON(
+  bulkSetGuildApplicationCommandsSecurity:
+    BulkSetGuildApplicationCommandsSecurity,
+): string {
+  return JSON.stringify(
+    BulkSetGuildApplicationCommandsSecurity$outboundSchema.parse(
+      bulkSetGuildApplicationCommandsSecurity,
+    ),
+  );
+}
+
+export function bulkSetGuildApplicationCommandsSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  BulkSetGuildApplicationCommandsSecurity,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      BulkSetGuildApplicationCommandsSecurity$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'BulkSetGuildApplicationCommandsSecurity' from JSON`,
+  );
 }
 
 /** @internal */
@@ -122,4 +152,26 @@ export namespace BulkSetGuildApplicationCommandsRequest$ {
     BulkSetGuildApplicationCommandsRequest$outboundSchema;
   /** @deprecated use `BulkSetGuildApplicationCommandsRequest$Outbound` instead. */
   export type Outbound = BulkSetGuildApplicationCommandsRequest$Outbound;
+}
+
+export function bulkSetGuildApplicationCommandsRequestToJSON(
+  bulkSetGuildApplicationCommandsRequest:
+    BulkSetGuildApplicationCommandsRequest,
+): string {
+  return JSON.stringify(
+    BulkSetGuildApplicationCommandsRequest$outboundSchema.parse(
+      bulkSetGuildApplicationCommandsRequest,
+    ),
+  );
+}
+
+export function bulkSetGuildApplicationCommandsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkSetGuildApplicationCommandsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      BulkSetGuildApplicationCommandsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkSetGuildApplicationCommandsRequest' from JSON`,
+  );
 }

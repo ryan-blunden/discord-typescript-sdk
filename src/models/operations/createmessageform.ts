@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateMessageFormRequest = {
   channelId: string;
@@ -58,4 +61,22 @@ export namespace CreateMessageFormRequest$ {
   export const outboundSchema = CreateMessageFormRequest$outboundSchema;
   /** @deprecated use `CreateMessageFormRequest$Outbound` instead. */
   export type Outbound = CreateMessageFormRequest$Outbound;
+}
+
+export function createMessageFormRequestToJSON(
+  createMessageFormRequest: CreateMessageFormRequest,
+): string {
+  return JSON.stringify(
+    CreateMessageFormRequest$outboundSchema.parse(createMessageFormRequest),
+  );
+}
+
+export function createMessageFormRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateMessageFormRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateMessageFormRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateMessageFormRequest' from JSON`,
+  );
 }

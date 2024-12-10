@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListStickerPacksSecurity = {
   botToken?: string | undefined;
@@ -51,4 +54,22 @@ export namespace ListStickerPacksSecurity$ {
   export const outboundSchema = ListStickerPacksSecurity$outboundSchema;
   /** @deprecated use `ListStickerPacksSecurity$Outbound` instead. */
   export type Outbound = ListStickerPacksSecurity$Outbound;
+}
+
+export function listStickerPacksSecurityToJSON(
+  listStickerPacksSecurity: ListStickerPacksSecurity,
+): string {
+  return JSON.stringify(
+    ListStickerPacksSecurity$outboundSchema.parse(listStickerPacksSecurity),
+  );
+}
+
+export function listStickerPacksSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<ListStickerPacksSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListStickerPacksSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListStickerPacksSecurity' from JSON`,
+  );
 }

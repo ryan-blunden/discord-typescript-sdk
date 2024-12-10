@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   InviteChannelRecipientResponse,
   InviteChannelRecipientResponse$inboundSchema,
@@ -69,4 +72,22 @@ export namespace InviteChannelResponse$ {
   export const outboundSchema = InviteChannelResponse$outboundSchema;
   /** @deprecated use `InviteChannelResponse$Outbound` instead. */
   export type Outbound = InviteChannelResponse$Outbound;
+}
+
+export function inviteChannelResponseToJSON(
+  inviteChannelResponse: InviteChannelResponse,
+): string {
+  return JSON.stringify(
+    InviteChannelResponse$outboundSchema.parse(inviteChannelResponse),
+  );
+}
+
+export function inviteChannelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<InviteChannelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InviteChannelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InviteChannelResponse' from JSON`,
+  );
 }

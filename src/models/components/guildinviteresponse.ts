@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   InviteApplicationResponse,
   InviteApplicationResponse$inboundSchema,
@@ -201,4 +204,22 @@ export namespace GuildInviteResponse$ {
   export const outboundSchema = GuildInviteResponse$outboundSchema;
   /** @deprecated use `GuildInviteResponse$Outbound` instead. */
   export type Outbound = GuildInviteResponse$Outbound;
+}
+
+export function guildInviteResponseToJSON(
+  guildInviteResponse: GuildInviteResponse,
+): string {
+  return JSON.stringify(
+    GuildInviteResponse$outboundSchema.parse(guildInviteResponse),
+  );
+}
+
+export function guildInviteResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildInviteResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildInviteResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildInviteResponse' from JSON`,
+  );
 }

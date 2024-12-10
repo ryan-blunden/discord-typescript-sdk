@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BlockMessageActionMetadata,
   BlockMessageActionMetadata$inboundSchema,
@@ -52,4 +55,22 @@ export namespace BlockMessageAction$ {
   export const outboundSchema = BlockMessageAction$outboundSchema;
   /** @deprecated use `BlockMessageAction$Outbound` instead. */
   export type Outbound = BlockMessageAction$Outbound;
+}
+
+export function blockMessageActionToJSON(
+  blockMessageAction: BlockMessageAction,
+): string {
+  return JSON.stringify(
+    BlockMessageAction$outboundSchema.parse(blockMessageAction),
+  );
+}
+
+export function blockMessageActionFromJSON(
+  jsonString: string,
+): SafeParseResult<BlockMessageAction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BlockMessageAction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BlockMessageAction' from JSON`,
+  );
 }

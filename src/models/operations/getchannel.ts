@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetChannelRequest = {
   channelId: string;
@@ -63,6 +66,24 @@ export namespace GetChannelRequest$ {
   export type Outbound = GetChannelRequest$Outbound;
 }
 
+export function getChannelRequestToJSON(
+  getChannelRequest: GetChannelRequest,
+): string {
+  return JSON.stringify(
+    GetChannelRequest$outboundSchema.parse(getChannelRequest),
+  );
+}
+
+export function getChannelRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetChannelRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetChannelRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetChannelRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetChannelResponseBody$inboundSchema: z.ZodType<
   GetChannelResponseBody,
@@ -105,4 +126,22 @@ export namespace GetChannelResponseBody$ {
   export const outboundSchema = GetChannelResponseBody$outboundSchema;
   /** @deprecated use `GetChannelResponseBody$Outbound` instead. */
   export type Outbound = GetChannelResponseBody$Outbound;
+}
+
+export function getChannelResponseBodyToJSON(
+  getChannelResponseBody: GetChannelResponseBody,
+): string {
+  return JSON.stringify(
+    GetChannelResponseBody$outboundSchema.parse(getChannelResponseBody),
+  );
+}
+
+export function getChannelResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetChannelResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetChannelResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetChannelResponseBody' from JSON`,
+  );
 }

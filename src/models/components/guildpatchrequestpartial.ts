@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GuildPatchRequestPartial = {
   name?: string | undefined;
@@ -163,4 +166,22 @@ export namespace GuildPatchRequestPartial$ {
   export const outboundSchema = GuildPatchRequestPartial$outboundSchema;
   /** @deprecated use `GuildPatchRequestPartial$Outbound` instead. */
   export type Outbound = GuildPatchRequestPartial$Outbound;
+}
+
+export function guildPatchRequestPartialToJSON(
+  guildPatchRequestPartial: GuildPatchRequestPartial,
+): string {
+  return JSON.stringify(
+    GuildPatchRequestPartial$outboundSchema.parse(guildPatchRequestPartial),
+  );
+}
+
+export function guildPatchRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildPatchRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildPatchRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildPatchRequestPartial' from JSON`,
+  );
 }

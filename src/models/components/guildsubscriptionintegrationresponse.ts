@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AccountResponse,
   AccountResponse$inboundSchema,
@@ -66,4 +69,25 @@ export namespace GuildSubscriptionIntegrationResponse$ {
     GuildSubscriptionIntegrationResponse$outboundSchema;
   /** @deprecated use `GuildSubscriptionIntegrationResponse$Outbound` instead. */
   export type Outbound = GuildSubscriptionIntegrationResponse$Outbound;
+}
+
+export function guildSubscriptionIntegrationResponseToJSON(
+  guildSubscriptionIntegrationResponse: GuildSubscriptionIntegrationResponse,
+): string {
+  return JSON.stringify(
+    GuildSubscriptionIntegrationResponse$outboundSchema.parse(
+      guildSubscriptionIntegrationResponse,
+    ),
+  );
+}
+
+export function guildSubscriptionIntegrationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildSubscriptionIntegrationResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GuildSubscriptionIntegrationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildSubscriptionIntegrationResponse' from JSON`,
+  );
 }

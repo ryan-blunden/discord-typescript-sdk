@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TriggerTypingIndicatorRequest = {
   channelId: string;
@@ -51,4 +54,24 @@ export namespace TriggerTypingIndicatorRequest$ {
   export const outboundSchema = TriggerTypingIndicatorRequest$outboundSchema;
   /** @deprecated use `TriggerTypingIndicatorRequest$Outbound` instead. */
   export type Outbound = TriggerTypingIndicatorRequest$Outbound;
+}
+
+export function triggerTypingIndicatorRequestToJSON(
+  triggerTypingIndicatorRequest: TriggerTypingIndicatorRequest,
+): string {
+  return JSON.stringify(
+    TriggerTypingIndicatorRequest$outboundSchema.parse(
+      triggerTypingIndicatorRequest,
+    ),
+  );
+}
+
+export function triggerTypingIndicatorRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<TriggerTypingIndicatorRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TriggerTypingIndicatorRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TriggerTypingIndicatorRequest' from JSON`,
+  );
 }
