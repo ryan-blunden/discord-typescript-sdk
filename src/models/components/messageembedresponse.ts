@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   MessageEmbedAuthorResponse,
   MessageEmbedAuthorResponse$inboundSchema,
@@ -130,4 +133,22 @@ export namespace MessageEmbedResponse$ {
   export const outboundSchema = MessageEmbedResponse$outboundSchema;
   /** @deprecated use `MessageEmbedResponse$Outbound` instead. */
   export type Outbound = MessageEmbedResponse$Outbound;
+}
+
+export function messageEmbedResponseToJSON(
+  messageEmbedResponse: MessageEmbedResponse,
+): string {
+  return JSON.stringify(
+    MessageEmbedResponse$outboundSchema.parse(messageEmbedResponse),
+  );
+}
+
+export function messageEmbedResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageEmbedResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageEmbedResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageEmbedResponse' from JSON`,
+  );
 }

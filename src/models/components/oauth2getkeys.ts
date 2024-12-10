@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   OAuth2Key,
   OAuth2Key$inboundSchema,
@@ -48,4 +51,18 @@ export namespace OAuth2GetKeys$ {
   export const outboundSchema = OAuth2GetKeys$outboundSchema;
   /** @deprecated use `OAuth2GetKeys$Outbound` instead. */
   export type Outbound = OAuth2GetKeys$Outbound;
+}
+
+export function oAuth2GetKeysToJSON(oAuth2GetKeys: OAuth2GetKeys): string {
+  return JSON.stringify(OAuth2GetKeys$outboundSchema.parse(oAuth2GetKeys));
+}
+
+export function oAuth2GetKeysFromJSON(
+  jsonString: string,
+): SafeParseResult<OAuth2GetKeys, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OAuth2GetKeys$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OAuth2GetKeys' from JSON`,
+  );
 }

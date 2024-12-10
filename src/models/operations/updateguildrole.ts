@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateGuildRoleRequestBody = {
   name?: string | null | undefined;
@@ -83,6 +86,24 @@ export namespace UpdateGuildRoleRequestBody$ {
   export type Outbound = UpdateGuildRoleRequestBody$Outbound;
 }
 
+export function updateGuildRoleRequestBodyToJSON(
+  updateGuildRoleRequestBody: UpdateGuildRoleRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateGuildRoleRequestBody$outboundSchema.parse(updateGuildRoleRequestBody),
+  );
+}
+
+export function updateGuildRoleRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildRoleRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildRoleRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildRoleRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpdateGuildRoleRequest$inboundSchema: z.ZodType<
   UpdateGuildRoleRequest,
@@ -135,4 +156,22 @@ export namespace UpdateGuildRoleRequest$ {
   export const outboundSchema = UpdateGuildRoleRequest$outboundSchema;
   /** @deprecated use `UpdateGuildRoleRequest$Outbound` instead. */
   export type Outbound = UpdateGuildRoleRequest$Outbound;
+}
+
+export function updateGuildRoleRequestToJSON(
+  updateGuildRoleRequest: UpdateGuildRoleRequest,
+): string {
+  return JSON.stringify(
+    UpdateGuildRoleRequest$outboundSchema.parse(updateGuildRoleRequest),
+  );
+}
+
+export function updateGuildRoleRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildRoleRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildRoleRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildRoleRequest' from JSON`,
+  );
 }

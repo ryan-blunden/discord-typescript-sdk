@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteApplicationUserRoleConnectionRequest = {
   applicationId: string;
@@ -52,4 +55,31 @@ export namespace DeleteApplicationUserRoleConnectionRequest$ {
     DeleteApplicationUserRoleConnectionRequest$outboundSchema;
   /** @deprecated use `DeleteApplicationUserRoleConnectionRequest$Outbound` instead. */
   export type Outbound = DeleteApplicationUserRoleConnectionRequest$Outbound;
+}
+
+export function deleteApplicationUserRoleConnectionRequestToJSON(
+  deleteApplicationUserRoleConnectionRequest:
+    DeleteApplicationUserRoleConnectionRequest,
+): string {
+  return JSON.stringify(
+    DeleteApplicationUserRoleConnectionRequest$outboundSchema.parse(
+      deleteApplicationUserRoleConnectionRequest,
+    ),
+  );
+}
+
+export function deleteApplicationUserRoleConnectionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteApplicationUserRoleConnectionRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteApplicationUserRoleConnectionRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeleteApplicationUserRoleConnectionRequest' from JSON`,
+  );
 }

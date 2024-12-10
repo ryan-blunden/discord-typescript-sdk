@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PollEmojiCreateRequest = {
   id?: string | null | undefined;
@@ -50,4 +53,22 @@ export namespace PollEmojiCreateRequest$ {
   export const outboundSchema = PollEmojiCreateRequest$outboundSchema;
   /** @deprecated use `PollEmojiCreateRequest$Outbound` instead. */
   export type Outbound = PollEmojiCreateRequest$Outbound;
+}
+
+export function pollEmojiCreateRequestToJSON(
+  pollEmojiCreateRequest: PollEmojiCreateRequest,
+): string {
+  return JSON.stringify(
+    PollEmojiCreateRequest$outboundSchema.parse(pollEmojiCreateRequest),
+  );
+}
+
+export function pollEmojiCreateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<PollEmojiCreateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PollEmojiCreateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PollEmojiCreateRequest' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AddThreadMemberRequest = {
   channelId: string;
@@ -57,4 +60,22 @@ export namespace AddThreadMemberRequest$ {
   export const outboundSchema = AddThreadMemberRequest$outboundSchema;
   /** @deprecated use `AddThreadMemberRequest$Outbound` instead. */
   export type Outbound = AddThreadMemberRequest$Outbound;
+}
+
+export function addThreadMemberRequestToJSON(
+  addThreadMemberRequest: AddThreadMemberRequest,
+): string {
+  return JSON.stringify(
+    AddThreadMemberRequest$outboundSchema.parse(addThreadMemberRequest),
+  );
+}
+
+export function addThreadMemberRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<AddThreadMemberRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddThreadMemberRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddThreadMemberRequest' from JSON`,
+  );
 }

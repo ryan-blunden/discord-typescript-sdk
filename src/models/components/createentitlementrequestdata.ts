@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateEntitlementRequestData = {
   skuId: string;
@@ -63,4 +66,24 @@ export namespace CreateEntitlementRequestData$ {
   export const outboundSchema = CreateEntitlementRequestData$outboundSchema;
   /** @deprecated use `CreateEntitlementRequestData$Outbound` instead. */
   export type Outbound = CreateEntitlementRequestData$Outbound;
+}
+
+export function createEntitlementRequestDataToJSON(
+  createEntitlementRequestData: CreateEntitlementRequestData,
+): string {
+  return JSON.stringify(
+    CreateEntitlementRequestData$outboundSchema.parse(
+      createEntitlementRequestData,
+    ),
+  );
+}
+
+export function createEntitlementRequestDataFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateEntitlementRequestData, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateEntitlementRequestData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateEntitlementRequestData' from JSON`,
+  );
 }

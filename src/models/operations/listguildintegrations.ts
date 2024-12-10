@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListGuildIntegrationsRequest = {
   guildId: string;
@@ -59,6 +62,26 @@ export namespace ListGuildIntegrationsRequest$ {
   export type Outbound = ListGuildIntegrationsRequest$Outbound;
 }
 
+export function listGuildIntegrationsRequestToJSON(
+  listGuildIntegrationsRequest: ListGuildIntegrationsRequest,
+): string {
+  return JSON.stringify(
+    ListGuildIntegrationsRequest$outboundSchema.parse(
+      listGuildIntegrationsRequest,
+    ),
+  );
+}
+
+export function listGuildIntegrationsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildIntegrationsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildIntegrationsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildIntegrationsRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const ListGuildIntegrationsResponseBody$inboundSchema: z.ZodType<
   ListGuildIntegrationsResponseBody,
@@ -99,4 +122,24 @@ export namespace ListGuildIntegrationsResponseBody$ {
     ListGuildIntegrationsResponseBody$outboundSchema;
   /** @deprecated use `ListGuildIntegrationsResponseBody$Outbound` instead. */
   export type Outbound = ListGuildIntegrationsResponseBody$Outbound;
+}
+
+export function listGuildIntegrationsResponseBodyToJSON(
+  listGuildIntegrationsResponseBody: ListGuildIntegrationsResponseBody,
+): string {
+  return JSON.stringify(
+    ListGuildIntegrationsResponseBody$outboundSchema.parse(
+      listGuildIntegrationsResponseBody,
+    ),
+  );
+}
+
+export function listGuildIntegrationsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildIntegrationsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildIntegrationsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildIntegrationsResponseBody' from JSON`,
+  );
 }

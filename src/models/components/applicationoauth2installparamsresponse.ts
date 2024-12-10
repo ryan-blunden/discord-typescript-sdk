@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ApplicationOAuth2InstallParamsResponse = {
   scopes: Array<string>;
@@ -48,4 +51,26 @@ export namespace ApplicationOAuth2InstallParamsResponse$ {
     ApplicationOAuth2InstallParamsResponse$outboundSchema;
   /** @deprecated use `ApplicationOAuth2InstallParamsResponse$Outbound` instead. */
   export type Outbound = ApplicationOAuth2InstallParamsResponse$Outbound;
+}
+
+export function applicationOAuth2InstallParamsResponseToJSON(
+  applicationOAuth2InstallParamsResponse:
+    ApplicationOAuth2InstallParamsResponse,
+): string {
+  return JSON.stringify(
+    ApplicationOAuth2InstallParamsResponse$outboundSchema.parse(
+      applicationOAuth2InstallParamsResponse,
+    ),
+  );
+}
+
+export function applicationOAuth2InstallParamsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationOAuth2InstallParamsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationOAuth2InstallParamsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationOAuth2InstallParamsResponse' from JSON`,
+  );
 }

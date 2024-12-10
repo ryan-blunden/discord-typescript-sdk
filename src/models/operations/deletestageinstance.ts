@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteStageInstanceRequest = {
   channelId: string;
@@ -51,4 +54,22 @@ export namespace DeleteStageInstanceRequest$ {
   export const outboundSchema = DeleteStageInstanceRequest$outboundSchema;
   /** @deprecated use `DeleteStageInstanceRequest$Outbound` instead. */
   export type Outbound = DeleteStageInstanceRequest$Outbound;
+}
+
+export function deleteStageInstanceRequestToJSON(
+  deleteStageInstanceRequest: DeleteStageInstanceRequest,
+): string {
+  return JSON.stringify(
+    DeleteStageInstanceRequest$outboundSchema.parse(deleteStageInstanceRequest),
+  );
+}
+
+export function deleteStageInstanceRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteStageInstanceRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteStageInstanceRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteStageInstanceRequest' from JSON`,
+  );
 }

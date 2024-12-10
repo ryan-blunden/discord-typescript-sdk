@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PollEmojiCreateRequest,
   PollEmojiCreateRequest$inboundSchema,
@@ -52,4 +55,22 @@ export namespace PollMediaCreateRequest$ {
   export const outboundSchema = PollMediaCreateRequest$outboundSchema;
   /** @deprecated use `PollMediaCreateRequest$Outbound` instead. */
   export type Outbound = PollMediaCreateRequest$Outbound;
+}
+
+export function pollMediaCreateRequestToJSON(
+  pollMediaCreateRequest: PollMediaCreateRequest,
+): string {
+  return JSON.stringify(
+    PollMediaCreateRequest$outboundSchema.parse(pollMediaCreateRequest),
+  );
+}
+
+export function pollMediaCreateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<PollMediaCreateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PollMediaCreateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PollMediaCreateRequest' from JSON`,
+  );
 }

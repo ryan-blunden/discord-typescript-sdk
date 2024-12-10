@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageEmbedFooterResponse = {
   text: string;
@@ -61,4 +64,22 @@ export namespace MessageEmbedFooterResponse$ {
   export const outboundSchema = MessageEmbedFooterResponse$outboundSchema;
   /** @deprecated use `MessageEmbedFooterResponse$Outbound` instead. */
   export type Outbound = MessageEmbedFooterResponse$Outbound;
+}
+
+export function messageEmbedFooterResponseToJSON(
+  messageEmbedFooterResponse: MessageEmbedFooterResponse,
+): string {
+  return JSON.stringify(
+    MessageEmbedFooterResponse$outboundSchema.parse(messageEmbedFooterResponse),
+  );
+}
+
+export function messageEmbedFooterResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageEmbedFooterResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageEmbedFooterResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageEmbedFooterResponse' from JSON`,
+  );
 }

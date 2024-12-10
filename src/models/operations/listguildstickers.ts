@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListGuildStickersRequest = {
   guildId: string;
@@ -51,4 +54,22 @@ export namespace ListGuildStickersRequest$ {
   export const outboundSchema = ListGuildStickersRequest$outboundSchema;
   /** @deprecated use `ListGuildStickersRequest$Outbound` instead. */
   export type Outbound = ListGuildStickersRequest$Outbound;
+}
+
+export function listGuildStickersRequestToJSON(
+  listGuildStickersRequest: ListGuildStickersRequest,
+): string {
+  return JSON.stringify(
+    ListGuildStickersRequest$outboundSchema.parse(listGuildStickersRequest),
+  );
+}
+
+export function listGuildStickersRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildStickersRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildStickersRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildStickersRequest' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateTextThreadWithMessageRequest = {
   name: string;
@@ -62,4 +65,25 @@ export namespace CreateTextThreadWithMessageRequest$ {
     CreateTextThreadWithMessageRequest$outboundSchema;
   /** @deprecated use `CreateTextThreadWithMessageRequest$Outbound` instead. */
   export type Outbound = CreateTextThreadWithMessageRequest$Outbound;
+}
+
+export function createTextThreadWithMessageRequestToJSON(
+  createTextThreadWithMessageRequest: CreateTextThreadWithMessageRequest,
+): string {
+  return JSON.stringify(
+    CreateTextThreadWithMessageRequest$outboundSchema.parse(
+      createTextThreadWithMessageRequest,
+    ),
+  );
+}
+
+export function createTextThreadWithMessageRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateTextThreadWithMessageRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateTextThreadWithMessageRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateTextThreadWithMessageRequest' from JSON`,
+  );
 }

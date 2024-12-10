@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserResponse,
   UserResponse$inboundSchema,
@@ -106,4 +109,24 @@ export namespace PrivateGroupChannelResponse$ {
   export const outboundSchema = PrivateGroupChannelResponse$outboundSchema;
   /** @deprecated use `PrivateGroupChannelResponse$Outbound` instead. */
   export type Outbound = PrivateGroupChannelResponse$Outbound;
+}
+
+export function privateGroupChannelResponseToJSON(
+  privateGroupChannelResponse: PrivateGroupChannelResponse,
+): string {
+  return JSON.stringify(
+    PrivateGroupChannelResponse$outboundSchema.parse(
+      privateGroupChannelResponse,
+    ),
+  );
+}
+
+export function privateGroupChannelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PrivateGroupChannelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PrivateGroupChannelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PrivateGroupChannelResponse' from JSON`,
+  );
 }

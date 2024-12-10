@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateAutoModerationRuleRequestBody =
   | components.DefaultKeywordListUpsertRequest
@@ -77,6 +80,27 @@ export namespace CreateAutoModerationRuleRequestBody$ {
   export type Outbound = CreateAutoModerationRuleRequestBody$Outbound;
 }
 
+export function createAutoModerationRuleRequestBodyToJSON(
+  createAutoModerationRuleRequestBody: CreateAutoModerationRuleRequestBody,
+): string {
+  return JSON.stringify(
+    CreateAutoModerationRuleRequestBody$outboundSchema.parse(
+      createAutoModerationRuleRequestBody,
+    ),
+  );
+}
+
+export function createAutoModerationRuleRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateAutoModerationRuleRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateAutoModerationRuleRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAutoModerationRuleRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const CreateAutoModerationRuleRequest$inboundSchema: z.ZodType<
   CreateAutoModerationRuleRequest,
@@ -140,6 +164,26 @@ export namespace CreateAutoModerationRuleRequest$ {
   export type Outbound = CreateAutoModerationRuleRequest$Outbound;
 }
 
+export function createAutoModerationRuleRequestToJSON(
+  createAutoModerationRuleRequest: CreateAutoModerationRuleRequest,
+): string {
+  return JSON.stringify(
+    CreateAutoModerationRuleRequest$outboundSchema.parse(
+      createAutoModerationRuleRequest,
+    ),
+  );
+}
+
+export function createAutoModerationRuleRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateAutoModerationRuleRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateAutoModerationRuleRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAutoModerationRuleRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const CreateAutoModerationRuleResponseBody$inboundSchema: z.ZodType<
   CreateAutoModerationRuleResponseBody,
@@ -187,4 +231,25 @@ export namespace CreateAutoModerationRuleResponseBody$ {
     CreateAutoModerationRuleResponseBody$outboundSchema;
   /** @deprecated use `CreateAutoModerationRuleResponseBody$Outbound` instead. */
   export type Outbound = CreateAutoModerationRuleResponseBody$Outbound;
+}
+
+export function createAutoModerationRuleResponseBodyToJSON(
+  createAutoModerationRuleResponseBody: CreateAutoModerationRuleResponseBody,
+): string {
+  return JSON.stringify(
+    CreateAutoModerationRuleResponseBody$outboundSchema.parse(
+      createAutoModerationRuleResponseBody,
+    ),
+  );
+}
+
+export function createAutoModerationRuleResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateAutoModerationRuleResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateAutoModerationRuleResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAutoModerationRuleResponseBody' from JSON`,
+  );
 }

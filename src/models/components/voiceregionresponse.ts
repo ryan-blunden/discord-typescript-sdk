@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type VoiceRegionResponse = {
   id: string;
@@ -58,4 +61,22 @@ export namespace VoiceRegionResponse$ {
   export const outboundSchema = VoiceRegionResponse$outboundSchema;
   /** @deprecated use `VoiceRegionResponse$Outbound` instead. */
   export type Outbound = VoiceRegionResponse$Outbound;
+}
+
+export function voiceRegionResponseToJSON(
+  voiceRegionResponse: VoiceRegionResponse,
+): string {
+  return JSON.stringify(
+    VoiceRegionResponse$outboundSchema.parse(voiceRegionResponse),
+  );
+}
+
+export function voiceRegionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<VoiceRegionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => VoiceRegionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VoiceRegionResponse' from JSON`,
+  );
 }

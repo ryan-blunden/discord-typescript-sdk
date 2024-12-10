@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type StandardStickerResponse = {
   id: string;
@@ -83,4 +86,22 @@ export namespace StandardStickerResponse$ {
   export const outboundSchema = StandardStickerResponse$outboundSchema;
   /** @deprecated use `StandardStickerResponse$Outbound` instead. */
   export type Outbound = StandardStickerResponse$Outbound;
+}
+
+export function standardStickerResponseToJSON(
+  standardStickerResponse: StandardStickerResponse,
+): string {
+  return JSON.stringify(
+    StandardStickerResponse$outboundSchema.parse(standardStickerResponse),
+  );
+}
+
+export function standardStickerResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<StandardStickerResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StandardStickerResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StandardStickerResponse' from JSON`,
+  );
 }

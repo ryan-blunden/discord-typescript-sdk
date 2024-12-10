@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   WebhookSlackEmbedField,
   WebhookSlackEmbedField$inboundSchema,
@@ -121,4 +124,22 @@ export namespace WebhookSlackEmbed$ {
   export const outboundSchema = WebhookSlackEmbed$outboundSchema;
   /** @deprecated use `WebhookSlackEmbed$Outbound` instead. */
   export type Outbound = WebhookSlackEmbed$Outbound;
+}
+
+export function webhookSlackEmbedToJSON(
+  webhookSlackEmbed: WebhookSlackEmbed,
+): string {
+  return JSON.stringify(
+    WebhookSlackEmbed$outboundSchema.parse(webhookSlackEmbed),
+  );
+}
+
+export function webhookSlackEmbedFromJSON(
+  jsonString: string,
+): SafeParseResult<WebhookSlackEmbed, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WebhookSlackEmbed$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WebhookSlackEmbed' from JSON`,
+  );
 }

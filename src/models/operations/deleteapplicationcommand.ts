@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteApplicationCommandSecurity = {
   botToken?: string | undefined;
@@ -58,6 +61,26 @@ export namespace DeleteApplicationCommandSecurity$ {
   export type Outbound = DeleteApplicationCommandSecurity$Outbound;
 }
 
+export function deleteApplicationCommandSecurityToJSON(
+  deleteApplicationCommandSecurity: DeleteApplicationCommandSecurity,
+): string {
+  return JSON.stringify(
+    DeleteApplicationCommandSecurity$outboundSchema.parse(
+      deleteApplicationCommandSecurity,
+    ),
+  );
+}
+
+export function deleteApplicationCommandSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteApplicationCommandSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteApplicationCommandSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteApplicationCommandSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const DeleteApplicationCommandRequest$inboundSchema: z.ZodType<
   DeleteApplicationCommandRequest,
@@ -105,4 +128,24 @@ export namespace DeleteApplicationCommandRequest$ {
   export const outboundSchema = DeleteApplicationCommandRequest$outboundSchema;
   /** @deprecated use `DeleteApplicationCommandRequest$Outbound` instead. */
   export type Outbound = DeleteApplicationCommandRequest$Outbound;
+}
+
+export function deleteApplicationCommandRequestToJSON(
+  deleteApplicationCommandRequest: DeleteApplicationCommandRequest,
+): string {
+  return JSON.stringify(
+    DeleteApplicationCommandRequest$outboundSchema.parse(
+      deleteApplicationCommandRequest,
+    ),
+  );
+}
+
+export function deleteApplicationCommandRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteApplicationCommandRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteApplicationCommandRequest' from JSON`,
+  );
 }

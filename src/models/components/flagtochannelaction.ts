@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FlagToChannelActionMetadata,
   FlagToChannelActionMetadata$inboundSchema,
@@ -52,4 +55,22 @@ export namespace FlagToChannelAction$ {
   export const outboundSchema = FlagToChannelAction$outboundSchema;
   /** @deprecated use `FlagToChannelAction$Outbound` instead. */
   export type Outbound = FlagToChannelAction$Outbound;
+}
+
+export function flagToChannelActionToJSON(
+  flagToChannelAction: FlagToChannelAction,
+): string {
+  return JSON.stringify(
+    FlagToChannelAction$outboundSchema.parse(flagToChannelAction),
+  );
+}
+
+export function flagToChannelActionFromJSON(
+  jsonString: string,
+): SafeParseResult<FlagToChannelAction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FlagToChannelAction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FlagToChannelAction' from JSON`,
+  );
 }

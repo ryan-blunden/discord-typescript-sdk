@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AccountResponse,
   AccountResponse$inboundSchema,
@@ -74,4 +77,24 @@ export namespace PartialDiscordIntegrationResponse$ {
     PartialDiscordIntegrationResponse$outboundSchema;
   /** @deprecated use `PartialDiscordIntegrationResponse$Outbound` instead. */
   export type Outbound = PartialDiscordIntegrationResponse$Outbound;
+}
+
+export function partialDiscordIntegrationResponseToJSON(
+  partialDiscordIntegrationResponse: PartialDiscordIntegrationResponse,
+): string {
+  return JSON.stringify(
+    PartialDiscordIntegrationResponse$outboundSchema.parse(
+      partialDiscordIntegrationResponse,
+    ),
+  );
+}
+
+export function partialDiscordIntegrationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PartialDiscordIntegrationResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PartialDiscordIntegrationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PartialDiscordIntegrationResponse' from JSON`,
+  );
 }

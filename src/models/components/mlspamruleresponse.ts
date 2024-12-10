@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BlockMessageActionResponse,
   BlockMessageActionResponse$inboundSchema,
@@ -102,6 +105,24 @@ export namespace MLSpamRuleResponseActions$ {
   export const outboundSchema = MLSpamRuleResponseActions$outboundSchema;
   /** @deprecated use `MLSpamRuleResponseActions$Outbound` instead. */
   export type Outbound = MLSpamRuleResponseActions$Outbound;
+}
+
+export function mlSpamRuleResponseActionsToJSON(
+  mlSpamRuleResponseActions: MLSpamRuleResponseActions,
+): string {
+  return JSON.stringify(
+    MLSpamRuleResponseActions$outboundSchema.parse(mlSpamRuleResponseActions),
+  );
+}
+
+export function mlSpamRuleResponseActionsFromJSON(
+  jsonString: string,
+): SafeParseResult<MLSpamRuleResponseActions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MLSpamRuleResponseActions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MLSpamRuleResponseActions' from JSON`,
+  );
 }
 
 /** @internal */
@@ -207,4 +228,22 @@ export namespace MLSpamRuleResponse$ {
   export const outboundSchema = MLSpamRuleResponse$outboundSchema;
   /** @deprecated use `MLSpamRuleResponse$Outbound` instead. */
   export type Outbound = MLSpamRuleResponse$Outbound;
+}
+
+export function mlSpamRuleResponseToJSON(
+  mlSpamRuleResponse: MLSpamRuleResponse,
+): string {
+  return JSON.stringify(
+    MLSpamRuleResponse$outboundSchema.parse(mlSpamRuleResponse),
+  );
+}
+
+export function mlSpamRuleResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MLSpamRuleResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MLSpamRuleResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MLSpamRuleResponse' from JSON`,
+  );
 }

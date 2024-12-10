@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type KeywordTriggerMetadataResponse = {
   keywordFilter: Array<string>;
@@ -63,4 +66,24 @@ export namespace KeywordTriggerMetadataResponse$ {
   export const outboundSchema = KeywordTriggerMetadataResponse$outboundSchema;
   /** @deprecated use `KeywordTriggerMetadataResponse$Outbound` instead. */
   export type Outbound = KeywordTriggerMetadataResponse$Outbound;
+}
+
+export function keywordTriggerMetadataResponseToJSON(
+  keywordTriggerMetadataResponse: KeywordTriggerMetadataResponse,
+): string {
+  return JSON.stringify(
+    KeywordTriggerMetadataResponse$outboundSchema.parse(
+      keywordTriggerMetadataResponse,
+    ),
+  );
+}
+
+export function keywordTriggerMetadataResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<KeywordTriggerMetadataResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => KeywordTriggerMetadataResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'KeywordTriggerMetadataResponse' from JSON`,
+  );
 }

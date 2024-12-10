@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateApplicationEmojiRequestBody = {
   name: string;
@@ -55,6 +58,26 @@ export namespace CreateApplicationEmojiRequestBody$ {
   export type Outbound = CreateApplicationEmojiRequestBody$Outbound;
 }
 
+export function createApplicationEmojiRequestBodyToJSON(
+  createApplicationEmojiRequestBody: CreateApplicationEmojiRequestBody,
+): string {
+  return JSON.stringify(
+    CreateApplicationEmojiRequestBody$outboundSchema.parse(
+      createApplicationEmojiRequestBody,
+    ),
+  );
+}
+
+export function createApplicationEmojiRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateApplicationEmojiRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateApplicationEmojiRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateApplicationEmojiRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const CreateApplicationEmojiRequest$inboundSchema: z.ZodType<
   CreateApplicationEmojiRequest,
@@ -102,4 +125,24 @@ export namespace CreateApplicationEmojiRequest$ {
   export const outboundSchema = CreateApplicationEmojiRequest$outboundSchema;
   /** @deprecated use `CreateApplicationEmojiRequest$Outbound` instead. */
   export type Outbound = CreateApplicationEmojiRequest$Outbound;
+}
+
+export function createApplicationEmojiRequestToJSON(
+  createApplicationEmojiRequest: CreateApplicationEmojiRequest,
+): string {
+  return JSON.stringify(
+    CreateApplicationEmojiRequest$outboundSchema.parse(
+      createApplicationEmojiRequest,
+    ),
+  );
+}
+
+export function createApplicationEmojiRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateApplicationEmojiRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateApplicationEmojiRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateApplicationEmojiRequest' from JSON`,
+  );
 }

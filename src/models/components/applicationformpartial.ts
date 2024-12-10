@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApplicationIntegrationTypeConfiguration,
   ApplicationIntegrationTypeConfiguration$inboundSchema,
@@ -79,6 +82,20 @@ export namespace Description$ {
   export const outboundSchema = Description$outboundSchema;
   /** @deprecated use `Description$Outbound` instead. */
   export type Outbound = Description$Outbound;
+}
+
+export function descriptionToJSON(description: Description): string {
+  return JSON.stringify(Description$outboundSchema.parse(description));
+}
+
+export function descriptionFromJSON(
+  jsonString: string,
+): SafeParseResult<Description, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Description$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Description' from JSON`,
+  );
 }
 
 /** @internal */
@@ -187,4 +204,22 @@ export namespace ApplicationFormPartial$ {
   export const outboundSchema = ApplicationFormPartial$outboundSchema;
   /** @deprecated use `ApplicationFormPartial$Outbound` instead. */
   export type Outbound = ApplicationFormPartial$Outbound;
+}
+
+export function applicationFormPartialToJSON(
+  applicationFormPartial: ApplicationFormPartial,
+): string {
+  return JSON.stringify(
+    ApplicationFormPartial$outboundSchema.parse(applicationFormPartial),
+  );
+}
+
+export function applicationFormPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationFormPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ApplicationFormPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationFormPartial' from JSON`,
+  );
 }

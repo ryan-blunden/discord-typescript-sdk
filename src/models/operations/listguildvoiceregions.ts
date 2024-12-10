@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListGuildVoiceRegionsRequest = {
   guildId: string;
@@ -51,4 +54,24 @@ export namespace ListGuildVoiceRegionsRequest$ {
   export const outboundSchema = ListGuildVoiceRegionsRequest$outboundSchema;
   /** @deprecated use `ListGuildVoiceRegionsRequest$Outbound` instead. */
   export type Outbound = ListGuildVoiceRegionsRequest$Outbound;
+}
+
+export function listGuildVoiceRegionsRequestToJSON(
+  listGuildVoiceRegionsRequest: ListGuildVoiceRegionsRequest,
+): string {
+  return JSON.stringify(
+    ListGuildVoiceRegionsRequest$outboundSchema.parse(
+      listGuildVoiceRegionsRequest,
+    ),
+  );
+}
+
+export function listGuildVoiceRegionsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildVoiceRegionsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildVoiceRegionsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildVoiceRegionsRequest' from JSON`,
+  );
 }

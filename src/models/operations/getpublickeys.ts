@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetPublicKeysSecurity = {
   botToken?: string | undefined;
@@ -51,4 +54,22 @@ export namespace GetPublicKeysSecurity$ {
   export const outboundSchema = GetPublicKeysSecurity$outboundSchema;
   /** @deprecated use `GetPublicKeysSecurity$Outbound` instead. */
   export type Outbound = GetPublicKeysSecurity$Outbound;
+}
+
+export function getPublicKeysSecurityToJSON(
+  getPublicKeysSecurity: GetPublicKeysSecurity,
+): string {
+  return JSON.stringify(
+    GetPublicKeysSecurity$outboundSchema.parse(getPublicKeysSecurity),
+  );
+}
+
+export function getPublicKeysSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPublicKeysSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPublicKeysSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPublicKeysSecurity' from JSON`,
+  );
 }

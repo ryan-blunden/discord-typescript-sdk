@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ConnectedAccountGuildResponse = {
   id: string;
@@ -50,4 +53,24 @@ export namespace ConnectedAccountGuildResponse$ {
   export const outboundSchema = ConnectedAccountGuildResponse$outboundSchema;
   /** @deprecated use `ConnectedAccountGuildResponse$Outbound` instead. */
   export type Outbound = ConnectedAccountGuildResponse$Outbound;
+}
+
+export function connectedAccountGuildResponseToJSON(
+  connectedAccountGuildResponse: ConnectedAccountGuildResponse,
+): string {
+  return JSON.stringify(
+    ConnectedAccountGuildResponse$outboundSchema.parse(
+      connectedAccountGuildResponse,
+    ),
+  );
+}
+
+export function connectedAccountGuildResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ConnectedAccountGuildResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ConnectedAccountGuildResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ConnectedAccountGuildResponse' from JSON`,
+  );
 }

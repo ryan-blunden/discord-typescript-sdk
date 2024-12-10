@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GuildChannelLocation = {
   id: string;
@@ -65,4 +68,22 @@ export namespace GuildChannelLocation$ {
   export const outboundSchema = GuildChannelLocation$outboundSchema;
   /** @deprecated use `GuildChannelLocation$Outbound` instead. */
   export type Outbound = GuildChannelLocation$Outbound;
+}
+
+export function guildChannelLocationToJSON(
+  guildChannelLocation: GuildChannelLocation,
+): string {
+  return JSON.stringify(
+    GuildChannelLocation$outboundSchema.parse(guildChannelLocation),
+  );
+}
+
+export function guildChannelLocationFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildChannelLocation, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildChannelLocation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildChannelLocation' from JSON`,
+  );
 }

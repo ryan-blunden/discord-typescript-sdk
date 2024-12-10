@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateVoiceStateRequestBody = {
   suppress?: boolean | null | undefined;
@@ -63,6 +66,26 @@ export namespace UpdateVoiceStateRequestBody$ {
   export type Outbound = UpdateVoiceStateRequestBody$Outbound;
 }
 
+export function updateVoiceStateRequestBodyToJSON(
+  updateVoiceStateRequestBody: UpdateVoiceStateRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateVoiceStateRequestBody$outboundSchema.parse(
+      updateVoiceStateRequestBody,
+    ),
+  );
+}
+
+export function updateVoiceStateRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateVoiceStateRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateVoiceStateRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateVoiceStateRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpdateVoiceStateRequest$inboundSchema: z.ZodType<
   UpdateVoiceStateRequest,
@@ -115,4 +138,22 @@ export namespace UpdateVoiceStateRequest$ {
   export const outboundSchema = UpdateVoiceStateRequest$outboundSchema;
   /** @deprecated use `UpdateVoiceStateRequest$Outbound` instead. */
   export type Outbound = UpdateVoiceStateRequest$Outbound;
+}
+
+export function updateVoiceStateRequestToJSON(
+  updateVoiceStateRequest: UpdateVoiceStateRequest,
+): string {
+  return JSON.stringify(
+    UpdateVoiceStateRequest$outboundSchema.parse(updateVoiceStateRequest),
+  );
+}
+
+export function updateVoiceStateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateVoiceStateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateVoiceStateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateVoiceStateRequest' from JSON`,
+  );
 }

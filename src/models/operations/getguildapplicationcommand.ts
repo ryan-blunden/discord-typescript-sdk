@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildApplicationCommandSecurity = {
   botToken?: string | undefined;
@@ -60,6 +63,27 @@ export namespace GetGuildApplicationCommandSecurity$ {
   export type Outbound = GetGuildApplicationCommandSecurity$Outbound;
 }
 
+export function getGuildApplicationCommandSecurityToJSON(
+  getGuildApplicationCommandSecurity: GetGuildApplicationCommandSecurity,
+): string {
+  return JSON.stringify(
+    GetGuildApplicationCommandSecurity$outboundSchema.parse(
+      getGuildApplicationCommandSecurity,
+    ),
+  );
+}
+
+export function getGuildApplicationCommandSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildApplicationCommandSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetGuildApplicationCommandSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildApplicationCommandSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetGuildApplicationCommandRequest$inboundSchema: z.ZodType<
   GetGuildApplicationCommandRequest,
@@ -113,4 +137,24 @@ export namespace GetGuildApplicationCommandRequest$ {
     GetGuildApplicationCommandRequest$outboundSchema;
   /** @deprecated use `GetGuildApplicationCommandRequest$Outbound` instead. */
   export type Outbound = GetGuildApplicationCommandRequest$Outbound;
+}
+
+export function getGuildApplicationCommandRequestToJSON(
+  getGuildApplicationCommandRequest: GetGuildApplicationCommandRequest,
+): string {
+  return JSON.stringify(
+    GetGuildApplicationCommandRequest$outboundSchema.parse(
+      getGuildApplicationCommandRequest,
+    ),
+  );
+}
+
+export function getGuildApplicationCommandRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildApplicationCommandRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildApplicationCommandRequest' from JSON`,
+  );
 }

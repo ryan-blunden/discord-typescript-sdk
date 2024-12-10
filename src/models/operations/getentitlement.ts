@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetEntitlementSecurity = {
   botToken?: string | undefined;
@@ -58,6 +61,24 @@ export namespace GetEntitlementSecurity$ {
   export type Outbound = GetEntitlementSecurity$Outbound;
 }
 
+export function getEntitlementSecurityToJSON(
+  getEntitlementSecurity: GetEntitlementSecurity,
+): string {
+  return JSON.stringify(
+    GetEntitlementSecurity$outboundSchema.parse(getEntitlementSecurity),
+  );
+}
+
+export function getEntitlementSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEntitlementSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetEntitlementSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEntitlementSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetEntitlementRequest$inboundSchema: z.ZodType<
   GetEntitlementRequest,
@@ -105,4 +126,22 @@ export namespace GetEntitlementRequest$ {
   export const outboundSchema = GetEntitlementRequest$outboundSchema;
   /** @deprecated use `GetEntitlementRequest$Outbound` instead. */
   export type Outbound = GetEntitlementRequest$Outbound;
+}
+
+export function getEntitlementRequestToJSON(
+  getEntitlementRequest: GetEntitlementRequest,
+): string {
+  return JSON.stringify(
+    GetEntitlementRequest$outboundSchema.parse(getEntitlementRequest),
+  );
+}
+
+export function getEntitlementRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEntitlementRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetEntitlementRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEntitlementRequest' from JSON`,
+  );
 }

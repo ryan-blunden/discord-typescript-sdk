@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AddGuildMemberRoleRequest = {
   guildId: string;
@@ -63,4 +66,22 @@ export namespace AddGuildMemberRoleRequest$ {
   export const outboundSchema = AddGuildMemberRoleRequest$outboundSchema;
   /** @deprecated use `AddGuildMemberRoleRequest$Outbound` instead. */
   export type Outbound = AddGuildMemberRoleRequest$Outbound;
+}
+
+export function addGuildMemberRoleRequestToJSON(
+  addGuildMemberRoleRequest: AddGuildMemberRoleRequest,
+): string {
+  return JSON.stringify(
+    AddGuildMemberRoleRequest$outboundSchema.parse(addGuildMemberRoleRequest),
+  );
+}
+
+export function addGuildMemberRoleRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<AddGuildMemberRoleRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddGuildMemberRoleRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddGuildMemberRoleRequest' from JSON`,
+  );
 }

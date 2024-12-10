@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetWebhookMessageSecurity = {
   botToken?: string | undefined;
@@ -58,6 +61,24 @@ export namespace GetWebhookMessageSecurity$ {
   export const outboundSchema = GetWebhookMessageSecurity$outboundSchema;
   /** @deprecated use `GetWebhookMessageSecurity$Outbound` instead. */
   export type Outbound = GetWebhookMessageSecurity$Outbound;
+}
+
+export function getWebhookMessageSecurityToJSON(
+  getWebhookMessageSecurity: GetWebhookMessageSecurity,
+): string {
+  return JSON.stringify(
+    GetWebhookMessageSecurity$outboundSchema.parse(getWebhookMessageSecurity),
+  );
+}
+
+export function getWebhookMessageSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWebhookMessageSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWebhookMessageSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWebhookMessageSecurity' from JSON`,
+  );
 }
 
 /** @internal */
@@ -117,4 +138,22 @@ export namespace GetWebhookMessageRequest$ {
   export const outboundSchema = GetWebhookMessageRequest$outboundSchema;
   /** @deprecated use `GetWebhookMessageRequest$Outbound` instead. */
   export type Outbound = GetWebhookMessageRequest$Outbound;
+}
+
+export function getWebhookMessageRequestToJSON(
+  getWebhookMessageRequest: GetWebhookMessageRequest,
+): string {
+  return JSON.stringify(
+    GetWebhookMessageRequest$outboundSchema.parse(getWebhookMessageRequest),
+  );
+}
+
+export function getWebhookMessageRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWebhookMessageRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWebhookMessageRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWebhookMessageRequest' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ForumTagResponse = {
   id: string;
@@ -69,4 +72,22 @@ export namespace ForumTagResponse$ {
   export const outboundSchema = ForumTagResponse$outboundSchema;
   /** @deprecated use `ForumTagResponse$Outbound` instead. */
   export type Outbound = ForumTagResponse$Outbound;
+}
+
+export function forumTagResponseToJSON(
+  forumTagResponse: ForumTagResponse,
+): string {
+  return JSON.stringify(
+    ForumTagResponse$outboundSchema.parse(forumTagResponse),
+  );
+}
+
+export function forumTagResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ForumTagResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ForumTagResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ForumTagResponse' from JSON`,
+  );
 }

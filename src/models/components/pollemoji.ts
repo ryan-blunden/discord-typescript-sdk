@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PollEmoji = {
   id?: string | null | undefined;
@@ -50,4 +53,18 @@ export namespace PollEmoji$ {
   export const outboundSchema = PollEmoji$outboundSchema;
   /** @deprecated use `PollEmoji$Outbound` instead. */
   export type Outbound = PollEmoji$Outbound;
+}
+
+export function pollEmojiToJSON(pollEmoji: PollEmoji): string {
+  return JSON.stringify(PollEmoji$outboundSchema.parse(pollEmoji));
+}
+
+export function pollEmojiFromJSON(
+  jsonString: string,
+): SafeParseResult<PollEmoji, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PollEmoji$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PollEmoji' from JSON`,
+  );
 }

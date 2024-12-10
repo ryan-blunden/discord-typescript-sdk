@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GithubCheckPullRequest,
   GithubCheckPullRequest$inboundSchema,
@@ -101,4 +104,18 @@ export namespace GithubCheckRun$ {
   export const outboundSchema = GithubCheckRun$outboundSchema;
   /** @deprecated use `GithubCheckRun$Outbound` instead. */
   export type Outbound = GithubCheckRun$Outbound;
+}
+
+export function githubCheckRunToJSON(githubCheckRun: GithubCheckRun): string {
+  return JSON.stringify(GithubCheckRun$outboundSchema.parse(githubCheckRun));
+}
+
+export function githubCheckRunFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubCheckRun, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubCheckRun$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubCheckRun' from JSON`,
+  );
 }

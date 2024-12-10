@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BlockMessageAction,
   BlockMessageAction$inboundSchema,
@@ -106,6 +109,28 @@ export namespace DefaultKeywordListUpsertRequestActions$ {
   export type Outbound = DefaultKeywordListUpsertRequestActions$Outbound;
 }
 
+export function defaultKeywordListUpsertRequestActionsToJSON(
+  defaultKeywordListUpsertRequestActions:
+    DefaultKeywordListUpsertRequestActions,
+): string {
+  return JSON.stringify(
+    DefaultKeywordListUpsertRequestActions$outboundSchema.parse(
+      defaultKeywordListUpsertRequestActions,
+    ),
+  );
+}
+
+export function defaultKeywordListUpsertRequestActionsFromJSON(
+  jsonString: string,
+): SafeParseResult<DefaultKeywordListUpsertRequestActions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DefaultKeywordListUpsertRequestActions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DefaultKeywordListUpsertRequestActions' from JSON`,
+  );
+}
+
 /** @internal */
 export const DefaultKeywordListUpsertRequest$inboundSchema: z.ZodType<
   DefaultKeywordListUpsertRequest,
@@ -203,4 +228,24 @@ export namespace DefaultKeywordListUpsertRequest$ {
   export const outboundSchema = DefaultKeywordListUpsertRequest$outboundSchema;
   /** @deprecated use `DefaultKeywordListUpsertRequest$Outbound` instead. */
   export type Outbound = DefaultKeywordListUpsertRequest$Outbound;
+}
+
+export function defaultKeywordListUpsertRequestToJSON(
+  defaultKeywordListUpsertRequest: DefaultKeywordListUpsertRequest,
+): string {
+  return JSON.stringify(
+    DefaultKeywordListUpsertRequest$outboundSchema.parse(
+      defaultKeywordListUpsertRequest,
+    ),
+  );
+}
+
+export function defaultKeywordListUpsertRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DefaultKeywordListUpsertRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DefaultKeywordListUpsertRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DefaultKeywordListUpsertRequest' from JSON`,
+  );
 }

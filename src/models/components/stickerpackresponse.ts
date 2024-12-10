@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   StandardStickerResponse,
   StandardStickerResponse$inboundSchema,
@@ -85,4 +88,22 @@ export namespace StickerPackResponse$ {
   export const outboundSchema = StickerPackResponse$outboundSchema;
   /** @deprecated use `StickerPackResponse$Outbound` instead. */
   export type Outbound = StickerPackResponse$Outbound;
+}
+
+export function stickerPackResponseToJSON(
+  stickerPackResponse: StickerPackResponse,
+): string {
+  return JSON.stringify(
+    StickerPackResponse$outboundSchema.parse(stickerPackResponse),
+  );
+}
+
+export function stickerPackResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<StickerPackResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StickerPackResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StickerPackResponse' from JSON`,
+  );
 }
