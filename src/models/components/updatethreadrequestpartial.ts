@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateThreadRequestPartial = {
   name?: string | null | undefined;
@@ -105,4 +108,22 @@ export namespace UpdateThreadRequestPartial$ {
   export const outboundSchema = UpdateThreadRequestPartial$outboundSchema;
   /** @deprecated use `UpdateThreadRequestPartial$Outbound` instead. */
   export type Outbound = UpdateThreadRequestPartial$Outbound;
+}
+
+export function updateThreadRequestPartialToJSON(
+  updateThreadRequestPartial: UpdateThreadRequestPartial,
+): string {
+  return JSON.stringify(
+    UpdateThreadRequestPartial$outboundSchema.parse(updateThreadRequestPartial),
+  );
+}
+
+export function updateThreadRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateThreadRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateThreadRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateThreadRequestPartial' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserResponse,
   UserResponse$inboundSchema,
@@ -73,4 +76,22 @@ export namespace MessageInteractionResponse$ {
   export const outboundSchema = MessageInteractionResponse$outboundSchema;
   /** @deprecated use `MessageInteractionResponse$Outbound` instead. */
   export type Outbound = MessageInteractionResponse$Outbound;
+}
+
+export function messageInteractionResponseToJSON(
+  messageInteractionResponse: MessageInteractionResponse,
+): string {
+  return JSON.stringify(
+    MessageInteractionResponse$outboundSchema.parse(messageInteractionResponse),
+  );
+}
+
+export function messageInteractionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageInteractionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageInteractionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageInteractionResponse' from JSON`,
+  );
 }

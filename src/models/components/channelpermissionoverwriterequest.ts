@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ChannelPermissionOverwriteRequest = {
   id: string;
@@ -55,4 +58,24 @@ export namespace ChannelPermissionOverwriteRequest$ {
     ChannelPermissionOverwriteRequest$outboundSchema;
   /** @deprecated use `ChannelPermissionOverwriteRequest$Outbound` instead. */
   export type Outbound = ChannelPermissionOverwriteRequest$Outbound;
+}
+
+export function channelPermissionOverwriteRequestToJSON(
+  channelPermissionOverwriteRequest: ChannelPermissionOverwriteRequest,
+): string {
+  return JSON.stringify(
+    ChannelPermissionOverwriteRequest$outboundSchema.parse(
+      channelPermissionOverwriteRequest,
+    ),
+  );
+}
+
+export function channelPermissionOverwriteRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ChannelPermissionOverwriteRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ChannelPermissionOverwriteRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChannelPermissionOverwriteRequest' from JSON`,
+  );
 }

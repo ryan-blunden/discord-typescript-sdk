@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetOriginalWebhookMessageSecurity = {
   botToken?: string | undefined;
@@ -60,6 +63,26 @@ export namespace GetOriginalWebhookMessageSecurity$ {
   export type Outbound = GetOriginalWebhookMessageSecurity$Outbound;
 }
 
+export function getOriginalWebhookMessageSecurityToJSON(
+  getOriginalWebhookMessageSecurity: GetOriginalWebhookMessageSecurity,
+): string {
+  return JSON.stringify(
+    GetOriginalWebhookMessageSecurity$outboundSchema.parse(
+      getOriginalWebhookMessageSecurity,
+    ),
+  );
+}
+
+export function getOriginalWebhookMessageSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOriginalWebhookMessageSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOriginalWebhookMessageSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOriginalWebhookMessageSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetOriginalWebhookMessageRequest$inboundSchema: z.ZodType<
   GetOriginalWebhookMessageRequest,
@@ -112,4 +135,24 @@ export namespace GetOriginalWebhookMessageRequest$ {
   export const outboundSchema = GetOriginalWebhookMessageRequest$outboundSchema;
   /** @deprecated use `GetOriginalWebhookMessageRequest$Outbound` instead. */
   export type Outbound = GetOriginalWebhookMessageRequest$Outbound;
+}
+
+export function getOriginalWebhookMessageRequestToJSON(
+  getOriginalWebhookMessageRequest: GetOriginalWebhookMessageRequest,
+): string {
+  return JSON.stringify(
+    GetOriginalWebhookMessageRequest$outboundSchema.parse(
+      getOriginalWebhookMessageRequest,
+    ),
+  );
+}
+
+export function getOriginalWebhookMessageRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOriginalWebhookMessageRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOriginalWebhookMessageRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOriginalWebhookMessageRequest' from JSON`,
+  );
 }

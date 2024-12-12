@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type WelcomeMessageResponse = {
   authorIds: Array<string>;
@@ -55,4 +58,22 @@ export namespace WelcomeMessageResponse$ {
   export const outboundSchema = WelcomeMessageResponse$outboundSchema;
   /** @deprecated use `WelcomeMessageResponse$Outbound` instead. */
   export type Outbound = WelcomeMessageResponse$Outbound;
+}
+
+export function welcomeMessageResponseToJSON(
+  welcomeMessageResponse: WelcomeMessageResponse,
+): string {
+  return JSON.stringify(
+    WelcomeMessageResponse$outboundSchema.parse(welcomeMessageResponse),
+  );
+}
+
+export function welcomeMessageResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<WelcomeMessageResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WelcomeMessageResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WelcomeMessageResponse' from JSON`,
+  );
 }

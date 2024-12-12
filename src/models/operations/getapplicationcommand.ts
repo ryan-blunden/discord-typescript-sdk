@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetApplicationCommandSecurity = {
   botToken?: string | undefined;
@@ -58,6 +61,26 @@ export namespace GetApplicationCommandSecurity$ {
   export type Outbound = GetApplicationCommandSecurity$Outbound;
 }
 
+export function getApplicationCommandSecurityToJSON(
+  getApplicationCommandSecurity: GetApplicationCommandSecurity,
+): string {
+  return JSON.stringify(
+    GetApplicationCommandSecurity$outboundSchema.parse(
+      getApplicationCommandSecurity,
+    ),
+  );
+}
+
+export function getApplicationCommandSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<GetApplicationCommandSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetApplicationCommandSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetApplicationCommandSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetApplicationCommandRequest$inboundSchema: z.ZodType<
   GetApplicationCommandRequest,
@@ -105,4 +128,24 @@ export namespace GetApplicationCommandRequest$ {
   export const outboundSchema = GetApplicationCommandRequest$outboundSchema;
   /** @deprecated use `GetApplicationCommandRequest$Outbound` instead. */
   export type Outbound = GetApplicationCommandRequest$Outbound;
+}
+
+export function getApplicationCommandRequestToJSON(
+  getApplicationCommandRequest: GetApplicationCommandRequest,
+): string {
+  return JSON.stringify(
+    GetApplicationCommandRequest$outboundSchema.parse(
+      getApplicationCommandRequest,
+    ),
+  );
+}
+
+export function getApplicationCommandRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetApplicationCommandRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetApplicationCommandRequest' from JSON`,
+  );
 }

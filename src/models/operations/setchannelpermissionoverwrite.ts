@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SetChannelPermissionOverwriteRequestBody = {
   type?: 0 | null | undefined;
@@ -59,6 +62,33 @@ export namespace SetChannelPermissionOverwriteRequestBody$ {
     SetChannelPermissionOverwriteRequestBody$outboundSchema;
   /** @deprecated use `SetChannelPermissionOverwriteRequestBody$Outbound` instead. */
   export type Outbound = SetChannelPermissionOverwriteRequestBody$Outbound;
+}
+
+export function setChannelPermissionOverwriteRequestBodyToJSON(
+  setChannelPermissionOverwriteRequestBody:
+    SetChannelPermissionOverwriteRequestBody,
+): string {
+  return JSON.stringify(
+    SetChannelPermissionOverwriteRequestBody$outboundSchema.parse(
+      setChannelPermissionOverwriteRequestBody,
+    ),
+  );
+}
+
+export function setChannelPermissionOverwriteRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  SetChannelPermissionOverwriteRequestBody,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      SetChannelPermissionOverwriteRequestBody$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'SetChannelPermissionOverwriteRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -119,4 +149,25 @@ export namespace SetChannelPermissionOverwriteRequest$ {
     SetChannelPermissionOverwriteRequest$outboundSchema;
   /** @deprecated use `SetChannelPermissionOverwriteRequest$Outbound` instead. */
   export type Outbound = SetChannelPermissionOverwriteRequest$Outbound;
+}
+
+export function setChannelPermissionOverwriteRequestToJSON(
+  setChannelPermissionOverwriteRequest: SetChannelPermissionOverwriteRequest,
+): string {
+  return JSON.stringify(
+    SetChannelPermissionOverwriteRequest$outboundSchema.parse(
+      setChannelPermissionOverwriteRequest,
+    ),
+  );
+}
+
+export function setChannelPermissionOverwriteRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<SetChannelPermissionOverwriteRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      SetChannelPermissionOverwriteRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SetChannelPermissionOverwriteRequest' from JSON`,
+  );
 }

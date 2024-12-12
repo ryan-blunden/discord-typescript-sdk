@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildWebhooksRequest = {
   guildId: string;
@@ -59,6 +62,24 @@ export namespace GetGuildWebhooksRequest$ {
   export type Outbound = GetGuildWebhooksRequest$Outbound;
 }
 
+export function getGuildWebhooksRequestToJSON(
+  getGuildWebhooksRequest: GetGuildWebhooksRequest,
+): string {
+  return JSON.stringify(
+    GetGuildWebhooksRequest$outboundSchema.parse(getGuildWebhooksRequest),
+  );
+}
+
+export function getGuildWebhooksRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildWebhooksRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildWebhooksRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildWebhooksRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetGuildWebhooksResponseBody$inboundSchema: z.ZodType<
   GetGuildWebhooksResponseBody,
@@ -98,4 +119,24 @@ export namespace GetGuildWebhooksResponseBody$ {
   export const outboundSchema = GetGuildWebhooksResponseBody$outboundSchema;
   /** @deprecated use `GetGuildWebhooksResponseBody$Outbound` instead. */
   export type Outbound = GetGuildWebhooksResponseBody$Outbound;
+}
+
+export function getGuildWebhooksResponseBodyToJSON(
+  getGuildWebhooksResponseBody: GetGuildWebhooksResponseBody,
+): string {
+  return JSON.stringify(
+    GetGuildWebhooksResponseBody$outboundSchema.parse(
+      getGuildWebhooksResponseBody,
+    ),
+  );
+}
+
+export function getGuildWebhooksResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildWebhooksResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildWebhooksResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildWebhooksResponseBody' from JSON`,
+  );
 }

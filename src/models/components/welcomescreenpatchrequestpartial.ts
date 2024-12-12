@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GuildWelcomeChannel,
   GuildWelcomeChannel$inboundSchema,
@@ -67,4 +70,24 @@ export namespace WelcomeScreenPatchRequestPartial$ {
   export const outboundSchema = WelcomeScreenPatchRequestPartial$outboundSchema;
   /** @deprecated use `WelcomeScreenPatchRequestPartial$Outbound` instead. */
   export type Outbound = WelcomeScreenPatchRequestPartial$Outbound;
+}
+
+export function welcomeScreenPatchRequestPartialToJSON(
+  welcomeScreenPatchRequestPartial: WelcomeScreenPatchRequestPartial,
+): string {
+  return JSON.stringify(
+    WelcomeScreenPatchRequestPartial$outboundSchema.parse(
+      welcomeScreenPatchRequestPartial,
+    ),
+  );
+}
+
+export function welcomeScreenPatchRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<WelcomeScreenPatchRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WelcomeScreenPatchRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WelcomeScreenPatchRequestPartial' from JSON`,
+  );
 }

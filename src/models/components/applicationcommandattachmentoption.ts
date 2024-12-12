@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ApplicationCommandAttachmentOption = {
   type?: 1 | undefined;
@@ -74,4 +77,25 @@ export namespace ApplicationCommandAttachmentOption$ {
     ApplicationCommandAttachmentOption$outboundSchema;
   /** @deprecated use `ApplicationCommandAttachmentOption$Outbound` instead. */
   export type Outbound = ApplicationCommandAttachmentOption$Outbound;
+}
+
+export function applicationCommandAttachmentOptionToJSON(
+  applicationCommandAttachmentOption: ApplicationCommandAttachmentOption,
+): string {
+  return JSON.stringify(
+    ApplicationCommandAttachmentOption$outboundSchema.parse(
+      applicationCommandAttachmentOption,
+    ),
+  );
+}
+
+export function applicationCommandAttachmentOptionFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationCommandAttachmentOption, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationCommandAttachmentOption$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationCommandAttachmentOption' from JSON`,
+  );
 }

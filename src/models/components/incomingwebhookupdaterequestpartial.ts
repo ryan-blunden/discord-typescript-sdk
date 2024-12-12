@@ -4,12 +4,15 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  ActionRow,
-  ActionRow$inboundSchema,
-  ActionRow$Outbound,
-  ActionRow$outboundSchema,
-} from "./actionrow.js";
+  ActionRowComponentForMessageRequest,
+  ActionRowComponentForMessageRequest$inboundSchema,
+  ActionRowComponentForMessageRequest$Outbound,
+  ActionRowComponentForMessageRequest$outboundSchema,
+} from "./actionrowcomponentformessagerequest.js";
 import {
   MessageAllowedMentionsRequest,
   MessageAllowedMentionsRequest$inboundSchema,
@@ -39,7 +42,7 @@ export type IncomingWebhookUpdateRequestPartial = {
   content?: string | null | undefined;
   embeds?: Array<RichEmbed> | null | undefined;
   allowedMentions?: MessageAllowedMentionsRequest | null | undefined;
-  components?: Array<ActionRow> | null | undefined;
+  components?: Array<ActionRowComponentForMessageRequest> | null | undefined;
   attachments?: Array<MessageAttachmentRequest> | null | undefined;
   poll?: PollCreateRequest | null | undefined;
   flags?: number | null | undefined;
@@ -55,7 +58,9 @@ export const IncomingWebhookUpdateRequestPartial$inboundSchema: z.ZodType<
   embeds: z.nullable(z.array(RichEmbed$inboundSchema)).optional(),
   allowed_mentions: z.nullable(MessageAllowedMentionsRequest$inboundSchema)
     .optional(),
-  components: z.nullable(z.array(ActionRow$inboundSchema)).optional(),
+  components: z.nullable(
+    z.array(ActionRowComponentForMessageRequest$inboundSchema),
+  ).optional(),
   attachments: z.nullable(z.array(MessageAttachmentRequest$inboundSchema))
     .optional(),
   poll: z.nullable(PollCreateRequest$inboundSchema).optional(),
@@ -71,7 +76,10 @@ export type IncomingWebhookUpdateRequestPartial$Outbound = {
   content?: string | null | undefined;
   embeds?: Array<RichEmbed$Outbound> | null | undefined;
   allowed_mentions?: MessageAllowedMentionsRequest$Outbound | null | undefined;
-  components?: Array<ActionRow$Outbound> | null | undefined;
+  components?:
+    | Array<ActionRowComponentForMessageRequest$Outbound>
+    | null
+    | undefined;
   attachments?: Array<MessageAttachmentRequest$Outbound> | null | undefined;
   poll?: PollCreateRequest$Outbound | null | undefined;
   flags?: number | null | undefined;
@@ -87,7 +95,9 @@ export const IncomingWebhookUpdateRequestPartial$outboundSchema: z.ZodType<
   embeds: z.nullable(z.array(RichEmbed$outboundSchema)).optional(),
   allowedMentions: z.nullable(MessageAllowedMentionsRequest$outboundSchema)
     .optional(),
-  components: z.nullable(z.array(ActionRow$outboundSchema)).optional(),
+  components: z.nullable(
+    z.array(ActionRowComponentForMessageRequest$outboundSchema),
+  ).optional(),
   attachments: z.nullable(z.array(MessageAttachmentRequest$outboundSchema))
     .optional(),
   poll: z.nullable(PollCreateRequest$outboundSchema).optional(),
@@ -111,4 +121,25 @@ export namespace IncomingWebhookUpdateRequestPartial$ {
     IncomingWebhookUpdateRequestPartial$outboundSchema;
   /** @deprecated use `IncomingWebhookUpdateRequestPartial$Outbound` instead. */
   export type Outbound = IncomingWebhookUpdateRequestPartial$Outbound;
+}
+
+export function incomingWebhookUpdateRequestPartialToJSON(
+  incomingWebhookUpdateRequestPartial: IncomingWebhookUpdateRequestPartial,
+): string {
+  return JSON.stringify(
+    IncomingWebhookUpdateRequestPartial$outboundSchema.parse(
+      incomingWebhookUpdateRequestPartial,
+    ),
+  );
+}
+
+export function incomingWebhookUpdateRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<IncomingWebhookUpdateRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      IncomingWebhookUpdateRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'IncomingWebhookUpdateRequestPartial' from JSON`,
+  );
 }

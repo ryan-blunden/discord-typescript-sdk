@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BotAccountPatchRequest = {
   username: string;
@@ -50,4 +53,22 @@ export namespace BotAccountPatchRequest$ {
   export const outboundSchema = BotAccountPatchRequest$outboundSchema;
   /** @deprecated use `BotAccountPatchRequest$Outbound` instead. */
   export type Outbound = BotAccountPatchRequest$Outbound;
+}
+
+export function botAccountPatchRequestToJSON(
+  botAccountPatchRequest: BotAccountPatchRequest,
+): string {
+  return JSON.stringify(
+    BotAccountPatchRequest$outboundSchema.parse(botAccountPatchRequest),
+  );
+}
+
+export function botAccountPatchRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<BotAccountPatchRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BotAccountPatchRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BotAccountPatchRequest' from JSON`,
+  );
 }

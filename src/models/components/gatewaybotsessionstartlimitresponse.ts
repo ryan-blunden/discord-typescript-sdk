@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GatewayBotSessionStartLimitResponse = {
   maxConcurrency: number;
@@ -67,4 +70,25 @@ export namespace GatewayBotSessionStartLimitResponse$ {
     GatewayBotSessionStartLimitResponse$outboundSchema;
   /** @deprecated use `GatewayBotSessionStartLimitResponse$Outbound` instead. */
   export type Outbound = GatewayBotSessionStartLimitResponse$Outbound;
+}
+
+export function gatewayBotSessionStartLimitResponseToJSON(
+  gatewayBotSessionStartLimitResponse: GatewayBotSessionStartLimitResponse,
+): string {
+  return JSON.stringify(
+    GatewayBotSessionStartLimitResponse$outboundSchema.parse(
+      gatewayBotSessionStartLimitResponse,
+    ),
+  );
+}
+
+export function gatewayBotSessionStartLimitResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GatewayBotSessionStartLimitResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GatewayBotSessionStartLimitResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GatewayBotSessionStartLimitResponse' from JSON`,
+  );
 }

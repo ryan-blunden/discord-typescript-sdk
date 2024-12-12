@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageActivityResponse = {};
 
@@ -34,4 +37,22 @@ export namespace MessageActivityResponse$ {
   export const outboundSchema = MessageActivityResponse$outboundSchema;
   /** @deprecated use `MessageActivityResponse$Outbound` instead. */
   export type Outbound = MessageActivityResponse$Outbound;
+}
+
+export function messageActivityResponseToJSON(
+  messageActivityResponse: MessageActivityResponse,
+): string {
+  return JSON.stringify(
+    MessageActivityResponse$outboundSchema.parse(messageActivityResponse),
+  );
+}
+
+export function messageActivityResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageActivityResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageActivityResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageActivityResponse' from JSON`,
+  );
 }

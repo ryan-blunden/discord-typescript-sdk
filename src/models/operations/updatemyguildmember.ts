@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateMyGuildMemberRequestBody = {
   nick?: string | null | undefined;
@@ -48,6 +51,26 @@ export namespace UpdateMyGuildMemberRequestBody$ {
   export const outboundSchema = UpdateMyGuildMemberRequestBody$outboundSchema;
   /** @deprecated use `UpdateMyGuildMemberRequestBody$Outbound` instead. */
   export type Outbound = UpdateMyGuildMemberRequestBody$Outbound;
+}
+
+export function updateMyGuildMemberRequestBodyToJSON(
+  updateMyGuildMemberRequestBody: UpdateMyGuildMemberRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateMyGuildMemberRequestBody$outboundSchema.parse(
+      updateMyGuildMemberRequestBody,
+    ),
+  );
+}
+
+export function updateMyGuildMemberRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateMyGuildMemberRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateMyGuildMemberRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateMyGuildMemberRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -97,4 +120,22 @@ export namespace UpdateMyGuildMemberRequest$ {
   export const outboundSchema = UpdateMyGuildMemberRequest$outboundSchema;
   /** @deprecated use `UpdateMyGuildMemberRequest$Outbound` instead. */
   export type Outbound = UpdateMyGuildMemberRequest$Outbound;
+}
+
+export function updateMyGuildMemberRequestToJSON(
+  updateMyGuildMemberRequest: UpdateMyGuildMemberRequest,
+): string {
+  return JSON.stringify(
+    UpdateMyGuildMemberRequest$outboundSchema.parse(updateMyGuildMemberRequest),
+  );
+}
+
+export function updateMyGuildMemberRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateMyGuildMemberRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateMyGuildMemberRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateMyGuildMemberRequest' from JSON`,
+  );
 }

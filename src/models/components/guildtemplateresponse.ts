@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GuildTemplateSnapshotResponse,
   GuildTemplateSnapshotResponse$inboundSchema,
@@ -115,4 +118,22 @@ export namespace GuildTemplateResponse$ {
   export const outboundSchema = GuildTemplateResponse$outboundSchema;
   /** @deprecated use `GuildTemplateResponse$Outbound` instead. */
   export type Outbound = GuildTemplateResponse$Outbound;
+}
+
+export function guildTemplateResponseToJSON(
+  guildTemplateResponse: GuildTemplateResponse,
+): string {
+  return JSON.stringify(
+    GuildTemplateResponse$outboundSchema.parse(guildTemplateResponse),
+  );
+}
+
+export function guildTemplateResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildTemplateResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildTemplateResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildTemplateResponse' from JSON`,
+  );
 }

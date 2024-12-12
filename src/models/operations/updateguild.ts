@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateGuildRequest = {
   guildId: string;
@@ -58,4 +61,22 @@ export namespace UpdateGuildRequest$ {
   export const outboundSchema = UpdateGuildRequest$outboundSchema;
   /** @deprecated use `UpdateGuildRequest$Outbound` instead. */
   export type Outbound = UpdateGuildRequest$Outbound;
+}
+
+export function updateGuildRequestToJSON(
+  updateGuildRequest: UpdateGuildRequest,
+): string {
+  return JSON.stringify(
+    UpdateGuildRequest$outboundSchema.parse(updateGuildRequest),
+  );
+}
+
+export function updateGuildRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildRequest' from JSON`,
+  );
 }

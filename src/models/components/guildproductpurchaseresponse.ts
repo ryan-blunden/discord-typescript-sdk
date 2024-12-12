@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GuildProductPurchaseResponse = {
   listingId: string;
@@ -57,4 +60,24 @@ export namespace GuildProductPurchaseResponse$ {
   export const outboundSchema = GuildProductPurchaseResponse$outboundSchema;
   /** @deprecated use `GuildProductPurchaseResponse$Outbound` instead. */
   export type Outbound = GuildProductPurchaseResponse$Outbound;
+}
+
+export function guildProductPurchaseResponseToJSON(
+  guildProductPurchaseResponse: GuildProductPurchaseResponse,
+): string {
+  return JSON.stringify(
+    GuildProductPurchaseResponse$outboundSchema.parse(
+      guildProductPurchaseResponse,
+    ),
+  );
+}
+
+export function guildProductPurchaseResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildProductPurchaseResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildProductPurchaseResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildProductPurchaseResponse' from JSON`,
+  );
 }

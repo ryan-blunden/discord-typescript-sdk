@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BulkSetApplicationCommandsSecurity = {
   botToken?: string | undefined;
@@ -58,6 +61,27 @@ export namespace BulkSetApplicationCommandsSecurity$ {
     BulkSetApplicationCommandsSecurity$outboundSchema;
   /** @deprecated use `BulkSetApplicationCommandsSecurity$Outbound` instead. */
   export type Outbound = BulkSetApplicationCommandsSecurity$Outbound;
+}
+
+export function bulkSetApplicationCommandsSecurityToJSON(
+  bulkSetApplicationCommandsSecurity: BulkSetApplicationCommandsSecurity,
+): string {
+  return JSON.stringify(
+    BulkSetApplicationCommandsSecurity$outboundSchema.parse(
+      bulkSetApplicationCommandsSecurity,
+    ),
+  );
+}
+
+export function bulkSetApplicationCommandsSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkSetApplicationCommandsSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      BulkSetApplicationCommandsSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkSetApplicationCommandsSecurity' from JSON`,
+  );
 }
 
 /** @internal */
@@ -114,4 +138,24 @@ export namespace BulkSetApplicationCommandsRequest$ {
     BulkSetApplicationCommandsRequest$outboundSchema;
   /** @deprecated use `BulkSetApplicationCommandsRequest$Outbound` instead. */
   export type Outbound = BulkSetApplicationCommandsRequest$Outbound;
+}
+
+export function bulkSetApplicationCommandsRequestToJSON(
+  bulkSetApplicationCommandsRequest: BulkSetApplicationCommandsRequest,
+): string {
+  return JSON.stringify(
+    BulkSetApplicationCommandsRequest$outboundSchema.parse(
+      bulkSetApplicationCommandsRequest,
+    ),
+  );
+}
+
+export function bulkSetApplicationCommandsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkSetApplicationCommandsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkSetApplicationCommandsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkSetApplicationCommandsRequest' from JSON`,
+  );
 }

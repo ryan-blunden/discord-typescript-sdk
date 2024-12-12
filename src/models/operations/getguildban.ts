@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildBanRequest = {
   guildId: string;
@@ -57,4 +60,22 @@ export namespace GetGuildBanRequest$ {
   export const outboundSchema = GetGuildBanRequest$outboundSchema;
   /** @deprecated use `GetGuildBanRequest$Outbound` instead. */
   export type Outbound = GetGuildBanRequest$Outbound;
+}
+
+export function getGuildBanRequestToJSON(
+  getGuildBanRequest: GetGuildBanRequest,
+): string {
+  return JSON.stringify(
+    GetGuildBanRequest$outboundSchema.parse(getGuildBanRequest),
+  );
+}
+
+export function getGuildBanRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildBanRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildBanRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildBanRequest' from JSON`,
+  );
 }

@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateThreadFromMessageRequest = {
   channelId: string;
@@ -68,4 +71,24 @@ export namespace CreateThreadFromMessageRequest$ {
   export const outboundSchema = CreateThreadFromMessageRequest$outboundSchema;
   /** @deprecated use `CreateThreadFromMessageRequest$Outbound` instead. */
   export type Outbound = CreateThreadFromMessageRequest$Outbound;
+}
+
+export function createThreadFromMessageRequestToJSON(
+  createThreadFromMessageRequest: CreateThreadFromMessageRequest,
+): string {
+  return JSON.stringify(
+    CreateThreadFromMessageRequest$outboundSchema.parse(
+      createThreadFromMessageRequest,
+    ),
+  );
+}
+
+export function createThreadFromMessageRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateThreadFromMessageRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateThreadFromMessageRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateThreadFromMessageRequest' from JSON`,
+  );
 }

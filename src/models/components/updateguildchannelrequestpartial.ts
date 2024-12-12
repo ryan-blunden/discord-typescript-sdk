@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ChannelPermissionOverwriteRequest,
   ChannelPermissionOverwriteRequest$inboundSchema,
@@ -182,4 +185,24 @@ export namespace UpdateGuildChannelRequestPartial$ {
   export const outboundSchema = UpdateGuildChannelRequestPartial$outboundSchema;
   /** @deprecated use `UpdateGuildChannelRequestPartial$Outbound` instead. */
   export type Outbound = UpdateGuildChannelRequestPartial$Outbound;
+}
+
+export function updateGuildChannelRequestPartialToJSON(
+  updateGuildChannelRequestPartial: UpdateGuildChannelRequestPartial,
+): string {
+  return JSON.stringify(
+    UpdateGuildChannelRequestPartial$outboundSchema.parse(
+      updateGuildChannelRequestPartial,
+    ),
+  );
+}
+
+export function updateGuildChannelRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildChannelRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildChannelRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildChannelRequestPartial' from JSON`,
+  );
 }

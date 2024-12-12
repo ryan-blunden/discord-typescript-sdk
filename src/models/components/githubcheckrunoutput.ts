@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GithubCheckRunOutput = {
   title?: string | null | undefined;
@@ -46,4 +49,22 @@ export namespace GithubCheckRunOutput$ {
   export const outboundSchema = GithubCheckRunOutput$outboundSchema;
   /** @deprecated use `GithubCheckRunOutput$Outbound` instead. */
   export type Outbound = GithubCheckRunOutput$Outbound;
+}
+
+export function githubCheckRunOutputToJSON(
+  githubCheckRunOutput: GithubCheckRunOutput,
+): string {
+  return JSON.stringify(
+    GithubCheckRunOutput$outboundSchema.parse(githubCheckRunOutput),
+  );
+}
+
+export function githubCheckRunOutputFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubCheckRunOutput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubCheckRunOutput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubCheckRunOutput' from JSON`,
+  );
 }

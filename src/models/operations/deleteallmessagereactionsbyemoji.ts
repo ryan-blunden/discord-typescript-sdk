@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteAllMessageReactionsByEmojiRequest = {
   channelId: string;
@@ -65,4 +68,31 @@ export namespace DeleteAllMessageReactionsByEmojiRequest$ {
     DeleteAllMessageReactionsByEmojiRequest$outboundSchema;
   /** @deprecated use `DeleteAllMessageReactionsByEmojiRequest$Outbound` instead. */
   export type Outbound = DeleteAllMessageReactionsByEmojiRequest$Outbound;
+}
+
+export function deleteAllMessageReactionsByEmojiRequestToJSON(
+  deleteAllMessageReactionsByEmojiRequest:
+    DeleteAllMessageReactionsByEmojiRequest,
+): string {
+  return JSON.stringify(
+    DeleteAllMessageReactionsByEmojiRequest$outboundSchema.parse(
+      deleteAllMessageReactionsByEmojiRequest,
+    ),
+  );
+}
+
+export function deleteAllMessageReactionsByEmojiRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteAllMessageReactionsByEmojiRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteAllMessageReactionsByEmojiRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeleteAllMessageReactionsByEmojiRequest' from JSON`,
+  );
 }

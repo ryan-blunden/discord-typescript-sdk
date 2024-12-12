@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BanUserFromGuildRequestBody = {
   deleteMessageSeconds?: number | null | undefined;
@@ -65,6 +68,26 @@ export namespace BanUserFromGuildRequestBody$ {
   export type Outbound = BanUserFromGuildRequestBody$Outbound;
 }
 
+export function banUserFromGuildRequestBodyToJSON(
+  banUserFromGuildRequestBody: BanUserFromGuildRequestBody,
+): string {
+  return JSON.stringify(
+    BanUserFromGuildRequestBody$outboundSchema.parse(
+      banUserFromGuildRequestBody,
+    ),
+  );
+}
+
+export function banUserFromGuildRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<BanUserFromGuildRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BanUserFromGuildRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BanUserFromGuildRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const BanUserFromGuildRequest$inboundSchema: z.ZodType<
   BanUserFromGuildRequest,
@@ -117,4 +140,22 @@ export namespace BanUserFromGuildRequest$ {
   export const outboundSchema = BanUserFromGuildRequest$outboundSchema;
   /** @deprecated use `BanUserFromGuildRequest$Outbound` instead. */
   export type Outbound = BanUserFromGuildRequest$Outbound;
+}
+
+export function banUserFromGuildRequestToJSON(
+  banUserFromGuildRequest: BanUserFromGuildRequest,
+): string {
+  return JSON.stringify(
+    BanUserFromGuildRequest$outboundSchema.parse(banUserFromGuildRequest),
+  );
+}
+
+export function banUserFromGuildRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<BanUserFromGuildRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BanUserFromGuildRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BanUserFromGuildRequest' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MentionSpamTriggerMetadataResponse = {
   mentionTotalLimit: number;
@@ -58,4 +61,25 @@ export namespace MentionSpamTriggerMetadataResponse$ {
     MentionSpamTriggerMetadataResponse$outboundSchema;
   /** @deprecated use `MentionSpamTriggerMetadataResponse$Outbound` instead. */
   export type Outbound = MentionSpamTriggerMetadataResponse$Outbound;
+}
+
+export function mentionSpamTriggerMetadataResponseToJSON(
+  mentionSpamTriggerMetadataResponse: MentionSpamTriggerMetadataResponse,
+): string {
+  return JSON.stringify(
+    MentionSpamTriggerMetadataResponse$outboundSchema.parse(
+      mentionSpamTriggerMetadataResponse,
+    ),
+  );
+}
+
+export function mentionSpamTriggerMetadataResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MentionSpamTriggerMetadataResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      MentionSpamTriggerMetadataResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MentionSpamTriggerMetadataResponse' from JSON`,
+  );
 }

@@ -19,5 +19,5 @@ targets:
                 token: $npm_token
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryan.blunden/discord-oas-code-samples
+                location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryan.blunden/discord-oas-typescript-code-samples
             blocking: false

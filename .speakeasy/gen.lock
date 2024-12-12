@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: 00c85872-82d6-41ec-beb9-2a928faab7d2
 management:
-  docChecksum: d56af70e286d0984e75ec9561f7a659e
+  docChecksum: 18c3f8f2a8d5791908367078717f02c6
   docVersion: "10"
-  speakeasyVersion: 1.438.1
-  generationVersion: 2.457.2
-  releaseVersion: 0.2.1
-  configChecksum: eae3e34bcf5f497c905277d23fcee02c
-  repoURL: https://github.com/ryan.blunden/discord-typescript-sdk.git
-  installationURL: https://github.com/ryan.blunden/discord-typescript-sdk
+  speakeasyVersion: 1.454.0
+  generationVersion: 2.477.0
+  releaseVersion: 0.3.0
+  configChecksum: c66fdd6b470eb080fc194c459fe9d4ba
+  repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
+  installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.3
+    core: 3.18.9
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.1.2
@@ -29,7 +29,6 @@ features:
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.2.0
-    tests: 0.7.0
     unions: 2.85.8
 generatedFiles:
   - .devcontainer/README.md
@@ -44,8 +43,9 @@ generatedFiles:
   - USAGE.md
   - docs/lib/utils/retryconfig.md
   - docs/models/components/accountresponse.md
-  - docs/models/components/actionrow.md
-  - docs/models/components/actionrowcomponents.md
+  - docs/models/components/actionrowcomponentformessagerequest.md
+  - docs/models/components/actionrowcomponentformessagerequestcomponents.md
+  - docs/models/components/actionrowcomponentresponse.md
   - docs/models/components/actions.md
   - docs/models/components/activitiesattachmentresponse.md
   - docs/models/components/applicationcommandattachmentoption.md
@@ -114,17 +114,21 @@ generatedFiles:
   - docs/models/components/blockmessageactionresponse.md
   - docs/models/components/botaccountpatchrequest.md
   - docs/models/components/bulkbanusersresponse.md
-  - docs/models/components/button.md
+  - docs/models/components/buttoncomponentformessagerequest.md
+  - docs/models/components/buttoncomponentresponse.md
   - docs/models/components/channelfollowerresponse.md
   - docs/models/components/channelfollowerwebhookresponse.md
   - docs/models/components/channelpermissionoverwriterequest.md
   - docs/models/components/channelpermissionoverwriteresponse.md
   - docs/models/components/channels.md
-  - docs/models/components/channelselect.md
+  - docs/models/components/channelselectcomponentformessagerequest.md
+  - docs/models/components/channelselectcomponentresponse.md
   - docs/models/components/channelselectdefaultvalue.md
   - docs/models/components/channelselectdefaultvalueresponse.md
   - docs/models/components/commandpermissionresponse.md
   - docs/models/components/commandpermissionsresponse.md
+  - docs/models/components/componentemojiformessagerequest.md
+  - docs/models/components/componentemojiresponse.md
   - docs/models/components/components.md
   - docs/models/components/connectedaccountguildresponse.md
   - docs/models/components/connectedaccountintegrationresponse.md
@@ -153,7 +157,6 @@ generatedFiles:
   - docs/models/components/description.md
   - docs/models/components/discordintegrationresponse.md
   - docs/models/components/embeddedactivityinstance.md
-  - docs/models/components/emoji.md
   - docs/models/components/emojiresponse.md
   - docs/models/components/entitlementresponse.md
   - docs/models/components/entitymetadataexternal.md
@@ -226,7 +229,6 @@ generatedFiles:
   - docs/models/components/iconemojiresponse.md
   - docs/models/components/incomingwebhookupdaterequestpartial.md
   - docs/models/components/innererrors.md
-  - docs/models/components/inputtext.md
   - docs/models/components/integrationapplicationresponse.md
   - docs/models/components/integrations.md
   - docs/models/components/interactionmetadata.md
@@ -246,8 +248,9 @@ generatedFiles:
   - docs/models/components/listapplicationemojisresponse.md
   - docs/models/components/listguildsoundboardsoundsresponse.md
   - docs/models/components/location.md
-  - docs/models/components/mentionableselect.md
-  - docs/models/components/mentionableselectdefaultvalues.md
+  - docs/models/components/mentionableselectcomponentformessagerequest.md
+  - docs/models/components/mentionableselectcomponentformessagerequestdefaultvalues.md
+  - docs/models/components/mentionableselectcomponentresponse.md
   - docs/models/components/mentionspamruleresponse.md
   - docs/models/components/mentionspamruleresponseactions.md
   - docs/models/components/mentionspamtriggermetadata.md
@@ -261,16 +264,7 @@ generatedFiles:
   - docs/models/components/messageattachmentrequest.md
   - docs/models/components/messageattachmentresponse.md
   - docs/models/components/messagecallresponse.md
-  - docs/models/components/messagecomponentactionrowresponse.md
-  - docs/models/components/messagecomponentbuttonresponse.md
-  - docs/models/components/messagecomponentchannelselectresponse.md
-  - docs/models/components/messagecomponentemojiresponse.md
-  - docs/models/components/messagecomponentinputtextresponse.md
   - docs/models/components/messagecomponentinteractionmetadataresponse.md
-  - docs/models/components/messagecomponentmentionableselectresponse.md
-  - docs/models/components/messagecomponentroleselectresponse.md
-  - docs/models/components/messagecomponentstringselectresponse.md
-  - docs/models/components/messagecomponentuserselectresponse.md
   - docs/models/components/messagecreaterequest.md
   - docs/models/components/messagecreaterequestnonce.md
   - docs/models/components/messageeditrequestpartial.md
@@ -351,14 +345,13 @@ generatedFiles:
   - docs/models/components/richembedprovider.md
   - docs/models/components/richembedthumbnail.md
   - docs/models/components/richembedvideo.md
-  - docs/models/components/roleselect.md
+  - docs/models/components/roleselectcomponentformessagerequest.md
+  - docs/models/components/roleselectcomponentresponse.md
   - docs/models/components/roleselectdefaultvalue.md
   - docs/models/components/roleselectdefaultvalueresponse.md
   - docs/models/components/scheduledeventresponse.md
   - docs/models/components/scheduledeventuserresponse.md
   - docs/models/components/security.md
-  - docs/models/components/selectoption.md
-  - docs/models/components/selectoptionresponse.md
   - docs/models/components/settingsemojiresponse.md
   - docs/models/components/slackwebhook.md
   - docs/models/components/soundboardcreaterequest.md
@@ -376,9 +369,13 @@ generatedFiles:
   - docs/models/components/stickerpackcollectionresponse.md
   - docs/models/components/stickerpackresponse.md
   - docs/models/components/stickers.md
-  - docs/models/components/stringselect.md
+  - docs/models/components/stringselectcomponentformessagerequest.md
+  - docs/models/components/stringselectcomponentresponse.md
+  - docs/models/components/stringselectoptionformessagerequest.md
+  - docs/models/components/stringselectoptionresponse.md
   - docs/models/components/teammemberresponse.md
   - docs/models/components/teamresponse.md
+  - docs/models/components/textinputcomponentresponse.md
   - docs/models/components/threadmemberresponse.md
   - docs/models/components/threadmetadataresponse.md
   - docs/models/components/threadresponse.md
@@ -398,8 +395,10 @@ generatedFiles:
   - docs/models/components/usercommunicationdisabledactionresponse.md
   - docs/models/components/userguildonboardingresponse.md
   - docs/models/components/userpiiresponse.md
+  - docs/models/components/userprimaryguildresponse.md
   - docs/models/components/userresponse.md
-  - docs/models/components/userselect.md
+  - docs/models/components/userselectcomponentformessagerequest.md
+  - docs/models/components/userselectcomponentresponse.md
   - docs/models/components/userselectdefaultvalue.md
   - docs/models/components/userselectdefaultvalueresponse.md
   - docs/models/components/vanityurlerrorresponse.md
@@ -1031,7 +1030,8 @@ generatedFiles:
   - src/lib/security.ts
   - src/lib/url.ts
   - src/models/components/accountresponse.ts
-  - src/models/components/actionrow.ts
+  - src/models/components/actionrowcomponentformessagerequest.ts
+  - src/models/components/actionrowcomponentresponse.ts
   - src/models/components/activitiesattachmentresponse.ts
   - src/models/components/applicationcommandattachmentoption.ts
   - src/models/components/applicationcommandattachmentoptionresponse.ts
@@ -1089,16 +1089,20 @@ generatedFiles:
   - src/models/components/blockmessageactionresponse.ts
   - src/models/components/botaccountpatchrequest.ts
   - src/models/components/bulkbanusersresponse.ts
-  - src/models/components/button.ts
+  - src/models/components/buttoncomponentformessagerequest.ts
+  - src/models/components/buttoncomponentresponse.ts
   - src/models/components/channelfollowerresponse.ts
   - src/models/components/channelfollowerwebhookresponse.ts
   - src/models/components/channelpermissionoverwriterequest.ts
   - src/models/components/channelpermissionoverwriteresponse.ts
-  - src/models/components/channelselect.ts
+  - src/models/components/channelselectcomponentformessagerequest.ts
+  - src/models/components/channelselectcomponentresponse.ts
   - src/models/components/channelselectdefaultvalue.ts
   - src/models/components/channelselectdefaultvalueresponse.ts
   - src/models/components/commandpermissionresponse.ts
   - src/models/components/commandpermissionsresponse.ts
+  - src/models/components/componentemojiformessagerequest.ts
+  - src/models/components/componentemojiresponse.ts
   - src/models/components/connectedaccountguildresponse.ts
   - src/models/components/connectedaccountintegrationresponse.ts
   - src/models/components/connectedaccountresponse.ts
@@ -1122,7 +1126,6 @@ generatedFiles:
   - src/models/components/defaultreactionemojiresponse.ts
   - src/models/components/discordintegrationresponse.ts
   - src/models/components/embeddedactivityinstance.ts
-  - src/models/components/emoji.ts
   - src/models/components/emojiresponse.ts
   - src/models/components/entitlementresponse.ts
   - src/models/components/entitymetadataexternal.ts
@@ -1195,7 +1198,6 @@ generatedFiles:
   - src/models/components/incomingwebhookupdaterequestpartial.ts
   - src/models/components/index.ts
   - src/models/components/innererrors.ts
-  - src/models/components/inputtext.ts
   - src/models/components/integrationapplicationresponse.ts
   - src/models/components/inviteapplicationresponse.ts
   - src/models/components/invitechannelrecipientresponse.ts
@@ -1209,7 +1211,8 @@ generatedFiles:
   - src/models/components/keywordupsertrequestpartial.ts
   - src/models/components/listapplicationemojisresponse.ts
   - src/models/components/listguildsoundboardsoundsresponse.ts
-  - src/models/components/mentionableselect.ts
+  - src/models/components/mentionableselectcomponentformessagerequest.ts
+  - src/models/components/mentionableselectcomponentresponse.ts
   - src/models/components/mentionspamruleresponse.ts
   - src/models/components/mentionspamtriggermetadata.ts
   - src/models/components/mentionspamtriggermetadataresponse.ts
@@ -1220,16 +1223,7 @@ generatedFiles:
   - src/models/components/messageattachmentrequest.ts
   - src/models/components/messageattachmentresponse.ts
   - src/models/components/messagecallresponse.ts
-  - src/models/components/messagecomponentactionrowresponse.ts
-  - src/models/components/messagecomponentbuttonresponse.ts
-  - src/models/components/messagecomponentchannelselectresponse.ts
-  - src/models/components/messagecomponentemojiresponse.ts
-  - src/models/components/messagecomponentinputtextresponse.ts
   - src/models/components/messagecomponentinteractionmetadataresponse.ts
-  - src/models/components/messagecomponentmentionableselectresponse.ts
-  - src/models/components/messagecomponentroleselectresponse.ts
-  - src/models/components/messagecomponentstringselectresponse.ts
-  - src/models/components/messagecomponentuserselectresponse.ts
   - src/models/components/messagecreaterequest.ts
   - src/models/components/messageeditrequestpartial.ts
   - src/models/components/messageembedauthorresponse.ts
@@ -1301,14 +1295,13 @@ generatedFiles:
   - src/models/components/richembedprovider.ts
   - src/models/components/richembedthumbnail.ts
   - src/models/components/richembedvideo.ts
-  - src/models/components/roleselect.ts
+  - src/models/components/roleselectcomponentformessagerequest.ts
+  - src/models/components/roleselectcomponentresponse.ts
   - src/models/components/roleselectdefaultvalue.ts
   - src/models/components/roleselectdefaultvalueresponse.ts
   - src/models/components/scheduledeventresponse.ts
   - src/models/components/scheduledeventuserresponse.ts
   - src/models/components/security.ts
-  - src/models/components/selectoption.ts
-  - src/models/components/selectoptionresponse.ts
   - src/models/components/settingsemojiresponse.ts
   - src/models/components/slackwebhook.ts
   - src/models/components/soundboardcreaterequest.ts
@@ -1324,9 +1317,13 @@ generatedFiles:
   - src/models/components/standardstickerresponse.ts
   - src/models/components/stickerpackcollectionresponse.ts
   - src/models/components/stickerpackresponse.ts
-  - src/models/components/stringselect.ts
+  - src/models/components/stringselectcomponentformessagerequest.ts
+  - src/models/components/stringselectcomponentresponse.ts
+  - src/models/components/stringselectoptionformessagerequest.ts
+  - src/models/components/stringselectoptionresponse.ts
   - src/models/components/teammemberresponse.ts
   - src/models/components/teamresponse.ts
+  - src/models/components/textinputcomponentresponse.ts
   - src/models/components/threadmemberresponse.ts
   - src/models/components/threadmetadataresponse.ts
   - src/models/components/threadresponse.ts
@@ -1345,8 +1342,10 @@ generatedFiles:
   - src/models/components/usercommunicationdisabledactionresponse.ts
   - src/models/components/userguildonboardingresponse.ts
   - src/models/components/userpiiresponse.ts
+  - src/models/components/userprimaryguildresponse.ts
   - src/models/components/userresponse.ts
-  - src/models/components/userselect.ts
+  - src/models/components/userselectcomponentformessagerequest.ts
+  - src/models/components/userselectcomponentresponse.ts
   - src/models/components/userselectdefaultvalue.ts
   - src/models/components/userselectdefaultvalueresponse.ts
   - src/models/components/vanityurlerrorresponse.ts
@@ -2615,7 +2614,7 @@ examples:
           message_id: "<value>"
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Elenora_Boyle", "discriminator": "<value>", "public_flags": 780144, "flags": 362378}, {"id": "<value>", "username": "Eleanora.Schinner", "discriminator": "<value>", "public_flags": 302834, "flags": 474599}], "mention_roles": [], "attachments": [{"id": "<value>", "filename": "example.file", "size": 285875, "url": "https://aged-haircut.name", "proxy_url": "https://overcooked-pantyhose.biz/"}], "embeds": [{"type": "<value>"}], "timestamp": "2022-03-28T01:14:20.633Z", "flags": 911769, "components": [{"id": 558834, "custom_id": "<id>"}, {"id": 521235, "custom_id": "<id>"}, {"id": 458049, "custom_id": "<id>"}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Tressie.Boyer23", "discriminator": "<value>", "public_flags": 169346, "flags": 505416}, "pinned": true, "mention_everyone": true, "tts": true}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Elenora_Boyle", "discriminator": "<value>", "public_flags": 780144, "flags": 362378}, {"id": "<value>", "username": "Eleanora.Schinner", "discriminator": "<value>", "public_flags": 302834, "flags": 474599}], "mention_roles": [], "attachments": [{"id": "<value>", "filename": "example.file", "size": 285875, "url": "https://aged-haircut.name", "proxy_url": "https://overcooked-pantyhose.biz/"}], "embeds": [{"type": "<value>"}], "timestamp": "2022-03-28T01:14:20.633Z", "flags": 911769, "components": [{"id": 558834, "custom_id": "<id>", "options": [{"label": "<value>", "value": "<value>"}, {"label": "<value>", "value": "<value>"}]}, {"id": 969961, "custom_id": "<id>"}, {"id": 450824, "custom_id": "<id>"}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Tressie.Boyer23", "discriminator": "<value>", "public_flags": 169346, "flags": 505416}, "pinned": true, "mention_everyone": true, "tts": true}
         4XX:
           application/json: {"code": 246254, "message": "<value>"}
   delete_message:
@@ -2635,7 +2634,7 @@ examples:
           message_id: "<value>"
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Quincy54", "discriminator": "<value>", "public_flags": 483332, "flags": 286778}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 724383, "url": "https://fine-acquaintance.net", "proxy_url": "https://sad-pasta.net"}], "embeds": [], "timestamp": "2023-05-22T11:11:23.018Z", "flags": 981058, "components": [{"id": 242978, "custom_id": "<id>"}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Erwin16", "discriminator": "<value>", "public_flags": 750208, "flags": 394444}, "pinned": false, "mention_everyone": true, "tts": false}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Quincy54", "discriminator": "<value>", "public_flags": 483332, "flags": 286778}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 724383, "url": "https://fine-acquaintance.net", "proxy_url": "https://sad-pasta.net"}], "embeds": [], "timestamp": "2023-05-22T11:11:23.018Z", "flags": 981058, "components": [{"id": 242978, "custom_id": "<id>", "options": []}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Erwin16", "discriminator": "<value>", "public_flags": 750208, "flags": 394444}, "pinned": false, "mention_everyone": true, "tts": false}
         4XX:
           application/json: {"code": 761910, "message": "<value>"}
     speakeasy-default-update-message-form:
@@ -2645,7 +2644,7 @@ examples:
           message_id: "<value>"
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Desiree13", "discriminator": "<value>", "public_flags": 252555, "flags": 698165}, {"id": "<value>", "username": "Hellen.Romaguera97", "discriminator": "<value>", "public_flags": 121620, "flags": 973259}], "mention_roles": ["<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 766372, "url": "https://rich-premeditation.info", "proxy_url": "https://grown-independence.org/"}, {"id": "<value>", "filename": "example.file", "size": 697901, "url": "https://devoted-poetry.biz", "proxy_url": "https://ragged-unit.info"}], "embeds": [], "timestamp": "2024-03-25T22:11:41.480Z", "flags": 782165, "components": [{"id": 30090, "custom_id": "<id>"}, {"id": 85042}, {"id": 491687, "custom_id": "<id>"}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Jedidiah.Vandervort", "discriminator": "<value>", "public_flags": 42608, "flags": 995949}, "pinned": false, "mention_everyone": true, "tts": true}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Desiree13", "discriminator": "<value>", "public_flags": 252555, "flags": 698165}, {"id": "<value>", "username": "Hellen.Romaguera97", "discriminator": "<value>", "public_flags": 121620, "flags": 973259}], "mention_roles": ["<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 766372, "url": "https://rich-premeditation.info", "proxy_url": "https://grown-independence.org/"}, {"id": "<value>", "filename": "example.file", "size": 697901, "url": "https://devoted-poetry.biz", "proxy_url": "https://ragged-unit.info"}], "embeds": [], "timestamp": "2024-03-25T22:11:41.480Z", "flags": 782165, "components": [{"id": 30090, "custom_id": "<id>"}, {"id": 85042}, {"id": 491687, "custom_id": "<id>", "options": []}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Jedidiah.Vandervort", "discriminator": "<value>", "public_flags": 42608, "flags": 995949}, "pinned": false, "mention_everyone": true, "tts": true}
         4XX:
           application/json: {"code": 283605, "message": "<value>"}
     speakeasy-default-update-message-multipart:
@@ -2787,7 +2786,7 @@ examples:
           channel_id: "<value>"
       responses:
         "200":
-          application/json: [{"content": "<value>", "mentions": [{"id": "<value>", "username": "Luther_Muller", "discriminator": "<value>", "public_flags": 99793, "flags": 803259}], "mention_roles": ["<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 343453, "url": "https://insignificant-ceramic.info/", "proxy_url": "https://fragrant-adaptation.net"}, {"id": "<value>", "filename": "example.file", "size": 796541, "url": "https://silver-overheard.info/", "proxy_url": "https://scented-contractor.biz"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2023-11-30T01:38:03.491Z", "flags": 733641, "components": [{"id": 292842, "custom_id": "<id>"}, {"id": 436081, "custom_id": "<id>"}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Wilfredo73", "discriminator": "<value>", "public_flags": 495488, "flags": 742930}, "pinned": false, "mention_everyone": false, "tts": true}, {"content": "<value>", "mentions": [], "mention_roles": ["<value>", "<value>"], "attachments": [], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-06-23T15:11:51.038Z", "flags": 484146, "components": [], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Lon29", "discriminator": "<value>", "public_flags": 79386, "flags": 420691}, "pinned": true, "mention_everyone": true, "tts": true}]
+          application/json: [{"content": "<value>", "mentions": [{"id": "<value>", "username": "Luther_Muller", "discriminator": "<value>", "public_flags": 99793, "flags": 803259}], "mention_roles": ["<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 343453, "url": "https://insignificant-ceramic.info/", "proxy_url": "https://fragrant-adaptation.net"}, {"id": "<value>", "filename": "example.file", "size": 796541, "url": "https://silver-overheard.info/", "proxy_url": "https://scented-contractor.biz"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2023-11-30T01:38:03.491Z", "flags": 733641, "components": [{"id": 292842, "custom_id": "<id>", "options": [{"label": "<value>", "value": "<value>"}, {"label": "<value>", "value": "<value>"}]}, {"id": 624513, "custom_id": "<id>"}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Wilfredo73", "discriminator": "<value>", "public_flags": 495488, "flags": 742930}, "pinned": false, "mention_everyone": false, "tts": true}, {"content": "<value>", "mentions": [], "mention_roles": ["<value>", "<value>"], "attachments": [], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-06-23T15:11:51.038Z", "flags": 484146, "components": [], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Lon29", "discriminator": "<value>", "public_flags": 79386, "flags": 420691}, "pinned": true, "mention_everyone": true, "tts": true}]
         4XX:
           application/json: {"code": 979964, "message": "<value>"}
   get_webhook_message:
@@ -2800,7 +2799,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Greta82", "discriminator": "<value>", "public_flags": 435341, "flags": 520550}, {"id": "<value>", "username": "Annie15", "discriminator": "<value>", "public_flags": 879835, "flags": 748540}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 164719, "url": "https://immaculate-spear.info", "proxy_url": "https://qualified-filter.org"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}], "timestamp": "2022-08-02T18:49:36.569Z", "flags": 960012, "components": [{"id": 296823, "custom_id": "<id>"}, {"id": 98239, "custom_id": "<id>"}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Letitia4", "discriminator": "<value>", "public_flags": 398637, "flags": 580813}, "pinned": false, "mention_everyone": true, "tts": true}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Greta82", "discriminator": "<value>", "public_flags": 435341, "flags": 520550}, {"id": "<value>", "username": "Annie15", "discriminator": "<value>", "public_flags": 879835, "flags": 748540}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 164719, "url": "https://immaculate-spear.info", "proxy_url": "https://qualified-filter.org"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}], "timestamp": "2022-08-02T18:49:36.569Z", "flags": 960012, "components": [{"id": 296823, "custom_id": "<id>", "options": [{"label": "<value>", "value": "<value>"}, {"label": "<value>", "value": "<value>"}, {"label": "<value>", "value": "<value>"}]}, {"id": 505491}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Letitia4", "discriminator": "<value>", "public_flags": 398637, "flags": 580813}, "pinned": false, "mention_everyone": true, "tts": true}
         4XX:
           application/json: {"code": 717436, "message": "<value>"}
   delete_webhook_message:
@@ -3800,3 +3799,4 @@ examples:
           application/json: {"id": "<value>", "username": "Hailie_Hackett", "discriminator": "<value>", "public_flags": 554950, "flags": 873496}
         4XX:
           application/json: {"code": 442991, "message": "<value>"}
+generatedTests: {}

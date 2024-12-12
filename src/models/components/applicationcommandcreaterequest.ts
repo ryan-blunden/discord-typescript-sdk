@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApplicationCommandAttachmentOption,
   ApplicationCommandAttachmentOption$inboundSchema,
@@ -180,6 +183,28 @@ export namespace ApplicationCommandCreateRequestOptions$ {
   export type Outbound = ApplicationCommandCreateRequestOptions$Outbound;
 }
 
+export function applicationCommandCreateRequestOptionsToJSON(
+  applicationCommandCreateRequestOptions:
+    ApplicationCommandCreateRequestOptions,
+): string {
+  return JSON.stringify(
+    ApplicationCommandCreateRequestOptions$outboundSchema.parse(
+      applicationCommandCreateRequestOptions,
+    ),
+  );
+}
+
+export function applicationCommandCreateRequestOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationCommandCreateRequestOptions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationCommandCreateRequestOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationCommandCreateRequestOptions' from JSON`,
+  );
+}
+
 /** @internal */
 export const ApplicationCommandCreateRequest$inboundSchema: z.ZodType<
   ApplicationCommandCreateRequest,
@@ -307,4 +332,24 @@ export namespace ApplicationCommandCreateRequest$ {
   export const outboundSchema = ApplicationCommandCreateRequest$outboundSchema;
   /** @deprecated use `ApplicationCommandCreateRequest$Outbound` instead. */
   export type Outbound = ApplicationCommandCreateRequest$Outbound;
+}
+
+export function applicationCommandCreateRequestToJSON(
+  applicationCommandCreateRequest: ApplicationCommandCreateRequest,
+): string {
+  return JSON.stringify(
+    ApplicationCommandCreateRequest$outboundSchema.parse(
+      applicationCommandCreateRequest,
+    ),
+  );
+}
+
+export function applicationCommandCreateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationCommandCreateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ApplicationCommandCreateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationCommandCreateRequest' from JSON`,
+  );
 }

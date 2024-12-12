@@ -4,12 +4,15 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  ActionRow,
-  ActionRow$inboundSchema,
-  ActionRow$Outbound,
-  ActionRow$outboundSchema,
-} from "./actionrow.js";
+  ActionRowComponentForMessageRequest,
+  ActionRowComponentForMessageRequest$inboundSchema,
+  ActionRowComponentForMessageRequest$Outbound,
+  ActionRowComponentForMessageRequest$outboundSchema,
+} from "./actionrowcomponentformessagerequest.js";
 import {
   MessageAllowedMentionsRequest,
   MessageAllowedMentionsRequest$inboundSchema,
@@ -48,7 +51,7 @@ export type MessageCreateRequest = {
   embeds?: Array<RichEmbed> | null | undefined;
   allowedMentions?: MessageAllowedMentionsRequest | null | undefined;
   stickerIds?: Array<string> | null | undefined;
-  components?: Array<ActionRow> | null | undefined;
+  components?: Array<ActionRowComponentForMessageRequest> | null | undefined;
   flags?: number | null | undefined;
   attachments?: Array<MessageAttachmentRequest> | null | undefined;
   poll?: PollCreateRequest | null | undefined;
@@ -88,6 +91,24 @@ export namespace MessageCreateRequestNonce$ {
   export type Outbound = MessageCreateRequestNonce$Outbound;
 }
 
+export function messageCreateRequestNonceToJSON(
+  messageCreateRequestNonce: MessageCreateRequestNonce,
+): string {
+  return JSON.stringify(
+    MessageCreateRequestNonce$outboundSchema.parse(messageCreateRequestNonce),
+  );
+}
+
+export function messageCreateRequestNonceFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageCreateRequestNonce, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageCreateRequestNonce$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageCreateRequestNonce' from JSON`,
+  );
+}
+
 /** @internal */
 export const MessageCreateRequest$inboundSchema: z.ZodType<
   MessageCreateRequest,
@@ -99,7 +120,9 @@ export const MessageCreateRequest$inboundSchema: z.ZodType<
   allowed_mentions: z.nullable(MessageAllowedMentionsRequest$inboundSchema)
     .optional(),
   sticker_ids: z.nullable(z.array(z.string())).optional(),
-  components: z.nullable(z.array(ActionRow$inboundSchema)).optional(),
+  components: z.nullable(
+    z.array(ActionRowComponentForMessageRequest$inboundSchema),
+  ).optional(),
   flags: z.nullable(z.number().int()).optional(),
   attachments: z.nullable(z.array(MessageAttachmentRequest$inboundSchema))
     .optional(),
@@ -124,7 +147,10 @@ export type MessageCreateRequest$Outbound = {
   embeds?: Array<RichEmbed$Outbound> | null | undefined;
   allowed_mentions?: MessageAllowedMentionsRequest$Outbound | null | undefined;
   sticker_ids?: Array<string> | null | undefined;
-  components?: Array<ActionRow$Outbound> | null | undefined;
+  components?:
+    | Array<ActionRowComponentForMessageRequest$Outbound>
+    | null
+    | undefined;
   flags?: number | null | undefined;
   attachments?: Array<MessageAttachmentRequest$Outbound> | null | undefined;
   poll?: PollCreateRequest$Outbound | null | undefined;
@@ -145,7 +171,9 @@ export const MessageCreateRequest$outboundSchema: z.ZodType<
   allowedMentions: z.nullable(MessageAllowedMentionsRequest$outboundSchema)
     .optional(),
   stickerIds: z.nullable(z.array(z.string())).optional(),
-  components: z.nullable(z.array(ActionRow$outboundSchema)).optional(),
+  components: z.nullable(
+    z.array(ActionRowComponentForMessageRequest$outboundSchema),
+  ).optional(),
   flags: z.nullable(z.number().int()).optional(),
   attachments: z.nullable(z.array(MessageAttachmentRequest$outboundSchema))
     .optional(),
@@ -175,4 +203,22 @@ export namespace MessageCreateRequest$ {
   export const outboundSchema = MessageCreateRequest$outboundSchema;
   /** @deprecated use `MessageCreateRequest$Outbound` instead. */
   export type Outbound = MessageCreateRequest$Outbound;
+}
+
+export function messageCreateRequestToJSON(
+  messageCreateRequest: MessageCreateRequest,
+): string {
+  return JSON.stringify(
+    MessageCreateRequest$outboundSchema.parse(messageCreateRequest),
+  );
+}
+
+export function messageCreateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageCreateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageCreateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageCreateRequest' from JSON`,
+  );
 }

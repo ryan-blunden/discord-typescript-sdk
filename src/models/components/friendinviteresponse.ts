@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   InviteChannelResponse,
   InviteChannelResponse$inboundSchema,
@@ -121,4 +124,22 @@ export namespace FriendInviteResponse$ {
   export const outboundSchema = FriendInviteResponse$outboundSchema;
   /** @deprecated use `FriendInviteResponse$Outbound` instead. */
   export type Outbound = FriendInviteResponse$Outbound;
+}
+
+export function friendInviteResponseToJSON(
+  friendInviteResponse: FriendInviteResponse,
+): string {
+  return JSON.stringify(
+    FriendInviteResponse$outboundSchema.parse(friendInviteResponse),
+  );
+}
+
+export function friendInviteResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<FriendInviteResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FriendInviteResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FriendInviteResponse' from JSON`,
+  );
 }

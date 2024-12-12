@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserResponse,
   UserResponse$inboundSchema,
@@ -90,4 +93,25 @@ export namespace ApplicationIncomingWebhookResponse$ {
     ApplicationIncomingWebhookResponse$outboundSchema;
   /** @deprecated use `ApplicationIncomingWebhookResponse$Outbound` instead. */
   export type Outbound = ApplicationIncomingWebhookResponse$Outbound;
+}
+
+export function applicationIncomingWebhookResponseToJSON(
+  applicationIncomingWebhookResponse: ApplicationIncomingWebhookResponse,
+): string {
+  return JSON.stringify(
+    ApplicationIncomingWebhookResponse$outboundSchema.parse(
+      applicationIncomingWebhookResponse,
+    ),
+  );
+}
+
+export function applicationIncomingWebhookResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationIncomingWebhookResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationIncomingWebhookResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationIncomingWebhookResponse' from JSON`,
+  );
 }

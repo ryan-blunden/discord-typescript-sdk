@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type WebhookSourceGuildResponse = {
   id: string;
@@ -50,4 +53,22 @@ export namespace WebhookSourceGuildResponse$ {
   export const outboundSchema = WebhookSourceGuildResponse$outboundSchema;
   /** @deprecated use `WebhookSourceGuildResponse$Outbound` instead. */
   export type Outbound = WebhookSourceGuildResponse$Outbound;
+}
+
+export function webhookSourceGuildResponseToJSON(
+  webhookSourceGuildResponse: WebhookSourceGuildResponse,
+): string {
+  return JSON.stringify(
+    WebhookSourceGuildResponse$outboundSchema.parse(webhookSourceGuildResponse),
+  );
+}
+
+export function webhookSourceGuildResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<WebhookSourceGuildResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WebhookSourceGuildResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WebhookSourceGuildResponse' from JSON`,
+  );
 }

@@ -24,18 +24,23 @@ For more information about the API: [Discord Developer Documentation](https://di
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
+<!-- $toc-max-depth=2 -->
+* [@ryan.blunden/discord](#ryanblundendiscord)
+  * [SDK Installation](#sdk-installation)
+  * [Requirements](#requirements)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Standalone functions](#standalone-functions)
+  * [Retries](#retries)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Authentication](#authentication)
+  * [Debugging](#debugging)
+* [Development](#development)
+  * [Maturity](#maturity)
+  * [Contributions](#contributions)
 
-* [SDK Installation](#sdk-installation)
-* [Requirements](#requirements)
-* [SDK Example Usage](#sdk-example-usage)
-* [Available Resources and Operations](#available-resources-and-operations)
-* [Standalone functions](#standalone-functions)
-* [Retries](#retries)
-* [Error Handling](#error-handling)
-* [Server Selection](#server-selection)
-* [Custom HTTP Client](#custom-http-client)
-* [Authentication](#authentication)
-* [Debugging](#debugging)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
@@ -506,9 +511,9 @@ run();
 * [updateOriginalMessageForm](docs/sdks/webhooks/README.md#updateoriginalmessageform)
 * [updateOriginalMessageMultipart](docs/sdks/webhooks/README.md#updateoriginalmessagemultipart)
 * [getMessage](docs/sdks/webhooks/README.md#getmessage)
+* [updateMessageJson](docs/sdks/webhooks/README.md#updatemessagejson)
 * [updateMessageForm](docs/sdks/webhooks/README.md#updatemessageform)
 * [updateMessageMultipart](docs/sdks/webhooks/README.md#updatemessagemultipart)
-* [updateMessageJson](docs/sdks/webhooks/README.md#updatemessagejson)
 * [executeGithubCompatible](docs/sdks/webhooks/README.md#executegithubcompatible)
 * [executeSlackCompatible](docs/sdks/webhooks/README.md#executeslackcompatible)
 * [get](docs/sdks/webhooks/README.md#get)

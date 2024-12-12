@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListGuildChannelsSecurity = {
   botToken?: string | undefined;
@@ -64,6 +67,24 @@ export namespace ListGuildChannelsSecurity$ {
   export type Outbound = ListGuildChannelsSecurity$Outbound;
 }
 
+export function listGuildChannelsSecurityToJSON(
+  listGuildChannelsSecurity: ListGuildChannelsSecurity,
+): string {
+  return JSON.stringify(
+    ListGuildChannelsSecurity$outboundSchema.parse(listGuildChannelsSecurity),
+  );
+}
+
+export function listGuildChannelsSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildChannelsSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildChannelsSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildChannelsSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const ListGuildChannelsRequest$inboundSchema: z.ZodType<
   ListGuildChannelsRequest,
@@ -108,6 +129,24 @@ export namespace ListGuildChannelsRequest$ {
   export type Outbound = ListGuildChannelsRequest$Outbound;
 }
 
+export function listGuildChannelsRequestToJSON(
+  listGuildChannelsRequest: ListGuildChannelsRequest,
+): string {
+  return JSON.stringify(
+    ListGuildChannelsRequest$outboundSchema.parse(listGuildChannelsRequest),
+  );
+}
+
+export function listGuildChannelsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildChannelsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildChannelsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildChannelsRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const ListGuildChannelsResponseBody$inboundSchema: z.ZodType<
   ListGuildChannelsResponseBody,
@@ -150,4 +189,24 @@ export namespace ListGuildChannelsResponseBody$ {
   export const outboundSchema = ListGuildChannelsResponseBody$outboundSchema;
   /** @deprecated use `ListGuildChannelsResponseBody$Outbound` instead. */
   export type Outbound = ListGuildChannelsResponseBody$Outbound;
+}
+
+export function listGuildChannelsResponseBodyToJSON(
+  listGuildChannelsResponseBody: ListGuildChannelsResponseBody,
+): string {
+  return JSON.stringify(
+    ListGuildChannelsResponseBody$outboundSchema.parse(
+      listGuildChannelsResponseBody,
+    ),
+  );
+}
+
+export function listGuildChannelsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildChannelsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildChannelsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildChannelsResponseBody' from JSON`,
+  );
 }

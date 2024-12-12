@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GuildPruneResponse = {
   pruned?: number | null | undefined;
@@ -42,4 +45,22 @@ export namespace GuildPruneResponse$ {
   export const outboundSchema = GuildPruneResponse$outboundSchema;
   /** @deprecated use `GuildPruneResponse$Outbound` instead. */
   export type Outbound = GuildPruneResponse$Outbound;
+}
+
+export function guildPruneResponseToJSON(
+  guildPruneResponse: GuildPruneResponse,
+): string {
+  return JSON.stringify(
+    GuildPruneResponse$outboundSchema.parse(guildPruneResponse),
+  );
+}
+
+export function guildPruneResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildPruneResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildPruneResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildPruneResponse' from JSON`,
+  );
 }

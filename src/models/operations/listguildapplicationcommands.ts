@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListGuildApplicationCommandsSecurity = {
   botToken?: string | undefined;
@@ -61,6 +64,27 @@ export namespace ListGuildApplicationCommandsSecurity$ {
   export type Outbound = ListGuildApplicationCommandsSecurity$Outbound;
 }
 
+export function listGuildApplicationCommandsSecurityToJSON(
+  listGuildApplicationCommandsSecurity: ListGuildApplicationCommandsSecurity,
+): string {
+  return JSON.stringify(
+    ListGuildApplicationCommandsSecurity$outboundSchema.parse(
+      listGuildApplicationCommandsSecurity,
+    ),
+  );
+}
+
+export function listGuildApplicationCommandsSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildApplicationCommandsSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListGuildApplicationCommandsSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildApplicationCommandsSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const ListGuildApplicationCommandsRequest$inboundSchema: z.ZodType<
   ListGuildApplicationCommandsRequest,
@@ -115,4 +139,25 @@ export namespace ListGuildApplicationCommandsRequest$ {
     ListGuildApplicationCommandsRequest$outboundSchema;
   /** @deprecated use `ListGuildApplicationCommandsRequest$Outbound` instead. */
   export type Outbound = ListGuildApplicationCommandsRequest$Outbound;
+}
+
+export function listGuildApplicationCommandsRequestToJSON(
+  listGuildApplicationCommandsRequest: ListGuildApplicationCommandsRequest,
+): string {
+  return JSON.stringify(
+    ListGuildApplicationCommandsRequest$outboundSchema.parse(
+      listGuildApplicationCommandsRequest,
+    ),
+  );
+}
+
+export function listGuildApplicationCommandsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildApplicationCommandsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListGuildApplicationCommandsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildApplicationCommandsRequest' from JSON`,
+  );
 }

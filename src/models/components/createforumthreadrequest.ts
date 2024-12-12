@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BaseCreateMessageCreateRequest,
   BaseCreateMessageCreateRequest$inboundSchema,
@@ -77,4 +80,22 @@ export namespace CreateForumThreadRequest$ {
   export const outboundSchema = CreateForumThreadRequest$outboundSchema;
   /** @deprecated use `CreateForumThreadRequest$Outbound` instead. */
   export type Outbound = CreateForumThreadRequest$Outbound;
+}
+
+export function createForumThreadRequestToJSON(
+  createForumThreadRequest: CreateForumThreadRequest,
+): string {
+  return JSON.stringify(
+    CreateForumThreadRequest$outboundSchema.parse(createForumThreadRequest),
+  );
+}
+
+export function createForumThreadRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateForumThreadRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateForumThreadRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateForumThreadRequest' from JSON`,
+  );
 }

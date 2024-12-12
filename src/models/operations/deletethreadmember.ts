@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteThreadMemberRequest = {
   channelId: string;
@@ -57,4 +60,22 @@ export namespace DeleteThreadMemberRequest$ {
   export const outboundSchema = DeleteThreadMemberRequest$outboundSchema;
   /** @deprecated use `DeleteThreadMemberRequest$Outbound` instead. */
   export type Outbound = DeleteThreadMemberRequest$Outbound;
+}
+
+export function deleteThreadMemberRequestToJSON(
+  deleteThreadMemberRequest: DeleteThreadMemberRequest,
+): string {
+  return JSON.stringify(
+    DeleteThreadMemberRequest$outboundSchema.parse(deleteThreadMemberRequest),
+  );
+}
+
+export function deleteThreadMemberRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteThreadMemberRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteThreadMemberRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteThreadMemberRequest' from JSON`,
+  );
 }

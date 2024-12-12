@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type OnboardingPromptOptionRequest = {
   id?: string | null | undefined;
@@ -87,4 +90,24 @@ export namespace OnboardingPromptOptionRequest$ {
   export const outboundSchema = OnboardingPromptOptionRequest$outboundSchema;
   /** @deprecated use `OnboardingPromptOptionRequest$Outbound` instead. */
   export type Outbound = OnboardingPromptOptionRequest$Outbound;
+}
+
+export function onboardingPromptOptionRequestToJSON(
+  onboardingPromptOptionRequest: OnboardingPromptOptionRequest,
+): string {
+  return JSON.stringify(
+    OnboardingPromptOptionRequest$outboundSchema.parse(
+      onboardingPromptOptionRequest,
+    ),
+  );
+}
+
+export function onboardingPromptOptionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<OnboardingPromptOptionRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OnboardingPromptOptionRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OnboardingPromptOptionRequest' from JSON`,
+  );
 }

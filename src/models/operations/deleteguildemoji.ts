@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteGuildEmojiRequest = {
   guildId: string;
@@ -57,4 +60,22 @@ export namespace DeleteGuildEmojiRequest$ {
   export const outboundSchema = DeleteGuildEmojiRequest$outboundSchema;
   /** @deprecated use `DeleteGuildEmojiRequest$Outbound` instead. */
   export type Outbound = DeleteGuildEmojiRequest$Outbound;
+}
+
+export function deleteGuildEmojiRequestToJSON(
+  deleteGuildEmojiRequest: DeleteGuildEmojiRequest,
+): string {
+  return JSON.stringify(
+    DeleteGuildEmojiRequest$outboundSchema.parse(deleteGuildEmojiRequest),
+  );
+}
+
+export function deleteGuildEmojiRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildEmojiRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteGuildEmojiRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildEmojiRequest' from JSON`,
+  );
 }

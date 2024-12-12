@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RichEmbedField = {
   name: string;
@@ -50,4 +53,18 @@ export namespace RichEmbedField$ {
   export const outboundSchema = RichEmbedField$outboundSchema;
   /** @deprecated use `RichEmbedField$Outbound` instead. */
   export type Outbound = RichEmbedField$Outbound;
+}
+
+export function richEmbedFieldToJSON(richEmbedField: RichEmbedField): string {
+  return JSON.stringify(RichEmbedField$outboundSchema.parse(richEmbedField));
+}
+
+export function richEmbedFieldFromJSON(
+  jsonString: string,
+): SafeParseResult<RichEmbedField, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RichEmbedField$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RichEmbedField' from JSON`,
+  );
 }

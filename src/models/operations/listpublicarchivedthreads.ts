@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListPublicArchivedThreadsRequest = {
   channelId: string;
@@ -60,4 +63,24 @@ export namespace ListPublicArchivedThreadsRequest$ {
   export const outboundSchema = ListPublicArchivedThreadsRequest$outboundSchema;
   /** @deprecated use `ListPublicArchivedThreadsRequest$Outbound` instead. */
   export type Outbound = ListPublicArchivedThreadsRequest$Outbound;
+}
+
+export function listPublicArchivedThreadsRequestToJSON(
+  listPublicArchivedThreadsRequest: ListPublicArchivedThreadsRequest,
+): string {
+  return JSON.stringify(
+    ListPublicArchivedThreadsRequest$outboundSchema.parse(
+      listPublicArchivedThreadsRequest,
+    ),
+  );
+}
+
+export function listPublicArchivedThreadsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListPublicArchivedThreadsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListPublicArchivedThreadsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListPublicArchivedThreadsRequest' from JSON`,
+  );
 }

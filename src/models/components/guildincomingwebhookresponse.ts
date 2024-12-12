@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserResponse,
   UserResponse$inboundSchema,
@@ -97,4 +100,24 @@ export namespace GuildIncomingWebhookResponse$ {
   export const outboundSchema = GuildIncomingWebhookResponse$outboundSchema;
   /** @deprecated use `GuildIncomingWebhookResponse$Outbound` instead. */
   export type Outbound = GuildIncomingWebhookResponse$Outbound;
+}
+
+export function guildIncomingWebhookResponseToJSON(
+  guildIncomingWebhookResponse: GuildIncomingWebhookResponse,
+): string {
+  return JSON.stringify(
+    GuildIncomingWebhookResponse$outboundSchema.parse(
+      guildIncomingWebhookResponse,
+    ),
+  );
+}
+
+export function guildIncomingWebhookResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildIncomingWebhookResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildIncomingWebhookResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildIncomingWebhookResponse' from JSON`,
+  );
 }

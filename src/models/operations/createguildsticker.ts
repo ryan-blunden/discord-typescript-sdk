@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateGuildStickerRequestBody = {
   file: string;
@@ -62,6 +65,26 @@ export namespace CreateGuildStickerRequestBody$ {
   export type Outbound = CreateGuildStickerRequestBody$Outbound;
 }
 
+export function createGuildStickerRequestBodyToJSON(
+  createGuildStickerRequestBody: CreateGuildStickerRequestBody,
+): string {
+  return JSON.stringify(
+    CreateGuildStickerRequestBody$outboundSchema.parse(
+      createGuildStickerRequestBody,
+    ),
+  );
+}
+
+export function createGuildStickerRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildStickerRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildStickerRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildStickerRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const CreateGuildStickerRequest$inboundSchema: z.ZodType<
   CreateGuildStickerRequest,
@@ -109,4 +132,22 @@ export namespace CreateGuildStickerRequest$ {
   export const outboundSchema = CreateGuildStickerRequest$outboundSchema;
   /** @deprecated use `CreateGuildStickerRequest$Outbound` instead. */
   export type Outbound = CreateGuildStickerRequest$Outbound;
+}
+
+export function createGuildStickerRequestToJSON(
+  createGuildStickerRequest: CreateGuildStickerRequest,
+): string {
+  return JSON.stringify(
+    CreateGuildStickerRequest$outboundSchema.parse(createGuildStickerRequest),
+  );
+}
+
+export function createGuildStickerRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildStickerRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildStickerRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildStickerRequest' from JSON`,
+  );
 }

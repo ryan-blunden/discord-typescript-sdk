@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateGuildStickerRequestBody = {
   name?: string | undefined;
@@ -59,6 +62,26 @@ export namespace UpdateGuildStickerRequestBody$ {
   export type Outbound = UpdateGuildStickerRequestBody$Outbound;
 }
 
+export function updateGuildStickerRequestBodyToJSON(
+  updateGuildStickerRequestBody: UpdateGuildStickerRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateGuildStickerRequestBody$outboundSchema.parse(
+      updateGuildStickerRequestBody,
+    ),
+  );
+}
+
+export function updateGuildStickerRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildStickerRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildStickerRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildStickerRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpdateGuildStickerRequest$inboundSchema: z.ZodType<
   UpdateGuildStickerRequest,
@@ -111,4 +134,22 @@ export namespace UpdateGuildStickerRequest$ {
   export const outboundSchema = UpdateGuildStickerRequest$outboundSchema;
   /** @deprecated use `UpdateGuildStickerRequest$Outbound` instead. */
   export type Outbound = UpdateGuildStickerRequest$Outbound;
+}
+
+export function updateGuildStickerRequestToJSON(
+  updateGuildStickerRequest: UpdateGuildStickerRequest,
+): string {
+  return JSON.stringify(
+    UpdateGuildStickerRequest$outboundSchema.parse(updateGuildStickerRequest),
+  );
+}
+
+export function updateGuildStickerRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildStickerRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildStickerRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildStickerRequest' from JSON`,
+  );
 }

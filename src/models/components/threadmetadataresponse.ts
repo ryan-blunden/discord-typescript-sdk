@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ThreadMetadataResponse = {
   archived: boolean;
@@ -81,4 +84,22 @@ export namespace ThreadMetadataResponse$ {
   export const outboundSchema = ThreadMetadataResponse$outboundSchema;
   /** @deprecated use `ThreadMetadataResponse$Outbound` instead. */
   export type Outbound = ThreadMetadataResponse$Outbound;
+}
+
+export function threadMetadataResponseToJSON(
+  threadMetadataResponse: ThreadMetadataResponse,
+): string {
+  return JSON.stringify(
+    ThreadMetadataResponse$outboundSchema.parse(threadMetadataResponse),
+  );
+}
+
+export function threadMetadataResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ThreadMetadataResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ThreadMetadataResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ThreadMetadataResponse' from JSON`,
+  );
 }

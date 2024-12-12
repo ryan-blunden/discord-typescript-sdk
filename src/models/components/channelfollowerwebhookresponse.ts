@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserResponse,
   UserResponse$inboundSchema,
@@ -115,4 +118,24 @@ export namespace ChannelFollowerWebhookResponse$ {
   export const outboundSchema = ChannelFollowerWebhookResponse$outboundSchema;
   /** @deprecated use `ChannelFollowerWebhookResponse$Outbound` instead. */
   export type Outbound = ChannelFollowerWebhookResponse$Outbound;
+}
+
+export function channelFollowerWebhookResponseToJSON(
+  channelFollowerWebhookResponse: ChannelFollowerWebhookResponse,
+): string {
+  return JSON.stringify(
+    ChannelFollowerWebhookResponse$outboundSchema.parse(
+      channelFollowerWebhookResponse,
+    ),
+  );
+}
+
+export function channelFollowerWebhookResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ChannelFollowerWebhookResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ChannelFollowerWebhookResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChannelFollowerWebhookResponse' from JSON`,
+  );
 }

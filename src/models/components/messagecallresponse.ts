@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageCallResponse = {
   endedTimestamp?: Date | null | undefined;
@@ -58,4 +61,22 @@ export namespace MessageCallResponse$ {
   export const outboundSchema = MessageCallResponse$outboundSchema;
   /** @deprecated use `MessageCallResponse$Outbound` instead. */
   export type Outbound = MessageCallResponse$Outbound;
+}
+
+export function messageCallResponseToJSON(
+  messageCallResponse: MessageCallResponse,
+): string {
+  return JSON.stringify(
+    MessageCallResponse$outboundSchema.parse(messageCallResponse),
+  );
+}
+
+export function messageCallResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageCallResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageCallResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageCallResponse' from JSON`,
+  );
 }

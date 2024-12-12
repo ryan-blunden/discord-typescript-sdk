@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GuildWelcomeScreenChannelResponse,
   GuildWelcomeScreenChannelResponse$inboundSchema,
@@ -61,4 +64,22 @@ export namespace GuildWelcomeScreenResponse$ {
   export const outboundSchema = GuildWelcomeScreenResponse$outboundSchema;
   /** @deprecated use `GuildWelcomeScreenResponse$Outbound` instead. */
   export type Outbound = GuildWelcomeScreenResponse$Outbound;
+}
+
+export function guildWelcomeScreenResponseToJSON(
+  guildWelcomeScreenResponse: GuildWelcomeScreenResponse,
+): string {
+  return JSON.stringify(
+    GuildWelcomeScreenResponse$outboundSchema.parse(guildWelcomeScreenResponse),
+  );
+}
+
+export function guildWelcomeScreenResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildWelcomeScreenResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildWelcomeScreenResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildWelcomeScreenResponse' from JSON`,
+  );
 }

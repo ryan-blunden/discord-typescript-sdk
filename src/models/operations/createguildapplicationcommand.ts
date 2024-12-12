@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateGuildApplicationCommandSecurity = {
   botToken?: string | undefined;
@@ -60,6 +63,27 @@ export namespace CreateGuildApplicationCommandSecurity$ {
     CreateGuildApplicationCommandSecurity$outboundSchema;
   /** @deprecated use `CreateGuildApplicationCommandSecurity$Outbound` instead. */
   export type Outbound = CreateGuildApplicationCommandSecurity$Outbound;
+}
+
+export function createGuildApplicationCommandSecurityToJSON(
+  createGuildApplicationCommandSecurity: CreateGuildApplicationCommandSecurity,
+): string {
+  return JSON.stringify(
+    CreateGuildApplicationCommandSecurity$outboundSchema.parse(
+      createGuildApplicationCommandSecurity,
+    ),
+  );
+}
+
+export function createGuildApplicationCommandSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildApplicationCommandSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateGuildApplicationCommandSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildApplicationCommandSecurity' from JSON`,
+  );
 }
 
 /** @internal */
@@ -119,4 +143,25 @@ export namespace CreateGuildApplicationCommandRequest$ {
     CreateGuildApplicationCommandRequest$outboundSchema;
   /** @deprecated use `CreateGuildApplicationCommandRequest$Outbound` instead. */
   export type Outbound = CreateGuildApplicationCommandRequest$Outbound;
+}
+
+export function createGuildApplicationCommandRequestToJSON(
+  createGuildApplicationCommandRequest: CreateGuildApplicationCommandRequest,
+): string {
+  return JSON.stringify(
+    CreateGuildApplicationCommandRequest$outboundSchema.parse(
+      createGuildApplicationCommandRequest,
+    ),
+  );
+}
+
+export function createGuildApplicationCommandRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildApplicationCommandRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateGuildApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildApplicationCommandRequest' from JSON`,
+  );
 }

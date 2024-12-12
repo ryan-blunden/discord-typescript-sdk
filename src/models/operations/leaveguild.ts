@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type LeaveGuildRequest = {
   guildId: string;
@@ -51,4 +54,22 @@ export namespace LeaveGuildRequest$ {
   export const outboundSchema = LeaveGuildRequest$outboundSchema;
   /** @deprecated use `LeaveGuildRequest$Outbound` instead. */
   export type Outbound = LeaveGuildRequest$Outbound;
+}
+
+export function leaveGuildRequestToJSON(
+  leaveGuildRequest: LeaveGuildRequest,
+): string {
+  return JSON.stringify(
+    LeaveGuildRequest$outboundSchema.parse(leaveGuildRequest),
+  );
+}
+
+export function leaveGuildRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<LeaveGuildRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => LeaveGuildRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'LeaveGuildRequest' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteOriginalWebhookMessageSecurity = {
   botToken?: string | undefined;
@@ -61,6 +64,27 @@ export namespace DeleteOriginalWebhookMessageSecurity$ {
   export type Outbound = DeleteOriginalWebhookMessageSecurity$Outbound;
 }
 
+export function deleteOriginalWebhookMessageSecurityToJSON(
+  deleteOriginalWebhookMessageSecurity: DeleteOriginalWebhookMessageSecurity,
+): string {
+  return JSON.stringify(
+    DeleteOriginalWebhookMessageSecurity$outboundSchema.parse(
+      deleteOriginalWebhookMessageSecurity,
+    ),
+  );
+}
+
+export function deleteOriginalWebhookMessageSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteOriginalWebhookMessageSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteOriginalWebhookMessageSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteOriginalWebhookMessageSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const DeleteOriginalWebhookMessageRequest$inboundSchema: z.ZodType<
   DeleteOriginalWebhookMessageRequest,
@@ -115,4 +139,25 @@ export namespace DeleteOriginalWebhookMessageRequest$ {
     DeleteOriginalWebhookMessageRequest$outboundSchema;
   /** @deprecated use `DeleteOriginalWebhookMessageRequest$Outbound` instead. */
   export type Outbound = DeleteOriginalWebhookMessageRequest$Outbound;
+}
+
+export function deleteOriginalWebhookMessageRequestToJSON(
+  deleteOriginalWebhookMessageRequest: DeleteOriginalWebhookMessageRequest,
+): string {
+  return JSON.stringify(
+    DeleteOriginalWebhookMessageRequest$outboundSchema.parse(
+      deleteOriginalWebhookMessageRequest,
+    ),
+  );
+}
+
+export function deleteOriginalWebhookMessageRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteOriginalWebhookMessageRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteOriginalWebhookMessageRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteOriginalWebhookMessageRequest' from JSON`,
+  );
 }

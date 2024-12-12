@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteApplicationEmojiRequest = {
   applicationId: string;
@@ -57,4 +60,24 @@ export namespace DeleteApplicationEmojiRequest$ {
   export const outboundSchema = DeleteApplicationEmojiRequest$outboundSchema;
   /** @deprecated use `DeleteApplicationEmojiRequest$Outbound` instead. */
   export type Outbound = DeleteApplicationEmojiRequest$Outbound;
+}
+
+export function deleteApplicationEmojiRequestToJSON(
+  deleteApplicationEmojiRequest: DeleteApplicationEmojiRequest,
+): string {
+  return JSON.stringify(
+    DeleteApplicationEmojiRequest$outboundSchema.parse(
+      deleteApplicationEmojiRequest,
+    ),
+  );
+}
+
+export function deleteApplicationEmojiRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteApplicationEmojiRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteApplicationEmojiRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteApplicationEmojiRequest' from JSON`,
+  );
 }

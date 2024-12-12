@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BlockMessageAction,
   BlockMessageAction$inboundSchema,
@@ -108,6 +111,33 @@ export namespace DefaultKeywordListUpsertRequestPartialActions$ {
   export type Outbound = DefaultKeywordListUpsertRequestPartialActions$Outbound;
 }
 
+export function defaultKeywordListUpsertRequestPartialActionsToJSON(
+  defaultKeywordListUpsertRequestPartialActions:
+    DefaultKeywordListUpsertRequestPartialActions,
+): string {
+  return JSON.stringify(
+    DefaultKeywordListUpsertRequestPartialActions$outboundSchema.parse(
+      defaultKeywordListUpsertRequestPartialActions,
+    ),
+  );
+}
+
+export function defaultKeywordListUpsertRequestPartialActionsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DefaultKeywordListUpsertRequestPartialActions,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DefaultKeywordListUpsertRequestPartialActions$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DefaultKeywordListUpsertRequestPartialActions' from JSON`,
+  );
+}
+
 /** @internal */
 export const DefaultKeywordListUpsertRequestPartial$inboundSchema: z.ZodType<
   DefaultKeywordListUpsertRequestPartial,
@@ -207,4 +237,26 @@ export namespace DefaultKeywordListUpsertRequestPartial$ {
     DefaultKeywordListUpsertRequestPartial$outboundSchema;
   /** @deprecated use `DefaultKeywordListUpsertRequestPartial$Outbound` instead. */
   export type Outbound = DefaultKeywordListUpsertRequestPartial$Outbound;
+}
+
+export function defaultKeywordListUpsertRequestPartialToJSON(
+  defaultKeywordListUpsertRequestPartial:
+    DefaultKeywordListUpsertRequestPartial,
+): string {
+  return JSON.stringify(
+    DefaultKeywordListUpsertRequestPartial$outboundSchema.parse(
+      defaultKeywordListUpsertRequestPartial,
+    ),
+  );
+}
+
+export function defaultKeywordListUpsertRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<DefaultKeywordListUpsertRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DefaultKeywordListUpsertRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DefaultKeywordListUpsertRequestPartial' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageMentionChannelResponse = {
   id: string;
@@ -63,4 +66,24 @@ export namespace MessageMentionChannelResponse$ {
   export const outboundSchema = MessageMentionChannelResponse$outboundSchema;
   /** @deprecated use `MessageMentionChannelResponse$Outbound` instead. */
   export type Outbound = MessageMentionChannelResponse$Outbound;
+}
+
+export function messageMentionChannelResponseToJSON(
+  messageMentionChannelResponse: MessageMentionChannelResponse,
+): string {
+  return JSON.stringify(
+    MessageMentionChannelResponse$outboundSchema.parse(
+      messageMentionChannelResponse,
+    ),
+  );
+}
+
+export function messageMentionChannelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageMentionChannelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageMentionChannelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageMentionChannelResponse' from JSON`,
+  );
 }

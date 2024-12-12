@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ExecuteGithubCompatibleWebhookSecurity = {
   botToken?: string | undefined;
@@ -62,6 +65,28 @@ export namespace ExecuteGithubCompatibleWebhookSecurity$ {
     ExecuteGithubCompatibleWebhookSecurity$outboundSchema;
   /** @deprecated use `ExecuteGithubCompatibleWebhookSecurity$Outbound` instead. */
   export type Outbound = ExecuteGithubCompatibleWebhookSecurity$Outbound;
+}
+
+export function executeGithubCompatibleWebhookSecurityToJSON(
+  executeGithubCompatibleWebhookSecurity:
+    ExecuteGithubCompatibleWebhookSecurity,
+): string {
+  return JSON.stringify(
+    ExecuteGithubCompatibleWebhookSecurity$outboundSchema.parse(
+      executeGithubCompatibleWebhookSecurity,
+    ),
+  );
+}
+
+export function executeGithubCompatibleWebhookSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<ExecuteGithubCompatibleWebhookSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ExecuteGithubCompatibleWebhookSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ExecuteGithubCompatibleWebhookSecurity' from JSON`,
+  );
 }
 
 /** @internal */
@@ -126,4 +151,25 @@ export namespace ExecuteGithubCompatibleWebhookRequest$ {
     ExecuteGithubCompatibleWebhookRequest$outboundSchema;
   /** @deprecated use `ExecuteGithubCompatibleWebhookRequest$Outbound` instead. */
   export type Outbound = ExecuteGithubCompatibleWebhookRequest$Outbound;
+}
+
+export function executeGithubCompatibleWebhookRequestToJSON(
+  executeGithubCompatibleWebhookRequest: ExecuteGithubCompatibleWebhookRequest,
+): string {
+  return JSON.stringify(
+    ExecuteGithubCompatibleWebhookRequest$outboundSchema.parse(
+      executeGithubCompatibleWebhookRequest,
+    ),
+  );
+}
+
+export function executeGithubCompatibleWebhookRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ExecuteGithubCompatibleWebhookRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ExecuteGithubCompatibleWebhookRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ExecuteGithubCompatibleWebhookRequest' from JSON`,
+  );
 }

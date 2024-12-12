@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserResponse,
   UserResponse$inboundSchema,
@@ -82,4 +85,22 @@ export namespace PrivateChannelResponse$ {
   export const outboundSchema = PrivateChannelResponse$outboundSchema;
   /** @deprecated use `PrivateChannelResponse$Outbound` instead. */
   export type Outbound = PrivateChannelResponse$Outbound;
+}
+
+export function privateChannelResponseToJSON(
+  privateChannelResponse: PrivateChannelResponse,
+): string {
+  return JSON.stringify(
+    PrivateChannelResponse$outboundSchema.parse(privateChannelResponse),
+  );
+}
+
+export function privateChannelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PrivateChannelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PrivateChannelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PrivateChannelResponse' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateGuildRoleRequestBody = {
   name?: string | null | undefined;
@@ -82,6 +85,24 @@ export namespace CreateGuildRoleRequestBody$ {
   export type Outbound = CreateGuildRoleRequestBody$Outbound;
 }
 
+export function createGuildRoleRequestBodyToJSON(
+  createGuildRoleRequestBody: CreateGuildRoleRequestBody,
+): string {
+  return JSON.stringify(
+    CreateGuildRoleRequestBody$outboundSchema.parse(createGuildRoleRequestBody),
+  );
+}
+
+export function createGuildRoleRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildRoleRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildRoleRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildRoleRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const CreateGuildRoleRequest$inboundSchema: z.ZodType<
   CreateGuildRoleRequest,
@@ -129,4 +150,22 @@ export namespace CreateGuildRoleRequest$ {
   export const outboundSchema = CreateGuildRoleRequest$outboundSchema;
   /** @deprecated use `CreateGuildRoleRequest$Outbound` instead. */
   export type Outbound = CreateGuildRoleRequest$Outbound;
+}
+
+export function createGuildRoleRequestToJSON(
+  createGuildRoleRequest: CreateGuildRoleRequest,
+): string {
+  return JSON.stringify(
+    CreateGuildRoleRequest$outboundSchema.parse(createGuildRoleRequest),
+  );
+}
+
+export function createGuildRoleRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildRoleRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildRoleRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildRoleRequest' from JSON`,
+  );
 }

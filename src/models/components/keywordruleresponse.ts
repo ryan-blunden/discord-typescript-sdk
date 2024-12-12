@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BlockMessageActionResponse,
   BlockMessageActionResponse$inboundSchema,
@@ -102,6 +105,24 @@ export namespace KeywordRuleResponseActions$ {
   export const outboundSchema = KeywordRuleResponseActions$outboundSchema;
   /** @deprecated use `KeywordRuleResponseActions$Outbound` instead. */
   export type Outbound = KeywordRuleResponseActions$Outbound;
+}
+
+export function keywordRuleResponseActionsToJSON(
+  keywordRuleResponseActions: KeywordRuleResponseActions,
+): string {
+  return JSON.stringify(
+    KeywordRuleResponseActions$outboundSchema.parse(keywordRuleResponseActions),
+  );
+}
+
+export function keywordRuleResponseActionsFromJSON(
+  jsonString: string,
+): SafeParseResult<KeywordRuleResponseActions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => KeywordRuleResponseActions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'KeywordRuleResponseActions' from JSON`,
+  );
 }
 
 /** @internal */
@@ -207,4 +228,22 @@ export namespace KeywordRuleResponse$ {
   export const outboundSchema = KeywordRuleResponse$outboundSchema;
   /** @deprecated use `KeywordRuleResponse$Outbound` instead. */
   export type Outbound = KeywordRuleResponse$Outbound;
+}
+
+export function keywordRuleResponseToJSON(
+  keywordRuleResponse: KeywordRuleResponse,
+): string {
+  return JSON.stringify(
+    KeywordRuleResponse$outboundSchema.parse(keywordRuleResponse),
+  );
+}
+
+export function keywordRuleResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<KeywordRuleResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => KeywordRuleResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'KeywordRuleResponse' from JSON`,
+  );
 }

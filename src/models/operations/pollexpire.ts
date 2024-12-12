@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PollExpireRequest = {
   channelId: string;
@@ -57,4 +60,22 @@ export namespace PollExpireRequest$ {
   export const outboundSchema = PollExpireRequest$outboundSchema;
   /** @deprecated use `PollExpireRequest$Outbound` instead. */
   export type Outbound = PollExpireRequest$Outbound;
+}
+
+export function pollExpireRequestToJSON(
+  pollExpireRequest: PollExpireRequest,
+): string {
+  return JSON.stringify(
+    PollExpireRequest$outboundSchema.parse(pollExpireRequest),
+  );
+}
+
+export function pollExpireRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<PollExpireRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PollExpireRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PollExpireRequest' from JSON`,
+  );
 }

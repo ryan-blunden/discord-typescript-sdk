@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteGroupDmUserRequest = {
   channelId: string;
@@ -57,4 +60,22 @@ export namespace DeleteGroupDmUserRequest$ {
   export const outboundSchema = DeleteGroupDmUserRequest$outboundSchema;
   /** @deprecated use `DeleteGroupDmUserRequest$Outbound` instead. */
   export type Outbound = DeleteGroupDmUserRequest$Outbound;
+}
+
+export function deleteGroupDmUserRequestToJSON(
+  deleteGroupDmUserRequest: DeleteGroupDmUserRequest,
+): string {
+  return JSON.stringify(
+    DeleteGroupDmUserRequest$outboundSchema.parse(deleteGroupDmUserRequest),
+  );
+}
+
+export function deleteGroupDmUserRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGroupDmUserRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteGroupDmUserRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGroupDmUserRequest' from JSON`,
+  );
 }
