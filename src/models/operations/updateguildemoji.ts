@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateGuildEmojiRequestBody = {
   name?: string | undefined;
@@ -53,6 +56,26 @@ export namespace UpdateGuildEmojiRequestBody$ {
   export const outboundSchema = UpdateGuildEmojiRequestBody$outboundSchema;
   /** @deprecated use `UpdateGuildEmojiRequestBody$Outbound` instead. */
   export type Outbound = UpdateGuildEmojiRequestBody$Outbound;
+}
+
+export function updateGuildEmojiRequestBodyToJSON(
+  updateGuildEmojiRequestBody: UpdateGuildEmojiRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateGuildEmojiRequestBody$outboundSchema.parse(
+      updateGuildEmojiRequestBody,
+    ),
+  );
+}
+
+export function updateGuildEmojiRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildEmojiRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildEmojiRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildEmojiRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -107,4 +130,22 @@ export namespace UpdateGuildEmojiRequest$ {
   export const outboundSchema = UpdateGuildEmojiRequest$outboundSchema;
   /** @deprecated use `UpdateGuildEmojiRequest$Outbound` instead. */
   export type Outbound = UpdateGuildEmojiRequest$Outbound;
+}
+
+export function updateGuildEmojiRequestToJSON(
+  updateGuildEmojiRequest: UpdateGuildEmojiRequest,
+): string {
+  return JSON.stringify(
+    UpdateGuildEmojiRequest$outboundSchema.parse(updateGuildEmojiRequest),
+  );
+}
+
+export function updateGuildEmojiRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildEmojiRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildEmojiRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildEmojiRequest' from JSON`,
+  );
 }

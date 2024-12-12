@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserResponse,
   UserResponse$inboundSchema,
@@ -85,4 +88,31 @@ export namespace MessageComponentInteractionMetadataResponse$ {
     MessageComponentInteractionMetadataResponse$outboundSchema;
   /** @deprecated use `MessageComponentInteractionMetadataResponse$Outbound` instead. */
   export type Outbound = MessageComponentInteractionMetadataResponse$Outbound;
+}
+
+export function messageComponentInteractionMetadataResponseToJSON(
+  messageComponentInteractionMetadataResponse:
+    MessageComponentInteractionMetadataResponse,
+): string {
+  return JSON.stringify(
+    MessageComponentInteractionMetadataResponse$outboundSchema.parse(
+      messageComponentInteractionMetadataResponse,
+    ),
+  );
+}
+
+export function messageComponentInteractionMetadataResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  MessageComponentInteractionMetadataResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      MessageComponentInteractionMetadataResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'MessageComponentInteractionMetadataResponse' from JSON`,
+  );
 }

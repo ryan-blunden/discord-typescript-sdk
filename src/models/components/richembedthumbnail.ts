@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RichEmbedThumbnail = {
   url?: string | null | undefined;
@@ -73,4 +76,22 @@ export namespace RichEmbedThumbnail$ {
   export const outboundSchema = RichEmbedThumbnail$outboundSchema;
   /** @deprecated use `RichEmbedThumbnail$Outbound` instead. */
   export type Outbound = RichEmbedThumbnail$Outbound;
+}
+
+export function richEmbedThumbnailToJSON(
+  richEmbedThumbnail: RichEmbedThumbnail,
+): string {
+  return JSON.stringify(
+    RichEmbedThumbnail$outboundSchema.parse(richEmbedThumbnail),
+  );
+}
+
+export function richEmbedThumbnailFromJSON(
+  jsonString: string,
+): SafeParseResult<RichEmbedThumbnail, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RichEmbedThumbnail$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RichEmbedThumbnail' from JSON`,
+  );
 }

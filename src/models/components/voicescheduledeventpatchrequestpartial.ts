@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EntityMetadataVoice,
   EntityMetadataVoice$inboundSchema,
@@ -110,4 +113,26 @@ export namespace VoiceScheduledEventPatchRequestPartial$ {
     VoiceScheduledEventPatchRequestPartial$outboundSchema;
   /** @deprecated use `VoiceScheduledEventPatchRequestPartial$Outbound` instead. */
   export type Outbound = VoiceScheduledEventPatchRequestPartial$Outbound;
+}
+
+export function voiceScheduledEventPatchRequestPartialToJSON(
+  voiceScheduledEventPatchRequestPartial:
+    VoiceScheduledEventPatchRequestPartial,
+): string {
+  return JSON.stringify(
+    VoiceScheduledEventPatchRequestPartial$outboundSchema.parse(
+      voiceScheduledEventPatchRequestPartial,
+    ),
+  );
+}
+
+export function voiceScheduledEventPatchRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<VoiceScheduledEventPatchRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      VoiceScheduledEventPatchRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VoiceScheduledEventPatchRequestPartial' from JSON`,
+  );
 }

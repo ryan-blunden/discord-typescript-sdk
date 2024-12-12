@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListMyGuildsSecurity = {
   botToken?: string | undefined;
@@ -60,6 +63,24 @@ export namespace ListMyGuildsSecurity$ {
   export type Outbound = ListMyGuildsSecurity$Outbound;
 }
 
+export function listMyGuildsSecurityToJSON(
+  listMyGuildsSecurity: ListMyGuildsSecurity,
+): string {
+  return JSON.stringify(
+    ListMyGuildsSecurity$outboundSchema.parse(listMyGuildsSecurity),
+  );
+}
+
+export function listMyGuildsSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<ListMyGuildsSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListMyGuildsSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListMyGuildsSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const ListMyGuildsRequest$inboundSchema: z.ZodType<
   ListMyGuildsRequest,
@@ -111,4 +132,22 @@ export namespace ListMyGuildsRequest$ {
   export const outboundSchema = ListMyGuildsRequest$outboundSchema;
   /** @deprecated use `ListMyGuildsRequest$Outbound` instead. */
   export type Outbound = ListMyGuildsRequest$Outbound;
+}
+
+export function listMyGuildsRequestToJSON(
+  listMyGuildsRequest: ListMyGuildsRequest,
+): string {
+  return JSON.stringify(
+    ListMyGuildsRequest$outboundSchema.parse(listMyGuildsRequest),
+  );
+}
+
+export function listMyGuildsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ListMyGuildsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListMyGuildsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListMyGuildsRequest' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ApplicationCommandChannelOption = {
   type?: 1 | undefined;
@@ -79,4 +82,24 @@ export namespace ApplicationCommandChannelOption$ {
   export const outboundSchema = ApplicationCommandChannelOption$outboundSchema;
   /** @deprecated use `ApplicationCommandChannelOption$Outbound` instead. */
   export type Outbound = ApplicationCommandChannelOption$Outbound;
+}
+
+export function applicationCommandChannelOptionToJSON(
+  applicationCommandChannelOption: ApplicationCommandChannelOption,
+): string {
+  return JSON.stringify(
+    ApplicationCommandChannelOption$outboundSchema.parse(
+      applicationCommandChannelOption,
+    ),
+  );
+}
+
+export function applicationCommandChannelOptionFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationCommandChannelOption, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ApplicationCommandChannelOption$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationCommandChannelOption' from JSON`,
+  );
 }

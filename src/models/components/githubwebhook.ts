@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GithubCheckRun,
   GithubCheckRun$inboundSchema,
@@ -195,4 +198,18 @@ export namespace GithubWebhook$ {
   export const outboundSchema = GithubWebhook$outboundSchema;
   /** @deprecated use `GithubWebhook$Outbound` instead. */
   export type Outbound = GithubWebhook$Outbound;
+}
+
+export function githubWebhookToJSON(githubWebhook: GithubWebhook): string {
+  return JSON.stringify(GithubWebhook$outboundSchema.parse(githubWebhook));
+}
+
+export function githubWebhookFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubWebhook, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubWebhook$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubWebhook' from JSON`,
+  );
 }

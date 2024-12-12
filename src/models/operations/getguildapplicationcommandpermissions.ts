@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildApplicationCommandPermissionsSecurity = {
   botToken?: string | undefined;
@@ -63,6 +66,33 @@ export namespace GetGuildApplicationCommandPermissionsSecurity$ {
   export type Outbound = GetGuildApplicationCommandPermissionsSecurity$Outbound;
 }
 
+export function getGuildApplicationCommandPermissionsSecurityToJSON(
+  getGuildApplicationCommandPermissionsSecurity:
+    GetGuildApplicationCommandPermissionsSecurity,
+): string {
+  return JSON.stringify(
+    GetGuildApplicationCommandPermissionsSecurity$outboundSchema.parse(
+      getGuildApplicationCommandPermissionsSecurity,
+    ),
+  );
+}
+
+export function getGuildApplicationCommandPermissionsSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetGuildApplicationCommandPermissionsSecurity,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetGuildApplicationCommandPermissionsSecurity$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetGuildApplicationCommandPermissionsSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetGuildApplicationCommandPermissionsRequest$inboundSchema:
   z.ZodType<
@@ -119,4 +149,31 @@ export namespace GetGuildApplicationCommandPermissionsRequest$ {
     GetGuildApplicationCommandPermissionsRequest$outboundSchema;
   /** @deprecated use `GetGuildApplicationCommandPermissionsRequest$Outbound` instead. */
   export type Outbound = GetGuildApplicationCommandPermissionsRequest$Outbound;
+}
+
+export function getGuildApplicationCommandPermissionsRequestToJSON(
+  getGuildApplicationCommandPermissionsRequest:
+    GetGuildApplicationCommandPermissionsRequest,
+): string {
+  return JSON.stringify(
+    GetGuildApplicationCommandPermissionsRequest$outboundSchema.parse(
+      getGuildApplicationCommandPermissionsRequest,
+    ),
+  );
+}
+
+export function getGuildApplicationCommandPermissionsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetGuildApplicationCommandPermissionsRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetGuildApplicationCommandPermissionsRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetGuildApplicationCommandPermissionsRequest' from JSON`,
+  );
 }

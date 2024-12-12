@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateApplicationUserRoleConnectionRequestBody = {
   platformName?: string | null | undefined;
@@ -73,6 +76,33 @@ export namespace UpdateApplicationUserRoleConnectionRequestBody$ {
     UpdateApplicationUserRoleConnectionRequestBody$Outbound;
 }
 
+export function updateApplicationUserRoleConnectionRequestBodyToJSON(
+  updateApplicationUserRoleConnectionRequestBody:
+    UpdateApplicationUserRoleConnectionRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateApplicationUserRoleConnectionRequestBody$outboundSchema.parse(
+      updateApplicationUserRoleConnectionRequestBody,
+    ),
+  );
+}
+
+export function updateApplicationUserRoleConnectionRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateApplicationUserRoleConnectionRequestBody,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateApplicationUserRoleConnectionRequestBody$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateApplicationUserRoleConnectionRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpdateApplicationUserRoleConnectionRequest$inboundSchema:
   z.ZodType<UpdateApplicationUserRoleConnectionRequest, z.ZodTypeDef, unknown> =
@@ -125,4 +155,31 @@ export namespace UpdateApplicationUserRoleConnectionRequest$ {
     UpdateApplicationUserRoleConnectionRequest$outboundSchema;
   /** @deprecated use `UpdateApplicationUserRoleConnectionRequest$Outbound` instead. */
   export type Outbound = UpdateApplicationUserRoleConnectionRequest$Outbound;
+}
+
+export function updateApplicationUserRoleConnectionRequestToJSON(
+  updateApplicationUserRoleConnectionRequest:
+    UpdateApplicationUserRoleConnectionRequest,
+): string {
+  return JSON.stringify(
+    UpdateApplicationUserRoleConnectionRequest$outboundSchema.parse(
+      updateApplicationUserRoleConnectionRequest,
+    ),
+  );
+}
+
+export function updateApplicationUserRoleConnectionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateApplicationUserRoleConnectionRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateApplicationUserRoleConnectionRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateApplicationUserRoleConnectionRequest' from JSON`,
+  );
 }

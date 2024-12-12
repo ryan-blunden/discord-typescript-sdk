@@ -23,4 +23,5 @@ let value: GetEntitlementsRequest = {
 | `after`             | *string*            | :heavy_minus_sign:  | N/A                 |
 | `limit`             | *number*            | :heavy_minus_sign:  | N/A                 |
 | `excludeEnded`      | *boolean*           | :heavy_minus_sign:  | N/A                 |
+| `excludeDeleted`    | *boolean*           | :heavy_minus_sign:  | N/A                 |
 | `onlyActive`        | *boolean*           | :heavy_minus_sign:  | N/A                 |

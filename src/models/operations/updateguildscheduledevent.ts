@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateGuildScheduledEventRequestBody =
   | components.ExternalScheduledEventPatchRequestPartial
@@ -69,6 +72,27 @@ export namespace UpdateGuildScheduledEventRequestBody$ {
     UpdateGuildScheduledEventRequestBody$outboundSchema;
   /** @deprecated use `UpdateGuildScheduledEventRequestBody$Outbound` instead. */
   export type Outbound = UpdateGuildScheduledEventRequestBody$Outbound;
+}
+
+export function updateGuildScheduledEventRequestBodyToJSON(
+  updateGuildScheduledEventRequestBody: UpdateGuildScheduledEventRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateGuildScheduledEventRequestBody$outboundSchema.parse(
+      updateGuildScheduledEventRequestBody,
+    ),
+  );
+}
+
+export function updateGuildScheduledEventRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildScheduledEventRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateGuildScheduledEventRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildScheduledEventRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -136,6 +160,26 @@ export namespace UpdateGuildScheduledEventRequest$ {
   export type Outbound = UpdateGuildScheduledEventRequest$Outbound;
 }
 
+export function updateGuildScheduledEventRequestToJSON(
+  updateGuildScheduledEventRequest: UpdateGuildScheduledEventRequest,
+): string {
+  return JSON.stringify(
+    UpdateGuildScheduledEventRequest$outboundSchema.parse(
+      updateGuildScheduledEventRequest,
+    ),
+  );
+}
+
+export function updateGuildScheduledEventRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildScheduledEventRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildScheduledEventRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildScheduledEventRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpdateGuildScheduledEventResponseBody$inboundSchema: z.ZodType<
   UpdateGuildScheduledEventResponseBody,
@@ -177,4 +221,25 @@ export namespace UpdateGuildScheduledEventResponseBody$ {
     UpdateGuildScheduledEventResponseBody$outboundSchema;
   /** @deprecated use `UpdateGuildScheduledEventResponseBody$Outbound` instead. */
   export type Outbound = UpdateGuildScheduledEventResponseBody$Outbound;
+}
+
+export function updateGuildScheduledEventResponseBodyToJSON(
+  updateGuildScheduledEventResponseBody: UpdateGuildScheduledEventResponseBody,
+): string {
+  return JSON.stringify(
+    UpdateGuildScheduledEventResponseBody$outboundSchema.parse(
+      updateGuildScheduledEventResponseBody,
+    ),
+  );
+}
+
+export function updateGuildScheduledEventResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildScheduledEventResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateGuildScheduledEventResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildScheduledEventResponseBody' from JSON`,
+  );
 }

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type VanityURLErrorResponse = {
   message: string;
@@ -46,4 +49,22 @@ export namespace VanityURLErrorResponse$ {
   export const outboundSchema = VanityURLErrorResponse$outboundSchema;
   /** @deprecated use `VanityURLErrorResponse$Outbound` instead. */
   export type Outbound = VanityURLErrorResponse$Outbound;
+}
+
+export function vanityURLErrorResponseToJSON(
+  vanityURLErrorResponse: VanityURLErrorResponse,
+): string {
+  return JSON.stringify(
+    VanityURLErrorResponse$outboundSchema.parse(vanityURLErrorResponse),
+  );
+}
+
+export function vanityURLErrorResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<VanityURLErrorResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => VanityURLErrorResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VanityURLErrorResponse' from JSON`,
+  );
 }

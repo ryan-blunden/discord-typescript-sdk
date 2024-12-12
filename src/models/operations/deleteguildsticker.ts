@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteGuildStickerRequest = {
   guildId: string;
@@ -57,4 +60,22 @@ export namespace DeleteGuildStickerRequest$ {
   export const outboundSchema = DeleteGuildStickerRequest$outboundSchema;
   /** @deprecated use `DeleteGuildStickerRequest$Outbound` instead. */
   export type Outbound = DeleteGuildStickerRequest$Outbound;
+}
+
+export function deleteGuildStickerRequestToJSON(
+  deleteGuildStickerRequest: DeleteGuildStickerRequest,
+): string {
+  return JSON.stringify(
+    DeleteGuildStickerRequest$outboundSchema.parse(deleteGuildStickerRequest),
+  );
+}
+
+export function deleteGuildStickerRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildStickerRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteGuildStickerRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildStickerRequest' from JSON`,
+  );
 }

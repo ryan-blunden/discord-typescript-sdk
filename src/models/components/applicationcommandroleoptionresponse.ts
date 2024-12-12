@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ApplicationCommandRoleOptionResponse = {
   type?: 1 | undefined;
@@ -87,4 +90,25 @@ export namespace ApplicationCommandRoleOptionResponse$ {
     ApplicationCommandRoleOptionResponse$outboundSchema;
   /** @deprecated use `ApplicationCommandRoleOptionResponse$Outbound` instead. */
   export type Outbound = ApplicationCommandRoleOptionResponse$Outbound;
+}
+
+export function applicationCommandRoleOptionResponseToJSON(
+  applicationCommandRoleOptionResponse: ApplicationCommandRoleOptionResponse,
+): string {
+  return JSON.stringify(
+    ApplicationCommandRoleOptionResponse$outboundSchema.parse(
+      applicationCommandRoleOptionResponse,
+    ),
+  );
+}
+
+export function applicationCommandRoleOptionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationCommandRoleOptionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationCommandRoleOptionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationCommandRoleOptionResponse' from JSON`,
+  );
 }

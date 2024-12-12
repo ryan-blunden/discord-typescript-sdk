@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteUserMessageReactionRequest = {
   channelId: string;
@@ -69,4 +72,24 @@ export namespace DeleteUserMessageReactionRequest$ {
   export const outboundSchema = DeleteUserMessageReactionRequest$outboundSchema;
   /** @deprecated use `DeleteUserMessageReactionRequest$Outbound` instead. */
   export type Outbound = DeleteUserMessageReactionRequest$Outbound;
+}
+
+export function deleteUserMessageReactionRequestToJSON(
+  deleteUserMessageReactionRequest: DeleteUserMessageReactionRequest,
+): string {
+  return JSON.stringify(
+    DeleteUserMessageReactionRequest$outboundSchema.parse(
+      deleteUserMessageReactionRequest,
+    ),
+  );
+}
+
+export function deleteUserMessageReactionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteUserMessageReactionRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteUserMessageReactionRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteUserMessageReactionRequest' from JSON`,
+  );
 }

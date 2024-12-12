@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AccountResponse,
   AccountResponse$inboundSchema,
@@ -64,4 +67,31 @@ export namespace PartialGuildSubscriptionIntegrationResponse$ {
     PartialGuildSubscriptionIntegrationResponse$outboundSchema;
   /** @deprecated use `PartialGuildSubscriptionIntegrationResponse$Outbound` instead. */
   export type Outbound = PartialGuildSubscriptionIntegrationResponse$Outbound;
+}
+
+export function partialGuildSubscriptionIntegrationResponseToJSON(
+  partialGuildSubscriptionIntegrationResponse:
+    PartialGuildSubscriptionIntegrationResponse,
+): string {
+  return JSON.stringify(
+    PartialGuildSubscriptionIntegrationResponse$outboundSchema.parse(
+      partialGuildSubscriptionIntegrationResponse,
+    ),
+  );
+}
+
+export function partialGuildSubscriptionIntegrationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PartialGuildSubscriptionIntegrationResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PartialGuildSubscriptionIntegrationResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PartialGuildSubscriptionIntegrationResponse' from JSON`,
+  );
 }

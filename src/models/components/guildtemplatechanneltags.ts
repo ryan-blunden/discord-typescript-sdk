@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GuildTemplateChannelTags = {
   name: string;
@@ -65,4 +68,22 @@ export namespace GuildTemplateChannelTags$ {
   export const outboundSchema = GuildTemplateChannelTags$outboundSchema;
   /** @deprecated use `GuildTemplateChannelTags$Outbound` instead. */
   export type Outbound = GuildTemplateChannelTags$Outbound;
+}
+
+export function guildTemplateChannelTagsToJSON(
+  guildTemplateChannelTags: GuildTemplateChannelTags,
+): string {
+  return JSON.stringify(
+    GuildTemplateChannelTags$outboundSchema.parse(guildTemplateChannelTags),
+  );
+}
+
+export function guildTemplateChannelTagsFromJSON(
+  jsonString: string,
+): SafeParseResult<GuildTemplateChannelTags, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GuildTemplateChannelTags$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuildTemplateChannelTags' from JSON`,
+  );
 }

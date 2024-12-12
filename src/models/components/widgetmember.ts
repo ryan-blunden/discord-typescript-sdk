@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   WidgetActivity,
   WidgetActivity$inboundSchema,
@@ -111,4 +114,18 @@ export namespace WidgetMember$ {
   export const outboundSchema = WidgetMember$outboundSchema;
   /** @deprecated use `WidgetMember$Outbound` instead. */
   export type Outbound = WidgetMember$Outbound;
+}
+
+export function widgetMemberToJSON(widgetMember: WidgetMember): string {
+  return JSON.stringify(WidgetMember$outboundSchema.parse(widgetMember));
+}
+
+export function widgetMemberFromJSON(
+  jsonString: string,
+): SafeParseResult<WidgetMember, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WidgetMember$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WidgetMember' from JSON`,
+  );
 }

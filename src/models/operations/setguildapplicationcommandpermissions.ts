@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SetGuildApplicationCommandPermissionsSecurity = {
   botToken?: string | undefined;
@@ -72,6 +75,33 @@ export namespace SetGuildApplicationCommandPermissionsSecurity$ {
   export type Outbound = SetGuildApplicationCommandPermissionsSecurity$Outbound;
 }
 
+export function setGuildApplicationCommandPermissionsSecurityToJSON(
+  setGuildApplicationCommandPermissionsSecurity:
+    SetGuildApplicationCommandPermissionsSecurity,
+): string {
+  return JSON.stringify(
+    SetGuildApplicationCommandPermissionsSecurity$outboundSchema.parse(
+      setGuildApplicationCommandPermissionsSecurity,
+    ),
+  );
+}
+
+export function setGuildApplicationCommandPermissionsSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  SetGuildApplicationCommandPermissionsSecurity,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      SetGuildApplicationCommandPermissionsSecurity$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'SetGuildApplicationCommandPermissionsSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const SetGuildApplicationCommandPermissionsRequestBody$inboundSchema:
   z.ZodType<
@@ -118,6 +148,33 @@ export namespace SetGuildApplicationCommandPermissionsRequestBody$ {
   /** @deprecated use `SetGuildApplicationCommandPermissionsRequestBody$Outbound` instead. */
   export type Outbound =
     SetGuildApplicationCommandPermissionsRequestBody$Outbound;
+}
+
+export function setGuildApplicationCommandPermissionsRequestBodyToJSON(
+  setGuildApplicationCommandPermissionsRequestBody:
+    SetGuildApplicationCommandPermissionsRequestBody,
+): string {
+  return JSON.stringify(
+    SetGuildApplicationCommandPermissionsRequestBody$outboundSchema.parse(
+      setGuildApplicationCommandPermissionsRequestBody,
+    ),
+  );
+}
+
+export function setGuildApplicationCommandPermissionsRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  SetGuildApplicationCommandPermissionsRequestBody,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      SetGuildApplicationCommandPermissionsRequestBody$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'SetGuildApplicationCommandPermissionsRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -185,4 +242,31 @@ export namespace SetGuildApplicationCommandPermissionsRequest$ {
     SetGuildApplicationCommandPermissionsRequest$outboundSchema;
   /** @deprecated use `SetGuildApplicationCommandPermissionsRequest$Outbound` instead. */
   export type Outbound = SetGuildApplicationCommandPermissionsRequest$Outbound;
+}
+
+export function setGuildApplicationCommandPermissionsRequestToJSON(
+  setGuildApplicationCommandPermissionsRequest:
+    SetGuildApplicationCommandPermissionsRequest,
+): string {
+  return JSON.stringify(
+    SetGuildApplicationCommandPermissionsRequest$outboundSchema.parse(
+      setGuildApplicationCommandPermissionsRequest,
+    ),
+  );
+}
+
+export function setGuildApplicationCommandPermissionsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  SetGuildApplicationCommandPermissionsRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      SetGuildApplicationCommandPermissionsRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'SetGuildApplicationCommandPermissionsRequest' from JSON`,
+  );
 }

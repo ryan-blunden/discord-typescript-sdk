@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateGuildScheduledEventRequestBody =
   | components.ExternalScheduledEventCreateRequest
@@ -70,6 +73,27 @@ export namespace CreateGuildScheduledEventRequestBody$ {
   export type Outbound = CreateGuildScheduledEventRequestBody$Outbound;
 }
 
+export function createGuildScheduledEventRequestBodyToJSON(
+  createGuildScheduledEventRequestBody: CreateGuildScheduledEventRequestBody,
+): string {
+  return JSON.stringify(
+    CreateGuildScheduledEventRequestBody$outboundSchema.parse(
+      createGuildScheduledEventRequestBody,
+    ),
+  );
+}
+
+export function createGuildScheduledEventRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildScheduledEventRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateGuildScheduledEventRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildScheduledEventRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const CreateGuildScheduledEventRequest$inboundSchema: z.ZodType<
   CreateGuildScheduledEventRequest,
@@ -130,6 +154,26 @@ export namespace CreateGuildScheduledEventRequest$ {
   export type Outbound = CreateGuildScheduledEventRequest$Outbound;
 }
 
+export function createGuildScheduledEventRequestToJSON(
+  createGuildScheduledEventRequest: CreateGuildScheduledEventRequest,
+): string {
+  return JSON.stringify(
+    CreateGuildScheduledEventRequest$outboundSchema.parse(
+      createGuildScheduledEventRequest,
+    ),
+  );
+}
+
+export function createGuildScheduledEventRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildScheduledEventRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildScheduledEventRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildScheduledEventRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const CreateGuildScheduledEventResponseBody$inboundSchema: z.ZodType<
   CreateGuildScheduledEventResponseBody,
@@ -171,4 +215,25 @@ export namespace CreateGuildScheduledEventResponseBody$ {
     CreateGuildScheduledEventResponseBody$outboundSchema;
   /** @deprecated use `CreateGuildScheduledEventResponseBody$Outbound` instead. */
   export type Outbound = CreateGuildScheduledEventResponseBody$Outbound;
+}
+
+export function createGuildScheduledEventResponseBodyToJSON(
+  createGuildScheduledEventResponseBody: CreateGuildScheduledEventResponseBody,
+): string {
+  return JSON.stringify(
+    CreateGuildScheduledEventResponseBody$outboundSchema.parse(
+      createGuildScheduledEventResponseBody,
+    ),
+  );
+}
+
+export function createGuildScheduledEventResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildScheduledEventResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateGuildScheduledEventResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildScheduledEventResponseBody' from JSON`,
+  );
 }

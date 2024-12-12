@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EntityMetadataStageInstance,
   EntityMetadataStageInstance$inboundSchema,
@@ -112,4 +115,26 @@ export namespace StageScheduledEventPatchRequestPartial$ {
     StageScheduledEventPatchRequestPartial$outboundSchema;
   /** @deprecated use `StageScheduledEventPatchRequestPartial$Outbound` instead. */
   export type Outbound = StageScheduledEventPatchRequestPartial$Outbound;
+}
+
+export function stageScheduledEventPatchRequestPartialToJSON(
+  stageScheduledEventPatchRequestPartial:
+    StageScheduledEventPatchRequestPartial,
+): string {
+  return JSON.stringify(
+    StageScheduledEventPatchRequestPartial$outboundSchema.parse(
+      stageScheduledEventPatchRequestPartial,
+    ),
+  );
+}
+
+export function stageScheduledEventPatchRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<StageScheduledEventPatchRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      StageScheduledEventPatchRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StageScheduledEventPatchRequestPartial' from JSON`,
+  );
 }

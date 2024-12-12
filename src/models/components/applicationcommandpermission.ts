@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ApplicationCommandPermission = {
   id: string;
@@ -50,4 +53,24 @@ export namespace ApplicationCommandPermission$ {
   export const outboundSchema = ApplicationCommandPermission$outboundSchema;
   /** @deprecated use `ApplicationCommandPermission$Outbound` instead. */
   export type Outbound = ApplicationCommandPermission$Outbound;
+}
+
+export function applicationCommandPermissionToJSON(
+  applicationCommandPermission: ApplicationCommandPermission,
+): string {
+  return JSON.stringify(
+    ApplicationCommandPermission$outboundSchema.parse(
+      applicationCommandPermission,
+    ),
+  );
+}
+
+export function applicationCommandPermissionFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationCommandPermission, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ApplicationCommandPermission$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationCommandPermission' from JSON`,
+  );
 }

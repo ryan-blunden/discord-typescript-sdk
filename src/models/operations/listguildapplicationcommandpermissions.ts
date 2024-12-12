@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListGuildApplicationCommandPermissionsSecurity = {
   botToken?: string | undefined;
@@ -63,6 +66,33 @@ export namespace ListGuildApplicationCommandPermissionsSecurity$ {
     ListGuildApplicationCommandPermissionsSecurity$Outbound;
 }
 
+export function listGuildApplicationCommandPermissionsSecurityToJSON(
+  listGuildApplicationCommandPermissionsSecurity:
+    ListGuildApplicationCommandPermissionsSecurity,
+): string {
+  return JSON.stringify(
+    ListGuildApplicationCommandPermissionsSecurity$outboundSchema.parse(
+      listGuildApplicationCommandPermissionsSecurity,
+    ),
+  );
+}
+
+export function listGuildApplicationCommandPermissionsSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListGuildApplicationCommandPermissionsSecurity,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListGuildApplicationCommandPermissionsSecurity$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListGuildApplicationCommandPermissionsSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const ListGuildApplicationCommandPermissionsRequest$inboundSchema:
   z.ZodType<
@@ -114,4 +144,31 @@ export namespace ListGuildApplicationCommandPermissionsRequest$ {
     ListGuildApplicationCommandPermissionsRequest$outboundSchema;
   /** @deprecated use `ListGuildApplicationCommandPermissionsRequest$Outbound` instead. */
   export type Outbound = ListGuildApplicationCommandPermissionsRequest$Outbound;
+}
+
+export function listGuildApplicationCommandPermissionsRequestToJSON(
+  listGuildApplicationCommandPermissionsRequest:
+    ListGuildApplicationCommandPermissionsRequest,
+): string {
+  return JSON.stringify(
+    ListGuildApplicationCommandPermissionsRequest$outboundSchema.parse(
+      listGuildApplicationCommandPermissionsRequest,
+    ),
+  );
+}
+
+export function listGuildApplicationCommandPermissionsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListGuildApplicationCommandPermissionsRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListGuildApplicationCommandPermissionsRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListGuildApplicationCommandPermissionsRequest' from JSON`,
+  );
 }

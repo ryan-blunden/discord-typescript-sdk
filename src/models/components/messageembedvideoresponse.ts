@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageEmbedVideoResponse = {
   url?: string | null | undefined;
@@ -77,4 +80,22 @@ export namespace MessageEmbedVideoResponse$ {
   export const outboundSchema = MessageEmbedVideoResponse$outboundSchema;
   /** @deprecated use `MessageEmbedVideoResponse$Outbound` instead. */
   export type Outbound = MessageEmbedVideoResponse$Outbound;
+}
+
+export function messageEmbedVideoResponseToJSON(
+  messageEmbedVideoResponse: MessageEmbedVideoResponse,
+): string {
+  return JSON.stringify(
+    MessageEmbedVideoResponse$outboundSchema.parse(messageEmbedVideoResponse),
+  );
+}
+
+export function messageEmbedVideoResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageEmbedVideoResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageEmbedVideoResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageEmbedVideoResponse' from JSON`,
+  );
 }

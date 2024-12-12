@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApplicationIntegrationTypeConfigurationResponse,
   ApplicationIntegrationTypeConfigurationResponse$inboundSchema,
@@ -194,4 +197,22 @@ export namespace ApplicationResponse$ {
   export const outboundSchema = ApplicationResponse$outboundSchema;
   /** @deprecated use `ApplicationResponse$Outbound` instead. */
   export type Outbound = ApplicationResponse$Outbound;
+}
+
+export function applicationResponseToJSON(
+  applicationResponse: ApplicationResponse,
+): string {
+  return JSON.stringify(
+    ApplicationResponse$outboundSchema.parse(applicationResponse),
+  );
+}
+
+export function applicationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ApplicationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationResponse' from JSON`,
+  );
 }

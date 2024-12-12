@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetStickerPackRequest = {
   packId: string;
@@ -51,4 +54,22 @@ export namespace GetStickerPackRequest$ {
   export const outboundSchema = GetStickerPackRequest$outboundSchema;
   /** @deprecated use `GetStickerPackRequest$Outbound` instead. */
   export type Outbound = GetStickerPackRequest$Outbound;
+}
+
+export function getStickerPackRequestToJSON(
+  getStickerPackRequest: GetStickerPackRequest,
+): string {
+  return JSON.stringify(
+    GetStickerPackRequest$outboundSchema.parse(getStickerPackRequest),
+  );
+}
+
+export function getStickerPackRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetStickerPackRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetStickerPackRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetStickerPackRequest' from JSON`,
+  );
 }

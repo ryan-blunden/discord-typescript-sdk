@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateStageInstanceRequestBody = {
   topic: string;
@@ -73,4 +76,24 @@ export namespace CreateStageInstanceRequestBody$ {
   export const outboundSchema = CreateStageInstanceRequestBody$outboundSchema;
   /** @deprecated use `CreateStageInstanceRequestBody$Outbound` instead. */
   export type Outbound = CreateStageInstanceRequestBody$Outbound;
+}
+
+export function createStageInstanceRequestBodyToJSON(
+  createStageInstanceRequestBody: CreateStageInstanceRequestBody,
+): string {
+  return JSON.stringify(
+    CreateStageInstanceRequestBody$outboundSchema.parse(
+      createStageInstanceRequestBody,
+    ),
+  );
+}
+
+export function createStageInstanceRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateStageInstanceRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateStageInstanceRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateStageInstanceRequestBody' from JSON`,
+  );
 }

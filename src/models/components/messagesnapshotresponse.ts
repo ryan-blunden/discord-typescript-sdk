@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   MinimalContentMessageResponse,
   MinimalContentMessageResponse$inboundSchema,
@@ -48,4 +51,22 @@ export namespace MessageSnapshotResponse$ {
   export const outboundSchema = MessageSnapshotResponse$outboundSchema;
   /** @deprecated use `MessageSnapshotResponse$Outbound` instead. */
   export type Outbound = MessageSnapshotResponse$Outbound;
+}
+
+export function messageSnapshotResponseToJSON(
+  messageSnapshotResponse: MessageSnapshotResponse,
+): string {
+  return JSON.stringify(
+    MessageSnapshotResponse$outboundSchema.parse(messageSnapshotResponse),
+  );
+}
+
+export function messageSnapshotResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageSnapshotResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageSnapshotResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageSnapshotResponse' from JSON`,
+  );
 }

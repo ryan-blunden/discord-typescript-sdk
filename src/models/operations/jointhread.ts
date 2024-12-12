@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type JoinThreadRequest = {
   channelId: string;
@@ -51,4 +54,22 @@ export namespace JoinThreadRequest$ {
   export const outboundSchema = JoinThreadRequest$outboundSchema;
   /** @deprecated use `JoinThreadRequest$Outbound` instead. */
   export type Outbound = JoinThreadRequest$Outbound;
+}
+
+export function joinThreadRequestToJSON(
+  joinThreadRequest: JoinThreadRequest,
+): string {
+  return JSON.stringify(
+    JoinThreadRequest$outboundSchema.parse(joinThreadRequest),
+  );
+}
+
+export function joinThreadRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<JoinThreadRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => JoinThreadRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JoinThreadRequest' from JSON`,
+  );
 }

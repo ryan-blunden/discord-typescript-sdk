@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserCommunicationDisabledActionMetadata,
   UserCommunicationDisabledActionMetadata$inboundSchema,
@@ -52,4 +55,24 @@ export namespace UserCommunicationDisabledAction$ {
   export const outboundSchema = UserCommunicationDisabledAction$outboundSchema;
   /** @deprecated use `UserCommunicationDisabledAction$Outbound` instead. */
   export type Outbound = UserCommunicationDisabledAction$Outbound;
+}
+
+export function userCommunicationDisabledActionToJSON(
+  userCommunicationDisabledAction: UserCommunicationDisabledAction,
+): string {
+  return JSON.stringify(
+    UserCommunicationDisabledAction$outboundSchema.parse(
+      userCommunicationDisabledAction,
+    ),
+  );
+}
+
+export function userCommunicationDisabledActionFromJSON(
+  jsonString: string,
+): SafeParseResult<UserCommunicationDisabledAction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UserCommunicationDisabledAction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UserCommunicationDisabledAction' from JSON`,
+  );
 }

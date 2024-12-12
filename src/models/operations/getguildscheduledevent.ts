@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildScheduledEventRequest = {
   guildId: string;
@@ -74,6 +77,26 @@ export namespace GetGuildScheduledEventRequest$ {
   export type Outbound = GetGuildScheduledEventRequest$Outbound;
 }
 
+export function getGuildScheduledEventRequestToJSON(
+  getGuildScheduledEventRequest: GetGuildScheduledEventRequest,
+): string {
+  return JSON.stringify(
+    GetGuildScheduledEventRequest$outboundSchema.parse(
+      getGuildScheduledEventRequest,
+    ),
+  );
+}
+
+export function getGuildScheduledEventRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildScheduledEventRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildScheduledEventRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildScheduledEventRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetGuildScheduledEventResponseBody$inboundSchema: z.ZodType<
   GetGuildScheduledEventResponseBody,
@@ -114,4 +137,25 @@ export namespace GetGuildScheduledEventResponseBody$ {
     GetGuildScheduledEventResponseBody$outboundSchema;
   /** @deprecated use `GetGuildScheduledEventResponseBody$Outbound` instead. */
   export type Outbound = GetGuildScheduledEventResponseBody$Outbound;
+}
+
+export function getGuildScheduledEventResponseBodyToJSON(
+  getGuildScheduledEventResponseBody: GetGuildScheduledEventResponseBody,
+): string {
+  return JSON.stringify(
+    GetGuildScheduledEventResponseBody$outboundSchema.parse(
+      getGuildScheduledEventResponseBody,
+    ),
+  );
+}
+
+export function getGuildScheduledEventResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildScheduledEventResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetGuildScheduledEventResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildScheduledEventResponseBody' from JSON`,
+  );
 }

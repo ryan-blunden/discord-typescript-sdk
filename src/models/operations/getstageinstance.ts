@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetStageInstanceRequest = {
   channelId: string;
@@ -51,4 +54,22 @@ export namespace GetStageInstanceRequest$ {
   export const outboundSchema = GetStageInstanceRequest$outboundSchema;
   /** @deprecated use `GetStageInstanceRequest$Outbound` instead. */
   export type Outbound = GetStageInstanceRequest$Outbound;
+}
+
+export function getStageInstanceRequestToJSON(
+  getStageInstanceRequest: GetStageInstanceRequest,
+): string {
+  return JSON.stringify(
+    GetStageInstanceRequest$outboundSchema.parse(getStageInstanceRequest),
+  );
+}
+
+export function getStageInstanceRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetStageInstanceRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetStageInstanceRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetStageInstanceRequest' from JSON`,
+  );
 }

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type IconEmojiResponse = {};
 
@@ -34,4 +37,22 @@ export namespace IconEmojiResponse$ {
   export const outboundSchema = IconEmojiResponse$outboundSchema;
   /** @deprecated use `IconEmojiResponse$Outbound` instead. */
   export type Outbound = IconEmojiResponse$Outbound;
+}
+
+export function iconEmojiResponseToJSON(
+  iconEmojiResponse: IconEmojiResponse,
+): string {
+  return JSON.stringify(
+    IconEmojiResponse$outboundSchema.parse(iconEmojiResponse),
+  );
+}
+
+export function iconEmojiResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<IconEmojiResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => IconEmojiResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'IconEmojiResponse' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BlockMessageAction,
   BlockMessageAction$inboundSchema,
@@ -105,6 +108,27 @@ export namespace KeywordUpsertRequestPartialActions$ {
   export type Outbound = KeywordUpsertRequestPartialActions$Outbound;
 }
 
+export function keywordUpsertRequestPartialActionsToJSON(
+  keywordUpsertRequestPartialActions: KeywordUpsertRequestPartialActions,
+): string {
+  return JSON.stringify(
+    KeywordUpsertRequestPartialActions$outboundSchema.parse(
+      keywordUpsertRequestPartialActions,
+    ),
+  );
+}
+
+export function keywordUpsertRequestPartialActionsFromJSON(
+  jsonString: string,
+): SafeParseResult<KeywordUpsertRequestPartialActions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      KeywordUpsertRequestPartialActions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'KeywordUpsertRequestPartialActions' from JSON`,
+  );
+}
+
 /** @internal */
 export const KeywordUpsertRequestPartial$inboundSchema: z.ZodType<
   KeywordUpsertRequestPartial,
@@ -202,4 +226,24 @@ export namespace KeywordUpsertRequestPartial$ {
   export const outboundSchema = KeywordUpsertRequestPartial$outboundSchema;
   /** @deprecated use `KeywordUpsertRequestPartial$Outbound` instead. */
   export type Outbound = KeywordUpsertRequestPartial$Outbound;
+}
+
+export function keywordUpsertRequestPartialToJSON(
+  keywordUpsertRequestPartial: KeywordUpsertRequestPartial,
+): string {
+  return JSON.stringify(
+    KeywordUpsertRequestPartial$outboundSchema.parse(
+      keywordUpsertRequestPartial,
+    ),
+  );
+}
+
+export function keywordUpsertRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<KeywordUpsertRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => KeywordUpsertRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'KeywordUpsertRequestPartial' from JSON`,
+  );
 }

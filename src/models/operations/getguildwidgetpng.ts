@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildWidgetPngSecurity = {
   botToken?: string | undefined;
@@ -58,6 +61,24 @@ export namespace GetGuildWidgetPngSecurity$ {
   export type Outbound = GetGuildWidgetPngSecurity$Outbound;
 }
 
+export function getGuildWidgetPngSecurityToJSON(
+  getGuildWidgetPngSecurity: GetGuildWidgetPngSecurity,
+): string {
+  return JSON.stringify(
+    GetGuildWidgetPngSecurity$outboundSchema.parse(getGuildWidgetPngSecurity),
+  );
+}
+
+export function getGuildWidgetPngSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildWidgetPngSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildWidgetPngSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildWidgetPngSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetGuildWidgetPngRequest$inboundSchema: z.ZodType<
   GetGuildWidgetPngRequest,
@@ -103,4 +124,22 @@ export namespace GetGuildWidgetPngRequest$ {
   export const outboundSchema = GetGuildWidgetPngRequest$outboundSchema;
   /** @deprecated use `GetGuildWidgetPngRequest$Outbound` instead. */
   export type Outbound = GetGuildWidgetPngRequest$Outbound;
+}
+
+export function getGuildWidgetPngRequestToJSON(
+  getGuildWidgetPngRequest: GetGuildWidgetPngRequest,
+): string {
+  return JSON.stringify(
+    GetGuildWidgetPngRequest$outboundSchema.parse(getGuildWidgetPngRequest),
+  );
+}
+
+export function getGuildWidgetPngRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildWidgetPngRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildWidgetPngRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildWidgetPngRequest' from JSON`,
+  );
 }

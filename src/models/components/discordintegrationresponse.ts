@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AccountResponse,
   AccountResponse$inboundSchema,
@@ -88,4 +91,22 @@ export namespace DiscordIntegrationResponse$ {
   export const outboundSchema = DiscordIntegrationResponse$outboundSchema;
   /** @deprecated use `DiscordIntegrationResponse$Outbound` instead. */
   export type Outbound = DiscordIntegrationResponse$Outbound;
+}
+
+export function discordIntegrationResponseToJSON(
+  discordIntegrationResponse: DiscordIntegrationResponse,
+): string {
+  return JSON.stringify(
+    DiscordIntegrationResponse$outboundSchema.parse(discordIntegrationResponse),
+  );
+}
+
+export function discordIntegrationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DiscordIntegrationResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DiscordIntegrationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DiscordIntegrationResponse' from JSON`,
+  );
 }

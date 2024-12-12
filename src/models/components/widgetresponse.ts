@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   WidgetChannel,
   WidgetChannel$inboundSchema,
@@ -85,4 +88,18 @@ export namespace WidgetResponse$ {
   export const outboundSchema = WidgetResponse$outboundSchema;
   /** @deprecated use `WidgetResponse$Outbound` instead. */
   export type Outbound = WidgetResponse$Outbound;
+}
+
+export function widgetResponseToJSON(widgetResponse: WidgetResponse): string {
+  return JSON.stringify(WidgetResponse$outboundSchema.parse(widgetResponse));
+}
+
+export function widgetResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<WidgetResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WidgetResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WidgetResponse' from JSON`,
+  );
 }

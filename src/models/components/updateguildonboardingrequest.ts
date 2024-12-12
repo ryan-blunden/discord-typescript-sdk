@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UpdateOnboardingPromptRequest,
   UpdateOnboardingPromptRequest$inboundSchema,
@@ -71,4 +74,24 @@ export namespace UpdateGuildOnboardingRequest$ {
   export const outboundSchema = UpdateGuildOnboardingRequest$outboundSchema;
   /** @deprecated use `UpdateGuildOnboardingRequest$Outbound` instead. */
   export type Outbound = UpdateGuildOnboardingRequest$Outbound;
+}
+
+export function updateGuildOnboardingRequestToJSON(
+  updateGuildOnboardingRequest: UpdateGuildOnboardingRequest,
+): string {
+  return JSON.stringify(
+    UpdateGuildOnboardingRequest$outboundSchema.parse(
+      updateGuildOnboardingRequest,
+    ),
+  );
+}
+
+export function updateGuildOnboardingRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildOnboardingRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildOnboardingRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildOnboardingRequest' from JSON`,
+  );
 }

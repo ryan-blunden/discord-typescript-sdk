@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GuildMemberResponse,
   GuildMemberResponse$inboundSchema,
@@ -77,4 +80,22 @@ export namespace ScheduledEventUserResponse$ {
   export const outboundSchema = ScheduledEventUserResponse$outboundSchema;
   /** @deprecated use `ScheduledEventUserResponse$Outbound` instead. */
   export type Outbound = ScheduledEventUserResponse$Outbound;
+}
+
+export function scheduledEventUserResponseToJSON(
+  scheduledEventUserResponse: ScheduledEventUserResponse,
+): string {
+  return JSON.stringify(
+    ScheduledEventUserResponse$outboundSchema.parse(scheduledEventUserResponse),
+  );
+}
+
+export function scheduledEventUserResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ScheduledEventUserResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ScheduledEventUserResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ScheduledEventUserResponse' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteEntitlementSecurity = {
   botToken?: string | undefined;
@@ -58,6 +61,24 @@ export namespace DeleteEntitlementSecurity$ {
   export type Outbound = DeleteEntitlementSecurity$Outbound;
 }
 
+export function deleteEntitlementSecurityToJSON(
+  deleteEntitlementSecurity: DeleteEntitlementSecurity,
+): string {
+  return JSON.stringify(
+    DeleteEntitlementSecurity$outboundSchema.parse(deleteEntitlementSecurity),
+  );
+}
+
+export function deleteEntitlementSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteEntitlementSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteEntitlementSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteEntitlementSecurity' from JSON`,
+  );
+}
+
 /** @internal */
 export const DeleteEntitlementRequest$inboundSchema: z.ZodType<
   DeleteEntitlementRequest,
@@ -105,4 +126,22 @@ export namespace DeleteEntitlementRequest$ {
   export const outboundSchema = DeleteEntitlementRequest$outboundSchema;
   /** @deprecated use `DeleteEntitlementRequest$Outbound` instead. */
   export type Outbound = DeleteEntitlementRequest$Outbound;
+}
+
+export function deleteEntitlementRequestToJSON(
+  deleteEntitlementRequest: DeleteEntitlementRequest,
+): string {
+  return JSON.stringify(
+    DeleteEntitlementRequest$outboundSchema.parse(deleteEntitlementRequest),
+  );
+}
+
+export function deleteEntitlementRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteEntitlementRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteEntitlementRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteEntitlementRequest' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildEmojiRequest = {
   guildId: string;
@@ -57,4 +60,22 @@ export namespace GetGuildEmojiRequest$ {
   export const outboundSchema = GetGuildEmojiRequest$outboundSchema;
   /** @deprecated use `GetGuildEmojiRequest$Outbound` instead. */
   export type Outbound = GetGuildEmojiRequest$Outbound;
+}
+
+export function getGuildEmojiRequestToJSON(
+  getGuildEmojiRequest: GetGuildEmojiRequest,
+): string {
+  return JSON.stringify(
+    GetGuildEmojiRequest$outboundSchema.parse(getGuildEmojiRequest),
+  );
+}
+
+export function getGuildEmojiRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildEmojiRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildEmojiRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildEmojiRequest' from JSON`,
+  );
 }

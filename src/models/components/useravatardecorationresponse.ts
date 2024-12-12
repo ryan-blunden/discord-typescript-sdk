@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UserAvatarDecorationResponse = {
   asset: string;
@@ -55,4 +58,24 @@ export namespace UserAvatarDecorationResponse$ {
   export const outboundSchema = UserAvatarDecorationResponse$outboundSchema;
   /** @deprecated use `UserAvatarDecorationResponse$Outbound` instead. */
   export type Outbound = UserAvatarDecorationResponse$Outbound;
+}
+
+export function userAvatarDecorationResponseToJSON(
+  userAvatarDecorationResponse: UserAvatarDecorationResponse,
+): string {
+  return JSON.stringify(
+    UserAvatarDecorationResponse$outboundSchema.parse(
+      userAvatarDecorationResponse,
+    ),
+  );
+}
+
+export function userAvatarDecorationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UserAvatarDecorationResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UserAvatarDecorationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UserAvatarDecorationResponse' from JSON`,
+  );
 }

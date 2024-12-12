@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PinMessageRequest = {
   channelId: string;
@@ -57,4 +60,22 @@ export namespace PinMessageRequest$ {
   export const outboundSchema = PinMessageRequest$outboundSchema;
   /** @deprecated use `PinMessageRequest$Outbound` instead. */
   export type Outbound = PinMessageRequest$Outbound;
+}
+
+export function pinMessageRequestToJSON(
+  pinMessageRequest: PinMessageRequest,
+): string {
+  return JSON.stringify(
+    PinMessageRequest$outboundSchema.parse(pinMessageRequest),
+  );
+}
+
+export function pinMessageRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<PinMessageRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PinMessageRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PinMessageRequest' from JSON`,
+  );
 }

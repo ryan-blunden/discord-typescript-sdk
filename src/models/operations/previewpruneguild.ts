@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type QueryParamIncludeRoles = string | Array<string>;
 
@@ -41,6 +44,24 @@ export namespace QueryParamIncludeRoles$ {
   export const outboundSchema = QueryParamIncludeRoles$outboundSchema;
   /** @deprecated use `QueryParamIncludeRoles$Outbound` instead. */
   export type Outbound = QueryParamIncludeRoles$Outbound;
+}
+
+export function queryParamIncludeRolesToJSON(
+  queryParamIncludeRoles: QueryParamIncludeRoles,
+): string {
+  return JSON.stringify(
+    QueryParamIncludeRoles$outboundSchema.parse(queryParamIncludeRoles),
+  );
+}
+
+export function queryParamIncludeRolesFromJSON(
+  jsonString: string,
+): SafeParseResult<QueryParamIncludeRoles, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => QueryParamIncludeRoles$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'QueryParamIncludeRoles' from JSON`,
+  );
 }
 
 /** @internal */
@@ -93,4 +114,22 @@ export namespace PreviewPruneGuildRequest$ {
   export const outboundSchema = PreviewPruneGuildRequest$outboundSchema;
   /** @deprecated use `PreviewPruneGuildRequest$Outbound` instead. */
   export type Outbound = PreviewPruneGuildRequest$Outbound;
+}
+
+export function previewPruneGuildRequestToJSON(
+  previewPruneGuildRequest: PreviewPruneGuildRequest,
+): string {
+  return JSON.stringify(
+    PreviewPruneGuildRequest$outboundSchema.parse(previewPruneGuildRequest),
+  );
+}
+
+export function previewPruneGuildRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<PreviewPruneGuildRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PreviewPruneGuildRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PreviewPruneGuildRequest' from JSON`,
+  );
 }

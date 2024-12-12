@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApplicationCommandAttachmentOption,
   ApplicationCommandAttachmentOption$inboundSchema,
@@ -181,6 +184,33 @@ export namespace ApplicationCommandPatchRequestPartialOptions$ {
   export type Outbound = ApplicationCommandPatchRequestPartialOptions$Outbound;
 }
 
+export function applicationCommandPatchRequestPartialOptionsToJSON(
+  applicationCommandPatchRequestPartialOptions:
+    ApplicationCommandPatchRequestPartialOptions,
+): string {
+  return JSON.stringify(
+    ApplicationCommandPatchRequestPartialOptions$outboundSchema.parse(
+      applicationCommandPatchRequestPartialOptions,
+    ),
+  );
+}
+
+export function applicationCommandPatchRequestPartialOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ApplicationCommandPatchRequestPartialOptions,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationCommandPatchRequestPartialOptions$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ApplicationCommandPatchRequestPartialOptions' from JSON`,
+  );
+}
+
 /** @internal */
 export const ApplicationCommandPatchRequestPartial$inboundSchema: z.ZodType<
   ApplicationCommandPatchRequestPartial,
@@ -307,4 +337,25 @@ export namespace ApplicationCommandPatchRequestPartial$ {
     ApplicationCommandPatchRequestPartial$outboundSchema;
   /** @deprecated use `ApplicationCommandPatchRequestPartial$Outbound` instead. */
   export type Outbound = ApplicationCommandPatchRequestPartial$Outbound;
+}
+
+export function applicationCommandPatchRequestPartialToJSON(
+  applicationCommandPatchRequestPartial: ApplicationCommandPatchRequestPartial,
+): string {
+  return JSON.stringify(
+    ApplicationCommandPatchRequestPartial$outboundSchema.parse(
+      applicationCommandPatchRequestPartial,
+    ),
+  );
+}
+
+export function applicationCommandPatchRequestPartialFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationCommandPatchRequestPartial, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationCommandPatchRequestPartial$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationCommandPatchRequestPartial' from JSON`,
+  );
 }

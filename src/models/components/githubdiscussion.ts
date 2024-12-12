@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GithubUser,
   GithubUser$inboundSchema,
@@ -79,4 +82,22 @@ export namespace GithubDiscussion$ {
   export const outboundSchema = GithubDiscussion$outboundSchema;
   /** @deprecated use `GithubDiscussion$Outbound` instead. */
   export type Outbound = GithubDiscussion$Outbound;
+}
+
+export function githubDiscussionToJSON(
+  githubDiscussion: GithubDiscussion,
+): string {
+  return JSON.stringify(
+    GithubDiscussion$outboundSchema.parse(githubDiscussion),
+  );
+}
+
+export function githubDiscussionFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubDiscussion, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubDiscussion$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubDiscussion' from JSON`,
+  );
 }

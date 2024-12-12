@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RoleSelectDefaultValue = {
   type?: "user" | undefined;
@@ -46,4 +49,22 @@ export namespace RoleSelectDefaultValue$ {
   export const outboundSchema = RoleSelectDefaultValue$outboundSchema;
   /** @deprecated use `RoleSelectDefaultValue$Outbound` instead. */
   export type Outbound = RoleSelectDefaultValue$Outbound;
+}
+
+export function roleSelectDefaultValueToJSON(
+  roleSelectDefaultValue: RoleSelectDefaultValue,
+): string {
+  return JSON.stringify(
+    RoleSelectDefaultValue$outboundSchema.parse(roleSelectDefaultValue),
+  );
+}
+
+export function roleSelectDefaultValueFromJSON(
+  jsonString: string,
+): SafeParseResult<RoleSelectDefaultValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RoleSelectDefaultValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RoleSelectDefaultValue' from JSON`,
+  );
 }

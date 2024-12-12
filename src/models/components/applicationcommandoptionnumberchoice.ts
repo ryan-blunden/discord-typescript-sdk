@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ApplicationCommandOptionNumberChoice = {
   name: string;
@@ -61,4 +64,25 @@ export namespace ApplicationCommandOptionNumberChoice$ {
     ApplicationCommandOptionNumberChoice$outboundSchema;
   /** @deprecated use `ApplicationCommandOptionNumberChoice$Outbound` instead. */
   export type Outbound = ApplicationCommandOptionNumberChoice$Outbound;
+}
+
+export function applicationCommandOptionNumberChoiceToJSON(
+  applicationCommandOptionNumberChoice: ApplicationCommandOptionNumberChoice,
+): string {
+  return JSON.stringify(
+    ApplicationCommandOptionNumberChoice$outboundSchema.parse(
+      applicationCommandOptionNumberChoice,
+    ),
+  );
+}
+
+export function applicationCommandOptionNumberChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationCommandOptionNumberChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationCommandOptionNumberChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationCommandOptionNumberChoice' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageStickerItemResponse = {
   id: string;
@@ -59,4 +62,22 @@ export namespace MessageStickerItemResponse$ {
   export const outboundSchema = MessageStickerItemResponse$outboundSchema;
   /** @deprecated use `MessageStickerItemResponse$Outbound` instead. */
   export type Outbound = MessageStickerItemResponse$Outbound;
+}
+
+export function messageStickerItemResponseToJSON(
+  messageStickerItemResponse: MessageStickerItemResponse,
+): string {
+  return JSON.stringify(
+    MessageStickerItemResponse$outboundSchema.parse(messageStickerItemResponse),
+  );
+}
+
+export function messageStickerItemResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageStickerItemResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MessageStickerItemResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageStickerItemResponse' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateSelfVoiceStateRequestBody = {
   requestToSpeakTimestamp?: Date | null | undefined;
@@ -71,6 +74,26 @@ export namespace UpdateSelfVoiceStateRequestBody$ {
   export type Outbound = UpdateSelfVoiceStateRequestBody$Outbound;
 }
 
+export function updateSelfVoiceStateRequestBodyToJSON(
+  updateSelfVoiceStateRequestBody: UpdateSelfVoiceStateRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateSelfVoiceStateRequestBody$outboundSchema.parse(
+      updateSelfVoiceStateRequestBody,
+    ),
+  );
+}
+
+export function updateSelfVoiceStateRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateSelfVoiceStateRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateSelfVoiceStateRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateSelfVoiceStateRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpdateSelfVoiceStateRequest$inboundSchema: z.ZodType<
   UpdateSelfVoiceStateRequest,
@@ -118,4 +141,24 @@ export namespace UpdateSelfVoiceStateRequest$ {
   export const outboundSchema = UpdateSelfVoiceStateRequest$outboundSchema;
   /** @deprecated use `UpdateSelfVoiceStateRequest$Outbound` instead. */
   export type Outbound = UpdateSelfVoiceStateRequest$Outbound;
+}
+
+export function updateSelfVoiceStateRequestToJSON(
+  updateSelfVoiceStateRequest: UpdateSelfVoiceStateRequest,
+): string {
+  return JSON.stringify(
+    UpdateSelfVoiceStateRequest$outboundSchema.parse(
+      updateSelfVoiceStateRequest,
+    ),
+  );
+}
+
+export function updateSelfVoiceStateRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateSelfVoiceStateRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateSelfVoiceStateRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateSelfVoiceStateRequest' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApplicationCommandAttachmentOption,
   ApplicationCommandAttachmentOption$inboundSchema,
@@ -155,6 +158,33 @@ export namespace ApplicationCommandSubcommandOptionOptions$ {
   export type Outbound = ApplicationCommandSubcommandOptionOptions$Outbound;
 }
 
+export function applicationCommandSubcommandOptionOptionsToJSON(
+  applicationCommandSubcommandOptionOptions:
+    ApplicationCommandSubcommandOptionOptions,
+): string {
+  return JSON.stringify(
+    ApplicationCommandSubcommandOptionOptions$outboundSchema.parse(
+      applicationCommandSubcommandOptionOptions,
+    ),
+  );
+}
+
+export function applicationCommandSubcommandOptionOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ApplicationCommandSubcommandOptionOptions,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationCommandSubcommandOptionOptions$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ApplicationCommandSubcommandOptionOptions' from JSON`,
+  );
+}
+
 /** @internal */
 export const ApplicationCommandSubcommandOption$inboundSchema: z.ZodType<
   ApplicationCommandSubcommandOption,
@@ -259,4 +289,25 @@ export namespace ApplicationCommandSubcommandOption$ {
     ApplicationCommandSubcommandOption$outboundSchema;
   /** @deprecated use `ApplicationCommandSubcommandOption$Outbound` instead. */
   export type Outbound = ApplicationCommandSubcommandOption$Outbound;
+}
+
+export function applicationCommandSubcommandOptionToJSON(
+  applicationCommandSubcommandOption: ApplicationCommandSubcommandOption,
+): string {
+  return JSON.stringify(
+    ApplicationCommandSubcommandOption$outboundSchema.parse(
+      applicationCommandSubcommandOption,
+    ),
+  );
+}
+
+export function applicationCommandSubcommandOptionFromJSON(
+  jsonString: string,
+): SafeParseResult<ApplicationCommandSubcommandOption, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationCommandSubcommandOption$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApplicationCommandSubcommandOption' from JSON`,
+  );
 }

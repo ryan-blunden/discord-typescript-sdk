@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateChannelRequestBody =
   | components.PrivateChannelRequestPartial
@@ -69,6 +72,24 @@ export namespace UpdateChannelRequestBody$ {
   export type Outbound = UpdateChannelRequestBody$Outbound;
 }
 
+export function updateChannelRequestBodyToJSON(
+  updateChannelRequestBody: UpdateChannelRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateChannelRequestBody$outboundSchema.parse(updateChannelRequestBody),
+  );
+}
+
+export function updateChannelRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateChannelRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateChannelRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateChannelRequestBody' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpdateChannelRequest$inboundSchema: z.ZodType<
   UpdateChannelRequest,
@@ -129,6 +150,24 @@ export namespace UpdateChannelRequest$ {
   export type Outbound = UpdateChannelRequest$Outbound;
 }
 
+export function updateChannelRequestToJSON(
+  updateChannelRequest: UpdateChannelRequest,
+): string {
+  return JSON.stringify(
+    UpdateChannelRequest$outboundSchema.parse(updateChannelRequest),
+  );
+}
+
+export function updateChannelRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateChannelRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateChannelRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateChannelRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpdateChannelResponseBody$inboundSchema: z.ZodType<
   UpdateChannelResponseBody,
@@ -171,4 +210,22 @@ export namespace UpdateChannelResponseBody$ {
   export const outboundSchema = UpdateChannelResponseBody$outboundSchema;
   /** @deprecated use `UpdateChannelResponseBody$Outbound` instead. */
   export type Outbound = UpdateChannelResponseBody$Outbound;
+}
+
+export function updateChannelResponseBodyToJSON(
+  updateChannelResponseBody: UpdateChannelResponseBody,
+): string {
+  return JSON.stringify(
+    UpdateChannelResponseBody$outboundSchema.parse(updateChannelResponseBody),
+  );
+}
+
+export function updateChannelResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateChannelResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateChannelResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateChannelResponseBody' from JSON`,
+  );
 }

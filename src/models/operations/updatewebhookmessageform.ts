@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateWebhookMessageFormSecurity = {
   botToken?: string | undefined;
@@ -61,6 +64,26 @@ export namespace UpdateWebhookMessageFormSecurity$ {
   export const outboundSchema = UpdateWebhookMessageFormSecurity$outboundSchema;
   /** @deprecated use `UpdateWebhookMessageFormSecurity$Outbound` instead. */
   export type Outbound = UpdateWebhookMessageFormSecurity$Outbound;
+}
+
+export function updateWebhookMessageFormSecurityToJSON(
+  updateWebhookMessageFormSecurity: UpdateWebhookMessageFormSecurity,
+): string {
+  return JSON.stringify(
+    UpdateWebhookMessageFormSecurity$outboundSchema.parse(
+      updateWebhookMessageFormSecurity,
+    ),
+  );
+}
+
+export function updateWebhookMessageFormSecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateWebhookMessageFormSecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateWebhookMessageFormSecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateWebhookMessageFormSecurity' from JSON`,
+  );
 }
 
 /** @internal */
@@ -129,4 +152,24 @@ export namespace UpdateWebhookMessageFormRequest$ {
   export const outboundSchema = UpdateWebhookMessageFormRequest$outboundSchema;
   /** @deprecated use `UpdateWebhookMessageFormRequest$Outbound` instead. */
   export type Outbound = UpdateWebhookMessageFormRequest$Outbound;
+}
+
+export function updateWebhookMessageFormRequestToJSON(
+  updateWebhookMessageFormRequest: UpdateWebhookMessageFormRequest,
+): string {
+  return JSON.stringify(
+    UpdateWebhookMessageFormRequest$outboundSchema.parse(
+      updateWebhookMessageFormRequest,
+    ),
+  );
+}
+
+export function updateWebhookMessageFormRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateWebhookMessageFormRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateWebhookMessageFormRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateWebhookMessageFormRequest' from JSON`,
+  );
 }

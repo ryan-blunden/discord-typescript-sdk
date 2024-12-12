@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGatewaySecurity = {
   botToken?: string | undefined;
@@ -51,4 +54,22 @@ export namespace GetGatewaySecurity$ {
   export const outboundSchema = GetGatewaySecurity$outboundSchema;
   /** @deprecated use `GetGatewaySecurity$Outbound` instead. */
   export type Outbound = GetGatewaySecurity$Outbound;
+}
+
+export function getGatewaySecurityToJSON(
+  getGatewaySecurity: GetGatewaySecurity,
+): string {
+  return JSON.stringify(
+    GetGatewaySecurity$outboundSchema.parse(getGatewaySecurity),
+  );
+}
+
+export function getGatewaySecurityFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGatewaySecurity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGatewaySecurity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGatewaySecurity' from JSON`,
+  );
 }
