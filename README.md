@@ -210,13 +210,13 @@ run();
 * [bulkDelete](docs/sdks/discordmessages/README.md#bulkdelete)
 * [deleteAllReactions](docs/sdks/discordmessages/README.md#deleteallreactions)
 * [get](docs/sdks/discordmessages/README.md#get)
+* [updateJson](docs/sdks/discordmessages/README.md#updatejson)
 * [updateForm](docs/sdks/discordmessages/README.md#updateform)
 * [updateMultipart](docs/sdks/discordmessages/README.md#updatemultipart)
-* [updateJson](docs/sdks/discordmessages/README.md#updatejson)
 * [list](docs/sdks/discordmessages/README.md#list)
-* [createMultipart](docs/sdks/discordmessages/README.md#createmultipart)
 * [createJson](docs/sdks/discordmessages/README.md#createjson)
 * [createForm](docs/sdks/discordmessages/README.md#createform)
+* [createMultipart](docs/sdks/discordmessages/README.md#createmultipart)
 
 #### [channels.messages.reactions](docs/sdks/reactions/README.md)
 
@@ -507,9 +507,9 @@ run();
 ### [webhooks](docs/sdks/webhooks/README.md)
 
 * [deleteOriginalMessage](docs/sdks/webhooks/README.md#deleteoriginalmessage)
-* [updateOriginalMessageJson](docs/sdks/webhooks/README.md#updateoriginalmessagejson)
 * [updateOriginalMessageForm](docs/sdks/webhooks/README.md#updateoriginalmessageform)
 * [updateOriginalMessageMultipart](docs/sdks/webhooks/README.md#updateoriginalmessagemultipart)
+* [updateOriginalMessageJson](docs/sdks/webhooks/README.md#updateoriginalmessagejson)
 * [getMessage](docs/sdks/webhooks/README.md#getmessage)
 * [updateMessageJson](docs/sdks/webhooks/README.md#updatemessagejson)
 * [updateMessageForm](docs/sdks/webhooks/README.md#updatemessageform)
