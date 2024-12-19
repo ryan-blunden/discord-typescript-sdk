@@ -3,10 +3,10 @@ id: 00c85872-82d6-41ec-beb9-2a928faab7d2
 management:
   docChecksum: 18c3f8f2a8d5791908367078717f02c6
   docVersion: "10"
-  speakeasyVersion: 1.455.3
-  generationVersion: 2.479.3
-  releaseVersion: 0.2.2
-  configChecksum: 04c8a95b8db5a1727b631e0446e8b156
+  speakeasyVersion: 1.456.1
+  generationVersion: 2.481.0
+  releaseVersion: 0.2.3
+  configChecksum: 27f9954b9122bad1fa0c62a2ebd2fb37
   repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
   installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
   published: true
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.9
+    core: 3.18.11
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.1.2
@@ -1872,7 +1872,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 971774, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   update_application_user_role_connection:
     speakeasy-default-update-application-user-role-connection:
       parameters:
@@ -1881,7 +1882,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 439471, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   delete_application_user_role_connection:
     speakeasy-default-delete-application-user-role-connection:
       parameters:
@@ -2107,7 +2109,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 390438, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   poll_expire:
     speakeasy-default-poll-expire:
       parameters:
@@ -2760,7 +2763,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 149690, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   pin_message:
     speakeasy-default-pin-message:
       parameters:
@@ -3523,7 +3527,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 117093, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   prune_guild:
     speakeasy-default-prune-guild:
       parameters:
@@ -3532,7 +3537,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 683489, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   get_guild_ban:
     speakeasy-default-get-guild-ban:
       parameters:
@@ -3581,7 +3587,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 600289, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   get_stage_instance:
     speakeasy-default-get-stage-instance:
       parameters:

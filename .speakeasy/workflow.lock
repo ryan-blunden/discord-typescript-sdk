@@ -1,4 +1,4 @@
-speakeasyVersion: 1.455.3
+speakeasyVersion: 1.456.1
 sources:
     Discord-OAS:
         sourceNamespace: discord-oas
