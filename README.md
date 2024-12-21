@@ -214,9 +214,9 @@ run();
 * [updateMultipart](docs/sdks/discordmessages/README.md#updatemultipart)
 * [updateJson](docs/sdks/discordmessages/README.md#updatejson)
 * [list](docs/sdks/discordmessages/README.md#list)
-* [createMultipart](docs/sdks/discordmessages/README.md#createmultipart)
 * [createJson](docs/sdks/discordmessages/README.md#createjson)
 * [createForm](docs/sdks/discordmessages/README.md#createform)
+* [createMultipart](docs/sdks/discordmessages/README.md#createmultipart)
 
 #### [channels.messages.reactions](docs/sdks/reactions/README.md)
 
