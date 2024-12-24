@@ -19,3 +19,13 @@ Based on:
 - [typescript v0.2.2] .
 ### Releases
 - [NPM v0.2.2] https://www.npmjs.com/package/@ryan.blunden/discord/v/0.2.2 - .
+
+## 2024-12-24 00:01:40
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.460.2 (2.484.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v0.2.3] .
+### Releases
+- [NPM v0.2.3] https://www.npmjs.com/package/@ryan.blunden/discord/v/0.2.3 - .
