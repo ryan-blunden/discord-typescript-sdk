@@ -7,7 +7,7 @@ import { ExternalScheduledEventCreateRequest } from "@ryan.blunden/discord/model
 
 let value: ExternalScheduledEventCreateRequest = {
   name: "<value>",
-  scheduledStartTime: new Date("2024-08-29T14:23:04.891Z"),
+  scheduledStartTime: new Date("2025-08-29T14:23:04.891Z"),
   entityMetadata: {
     location: "<value>",
   },

@@ -23,7 +23,7 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
-      scheduledStartTime: new Date("2023-12-01T17:06:07.804Z"),
+      scheduledStartTime: new Date("2024-11-30T17:06:07.804Z"),
     },
   });
 
@@ -53,7 +53,7 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
-      scheduledStartTime: new Date("2024-05-22T22:27:14.379Z"),
+      scheduledStartTime: new Date("2025-05-22T22:27:14.379Z"),
       entityMetadata: {
         location: "<value>",
       },

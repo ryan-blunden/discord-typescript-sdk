@@ -36,7 +36,7 @@ let value: GuildAuditLogResponse = {
       id: "<value>",
       guildId: "<value>",
       name: "<value>",
-      scheduledStartTime: new Date("2022-10-30T23:56:54.625Z"),
+      scheduledStartTime: new Date("2023-10-30T23:56:54.625Z"),
     },
   ],
   threads: [

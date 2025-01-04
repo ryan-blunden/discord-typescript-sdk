@@ -22,7 +22,7 @@ let value: ThreadsResponse = {
     {
       id: "<value>",
       userId: "<value>",
-      joinTimestamp: new Date("2023-03-29T05:07:38.347Z"),
+      joinTimestamp: new Date("2024-03-28T05:07:38.347Z"),
       flags: 453310,
     },
   ],
