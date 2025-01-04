@@ -8,7 +8,7 @@
 ```typescript
 const value: components.ExternalScheduledEventCreateRequest = {
   name: "<value>",
-  scheduledStartTime: new Date("2023-11-30T23:53:33.954Z"),
+  scheduledStartTime: new Date("2024-11-29T23:53:33.954Z"),
   entityMetadata: {
     location: "<value>",
   },
@@ -20,7 +20,7 @@ const value: components.ExternalScheduledEventCreateRequest = {
 ```typescript
 const value: components.StageScheduledEventCreateRequest = {
   name: "<value>",
-  scheduledStartTime: new Date("2023-03-02T14:51:30.829Z"),
+  scheduledStartTime: new Date("2024-03-01T14:51:30.829Z"),
 };
 ```
 
@@ -29,7 +29,7 @@ const value: components.StageScheduledEventCreateRequest = {
 ```typescript
 const value: components.VoiceScheduledEventCreateRequest = {
   name: "<value>",
-  scheduledStartTime: new Date("2024-01-25T11:17:56.076Z"),
+  scheduledStartTime: new Date("2025-01-24T11:17:56.076Z"),
 };
 ```
 

@@ -13,7 +13,7 @@ let value: PollResponse = {
       pollMedia: {},
     },
   ],
-  expiry: new Date("2024-08-28T07:26:38.517Z"),
+  expiry: new Date("2025-08-28T07:26:38.517Z"),
   allowMultiselect: false,
   layoutType: 793526,
   results: {

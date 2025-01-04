@@ -3,10 +3,10 @@ id: 00c85872-82d6-41ec-beb9-2a928faab7d2
 management:
   docChecksum: 18c3f8f2a8d5791908367078717f02c6
   docVersion: "10"
-  speakeasyVersion: 1.455.3
-  generationVersion: 2.479.3
-  releaseVersion: 0.2.2
-  configChecksum: 04c8a95b8db5a1727b631e0446e8b156
+  speakeasyVersion: 1.462.2
+  generationVersion: 2.486.1
+  releaseVersion: 0.2.3
+  configChecksum: 27f9954b9122bad1fa0c62a2ebd2fb37
   repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
   installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
   published: true
@@ -14,16 +14,16 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.9
+    core: 3.18.12
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.1.2
-    globalSecurity: 2.82.11
+    globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
     groups: 2.81.2
-    methodSecurity: 2.82.4
+    methodSecurity: 2.82.5
     nameOverrides: 2.81.2
     nullables: 0.1.0
     responseFormat: 0.2.3
@@ -1872,7 +1872,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 971774, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   update_application_user_role_connection:
     speakeasy-default-update-application-user-role-connection:
       parameters:
@@ -1881,7 +1882,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 439471, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   delete_application_user_role_connection:
     speakeasy-default-delete-application-user-role-connection:
       parameters:
@@ -2107,7 +2109,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 390438, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   poll_expire:
     speakeasy-default-poll-expire:
       parameters:
@@ -2760,7 +2763,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 149690, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   pin_message:
     speakeasy-default-pin-message:
       parameters:
@@ -2968,7 +2972,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-09-05T11:33:52.011Z"}
+          application/json: {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-09-04T11:33:52.011Z"}
         4XX:
           application/json: {"code": 812134, "message": "<value>"}
   delete_guild_scheduled_event:
@@ -2988,7 +2992,7 @@ examples:
           guild_scheduled_event_id: "<value>"
       responses:
         "200":
-          application/json: {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-01-13T16:52:57.274Z"}
+          application/json: {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-01-13T16:52:57.274Z"}
         4XX:
           application/json: {"code": 156591, "message": "<value>"}
   list_guild_scheduled_events:
@@ -2999,7 +3003,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: [{"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-08-23T19:26:20.850Z"}]
+          application/json: [{"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-08-22T19:26:20.850Z"}]
         4XX:
           application/json: {"code": 639867, "message": "<value>"}
   create_guild_scheduled_event:
@@ -3008,10 +3012,10 @@ examples:
         path:
           guild_id: "<value>"
       requestBody:
-        application/json: {"name": "<value>", "scheduled_start_time": "2023-12-01T17:06:07.804Z"}
+        application/json: {"name": "<value>", "scheduled_start_time": "2024-11-30T17:06:07.804Z"}
       responses:
         "200":
-          application/json: {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2022-05-28T06:20:22.766Z"}
+          application/json: {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-05-28T06:20:22.766Z"}
         4XX:
           application/json: {"code": 57940, "message": "<value>"}
   get_guild_welcome_screen:
@@ -3121,7 +3125,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"audit_log_entries": [{"id": "<value>"}, {"id": "<value>"}, {"id": "<value>"}], "users": [{"id": "<value>", "username": "Madyson.Weissnat", "discriminator": "<value>", "public_flags": 246466, "flags": 320927}, {"id": "<value>", "username": "Brain.Erdman55", "discriminator": "<value>", "public_flags": 731295, "flags": 643852}], "integrations": [{"id": "<value>"}, {"id": "<value>"}], "webhooks": [{"id": "<value>", "name": "<value>"}, {"id": "<value>", "name": "<value>"}], "guild_scheduled_events": [{"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-10-03T16:15:05.876Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2022-09-25T07:53:48.907Z"}], "threads": [{"id": "<value>", "flags": 534175, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 255058, "member_count": 603494, "total_message_sent": 295543}], "application_commands": [{"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "flawed haunting at who nicely putrid suddenly exasperation quarrelsome recommendation"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "publication excitable obligation personalise yuck flowery misspend yahoo"}], "auto_moderation_rules": [{"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {"channel_id": "<value>"}}, {"metadata": {"channel_id": "<value>"}}, {}], "trigger_metadata": {"allow_list": ["<value>"], "presets": [755506]}}, {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{}, {"metadata": {"duration_seconds": 713667}}, {}]}]}
+          application/json: {"audit_log_entries": [{"id": "<value>"}, {"id": "<value>"}, {"id": "<value>"}], "users": [{"id": "<value>", "username": "Madyson.Weissnat", "discriminator": "<value>", "public_flags": 246466, "flags": 320927}, {"id": "<value>", "username": "Brain.Erdman55", "discriminator": "<value>", "public_flags": 731295, "flags": 643852}], "integrations": [{"id": "<value>"}, {"id": "<value>"}], "webhooks": [{"id": "<value>", "name": "<value>"}, {"id": "<value>", "name": "<value>"}], "guild_scheduled_events": [{"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-10-02T16:15:05.876Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-09-25T07:53:48.907Z"}], "threads": [{"id": "<value>", "flags": 534175, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 255058, "member_count": 603494, "total_message_sent": 295543}], "application_commands": [{"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "flawed haunting at who nicely putrid suddenly exasperation quarrelsome recommendation"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "publication excitable obligation personalise yuck flowery misspend yahoo"}], "auto_moderation_rules": [{"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {"channel_id": "<value>"}}, {"metadata": {"channel_id": "<value>"}}, {}], "trigger_metadata": {"allow_list": ["<value>"], "presets": [755506]}}, {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{}, {"metadata": {"duration_seconds": 713667}}, {}]}]}
         4XX:
           application/json: {"code": 63195, "message": "<value>"}
   get_guild_widget_png:
@@ -3523,7 +3527,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 117093, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   prune_guild:
     speakeasy-default-prune-guild:
       parameters:
@@ -3532,7 +3537,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 683489, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   get_guild_ban:
     speakeasy-default-get-guild-ban:
       parameters:
@@ -3581,7 +3587,8 @@ examples:
       responses:
         4XX:
           application/json: {"code": 600289, "message": "<value>"}
-        "200": {}
+        "200":
+          application/json: {}
   get_stage_instance:
     speakeasy-default-get-stage-instance:
       parameters:

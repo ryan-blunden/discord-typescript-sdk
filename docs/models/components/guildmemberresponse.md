@@ -7,7 +7,7 @@ import { GuildMemberResponse } from "@ryan.blunden/discord/models/components";
 
 let value: GuildMemberResponse = {
   flags: 528914,
-  joinedAt: new Date("2022-02-16T13:06:35.195Z"),
+  joinedAt: new Date("2023-02-16T13:06:35.195Z"),
   pending: false,
   roles: [
     "<value>",

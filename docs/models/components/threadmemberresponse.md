@@ -8,7 +8,7 @@ import { ThreadMemberResponse } from "@ryan.blunden/discord/models/components";
 let value: ThreadMemberResponse = {
   id: "<value>",
   userId: "<value>",
-  joinTimestamp: new Date("2022-06-08T16:53:50.445Z"),
+  joinTimestamp: new Date("2023-06-08T16:53:50.445Z"),
   flags: 778403,
 };
 ```

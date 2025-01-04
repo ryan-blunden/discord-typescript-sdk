@@ -18,7 +18,7 @@ let value: ResolvedObjectsResponse = {
   members: {
     "key": {
       flags: 605256,
-      joinedAt: new Date("2024-10-26T13:07:40.238Z"),
+      joinedAt: new Date("2025-10-26T13:07:40.238Z"),
       pending: false,
       roles: [
         "<value>",

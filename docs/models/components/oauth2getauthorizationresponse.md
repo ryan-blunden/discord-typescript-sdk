@@ -13,7 +13,7 @@ let value: OAuth2GetAuthorizationResponse = {
     verifyKey: "<value>",
     flags: 714242,
   },
-  expires: new Date("2024-12-30T17:40:17.979Z"),
+  expires: new Date("2025-12-30T17:40:17.979Z"),
   scopes: [
     "<value>",
   ],

@@ -10,8 +10,8 @@ let value: GuildTemplateResponse = {
   name: "<value>",
   usageCount: 145937,
   creatorId: "<value>",
-  createdAt: new Date("2022-10-30T01:36:34.812Z"),
-  updatedAt: new Date("2024-05-25T15:41:11.321Z"),
+  createdAt: new Date("2023-10-30T01:36:34.812Z"),
+  updatedAt: new Date("2025-05-25T15:41:11.321Z"),
   sourceGuildId: "<value>",
   serializedSourceGuild: {
     name: "<value>",

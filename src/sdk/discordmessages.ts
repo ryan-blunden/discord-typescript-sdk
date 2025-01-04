@@ -69,17 +69,6 @@ export class DiscordMessages extends ClientSDK {
     ));
   }
 
-  async updateForm(
-    request: operations.UpdateMessageFormRequest,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(channelsMessagesUpdateForm(
-      this,
-      request,
-      options,
-    ));
-  }
-
   async updateMultipart(
     request: operations.UpdateMessageMultipartRequest,
     options?: RequestOptions,
@@ -102,22 +91,22 @@ export class DiscordMessages extends ClientSDK {
     ));
   }
 
-  async list(
-    request: operations.ListMessagesRequest,
+  async updateForm(
+    request: operations.UpdateMessageFormRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.MessageResponse>> {
-    return unwrapAsync(channelsMessagesList(
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(channelsMessagesUpdateForm(
       this,
       request,
       options,
     ));
   }
 
-  async createMultipart(
-    request: operations.CreateMessageMultipartRequest,
+  async list(
+    request: operations.ListMessagesRequest,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(channelsMessagesCreateMultipart(
+  ): Promise<Array<components.MessageResponse>> {
+    return unwrapAsync(channelsMessagesList(
       this,
       request,
       options,
@@ -140,6 +129,17 @@ export class DiscordMessages extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.MessageResponse> {
     return unwrapAsync(channelsMessagesCreateForm(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  async createMultipart(
+    request: operations.CreateMessageMultipartRequest,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(channelsMessagesCreateMultipart(
       this,
       request,
       options,

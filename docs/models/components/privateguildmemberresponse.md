@@ -7,7 +7,7 @@ import { PrivateGuildMemberResponse } from "@ryan.blunden/discord/models/compone
 
 let value: PrivateGuildMemberResponse = {
   flags: 915897,
-  joinedAt: new Date("2024-08-14T07:37:23.995Z"),
+  joinedAt: new Date("2025-08-14T07:37:23.995Z"),
   pending: false,
   roles: [
     "<value>",
