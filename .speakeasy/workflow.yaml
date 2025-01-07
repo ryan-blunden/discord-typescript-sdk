@@ -1,0 +1,22 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Discord HTTP API (Preview):
+        inputs:
+            - location: https://raw.githubusercontent.com/discord/discord-api-spec/refs/heads/main/specs/openapi.json
+        overlays:
+            - location: .speakeasy/openapi-fixes-overlay.yaml
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+        output: .speakeasy/openapi-output.yaml
+        registry:
+            location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryanblunden/discord-sdk
+targets:
+    discord:
+        target: typescript
+        source: Discord HTTP API (Preview)
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryanblunden/discord-sdk-typescript-code-samples
+            labelOverride:
+                fixedValue: Typescript (SDK)
+            blocking: false

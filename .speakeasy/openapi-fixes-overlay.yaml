@@ -1,0 +1,39 @@
+overlay: 1.0.0
+info:
+  title: Overlay .speakeasy/openapi.yaml => .speakeasy/openapi-fixes.yaml
+  version: 0.0.0
+actions:
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/@original"]["patch"]["requestBody"]["content"]["multipart/form-data"]["schema"]
+    update:
+      type: object
+  - target: $["paths"]["/interactions/{interaction_id}/{interaction_token}/callback"]["post"]["requestBody"]["content"]["multipart/form-data"]["schema"]
+    update:
+      type: object
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}"]["patch"]["requestBody"]["content"]["multipart/form-data"]["schema"]
+    update:
+      type: object
+  - target: $["paths"]["/channels/{channel_id}/messages"]["post"]["requestBody"]["content"]["multipart/form-data"]["schema"]
+    update:
+      type: object
+  - target: $["paths"]["/channels/{channel_id}/invites"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["items"]["x-discord-union"]
+    remove: true
+  - target: $["paths"]["/channels/{channel_id}/threads"]["post"]["requestBody"]["content"]["multipart/form-data"]["schema"]
+    update:
+      type: object
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}"]["patch"]["requestBody"]["content"]["application/x-www-form-urlencoded"]["schema"]
+    update:
+      type: object
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}"]["patch"]["requestBody"]["content"]["multipart/form-data"]["schema"]
+    update:
+      type: object
+  - target: $["paths"]["/guilds/{guild_id}/invites"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["items"]["x-discord-union"]
+    remove: true
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}"]["post"]["requestBody"]["content"]["multipart/form-data"]["schema"]
+    update:
+      type: object
+  - target: $["components"]["schemas"]["ApplicationCommandHandler"]["oneOf"]
+    remove: true
+  - target: $["components"]["schemas"]["EntitlementOwnerTypes"]["oneOf"]
+    remove: true
+  - target: $["components"]["schemas"]["PollLayoutTypes"]["oneOf"]
+    remove: true

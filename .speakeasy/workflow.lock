@@ -1,0 +1,40 @@
+speakeasyVersion: 1.481.1
+sources:
+    Discord HTTP API (Preview):
+        sourceNamespace: discord-sdk
+        sourceRevisionDigest: sha256:5de8b29e3fe87cbe87253416892412d671e526ccbf2e376fcef7bfe438d0fa64
+        sourceBlobDigest: sha256:9e579a4a61d3141e252a64bdfc1b9a151fd0c0e45b3a3c1f073b741aff830750
+        tags:
+            - latest
+            - "10"
+targets:
+    discord:
+        source: Discord HTTP API (Preview)
+        sourceNamespace: discord-sdk
+        sourceRevisionDigest: sha256:5de8b29e3fe87cbe87253416892412d671e526ccbf2e376fcef7bfe438d0fa64
+        sourceBlobDigest: sha256:9e579a4a61d3141e252a64bdfc1b9a151fd0c0e45b3a3c1f073b741aff830750
+        codeSamplesNamespace: discord-sdk-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:b7fec956ebe0e0de9489aca5a5a04caa1a3a3be6b5d62a2e0d12d65a8d4c8978
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        Discord HTTP API (Preview):
+            inputs:
+                - location: https://raw.githubusercontent.com/discord/discord-api-spec/refs/heads/main/specs/openapi.json
+            overlays:
+                - location: .speakeasy/openapi-fixes-overlay.yaml
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            output: .speakeasy/openapi-output.yaml
+            registry:
+                location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryanblunden/discord-sdk
+    targets:
+        discord:
+            target: typescript
+            source: Discord HTTP API (Preview)
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryanblunden/discord-sdk-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false

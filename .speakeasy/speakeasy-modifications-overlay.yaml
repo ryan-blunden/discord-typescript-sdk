@@ -1,0 +1,2040 @@
+overlay: 1.0.0
+info:
+  title: Speakeasy Modifications
+  version: 0.0.0
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/channels/{channel_id}"]["patch"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_channel()
+      after: sdk.channels.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/channels/{channel_id}/invites"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: listInvites
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_channel_invites()
+      after: sdk.channels.listInvites()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/members/@me"]["patch"]
+    update:
+      x-speakeasy-group: guilds_members
+      x-speakeasy-name-override: update_me
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_my_guild_member()
+      after: sdk.guildsMembers.updateMe()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/guilds/{guild_id}/bans/{user_id}"]["get"]
+    update:
+      x-speakeasy-group: guildBans
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_ban()
+      after: sdk.guildBans.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/soundboard-sounds/{sound_id}"]["delete"]
+    update:
+      x-speakeasy-group: guildSoundboardSounds
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_guild_soundboard_sound()
+      after: sdk.guildSoundboardSounds.delete()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/bans/{user_id}"]["delete"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: unbanUser
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.unban_user_from_guild()
+      after: sdk.guilds.unbanUser()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/templates/{code}"]["delete"]
+    update:
+      x-speakeasy-group: guilds.templates
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_guild_template()
+      after: sdk.guilds.templates.delete()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/prune"]["post"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: prune
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.prune_guild()
+      after: sdk.guilds.prune()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/channels/{channel_id}/users/@me/threads/archived/private"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: list_my_private_archived_threads
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_my_private_archived_threads()
+      after: sdk.channels.listMyPrivateArchivedThreads()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/applications/{application_id}/commands"]["post"]
+    update:
+      x-speakeasy-group: applications_commands
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_application_command()
+      after: sdk.applicationsCommands.create()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands/{command_id}/permissions"]["put"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: setGuildCommandPermissions
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.set_guild_application_command_permissions()
+      after: sdk.applications.setGuildCommandPermissions()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/applications/{application_id}/emojis/{emoji_id}"]["patch"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: updateEmoji
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_application_emoji()
+      after: sdk.applications.updateEmoji()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/thread-members/@me"]["put"]
+    update:
+      x-speakeasy-group: channels_thread_members
+      x-speakeasy-name-override: join
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.join_thread()
+      after: sdk.channelsThreadMembers.join()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/guilds/{guild_id}/preview"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: getPreview
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_preview()
+      after: sdk.guilds.getPreview()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/webhooks"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: listWebhooks
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_channel_webhooks()
+      after: sdk.channels.listWebhooks()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/stickers"]["post"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: createSticker
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_guild_sticker()
+      after: sdk.guilds.createSticker()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/guilds/templates/{code}"]["post"]
+    update:
+      x-speakeasy-group: guild_templates
+      x-speakeasy-name-override: create_from_code
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_guild_from_template()
+      after: sdk.guildTemplates.createFromCode()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/templates"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: list_templates
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_templates()
+      after: sdk.guilds.listTemplates()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/channels/{channel_id}/polls/{message_id}/answers/{answer_id}"]["get"]
+    update:
+      x-speakeasy-group: answers
+      x-speakeasy-name-override: getVoters
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_answer_voters()
+      after: sdk.answers.getVoters()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/roles/{role_id}"]["patch"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: updateRole
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_guild_role()
+      after: sdk.guilds.updateRole()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/templates/{code}"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: getTemplate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_template()
+      after: sdk.guilds.getTemplate()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/channels/{channel_id}/webhooks"]["post"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: createWebhook
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_webhook()
+      after: sdk.channels.createWebhook()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/applications/{application_id}/attachment"]["post"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: upload_attachment
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.upload_application_attachment()
+      after: sdk.applications.uploadAttachment()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/soundboard-sounds"]["get"]
+    update:
+      x-speakeasy-group: guilds_soundboard_sounds
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_soundboard_sounds()
+      after: sdk.guildsSoundboardSounds.list()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}"]["patch"]
+    update:
+      x-speakeasy-group: channels.messages
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_message()
+      after: sdk.channels.messages.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/applications/{application_id}/commands/{command_id}"]["delete"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: deleteCommand
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_application_command()
+      after: sdk.applications.deleteCommand()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/voice-states/{user_id}"]["get"]
+    update:
+      x-speakeasy-group: guilds
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_voice_state()
+      after: sdk.guilds.getVoiceState()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/scheduled-events"]["post"]
+    update:
+      x-speakeasy-group: scheduledEvents
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_guild_scheduled_event()
+      after: sdk.scheduledEvents.create()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/thread-members"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: listThreadMembers
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_thread_members()
+      after: sdk.channels.listThreadMembers()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/applications/{application_id}/activity-instances/{instance_id}"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getActivityInstance
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.applications_get_activity_instance()
+      after: sdk.applications.getActivityInstance()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/oauth2/@me"]["get"]
+    update:
+      x-speakeasy-group: oauth2
+      x-speakeasy-name-override: get_authorization
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_my_oauth2_authorization()
+      after: sdk.oauth2.getAuthorization()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/sticker-packs"]["get"]
+    update:
+      x-speakeasy-group: stickerPacks
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_sticker_packs()
+      after: sdk.stickerPacks.list()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/widget.png"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: get_widget_png
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_widget_png()
+      after: sdk.guilds.getWidgetPng()
+      reviewed_at: 1731379212400
+      created_at: 1731377079054
+  - target: $["paths"]["/users/{user_id}"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_user()
+      after: sdk.users.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/stage-instances/{channel_id}"]["delete"]
+    update:
+      x-speakeasy-group: stageInstances
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_stage_instance()
+      after: sdk.stageInstances.delete()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/channels/{channel_id}/messages"]["get"]
+    update:
+      x-speakeasy-group: channels.messages
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_messages()
+      after: sdk.channels.messages.list()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/channels/{channel_id}"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_channel()
+      after: sdk.channels.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/recipients/{user_id}"]["delete"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: delete_dm_user
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_group_dm_user()
+      after: sdk.channels.deleteDmUser()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/users/@me/guilds/{guild_id}/member"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: getMyMember
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_my_guild_member()
+      after: sdk.guilds.getMyMember()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/invites/{code}"]["get"]
+    update:
+      x-speakeasy-group: invites
+      x-speakeasy-name-override: resolve
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.invite_resolve()
+      after: sdk.invites.resolve()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/channels/{channel_id}/followers"]["post"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: follow
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.follow_channel()
+      after: sdk.channels.follow()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/voice/regions"]["get"]
+    update:
+      x-speakeasy-group: voice
+      x-speakeasy-name-override: list_regions
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_voice_regions()
+      after: sdk.voice.listRegions()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}"]["get"]
+    update:
+      x-speakeasy-group: guilds.scheduledEvents
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_scheduled_event()
+      after: sdk.guilds.scheduledEvents.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/emojis/{emoji_id}"]["get"]
+    update:
+      x-speakeasy-group: guildEmojis
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_emoji()
+      after: sdk.guildEmojis.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/webhooks/{webhook_id}"]["patch"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_webhook()
+      after: sdk.webhooks.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/members/{user_id}"]["put"]
+    update:
+      x-speakeasy-group: guildMembers
+      x-speakeasy-name-override: add
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.add_guild_member()
+      after: sdk.guildMembers.add()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}"]["post"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: execute
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.execute_webhook()
+      after: sdk.webhooks.execute()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/webhooks/{webhook_id}"]["get"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_webhook()
+      after: sdk.webhooks.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/new-member-welcome"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: get_new_member_welcome
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_new_member_welcome()
+      after: sdk.guilds.getNewMemberWelcome()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}"]["delete"]
+    update:
+      x-speakeasy-group: guild_scheduled_events
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_guild_scheduled_event()
+      after: sdk.guildScheduledEvents.delete()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/applications/{application_id}/commands"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: listCommands
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_application_commands()
+      after: sdk.applications.listCommands()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/members/search"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: searchMembers
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.search_guild_members()
+      after: sdk.guilds.searchMembers()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/applications/{application_id}/role-connections/metadata"]["put"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: updateRoleConnectionsMetadata
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_application_role_connections_metadata()
+      after: sdk.applications.updateRoleConnectionsMetadata()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/threads/active"]["get"]
+    update:
+      x-speakeasy-group: guildThreads
+      x-speakeasy-name-override: getActive
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_active_guild_threads()
+      after: sdk.guildThreads.getActive()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/reactions"]["delete"]
+    update:
+      x-speakeasy-group: channels.messages
+      x-speakeasy-name-override: deleteAllReactions
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_all_message_reactions()
+      after: sdk.channels.messages.deleteAllReactions()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/oauth2/applications/@me"]["get"]
+    update:
+      x-speakeasy-group: oauth2
+      x-speakeasy-name-override: get_my_application
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_my_oauth2_application()
+      after: sdk.oauth2.getMyApplication()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/stickers/{sticker_id}"]["get"]
+    update:
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_sticker()
+      after: sdk.stickers.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/guilds/{guild_id}/vanity-url"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: getVanityUrl
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_vanity_url()
+      after: sdk.guilds.getVanityUrl()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/members/{user_id}"]["patch"]
+    update:
+      x-speakeasy-group: guilds_members
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_guild_member()
+      after: sdk.guildsMembers.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/regions"]["get"]
+    update:
+      x-speakeasy-group: guildVoiceRegions
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_voice_regions()
+      after: sdk.guildVoiceRegions.list()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}"]["delete"]
+    update:
+      x-speakeasy-group: messageReactions
+      x-speakeasy-name-override: deleteAllByEmoji
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_all_message_reactions_by_emoji()
+      after: sdk.messageReactions.deleteAllByEmoji()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands"]["post"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: createGuildCommand
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_guild_application_command()
+      after: sdk.applications.createGuildCommand()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/@original"]["get"]
+    update:
+      x-speakeasy-group: webhookMessages
+      x-speakeasy-name-override: getOriginal
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_original_webhook_message()
+      after: sdk.webhookMessages.getOriginal()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}"]["delete"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: delete_by_token
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_webhook_by_token()
+      after: sdk.webhooks.deleteByToken()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}"]["patch"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_guild()
+      after: sdk.guilds.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/guilds/{guild_id}/stickers"]["get"]
+    update:
+      x-speakeasy-group: guildStickers
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_stickers()
+      after: sdk.guildStickers.list()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/applications/{application_id}/entitlements/{entitlement_id}"]["delete"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: deleteEntitlement
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_entitlement()
+      after: sdk.applications.deleteEntitlement()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/widget.json"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: get_widget
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_widget()
+      after: sdk.guilds.getWidget()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/emojis/{emoji_id}"]["delete"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: delete_emoji
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_guild_emoji()
+      after: sdk.guilds.deleteEmoji()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/channels/{channel_id}/threads"]["post"]
+    update:
+      x-speakeasy-group: channels.threads
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_thread()
+      after: sdk.channels.threads.create()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/stickers/{sticker_id}"]["patch"]
+    update:
+      x-speakeasy-group: guilds.stickers
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_guild_sticker()
+      after: sdk.guilds.stickers.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/pins/{message_id}"]["put"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: pinMessage
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.pin_message()
+      after: sdk.channels.pinMessage()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}"]["get"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: get_message
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_webhook_message()
+      after: sdk.webhooks.getMessage()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/stickers/{sticker_id}"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: getSticker
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_sticker()
+      after: sdk.guilds.getSticker()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/threads/archived/private"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: listPrivateArchivedThreads
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_private_archived_threads()
+      after: sdk.channels.listPrivateArchivedThreads()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/members/{user_id}"]["delete"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: deleteMember
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_guild_member()
+      after: sdk.guilds.deleteMember()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/channels/{channel_id}/invites"]["post"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: create_invite
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_channel_invite()
+      after: sdk.channels.createInvite()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/stage-instances/{channel_id}"]["get"]
+    update:
+      x-speakeasy-group: stageInstances
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_stage_instance()
+      after: sdk.stageInstances.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands/{command_id}"]["get"]
+    update:
+      x-speakeasy-group: guildCommands
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_application_command()
+      after: sdk.guildCommands.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/auto-moderation/rules"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: listAutoModerationRules
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_auto_moderation_rules()
+      after: sdk.guilds.listAutoModerationRules()
+      reviewed_at: 1731379212400
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/integrations"]["get"]
+    update:
+      x-speakeasy-group: guilds.integrations
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_integrations()
+      after: sdk.guilds.integrations.list()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/soundboard-sounds"]["post"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: create_soundboard_sound
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_guild_soundboard_sound()
+      after: sdk.guilds.createSoundboardSound()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/members/{user_id}/roles/{role_id}"]["delete"]
+    update:
+      x-speakeasy-group: guild_member_roles
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_guild_member_role()
+      after: sdk.guildMemberRoles.delete()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/sticker-packs/{pack_id}"]["get"]
+    update:
+      x-speakeasy-group: stickerPacks
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_sticker_pack()
+      after: sdk.stickerPacks.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/applications/{application_id}"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_application()
+      after: sdk.applications.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/emojis"]["post"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: createEmoji
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_guild_emoji()
+      after: sdk.guilds.createEmoji()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/voice-states/@me"]["patch"]
+    update:
+      x-speakeasy-group: guilds.voiceStates
+      x-speakeasy-name-override: updateSelf
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_self_voice_state()
+      after: sdk.guilds.voiceStates.updateSelf()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/channels/{channel_id}/pins"]["get"]
+    update:
+      x-speakeasy-group: channels
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_pinned_messages()
+      after: sdk.channels.listPinnedMessages()
+      reviewed_at: 1731379212400
+      created_at: 1731377079055
+  - target: $["paths"]["/channels/{channel_id}/polls/{message_id}/expire"]["post"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: expirePoll
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.poll_expire()
+      after: sdk.channels.expirePoll()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/channels/{channel_id}/threads/archived/public"]["get"]
+    update:
+      x-speakeasy-group: threads
+      x-speakeasy-name-override: list_public_archived
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_public_archived_threads()
+      after: sdk.threads.listPublicArchived()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/integrations/{integration_id}"]["delete"]
+    update:
+      x-speakeasy-group: guildIntegrations
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_guild_integration()
+      after: sdk.guildIntegrations.delete()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/voice-states/{user_id}"]["patch"]
+    update:
+      x-speakeasy-group: guilds.voiceStates
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_voice_state()
+      after: sdk.guilds.voiceStates.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/onboarding"]["put"]
+    update:
+      x-speakeasy-group: guildOnboarding
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.put_guilds_onboarding()
+      after: sdk.guildOnboarding.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/guilds/{guild_id}/invites"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: listInvites
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_invites()
+      after: sdk.guilds.listInvites()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/users/@me/guilds"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: listMyGuilds
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_my_guilds()
+      after: sdk.users.listMyGuilds()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/onboarding"]["get"]
+    update:
+      x-speakeasy-group: guildOnboarding
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guilds_onboarding()
+      after: sdk.guildOnboarding.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/stickers/{sticker_id}"]["delete"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: delete_sticker
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_guild_sticker()
+      after: sdk.guilds.deleteSticker()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}"]["get"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: listReactionsByEmoji
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_message_reactions_by_emoji()
+      after: sdk.messages.listReactionsByEmoji()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/auto-moderation/rules"]["post"]
+    update:
+      x-speakeasy-group: auto_moderation_rules
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_auto_moderation_rule()
+      after: sdk.autoModerationRules.create()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/templates/{code}"]["patch"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: update_template
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_guild_template()
+      after: sdk.guilds.updateTemplate()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/applications/{application_id}/emojis"]["post"]
+    update:
+      x-speakeasy-group: applications.emojis
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_application_emoji()
+      after: sdk.applications.emojis.create()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/templates/{code}"]["put"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: syncTemplate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.sync_guild_template()
+      after: sdk.guilds.syncTemplate()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/applications/@me"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getMe
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_my_application()
+      after: sdk.applications.getMe()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/permissions/{overwrite_id}"]["put"]
+    update:
+      x-speakeasy-group: channels.permissions
+      x-speakeasy-name-override: setOverwrite
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.set_channel_permission_overwrite()
+      after: sdk.channels.permissions.setOverwrite()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/channels"]["post"]
+    update:
+      x-speakeasy-group: guilds_channels
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_guild_channel()
+      after: sdk.guildsChannels.create()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/guilds/{guild_id}/soundboard-sounds/{sound_id}"]["patch"]
+    update:
+      x-speakeasy-group: guilds.soundboardSounds
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_guild_soundboard_sound()
+      after: sdk.guilds.soundboardSounds.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/auto-moderation/rules/{rule_id}"]["delete"]
+    update:
+      x-speakeasy-group: autoModerationRules
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_auto_moderation_rule()
+      after: sdk.autoModerationRules.delete()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}/users"]["get"]
+    update:
+      x-speakeasy-group: guilds.scheduledEvents.users
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_scheduled_event_users()
+      after: sdk.guilds.scheduledEvents.users.list()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/soundboard-sounds/{sound_id}"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: getSoundboardSound
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_soundboard_sound()
+      after: sdk.guilds.getSoundboardSound()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/applications/{application_id}/entitlements"]["get"]
+    update:
+      x-speakeasy-group: applications
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_entitlements()
+      after: sdk.applications.getEntitlements()
+      reviewed_at: 1731379212400
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/widget"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: getWidgetSettings
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_widget_settings()
+      after: sdk.guilds.getWidgetSettings()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands/permissions"]["get"]
+    update:
+      x-speakeasy-group: applications.guilds
+      x-speakeasy-name-override: list_command_permissions
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_application_command_permissions()
+      after: sdk.applications.guilds.list_command_permissions()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/invites/{code}"]["delete"]
+    update:
+      x-speakeasy-group: invites
+      x-speakeasy-name-override: revoke
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.invite_revoke()
+      after: sdk.invites.revoke()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/bulk-ban"]["post"]
+    update:
+      x-speakeasy-group: guildBans
+      x-speakeasy-name-override: bulkBan
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.bulk_ban_users_from_guild()
+      after: sdk.guildBans.bulkBan()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/channels/{channel_id}/thread-members/{user_id}"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: getThreadMember
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_thread_member()
+      after: sdk.channels.getThreadMember()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/applications/@me"]["patch"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: updateSelf
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_my_application()
+      after: sdk.applications.updateSelf()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}/@me"]["put"]
+    update:
+      x-speakeasy-group: channels.messages.reactions
+      x-speakeasy-name-override: add
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.add_my_message_reaction()
+      after: sdk.channels.messages.reactions.add()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild()
+      after: sdk.guilds.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/prune"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: preview_prune
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.preview_prune_guild()
+      after: sdk.guilds.previewPrune()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/slack"]["post"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: executeSlackCompatible
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.execute_slack_compatible_webhook()
+      after: sdk.webhooks.executeSlackCompatible()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/channels/{channel_id}/send-soundboard-sound"]["post"]
+    update:
+      x-speakeasy-group: channels
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.send_soundboard_sound()
+      after: sdk.channels.sendSoundboardSound()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/github"]["post"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: executeGithubCompatible
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.execute_github_compatible_webhook()
+      after: sdk.webhooks.executeGithubCompatible()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}"]["patch"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: update_by_token
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_webhook_by_token()
+      after: sdk.webhooks.updateByToken()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/roles"]["post"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: create_role
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_guild_role()
+      after: sdk.guilds.createRole()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/users/@me/guilds/{guild_id}"]["delete"]
+    update:
+      x-speakeasy-group: users.guilds
+      x-speakeasy-name-override: leave
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.leave_guild()
+      after: sdk.users.guilds.leave()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/welcome-screen"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: get_welcome_screen
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_welcome_screen()
+      after: sdk.guilds.getWelcomeScreen()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/channels"]["patch"]
+    update:
+      x-speakeasy-group: guilds.channels
+      x-speakeasy-name-override: bulkUpdate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.bulk_update_guild_channels()
+      after: sdk.guilds.channels.bulkUpdate()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/channels/{channel_id}"]["delete"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_channel()
+      after: sdk.channels.delete()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/roles"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: listRoles
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_roles()
+      after: sdk.guilds.listRoles()
+      reviewed_at: 1731379212400
+      created_at: 1731377079052
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands"]["get"]
+    update:
+      x-speakeasy-group: guild_application_commands
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_application_commands()
+      after: sdk.guildApplicationCommands.list()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}/{user_id}"]["delete"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: deleteUserMessageReaction
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_user_message_reaction()
+      after: sdk.channels.deleteUserMessageReaction()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/users/@me/applications/{application_id}/role-connection"]["get"]
+    update:
+      x-speakeasy-group: application_user_role_connections
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_application_user_role_connection()
+      after: sdk.applicationUserRoleConnections.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands/{command_id}"]["patch"]
+    update:
+      x-speakeasy-group: guildApplicationCommands
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_guild_application_command()
+      after: sdk.guildApplicationCommands.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/gateway/bot"]["get"]
+    update:
+      x-speakeasy-group: gateway
+      x-speakeasy-name-override: getBot
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_bot_gateway()
+      after: sdk.gateway.getBot()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands"]["put"]
+    update:
+      x-speakeasy-group: guildApplicationCommands
+      x-speakeasy-name-override: bulkSet
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.bulk_set_guild_application_commands()
+      after: sdk.guildApplicationCommands.bulkSet()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/stage-instances"]["post"]
+    update:
+      x-speakeasy-group: stageInstances
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_stage_instance()
+      after: sdk.stageInstances.create()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}"]["patch"]
+    update:
+      x-speakeasy-group: guilds.scheduled_events
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_guild_scheduled_event()
+      after: sdk.guilds.scheduledEvents.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds"]["post"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_guild()
+      after: sdk.guilds.create()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/permissions/{overwrite_id}"]["delete"]
+    update:
+      x-speakeasy-group: channel_permissions
+      x-speakeasy-name-override: delete_overwrite
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_channel_permission_overwrite()
+      after: sdk.channelPermissions.deleteOverwrite()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/applications/{application_id}/commands/{command_id}"]["patch"]
+    update:
+      x-speakeasy-group: applications.commands
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_application_command()
+      after: sdk.applications.commands.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/applications/{application_id}/emojis/{emoji_id}"]["delete"]
+    update:
+      x-speakeasy-group: applications.emojis
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_application_emoji()
+      after: sdk.applications.emojis.delete()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/roles/{role_id}"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: getRole
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_role()
+      after: sdk.guilds.getRole()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/channels/{channel_id}/thread-members/@me"]["delete"]
+    update:
+      x-speakeasy-group: channels.threadMembers
+      x-speakeasy-name-override: leave
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.leave_thread()
+      after: sdk.channels.threadMembers.leave()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/applications/{application_id}/entitlements"]["post"]
+    update:
+      x-speakeasy-group: applications
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_entitlement()
+      after: sdk.applications.createEntitlement()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/audit-logs"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: listAuditLogs
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_audit_log_entries()
+      after: sdk.guilds.listAuditLogs()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/applications/{application_id}/entitlements/{entitlement_id}/consume"]["post"]
+    update:
+      x-speakeasy-group: applications
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.consume_entitlement()
+      after: sdk.applications.consumeEntitlement()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/scheduled-events"]["get"]
+    update:
+      x-speakeasy-group: guilds.scheduledEvents
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_scheduled_events()
+      after: sdk.guilds.scheduledEvents.list()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}"]["delete"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: deleteMessage
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_message()
+      after: sdk.channels.deleteMessage()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/gateway"]["get"]
+    update:
+      x-speakeasy-group: gateway
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_gateway()
+      after: sdk.gateway.get()
+      reviewed_at: 1731379212400
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/emojis/{emoji_id}"]["patch"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: updateEmoji
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_guild_emoji()
+      after: sdk.guilds.updateEmoji()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/pins/{message_id}"]["delete"]
+    update:
+      x-speakeasy-group: channels.pins
+      x-speakeasy-name-override: unpin
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.unpin_message()
+      after: sdk.channels.pins.unpin()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands/{command_id}"]["delete"]
+    update:
+      x-speakeasy-group: guild_application_commands
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_guild_application_command()
+      after: sdk.guildApplicationCommands.delete()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/guilds/{guild_id}/auto-moderation/rules/{rule_id}"]["patch"]
+    update:
+      x-speakeasy-group: guilds.autoModeration.rules
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_auto_moderation_rule()
+      after: sdk.guilds.autoModeration.rules.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/members/{user_id}/roles/{role_id}"]["put"]
+    update:
+      x-speakeasy-group: guild_member_roles
+      x-speakeasy-name-override: add
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.add_guild_member_role()
+      after: sdk.guildMemberRoles.add()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/applications/{application_id}/commands"]["put"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: bulk_set_commands
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.bulk_set_application_commands()
+      after: sdk.applications.bulkSetCommands()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/applications/{application_id}/entitlements/{entitlement_id}"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getEntitlement
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_entitlement()
+      after: sdk.applications.getEntitlement()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/bans"]["get"]
+    update:
+      x-speakeasy-group: guildBans
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_bans()
+      after: sdk.guildBans.list()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/messages/bulk-delete"]["post"]
+    update:
+      x-speakeasy-group: channels.messages
+      x-speakeasy-name-override: bulkDelete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.bulk_delete_messages()
+      after: sdk.channels.messages.bulkDelete()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/threads"]["post"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: startThreadFromMessage
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_thread_from_message()
+      after: sdk.channels.startThreadFromMessage()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/users/@me"]["patch"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: updateMe
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_my_user()
+      after: sdk.users.updateMe()
+      reviewed_at: 1731379212400
+      created_at: 1731377079054
+  - target: $["paths"]["/stage-instances/{channel_id}"]["patch"]
+    update:
+      x-speakeasy-group: stage_instances
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_stage_instance()
+      after: sdk.stageInstances.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/@original"]["patch"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: updateOriginalMessage
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_original_webhook_message()
+      after: sdk.webhooks.updateOriginalMessage()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/members/{user_id}"]["get"]
+    update:
+      x-speakeasy-group: guilds_members
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_member()
+      after: sdk.guildsMembers.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/@original"]["delete"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: deleteOriginalMessage
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_original_webhook_message()
+      after: sdk.webhooks.deleteOriginalMessage()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/applications/{application_id}/commands/{command_id}"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: get_command
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_application_command()
+      after: sdk.applications.getCommand()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}"]["patch"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: updateMessage
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_webhook_message()
+      after: sdk.webhooks.updateMessage()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}"]["get"]
+    update:
+      x-speakeasy-group: channels.messages
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_message()
+      after: sdk.channels.messages.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/users/@me/applications/{application_id}/role-connection"]["delete"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: delete_user_role_connection
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_application_user_role_connection()
+      after: sdk.applications.deleteUserRoleConnection()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}"]["get"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: get_by_token
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_webhook_by_token()
+      after: sdk.webhooks.getByToken()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}/bans/{user_id}"]["put"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: banUser
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.ban_user_from_guild()
+      after: sdk.guilds.banUser()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/channels"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: listChannels
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_channels()
+      after: sdk.guilds.listChannels()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/applications/{application_id}/emojis"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: listEmojis
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_application_emojis()
+      after: sdk.applications.listEmojis()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/crosspost"]["post"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: crosspostMessage
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.crosspost_message()
+      after: sdk.channels.crosspostMessage()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/roles"]["patch"]
+    update:
+      x-speakeasy-group: guildRoles
+      x-speakeasy-name-override: bulkUpdate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.bulk_update_guild_roles()
+      after: sdk.guildRoles.bulkUpdate()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/typing"]["post"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: triggerTyping
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.trigger_typing_indicator()
+      after: sdk.channels.triggerTyping()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/webhooks/{webhook_id}"]["delete"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_webhook()
+      after: sdk.webhooks.delete()
+      reviewed_at: 1731379212400
+      created_at: 1731377079052
+  - target: $["paths"]["/channels/{channel_id}/recipients/{user_id}"]["put"]
+    update:
+      x-speakeasy-group: channels_recipients
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.add_group_dm_user()
+      after: sdk.channelsRecipients.addGroupDmUser()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}/@me"]["delete"]
+    update:
+      x-speakeasy-group: channels.messages
+      x-speakeasy-name-override: deleteMyReaction
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_my_message_reaction()
+      after: sdk.channels.messages.deleteMyReaction()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/channels/{channel_id}/thread-members/{user_id}"]["put"]
+    update:
+      x-speakeasy-group: channels
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.add_thread_member()
+      after: sdk.channels.addThreadMember()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/members"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: listMembers
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_members()
+      after: sdk.guilds.listMembers()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/voice-states/@me"]["get"]
+    update:
+      x-speakeasy-group: guilds.voice_states
+      x-speakeasy-name-override: get_self
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_self_voice_state()
+      after: sdk.guilds.voiceStates.get_self()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/applications/{application_id}/role-connections/metadata"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getRoleConnectionsMetadata
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_application_role_connections_metadata()
+      after: sdk.applications.getRoleConnectionsMetadata()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/interactions/{interaction_id}/{interaction_token}/callback"]["post"]
+    update:
+      x-speakeasy-group: interactions
+      x-speakeasy-name-override: create_response
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_interaction_response()
+      after: sdk.interactions.createResponse()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/auto-moderation/rules/{rule_id}"]["get"]
+    update:
+      x-speakeasy-group: autoModerationRules
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_auto_moderation_rule()
+      after: sdk.autoModerationRules.get()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}"]["delete"]
+    update:
+      x-speakeasy-group: webhooks.messages
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_webhook_message()
+      after: sdk.webhooks.messages.delete()
+      reviewed_at: 1731379212400
+      created_at: 1731377079053
+  - target: $["paths"]["/channels/{channel_id}/thread-members/{user_id}"]["delete"]
+    update:
+      x-speakeasy-group: threadMembers
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_thread_member()
+      after: sdk.threadMembers.delete()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/oauth2/keys"]["get"]
+    update:
+      x-speakeasy-group: oauth2
+      x-speakeasy-name-override: getKeys
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_public_keys()
+      after: sdk.oauth2.getKeys()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/guilds/{guild_id}/mfa"]["post"]
+    update:
+      x-speakeasy-group: guilds.mfa
+      x-speakeasy-name-override: setLevel
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.set_guild_mfa_level()
+      after: sdk.guilds.mfa.setLevel()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/welcome-screen"]["patch"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: updateWelcomeScreen
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_guild_welcome_screen()
+      after: sdk.guilds.updateWelcomeScreen()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/guilds/{guild_id}/roles/{role_id}"]["delete"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: delete_role
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_guild_role()
+      after: sdk.guilds.deleteRole()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/guilds/{guild_id}"]["delete"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.delete_guild()
+      after: sdk.guilds.delete()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/users/@me/channels"]["post"]
+    update:
+      x-speakeasy-group: users
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_dm()
+      after: sdk.users.createDm()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/templates"]["post"]
+    update:
+      x-speakeasy-group: guilds.templates
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_guild_template()
+      after: sdk.guilds.templates.create()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/guilds/{guild_id}/widget"]["patch"]
+    update:
+      x-speakeasy-group: guildWidgetSettings
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_guild_widget_settings()
+      after: sdk.guildWidgetSettings.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/users/@me"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: get_me
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_my_user()
+      after: sdk.users.getMe()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/guilds/{guild_id}/emojis"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: list_emojis
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_guild_emojis()
+      after: sdk.guilds.listEmojis()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/users/@me/applications/{application_id}/role-connection"]["put"]
+    update:
+      x-speakeasy-group: applicationUserRoleConnection
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_application_user_role_connection()
+      after: sdk.applicationUserRoleConnection.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/applications/{application_id}"]["patch"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.update_application()
+      after: sdk.applications.update()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/users/@me/connections"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: listMyConnections
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.list_my_connections()
+      after: sdk.users.listMyConnections()
+      reviewed_at: 1731379212401
+      created_at: 1731377079055
+  - target: $["paths"]["/soundboard-default-sounds"]["get"]
+    update:
+      x-speakeasy-group: soundboard
+      x-speakeasy-name-override: getDefaultSounds
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_soundboard_default_sounds()
+      after: sdk.soundboard.getDefaultSounds()
+      reviewed_at: 1731379212401
+      created_at: 1731377079053
+  - target: $["paths"]["/guilds/{guild_id}/webhooks"]["get"]
+    update:
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: listWebhooks
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_webhooks()
+      after: sdk.guilds.listWebhooks()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/applications/{application_id}/emojis/{emoji_id}"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: get_emoji
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_application_emoji()
+      after: sdk.applications.getEmoji()
+      reviewed_at: 1731379212401
+      created_at: 1731377079052
+  - target: $["paths"]["/channels/{channel_id}/messages"]["post"]
+    update:
+      x-speakeasy-group: channels.messages
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.create_message()
+      after: sdk.channels.messages.create()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands/{command_id}/permissions"]["get"]
+    update:
+      x-speakeasy-group: applications.guilds
+      x-speakeasy-name-override: get_command_permissions
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.<no_group>.get_guild_application_command_permissions()
+      after: sdk.applications.guilds.get_command_permissions()
+      reviewed_at: 1731379212401
+      created_at: 1731377079054
