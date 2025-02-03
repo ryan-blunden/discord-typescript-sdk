@@ -3,6 +3,12 @@ info:
   title: Overlay .speakeasy/openapi.yaml => .speakeasy/openapi-fixes.yaml
   version: 0.0.0
 actions:
+  - target: $["info"]
+    update:
+      description: |
+        The Discord TypeScript SDK exposes the full capabilities of the v10 API, enabling you to build bots and applications that manage servers, channels, messages, interactions, and more.
+
+        The SDK is regularly updated to include the latest changes from the OpenAPI spec at https://github.com/discord/discord-api-spec/blob/main/specs/openapi.json
   - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/@original"]["patch"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
