@@ -12,7 +12,10 @@ A type-safe SDK for building Node.js Discord bots and applications with the v10 
 <!-- Start Summary [summary] -->
 ## Summary
 
-Discord HTTP API (Preview): Preview of the Discord v10 HTTP API specification. See https://discord.com/developers/docs for more details.
+Discord HTTP API (Preview): The Discord TypeScript SDK exposes the full capabilities of the v10 API, enabling you to build bots and applications that manage servers, channels, messages, interactions, and more.
+
+The SDK is regularly updated to include the latest changes from the OpenAPI spec at https://github.com/discord/discord-api-spec/blob/main/specs/openapi.json
+
 
 For more information about the API: [Discord Developer Documentation](https://discord.com/developers/docs)
 <!-- End Summary [summary] -->
@@ -50,25 +53,25 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add https://github.com/ryan-blunden/discord-typescript-sdk
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add https://github.com/ryan-blunden/discord-typescript-sdk
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add https://github.com/ryan-blunden/discord-typescript-sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
+yarn add https://github.com/ryan-blunden/discord-typescript-sdk zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
@@ -265,9 +268,9 @@ run();
 * [updateForm](docs/sdks/discordmessages/README.md#updateform)
 * [updateMultipart](docs/sdks/discordmessages/README.md#updatemultipart)
 * [list](docs/sdks/discordmessages/README.md#list)
+* [createMultipart](docs/sdks/discordmessages/README.md#createmultipart)
 * [createJson](docs/sdks/discordmessages/README.md#createjson)
 * [createForm](docs/sdks/discordmessages/README.md#createform)
-* [createMultipart](docs/sdks/discordmessages/README.md#createmultipart)
 
 #### [channels.messages.reactions](docs/sdks/reactions/README.md)
 
