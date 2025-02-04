@@ -1,7 +1,7 @@
 openapi: "3.1.0"
 info:
   title: "Discord HTTP API (Preview)"
-  description: "Preview of the Discord v10 HTTP API specification. See https://discord.com/developers/docs for more details."
+  description: "The Discord TypeScript SDK exposes the full capabilities of the v10 API, enabling you to build bots and applications that manage servers, channels, messages, interactions, and more.\n\nThe SDK is regularly updated to include the latest changes from the OpenAPI spec at https://github.com/discord/discord-api-spec/blob/main/specs/openapi.json\n"
   termsOfService: "https://discord.com/developers/docs/policies-and-agreements/developer-terms-of-service"
   license:
     name: "MIT"
