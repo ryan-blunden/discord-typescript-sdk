@@ -14,6 +14,9 @@ targets:
     discord:
         target: typescript
         source: Discord HTTP API (Preview)
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryanblunden/discord-sdk-typescript-code-samples
