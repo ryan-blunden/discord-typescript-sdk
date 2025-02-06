@@ -22,7 +22,7 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
-export async function getOpenidConnectUserinfo(
+export async function openidConnectGetUserinfo(
   client: DiscordCore,
   security: operations.GetOpenidConnectUserinfoSecurity,
   options?: RequestOptions,

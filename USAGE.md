@@ -2,12 +2,12 @@
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
-  const result = await discord.getOpenidConnectUserinfo({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  });
+  const result = await discord.oauth2.getMyApplication();
 
   // Handle the result
   console.log(result);
