@@ -165,6 +165,8 @@ paths:
         - BotToken: []
         - OAuth2:
             - openid
+      x-speakeasy-group: openidConnect
+      x-speakeasy-name-override: getUserinfo
   "/oauth2/keys":
     get:
       operationId: "get_public_keys"

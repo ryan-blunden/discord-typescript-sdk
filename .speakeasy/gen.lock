@@ -1,14 +1,15 @@
 lockVersion: 2.0.0
 id: d6760420-c0f7-476a-a38c-38dd82de2cc6
 management:
-  docChecksum: 4bfa93a012780156564dc0366f265c13
+  docChecksum: a2839937c3514482794020697c1fd868
   docVersion: "10"
-  speakeasyVersion: 1.483.0
-  generationVersion: 2.502.0
-  releaseVersion: 0.0.2
-  configChecksum: 7b9c1c4d3f8fb74f89efb8baaadf339f
+  speakeasyVersion: 1.484.1
+  generationVersion: 2.503.2
+  releaseVersion: 0.0.3
+  configChecksum: 68107967307215dcf68df21c49b56ab1
   repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
   installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
+  published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -790,6 +791,7 @@ generatedFiles:
   - docs/sdks/messages/README.md
   - docs/sdks/mfa/README.md
   - docs/sdks/oauth2/README.md
+  - docs/sdks/openidconnect/README.md
   - docs/sdks/permissions/README.md
   - docs/sdks/pins/README.md
   - docs/sdks/reactions/README.md
@@ -891,7 +893,6 @@ generatedFiles:
   - src/funcs/channelsUpdate.ts
   - src/funcs/gatewayGet.ts
   - src/funcs/gatewayGetBot.ts
-  - src/funcs/getOpenidConnectUserinfo.ts
   - src/funcs/guildApplicationCommandsBulkSet.ts
   - src/funcs/guildApplicationCommandsDelete.ts
   - src/funcs/guildApplicationCommandsList.ts
@@ -986,6 +987,7 @@ generatedFiles:
   - src/funcs/oauth2GetAuthorization.ts
   - src/funcs/oauth2GetKeys.ts
   - src/funcs/oauth2GetMyApplication.ts
+  - src/funcs/openidConnectGetUserinfo.ts
   - src/funcs/scheduledEventsCreate.ts
   - src/funcs/soundboardGetDefaultSounds.ts
   - src/funcs/stageInstancesCreate.ts
@@ -1642,6 +1644,7 @@ generatedFiles:
   - src/sdk/messages.ts
   - src/sdk/mfa.ts
   - src/sdk/oauth2.ts
+  - src/sdk/openidconnect.ts
   - src/sdk/permissions.ts
   - src/sdk/pins.ts
   - src/sdk/reactions.ts

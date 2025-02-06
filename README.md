@@ -44,34 +44,30 @@ For more information about the API: [Discord Developer Documentation](https://di
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
 ```bash
-npm add https://github.com/ryan-blunden/discord-typescript-sdk
+npm add @ryan.blunden/discord-sdk
 ```
 
 ### PNPM
 
 ```bash
-pnpm add https://github.com/ryan-blunden/discord-typescript-sdk
+pnpm add @ryan.blunden/discord-sdk
 ```
 
 ### Bun
 
 ```bash
-bun add https://github.com/ryan-blunden/discord-typescript-sdk
+bun add @ryan.blunden/discord-sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add https://github.com/ryan-blunden/discord-typescript-sdk zod
+yarn add @ryan.blunden/discord-sdk zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
@@ -92,12 +88,12 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
-  const result = await discord.getOpenidConnectUserinfo({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  });
+  const result = await discord.oauth2.getMyApplication();
 
   // Handle the result
   console.log(result);
@@ -147,9 +143,7 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  const result = await discord.getOpenidConnectUserinfo({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  });
+  const result = await discord.oauth2.getKeys();
 
   // Handle the result
   console.log(result);
@@ -300,9 +294,6 @@ run();
 
 * [join](docs/sdks/channelsthreadmembers/README.md#join)
 
-### [Discord SDK](docs/sdks/discord/README.md)
-
-* [getOpenidConnectUserinfo](docs/sdks/discord/README.md#getopenidconnectuserinfo)
 
 ### [gateway](docs/sdks/gateway/README.md)
 
@@ -508,6 +499,10 @@ run();
 * [getKeys](docs/sdks/oauth2/README.md#getkeys)
 * [getAuthorization](docs/sdks/oauth2/README.md#getauthorization)
 
+### [openidConnect](docs/sdks/openidconnect/README.md)
+
+* [getUserinfo](docs/sdks/openidconnect/README.md#getuserinfo)
+
 ### [scheduledEvents](docs/sdks/scheduledevents/README.md)
 
 * [create](docs/sdks/scheduledevents/README.md#create)
@@ -681,7 +676,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`channelsUpdate`](docs/sdks/channels/README.md#update)
 - [`gatewayGet`](docs/sdks/gateway/README.md#get)
 - [`gatewayGetBot`](docs/sdks/gateway/README.md#getbot)
-- [`getOpenidConnectUserinfo`](docs/sdks/discord/README.md#getopenidconnectuserinfo)
 - [`guildApplicationCommandsBulkSet`](docs/sdks/guildapplicationcommands/README.md#bulkset)
 - [`guildApplicationCommandsDelete`](docs/sdks/guildapplicationcommands/README.md#delete)
 - [`guildApplicationCommandsList`](docs/sdks/guildapplicationcommands/README.md#list)
@@ -776,6 +770,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`oauth2GetAuthorization`](docs/sdks/oauth2/README.md#getauthorization)
 - [`oauth2GetKeys`](docs/sdks/oauth2/README.md#getkeys)
 - [`oauth2GetMyApplication`](docs/sdks/oauth2/README.md#getmyapplication)
+- [`openidConnectGetUserinfo`](docs/sdks/openidconnect/README.md#getuserinfo)
 - [`scheduledEventsCreate`](docs/sdks/scheduledevents/README.md#create)
 - [`soundboardGetDefaultSounds`](docs/sdks/soundboard/README.md#getdefaultsounds)
 - [`stageInstancesCreate`](docs/sdks/stageinstances/README.md#create)
@@ -826,12 +821,12 @@ To change the default retry strategy for a single API call, simply provide a ret
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
-  const result = await discord.getOpenidConnectUserinfo({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
+  const result = await discord.oauth2.getMyApplication({
     retries: {
       strategy: "backoff",
       backoff: {
@@ -867,12 +862,11 @@ const discord = new Discord({
     },
     retryConnectionErrors: false,
   },
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
 });
 
 async function run() {
-  const result = await discord.getOpenidConnectUserinfo({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  });
+  const result = await discord.oauth2.getMyApplication();
 
   // Handle the result
   console.log(result);
@@ -886,7 +880,7 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `getOpenidConnectUserinfo` method may throw the following errors:
+Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `getMyApplication` method may throw the following errors:
 
 | Error Type           | Status Code | Content Type     |
 | -------------------- | ----------- | ---------------- |
@@ -902,14 +896,14 @@ import {
   SDKValidationError,
 } from "@ryan.blunden/discord-sdk/models/errors";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   let result;
   try {
-    result = await discord.getOpenidConnectUserinfo({
-      botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-    });
+    result = await discord.oauth2.getMyApplication();
 
     // Handle the result
     console.log(result);
@@ -964,12 +958,11 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 
 const discord = new Discord({
   serverURL: "https://discord.com/api/v10",
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
 });
 
 async function run() {
-  const result = await discord.getOpenidConnectUserinfo({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  });
+  const result = await discord.oauth2.getMyApplication();
 
   // Handle the result
   console.log(result);
