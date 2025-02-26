@@ -18,7 +18,7 @@ let value: MentionSpamRuleResponse = {
     },
   ],
   triggerMetadata: {
-    mentionTotalLimit: 777470,
+    mentionTotalLimit: 29722,
   },
 };
 ```

@@ -133,7 +133,7 @@ export class Guilds extends ClientSDK {
   async listAutoModerationRules(
     request: operations.ListAutoModerationRulesRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.ResponseBody>> {
+  ): Promise<Array<operations.ResponseBody | null>> {
     return unwrapAsync(guildsListAutoModerationRules(
       this,
       request,

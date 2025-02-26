@@ -12,18 +12,18 @@ let value: WidgetResponse = {
     {
       id: "<value>",
       name: "<value>",
-      position: 415121,
+      position: 377716,
     },
   ],
   members: [
     {
       id: "<id>",
-      username: "Vince.Hoppe",
+      username: "Terrill92",
       status: "<value>",
-      avatarUrl: "https://extra-large-daughter.info/",
+      avatarUrl: "https://sudden-hepatitis.net/",
     },
   ],
-  presenceCount: 47289,
+  presenceCount: 486354,
 };
 ```
 

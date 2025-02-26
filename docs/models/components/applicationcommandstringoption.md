@@ -8,7 +8,7 @@ import { ApplicationCommandStringOption } from "@ryan.blunden/discord-sdk/models
 let value: ApplicationCommandStringOption = {
   name: "<value>",
   description:
-    "throughout postbox hence down why mmm oh gestate correctly trick",
+    "gah rudely blah glossy substantial supposing gee unwritten afore",
 };
 ```
 

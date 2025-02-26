@@ -7,7 +7,7 @@ import { ApplicationCommandMentionableOptionResponse } from "@ryan.blunden/disco
 
 let value: ApplicationCommandMentionableOptionResponse = {
   name: "<value>",
-  description: "hierarchy substantial foolish purse thoughtfully sternly",
+  description: "vainly scoop weighty",
 };
 ```
 

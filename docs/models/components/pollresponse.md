@@ -9,13 +9,13 @@ let value: PollResponse = {
   question: {},
   answers: [
     {
-      answerId: 204898,
+      answerId: 511319,
       pollMedia: {},
     },
   ],
-  expiry: new Date("2025-08-28T07:26:38.517Z"),
+  expiry: new Date("2023-09-03T20:26:06.468Z"),
   allowMultiselect: false,
-  layoutType: 793526,
+  layoutType: 97844,
   results: {
     isFinalized: false,
   },

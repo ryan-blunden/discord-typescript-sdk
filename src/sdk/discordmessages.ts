@@ -113,17 +113,6 @@ export class DiscordMessages extends ClientSDK {
     ));
   }
 
-  async createMultipart(
-    request: operations.CreateMessageMultipartRequest,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(channelsMessagesCreateMultipart(
-      this,
-      request,
-      options,
-    ));
-  }
-
   async createJson(
     request: operations.CreateMessageJsonRequest,
     options?: RequestOptions,
@@ -140,6 +129,17 @@ export class DiscordMessages extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.MessageResponse> {
     return unwrapAsync(channelsMessagesCreateForm(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  async createMultipart(
+    request: operations.CreateMessageMultipartRequest,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(channelsMessagesCreateMultipart(
       this,
       request,
       options,

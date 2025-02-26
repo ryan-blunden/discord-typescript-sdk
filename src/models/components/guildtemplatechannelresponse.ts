@@ -44,7 +44,7 @@ export type GuildTemplateChannelResponse = {
   rateLimitPerUser: number;
   parentId?: string | null | undefined;
   defaultAutoArchiveDuration?: 60 | null | undefined;
-  permissionOverwrites: Array<ChannelPermissionOverwriteResponse>;
+  permissionOverwrites: Array<ChannelPermissionOverwriteResponse | null>;
   availableTags?: Array<GuildTemplateChannelTags> | null | undefined;
   template: string;
   defaultReactionEmoji?: DefaultReactionEmojiResponse | null | undefined;
@@ -73,7 +73,7 @@ export const GuildTemplateChannelResponse$inboundSchema: z.ZodType<
   parent_id: z.nullable(z.string()).optional(),
   default_auto_archive_duration: z.nullable(z.literal(60)).optional(),
   permission_overwrites: z.array(
-    ChannelPermissionOverwriteResponse$inboundSchema,
+    z.nullable(ChannelPermissionOverwriteResponse$inboundSchema),
   ),
   available_tags: z.nullable(z.array(GuildTemplateChannelTags$inboundSchema))
     .optional(),
@@ -115,7 +115,9 @@ export type GuildTemplateChannelResponse$Outbound = {
   rate_limit_per_user: number;
   parent_id?: string | null | undefined;
   default_auto_archive_duration: 60 | null;
-  permission_overwrites: Array<ChannelPermissionOverwriteResponse$Outbound>;
+  permission_overwrites: Array<
+    ChannelPermissionOverwriteResponse$Outbound | null
+  >;
   available_tags?: Array<GuildTemplateChannelTags$Outbound> | null | undefined;
   template: string;
   default_reaction_emoji?:
@@ -147,7 +149,7 @@ export const GuildTemplateChannelResponse$outboundSchema: z.ZodType<
   parentId: z.nullable(z.string()).optional(),
   defaultAutoArchiveDuration: z.nullable(z.literal(60).default(60 as const)),
   permissionOverwrites: z.array(
-    ChannelPermissionOverwriteResponse$outboundSchema,
+    z.nullable(ChannelPermissionOverwriteResponse$outboundSchema),
   ),
   availableTags: z.nullable(z.array(GuildTemplateChannelTags$outboundSchema))
     .optional(),

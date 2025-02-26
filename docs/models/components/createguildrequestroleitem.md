@@ -6,7 +6,7 @@
 import { CreateGuildRequestRoleItem } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: CreateGuildRequestRoleItem = {
-  id: 196647,
+  id: 942167,
 };
 ```
 

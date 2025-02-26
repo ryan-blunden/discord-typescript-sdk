@@ -8,7 +8,7 @@ import { SoundboardSoundResponse } from "@ryan.blunden/discord-sdk/models/compon
 let value: SoundboardSoundResponse = {
   name: "<value>",
   soundId: "<value>",
-  volume: 8807.69,
+  volume: 641.84,
   available: false,
 };
 ```

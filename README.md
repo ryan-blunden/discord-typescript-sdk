@@ -44,37 +44,85 @@ For more information about the API: [Discord Developer Documentation](https://di
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
 ```bash
-npm add https://github.com/ryan-blunden/discord-typescript-sdk
+npm add @ryan.blunden/discord-sdk
 ```
 
 ### PNPM
 
 ```bash
-pnpm add https://github.com/ryan-blunden/discord-typescript-sdk
+pnpm add @ryan.blunden/discord-sdk
 ```
 
 ### Bun
 
 ```bash
-bun add https://github.com/ryan-blunden/discord-typescript-sdk
+bun add @ryan.blunden/discord-sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add https://github.com/ryan-blunden/discord-typescript-sdk zod
+yarn add @ryan.blunden/discord-sdk zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
+```
+
+
+
+### Model Context Protocol (MCP) Server
+
+This SDK is also an installable MCP server where the various SDK methods are
+exposed as tools that can be invoked by AI applications.
+
+> Node.js v20 or greater is required to run the MCP server.
+
+<details>
+<summary>Claude installation steps</summary>
+
+Add the following server definition to your `claude_desktop_config.json` file:
+
+```json
+{
+  "mcpServers": {
+    "Discord": {
+      "command": "npx",
+      "args": [
+        "-y", "--package", "@ryan.blunden/discord-sdk",
+        "--",
+        "mcp", "start",
+        "--bot-token", "..."
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary>Cursor installation steps</summary>
+
+Go to `Cursor Settings > Features > MCP Servers > Add new MCP server` and use the following settings:
+
+- Name: Discord
+- Type: `command`
+- Command:
+```sh
+npx -y --package @ryan.blunden/discord-sdk -- mcp start --bot-token ... 
+```
+
+</details>
+
+For a full list of server arguments, run:
+
+```sh
+npx -y --package @ryan.blunden/discord-sdk -- mcp start --help
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -92,11 +140,13 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
-  const result = await discord.getOpenidConnectUserinfo({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+  const result = await discord.threadSearch({
+    channelId: "<value>",
   });
 
   // Handle the result
@@ -128,7 +178,9 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.oauth2.getMyApplication();
+  const result = await discord.threadSearch({
+    channelId: "<value>",
+  });
 
   // Handle the result
   console.log(result);
@@ -147,9 +199,7 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  const result = await discord.getOpenidConnectUserinfo({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  });
+  const result = await discord.oauth2.getKeys();
 
   // Handle the result
   console.log(result);
@@ -268,9 +318,9 @@ run();
 * [updateForm](docs/sdks/discordmessages/README.md#updateform)
 * [updateMultipart](docs/sdks/discordmessages/README.md#updatemultipart)
 * [list](docs/sdks/discordmessages/README.md#list)
-* [createMultipart](docs/sdks/discordmessages/README.md#createmultipart)
 * [createJson](docs/sdks/discordmessages/README.md#createjson)
 * [createForm](docs/sdks/discordmessages/README.md#createform)
+* [createMultipart](docs/sdks/discordmessages/README.md#createmultipart)
 
 #### [channels.messages.reactions](docs/sdks/reactions/README.md)
 
@@ -302,7 +352,7 @@ run();
 
 ### [Discord SDK](docs/sdks/discord/README.md)
 
-* [getOpenidConnectUserinfo](docs/sdks/discord/README.md#getopenidconnectuserinfo)
+* [threadSearch](docs/sdks/discord/README.md#threadsearch)
 
 ### [gateway](docs/sdks/gateway/README.md)
 
@@ -508,6 +558,10 @@ run();
 * [getKeys](docs/sdks/oauth2/README.md#getkeys)
 * [getAuthorization](docs/sdks/oauth2/README.md#getauthorization)
 
+### [openidConnect](docs/sdks/openidconnect/README.md)
+
+* [getUserinfo](docs/sdks/openidconnect/README.md#getuserinfo)
+
 ### [scheduledEvents](docs/sdks/scheduledevents/README.md)
 
 * [create](docs/sdks/scheduledevents/README.md#create)
@@ -564,9 +618,9 @@ run();
 ### [webhooks](docs/sdks/webhooks/README.md)
 
 * [deleteOriginalMessage](docs/sdks/webhooks/README.md#deleteoriginalmessage)
+* [updateOriginalMessageMultipart](docs/sdks/webhooks/README.md#updateoriginalmessagemultipart)
 * [updateOriginalMessageJson](docs/sdks/webhooks/README.md#updateoriginalmessagejson)
 * [updateOriginalMessageForm](docs/sdks/webhooks/README.md#updateoriginalmessageform)
-* [updateOriginalMessageMultipart](docs/sdks/webhooks/README.md#updateoriginalmessagemultipart)
 * [getMessage](docs/sdks/webhooks/README.md#getmessage)
 * [updateMessageJson](docs/sdks/webhooks/README.md#updatemessagejson)
 * [updateMessageForm](docs/sdks/webhooks/README.md#updatemessageform)
@@ -681,7 +735,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`channelsUpdate`](docs/sdks/channels/README.md#update)
 - [`gatewayGet`](docs/sdks/gateway/README.md#get)
 - [`gatewayGetBot`](docs/sdks/gateway/README.md#getbot)
-- [`getOpenidConnectUserinfo`](docs/sdks/discord/README.md#getopenidconnectuserinfo)
 - [`guildApplicationCommandsBulkSet`](docs/sdks/guildapplicationcommands/README.md#bulkset)
 - [`guildApplicationCommandsDelete`](docs/sdks/guildapplicationcommands/README.md#delete)
 - [`guildApplicationCommandsList`](docs/sdks/guildapplicationcommands/README.md#list)
@@ -776,6 +829,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`oauth2GetAuthorization`](docs/sdks/oauth2/README.md#getauthorization)
 - [`oauth2GetKeys`](docs/sdks/oauth2/README.md#getkeys)
 - [`oauth2GetMyApplication`](docs/sdks/oauth2/README.md#getmyapplication)
+- [`openidConnectGetUserinfo`](docs/sdks/openidconnect/README.md#getuserinfo)
 - [`scheduledEventsCreate`](docs/sdks/scheduledevents/README.md#create)
 - [`soundboardGetDefaultSounds`](docs/sdks/soundboard/README.md#getdefaultsounds)
 - [`stageInstancesCreate`](docs/sdks/stageinstances/README.md#create)
@@ -786,6 +840,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`stickerPacksList`](docs/sdks/stickerpacks/README.md#list)
 - [`stickersGet`](docs/sdks/stickers/README.md#get)
 - [`threadMembersDelete`](docs/sdks/threadmembers/README.md#delete)
+- [`threadSearch`](docs/sdks/discord/README.md#threadsearch)
 - [`threadsListPublicArchived`](docs/sdks/threads/README.md#listpublicarchived)
 - [`usersCreateDm`](docs/sdks/users/README.md#createdm)
 - [`usersGet`](docs/sdks/users/README.md#get)
@@ -826,11 +881,13 @@ To change the default retry strategy for a single API call, simply provide a ret
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
-  const result = await discord.getOpenidConnectUserinfo({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+  const result = await discord.threadSearch({
+    channelId: "<value>",
   }, {
     retries: {
       strategy: "backoff",
@@ -867,11 +924,12 @@ const discord = new Discord({
     },
     retryConnectionErrors: false,
   },
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
 });
 
 async function run() {
-  const result = await discord.getOpenidConnectUserinfo({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+  const result = await discord.threadSearch({
+    channelId: "<value>",
   });
 
   // Handle the result
@@ -886,7 +944,7 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `getOpenidConnectUserinfo` method may throw the following errors:
+Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `threadSearch` method may throw the following errors:
 
 | Error Type           | Status Code | Content Type     |
 | -------------------- | ----------- | ---------------- |
@@ -902,13 +960,15 @@ import {
   SDKValidationError,
 } from "@ryan.blunden/discord-sdk/models/errors";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   let result;
   try {
-    result = await discord.getOpenidConnectUserinfo({
-      botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+    result = await discord.threadSearch({
+      channelId: "<value>",
     });
 
     // Handle the result
@@ -958,17 +1018,18 @@ In some rare cases, the SDK can fail to get a response from the server or even m
 
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
+The default server can be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
 const discord = new Discord({
   serverURL: "https://discord.com/api/v10",
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
 });
 
 async function run() {
-  const result = await discord.getOpenidConnectUserinfo({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+  const result = await discord.threadSearch({
+    channelId: "<value>",
   });
 
   // Handle the result

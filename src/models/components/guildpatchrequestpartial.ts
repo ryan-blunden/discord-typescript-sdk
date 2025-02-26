@@ -24,7 +24,7 @@ export type GuildPatchRequestPartial = {
   splash?: string | null | undefined;
   banner?: string | null | undefined;
   systemChannelFlags?: number | null | undefined;
-  features?: Array<string> | null | undefined;
+  features?: Array<string | null> | null | undefined;
   discoverySplash?: string | null | undefined;
   homeHeader?: string | null | undefined;
   rulesChannelId?: string | null | undefined;
@@ -54,7 +54,7 @@ export const GuildPatchRequestPartial$inboundSchema: z.ZodType<
   splash: z.nullable(z.string()).optional(),
   banner: z.nullable(z.string()).optional(),
   system_channel_flags: z.nullable(z.number().int()).optional(),
-  features: z.nullable(z.array(z.string())).optional(),
+  features: z.nullable(z.array(z.nullable(z.string()))).optional(),
   discovery_splash: z.nullable(z.string()).optional(),
   home_header: z.nullable(z.string()).optional(),
   rules_channel_id: z.nullable(z.string()).optional(),
@@ -98,7 +98,7 @@ export type GuildPatchRequestPartial$Outbound = {
   splash?: string | null | undefined;
   banner?: string | null | undefined;
   system_channel_flags?: number | null | undefined;
-  features?: Array<string> | null | undefined;
+  features?: Array<string | null> | null | undefined;
   discovery_splash?: string | null | undefined;
   home_header?: string | null | undefined;
   rules_channel_id?: string | null | undefined;
@@ -128,7 +128,7 @@ export const GuildPatchRequestPartial$outboundSchema: z.ZodType<
   splash: z.nullable(z.string()).optional(),
   banner: z.nullable(z.string()).optional(),
   systemChannelFlags: z.nullable(z.number().int()).optional(),
-  features: z.nullable(z.array(z.string())).optional(),
+  features: z.nullable(z.array(z.nullable(z.string()))).optional(),
   discoverySplash: z.nullable(z.string()).optional(),
   homeHeader: z.nullable(z.string()).optional(),
   rulesChannelId: z.nullable(z.string()).optional(),

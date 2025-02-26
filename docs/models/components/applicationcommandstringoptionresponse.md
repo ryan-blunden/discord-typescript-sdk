@@ -7,7 +7,7 @@ import { ApplicationCommandStringOptionResponse } from "@ryan.blunden/discord-sd
 
 let value: ApplicationCommandStringOptionResponse = {
   name: "<value>",
-  description: "pleasing afore pick obediently",
+  description: "unfinished boo upside-down",
 };
 ```
 

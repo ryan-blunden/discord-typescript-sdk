@@ -7,7 +7,7 @@ import { ApplicationCommandSubcommandGroupOptionResponse } from "@ryan.blunden/d
 
 let value: ApplicationCommandSubcommandGroupOptionResponse = {
   name: "<value>",
-  description: "unless boggle often ornery needily in massage unhappy",
+  description: "whine enormously fall gently glow amused geez oval per shy",
 };
 ```
 

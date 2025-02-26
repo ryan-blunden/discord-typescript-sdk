@@ -10,10 +10,10 @@ let value: BasicMessageResponse = {
   mentions: [
     {
       id: "<value>",
-      username: "Rosalee_Stehr26",
+      username: "Deon.Frami",
       discriminator: "<value>",
-      publicFlags: 756979,
-      flags: 577735,
+      publicFlags: 138183,
+      flags: 196582,
     },
   ],
   mentionRoles: [
@@ -23,9 +23,9 @@ let value: BasicMessageResponse = {
     {
       id: "<value>",
       filename: "example.file",
-      size: 107863,
-      url: "https://grandiose-perp.info/",
-      proxyUrl: "https://steep-privilege.name",
+      size: 368725,
+      url: "https://busy-spirit.com",
+      proxyUrl: "https://likely-wallaby.name",
     },
   ],
   embeds: [
@@ -33,11 +33,11 @@ let value: BasicMessageResponse = {
       type: "<value>",
     },
   ],
-  timestamp: new Date("2025-09-20T11:43:37.795Z"),
-  flags: 247782,
+  timestamp: new Date("2025-03-21T05:35:21.093Z"),
+  flags: 39187,
   components: [
     {
-      id: 756112,
+      id: 120196,
       customId: "<id>",
     },
   ],
@@ -45,10 +45,10 @@ let value: BasicMessageResponse = {
   channelId: "<value>",
   author: {
     id: "<value>",
-    username: "Dan_Paucek",
+    username: "Elena6",
     discriminator: "<value>",
-    publicFlags: 716296,
-    flags: 170949,
+    publicFlags: 566602,
+    flags: 265389,
   },
   pinned: false,
   mentionEveryone: false,

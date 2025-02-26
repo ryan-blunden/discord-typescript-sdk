@@ -12,9 +12,9 @@ export type ApplicationRoleConnectionsMetadataItemRequest = {
   type?: 1 | undefined;
   key: string;
   name: string;
-  nameLocalizations?: { [k: string]: string } | null | undefined;
+  nameLocalizations?: { [k: string]: string | null } | null | undefined;
   description: string;
-  descriptionLocalizations?: { [k: string]: string } | null | undefined;
+  descriptionLocalizations?: { [k: string]: string | null } | null | undefined;
 };
 
 /** @internal */
@@ -27,9 +27,10 @@ export const ApplicationRoleConnectionsMetadataItemRequest$inboundSchema:
     type: z.literal(1).optional(),
     key: z.string(),
     name: z.string(),
-    name_localizations: z.nullable(z.record(z.string())).optional(),
+    name_localizations: z.nullable(z.record(z.nullable(z.string()))).optional(),
     description: z.string(),
-    description_localizations: z.nullable(z.record(z.string())).optional(),
+    description_localizations: z.nullable(z.record(z.nullable(z.string())))
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "name_localizations": "nameLocalizations",
@@ -42,9 +43,9 @@ export type ApplicationRoleConnectionsMetadataItemRequest$Outbound = {
   type: 1;
   key: string;
   name: string;
-  name_localizations?: { [k: string]: string } | null | undefined;
+  name_localizations?: { [k: string]: string | null } | null | undefined;
   description: string;
-  description_localizations?: { [k: string]: string } | null | undefined;
+  description_localizations?: { [k: string]: string | null } | null | undefined;
 };
 
 /** @internal */
@@ -57,9 +58,10 @@ export const ApplicationRoleConnectionsMetadataItemRequest$outboundSchema:
     type: z.literal(1).default(1 as const),
     key: z.string(),
     name: z.string(),
-    nameLocalizations: z.nullable(z.record(z.string())).optional(),
+    nameLocalizations: z.nullable(z.record(z.nullable(z.string()))).optional(),
     description: z.string(),
-    descriptionLocalizations: z.nullable(z.record(z.string())).optional(),
+    descriptionLocalizations: z.nullable(z.record(z.nullable(z.string())))
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       nameLocalizations: "name_localizations",

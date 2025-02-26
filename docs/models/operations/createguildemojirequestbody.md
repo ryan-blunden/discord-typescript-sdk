@@ -7,7 +7,7 @@ import { CreateGuildEmojiRequestBody } from "@ryan.blunden/discord-sdk/models/op
 
 let value: CreateGuildEmojiRequestBody = {
   name: "<value>",
-  image: "https://loremflickr.com/1467/33?lock=2570117569072513",
+  image: "https://picsum.photos/seed/8zZ5rLZ7pK/3774/2503",
 };
 ```
 

@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateGuildMemberRequestBody = {
   nick?: string | null | undefined;
-  roles?: Array<string> | null | undefined;
+  roles?: Array<string | null> | null | undefined;
   mute?: boolean | null | undefined;
   deaf?: boolean | null | undefined;
   channelId?: string | null | undefined;
@@ -31,7 +31,7 @@ export const UpdateGuildMemberRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   nick: z.nullable(z.string()).optional(),
-  roles: z.nullable(z.array(z.string())).optional(),
+  roles: z.nullable(z.array(z.nullable(z.string()))).optional(),
   mute: z.nullable(z.boolean()).optional(),
   deaf: z.nullable(z.boolean()).optional(),
   channel_id: z.nullable(z.string()).optional(),
@@ -49,7 +49,7 @@ export const UpdateGuildMemberRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateGuildMemberRequestBody$Outbound = {
   nick?: string | null | undefined;
-  roles?: Array<string> | null | undefined;
+  roles?: Array<string | null> | null | undefined;
   mute?: boolean | null | undefined;
   deaf?: boolean | null | undefined;
   channel_id?: string | null | undefined;
@@ -64,7 +64,7 @@ export const UpdateGuildMemberRequestBody$outboundSchema: z.ZodType<
   UpdateGuildMemberRequestBody
 > = z.object({
   nick: z.nullable(z.string()).optional(),
-  roles: z.nullable(z.array(z.string())).optional(),
+  roles: z.nullable(z.array(z.nullable(z.string()))).optional(),
   mute: z.nullable(z.boolean()).optional(),
   deaf: z.nullable(z.boolean()).optional(),
   channelId: z.nullable(z.string()).optional(),

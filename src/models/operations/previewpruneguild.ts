@@ -8,12 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type QueryParamIncludeRoles = string | Array<string>;
+export type QueryParamIncludeRoles = string | Array<string | null>;
 
 export type PreviewPruneGuildRequest = {
   guildId: string;
   days?: number | undefined;
-  includeRoles?: string | Array<string> | undefined;
+  includeRoles?: string | Array<string | null> | undefined;
 };
 
 /** @internal */
@@ -21,17 +21,17 @@ export const QueryParamIncludeRoles$inboundSchema: z.ZodType<
   QueryParamIncludeRoles,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(z.string())]);
+> = z.union([z.string(), z.array(z.nullable(z.string()))]);
 
 /** @internal */
-export type QueryParamIncludeRoles$Outbound = string | Array<string>;
+export type QueryParamIncludeRoles$Outbound = string | Array<string | null>;
 
 /** @internal */
 export const QueryParamIncludeRoles$outboundSchema: z.ZodType<
   QueryParamIncludeRoles$Outbound,
   z.ZodTypeDef,
   QueryParamIncludeRoles
-> = z.union([z.string(), z.array(z.string())]);
+> = z.union([z.string(), z.array(z.nullable(z.string()))]);
 
 /**
  * @internal
@@ -72,7 +72,8 @@ export const PreviewPruneGuildRequest$inboundSchema: z.ZodType<
 > = z.object({
   guild_id: z.string(),
   days: z.number().int().optional(),
-  include_roles: z.union([z.string(), z.array(z.string())]).optional(),
+  include_roles: z.union([z.string(), z.array(z.nullable(z.string()))])
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",
@@ -84,7 +85,7 @@ export const PreviewPruneGuildRequest$inboundSchema: z.ZodType<
 export type PreviewPruneGuildRequest$Outbound = {
   guild_id: string;
   days?: number | undefined;
-  include_roles?: string | Array<string> | undefined;
+  include_roles?: string | Array<string | null> | undefined;
 };
 
 /** @internal */
@@ -95,7 +96,8 @@ export const PreviewPruneGuildRequest$outboundSchema: z.ZodType<
 > = z.object({
   guildId: z.string(),
   days: z.number().int().optional(),
-  includeRoles: z.union([z.string(), z.array(z.string())]).optional(),
+  includeRoles: z.union([z.string(), z.array(z.nullable(z.string()))])
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     guildId: "guild_id",

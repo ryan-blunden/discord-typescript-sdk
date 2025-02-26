@@ -6,7 +6,7 @@
 import { RoleSelectComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: RoleSelectComponentResponse = {
-  id: 346667,
+  id: 730856,
   customId: "<id>",
 };
 ```

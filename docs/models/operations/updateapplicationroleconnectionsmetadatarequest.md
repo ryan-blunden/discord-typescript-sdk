@@ -11,7 +11,8 @@ let value: UpdateApplicationRoleConnectionsMetadataRequest = {
     {
       key: "<key>",
       name: "<value>",
-      description: "instead carelessly quicker ew",
+      description:
+        "pneumonia decriminalize wasteful who fat iridescence yahoo deer weary",
     },
   ],
 };

@@ -7,7 +7,7 @@ import { StageScheduledEventCreateRequest } from "@ryan.blunden/discord-sdk/mode
 
 let value: StageScheduledEventCreateRequest = {
   name: "<value>",
-  scheduledStartTime: new Date("2025-11-01T22:12:29.478Z"),
+  scheduledStartTime: new Date("2024-05-08T07:46:42.461Z"),
 };
 ```
 

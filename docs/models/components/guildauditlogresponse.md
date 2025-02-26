@@ -14,10 +14,10 @@ let value: GuildAuditLogResponse = {
   users: [
     {
       id: "<value>",
-      username: "Shawna.Barrows52",
+      username: "Kolby_Hamill",
       discriminator: "<value>",
-      publicFlags: 104264,
-      flags: 697864,
+      publicFlags: 509562,
+      flags: 888034,
     },
   ],
   integrations: [
@@ -36,19 +36,22 @@ let value: GuildAuditLogResponse = {
       id: "<value>",
       guildId: "<value>",
       name: "<value>",
-      scheduledStartTime: new Date("2023-10-30T23:56:54.625Z"),
+      scheduledStartTime: new Date("2023-07-12T21:54:14.870Z"),
+      entityMetadata: {
+        location: "<value>",
+      },
     },
   ],
   threads: [
     {
       id: "<value>",
-      flags: 377716,
+      flags: 200991,
       guildId: "<value>",
       name: "<value>",
       ownerId: "<value>",
-      messageCount: 918172,
-      memberCount: 579258,
-      totalMessageSent: 369722,
+      messageCount: 623148,
+      memberCount: 108112,
+      totalMessageSent: 28994,
     },
   ],
   applicationCommands: [
@@ -57,7 +60,7 @@ let value: GuildAuditLogResponse = {
       applicationId: "<value>",
       version: "<value>",
       name: "<value>",
-      description: "low daintily hm charm inasmuch musty fowl deduce anenst",
+      description: "deduce anenst obnoxiously right miscalculate",
     },
   ],
   autoModerationRules: [
@@ -72,11 +75,14 @@ let value: GuildAuditLogResponse = {
         },
       ],
       triggerMetadata: {
-        allowList: [
+        keywordFilter: [
           "<value>",
         ],
-        presets: [
-          911026,
+        regexPatterns: [
+          "<value>",
+        ],
+        allowList: [
+          "<value>",
         ],
       },
     },

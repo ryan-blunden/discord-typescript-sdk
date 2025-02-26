@@ -7,10 +7,10 @@ import { UserResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: UserResponse = {
   id: "<value>",
-  username: "Mathilde_Gleason",
+  username: "Shaniya_Tillman",
   discriminator: "<value>",
-  publicFlags: 929297,
-  flags: 318569,
+  publicFlags: 956084,
+  flags: 643990,
 };
 ```
 

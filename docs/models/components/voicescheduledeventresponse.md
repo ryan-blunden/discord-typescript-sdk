@@ -9,7 +9,7 @@ let value: VoiceScheduledEventResponse = {
   id: "<value>",
   guildId: "<value>",
   name: "<value>",
-  scheduledStartTime: new Date("2024-03-09T17:11:32.839Z"),
+  scheduledStartTime: new Date("2023-12-03T02:57:34.929Z"),
 };
 ```
 

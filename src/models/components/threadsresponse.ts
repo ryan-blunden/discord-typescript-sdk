@@ -8,6 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  MessageResponse,
+  MessageResponse$inboundSchema,
+  MessageResponse$Outbound,
+  MessageResponse$outboundSchema,
+} from "./messageresponse.js";
+import {
   ThreadMemberResponse,
   ThreadMemberResponse$inboundSchema,
   ThreadMemberResponse$Outbound,
@@ -24,6 +30,7 @@ export type ThreadsResponse = {
   threads: Array<ThreadResponse>;
   members: Array<ThreadMemberResponse>;
   hasMore?: boolean | null | undefined;
+  firstMessages?: Array<MessageResponse> | null | undefined;
 };
 
 /** @internal */
@@ -35,9 +42,11 @@ export const ThreadsResponse$inboundSchema: z.ZodType<
   threads: z.array(ThreadResponse$inboundSchema),
   members: z.array(ThreadMemberResponse$inboundSchema),
   has_more: z.nullable(z.boolean()).optional(),
+  first_messages: z.nullable(z.array(MessageResponse$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",
+    "first_messages": "firstMessages",
   });
 });
 
@@ -46,6 +55,7 @@ export type ThreadsResponse$Outbound = {
   threads: Array<ThreadResponse$Outbound>;
   members: Array<ThreadMemberResponse$Outbound>;
   has_more?: boolean | null | undefined;
+  first_messages?: Array<MessageResponse$Outbound> | null | undefined;
 };
 
 /** @internal */
@@ -57,9 +67,11 @@ export const ThreadsResponse$outboundSchema: z.ZodType<
   threads: z.array(ThreadResponse$outboundSchema),
   members: z.array(ThreadMemberResponse$outboundSchema),
   hasMore: z.nullable(z.boolean()).optional(),
+  firstMessages: z.nullable(z.array(MessageResponse$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     hasMore: "has_more",
+    firstMessages: "first_messages",
   });
 });
 

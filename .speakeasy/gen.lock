@@ -1,30 +1,32 @@
 lockVersion: 2.0.0
 id: d6760420-c0f7-476a-a38c-38dd82de2cc6
 management:
-  docChecksum: 4bfa93a012780156564dc0366f265c13
+  docChecksum: 41df508b8e8eec1c2b7488da5106fe72
   docVersion: "10"
-  speakeasyVersion: 1.483.0
-  generationVersion: 2.502.0
-  releaseVersion: 0.0.2
-  configChecksum: 7b9c1c4d3f8fb74f89efb8baaadf339f
+  speakeasyVersion: 1.504.1
+  generationVersion: 2.529.2
+  releaseVersion: 0.1.0
+  configChecksum: b40177abbe234e67ce1ce476ba99df48
   repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
   installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
+  published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.22
+    core: 3.21.2
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.1.2
-    globalSecurity: 2.82.12
+    globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
     groups: 2.81.2
-    methodSecurity: 2.82.5
+    mcpServer: 0.3.0
+    methodSecurity: 2.82.6
     nameOverrides: 2.81.2
-    nullables: 0.1.0
+    nullables: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.2.0
@@ -378,6 +380,7 @@ generatedFiles:
   - docs/models/components/threadmemberresponse.md
   - docs/models/components/threadmetadataresponse.md
   - docs/models/components/threadresponse.md
+  - docs/models/components/threadsearchresponse.md
   - docs/models/components/threadsresponse.md
   - docs/models/components/triggeringinteractionmetadata.md
   - docs/models/components/typingindicatorresponse.md
@@ -666,6 +669,8 @@ generatedFiles:
   - docs/models/operations/setguildmfalevelrequestbody.md
   - docs/models/operations/skuids.md
   - docs/models/operations/syncguildtemplaterequest.md
+  - docs/models/operations/tag.md
+  - docs/models/operations/threadsearchrequest.md
   - docs/models/operations/triggertypingindicatorrequest.md
   - docs/models/operations/unbanuserfromguildrequest.md
   - docs/models/operations/unpinmessagerequest.md
@@ -790,6 +795,7 @@ generatedFiles:
   - docs/sdks/messages/README.md
   - docs/sdks/mfa/README.md
   - docs/sdks/oauth2/README.md
+  - docs/sdks/openidconnect/README.md
   - docs/sdks/permissions/README.md
   - docs/sdks/pins/README.md
   - docs/sdks/reactions/README.md
@@ -891,7 +897,6 @@ generatedFiles:
   - src/funcs/channelsUpdate.ts
   - src/funcs/gatewayGet.ts
   - src/funcs/gatewayGetBot.ts
-  - src/funcs/getOpenidConnectUserinfo.ts
   - src/funcs/guildApplicationCommandsBulkSet.ts
   - src/funcs/guildApplicationCommandsDelete.ts
   - src/funcs/guildApplicationCommandsList.ts
@@ -986,6 +991,7 @@ generatedFiles:
   - src/funcs/oauth2GetAuthorization.ts
   - src/funcs/oauth2GetKeys.ts
   - src/funcs/oauth2GetMyApplication.ts
+  - src/funcs/openidConnectGetUserinfo.ts
   - src/funcs/scheduledEventsCreate.ts
   - src/funcs/soundboardGetDefaultSounds.ts
   - src/funcs/stageInstancesCreate.ts
@@ -996,6 +1002,7 @@ generatedFiles:
   - src/funcs/stickerPacksList.ts
   - src/funcs/stickersGet.ts
   - src/funcs/threadMembersDelete.ts
+  - src/funcs/threadSearch.ts
   - src/funcs/threadsListPublicArchived.ts
   - src/funcs/usersCreateDm.ts
   - src/funcs/usersGet.ts
@@ -1043,6 +1050,181 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
+  - src/mcp-server/build.mts
+  - src/mcp-server/cli.ts
+  - src/mcp-server/cli/start/command.ts
+  - src/mcp-server/cli/start/impl.ts
+  - src/mcp-server/console-logger.ts
+  - src/mcp-server/mcp-server.ts
+  - src/mcp-server/resources.ts
+  - src/mcp-server/scopes.ts
+  - src/mcp-server/server.ts
+  - src/mcp-server/shared.ts
+  - src/mcp-server/tools.ts
+  - src/mcp-server/tools/answersGetVoters.ts
+  - src/mcp-server/tools/applicationUserRoleConnectionUpdate.ts
+  - src/mcp-server/tools/applicationUserRoleConnectionsGet.ts
+  - src/mcp-server/tools/applicationsCreateEntitlement.ts
+  - src/mcp-server/tools/applicationsDeleteUserRoleConnection.ts
+  - src/mcp-server/tools/applicationsEmojisCreate.ts
+  - src/mcp-server/tools/applicationsEmojisDelete.ts
+  - src/mcp-server/tools/applicationsGet.ts
+  - src/mcp-server/tools/applicationsGetActivityInstance.ts
+  - src/mcp-server/tools/applicationsGetEmoji.ts
+  - src/mcp-server/tools/applicationsGetMe.ts
+  - src/mcp-server/tools/applicationsGetRoleConnectionsMetadata.ts
+  - src/mcp-server/tools/applicationsListEmojis.ts
+  - src/mcp-server/tools/applicationsUpdate.ts
+  - src/mcp-server/tools/applicationsUpdateEmoji.ts
+  - src/mcp-server/tools/applicationsUpdateRoleConnectionsMetadata.ts
+  - src/mcp-server/tools/applicationsUpdateSelf.ts
+  - src/mcp-server/tools/autoModerationRulesCreate.ts
+  - src/mcp-server/tools/autoModerationRulesDelete.ts
+  - src/mcp-server/tools/autoModerationRulesGet.ts
+  - src/mcp-server/tools/channelPermissionsDeleteOverwrite.ts
+  - src/mcp-server/tools/channelsAddThreadMember.ts
+  - src/mcp-server/tools/channelsCreateInvite.ts
+  - src/mcp-server/tools/channelsCreateWebhook.ts
+  - src/mcp-server/tools/channelsCrosspostMessage.ts
+  - src/mcp-server/tools/channelsDelete.ts
+  - src/mcp-server/tools/channelsDeleteDmUser.ts
+  - src/mcp-server/tools/channelsDeleteMessage.ts
+  - src/mcp-server/tools/channelsDeleteUserMessageReaction.ts
+  - src/mcp-server/tools/channelsExpirePoll.ts
+  - src/mcp-server/tools/channelsFollow.ts
+  - src/mcp-server/tools/channelsGet.ts
+  - src/mcp-server/tools/channelsGetThreadMember.ts
+  - src/mcp-server/tools/channelsListInvites.ts
+  - src/mcp-server/tools/channelsListMyPrivateArchivedThreads.ts
+  - src/mcp-server/tools/channelsListPinnedMessages.ts
+  - src/mcp-server/tools/channelsListPrivateArchivedThreads.ts
+  - src/mcp-server/tools/channelsListThreadMembers.ts
+  - src/mcp-server/tools/channelsListWebhooks.ts
+  - src/mcp-server/tools/channelsMessagesBulkDelete.ts
+  - src/mcp-server/tools/channelsMessagesCreateForm.ts
+  - src/mcp-server/tools/channelsMessagesCreateJson.ts
+  - src/mcp-server/tools/channelsMessagesCreateMultipart.ts
+  - src/mcp-server/tools/channelsMessagesDeleteAllReactions.ts
+  - src/mcp-server/tools/channelsMessagesDeleteMyReaction.ts
+  - src/mcp-server/tools/channelsMessagesGet.ts
+  - src/mcp-server/tools/channelsMessagesList.ts
+  - src/mcp-server/tools/channelsMessagesReactionsAdd.ts
+  - src/mcp-server/tools/channelsMessagesUpdateForm.ts
+  - src/mcp-server/tools/channelsMessagesUpdateJson.ts
+  - src/mcp-server/tools/channelsMessagesUpdateMultipart.ts
+  - src/mcp-server/tools/channelsPermissionsSetOverwrite.ts
+  - src/mcp-server/tools/channelsPinMessage.ts
+  - src/mcp-server/tools/channelsPinsUnpin.ts
+  - src/mcp-server/tools/channelsRecipientsAddGroupDmUser.ts
+  - src/mcp-server/tools/channelsSendSoundboardSound.ts
+  - src/mcp-server/tools/channelsStartThreadFromMessage.ts
+  - src/mcp-server/tools/channelsThreadMembersJoin.ts
+  - src/mcp-server/tools/channelsThreadMembersLeave.ts
+  - src/mcp-server/tools/channelsThreadsCreate.ts
+  - src/mcp-server/tools/channelsTriggerTyping.ts
+  - src/mcp-server/tools/channelsUpdate.ts
+  - src/mcp-server/tools/gatewayGetBot.ts
+  - src/mcp-server/tools/guildBansBulkBan.ts
+  - src/mcp-server/tools/guildBansGet.ts
+  - src/mcp-server/tools/guildBansList.ts
+  - src/mcp-server/tools/guildEmojisGet.ts
+  - src/mcp-server/tools/guildIntegrationsDelete.ts
+  - src/mcp-server/tools/guildMemberRolesAdd.ts
+  - src/mcp-server/tools/guildMemberRolesDelete.ts
+  - src/mcp-server/tools/guildMembersAdd.ts
+  - src/mcp-server/tools/guildOnboardingGet.ts
+  - src/mcp-server/tools/guildOnboardingUpdate.ts
+  - src/mcp-server/tools/guildRolesBulkUpdate.ts
+  - src/mcp-server/tools/guildScheduledEventsDelete.ts
+  - src/mcp-server/tools/guildSoundboardSoundsDelete.ts
+  - src/mcp-server/tools/guildStickersList.ts
+  - src/mcp-server/tools/guildTemplatesCreateFromCode.ts
+  - src/mcp-server/tools/guildThreadsGetActive.ts
+  - src/mcp-server/tools/guildVoiceRegionsList.ts
+  - src/mcp-server/tools/guildWidgetSettingsUpdate.ts
+  - src/mcp-server/tools/guildsAutoModerationRulesUpdate.ts
+  - src/mcp-server/tools/guildsBanUser.ts
+  - src/mcp-server/tools/guildsChannelsBulkUpdate.ts
+  - src/mcp-server/tools/guildsChannelsCreate.ts
+  - src/mcp-server/tools/guildsCreate.ts
+  - src/mcp-server/tools/guildsCreateEmoji.ts
+  - src/mcp-server/tools/guildsCreateRole.ts
+  - src/mcp-server/tools/guildsCreateSoundboardSound.ts
+  - src/mcp-server/tools/guildsCreateSticker.ts
+  - src/mcp-server/tools/guildsDelete.ts
+  - src/mcp-server/tools/guildsDeleteEmoji.ts
+  - src/mcp-server/tools/guildsDeleteMember.ts
+  - src/mcp-server/tools/guildsDeleteRole.ts
+  - src/mcp-server/tools/guildsDeleteSticker.ts
+  - src/mcp-server/tools/guildsGet.ts
+  - src/mcp-server/tools/guildsGetMyMember.ts
+  - src/mcp-server/tools/guildsGetNewMemberWelcome.ts
+  - src/mcp-server/tools/guildsGetPreview.ts
+  - src/mcp-server/tools/guildsGetRole.ts
+  - src/mcp-server/tools/guildsGetSoundboardSound.ts
+  - src/mcp-server/tools/guildsGetSticker.ts
+  - src/mcp-server/tools/guildsGetVanityUrl.ts
+  - src/mcp-server/tools/guildsGetVoiceState.ts
+  - src/mcp-server/tools/guildsGetWelcomeScreen.ts
+  - src/mcp-server/tools/guildsGetWidgetSettings.ts
+  - src/mcp-server/tools/guildsIntegrationsList.ts
+  - src/mcp-server/tools/guildsListAuditLogs.ts
+  - src/mcp-server/tools/guildsListAutoModerationRules.ts
+  - src/mcp-server/tools/guildsListEmojis.ts
+  - src/mcp-server/tools/guildsListInvites.ts
+  - src/mcp-server/tools/guildsListMembers.ts
+  - src/mcp-server/tools/guildsListRoles.ts
+  - src/mcp-server/tools/guildsListTemplates.ts
+  - src/mcp-server/tools/guildsListWebhooks.ts
+  - src/mcp-server/tools/guildsMembersGet.ts
+  - src/mcp-server/tools/guildsMembersUpdate.ts
+  - src/mcp-server/tools/guildsMembersUpdateMe.ts
+  - src/mcp-server/tools/guildsMfaSetLevel.ts
+  - src/mcp-server/tools/guildsPreviewPrune.ts
+  - src/mcp-server/tools/guildsPrune.ts
+  - src/mcp-server/tools/guildsScheduledEventsGet.ts
+  - src/mcp-server/tools/guildsScheduledEventsList.ts
+  - src/mcp-server/tools/guildsScheduledEventsUpdate.ts
+  - src/mcp-server/tools/guildsScheduledEventsUsersList.ts
+  - src/mcp-server/tools/guildsSearchMembers.ts
+  - src/mcp-server/tools/guildsSoundboardSoundsList.ts
+  - src/mcp-server/tools/guildsSoundboardSoundsUpdate.ts
+  - src/mcp-server/tools/guildsStickersUpdate.ts
+  - src/mcp-server/tools/guildsSyncTemplate.ts
+  - src/mcp-server/tools/guildsTemplatesCreate.ts
+  - src/mcp-server/tools/guildsTemplatesDelete.ts
+  - src/mcp-server/tools/guildsUnbanUser.ts
+  - src/mcp-server/tools/guildsUpdate.ts
+  - src/mcp-server/tools/guildsUpdateEmoji.ts
+  - src/mcp-server/tools/guildsUpdateRole.ts
+  - src/mcp-server/tools/guildsUpdateTemplate.ts
+  - src/mcp-server/tools/guildsUpdateWelcomeScreen.ts
+  - src/mcp-server/tools/guildsVoiceStatesGetSelf.ts
+  - src/mcp-server/tools/guildsVoiceStatesUpdate.ts
+  - src/mcp-server/tools/guildsVoiceStatesUpdateSelf.ts
+  - src/mcp-server/tools/invitesRevoke.ts
+  - src/mcp-server/tools/messageReactionsDeleteAllByEmoji.ts
+  - src/mcp-server/tools/messagesListReactionsByEmoji.ts
+  - src/mcp-server/tools/oauth2GetMyApplication.ts
+  - src/mcp-server/tools/scheduledEventsCreate.ts
+  - src/mcp-server/tools/soundboardGetDefaultSounds.ts
+  - src/mcp-server/tools/stageInstancesCreate.ts
+  - src/mcp-server/tools/stageInstancesDelete.ts
+  - src/mcp-server/tools/stageInstancesGet.ts
+  - src/mcp-server/tools/stageInstancesUpdate.ts
+  - src/mcp-server/tools/stickerPacksGet.ts
+  - src/mcp-server/tools/stickersGet.ts
+  - src/mcp-server/tools/threadMembersDelete.ts
+  - src/mcp-server/tools/threadSearch.ts
+  - src/mcp-server/tools/threadsListPublicArchived.ts
+  - src/mcp-server/tools/usersCreateDm.ts
+  - src/mcp-server/tools/usersGet.ts
+  - src/mcp-server/tools/usersGuildsLeave.ts
+  - src/mcp-server/tools/usersUpdateMe.ts
+  - src/mcp-server/tools/voiceListRegions.ts
+  - src/mcp-server/tools/webhooksDelete.ts
+  - src/mcp-server/tools/webhooksGet.ts
+  - src/mcp-server/tools/webhooksUpdate.ts
   - src/models/components/accountresponse.ts
   - src/models/components/actionrowcomponentformessagerequest.ts
   - src/models/components/actionrowcomponentresponse.ts
@@ -1343,6 +1525,7 @@ generatedFiles:
   - src/models/components/threadmemberresponse.ts
   - src/models/components/threadmetadataresponse.ts
   - src/models/components/threadresponse.ts
+  - src/models/components/threadsearchresponse.ts
   - src/models/components/threadsresponse.ts
   - src/models/components/typingindicatorresponse.ts
   - src/models/components/updatedefaultreactionemojirequest.ts
@@ -1554,6 +1737,7 @@ generatedFiles:
   - src/models/operations/setguildapplicationcommandpermissions.ts
   - src/models/operations/setguildmfalevel.ts
   - src/models/operations/syncguildtemplate.ts
+  - src/models/operations/threadsearch.ts
   - src/models/operations/triggertypingindicator.ts
   - src/models/operations/unbanuserfromguild.ts
   - src/models/operations/unpinmessage.ts
@@ -1642,6 +1826,7 @@ generatedFiles:
   - src/sdk/messages.ts
   - src/sdk/mfa.ts
   - src/sdk/oauth2.ts
+  - src/sdk/openidconnect.ts
   - src/sdk/permissions.ts
   - src/sdk/pins.ts
   - src/sdk/reactions.ts
@@ -1661,6 +1846,7 @@ generatedFiles:
   - src/sdk/voicestates.ts
   - src/sdk/webhookmessages.ts
   - src/sdk/webhooks.ts
+  - src/types/async.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
@@ -3933,5 +4119,11 @@ examples:
           application/json: {"code": "<value>"}
         4XX:
           application/json: {"code": 32810, "message": "<value>"}
+  thread_search:
+    speakeasy-default-thread-search:
+      parameters:
+        path:
+          channel_id: "<value>"
+        query: {}
 examplesVersion: 1.0.0
 generatedTests: {}

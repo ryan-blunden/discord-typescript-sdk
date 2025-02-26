@@ -9,6 +9,7 @@ let value: CreateThreadRequest = {
   channelId: "<value>",
   requestBody: {
     name: "<value>",
+    message: {},
   },
 };
 ```

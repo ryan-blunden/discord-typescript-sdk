@@ -12,12 +12,12 @@ export type GetEntitlementsSecurity = {
   botToken?: string | undefined;
 };
 
-export type SkuIds = string | Array<string>;
+export type SkuIds = string | Array<string | null>;
 
 export type GetEntitlementsRequest = {
   applicationId: string;
   userId?: string | undefined;
-  skuIds: string | Array<string>;
+  skuIds: string | Array<string | null>;
   guildId?: string | undefined;
   before?: string | undefined;
   after?: string | undefined;
@@ -91,17 +91,17 @@ export function getEntitlementsSecurityFromJSON(
 
 /** @internal */
 export const SkuIds$inboundSchema: z.ZodType<SkuIds, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.array(z.string())]);
+  .union([z.string(), z.array(z.nullable(z.string()))]);
 
 /** @internal */
-export type SkuIds$Outbound = string | Array<string>;
+export type SkuIds$Outbound = string | Array<string | null>;
 
 /** @internal */
 export const SkuIds$outboundSchema: z.ZodType<
   SkuIds$Outbound,
   z.ZodTypeDef,
   SkuIds
-> = z.union([z.string(), z.array(z.string())]);
+> = z.union([z.string(), z.array(z.nullable(z.string()))]);
 
 /**
  * @internal
@@ -138,7 +138,7 @@ export const GetEntitlementsRequest$inboundSchema: z.ZodType<
 > = z.object({
   application_id: z.string(),
   user_id: z.string().optional(),
-  sku_ids: z.union([z.string(), z.array(z.string())]),
+  sku_ids: z.union([z.string(), z.array(z.nullable(z.string()))]),
   guild_id: z.string().optional(),
   before: z.string().optional(),
   after: z.string().optional(),
@@ -162,7 +162,7 @@ export const GetEntitlementsRequest$inboundSchema: z.ZodType<
 export type GetEntitlementsRequest$Outbound = {
   application_id: string;
   user_id?: string | undefined;
-  sku_ids: string | Array<string>;
+  sku_ids: string | Array<string | null>;
   guild_id?: string | undefined;
   before?: string | undefined;
   after?: string | undefined;
@@ -180,7 +180,7 @@ export const GetEntitlementsRequest$outboundSchema: z.ZodType<
 > = z.object({
   applicationId: z.string(),
   userId: z.string().optional(),
-  skuIds: z.union([z.string(), z.array(z.string())]),
+  skuIds: z.union([z.string(), z.array(z.nullable(z.string()))]),
   guildId: z.string().optional(),
   before: z.string().optional(),
   after: z.string().optional(),

@@ -9,7 +9,7 @@ let value: CreateGuildEmojiRequest = {
   guildId: "<value>",
   requestBody: {
     name: "<value>",
-    image: "https://picsum.photos/seed/pONcm9/1573/1457",
+    image: "https://loremflickr.com/2376/3514?lock=4886518738099438",
   },
 };
 ```

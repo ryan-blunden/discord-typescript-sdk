@@ -7,10 +7,10 @@ import { GithubWebhook } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GithubWebhook = {
   sender: {
-    id: 756641,
-    login: "Beatrice_Abbott26",
-    htmlUrl: "https://disloyal-merit.biz",
-    avatarUrl: "https://quarterly-quinoa.biz",
+    id: 665706,
+    login: "Robyn52",
+    htmlUrl: "https://informal-fat.biz",
+    avatarUrl: "https://winding-editor.info",
   },
 };
 ```

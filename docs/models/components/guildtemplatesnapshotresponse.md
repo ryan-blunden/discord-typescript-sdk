@@ -7,23 +7,23 @@ import { GuildTemplateSnapshotResponse } from "@ryan.blunden/discord-sdk/models/
 
 let value: GuildTemplateSnapshotResponse = {
   name: "<value>",
-  systemChannelFlags: 715543,
+  systemChannelFlags: 176403,
   roles: [
     {
-      id: 449100,
+      id: 27710,
       name: "<value>",
       permissions: "<value>",
-      color: 279575,
+      color: 304361,
       hoist: false,
       mentionable: false,
     },
   ],
   channels: [
     {
-      bitrate: 873901,
-      userLimit: 673158,
+      bitrate: 520811,
+      userLimit: 650319,
       nsfw: false,
-      rateLimitPerUser: 64184,
+      rateLimitPerUser: 377895,
       permissionOverwrites: [
         {
           id: "<value>",

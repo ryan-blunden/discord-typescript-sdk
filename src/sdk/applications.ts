@@ -182,7 +182,7 @@ export class Applications extends ClientSDK {
     security: operations.GetEntitlementsSecurity,
     request: operations.GetEntitlementsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.EntitlementResponse>> {
+  ): Promise<Array<components.EntitlementResponse | null>> {
     return unwrapAsync(applicationsGetEntitlements(
       this,
       security,

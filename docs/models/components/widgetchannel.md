@@ -8,7 +8,7 @@ import { WidgetChannel } from "@ryan.blunden/discord-sdk/models/components";
 let value: WidgetChannel = {
   id: "<value>",
   name: "<value>",
-  position: 656964,
+  position: 197388,
 };
 ```
 

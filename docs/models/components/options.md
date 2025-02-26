@@ -8,7 +8,7 @@
 ```typescript
 const value: components.ApplicationCommandAttachmentOptionResponse = {
   name: "<value>",
-  description: "close whoa and yet once coolly gee punctually lavish",
+  description: "um the gleefully these oof blah feminize sans annual",
 };
 ```
 
@@ -17,8 +17,7 @@ const value: components.ApplicationCommandAttachmentOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandBooleanOptionResponse = {
   name: "<value>",
-  description:
-    "yuck cooperative till though awkwardly gadzooks kiddingly wrongly criminal",
+  description: "ouch greatly gosh vengeful gee funny brief where daintily role",
 };
 ```
 
@@ -27,7 +26,8 @@ const value: components.ApplicationCommandBooleanOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandChannelOptionResponse = {
   name: "<value>",
-  description: "monthly searchingly forgather wherever ascribe hubris pfft",
+  description:
+    "guidance jealously restfully where defiantly sans yum creature clean",
 };
 ```
 
@@ -36,8 +36,7 @@ const value: components.ApplicationCommandChannelOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandIntegerOptionResponse = {
   name: "<value>",
-  description:
-    "unrealistic whereas tomatillo disloyal jovially cleverly wrong abnegate",
+  description: "cake uh-huh while instead",
 };
 ```
 
@@ -46,7 +45,7 @@ const value: components.ApplicationCommandIntegerOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandMentionableOptionResponse = {
   name: "<value>",
-  description: "kissingly tensely gah supposing anti",
+  description: "scorpion ha scamper safe excitedly gee beneath since",
 };
 ```
 
@@ -56,7 +55,7 @@ const value: components.ApplicationCommandMentionableOptionResponse = {
 const value: components.ApplicationCommandNumberOptionResponse = {
   name: "<value>",
   description:
-    "elegant ferociously courageous woot needily academics ack generously aboard",
+    "lucky whenever happily likewise pace fall ick incidentally gullible",
 };
 ```
 
@@ -65,7 +64,7 @@ const value: components.ApplicationCommandNumberOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandRoleOptionResponse = {
   name: "<value>",
-  description: "till crumble besides even forenenst lazily",
+  description: "snowplow unimpressively chubby rout",
 };
 ```
 
@@ -74,7 +73,7 @@ const value: components.ApplicationCommandRoleOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandStringOptionResponse = {
   name: "<value>",
-  description: "speedily out snow fencing vice",
+  description: "rusty so after awkwardly loosely than providence",
 };
 ```
 
@@ -83,7 +82,7 @@ const value: components.ApplicationCommandStringOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandUserOptionResponse = {
   name: "<value>",
-  description: "sit mid gosh vision early apropos merrily minty above blight",
+  description: "fairly consequently celsius warmly fort likewise",
 };
 ```
 

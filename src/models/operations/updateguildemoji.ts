@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateGuildEmojiRequestBody = {
   name?: string | undefined;
-  roles?: Array<string> | null | undefined;
+  roles?: Array<string | null> | null | undefined;
 };
 
 export type UpdateGuildEmojiRequest = {
@@ -26,13 +26,13 @@ export const UpdateGuildEmojiRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  roles: z.nullable(z.array(z.string())).optional(),
+  roles: z.nullable(z.array(z.nullable(z.string()))).optional(),
 });
 
 /** @internal */
 export type UpdateGuildEmojiRequestBody$Outbound = {
   name?: string | undefined;
-  roles?: Array<string> | null | undefined;
+  roles?: Array<string | null> | null | undefined;
 };
 
 /** @internal */
@@ -42,7 +42,7 @@ export const UpdateGuildEmojiRequestBody$outboundSchema: z.ZodType<
   UpdateGuildEmojiRequestBody
 > = z.object({
   name: z.string().optional(),
-  roles: z.nullable(z.array(z.string())).optional(),
+  roles: z.nullable(z.array(z.nullable(z.string()))).optional(),
 });
 
 /**

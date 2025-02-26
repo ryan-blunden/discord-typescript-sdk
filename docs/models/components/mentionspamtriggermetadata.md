@@ -6,7 +6,7 @@
 import { MentionSpamTriggerMetadata } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: MentionSpamTriggerMetadata = {
-  mentionTotalLimit: 770376,
+  mentionTotalLimit: 470455,
 };
 ```
 

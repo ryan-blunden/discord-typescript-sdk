@@ -7,7 +7,7 @@ import { ApplicationCommandChannelOption } from "@ryan.blunden/discord-sdk/model
 
 let value: ApplicationCommandChannelOption = {
   name: "<value>",
-  description: "regularly whose recovery furthermore glaring huddle",
+  description: "eek mallard than ouch apud",
 };
 ```
 

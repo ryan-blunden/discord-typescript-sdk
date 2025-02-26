@@ -8,8 +8,7 @@
 ```typescript
 const value: components.ApplicationCommandAttachmentOption = {
   name: "<value>",
-  description:
-    "arrogantly address excluding likewise captain huzzah since seldom who",
+  description: "nun apropos lumbering and unethically farmer or boo",
 };
 ```
 
@@ -18,7 +17,7 @@ const value: components.ApplicationCommandAttachmentOption = {
 ```typescript
 const value: components.ApplicationCommandBooleanOption = {
   name: "<value>",
-  description: "which reproach past finer square",
+  description: "once department gee reboot aha catch receptor ack",
 };
 ```
 
@@ -27,7 +26,8 @@ const value: components.ApplicationCommandBooleanOption = {
 ```typescript
 const value: components.ApplicationCommandChannelOption = {
   name: "<value>",
-  description: "crumble handle some hospitalization shark psst",
+  description:
+    "excluding owlishly behind whereas ultimately bah serene woefully marksman brr",
 };
 ```
 
@@ -36,7 +36,7 @@ const value: components.ApplicationCommandChannelOption = {
 ```typescript
 const value: components.ApplicationCommandIntegerOption = {
   name: "<value>",
-  description: "whenever per own brr about",
+  description: "boo aw smoothly absentmindedly gifted scrap",
 };
 ```
 
@@ -45,7 +45,7 @@ const value: components.ApplicationCommandIntegerOption = {
 ```typescript
 const value: components.ApplicationCommandMentionableOption = {
   name: "<value>",
-  description: "unabashedly sticky once fathom collaborate hepatitis wide-eyed",
+  description: "ew roger wash whereas drag pull",
 };
 ```
 
@@ -54,7 +54,7 @@ const value: components.ApplicationCommandMentionableOption = {
 ```typescript
 const value: components.ApplicationCommandNumberOption = {
   name: "<value>",
-  description: "bell yeast mallard croon",
+  description: "that faint yahoo mostly who truly",
 };
 ```
 
@@ -63,8 +63,7 @@ const value: components.ApplicationCommandNumberOption = {
 ```typescript
 const value: components.ApplicationCommandRoleOption = {
   name: "<value>",
-  description:
-    "across psst helpless angle during gee psst coaxingly shameful after",
+  description: "although lively an unto electrify between",
 };
 ```
 
@@ -73,7 +72,7 @@ const value: components.ApplicationCommandRoleOption = {
 ```typescript
 const value: components.ApplicationCommandStringOption = {
   name: "<value>",
-  description: "overstay consequently anenst when inasmuch ectoderm where oof",
+  description: "oh aside toward outnumber steel woot ouch unaccountably",
 };
 ```
 
@@ -83,7 +82,7 @@ const value: components.ApplicationCommandStringOption = {
 const value: components.ApplicationCommandSubcommandGroupOption = {
   name: "<value>",
   description:
-    "amongst repeatedly motor though wearily empty idolized after phooey",
+    "of notwithstanding aha throughout impressive designation admonish masterpiece yippee",
 };
 ```
 
@@ -92,7 +91,7 @@ const value: components.ApplicationCommandSubcommandGroupOption = {
 ```typescript
 const value: components.ApplicationCommandSubcommandOption = {
   name: "<value>",
-  description: "than athwart legging zowie pace exalt vanadyl bank",
+  description: "ah joyous able filter though aw hmph er",
 };
 ```
 
@@ -101,7 +100,7 @@ const value: components.ApplicationCommandSubcommandOption = {
 ```typescript
 const value: components.ApplicationCommandUserOption = {
   name: "<value>",
-  description: "of husky truthfully extract allocation pish",
+  description: "oxidise yowza how yowza even chiffonier mould",
 };
 ```
 

@@ -8,7 +8,8 @@ import { ApplicationRoleConnectionsMetadataItemRequest } from "@ryan.blunden/dis
 let value: ApplicationRoleConnectionsMetadataItemRequest = {
   key: "<key>",
   name: "<value>",
-  description: "whose afraid concerning unimpressively kindheartedly yowza",
+  description:
+    "huzzah after what gah eek flight grouper uniform industrialize when",
 };
 ```
 

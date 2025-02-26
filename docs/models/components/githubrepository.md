@@ -6,10 +6,10 @@
 import { GithubRepository } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GithubRepository = {
-  id: 779477,
-  htmlUrl: "https://flawed-schedule.biz",
+  id: 831959,
+  htmlUrl: "https://juvenile-obesity.name",
   name: "<value>",
-  fullName: "Beulah Kuvalis",
+  fullName: "Ruby Hackett",
 };
 ```
 

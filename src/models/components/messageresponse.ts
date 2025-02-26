@@ -254,7 +254,10 @@ export type MessageResponse = {
   webhookId?: string | null | undefined;
   messageReference?: MessageReferenceResponse | null | undefined;
   thread?: ThreadResponse | null | undefined;
-  mentionChannels?: Array<MessageMentionChannelResponse> | null | undefined;
+  mentionChannels?:
+    | Array<MessageMentionChannelResponse | null>
+    | null
+    | undefined;
   roleSubscriptionData?: MessageRoleSubscriptionDataResponse | null | undefined;
   purchaseNotification?: PurchaseNotificationResponse | null | undefined;
   position?: number | null | undefined;
@@ -553,7 +556,7 @@ export const MessageResponse$inboundSchema: z.ZodType<
     .optional(),
   thread: z.nullable(ThreadResponse$inboundSchema).optional(),
   mention_channels: z.nullable(
-    z.array(MessageMentionChannelResponse$inboundSchema),
+    z.array(z.nullable(MessageMentionChannelResponse$inboundSchema)),
   ).optional(),
   role_subscription_data: z.nullable(
     MessageRoleSubscriptionDataResponse$inboundSchema,
@@ -636,7 +639,7 @@ export type MessageResponse$Outbound = {
   message_reference?: MessageReferenceResponse$Outbound | null | undefined;
   thread?: ThreadResponse$Outbound | null | undefined;
   mention_channels?:
-    | Array<MessageMentionChannelResponse$Outbound>
+    | Array<MessageMentionChannelResponse$Outbound | null>
     | null
     | undefined;
   role_subscription_data?:
@@ -719,7 +722,7 @@ export const MessageResponse$outboundSchema: z.ZodType<
     .optional(),
   thread: z.nullable(ThreadResponse$outboundSchema).optional(),
   mentionChannels: z.nullable(
-    z.array(MessageMentionChannelResponse$outboundSchema),
+    z.array(z.nullable(MessageMentionChannelResponse$outboundSchema)),
   ).optional(),
   roleSubscriptionData: z.nullable(
     MessageRoleSubscriptionDataResponse$outboundSchema,
