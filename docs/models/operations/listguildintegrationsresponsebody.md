@@ -11,7 +11,8 @@ const value: components.DiscordIntegrationResponse = {
   application: {
     id: "<value>",
     name: "<value>",
-    description: "per cricket boo over whether",
+    description:
+      "foolhardy pish live spring starboard near duster ack circa zowie",
   },
   scopes: [
     "<value>",
@@ -26,10 +27,10 @@ const value: components.ExternalConnectionIntegrationResponse = {
   id: "<id>",
   user: {
     id: "<value>",
-    username: "Haven95",
+    username: "Dock.Lang98",
     discriminator: "<value>",
-    publicFlags: 353692,
-    flags: 888833,
+    publicFlags: 190895,
+    flags: 753559,
   },
 };
 ```

@@ -8,7 +8,7 @@ import { ApplicationCommandSubcommandOptionResponse } from "@ryan.blunden/discor
 let value: ApplicationCommandSubcommandOptionResponse = {
   name: "<value>",
   description:
-    "notwithstanding aboard same below celsius along upward than acidly colorless",
+    "nicely heating for perfectly midwife loyalty descent and provided",
 };
 ```
 

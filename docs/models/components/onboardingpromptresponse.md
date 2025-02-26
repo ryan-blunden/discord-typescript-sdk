@@ -12,7 +12,7 @@ let value: OnboardingPromptResponse = {
     {
       id: "<value>",
       title: "<value>",
-      description: "overcoat incidentally woefully cannon graffiti valiantly",
+      description: "zowie hence sadly those naturally if",
       emoji: {},
       roleIds: [
         "<value>",

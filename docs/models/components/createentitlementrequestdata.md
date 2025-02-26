@@ -8,7 +8,7 @@ import { CreateEntitlementRequestData } from "@ryan.blunden/discord-sdk/models/c
 let value: CreateEntitlementRequestData = {
   skuId: "<value>",
   ownerId: "<value>",
-  ownerType: 794531,
+  ownerType: 119903,
 };
 ```
 

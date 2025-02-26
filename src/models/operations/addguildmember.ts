@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AddGuildMemberRequestBody = {
   nick?: string | null | undefined;
-  roles?: Array<string> | null | undefined;
+  roles?: Array<string | null> | null | undefined;
   mute?: boolean | null | undefined;
   deaf?: boolean | null | undefined;
   accessToken: string;
@@ -30,7 +30,7 @@ export const AddGuildMemberRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   nick: z.nullable(z.string()).optional(),
-  roles: z.nullable(z.array(z.string())).optional(),
+  roles: z.nullable(z.array(z.nullable(z.string()))).optional(),
   mute: z.nullable(z.boolean()).optional(),
   deaf: z.nullable(z.boolean()).optional(),
   access_token: z.string(),
@@ -44,7 +44,7 @@ export const AddGuildMemberRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type AddGuildMemberRequestBody$Outbound = {
   nick?: string | null | undefined;
-  roles?: Array<string> | null | undefined;
+  roles?: Array<string | null> | null | undefined;
   mute?: boolean | null | undefined;
   deaf?: boolean | null | undefined;
   access_token: string;
@@ -58,7 +58,7 @@ export const AddGuildMemberRequestBody$outboundSchema: z.ZodType<
   AddGuildMemberRequestBody
 > = z.object({
   nick: z.nullable(z.string()).optional(),
-  roles: z.nullable(z.array(z.string())).optional(),
+  roles: z.nullable(z.array(z.nullable(z.string()))).optional(),
   mute: z.nullable(z.boolean()).optional(),
   deaf: z.nullable(z.boolean()).optional(),
   accessToken: z.string(),

@@ -6,14 +6,14 @@
 import { GithubIssue } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GithubIssue = {
-  id: 50532,
-  number: 288267,
-  htmlUrl: "https://bossy-crocodile.org/",
+  id: 1663,
+  number: 681678,
+  htmlUrl: "https://shocked-crocodile.com/",
   user: {
-    id: 896280,
-    login: "Kaci_Kohler94",
-    htmlUrl: "https://awful-formation.info/",
-    avatarUrl: "https://useless-spirit.net/",
+    id: 600556,
+    login: "Wilmer50",
+    htmlUrl: "https://common-advertisement.info/",
+    avatarUrl: "https://wry-information.biz",
   },
   title: "<value>",
 };

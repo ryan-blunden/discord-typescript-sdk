@@ -7,9 +7,9 @@ import { WidgetMember } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: WidgetMember = {
   id: "<id>",
-  username: "Edyth_Mraz74",
+  username: "Triston.Crist22",
   status: "<value>",
-  avatarUrl: "https://jittery-fraudster.org",
+  avatarUrl: "https://rough-dandelion.biz/",
 };
 ```
 

@@ -164,6 +164,7 @@ export type GuildAuditLogResponse = {
     | MLSpamRuleResponse
     | MentionSpamRuleResponse
     | SpamLinkRuleResponse
+    | null
   >;
 };
 
@@ -433,13 +434,15 @@ export const GuildAuditLogResponse$inboundSchema: z.ZodType<
   threads: z.array(ThreadResponse$inboundSchema),
   application_commands: z.array(ApplicationCommandResponse$inboundSchema),
   auto_moderation_rules: z.array(
-    z.union([
-      DefaultKeywordRuleResponse$inboundSchema,
-      KeywordRuleResponse$inboundSchema,
-      MLSpamRuleResponse$inboundSchema,
-      MentionSpamRuleResponse$inboundSchema,
-      SpamLinkRuleResponse$inboundSchema,
-    ]),
+    z.nullable(
+      z.union([
+        DefaultKeywordRuleResponse$inboundSchema,
+        KeywordRuleResponse$inboundSchema,
+        MLSpamRuleResponse$inboundSchema,
+        MentionSpamRuleResponse$inboundSchema,
+        SpamLinkRuleResponse$inboundSchema,
+      ]),
+    ),
   ),
 }).transform((v) => {
   return remap$(v, {
@@ -477,6 +480,7 @@ export type GuildAuditLogResponse$Outbound = {
     | MLSpamRuleResponse$Outbound
     | MentionSpamRuleResponse$Outbound
     | SpamLinkRuleResponse$Outbound
+    | null
   >;
 };
 
@@ -512,13 +516,15 @@ export const GuildAuditLogResponse$outboundSchema: z.ZodType<
   threads: z.array(ThreadResponse$outboundSchema),
   applicationCommands: z.array(ApplicationCommandResponse$outboundSchema),
   autoModerationRules: z.array(
-    z.union([
-      DefaultKeywordRuleResponse$outboundSchema,
-      KeywordRuleResponse$outboundSchema,
-      MLSpamRuleResponse$outboundSchema,
-      MentionSpamRuleResponse$outboundSchema,
-      SpamLinkRuleResponse$outboundSchema,
-    ]),
+    z.nullable(
+      z.union([
+        DefaultKeywordRuleResponse$outboundSchema,
+        KeywordRuleResponse$outboundSchema,
+        MLSpamRuleResponse$outboundSchema,
+        MentionSpamRuleResponse$outboundSchema,
+        SpamLinkRuleResponse$outboundSchema,
+      ]),
+    ),
   ),
 }).transform((v) => {
   return remap$(v, {

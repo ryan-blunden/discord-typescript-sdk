@@ -9,9 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageAllowedMentionsRequest = {
-  parse?: Array<string> | null | undefined;
-  users?: Array<string> | null | undefined;
-  roles?: Array<string> | null | undefined;
+  parse?: Array<string | null> | null | undefined;
+  users?: Array<string | null> | null | undefined;
+  roles?: Array<string | null> | null | undefined;
   repliedUser?: boolean | null | undefined;
 };
 
@@ -21,9 +21,9 @@ export const MessageAllowedMentionsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  parse: z.nullable(z.array(z.string())).optional(),
-  users: z.nullable(z.array(z.string())).optional(),
-  roles: z.nullable(z.array(z.string())).optional(),
+  parse: z.nullable(z.array(z.nullable(z.string()))).optional(),
+  users: z.nullable(z.array(z.nullable(z.string()))).optional(),
+  roles: z.nullable(z.array(z.nullable(z.string()))).optional(),
   replied_user: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -33,9 +33,9 @@ export const MessageAllowedMentionsRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type MessageAllowedMentionsRequest$Outbound = {
-  parse?: Array<string> | null | undefined;
-  users?: Array<string> | null | undefined;
-  roles?: Array<string> | null | undefined;
+  parse?: Array<string | null> | null | undefined;
+  users?: Array<string | null> | null | undefined;
+  roles?: Array<string | null> | null | undefined;
   replied_user?: boolean | null | undefined;
 };
 
@@ -45,9 +45,9 @@ export const MessageAllowedMentionsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MessageAllowedMentionsRequest
 > = z.object({
-  parse: z.nullable(z.array(z.string())).optional(),
-  users: z.nullable(z.array(z.string())).optional(),
-  roles: z.nullable(z.array(z.string())).optional(),
+  parse: z.nullable(z.array(z.nullable(z.string()))).optional(),
+  users: z.nullable(z.array(z.nullable(z.string()))).optional(),
+  roles: z.nullable(z.array(z.nullable(z.string()))).optional(),
   repliedUser: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {

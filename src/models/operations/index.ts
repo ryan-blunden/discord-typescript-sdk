@@ -168,6 +168,7 @@ export * from "./setchannelpermissionoverwrite.js";
 export * from "./setguildapplicationcommandpermissions.js";
 export * from "./setguildmfalevel.js";
 export * from "./syncguildtemplate.js";
+export * from "./threadsearch.js";
 export * from "./triggertypingindicator.js";
 export * from "./unbanuserfromguild.js";
 export * from "./unpinmessage.js";

@@ -8,7 +8,7 @@ import { ResourceChannelResponse } from "@ryan.blunden/discord-sdk/models/compon
 let value: ResourceChannelResponse = {
   channelId: "<value>",
   title: "<value>",
-  description: "phew since woot drat",
+  description: "approximate after mmm cycle though",
 };
 ```
 

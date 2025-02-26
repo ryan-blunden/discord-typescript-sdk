@@ -9,7 +9,7 @@ let value: NewMemberActionResponse = {
   channelId: "<value>",
   title: "<value>",
   description:
-    "electrify fooey now punctually gladly after adventurously out definite",
+    "measly intrepid beside foolishly bidet baa highlight aw bleakly",
 };
 ```
 

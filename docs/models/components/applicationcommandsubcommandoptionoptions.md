@@ -9,7 +9,7 @@
 const value: components.ApplicationCommandAttachmentOption = {
   name: "<value>",
   description:
-    "indolent and eyeglasses despite thankfully promptly gosh label oxidize yum",
+    "inborn above atop unabashedly unless reconstitute seemingly wherever cow",
 };
 ```
 
@@ -18,7 +18,7 @@ const value: components.ApplicationCommandAttachmentOption = {
 ```typescript
 const value: components.ApplicationCommandBooleanOption = {
   name: "<value>",
-  description: "ugh ignite briefly quip after minus pish up loosely",
+  description: "smuggle book ultimately athwart coordinated",
 };
 ```
 
@@ -27,7 +27,7 @@ const value: components.ApplicationCommandBooleanOption = {
 ```typescript
 const value: components.ApplicationCommandChannelOption = {
   name: "<value>",
-  description: "reservation even pessimistic",
+  description: "mid individual reboot inquisitively",
 };
 ```
 
@@ -36,7 +36,7 @@ const value: components.ApplicationCommandChannelOption = {
 ```typescript
 const value: components.ApplicationCommandIntegerOption = {
   name: "<value>",
-  description: "past energetically gentle ingratiate yippee supposing perfumed",
+  description: "orderly after colossal bitter",
 };
 ```
 
@@ -45,8 +45,7 @@ const value: components.ApplicationCommandIntegerOption = {
 ```typescript
 const value: components.ApplicationCommandMentionableOption = {
   name: "<value>",
-  description:
-    "past except hepatitis pro collaboration wisely account ah without",
+  description: "gerbil angelic acquire",
 };
 ```
 
@@ -55,7 +54,8 @@ const value: components.ApplicationCommandMentionableOption = {
 ```typescript
 const value: components.ApplicationCommandNumberOption = {
   name: "<value>",
-  description: "likely shocked yahoo however",
+  description:
+    "account ah without yowza readily instead abnormally incidentally deduce with",
 };
 ```
 
@@ -64,7 +64,7 @@ const value: components.ApplicationCommandNumberOption = {
 ```typescript
 const value: components.ApplicationCommandRoleOption = {
   name: "<value>",
-  description: "flowery sans wrongly inculcate pop than below neatly pro",
+  description: "down glorious favorite instead by knottily",
 };
 ```
 
@@ -73,7 +73,7 @@ const value: components.ApplicationCommandRoleOption = {
 ```typescript
 const value: components.ApplicationCommandStringOption = {
   name: "<value>",
-  description: "mmm zowie reorient red carelessly",
+  description: "yet blue ugh nautical barring whereas ouch reporter",
 };
 ```
 
@@ -82,7 +82,7 @@ const value: components.ApplicationCommandStringOption = {
 ```typescript
 const value: components.ApplicationCommandUserOption = {
   name: "<value>",
-  description: "maroon woot aboard unto ick hurtful forceful yuck",
+  description: "midwife unless separate",
 };
 ```
 

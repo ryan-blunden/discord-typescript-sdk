@@ -43,7 +43,7 @@ export type PrivateApplicationResponse = {
   bot?: UserResponse | null | undefined;
   slug?: string | null | undefined;
   guildId?: string | null | undefined;
-  rpcOrigins?: Array<string> | null | undefined;
+  rpcOrigins?: Array<string | null> | null | undefined;
   botPublic?: boolean | null | undefined;
   botRequireCodeGrant?: boolean | null | undefined;
   termsOfServiceUrl?: string | null | undefined;
@@ -58,7 +58,7 @@ export type PrivateApplicationResponse = {
   flags: number;
   maxParticipants?: number | null | undefined;
   tags?: Array<string> | null | undefined;
-  redirectUris: Array<string>;
+  redirectUris: Array<string | null>;
   interactionsEndpointUrl?: string | null | undefined;
   roleConnectionsVerificationUrl?: string | null | undefined;
   owner: UserResponse;
@@ -84,7 +84,7 @@ export const PrivateApplicationResponse$inboundSchema: z.ZodType<
   bot: z.nullable(UserResponse$inboundSchema).optional(),
   slug: z.nullable(z.string()).optional(),
   guild_id: z.nullable(z.string()).optional(),
-  rpc_origins: z.nullable(z.array(z.string())).optional(),
+  rpc_origins: z.nullable(z.array(z.nullable(z.string()))).optional(),
   bot_public: z.nullable(z.boolean()).optional(),
   bot_require_code_grant: z.nullable(z.boolean()).optional(),
   terms_of_service_url: z.nullable(z.string()).optional(),
@@ -100,7 +100,7 @@ export const PrivateApplicationResponse$inboundSchema: z.ZodType<
   flags: z.number().int(),
   max_participants: z.nullable(z.number().int()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
-  redirect_uris: z.array(z.string()),
+  redirect_uris: z.array(z.nullable(z.string())),
   interactions_endpoint_url: z.nullable(z.string()).optional(),
   role_connections_verification_url: z.nullable(z.string()).optional(),
   owner: UserResponse$inboundSchema,
@@ -144,7 +144,7 @@ export type PrivateApplicationResponse$Outbound = {
   bot?: UserResponse$Outbound | null | undefined;
   slug?: string | null | undefined;
   guild_id?: string | null | undefined;
-  rpc_origins?: Array<string> | null | undefined;
+  rpc_origins?: Array<string | null> | null | undefined;
   bot_public?: boolean | null | undefined;
   bot_require_code_grant?: boolean | null | undefined;
   terms_of_service_url?: string | null | undefined;
@@ -162,7 +162,7 @@ export type PrivateApplicationResponse$Outbound = {
   flags: number;
   max_participants?: number | null | undefined;
   tags?: Array<string> | null | undefined;
-  redirect_uris: Array<string>;
+  redirect_uris: Array<string | null>;
   interactions_endpoint_url?: string | null | undefined;
   role_connections_verification_url?: string | null | undefined;
   owner: UserResponse$Outbound;
@@ -188,7 +188,7 @@ export const PrivateApplicationResponse$outboundSchema: z.ZodType<
   bot: z.nullable(UserResponse$outboundSchema).optional(),
   slug: z.nullable(z.string()).optional(),
   guildId: z.nullable(z.string()).optional(),
-  rpcOrigins: z.nullable(z.array(z.string())).optional(),
+  rpcOrigins: z.nullable(z.array(z.nullable(z.string()))).optional(),
   botPublic: z.nullable(z.boolean()).optional(),
   botRequireCodeGrant: z.nullable(z.boolean()).optional(),
   termsOfServiceUrl: z.nullable(z.string()).optional(),
@@ -204,7 +204,7 @@ export const PrivateApplicationResponse$outboundSchema: z.ZodType<
   flags: z.number().int(),
   maxParticipants: z.nullable(z.number().int()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
-  redirectUris: z.array(z.string()),
+  redirectUris: z.array(z.nullable(z.string())),
   interactionsEndpointUrl: z.nullable(z.string()).optional(),
   roleConnectionsVerificationUrl: z.nullable(z.string()).optional(),
   owner: UserResponse$outboundSchema,

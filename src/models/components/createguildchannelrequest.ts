@@ -47,7 +47,10 @@ export type CreateGuildChannelRequest = {
   defaultThreadRateLimitPerUser?: number | null | undefined;
   defaultSortOrder?: 0 | null | undefined;
   defaultForumLayout?: 0 | null | undefined;
-  availableTags?: Array<CreateOrUpdateThreadTagRequest> | null | undefined;
+  availableTags?:
+    | Array<CreateOrUpdateThreadTagRequest | null>
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -78,7 +81,7 @@ export const CreateGuildChannelRequest$inboundSchema: z.ZodType<
   default_sort_order: z.nullable(z.literal(0)).optional(),
   default_forum_layout: z.nullable(z.literal(0)).optional(),
   available_tags: z.nullable(
-    z.array(CreateOrUpdateThreadTagRequest$inboundSchema),
+    z.array(z.nullable(CreateOrUpdateThreadTagRequest$inboundSchema)),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -123,7 +126,7 @@ export type CreateGuildChannelRequest$Outbound = {
   default_sort_order: 0 | null;
   default_forum_layout: 0 | null;
   available_tags?:
-    | Array<CreateOrUpdateThreadTagRequest$Outbound>
+    | Array<CreateOrUpdateThreadTagRequest$Outbound | null>
     | null
     | undefined;
 };
@@ -156,7 +159,7 @@ export const CreateGuildChannelRequest$outboundSchema: z.ZodType<
   defaultSortOrder: z.nullable(z.literal(0).default(0 as const)),
   defaultForumLayout: z.nullable(z.literal(0).default(0 as const)),
   availableTags: z.nullable(
-    z.array(CreateOrUpdateThreadTagRequest$outboundSchema),
+    z.array(z.nullable(CreateOrUpdateThreadTagRequest$outboundSchema)),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {

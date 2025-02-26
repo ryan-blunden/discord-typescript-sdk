@@ -13,7 +13,9 @@ const value: components.DefaultKeywordRuleResponse = {
   name: "<value>",
   actions: [
     {
-      metadata: {},
+      metadata: {
+        channelId: "<value>",
+      },
     },
   ],
   triggerMetadata: {
@@ -21,7 +23,7 @@ const value: components.DefaultKeywordRuleResponse = {
       "<value>",
     ],
     presets: [
-      162421,
+      232196,
     ],
   },
 };
@@ -37,7 +39,9 @@ const value: components.KeywordRuleResponse = {
   name: "<value>",
   actions: [
     {
-      metadata: {},
+      metadata: {
+        durationSeconds: 111628,
+      },
     },
   ],
   triggerMetadata: {
@@ -64,9 +68,7 @@ const value: components.MLSpamRuleResponse = {
   name: "<value>",
   actions: [
     {
-      metadata: {
-        durationSeconds: 728700,
-      },
+      metadata: {},
     },
   ],
   triggerMetadata: {},
@@ -89,7 +91,7 @@ const value: components.MentionSpamRuleResponse = {
     },
   ],
   triggerMetadata: {
-    mentionTotalLimit: 305965,
+    mentionTotalLimit: 288027,
   },
 };
 ```
@@ -105,7 +107,7 @@ const value: components.SpamLinkRuleResponse = {
   actions: [
     {
       metadata: {
-        channelId: "<value>",
+        durationSeconds: 791284,
       },
     },
   ],

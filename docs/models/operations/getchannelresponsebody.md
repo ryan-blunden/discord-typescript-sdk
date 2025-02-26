@@ -10,10 +10,10 @@
 ```typescript
 const value: components.GuildChannelResponse = {
   id: "<value>",
-  flags: 571591,
+  flags: 562238,
   guildId: "<value>",
   name: "<value>",
-  position: 520173,
+  position: 815452,
 };
 ```
 
@@ -22,14 +22,14 @@ const value: components.GuildChannelResponse = {
 ```typescript
 const value: components.PrivateChannelResponse = {
   id: "<value>",
-  flags: 81790,
+  flags: 666863,
   recipients: [
     {
       id: "<value>",
-      username: "Saige.Hodkiewicz",
+      username: "Leif.Bergnaum",
       discriminator: "<value>",
-      publicFlags: 563957,
-      flags: 362377,
+      publicFlags: 995715,
+      flags: 820659,
     },
   ],
 };
@@ -40,14 +40,14 @@ const value: components.PrivateChannelResponse = {
 ```typescript
 const value: components.PrivateGroupChannelResponse = {
   id: "<value>",
-  flags: 279684,
+  flags: 926479,
   recipients: [
     {
       id: "<value>",
-      username: "Jaunita84",
+      username: "Chesley4",
       discriminator: "<value>",
-      publicFlags: 829742,
-      flags: 525700,
+      publicFlags: 212369,
+      flags: 591191,
     },
   ],
 };
@@ -58,13 +58,13 @@ const value: components.PrivateGroupChannelResponse = {
 ```typescript
 const value: components.ThreadResponse = {
   id: "<value>",
-  flags: 711557,
+  flags: 275974,
   guildId: "<value>",
   name: "<value>",
   ownerId: "<value>",
-  messageCount: 335208,
-  memberCount: 459197,
-  totalMessageSent: 940490,
+  messageCount: 22402,
+  memberCount: 685537,
+  totalMessageSent: 448659,
 };
 ```
 

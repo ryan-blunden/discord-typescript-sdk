@@ -8,7 +8,7 @@ import { ApplicationCommandBooleanOption } from "@ryan.blunden/discord-sdk/model
 let value: ApplicationCommandBooleanOption = {
   name: "<value>",
   description:
-    "hastily investigate even mushy or ack roughly normal drat sidetrack",
+    "sternly briefly provided accredit psst instead staid well-groomed rot woot",
 };
 ```
 

@@ -9,7 +9,7 @@ let value: BasicApplicationResponse = {
   id: "<value>",
   name: "<value>",
   description:
-    "where that utilized too drat connect providence hmph gnash stuff",
+    "shakily hence bitterly considering barring above provision continually suffice",
 };
 ```
 

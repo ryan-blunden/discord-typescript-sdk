@@ -8,30 +8,30 @@ import { GuildTemplateResponse } from "@ryan.blunden/discord-sdk/models/componen
 let value: GuildTemplateResponse = {
   code: "<value>",
   name: "<value>",
-  usageCount: 145937,
+  usageCount: 448405,
   creatorId: "<value>",
-  createdAt: new Date("2023-10-30T01:36:34.812Z"),
-  updatedAt: new Date("2025-05-25T15:41:11.321Z"),
+  createdAt: new Date("2025-07-27T08:56:13.386Z"),
+  updatedAt: new Date("2023-10-23T06:03:23.045Z"),
   sourceGuildId: "<value>",
   serializedSourceGuild: {
     name: "<value>",
-    systemChannelFlags: 255108,
+    systemChannelFlags: 615932,
     roles: [
       {
-        id: 609429,
+        id: 845771,
         name: "<value>",
         permissions: "<value>",
-        color: 78381,
+        color: 807151,
         hoist: false,
         mentionable: false,
       },
     ],
     channels: [
       {
-        bitrate: 202145,
-        userLimit: 619143,
+        bitrate: 238723,
+        userLimit: 51089,
         nsfw: false,
-        rateLimitPerUser: 98138,
+        rateLimitPerUser: 276828,
         permissionOverwrites: [
           {
             id: "<value>",

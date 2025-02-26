@@ -8,7 +8,7 @@ import { MessageRoleSubscriptionDataResponse } from "@ryan.blunden/discord-sdk/m
 let value: MessageRoleSubscriptionDataResponse = {
   roleSubscriptionListingId: "<value>",
   tierName: "<value>",
-  totalMonthsSubscribed: 701940,
+  totalMonthsSubscribed: 906556,
   isRenewal: false,
 };
 ```

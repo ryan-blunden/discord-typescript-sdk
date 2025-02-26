@@ -7,7 +7,7 @@ import { VanityURLErrorResponse } from "@ryan.blunden/discord-sdk/models/compone
 
 let value: VanityURLErrorResponse = {
   message: "<value>",
-  code: 532866,
+  code: 958594,
 };
 ```
 

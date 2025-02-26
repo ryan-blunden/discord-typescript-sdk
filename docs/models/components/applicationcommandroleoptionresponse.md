@@ -7,7 +7,7 @@ import { ApplicationCommandRoleOptionResponse } from "@ryan.blunden/discord-sdk/
 
 let value: ApplicationCommandRoleOptionResponse = {
   name: "<value>",
-  description: "essay gently underpants yak tune judgementally",
+  description: "provided deduct besides impartial",
 };
 ```
 

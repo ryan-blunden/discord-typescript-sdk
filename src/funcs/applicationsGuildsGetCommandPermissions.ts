@@ -22,14 +22,15 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
-export async function applicationsGuildsGetCommandPermissions(
+export function applicationsGuildsGetCommandPermissions(
   client: DiscordCore,
   security: operations.GetGuildApplicationCommandPermissionsSecurity,
   request: operations.GetGuildApplicationCommandPermissionsRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     components.CommandPermissionsResponse,
     | errors.ErrorResponse
@@ -42,6 +43,35 @@ export async function applicationsGuildsGetCommandPermissions(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    security,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: DiscordCore,
+  security: operations.GetGuildApplicationCommandPermissionsSecurity,
+  request: operations.GetGuildApplicationCommandPermissionsRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      components.CommandPermissionsResponse,
+      | errors.ErrorResponse
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -50,7 +80,7 @@ export async function applicationsGuildsGetCommandPermissions(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -89,6 +119,7 @@ export async function applicationsGuildsGetCommandPermissions(
   );
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "get_guild_application_command_permissions",
     oAuth2Scopes: ["applications.commands.permissions.update"],
 
@@ -111,7 +142,7 @@ export async function applicationsGuildsGetCommandPermissions(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -122,7 +153,7 @@ export async function applicationsGuildsGetCommandPermissions(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -146,8 +177,8 @@ export async function applicationsGuildsGetCommandPermissions(
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

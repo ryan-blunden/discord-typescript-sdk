@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type CreatePrivateChannelRequest = {
   recipientId?: string | null | undefined;
   accessTokens?: Array<string> | null | undefined;
-  nicks?: { [k: string]: string } | null | undefined;
+  nicks?: { [k: string]: string | null } | null | undefined;
 };
 
 /** @internal */
@@ -22,7 +22,7 @@ export const CreatePrivateChannelRequest$inboundSchema: z.ZodType<
 > = z.object({
   recipient_id: z.nullable(z.string()).optional(),
   access_tokens: z.nullable(z.array(z.string())).optional(),
-  nicks: z.nullable(z.record(z.string())).optional(),
+  nicks: z.nullable(z.record(z.nullable(z.string()))).optional(),
 }).transform((v) => {
   return remap$(v, {
     "recipient_id": "recipientId",
@@ -34,7 +34,7 @@ export const CreatePrivateChannelRequest$inboundSchema: z.ZodType<
 export type CreatePrivateChannelRequest$Outbound = {
   recipient_id?: string | null | undefined;
   access_tokens?: Array<string> | null | undefined;
-  nicks?: { [k: string]: string } | null | undefined;
+  nicks?: { [k: string]: string | null } | null | undefined;
 };
 
 /** @internal */
@@ -45,7 +45,7 @@ export const CreatePrivateChannelRequest$outboundSchema: z.ZodType<
 > = z.object({
   recipientId: z.nullable(z.string()).optional(),
   accessTokens: z.nullable(z.array(z.string())).optional(),
-  nicks: z.nullable(z.record(z.string())).optional(),
+  nicks: z.nullable(z.record(z.nullable(z.string()))).optional(),
 }).transform((v) => {
   return remap$(v, {
     recipientId: "recipient_id",

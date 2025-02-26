@@ -7,8 +7,7 @@ import { ApplicationCommandChannelOptionResponse } from "@ryan.blunden/discord-s
 
 let value: ApplicationCommandChannelOptionResponse = {
   name: "<value>",
-  description:
-    "coagulate stir-fry wherever infinite stranger before cooperative lieu adumbrate till",
+  description: "likewise willfully heavy likewise",
 };
 ```
 

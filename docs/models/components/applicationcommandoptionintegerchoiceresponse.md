@@ -7,7 +7,7 @@ import { ApplicationCommandOptionIntegerChoiceResponse } from "@ryan.blunden/dis
 
 let value: ApplicationCommandOptionIntegerChoiceResponse = {
   name: "<value>",
-  value: 697330,
+  value: 37129,
 };
 ```
 

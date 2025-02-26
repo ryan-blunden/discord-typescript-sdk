@@ -8,12 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type IncludeRoles = string | Array<string>;
+export type IncludeRoles = string | Array<string | null>;
 
 export type PruneGuildRequestBody = {
   days?: number | null | undefined;
   computePruneCount?: boolean | null | undefined;
-  includeRoles?: string | Array<string> | null | undefined;
+  includeRoles?: string | Array<string | null> | null | undefined;
 };
 
 export type PruneGuildRequest = {
@@ -26,17 +26,17 @@ export const IncludeRoles$inboundSchema: z.ZodType<
   IncludeRoles,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(z.string())]);
+> = z.union([z.string(), z.array(z.nullable(z.string()))]);
 
 /** @internal */
-export type IncludeRoles$Outbound = string | Array<string>;
+export type IncludeRoles$Outbound = string | Array<string | null>;
 
 /** @internal */
 export const IncludeRoles$outboundSchema: z.ZodType<
   IncludeRoles$Outbound,
   z.ZodTypeDef,
   IncludeRoles
-> = z.union([z.string(), z.array(z.string())]);
+> = z.union([z.string(), z.array(z.nullable(z.string()))]);
 
 /**
  * @internal
@@ -73,8 +73,9 @@ export const PruneGuildRequestBody$inboundSchema: z.ZodType<
 > = z.object({
   days: z.nullable(z.number().int()).optional(),
   compute_prune_count: z.nullable(z.boolean()).optional(),
-  include_roles: z.nullable(z.union([z.string(), z.array(z.string())]))
-    .optional(),
+  include_roles: z.nullable(
+    z.union([z.string(), z.array(z.nullable(z.string()))]),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "compute_prune_count": "computePruneCount",
@@ -86,7 +87,7 @@ export const PruneGuildRequestBody$inboundSchema: z.ZodType<
 export type PruneGuildRequestBody$Outbound = {
   days?: number | null | undefined;
   compute_prune_count?: boolean | null | undefined;
-  include_roles?: string | Array<string> | null | undefined;
+  include_roles?: string | Array<string | null> | null | undefined;
 };
 
 /** @internal */
@@ -97,8 +98,9 @@ export const PruneGuildRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   days: z.nullable(z.number().int()).optional(),
   computePruneCount: z.nullable(z.boolean()).optional(),
-  includeRoles: z.nullable(z.union([z.string(), z.array(z.string())]))
-    .optional(),
+  includeRoles: z.nullable(
+    z.union([z.string(), z.array(z.nullable(z.string()))]),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     computePruneCount: "compute_prune_count",

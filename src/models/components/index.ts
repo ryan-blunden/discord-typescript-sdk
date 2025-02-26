@@ -301,6 +301,7 @@ export * from "./textinputcomponentresponse.js";
 export * from "./threadmemberresponse.js";
 export * from "./threadmetadataresponse.js";
 export * from "./threadresponse.js";
+export * from "./threadsearchresponse.js";
 export * from "./threadsresponse.js";
 export * from "./typingindicatorresponse.js";
 export * from "./updatedefaultreactionemojirequest.js";

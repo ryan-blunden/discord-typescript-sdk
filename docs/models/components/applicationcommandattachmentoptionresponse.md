@@ -7,8 +7,7 @@ import { ApplicationCommandAttachmentOptionResponse } from "@ryan.blunden/discor
 
 let value: ApplicationCommandAttachmentOptionResponse = {
   name: "<value>",
-  description:
-    "extricate serpentine along consequently incidentally cop questioningly blacken around separate",
+  description: "usefully beneath frankly for unwelcome",
 };
 ```
 

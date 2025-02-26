@@ -40,7 +40,7 @@ export type ApplicationFormPartial = {
   installParams?: ApplicationOAuth2InstallParams | null | undefined;
   roleConnectionsVerificationUrl?: string | null | undefined;
   integrationTypesConfig?:
-    | { [k: string]: ApplicationIntegrationTypeConfiguration }
+    | { [k: string]: ApplicationIntegrationTypeConfiguration | null }
     | null
     | undefined;
 };
@@ -119,7 +119,7 @@ export const ApplicationFormPartial$inboundSchema: z.ZodType<
     .optional(),
   role_connections_verification_url: z.nullable(z.string()).optional(),
   integration_types_config: z.nullable(
-    z.record(ApplicationIntegrationTypeConfiguration$inboundSchema),
+    z.record(z.nullable(ApplicationIntegrationTypeConfiguration$inboundSchema)),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -151,7 +151,7 @@ export type ApplicationFormPartial$Outbound = {
   install_params?: ApplicationOAuth2InstallParams$Outbound | null | undefined;
   role_connections_verification_url?: string | null | undefined;
   integration_types_config?:
-    | { [k: string]: ApplicationIntegrationTypeConfiguration$Outbound }
+    | { [k: string]: ApplicationIntegrationTypeConfiguration$Outbound | null }
     | null
     | undefined;
 };
@@ -177,7 +177,9 @@ export const ApplicationFormPartial$outboundSchema: z.ZodType<
     .optional(),
   roleConnectionsVerificationUrl: z.nullable(z.string()).optional(),
   integrationTypesConfig: z.nullable(
-    z.record(ApplicationIntegrationTypeConfiguration$outboundSchema),
+    z.record(
+      z.nullable(ApplicationIntegrationTypeConfiguration$outboundSchema),
+    ),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {

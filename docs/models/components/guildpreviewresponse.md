@@ -11,8 +11,8 @@ let value: GuildPreviewResponse = {
   features: [
     "<value>",
   ],
-  approximateMemberCount: 561416,
-  approximatePresenceCount: 845740,
+  approximateMemberCount: 515159,
+  approximatePresenceCount: 695511,
   emojis: [
     {
       id: "<value>",

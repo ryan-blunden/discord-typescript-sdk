@@ -7,10 +7,10 @@ import { GuildChannelResponse } from "@ryan.blunden/discord-sdk/models/component
 
 let value: GuildChannelResponse = {
   id: "<value>",
-  flags: 702323,
+  flags: 621479,
   guildId: "<value>",
   name: "<value>",
-  position: 684615,
+  position: 577229,
 };
 ```
 

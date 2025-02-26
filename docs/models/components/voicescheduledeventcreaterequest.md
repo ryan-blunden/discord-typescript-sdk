@@ -7,7 +7,7 @@ import { VoiceScheduledEventCreateRequest } from "@ryan.blunden/discord-sdk/mode
 
 let value: VoiceScheduledEventCreateRequest = {
   name: "<value>",
-  scheduledStartTime: new Date("2025-08-30T21:19:27.448Z"),
+  scheduledStartTime: new Date("2024-11-18T07:59:28.683Z"),
 };
 ```
 

@@ -10,10 +10,10 @@ let value: MessageResponse = {
   mentions: [
     {
       id: "<value>",
-      username: "Tamia_Mayert46",
+      username: "Rita_Strosin",
       discriminator: "<value>",
-      publicFlags: 425065,
-      flags: 381627,
+      publicFlags: 780529,
+      flags: 118274,
     },
   ],
   mentionRoles: [
@@ -23,9 +23,9 @@ let value: MessageResponse = {
     {
       id: "<value>",
       filename: "example.file",
-      size: 730863,
-      url: "https://advanced-kick.biz",
-      proxyUrl: "https://rapid-space.name/",
+      size: 639921,
+      url: "https://wealthy-lender.info/",
+      proxyUrl: "https://sorrowful-import.name/",
     },
   ],
   embeds: [
@@ -33,11 +33,11 @@ let value: MessageResponse = {
       type: "<value>",
     },
   ],
-  timestamp: new Date("2023-08-01T09:33:41.426Z"),
-  flags: 751286,
+  timestamp: new Date("2023-01-21T14:14:48.878Z"),
+  flags: 617636,
   components: [
     {
-      id: 804638,
+      id: 616934,
       customId: "<id>",
     },
   ],
@@ -45,10 +45,10 @@ let value: MessageResponse = {
   channelId: "<value>",
   author: {
     id: "<value>",
-    username: "Violet69",
+    username: "Tyra.Hessel69",
     discriminator: "<value>",
-    publicFlags: 285819,
-    flags: 462278,
+    publicFlags: 666767,
+    flags: 670638,
   },
   pinned: false,
   mentionEveryone: false,

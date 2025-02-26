@@ -13,7 +13,7 @@ let value: SpamLinkRuleResponse = {
   actions: [
     {
       metadata: {
-        durationSeconds: 147916,
+        channelId: "<value>",
       },
     },
   ],

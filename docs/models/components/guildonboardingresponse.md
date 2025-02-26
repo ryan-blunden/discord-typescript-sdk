@@ -15,8 +15,7 @@ let value: GuildOnboardingResponse = {
         {
           id: "<value>",
           title: "<value>",
-          description:
-            "including including since brr haunting bookend mispronounce goodwill fork",
+          description: "whenever viability outside blissfully crocodile gladly",
           emoji: {},
           roleIds: [
             "<value>",

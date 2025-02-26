@@ -7,7 +7,7 @@ import { ApplicationCommandSubcommandOption } from "@ryan.blunden/discord-sdk/mo
 
 let value: ApplicationCommandSubcommandOption = {
   name: "<value>",
-  description: "etch scorpion hence woot saloon bah aw geez affectionate",
+  description: "forceful yuck accentuate er manage whenever",
 };
 ```
 

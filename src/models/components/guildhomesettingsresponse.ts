@@ -30,8 +30,8 @@ export type GuildHomeSettingsResponse = {
   guildId: string;
   enabled: boolean;
   welcomeMessage?: WelcomeMessageResponse | null | undefined;
-  newMemberActions?: Array<NewMemberActionResponse> | null | undefined;
-  resourceChannels?: Array<ResourceChannelResponse> | null | undefined;
+  newMemberActions?: Array<NewMemberActionResponse | null> | null | undefined;
+  resourceChannels?: Array<ResourceChannelResponse | null> | null | undefined;
 };
 
 /** @internal */
@@ -43,10 +43,12 @@ export const GuildHomeSettingsResponse$inboundSchema: z.ZodType<
   guild_id: z.string(),
   enabled: z.boolean(),
   welcome_message: z.nullable(WelcomeMessageResponse$inboundSchema).optional(),
-  new_member_actions: z.nullable(z.array(NewMemberActionResponse$inboundSchema))
-    .optional(),
-  resource_channels: z.nullable(z.array(ResourceChannelResponse$inboundSchema))
-    .optional(),
+  new_member_actions: z.nullable(
+    z.array(z.nullable(NewMemberActionResponse$inboundSchema)),
+  ).optional(),
+  resource_channels: z.nullable(
+    z.array(z.nullable(ResourceChannelResponse$inboundSchema)),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",
@@ -62,11 +64,11 @@ export type GuildHomeSettingsResponse$Outbound = {
   enabled: boolean;
   welcome_message?: WelcomeMessageResponse$Outbound | null | undefined;
   new_member_actions?:
-    | Array<NewMemberActionResponse$Outbound>
+    | Array<NewMemberActionResponse$Outbound | null>
     | null
     | undefined;
   resource_channels?:
-    | Array<ResourceChannelResponse$Outbound>
+    | Array<ResourceChannelResponse$Outbound | null>
     | null
     | undefined;
 };
@@ -80,10 +82,12 @@ export const GuildHomeSettingsResponse$outboundSchema: z.ZodType<
   guildId: z.string(),
   enabled: z.boolean(),
   welcomeMessage: z.nullable(WelcomeMessageResponse$outboundSchema).optional(),
-  newMemberActions: z.nullable(z.array(NewMemberActionResponse$outboundSchema))
-    .optional(),
-  resourceChannels: z.nullable(z.array(ResourceChannelResponse$outboundSchema))
-    .optional(),
+  newMemberActions: z.nullable(
+    z.array(z.nullable(NewMemberActionResponse$outboundSchema)),
+  ).optional(),
+  resourceChannels: z.nullable(
+    z.array(z.nullable(ResourceChannelResponse$outboundSchema)),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     guildId: "guild_id",

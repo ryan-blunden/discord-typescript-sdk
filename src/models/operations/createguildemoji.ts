@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type CreateGuildEmojiRequestBody = {
   name: string;
   image: string;
-  roles?: Array<string> | null | undefined;
+  roles?: Array<string | null> | null | undefined;
 };
 
 export type CreateGuildEmojiRequest = {
@@ -27,14 +27,14 @@ export const CreateGuildEmojiRequestBody$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   image: z.string(),
-  roles: z.nullable(z.array(z.string())).optional(),
+  roles: z.nullable(z.array(z.nullable(z.string()))).optional(),
 });
 
 /** @internal */
 export type CreateGuildEmojiRequestBody$Outbound = {
   name: string;
   image: string;
-  roles?: Array<string> | null | undefined;
+  roles?: Array<string | null> | null | undefined;
 };
 
 /** @internal */
@@ -45,7 +45,7 @@ export const CreateGuildEmojiRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   image: z.string(),
-  roles: z.nullable(z.array(z.string())).optional(),
+  roles: z.nullable(z.array(z.nullable(z.string()))).optional(),
 });
 
 /**

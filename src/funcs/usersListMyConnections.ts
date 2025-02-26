@@ -21,13 +21,14 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
-export async function usersListMyConnections(
+export function usersListMyConnections(
   client: DiscordCore,
   security: operations.ListMyConnectionsSecurity,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     Array<components.ConnectedAccountResponse>,
     | errors.ErrorResponse
@@ -39,6 +40,33 @@ export async function usersListMyConnections(
     | RequestTimeoutError
     | ConnectionError
   >
+> {
+  return new APIPromise($do(
+    client,
+    security,
+    options,
+  ));
+}
+
+async function $do(
+  client: DiscordCore,
+  security: operations.ListMyConnectionsSecurity,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      Array<components.ConnectedAccountResponse>,
+      | errors.ErrorResponse
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
 > {
   const path = pathToFunc("/users/@me/connections")();
 
@@ -57,6 +85,7 @@ export async function usersListMyConnections(
   );
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "list_my_connections",
     oAuth2Scopes: ["connections"],
 
@@ -78,7 +107,7 @@ export async function usersListMyConnections(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -89,7 +118,7 @@ export async function usersListMyConnections(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -113,8 +142,8 @@ export async function usersListMyConnections(
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

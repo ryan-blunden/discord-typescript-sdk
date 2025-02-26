@@ -10,7 +10,7 @@ let value: ListGuildSoundboardSoundsResponse = {
     {
       name: "<value>",
       soundId: "<value>",
-      volume: 4838.96,
+      volume: 3466.67,
       available: false,
     },
   ],

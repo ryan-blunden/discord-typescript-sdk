@@ -6,7 +6,7 @@
 import { GatewayResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GatewayResponse = {
-  url: "https://chubby-duffel.name",
+  url: "https://flimsy-surface.net/",
 };
 ```
 
