@@ -199,7 +199,7 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  const result = await discord.oauth2.getKeys();
+  const result = await discord.oauth2.getKeys({});
 
   // Handle the result
   console.log(result);
@@ -318,9 +318,9 @@ run();
 * [updateForm](docs/sdks/discordmessages/README.md#updateform)
 * [updateMultipart](docs/sdks/discordmessages/README.md#updatemultipart)
 * [list](docs/sdks/discordmessages/README.md#list)
-* [createJson](docs/sdks/discordmessages/README.md#createjson)
 * [createForm](docs/sdks/discordmessages/README.md#createform)
 * [createMultipart](docs/sdks/discordmessages/README.md#createmultipart)
+* [createJson](docs/sdks/discordmessages/README.md#createjson)
 
 #### [channels.messages.reactions](docs/sdks/reactions/README.md)
 
