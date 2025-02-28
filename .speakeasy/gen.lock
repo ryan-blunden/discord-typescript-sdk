@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d6760420-c0f7-476a-a38c-38dd82de2cc6
 management:
-  docChecksum: 41df508b8e8eec1c2b7488da5106fe72
+  docChecksum: 51c484515fdfaa509c00520e4f4cc771
   docVersion: "10"
-  speakeasyVersion: 1.504.1
-  generationVersion: 2.529.2
-  releaseVersion: 0.1.0
-  configChecksum: b40177abbe234e67ce1ce476ba99df48
+  speakeasyVersion: 1.507.0
+  generationVersion: 2.533.0
+  releaseVersion: 0.1.1
+  configChecksum: 4f64ba0c3770800636412c30e207f95c
   repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
   installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
   published: true
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.21.2
+    core: 3.21.3
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.1.2
@@ -4125,5 +4125,10 @@ examples:
         path:
           channel_id: "<value>"
         query: {}
+      responses:
+        "200":
+          application/json: {"threads": [{"id": "<value>", "flags": 712792, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 772024, "member_count": 837268, "total_message_sent": 758801}, {"id": "<value>", "flags": 786183, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 525848, "member_count": 123502, "total_message_sent": 637469}], "members": []}
+        4XX:
+          application/json: {"code": 830908, "message": "<value>"}
 examplesVersion: 1.0.0
 generatedTests: {}

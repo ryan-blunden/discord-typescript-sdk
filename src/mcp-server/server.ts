@@ -182,7 +182,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Discord",
-    version: "0.1.0",
+    version: "0.1.1",
   });
 
   const client = new DiscordCore({
@@ -347,9 +347,9 @@ export function createMCPServer(deps: {
   tool(tool$channelsMessagesUpdateForm);
   tool(tool$channelsMessagesUpdateMultipart);
   tool(tool$channelsMessagesList);
-  tool(tool$channelsMessagesCreateJson);
   tool(tool$channelsMessagesCreateForm);
   tool(tool$channelsMessagesCreateMultipart);
+  tool(tool$channelsMessagesCreateJson);
   tool(tool$channelsThreadMembersLeave);
   tool(tool$channelsPermissionsSetOverwrite);
   tool(tool$channelsThreadsCreate);
