@@ -8,8 +8,7 @@ import { IntegrationApplicationResponse } from "@ryan.blunden/discord-sdk/models
 let value: IntegrationApplicationResponse = {
   id: "<value>",
   name: "<value>",
-  description:
-    "controvert mozzarella solemnly sinful meanwhile skyline up heating avaricious",
+  description: "probable steep telescope woot shallow ready",
 };
 ```
 

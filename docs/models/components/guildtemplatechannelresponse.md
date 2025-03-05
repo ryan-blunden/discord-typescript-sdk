@@ -6,10 +6,10 @@
 import { GuildTemplateChannelResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GuildTemplateChannelResponse = {
-  bitrate: 204283,
-  userLimit: 569306,
+  bitrate: 143278,
+  userLimit: 761563,
   nsfw: false,
-  rateLimitPerUser: 752367,
+  rateLimitPerUser: 93445,
   permissionOverwrites: [
     {
       id: "<value>",

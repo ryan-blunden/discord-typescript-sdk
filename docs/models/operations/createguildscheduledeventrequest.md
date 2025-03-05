@@ -9,7 +9,7 @@ let value: CreateGuildScheduledEventRequest = {
   guildId: "<value>",
   requestBody: {
     name: "<value>",
-    scheduledStartTime: new Date("2024-01-08T03:32:32.737Z"),
+    scheduledStartTime: new Date("2025-01-13T18:41:59.111Z"),
   },
 };
 ```

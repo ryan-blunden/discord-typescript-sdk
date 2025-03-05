@@ -7,7 +7,7 @@ import { GuildWelcomeChannel } from "@ryan.blunden/discord-sdk/models/components
 
 let value: GuildWelcomeChannel = {
   channelId: "<value>",
-  description: "insert rot meh never behind",
+  description: "around after yowza",
 };
 ```
 

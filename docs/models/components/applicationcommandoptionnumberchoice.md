@@ -7,7 +7,7 @@ import { ApplicationCommandOptionNumberChoice } from "@ryan.blunden/discord-sdk/
 
 let value: ApplicationCommandOptionNumberChoice = {
   name: "<value>",
-  value: 3727.37,
+  value: 8253.03,
 };
 ```
 

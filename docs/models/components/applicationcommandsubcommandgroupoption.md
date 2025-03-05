@@ -7,7 +7,7 @@ import { ApplicationCommandSubcommandGroupOption } from "@ryan.blunden/discord-s
 
 let value: ApplicationCommandSubcommandGroupOption = {
   name: "<value>",
-  description: "so intermesh sore rewrite",
+  description: "yowza upliftingly whoa fuel oof matter under indolent and",
 };
 ```
 

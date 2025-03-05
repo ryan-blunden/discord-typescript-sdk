@@ -7,14 +7,14 @@ import { PrivateGroupChannelResponse } from "@ryan.blunden/discord-sdk/models/co
 
 let value: PrivateGroupChannelResponse = {
   id: "<value>",
-  flags: 186193,
+  flags: 359978,
   recipients: [
     {
       id: "<value>",
-      username: "Tyreek.Kuhn25",
+      username: "Morgan.Lebsack19",
       discriminator: "<value>",
-      publicFlags: 434417,
-      flags: 311796,
+      publicFlags: 793698,
+      flags: 223924,
     },
   ],
 };

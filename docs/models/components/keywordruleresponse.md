@@ -12,7 +12,9 @@ let value: KeywordRuleResponse = {
   name: "<value>",
   actions: [
     {
-      metadata: {},
+      metadata: {
+        channelId: "<value>",
+      },
     },
   ],
   triggerMetadata: {

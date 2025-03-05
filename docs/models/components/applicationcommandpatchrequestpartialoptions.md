@@ -8,7 +8,7 @@
 ```typescript
 const value: components.ApplicationCommandAttachmentOption = {
   name: "<value>",
-  description: "nun apropos lumbering and unethically farmer or boo",
+  description: "essence frankly folklore fen but adjudge needily blah scent",
 };
 ```
 
@@ -17,7 +17,7 @@ const value: components.ApplicationCommandAttachmentOption = {
 ```typescript
 const value: components.ApplicationCommandBooleanOption = {
   name: "<value>",
-  description: "once department gee reboot aha catch receptor ack",
+  description: "jump whoever among",
 };
 ```
 
@@ -26,8 +26,7 @@ const value: components.ApplicationCommandBooleanOption = {
 ```typescript
 const value: components.ApplicationCommandChannelOption = {
   name: "<value>",
-  description:
-    "excluding owlishly behind whereas ultimately bah serene woefully marksman brr",
+  description: "ick since blissfully",
 };
 ```
 
@@ -36,7 +35,7 @@ const value: components.ApplicationCommandChannelOption = {
 ```typescript
 const value: components.ApplicationCommandIntegerOption = {
   name: "<value>",
-  description: "boo aw smoothly absentmindedly gifted scrap",
+  description: "sonar availability even which filthy ah",
 };
 ```
 
@@ -45,7 +44,7 @@ const value: components.ApplicationCommandIntegerOption = {
 ```typescript
 const value: components.ApplicationCommandMentionableOption = {
   name: "<value>",
-  description: "ew roger wash whereas drag pull",
+  description: "silently via and painfully",
 };
 ```
 
@@ -54,7 +53,8 @@ const value: components.ApplicationCommandMentionableOption = {
 ```typescript
 const value: components.ApplicationCommandNumberOption = {
   name: "<value>",
-  description: "that faint yahoo mostly who truly",
+  description:
+    "vivid honesty majestically whereas pantyhose nun apropos lumbering",
 };
 ```
 
@@ -63,7 +63,7 @@ const value: components.ApplicationCommandNumberOption = {
 ```typescript
 const value: components.ApplicationCommandRoleOption = {
   name: "<value>",
-  description: "although lively an unto electrify between",
+  description: "seldom who reassuringly throughout rightfully once department",
 };
 ```
 
@@ -72,7 +72,8 @@ const value: components.ApplicationCommandRoleOption = {
 ```typescript
 const value: components.ApplicationCommandStringOption = {
   name: "<value>",
-  description: "oh aside toward outnumber steel woot ouch unaccountably",
+  description:
+    "vice indolent stir-fry psst custom vestment excluding owlishly behind",
 };
 ```
 
@@ -81,8 +82,7 @@ const value: components.ApplicationCommandStringOption = {
 ```typescript
 const value: components.ApplicationCommandSubcommandGroupOption = {
   name: "<value>",
-  description:
-    "of notwithstanding aha throughout impressive designation admonish masterpiece yippee",
+  description: "why pupil transom stale and hmph",
 };
 ```
 
@@ -91,7 +91,7 @@ const value: components.ApplicationCommandSubcommandGroupOption = {
 ```typescript
 const value: components.ApplicationCommandSubcommandOption = {
   name: "<value>",
-  description: "ah joyous able filter though aw hmph er",
+  description: "gloss gadzooks sorrowful whale",
 };
 ```
 
@@ -100,7 +100,7 @@ const value: components.ApplicationCommandSubcommandOption = {
 ```typescript
 const value: components.ApplicationCommandUserOption = {
   name: "<value>",
-  description: "oxidise yowza how yowza even chiffonier mould",
+  description: "nor coolly syringe request amid shady croon",
 };
 ```
 

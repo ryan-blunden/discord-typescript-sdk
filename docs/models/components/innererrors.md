@@ -8,7 +8,7 @@ import { InnerErrors } from "@ryan.blunden/discord-sdk/models/components";
 let value: InnerErrors = {
   errors: [
     {
-      code: 327720,
+      code: 639473,
       message: "<value>",
     },
   ],

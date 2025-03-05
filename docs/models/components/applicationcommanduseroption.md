@@ -7,7 +7,7 @@ import { ApplicationCommandUserOption } from "@ryan.blunden/discord-sdk/models/c
 
 let value: ApplicationCommandUserOption = {
   name: "<value>",
-  description: "saloon bah aw geez affectionate obvious",
+  description: "ew stunning perspire pfft behind",
 };
 ```
 

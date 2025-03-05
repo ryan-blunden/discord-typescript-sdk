@@ -8,7 +8,7 @@ import { OnboardingPromptOptionResponse } from "@ryan.blunden/discord-sdk/models
 let value: OnboardingPromptOptionResponse = {
   id: "<value>",
   title: "<value>",
-  description: "brook council absent quietly stake gaseous so tame",
+  description: "curl fully brook mmm bah carp gah off er bah",
   emoji: {},
   roleIds: [
     "<value>",

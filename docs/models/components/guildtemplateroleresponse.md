@@ -6,10 +6,10 @@
 import { GuildTemplateRoleResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GuildTemplateRoleResponse = {
-  id: 694952,
+  id: 148641,
   name: "<value>",
   permissions: "<value>",
-  color: 856985,
+  color: 447016,
   hoist: false,
   mentionable: false,
 };

@@ -7,7 +7,8 @@ import { ApplicationCommandAttachmentOption } from "@ryan.blunden/discord-sdk/mo
 
 let value: ApplicationCommandAttachmentOption = {
   name: "<value>",
-  description: "barring after plus lest generally save why nor ocelot",
+  description:
+    "hastily investigate even mushy or ack roughly normal drat sidetrack",
 };
 ```
 

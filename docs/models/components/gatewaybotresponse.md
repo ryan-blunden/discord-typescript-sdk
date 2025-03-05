@@ -6,14 +6,14 @@
 import { GatewayBotResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GatewayBotResponse = {
-  url: "https://lighthearted-bidet.com",
+  url: "https://any-synergy.net",
   sessionStartLimit: {
-    maxConcurrency: 275608,
-    remaining: 798954,
-    resetAfter: 255108,
-    total: 609429,
+    maxConcurrency: 422444,
+    remaining: 265507,
+    resetAfter: 184401,
+    total: 585645,
   },
-  shards: 78381,
+  shards: 410239,
 };
 ```
 

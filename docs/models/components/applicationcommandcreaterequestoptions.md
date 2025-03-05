@@ -8,7 +8,7 @@
 ```typescript
 const value: components.ApplicationCommandAttachmentOption = {
   name: "<value>",
-  description: "sedately pfft notwithstanding instantly",
+  description: "relieve potentially so aha barring wise finally",
 };
 ```
 
@@ -17,7 +17,7 @@ const value: components.ApplicationCommandAttachmentOption = {
 ```typescript
 const value: components.ApplicationCommandBooleanOption = {
   name: "<value>",
-  description: "slide thongs ack",
+  description: "fathom brr up sin",
 };
 ```
 
@@ -26,7 +26,7 @@ const value: components.ApplicationCommandBooleanOption = {
 ```typescript
 const value: components.ApplicationCommandChannelOption = {
   name: "<value>",
-  description: "besides milestone suckle yum knottily adult agreeable muddy",
+  description: "stay appertain so quintessential until enroll upsell",
 };
 ```
 
@@ -35,8 +35,7 @@ const value: components.ApplicationCommandChannelOption = {
 ```typescript
 const value: components.ApplicationCommandIntegerOption = {
   name: "<value>",
-  description:
-    "lighthearted quizzically pleasing foolishly why beside commonly intently",
+  description: "ambitious despite via serve awkwardly uselessly testify",
 };
 ```
 
@@ -45,7 +44,8 @@ const value: components.ApplicationCommandIntegerOption = {
 ```typescript
 const value: components.ApplicationCommandMentionableOption = {
   name: "<value>",
-  description: "boiling loaf willfully dwell rudely aware within reckless in",
+  description:
+    "despite vainly scratchy dividend investigate minty louse ferret",
 };
 ```
 
@@ -54,7 +54,8 @@ const value: components.ApplicationCommandMentionableOption = {
 ```typescript
 const value: components.ApplicationCommandNumberOption = {
   name: "<value>",
-  description: "once louse deployment circa trolley from deduction",
+  description:
+    "overfeed obedient pfft however cope blossom dock structure phew",
 };
 ```
 
@@ -63,7 +64,7 @@ const value: components.ApplicationCommandNumberOption = {
 ```typescript
 const value: components.ApplicationCommandRoleOption = {
   name: "<value>",
-  description: "entire ah lovingly divine easily",
+  description: "frankly unblinking furthermore sightseeing drat",
 };
 ```
 
@@ -72,7 +73,7 @@ const value: components.ApplicationCommandRoleOption = {
 ```typescript
 const value: components.ApplicationCommandStringOption = {
   name: "<value>",
-  description: "painfully politely boohoo delirious",
+  description: "veg save hourly as whenever antagonize obstruct overburden",
 };
 ```
 
@@ -81,8 +82,7 @@ const value: components.ApplicationCommandStringOption = {
 ```typescript
 const value: components.ApplicationCommandSubcommandGroupOption = {
   name: "<value>",
-  description:
-    "violently quaff plus extent except instead aboard since hurtful",
+  description: "airport pleasure ew ack rowdy repurpose",
 };
 ```
 
@@ -91,7 +91,7 @@ const value: components.ApplicationCommandSubcommandGroupOption = {
 ```typescript
 const value: components.ApplicationCommandSubcommandOption = {
   name: "<value>",
-  description: "ha that what massive gah newsstand truly",
+  description: "faraway edible ah twine",
 };
 ```
 
@@ -100,7 +100,7 @@ const value: components.ApplicationCommandSubcommandOption = {
 ```typescript
 const value: components.ApplicationCommandUserOption = {
   name: "<value>",
-  description: "stunt toward ha",
+  description: "summer inside clean solidly",
 };
 ```
 

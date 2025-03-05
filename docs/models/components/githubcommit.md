@@ -7,7 +7,7 @@ import { GithubCommit } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GithubCommit = {
   id: "<id>",
-  url: "https://valuable-instruction.com/",
+  url: "https://glass-mozzarella.net/",
   message: "<value>",
   author: {
     name: "<value>",

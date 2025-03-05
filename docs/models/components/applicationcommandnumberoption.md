@@ -7,7 +7,7 @@ import { ApplicationCommandNumberOption } from "@ryan.blunden/discord-sdk/models
 
 let value: ApplicationCommandNumberOption = {
   name: "<value>",
-  description: "separately ack the thorn chime jealous",
+  description: "meh viability victoriously ha lest sate blah beyond",
 };
 ```
 

@@ -6,7 +6,7 @@
 import { VanityURLResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: VanityURLResponse = {
-  uses: 398687,
+  uses: 145937,
 };
 ```
 

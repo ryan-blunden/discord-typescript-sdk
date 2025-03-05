@@ -10,10 +10,10 @@ let value: BasicMessageResponse = {
   mentions: [
     {
       id: "<value>",
-      username: "Deon.Frami",
+      username: "Floy66",
       discriminator: "<value>",
-      publicFlags: 138183,
-      flags: 196582,
+      publicFlags: 210382,
+      flags: 128926,
     },
   ],
   mentionRoles: [
@@ -23,9 +23,9 @@ let value: BasicMessageResponse = {
     {
       id: "<value>",
       filename: "example.file",
-      size: 368725,
-      url: "https://busy-spirit.com",
-      proxyUrl: "https://likely-wallaby.name",
+      size: 315428,
+      url: "https://oily-hundred.org/",
+      proxyUrl: "https://dual-cod.name/",
     },
   ],
   embeds: [
@@ -33,22 +33,21 @@ let value: BasicMessageResponse = {
       type: "<value>",
     },
   ],
-  timestamp: new Date("2025-03-21T05:35:21.093Z"),
-  flags: 39187,
+  timestamp: new Date("2023-10-05T14:34:56.327Z"),
+  flags: 466311,
   components: [
     {
-      id: 120196,
-      customId: "<id>",
+      id: 244425,
     },
   ],
   id: "<value>",
   channelId: "<value>",
   author: {
     id: "<value>",
-    username: "Elena6",
+    username: "Carmelo.OKon",
     discriminator: "<value>",
-    publicFlags: 566602,
-    flags: 265389,
+    publicFlags: 820994,
+    flags: 97101,
   },
   pinned: false,
   mentionEveryone: false,
@@ -69,7 +68,7 @@ let value: BasicMessageResponse = {
 | `timestamp`                                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                    | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `editedTimestamp`                                                                                                | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                    | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `flags`                                                                                                          | *number*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
-| `components`                                                                                                     | *components.BasicMessageResponseComponents*[]                                                                    | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `components`                                                                                                     | [components.ActionRowComponentResponse](../../models/components/actionrowcomponentresponse.md)[]                 | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `resolved`                                                                                                       | [components.ResolvedObjectsResponse](../../models/components/resolvedobjectsresponse.md)                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `stickers`                                                                                                       | *components.BasicMessageResponseStickers*[]                                                                      | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `stickerItems`                                                                                                   | [components.MessageStickerItemResponse](../../models/components/messagestickeritemresponse.md)[]                 | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |

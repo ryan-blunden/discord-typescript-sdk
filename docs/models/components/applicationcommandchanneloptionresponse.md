@@ -7,7 +7,8 @@ import { ApplicationCommandChannelOptionResponse } from "@ryan.blunden/discord-s
 
 let value: ApplicationCommandChannelOptionResponse = {
   name: "<value>",
-  description: "likewise willfully heavy likewise",
+  description:
+    "dulcimer before when excluding worthless up transcend since while",
 };
 ```
 

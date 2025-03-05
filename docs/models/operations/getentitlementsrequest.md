@@ -7,7 +7,9 @@ import { GetEntitlementsRequest } from "@ryan.blunden/discord-sdk/models/operati
 
 let value: GetEntitlementsRequest = {
   applicationId: "<value>",
-  skuIds: "<value>",
+  skuIds: [
+    "<value>",
+  ],
 };
 ```
 

@@ -7,7 +7,7 @@
 
 ```typescript
 const value: components.ButtonComponentResponse = {
-  id: 588317,
+  id: 186193,
 };
 ```
 
@@ -15,7 +15,7 @@ const value: components.ButtonComponentResponse = {
 
 ```typescript
 const value: components.ChannelSelectComponentResponse = {
-  id: 831049,
+  id: 944373,
   customId: "<id>",
 };
 ```
@@ -24,7 +24,7 @@ const value: components.ChannelSelectComponentResponse = {
 
 ```typescript
 const value: components.MentionableSelectComponentResponse = {
-  id: 628982,
+  id: 739551,
   customId: "<id>",
 };
 ```
@@ -33,7 +33,7 @@ const value: components.MentionableSelectComponentResponse = {
 
 ```typescript
 const value: components.RoleSelectComponentResponse = {
-  id: 872651,
+  id: 490459,
   customId: "<id>",
 };
 ```
@@ -42,7 +42,7 @@ const value: components.RoleSelectComponentResponse = {
 
 ```typescript
 const value: components.StringSelectComponentResponse = {
-  id: 273542,
+  id: 227414,
   customId: "<id>",
   options: [
     {
@@ -57,7 +57,7 @@ const value: components.StringSelectComponentResponse = {
 
 ```typescript
 const value: components.TextInputComponentResponse = {
-  id: 798047,
+  id: 254356,
   customId: "<id>",
 };
 ```
@@ -66,7 +66,7 @@ const value: components.TextInputComponentResponse = {
 
 ```typescript
 const value: components.UserSelectComponentResponse = {
-  id: 185636,
+  id: 58029,
   customId: "<id>",
 };
 ```

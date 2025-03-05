@@ -23,7 +23,7 @@ const value: components.StandardStickerResponse = {
   name: "<value>",
   tags: "<value>",
   packId: "<value>",
-  sortValue: 71036,
+  sortValue: 437587,
 };
 ```
 

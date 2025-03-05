@@ -8,7 +8,7 @@
 ```typescript
 const value: components.ApplicationCommandAttachmentOptionResponse = {
   name: "<value>",
-  description: "um the gleefully these oof blah feminize sans annual",
+  description: "mortally so continually",
 };
 ```
 
@@ -17,7 +17,7 @@ const value: components.ApplicationCommandAttachmentOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandBooleanOptionResponse = {
   name: "<value>",
-  description: "ouch greatly gosh vengeful gee funny brief where daintily role",
+  description: "ascribe hubris pfft wordy silently seldom yet heating dreamily",
 };
 ```
 
@@ -26,8 +26,7 @@ const value: components.ApplicationCommandBooleanOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandChannelOptionResponse = {
   name: "<value>",
-  description:
-    "guidance jealously restfully where defiantly sans yum creature clean",
+  description: "wrong abnegate convection",
 };
 ```
 
@@ -36,7 +35,7 @@ const value: components.ApplicationCommandChannelOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandIntegerOptionResponse = {
   name: "<value>",
-  description: "cake uh-huh while instead",
+  description: "tensely gah supposing anti pleasing about",
 };
 ```
 
@@ -45,7 +44,7 @@ const value: components.ApplicationCommandIntegerOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandMentionableOptionResponse = {
   name: "<value>",
-  description: "scorpion ha scamper safe excitedly gee beneath since",
+  description: "courageous woot needily academics",
 };
 ```
 
@@ -55,7 +54,7 @@ const value: components.ApplicationCommandMentionableOptionResponse = {
 const value: components.ApplicationCommandNumberOptionResponse = {
   name: "<value>",
   description:
-    "lucky whenever happily likewise pace fall ick incidentally gullible",
+    "whereas collectivization despite till crumble besides even forenenst lazily",
 };
 ```
 
@@ -64,7 +63,7 @@ const value: components.ApplicationCommandNumberOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandRoleOptionResponse = {
   name: "<value>",
-  description: "snowplow unimpressively chubby rout",
+  description: "speedily out snow fencing vice",
 };
 ```
 
@@ -73,7 +72,7 @@ const value: components.ApplicationCommandRoleOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandStringOptionResponse = {
   name: "<value>",
-  description: "rusty so after awkwardly loosely than providence",
+  description: "sit mid gosh vision early apropos merrily minty above blight",
 };
 ```
 
@@ -82,7 +81,8 @@ const value: components.ApplicationCommandStringOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandUserOptionResponse = {
   name: "<value>",
-  description: "fairly consequently celsius warmly fort likewise",
+  description:
+    "notwithstanding aboard same below celsius along upward than acidly colorless",
 };
 ```
 

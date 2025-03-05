@@ -175,6 +175,7 @@ import { tool$webhooksUpdate } from "./tools/webhooksUpdate.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
+  allowedTools?: string[] | undefined;
   scopes?: MCPScope[] | undefined;
   serverURL?: string | undefined;
   botToken?: SDKOptions["botToken"] | undefined;
@@ -182,7 +183,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Discord",
-    version: "0.1.0",
+    version: "0.2.0",
   });
 
   const client = new DiscordCore({
@@ -191,7 +192,14 @@ export function createMCPServer(deps: {
     serverIdx: deps.serverIdx,
   });
   const scopes = new Set(deps.scopes ?? mcpScopes);
-  const tool = createRegisterTool(deps.logger, server, client, scopes);
+  const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
+  const tool = createRegisterTool(
+    deps.logger,
+    server,
+    client,
+    scopes,
+    allowedTools,
+  );
 
   tool(tool$threadSearch);
   tool(tool$oauth2GetMyApplication);
