@@ -12,9 +12,7 @@ let value: MLSpamRuleResponse = {
   name: "<value>",
   actions: [
     {
-      metadata: {
-        channelId: "<value>",
-      },
+      metadata: {},
     },
   ],
   triggerMetadata: {},

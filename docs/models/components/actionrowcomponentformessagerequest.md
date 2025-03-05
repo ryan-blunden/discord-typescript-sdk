@@ -9,12 +9,6 @@ let value: ActionRowComponentForMessageRequest = {
   components: [
     {
       customId: "<id>",
-      options: [
-        {
-          label: "<value>",
-          value: "<value>",
-        },
-      ],
     },
   ],
 };

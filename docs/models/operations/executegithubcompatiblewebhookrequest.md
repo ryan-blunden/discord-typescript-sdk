@@ -10,10 +10,10 @@ let value: ExecuteGithubCompatibleWebhookRequest = {
   webhookToken: "<value>",
   githubWebhook: {
     sender: {
-      id: 285340,
-      login: "Glenda41",
-      htmlUrl: "https://drab-freight.com",
-      avatarUrl: "https://nifty-fat.name/",
+      id: 969294,
+      login: "Shemar.Schaden",
+      htmlUrl: "https://regal-obligation.name",
+      avatarUrl: "https://trained-resource.org/",
     },
   },
 };

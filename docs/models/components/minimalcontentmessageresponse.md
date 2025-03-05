@@ -10,10 +10,10 @@ let value: MinimalContentMessageResponse = {
   mentions: [
     {
       id: "<value>",
-      username: "Christa0",
+      username: "Austyn_Koss-Wolff73",
       discriminator: "<value>",
-      publicFlags: 270008,
-      flags: 735194,
+      publicFlags: 282807,
+      flags: 120196,
     },
   ],
   mentionRoles: [
@@ -23,9 +23,9 @@ let value: MinimalContentMessageResponse = {
     {
       id: "<value>",
       filename: "example.file",
-      size: 962189,
-      url: "https://orange-mozzarella.name/",
-      proxyUrl: "https://well-groomed-hyena.org/",
+      size: 296140,
+      url: "https://glaring-hawk.com/",
+      proxyUrl: "https://obvious-doing.name",
     },
   ],
   embeds: [
@@ -33,12 +33,11 @@ let value: MinimalContentMessageResponse = {
       type: "<value>",
     },
   ],
-  timestamp: new Date("2025-02-05T15:06:10.289Z"),
-  flags: 297437,
+  timestamp: new Date("2023-04-13T23:00:40.302Z"),
+  flags: 575947,
   components: [
     {
-      id: 396506,
-      customId: "<id>",
+      id: 929297,
     },
   ],
 };
@@ -57,7 +56,7 @@ let value: MinimalContentMessageResponse = {
 | `timestamp`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)    | :heavy_check_mark:                                                                               | N/A                                                                                              |
 | `editedTimestamp`                                                                                | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)    | :heavy_minus_sign:                                                                               | N/A                                                                                              |
 | `flags`                                                                                          | *number*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
-| `components`                                                                                     | *components.MinimalContentMessageResponseComponents*[]                                           | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `components`                                                                                     | [components.ActionRowComponentResponse](../../models/components/actionrowcomponentresponse.md)[] | :heavy_check_mark:                                                                               | N/A                                                                                              |
 | `resolved`                                                                                       | [components.ResolvedObjectsResponse](../../models/components/resolvedobjectsresponse.md)         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
 | `stickers`                                                                                       | *components.MinimalContentMessageResponseStickers*[]                                             | :heavy_minus_sign:                                                                               | N/A                                                                                              |
 | `stickerItems`                                                                                   | [components.MessageStickerItemResponse](../../models/components/messagestickeritemresponse.md)[] | :heavy_minus_sign:                                                                               | N/A                                                                                              |

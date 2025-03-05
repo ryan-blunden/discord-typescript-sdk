@@ -10,7 +10,7 @@ let value: StandardStickerResponse = {
   name: "<value>",
   tags: "<value>",
   packId: "<value>",
-  sortValue: 423855,
+  sortValue: 828940,
 };
 ```
 

@@ -8,8 +8,7 @@ import { BasicApplicationResponse } from "@ryan.blunden/discord-sdk/models/compo
 let value: BasicApplicationResponse = {
   id: "<value>",
   name: "<value>",
-  description:
-    "shakily hence bitterly considering barring above provision continually suffice",
+  description: "as unfreeze than",
 };
 ```
 

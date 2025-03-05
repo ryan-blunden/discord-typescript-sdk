@@ -8,7 +8,7 @@ import { ApplicationCommandIntegerOptionResponse } from "@ryan.blunden/discord-s
 let value: ApplicationCommandIntegerOptionResponse = {
   name: "<value>",
   description:
-    "well-off although tenderly yawningly whether boo poor deliberately pleasing",
+    "ascertain yowza vivaciously alongside against so immense tomb total",
 };
 ```
 

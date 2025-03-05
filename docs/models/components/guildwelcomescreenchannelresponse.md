@@ -7,7 +7,7 @@ import { GuildWelcomeScreenChannelResponse } from "@ryan.blunden/discord-sdk/mod
 
 let value: GuildWelcomeScreenChannelResponse = {
   channelId: "<value>",
-  description: "suffice oof even coil armchair",
+  description: "rapidly brr ew bah whether sediment litter oxidise",
 };
 ```
 

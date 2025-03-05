@@ -32,29 +32,11 @@ import {
   BasicMessageResponse$outboundSchema,
 } from "./basicmessageresponse.js";
 import {
-  ButtonComponentResponse,
-  ButtonComponentResponse$inboundSchema,
-  ButtonComponentResponse$Outbound,
-  ButtonComponentResponse$outboundSchema,
-} from "./buttoncomponentresponse.js";
-import {
-  ChannelSelectComponentResponse,
-  ChannelSelectComponentResponse$inboundSchema,
-  ChannelSelectComponentResponse$Outbound,
-  ChannelSelectComponentResponse$outboundSchema,
-} from "./channelselectcomponentresponse.js";
-import {
   GuildStickerResponse,
   GuildStickerResponse$inboundSchema,
   GuildStickerResponse$Outbound,
   GuildStickerResponse$outboundSchema,
 } from "./guildstickerresponse.js";
-import {
-  MentionableSelectComponentResponse,
-  MentionableSelectComponentResponse$inboundSchema,
-  MentionableSelectComponentResponse$Outbound,
-  MentionableSelectComponentResponse$outboundSchema,
-} from "./mentionableselectcomponentresponse.js";
 import {
   MessageActivityResponse,
   MessageActivityResponse$inboundSchema,
@@ -152,29 +134,11 @@ import {
   ResolvedObjectsResponse$outboundSchema,
 } from "./resolvedobjectsresponse.js";
 import {
-  RoleSelectComponentResponse,
-  RoleSelectComponentResponse$inboundSchema,
-  RoleSelectComponentResponse$Outbound,
-  RoleSelectComponentResponse$outboundSchema,
-} from "./roleselectcomponentresponse.js";
-import {
   StandardStickerResponse,
   StandardStickerResponse$inboundSchema,
   StandardStickerResponse$Outbound,
   StandardStickerResponse$outboundSchema,
 } from "./standardstickerresponse.js";
-import {
-  StringSelectComponentResponse,
-  StringSelectComponentResponse$inboundSchema,
-  StringSelectComponentResponse$Outbound,
-  StringSelectComponentResponse$outboundSchema,
-} from "./stringselectcomponentresponse.js";
-import {
-  TextInputComponentResponse,
-  TextInputComponentResponse$inboundSchema,
-  TextInputComponentResponse$Outbound,
-  TextInputComponentResponse$outboundSchema,
-} from "./textinputcomponentresponse.js";
 import {
   ThreadResponse,
   ThreadResponse$inboundSchema,
@@ -187,22 +151,6 @@ import {
   UserResponse$Outbound,
   UserResponse$outboundSchema,
 } from "./userresponse.js";
-import {
-  UserSelectComponentResponse,
-  UserSelectComponentResponse$inboundSchema,
-  UserSelectComponentResponse$Outbound,
-  UserSelectComponentResponse$outboundSchema,
-} from "./userselectcomponentresponse.js";
-
-export type MessageResponseComponents =
-  | ActionRowComponentResponse
-  | MentionableSelectComponentResponse
-  | RoleSelectComponentResponse
-  | StringSelectComponentResponse
-  | UserSelectComponentResponse
-  | ButtonComponentResponse
-  | ChannelSelectComponentResponse
-  | TextInputComponentResponse;
 
 export type Stickers = StandardStickerResponse | GuildStickerResponse;
 
@@ -223,16 +171,7 @@ export type MessageResponse = {
   timestamp: Date;
   editedTimestamp?: Date | null | undefined;
   flags: number;
-  components: Array<
-    | ActionRowComponentResponse
-    | MentionableSelectComponentResponse
-    | RoleSelectComponentResponse
-    | StringSelectComponentResponse
-    | UserSelectComponentResponse
-    | ButtonComponentResponse
-    | ChannelSelectComponentResponse
-    | TextInputComponentResponse
-  >;
+  components: Array<ActionRowComponentResponse>;
   resolved?: ResolvedObjectsResponse | null | undefined;
   stickers?:
     | Array<StandardStickerResponse | GuildStickerResponse>
@@ -272,80 +211,6 @@ export type MessageResponse = {
   reactions?: Array<MessageReactionResponse> | null | undefined;
   referencedMessage?: BasicMessageResponse | null | undefined;
 };
-
-/** @internal */
-export const MessageResponseComponents$inboundSchema: z.ZodType<
-  MessageResponseComponents,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  ActionRowComponentResponse$inboundSchema,
-  MentionableSelectComponentResponse$inboundSchema,
-  RoleSelectComponentResponse$inboundSchema,
-  StringSelectComponentResponse$inboundSchema,
-  UserSelectComponentResponse$inboundSchema,
-  ButtonComponentResponse$inboundSchema,
-  ChannelSelectComponentResponse$inboundSchema,
-  TextInputComponentResponse$inboundSchema,
-]);
-
-/** @internal */
-export type MessageResponseComponents$Outbound =
-  | ActionRowComponentResponse$Outbound
-  | MentionableSelectComponentResponse$Outbound
-  | RoleSelectComponentResponse$Outbound
-  | StringSelectComponentResponse$Outbound
-  | UserSelectComponentResponse$Outbound
-  | ButtonComponentResponse$Outbound
-  | ChannelSelectComponentResponse$Outbound
-  | TextInputComponentResponse$Outbound;
-
-/** @internal */
-export const MessageResponseComponents$outboundSchema: z.ZodType<
-  MessageResponseComponents$Outbound,
-  z.ZodTypeDef,
-  MessageResponseComponents
-> = z.union([
-  ActionRowComponentResponse$outboundSchema,
-  MentionableSelectComponentResponse$outboundSchema,
-  RoleSelectComponentResponse$outboundSchema,
-  StringSelectComponentResponse$outboundSchema,
-  UserSelectComponentResponse$outboundSchema,
-  ButtonComponentResponse$outboundSchema,
-  ChannelSelectComponentResponse$outboundSchema,
-  TextInputComponentResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MessageResponseComponents$ {
-  /** @deprecated use `MessageResponseComponents$inboundSchema` instead. */
-  export const inboundSchema = MessageResponseComponents$inboundSchema;
-  /** @deprecated use `MessageResponseComponents$outboundSchema` instead. */
-  export const outboundSchema = MessageResponseComponents$outboundSchema;
-  /** @deprecated use `MessageResponseComponents$Outbound` instead. */
-  export type Outbound = MessageResponseComponents$Outbound;
-}
-
-export function messageResponseComponentsToJSON(
-  messageResponseComponents: MessageResponseComponents,
-): string {
-  return JSON.stringify(
-    MessageResponseComponents$outboundSchema.parse(messageResponseComponents),
-  );
-}
-
-export function messageResponseComponentsFromJSON(
-  jsonString: string,
-): SafeParseResult<MessageResponseComponents, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => MessageResponseComponents$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MessageResponseComponents' from JSON`,
-  );
-}
 
 /** @internal */
 export const Stickers$inboundSchema: z.ZodType<
@@ -516,18 +381,7 @@ export const MessageResponse$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   flags: z.number().int(),
-  components: z.array(
-    z.union([
-      ActionRowComponentResponse$inboundSchema,
-      MentionableSelectComponentResponse$inboundSchema,
-      RoleSelectComponentResponse$inboundSchema,
-      StringSelectComponentResponse$inboundSchema,
-      UserSelectComponentResponse$inboundSchema,
-      ButtonComponentResponse$inboundSchema,
-      ChannelSelectComponentResponse$inboundSchema,
-      TextInputComponentResponse$inboundSchema,
-    ]),
-  ),
+  components: z.array(ActionRowComponentResponse$inboundSchema),
   resolved: z.nullable(ResolvedObjectsResponse$inboundSchema).optional(),
   stickers: z.nullable(
     z.array(
@@ -607,16 +461,7 @@ export type MessageResponse$Outbound = {
   timestamp: string;
   edited_timestamp?: string | null | undefined;
   flags: number;
-  components: Array<
-    | ActionRowComponentResponse$Outbound
-    | MentionableSelectComponentResponse$Outbound
-    | RoleSelectComponentResponse$Outbound
-    | StringSelectComponentResponse$Outbound
-    | UserSelectComponentResponse$Outbound
-    | ButtonComponentResponse$Outbound
-    | ChannelSelectComponentResponse$Outbound
-    | TextInputComponentResponse$Outbound
-  >;
+  components: Array<ActionRowComponentResponse$Outbound>;
   resolved?: ResolvedObjectsResponse$Outbound | null | undefined;
   stickers?:
     | Array<StandardStickerResponse$Outbound | GuildStickerResponse$Outbound>
@@ -682,18 +527,7 @@ export const MessageResponse$outboundSchema: z.ZodType<
   editedTimestamp: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   flags: z.number().int(),
-  components: z.array(
-    z.union([
-      ActionRowComponentResponse$outboundSchema,
-      MentionableSelectComponentResponse$outboundSchema,
-      RoleSelectComponentResponse$outboundSchema,
-      StringSelectComponentResponse$outboundSchema,
-      UserSelectComponentResponse$outboundSchema,
-      ButtonComponentResponse$outboundSchema,
-      ChannelSelectComponentResponse$outboundSchema,
-      TextInputComponentResponse$outboundSchema,
-    ]),
-  ),
+  components: z.array(ActionRowComponentResponse$outboundSchema),
   resolved: z.nullable(ResolvedObjectsResponse$outboundSchema).optional(),
   stickers: z.nullable(
     z.array(

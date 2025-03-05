@@ -9,10 +9,10 @@ let value: ExternalConnectionIntegrationResponse = {
   id: "<id>",
   user: {
     id: "<value>",
-    username: "Weston.McClure",
+    username: "Zita_Rosenbaum28",
     discriminator: "<value>",
-    publicFlags: 911193,
-    flags: 418407,
+    publicFlags: 441358,
+    flags: 393857,
   },
 };
 ```

@@ -9,7 +9,7 @@ let value: CreateApplicationEmojiRequest = {
   applicationId: "<value>",
   requestBody: {
     name: "<value>",
-    image: "https://picsum.photos/seed/aKlB0q/1804/68",
+    image: "https://loremflickr.com/3487/2361?lock=4182646315502159",
   },
 };
 ```

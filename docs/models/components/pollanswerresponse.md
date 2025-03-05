@@ -6,7 +6,7 @@
 import { PollAnswerResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: PollAnswerResponse = {
-  answerId: 960835,
+  answerId: 292147,
   pollMedia: {},
 };
 ```

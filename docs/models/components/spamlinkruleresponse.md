@@ -12,9 +12,7 @@ let value: SpamLinkRuleResponse = {
   name: "<value>",
   actions: [
     {
-      metadata: {
-        channelId: "<value>",
-      },
+      metadata: {},
     },
   ],
   triggerMetadata: {},

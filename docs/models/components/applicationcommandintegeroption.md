@@ -7,7 +7,7 @@ import { ApplicationCommandIntegerOption } from "@ryan.blunden/discord-sdk/model
 
 let value: ApplicationCommandIntegerOption = {
   name: "<value>",
-  description: "gadzooks until woot daily including before indeed stool safely",
+  description: "throughout undergo beside confusion chainstay provided",
 };
 ```
 

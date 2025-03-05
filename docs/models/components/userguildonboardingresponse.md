@@ -15,8 +15,7 @@ let value: UserGuildOnboardingResponse = {
         {
           id: "<value>",
           title: "<value>",
-          description:
-            "unbearably giggle knowingly unto unfortunately until ascertain",
+          description: "case different abnormally whenever",
           emoji: {},
           roleIds: [
             "<value>",

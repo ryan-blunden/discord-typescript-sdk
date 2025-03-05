@@ -9,7 +9,7 @@ let value: StageScheduledEventResponse = {
   id: "<value>",
   guildId: "<value>",
   name: "<value>",
-  scheduledStartTime: new Date("2023-10-18T13:51:15.254Z"),
+  scheduledStartTime: new Date("2025-08-08T09:47:23.975Z"),
 };
 ```
 

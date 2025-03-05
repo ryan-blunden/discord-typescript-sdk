@@ -9,7 +9,7 @@ let value: ScheduledEventResponse = {
   id: "<value>",
   guildId: "<value>",
   name: "<value>",
-  scheduledStartTime: new Date("2023-11-13T23:20:26.533Z"),
+  scheduledStartTime: new Date("2023-03-23T16:26:21.583Z"),
 };
 ```
 

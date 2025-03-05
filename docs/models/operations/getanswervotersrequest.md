@@ -8,7 +8,7 @@ import { GetAnswerVotersRequest } from "@ryan.blunden/discord-sdk/models/operati
 let value: GetAnswerVotersRequest = {
   channelId: "<value>",
   messageId: "<value>",
-  answerId: 105518,
+  answerId: 857272,
 };
 ```
 

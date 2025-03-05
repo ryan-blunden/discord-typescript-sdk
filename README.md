@@ -199,7 +199,7 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  const result = await discord.oauth2.getKeys();
+  const result = await discord.oauth2.getKeys({});
 
   // Handle the result
   console.log(result);
@@ -618,9 +618,9 @@ run();
 ### [webhooks](docs/sdks/webhooks/README.md)
 
 * [deleteOriginalMessage](docs/sdks/webhooks/README.md#deleteoriginalmessage)
-* [updateOriginalMessageMultipart](docs/sdks/webhooks/README.md#updateoriginalmessagemultipart)
 * [updateOriginalMessageJson](docs/sdks/webhooks/README.md#updateoriginalmessagejson)
 * [updateOriginalMessageForm](docs/sdks/webhooks/README.md#updateoriginalmessageform)
+* [updateOriginalMessageMultipart](docs/sdks/webhooks/README.md#updateoriginalmessagemultipart)
 * [getMessage](docs/sdks/webhooks/README.md#getmessage)
 * [updateMessageJson](docs/sdks/webhooks/README.md#updatemessagejson)
 * [updateMessageForm](docs/sdks/webhooks/README.md#updatemessageform)

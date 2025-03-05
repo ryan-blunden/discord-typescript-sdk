@@ -8,8 +8,7 @@
 ```typescript
 const value: components.ApplicationCommandAttachmentOptionResponse = {
   name: "<value>",
-  description:
-    "though unfortunately hmph ha gadzooks although cap cope against",
+  description: "vicinity firm lieu limply decide",
 };
 ```
 
@@ -18,7 +17,7 @@ const value: components.ApplicationCommandAttachmentOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandBooleanOptionResponse = {
   name: "<value>",
-  description: "midst hm upright indeed",
+  description: "accessorise fly gadzooks abaft drat",
 };
 ```
 
@@ -27,7 +26,7 @@ const value: components.ApplicationCommandBooleanOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandChannelOptionResponse = {
   name: "<value>",
-  description: "absent mmm feline following willfully",
+  description: "of tough well gadzooks blindly um platypus",
 };
 ```
 
@@ -36,7 +35,7 @@ const value: components.ApplicationCommandChannelOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandIntegerOptionResponse = {
   name: "<value>",
-  description: "inventory sit since dilate uh-huh pluck slowly trek what",
+  description: "following gadzooks wobbly",
 };
 ```
 
@@ -45,7 +44,8 @@ const value: components.ApplicationCommandIntegerOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandMentionableOptionResponse = {
   name: "<value>",
-  description: "hunt during up er store lively perfectly starch",
+  description:
+    "industrialize when till even woot foot whereas besides vice fuel",
 };
 ```
 
@@ -54,7 +54,7 @@ const value: components.ApplicationCommandMentionableOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandNumberOptionResponse = {
   name: "<value>",
-  description: "powerless pish and ouch supportive honestly",
+  description: "against even noisily harangue",
 };
 ```
 
@@ -63,7 +63,8 @@ const value: components.ApplicationCommandNumberOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandRoleOptionResponse = {
   name: "<value>",
-  description: "consequently incidentally cop",
+  description:
+    "indeed anenst which miserly strait huge verbally knowledgeably knowledgeably upon",
 };
 ```
 
@@ -72,7 +73,7 @@ const value: components.ApplicationCommandRoleOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandStringOptionResponse = {
   name: "<value>",
-  description: "before substantiate mosh noted abaft",
+  description: "gift harmful down cross-contamination before enrage",
 };
 ```
 
@@ -81,7 +82,8 @@ const value: components.ApplicationCommandStringOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandSubcommandGroupOptionResponse = {
   name: "<value>",
-  description: "deed under however resource lustrous",
+  description:
+    "reasoning safely ick discourse besides forsaken coordinated married",
 };
 ```
 
@@ -90,7 +92,8 @@ const value: components.ApplicationCommandSubcommandGroupOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandSubcommandOptionResponse = {
   name: "<value>",
-  description: "mmm fabricate forenenst furthermore",
+  description:
+    "belabor zowie incidentally nifty and highly experience confiscate uniform",
 };
 ```
 
@@ -99,7 +102,7 @@ const value: components.ApplicationCommandSubcommandOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandUserOptionResponse = {
   name: "<value>",
-  description: "yuck abnormally within whether but",
+  description: "mmm zen strange earnest",
 };
 ```
 

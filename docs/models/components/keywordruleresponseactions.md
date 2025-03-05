@@ -34,7 +34,7 @@ const value: components.QuarantineUserActionResponse = {
 ```typescript
 const value: components.UserCommunicationDisabledActionResponse = {
   metadata: {
-    durationSeconds: 454352,
+    durationSeconds: 499182,
   },
 };
 ```

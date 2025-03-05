@@ -11,7 +11,7 @@ let value: ApplicationCommandResponse = {
   version: "<value>",
   name: "<value>",
   description:
-    "marketplace minty coin neglect newsprint quizzically grandson incidentally whose",
+    "lawmaker per moment devastation spanish boldly cauliflower horst miserably",
 };
 ```
 

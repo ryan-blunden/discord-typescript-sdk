@@ -9,7 +9,7 @@ let value: NewMemberActionResponse = {
   channelId: "<value>",
   title: "<value>",
   description:
-    "measly intrepid beside foolishly bidet baa highlight aw bleakly",
+    "planula forenenst eminent inasmuch beloved powerfully squeaky rim of notwithstanding",
 };
 ```
 

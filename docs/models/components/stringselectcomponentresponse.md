@@ -6,7 +6,7 @@
 import { StringSelectComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: StringSelectComponentResponse = {
-  id: 253941,
+  id: 24678,
   customId: "<id>",
   options: [
     {

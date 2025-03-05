@@ -10,7 +10,7 @@ const value: components.ExternalScheduledEventResponse = {
   id: "<value>",
   guildId: "<value>",
   name: "<value>",
-  scheduledStartTime: new Date("2024-06-03T16:26:15.874Z"),
+  scheduledStartTime: new Date("2023-08-16T22:10:33.984Z"),
   entityMetadata: {
     location: "<value>",
   },
@@ -24,7 +24,7 @@ const value: components.StageScheduledEventResponse = {
   id: "<value>",
   guildId: "<value>",
   name: "<value>",
-  scheduledStartTime: new Date("2024-10-24T08:09:44.362Z"),
+  scheduledStartTime: new Date("2023-06-30T13:58:33.645Z"),
 };
 ```
 
@@ -35,7 +35,7 @@ const value: components.VoiceScheduledEventResponse = {
   id: "<value>",
   guildId: "<value>",
   name: "<value>",
-  scheduledStartTime: new Date("2023-01-09T14:33:29.493Z"),
+  scheduledStartTime: new Date("2024-10-20T05:01:51.503Z"),
 };
 ```
 

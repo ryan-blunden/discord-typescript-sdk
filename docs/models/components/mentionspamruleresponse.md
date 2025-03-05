@@ -12,13 +12,11 @@ let value: MentionSpamRuleResponse = {
   name: "<value>",
   actions: [
     {
-      metadata: {
-        channelId: "<value>",
-      },
+      metadata: {},
     },
   ],
   triggerMetadata: {
-    mentionTotalLimit: 29722,
+    mentionTotalLimit: 503469,
   },
 };
 ```

@@ -7,7 +7,7 @@ import { SearchGuildMembersRequest } from "@ryan.blunden/discord-sdk/models/oper
 
 let value: SearchGuildMembersRequest = {
   guildId: "<value>",
-  limit: 7092,
+  limit: 255953,
   query: "<value>",
 };
 ```
