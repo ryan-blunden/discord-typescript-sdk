@@ -14,6 +14,12 @@ import {
   UserAvatarDecorationResponse$outboundSchema,
 } from "./useravatardecorationresponse.js";
 import {
+  UserCollectiblesResponse,
+  UserCollectiblesResponse$inboundSchema,
+  UserCollectiblesResponse$Outbound,
+  UserCollectiblesResponse$outboundSchema,
+} from "./usercollectiblesresponse.js";
+import {
   UserPrimaryGuildResponse,
   UserPrimaryGuildResponse$inboundSchema,
   UserPrimaryGuildResponse$Outbound,
@@ -33,6 +39,7 @@ export type UserPIIResponse = {
   accentColor?: number | null | undefined;
   globalName?: string | null | undefined;
   avatarDecorationData?: UserAvatarDecorationResponse | null | undefined;
+  collectibles?: UserCollectiblesResponse | null | undefined;
   clan?: UserPrimaryGuildResponse | null | undefined;
   mfaEnabled: boolean;
   locale?: "ar" | undefined;
@@ -60,6 +67,7 @@ export const UserPIIResponse$inboundSchema: z.ZodType<
   global_name: z.nullable(z.string()).optional(),
   avatar_decoration_data: z.nullable(UserAvatarDecorationResponse$inboundSchema)
     .optional(),
+  collectibles: z.nullable(UserCollectiblesResponse$inboundSchema).optional(),
   clan: z.nullable(UserPrimaryGuildResponse$inboundSchema).optional(),
   mfa_enabled: z.boolean(),
   locale: z.literal("ar").optional(),
@@ -94,6 +102,7 @@ export type UserPIIResponse$Outbound = {
     | UserAvatarDecorationResponse$Outbound
     | null
     | undefined;
+  collectibles?: UserCollectiblesResponse$Outbound | null | undefined;
   clan?: UserPrimaryGuildResponse$Outbound | null | undefined;
   mfa_enabled: boolean;
   locale: "ar";
@@ -121,6 +130,7 @@ export const UserPIIResponse$outboundSchema: z.ZodType<
   globalName: z.nullable(z.string()).optional(),
   avatarDecorationData: z.nullable(UserAvatarDecorationResponse$outboundSchema)
     .optional(),
+  collectibles: z.nullable(UserCollectiblesResponse$outboundSchema).optional(),
   clan: z.nullable(UserPrimaryGuildResponse$outboundSchema).optional(),
   mfaEnabled: z.boolean(),
   locale: z.literal("ar").default("ar" as const),

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d6760420-c0f7-476a-a38c-38dd82de2cc6
 management:
-  docChecksum: 0fcba63ae662991f898fa07e6304d246
+  docChecksum: 3267c7c3efad2995b2c18f162ea86937
   docVersion: "10"
-  speakeasyVersion: 1.509.1
-  generationVersion: 2.539.1
-  releaseVersion: 0.2.0
-  configChecksum: f326a0124561e81ea6d97dcd0c26c2f9
+  speakeasyVersion: 1.510.0
+  generationVersion: 2.541.0
+  releaseVersion: 0.2.1
+  configChecksum: 04a9739b1148063635fba1512291bad0
   repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
   installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
   published: true
@@ -388,11 +388,13 @@ generatedFiles:
   - docs/models/components/updatethreadrequestpartial.md
   - docs/models/components/updatethreadtagrequest.md
   - docs/models/components/useravatardecorationresponse.md
+  - docs/models/components/usercollectiblesresponse.md
   - docs/models/components/usercommunicationdisabledaction.md
   - docs/models/components/usercommunicationdisabledactionmetadata.md
   - docs/models/components/usercommunicationdisabledactionmetadataresponse.md
   - docs/models/components/usercommunicationdisabledactionresponse.md
   - docs/models/components/userguildonboardingresponse.md
+  - docs/models/components/usernameplateresponse.md
   - docs/models/components/userpiiresponse.md
   - docs/models/components/userprimaryguildresponse.md
   - docs/models/components/userresponse.md
@@ -1532,11 +1534,13 @@ generatedFiles:
   - src/models/components/updatethreadrequestpartial.ts
   - src/models/components/updatethreadtagrequest.ts
   - src/models/components/useravatardecorationresponse.ts
+  - src/models/components/usercollectiblesresponse.ts
   - src/models/components/usercommunicationdisabledaction.ts
   - src/models/components/usercommunicationdisabledactionmetadata.ts
   - src/models/components/usercommunicationdisabledactionmetadataresponse.ts
   - src/models/components/usercommunicationdisabledactionresponse.ts
   - src/models/components/userguildonboardingresponse.ts
+  - src/models/components/usernameplateresponse.ts
   - src/models/components/userpiiresponse.ts
   - src/models/components/userprimaryguildresponse.ts
   - src/models/components/userresponse.ts
