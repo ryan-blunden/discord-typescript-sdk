@@ -14483,6 +14483,8 @@ components:
         - "owner"
         - "permissions"
         - "features"
+    "NameplatePalette":
+      type: "string"
     "NewMemberActionResponse":
       type: "object"
       properties:
@@ -17195,6 +17197,13 @@ components:
             - {"$ref": "#/components/schemas/SnowflakeType"}
       required:
         - "asset"
+    "UserCollectiblesResponse":
+      type: "object"
+      properties:
+        "nameplate":
+          oneOf:
+            - type: "null"
+            - {"$ref": "#/components/schemas/UserNameplateResponse"}
     "UserCommunicationDisabledAction":
       type: "object"
       properties:
@@ -17258,6 +17267,25 @@ components:
         - "prompts"
         - "default_channel_ids"
         - "enabled"
+    "UserNameplateResponse":
+      type: "object"
+      properties:
+        "sku_id":
+          oneOf:
+            - type: "null"
+            - {"$ref": "#/components/schemas/SnowflakeType"}
+        "asset":
+          type:
+            - "string"
+            - "null"
+        "label":
+          type:
+            - "string"
+            - "null"
+        "palette":
+          oneOf:
+            - type: "null"
+            - {"$ref": "#/components/schemas/NameplatePalette"}
     "UserNotificationSettings":
       type: "integer"
       oneOf:
@@ -17309,6 +17337,10 @@ components:
           oneOf:
             - type: "null"
             - {"$ref": "#/components/schemas/UserAvatarDecorationResponse"}
+        "collectibles":
+          oneOf:
+            - type: "null"
+            - {"$ref": "#/components/schemas/UserCollectiblesResponse"}
         "clan":
           oneOf:
             - type: "null"
@@ -17379,6 +17411,10 @@ components:
           oneOf:
             - type: "null"
             - {"$ref": "#/components/schemas/UserAvatarDecorationResponse"}
+        "collectibles":
+          oneOf:
+            - type: "null"
+            - {"$ref": "#/components/schemas/UserCollectiblesResponse"}
         "clan":
           oneOf:
             - type: "null"
