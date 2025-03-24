@@ -14,7 +14,7 @@ const args = {
 export const tool$applicationsUpdateRoleConnectionsMetadata: ToolDefinition<
   typeof args
 > = {
-  name: "applications_update-role-connections-metadata",
+  name: "applications-update-role-connections-metadata",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

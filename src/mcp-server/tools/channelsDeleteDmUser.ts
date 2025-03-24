@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsDeleteDmUser: ToolDefinition<typeof args> = {
-  name: "channels_delete-dm-user",
+  name: "channels-delete-dm-user",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

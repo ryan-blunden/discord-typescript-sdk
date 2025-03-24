@@ -6,7 +6,7 @@ import { applicationsGetMe } from "../../funcs/applicationsGetMe.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$applicationsGetMe: ToolDefinition = {
-  name: "applications_get-me",
+  name: "applications-get-me",
   description: ``,
   tool: async (client, ctx) => {
     const [result, apiCall] = await applicationsGetMe(

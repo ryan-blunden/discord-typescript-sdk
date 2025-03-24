@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildScheduledEventsDelete: ToolDefinition<typeof args> = {
-  name: "guild-scheduled-events_delete",
+  name: "guild-scheduled-events-delete",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

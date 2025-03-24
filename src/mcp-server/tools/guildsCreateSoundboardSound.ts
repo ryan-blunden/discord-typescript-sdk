@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsCreateSoundboardSound: ToolDefinition<typeof args> = {
-  name: "guilds_create-soundboard-sound",
+  name: "guilds-create-soundboard-sound",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

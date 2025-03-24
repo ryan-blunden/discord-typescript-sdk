@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsGetWidgetSettings: ToolDefinition<typeof args> = {
-  name: "guilds_get-widget-settings",
+  name: "guilds-get-widget-settings",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

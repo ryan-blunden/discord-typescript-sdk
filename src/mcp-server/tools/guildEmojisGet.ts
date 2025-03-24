@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildEmojisGet: ToolDefinition<typeof args> = {
-  name: "guild-emojis_get",
+  name: "guild-emojis-get",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

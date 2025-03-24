@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$stageInstancesUpdate: ToolDefinition<typeof args> = {
-  name: "stage-instances_update",
+  name: "stage-instances-update",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

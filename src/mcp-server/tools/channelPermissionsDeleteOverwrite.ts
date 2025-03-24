@@ -13,7 +13,7 @@ const args = {
 export const tool$channelPermissionsDeleteOverwrite: ToolDefinition<
   typeof args
 > = {
-  name: "channel-permissions_delete-overwrite",
+  name: "channel-permissions-delete-overwrite",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

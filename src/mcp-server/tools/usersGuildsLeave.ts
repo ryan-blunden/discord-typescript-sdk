@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$usersGuildsLeave: ToolDefinition<typeof args> = {
-  name: "users-guilds_leave",
+  name: "users-guilds-leave",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

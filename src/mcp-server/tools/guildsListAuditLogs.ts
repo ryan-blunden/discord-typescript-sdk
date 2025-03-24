@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsListAuditLogs: ToolDefinition<typeof args> = {
-  name: "guilds_list-audit-logs",
+  name: "guilds-list-audit-logs",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

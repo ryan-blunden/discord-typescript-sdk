@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$messagesListReactionsByEmoji: ToolDefinition<typeof args> = {
-  name: "messages_list-reactions-by-emoji",
+  name: "messages-list-reactions-by-emoji",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

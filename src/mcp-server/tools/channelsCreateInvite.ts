@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsCreateInvite: ToolDefinition<typeof args> = {
-  name: "channels_create-invite",
+  name: "channels-create-invite",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

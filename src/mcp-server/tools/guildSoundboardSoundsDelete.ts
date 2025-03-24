@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildSoundboardSoundsDelete: ToolDefinition<typeof args> = {
-  name: "guild-soundboard-sounds_delete",
+  name: "guild-soundboard-sounds-delete",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsListPinnedMessages: ToolDefinition<typeof args> = {
-  name: "channels_list-pinned-messages",
+  name: "channels-list-pinned-messages",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

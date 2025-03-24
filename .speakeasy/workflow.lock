@@ -1,21 +1,21 @@
-speakeasyVersion: 1.510.0
+speakeasyVersion: 1.523.0
 sources:
     Discord HTTP API (Preview):
         sourceNamespace: discord-sdk
-        sourceRevisionDigest: sha256:234e268a03c6188e12708fad6dd67dd4baa2278b361d5b4b71bae77d9093cdeb
-        sourceBlobDigest: sha256:c79c08325d9d5b367dbc27618821b20fb1191ee426bf5d72c144c3285d683daf
+        sourceRevisionDigest: sha256:6c5e817166f480372359932f5cb65e61a68790e661cfc953197dba98cec134e5
+        sourceBlobDigest: sha256:a36322b4f56c16af48108e402006bf572c0d27eee64123769f965122890fd3d8
         tags:
             - latest
-            - speakeasy-sdk-regen-1741219496
+            - speakeasy-sdk-regen-1741824289
             - "10"
 targets:
     discord:
         source: Discord HTTP API (Preview)
         sourceNamespace: discord-sdk
-        sourceRevisionDigest: sha256:234e268a03c6188e12708fad6dd67dd4baa2278b361d5b4b71bae77d9093cdeb
-        sourceBlobDigest: sha256:c79c08325d9d5b367dbc27618821b20fb1191ee426bf5d72c144c3285d683daf
+        sourceRevisionDigest: sha256:6c5e817166f480372359932f5cb65e61a68790e661cfc953197dba98cec134e5
+        sourceBlobDigest: sha256:a36322b4f56c16af48108e402006bf572c0d27eee64123769f965122890fd3d8
         codeSamplesNamespace: discord-sdk-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:6e25a84ae638997f4251c3571fff9d30624865fb7255d930413a91f486d04ebf
+        codeSamplesRevisionDigest: sha256:64b65daf7c03bdf23740ff0efd4729135718bb6bf34f3524f422929108a0c8a6
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

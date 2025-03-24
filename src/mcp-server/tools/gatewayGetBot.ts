@@ -6,7 +6,7 @@ import { gatewayGetBot } from "../../funcs/gatewayGetBot.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$gatewayGetBot: ToolDefinition = {
-  name: "gateway_get-bot",
+  name: "gateway-get-bot",
   description: ``,
   tool: async (client, ctx) => {
     const [result, apiCall] = await gatewayGetBot(

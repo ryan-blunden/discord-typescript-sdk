@@ -39,7 +39,6 @@ const value: components.ModalSubmitInteractionMetadataResponse = {
     authorizingIntegrationOwners: {
       "key": "<value>",
     },
-    interactedMessageId: "<value>",
   },
 };
 ```

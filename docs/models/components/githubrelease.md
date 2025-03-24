@@ -6,14 +6,14 @@
 import { GithubRelease } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GithubRelease = {
-  id: 384098,
+  id: 739867,
   tagName: "<value>",
-  htmlUrl: "https://unhealthy-patroller.name",
+  htmlUrl: "https://memorable-tabletop.name/",
   author: {
-    id: 71222,
-    login: "Charity.Mueller",
-    htmlUrl: "https://round-seafood.net",
-    avatarUrl: "https://low-cross-contamination.name",
+    id: 535550,
+    login: "Antonette_Douglas10",
+    htmlUrl: "https://secret-popularity.net/",
+    avatarUrl: "https://pleased-jogging.biz",
   },
 };
 ```

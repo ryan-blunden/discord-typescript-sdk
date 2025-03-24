@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$scheduledEventsCreate: ToolDefinition<typeof args> = {
-  name: "scheduled-events_create",
+  name: "scheduled-events-create",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

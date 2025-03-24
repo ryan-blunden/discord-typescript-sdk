@@ -10,10 +10,10 @@ let value: BasicMessageResponse = {
   mentions: [
     {
       id: "<value>",
-      username: "Floy66",
+      username: "Braulio43",
       discriminator: "<value>",
-      publicFlags: 210382,
-      flags: 128926,
+      publicFlags: 102044,
+      flags: 208876,
     },
   ],
   mentionRoles: [
@@ -23,9 +23,9 @@ let value: BasicMessageResponse = {
     {
       id: "<value>",
       filename: "example.file",
-      size: 315428,
-      url: "https://oily-hundred.org/",
-      proxyUrl: "https://dual-cod.name/",
+      size: 161309,
+      url: "https://fair-insolence.biz",
+      proxyUrl: "https://cheerful-peony.com/",
     },
   ],
   embeds: [
@@ -33,21 +33,21 @@ let value: BasicMessageResponse = {
       type: "<value>",
     },
   ],
-  timestamp: new Date("2023-10-05T14:34:56.327Z"),
-  flags: 466311,
+  timestamp: new Date("2023-08-04T10:54:08.790Z"),
+  flags: 368725,
   components: [
     {
-      id: 244425,
+      id: 820994,
     },
   ],
   id: "<value>",
   channelId: "<value>",
   author: {
     id: "<value>",
-    username: "Carmelo.OKon",
+    username: "Avery46",
     discriminator: "<value>",
-    publicFlags: 820994,
-    flags: 97101,
+    publicFlags: 604846,
+    flags: 739264,
   },
   pinned: false,
   mentionEveryone: false,

@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$answersGetVoters: ToolDefinition<typeof args> = {
-  name: "answers_get-voters",
+  name: "answers-get-voters",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

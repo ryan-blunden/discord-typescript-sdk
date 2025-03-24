@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsChannelsCreate: ToolDefinition<typeof args> = {
-  name: "guilds-channels_create",
+  name: "guilds-channels-create",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

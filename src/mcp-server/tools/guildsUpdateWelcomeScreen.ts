@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsUpdateWelcomeScreen: ToolDefinition<typeof args> = {
-  name: "guilds_update-welcome-screen",
+  name: "guilds-update-welcome-screen",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$invitesRevoke: ToolDefinition<typeof args> = {
-  name: "invites_revoke",
+  name: "invites-revoke",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

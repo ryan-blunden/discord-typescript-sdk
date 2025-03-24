@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsUpdateTemplate: ToolDefinition<typeof args> = {
-  name: "guilds_update-template",
+  name: "guilds-update-template",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

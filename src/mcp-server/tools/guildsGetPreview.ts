@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsGetPreview: ToolDefinition<typeof args> = {
-  name: "guilds_get-preview",
+  name: "guilds-get-preview",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

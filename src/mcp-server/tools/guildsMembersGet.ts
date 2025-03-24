@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsMembersGet: ToolDefinition<typeof args> = {
-  name: "guilds-members_get",
+  name: "guilds-members-get",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

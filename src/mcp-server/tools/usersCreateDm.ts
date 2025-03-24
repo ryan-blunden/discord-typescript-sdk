@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$usersCreateDm: ToolDefinition<typeof args> = {
-  name: "users_create-dm",
+  name: "users-create-dm",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

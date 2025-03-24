@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildRolesBulkUpdate: ToolDefinition<typeof args> = {
-  name: "guild-roles_bulk-update",
+  name: "guild-roles-bulk-update",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

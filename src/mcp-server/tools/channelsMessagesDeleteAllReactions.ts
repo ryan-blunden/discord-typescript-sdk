@@ -13,7 +13,7 @@ const args = {
 export const tool$channelsMessagesDeleteAllReactions: ToolDefinition<
   typeof args
 > = {
-  name: "channels-messages_delete-all-reactions",
+  name: "channels-messages-delete-all-reactions",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

@@ -13,7 +13,7 @@ const args = {
 export const tool$messageReactionsDeleteAllByEmoji: ToolDefinition<
   typeof args
 > = {
-  name: "message-reactions_delete-all-by-emoji",
+  name: "message-reactions-delete-all-by-emoji",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

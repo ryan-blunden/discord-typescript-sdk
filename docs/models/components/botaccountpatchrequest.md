@@ -6,7 +6,7 @@
 import { BotAccountPatchRequest } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: BotAccountPatchRequest = {
-  username: "Adolfo_Mosciski",
+  username: "Gail92",
 };
 ```
 

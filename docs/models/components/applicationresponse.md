@@ -8,9 +8,10 @@ import { ApplicationResponse } from "@ryan.blunden/discord-sdk/models/components
 let value: ApplicationResponse = {
   id: "<value>",
   name: "<value>",
-  description: "sympathetically disappointment nor until twist",
+  description:
+    "underplay hippodrome league given only trash within ack incidentally",
   verifyKey: "<value>",
-  flags: 765326,
+  flags: 148141,
 };
 ```
 

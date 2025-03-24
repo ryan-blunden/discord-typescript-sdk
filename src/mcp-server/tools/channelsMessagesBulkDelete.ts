@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsMessagesBulkDelete: ToolDefinition<typeof args> = {
-  name: "channels-messages_bulk-delete",
+  name: "channels-messages-bulk-delete",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

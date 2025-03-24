@@ -12,7 +12,7 @@ const args = {
 
 export const tool$channelsPermissionsSetOverwrite: ToolDefinition<typeof args> =
   {
-    name: "channels-permissions_set-overwrite",
+    name: "channels-permissions-set-overwrite",
     description: ``,
     args,
     tool: async (client, args, ctx) => {

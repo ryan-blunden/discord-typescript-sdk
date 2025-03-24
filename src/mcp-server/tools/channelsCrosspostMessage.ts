@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsCrosspostMessage: ToolDefinition<typeof args> = {
-  name: "channels_crosspost-message",
+  name: "channels-crosspost-message",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

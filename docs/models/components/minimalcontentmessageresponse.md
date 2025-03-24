@@ -10,10 +10,10 @@ let value: MinimalContentMessageResponse = {
   mentions: [
     {
       id: "<value>",
-      username: "Austyn_Koss-Wolff73",
+      username: "Easter.Gulgowski",
       discriminator: "<value>",
-      publicFlags: 282807,
-      flags: 120196,
+      publicFlags: 64147,
+      flags: 692472,
     },
   ],
   mentionRoles: [
@@ -23,9 +23,9 @@ let value: MinimalContentMessageResponse = {
     {
       id: "<value>",
       filename: "example.file",
-      size: 296140,
-      url: "https://glaring-hawk.com/",
-      proxyUrl: "https://obvious-doing.name",
+      size: 566602,
+      url: "https://moist-bourgeoisie.name/",
+      proxyUrl: "https://glass-pigpen.com",
     },
   ],
   embeds: [
@@ -33,11 +33,11 @@ let value: MinimalContentMessageResponse = {
       type: "<value>",
     },
   ],
-  timestamp: new Date("2023-04-13T23:00:40.302Z"),
-  flags: 575947,
+  timestamp: new Date("2025-02-24T02:16:14.798Z"),
+  flags: 289406,
   components: [
     {
-      id: 929297,
+      id: 183191,
     },
   ],
 };

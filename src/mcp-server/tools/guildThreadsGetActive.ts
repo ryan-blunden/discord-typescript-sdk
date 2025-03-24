@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildThreadsGetActive: ToolDefinition<typeof args> = {
-  name: "guild-threads_get-active",
+  name: "guild-threads-get-active",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

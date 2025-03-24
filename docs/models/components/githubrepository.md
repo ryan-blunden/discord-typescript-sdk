@@ -6,10 +6,10 @@
 import { GithubRepository } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GithubRepository = {
-  id: 636625,
-  htmlUrl: "https://oblong-brace.name/",
+  id: 568548,
+  htmlUrl: "https://cluttered-membership.com",
   name: "<value>",
-  fullName: "Mildred Vandervort",
+  fullName: "Eugene Bruen V",
 };
 ```
 

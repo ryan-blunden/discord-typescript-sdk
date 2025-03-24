@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsExpirePoll: ToolDefinition<typeof args> = {
-  name: "channels_expire-poll",
+  name: "channels-expire-poll",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

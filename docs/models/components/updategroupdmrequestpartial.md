@@ -1,11 +1,11 @@
-# PrivateChannelRequestPartial
+# UpdateGroupDMRequestPartial
 
 ## Example Usage
 
 ```typescript
-import { PrivateChannelRequestPartial } from "@ryan.blunden/discord-sdk/models/components";
+import { UpdateGroupDMRequestPartial } from "@ryan.blunden/discord-sdk/models/components";
 
-let value: PrivateChannelRequestPartial = {};
+let value: UpdateGroupDMRequestPartial = {};
 ```
 
 ## Fields

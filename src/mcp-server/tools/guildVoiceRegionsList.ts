@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildVoiceRegionsList: ToolDefinition<typeof args> = {
-  name: "guild-voice-regions_list",
+  name: "guild-voice-regions-list",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

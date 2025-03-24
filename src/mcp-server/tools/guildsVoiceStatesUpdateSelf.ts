@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsVoiceStatesUpdateSelf: ToolDefinition<typeof args> = {
-  name: "guilds-voice-states_update-self",
+  name: "guilds-voice-states-update-self",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

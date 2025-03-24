@@ -6,8 +6,14 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { DiscordCore } from "../core.js";
 import { SDKOptions } from "../lib/config.js";
 import type { ConsoleLogger } from "./console-logger.js";
+import { createRegisterPrompt } from "./prompts.js";
+import {
+  createRegisterResource,
+  createRegisterResourceTemplate,
+} from "./resources.js";
 import { MCPScope, mcpScopes } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
+import { tool$addLobbyMember } from "./tools/addLobbyMember.js";
 import { tool$answersGetVoters } from "./tools/answersGetVoters.js";
 import { tool$applicationsCreateEntitlement } from "./tools/applicationsCreateEntitlement.js";
 import { tool$applicationsDeleteUserRoleConnection } from "./tools/applicationsDeleteUserRoleConnection.js";
@@ -70,7 +76,11 @@ import { tool$channelsThreadMembersLeave } from "./tools/channelsThreadMembersLe
 import { tool$channelsThreadsCreate } from "./tools/channelsThreadsCreate.js";
 import { tool$channelsTriggerTyping } from "./tools/channelsTriggerTyping.js";
 import { tool$channelsUpdate } from "./tools/channelsUpdate.js";
+import { tool$createLobby } from "./tools/createLobby.js";
+import { tool$deleteLobbyMember } from "./tools/deleteLobbyMember.js";
+import { tool$editLobby } from "./tools/editLobby.js";
 import { tool$gatewayGetBot } from "./tools/gatewayGetBot.js";
+import { tool$getLobby } from "./tools/getLobby.js";
 import { tool$guildBansBulkBan } from "./tools/guildBansBulkBan.js";
 import { tool$guildBansGet } from "./tools/guildBansGet.js";
 import { tool$guildBansList } from "./tools/guildBansList.js";
@@ -183,7 +193,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Discord",
-    version: "0.2.1",
+    version: "0.3.0",
   });
 
   const client = new DiscordCore({
@@ -191,7 +201,9 @@ export function createMCPServer(deps: {
     serverURL: deps.serverURL,
     serverIdx: deps.serverIdx,
   });
+
   const scopes = new Set(deps.scopes ?? mcpScopes);
+
   const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
   const tool = createRegisterTool(
     deps.logger,
@@ -200,8 +212,23 @@ export function createMCPServer(deps: {
     scopes,
     allowedTools,
   );
+  const resource = createRegisterResource(deps.logger, server, client, scopes);
+  const resourceTemplate = createRegisterResourceTemplate(
+    deps.logger,
+    server,
+    client,
+    scopes,
+  );
+  const prompt = createRegisterPrompt(deps.logger, server, client, scopes);
+  const register = { tool, resource, resourceTemplate, prompt };
+  void register; // suppress unused warnings
 
+  tool(tool$createLobby);
   tool(tool$threadSearch);
+  tool(tool$addLobbyMember);
+  tool(tool$deleteLobbyMember);
+  tool(tool$getLobby);
+  tool(tool$editLobby);
   tool(tool$oauth2GetMyApplication);
   tool(tool$usersCreateDm);
   tool(tool$usersUpdateMe);

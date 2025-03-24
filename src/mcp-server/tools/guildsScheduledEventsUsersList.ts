@@ -12,7 +12,7 @@ const args = {
 
 export const tool$guildsScheduledEventsUsersList: ToolDefinition<typeof args> =
   {
-    name: "guilds-scheduled-events-users_list",
+    name: "guilds-scheduled-events-users-list",
     description: ``,
     args,
     tool: async (client, args, ctx) => {

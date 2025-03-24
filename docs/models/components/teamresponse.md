@@ -13,10 +13,10 @@ let value: TeamResponse = {
     {
       user: {
         id: "<value>",
-        username: "Orlo.Gerlach58",
+        username: "Santino.Hansen61",
         discriminator: "<value>",
-        publicFlags: 370853,
-        flags: 197054,
+        publicFlags: 15606,
+        flags: 428796,
       },
       teamId: "<value>",
     },
