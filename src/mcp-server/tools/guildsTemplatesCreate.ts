@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsTemplatesCreate: ToolDefinition<typeof args> = {
-  name: "guilds-templates_create",
+  name: "guilds-templates-create",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

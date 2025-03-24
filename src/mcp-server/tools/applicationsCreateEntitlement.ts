@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$applicationsCreateEntitlement: ToolDefinition<typeof args> = {
-  name: "applications_create-entitlement",
+  name: "applications-create-entitlement",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

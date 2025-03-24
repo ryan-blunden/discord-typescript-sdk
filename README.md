@@ -80,7 +80,7 @@ yarn add @ryan.blunden/discord-sdk zod
 This SDK is also an installable MCP server where the various SDK methods are
 exposed as tools that can be invoked by AI applications.
 
-> Node.js v20 or greater is required to run the MCP server.
+> Node.js v20 or greater is required to run the MCP server from npm.
 
 <details>
 <summary>Claude installation steps</summary>
@@ -108,16 +108,49 @@ Add the following server definition to your `claude_desktop_config.json` file:
 <details>
 <summary>Cursor installation steps</summary>
 
-Go to `Cursor Settings > Features > MCP Servers > Add new MCP server` and use the following settings:
+Create a `.cursor/mcp.json` file in your project root with the following content:
 
-- Name: Discord
-- Type: `command`
-- Command:
-```sh
-npx -y --package @ryan.blunden/discord-sdk -- mcp start --bot-token ... 
+```json
+{
+  "mcpServers": {
+    "Discord": {
+      "command": "npx",
+      "args": [
+        "-y", "--package", "@ryan.blunden/discord-sdk",
+        "--",
+        "mcp", "start",
+        "--bot-token", "..."
+      ]
+    }
+  }
+}
 ```
 
 </details>
+
+You can also run MCP servers as a standalone binary with no additional dependencies. You must pull these binaries from available Github releases:
+
+```bash
+curl -L -o mcp-server \
+    https://github.com/{org}/{repo}/releases/download/{tag}/mcp-server-bun-darwin-arm64 && \
+chmod +x mcp-server
+```
+
+If the repo is a private repo you must add your Github PAT to download a release `-H "Authorization: Bearer {GITHUB_PAT}"`.
+
+
+```json
+{
+  "mcpServers": {
+    "Todos": {
+      "command": "./DOWNLOAD/PATH/mcp-server",
+      "args": [
+        "start"
+      ]
+    }
+  }
+}
+```
 
 For a full list of server arguments, run:
 
@@ -140,17 +173,13 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
+const discord = new Discord();
 
 async function run() {
-  const result = await discord.threadSearch({
-    channelId: "<value>",
+  await discord.partnerSDKUnmergeProvisionalAccount({
+    clientId: "<value>",
+    externalAuthToken: "<value>",
   });
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -178,9 +207,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.threadSearch({
-    channelId: "<value>",
-  });
+  const result = await discord.createLobby({});
 
   // Handle the result
   console.log(result);
@@ -199,10 +226,10 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  const result = await discord.oauth2.getKeys({});
-
-  // Handle the result
-  console.log(result);
+  await discord.partnerSDKUnmergeProvisionalAccount({
+    clientId: "<value>",
+    externalAuthToken: "<value>",
+  }, {});
 }
 
 run();
@@ -352,7 +379,18 @@ run();
 
 ### [Discord SDK](docs/sdks/discord/README.md)
 
+* [partnerSDKUnmergeProvisionalAccount](docs/sdks/discord/README.md#partnersdkunmergeprovisionalaccount)
+* [partnerSDKToken](docs/sdks/discord/README.md#partnersdktoken)
+* [createOrJoinLobby](docs/sdks/discord/README.md#createorjoinlobby)
+* [createLobby](docs/sdks/discord/README.md#createlobby)
 * [threadSearch](docs/sdks/discord/README.md#threadsearch)
+* [leaveLobby](docs/sdks/discord/README.md#leavelobby)
+* [editLobbyChannelLink](docs/sdks/discord/README.md#editlobbychannellink)
+* [createLobbyMessage](docs/sdks/discord/README.md#createlobbymessage)
+* [addLobbyMember](docs/sdks/discord/README.md#addlobbymember)
+* [deleteLobbyMember](docs/sdks/discord/README.md#deletelobbymember)
+* [getLobby](docs/sdks/discord/README.md#getlobby)
+* [editLobby](docs/sdks/discord/README.md#editlobby)
 
 ### [gateway](docs/sdks/gateway/README.md)
 
@@ -656,6 +694,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
+- [`addLobbyMember`](docs/sdks/discord/README.md#addlobbymember)
 - [`answersGetVoters`](docs/sdks/answers/README.md#getvoters)
 - [`applicationsBulkSetCommands`](docs/sdks/applications/README.md#bulksetcommands)
 - [`applicationsCommandsCreate`](docs/sdks/applicationscommands/README.md#create)
@@ -733,8 +772,15 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`channelsThreadsCreate`](docs/sdks/discordthreads/README.md#create)
 - [`channelsTriggerTyping`](docs/sdks/channels/README.md#triggertyping)
 - [`channelsUpdate`](docs/sdks/channels/README.md#update)
+- [`createLobby`](docs/sdks/discord/README.md#createlobby)
+- [`createLobbyMessage`](docs/sdks/discord/README.md#createlobbymessage)
+- [`createOrJoinLobby`](docs/sdks/discord/README.md#createorjoinlobby)
+- [`deleteLobbyMember`](docs/sdks/discord/README.md#deletelobbymember)
+- [`editLobby`](docs/sdks/discord/README.md#editlobby)
+- [`editLobbyChannelLink`](docs/sdks/discord/README.md#editlobbychannellink)
 - [`gatewayGet`](docs/sdks/gateway/README.md#get)
 - [`gatewayGetBot`](docs/sdks/gateway/README.md#getbot)
+- [`getLobby`](docs/sdks/discord/README.md#getlobby)
 - [`guildApplicationCommandsBulkSet`](docs/sdks/guildapplicationcommands/README.md#bulkset)
 - [`guildApplicationCommandsDelete`](docs/sdks/guildapplicationcommands/README.md#delete)
 - [`guildApplicationCommandsList`](docs/sdks/guildapplicationcommands/README.md#list)
@@ -824,12 +870,15 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`guildWidgetSettingsUpdate`](docs/sdks/guildwidgetsettings/README.md#update)
 - [`invitesResolve`](docs/sdks/invites/README.md#resolve)
 - [`invitesRevoke`](docs/sdks/invites/README.md#revoke)
+- [`leaveLobby`](docs/sdks/discord/README.md#leavelobby)
 - [`messageReactionsDeleteAllByEmoji`](docs/sdks/messagereactions/README.md#deleteallbyemoji)
 - [`messagesListReactionsByEmoji`](docs/sdks/messages/README.md#listreactionsbyemoji)
 - [`oauth2GetAuthorization`](docs/sdks/oauth2/README.md#getauthorization)
 - [`oauth2GetKeys`](docs/sdks/oauth2/README.md#getkeys)
 - [`oauth2GetMyApplication`](docs/sdks/oauth2/README.md#getmyapplication)
 - [`openidConnectGetUserinfo`](docs/sdks/openidconnect/README.md#getuserinfo)
+- [`partnerSDKToken`](docs/sdks/discord/README.md#partnersdktoken)
+- [`partnerSDKUnmergeProvisionalAccount`](docs/sdks/discord/README.md#partnersdkunmergeprovisionalaccount)
 - [`scheduledEventsCreate`](docs/sdks/scheduledevents/README.md#create)
 - [`soundboardGetDefaultSounds`](docs/sdks/soundboard/README.md#getdefaultsounds)
 - [`stageInstancesCreate`](docs/sdks/stageinstances/README.md#create)
@@ -881,13 +930,12 @@ To change the default retry strategy for a single API call, simply provide a ret
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
+const discord = new Discord();
 
 async function run() {
-  const result = await discord.threadSearch({
-    channelId: "<value>",
+  await discord.partnerSDKUnmergeProvisionalAccount({
+    clientId: "<value>",
+    externalAuthToken: "<value>",
   }, {
     retries: {
       strategy: "backoff",
@@ -900,9 +948,6 @@ async function run() {
       retryConnectionErrors: false,
     },
   });
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -924,16 +969,13 @@ const discord = new Discord({
     },
     retryConnectionErrors: false,
   },
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
 });
 
 async function run() {
-  const result = await discord.threadSearch({
-    channelId: "<value>",
+  await discord.partnerSDKUnmergeProvisionalAccount({
+    clientId: "<value>",
+    externalAuthToken: "<value>",
   });
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -944,7 +986,7 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `threadSearch` method may throw the following errors:
+Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `partnerSDKUnmergeProvisionalAccount` method may throw the following errors:
 
 | Error Type           | Status Code | Content Type     |
 | -------------------- | ----------- | ---------------- |
@@ -960,19 +1002,14 @@ import {
   SDKValidationError,
 } from "@ryan.blunden/discord-sdk/models/errors";
 
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
+const discord = new Discord();
 
 async function run() {
-  let result;
   try {
-    result = await discord.threadSearch({
-      channelId: "<value>",
+    await discord.partnerSDKUnmergeProvisionalAccount({
+      clientId: "<value>",
+      externalAuthToken: "<value>",
     });
-
-    // Handle the result
-    console.log(result);
   } catch (err) {
     switch (true) {
       // The server response does not match the expected SDK schema
@@ -1024,16 +1061,13 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 
 const discord = new Discord({
   serverURL: "https://discord.com/api/v10",
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
 });
 
 async function run() {
-  const result = await discord.threadSearch({
-    channelId: "<value>",
+  await discord.partnerSDKUnmergeProvisionalAccount({
+    clientId: "<value>",
+    externalAuthToken: "<value>",
   });
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

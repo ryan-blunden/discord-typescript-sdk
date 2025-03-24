@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildTemplatesCreateFromCode: ToolDefinition<typeof args> = {
-  name: "guild-templates_create-from-code",
+  name: "guild-templates-create-from-code",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

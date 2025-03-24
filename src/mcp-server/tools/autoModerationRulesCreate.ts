@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$autoModerationRulesCreate: ToolDefinition<typeof args> = {
-  name: "auto-moderation-rules_create",
+  name: "auto-moderation-rules-create",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

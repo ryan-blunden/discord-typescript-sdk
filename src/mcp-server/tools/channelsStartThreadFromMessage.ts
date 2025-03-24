@@ -12,7 +12,7 @@ const args = {
 
 export const tool$channelsStartThreadFromMessage: ToolDefinition<typeof args> =
   {
-    name: "channels_start-thread-from-message",
+    name: "channels-start-thread-from-message",
     description: ``,
     args,
     tool: async (client, args, ctx) => {

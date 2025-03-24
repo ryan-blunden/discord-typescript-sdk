@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsSendSoundboardSound: ToolDefinition<typeof args> = {
-  name: "channels_send-soundboard-sound",
+  name: "channels-send-soundboard-sound",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

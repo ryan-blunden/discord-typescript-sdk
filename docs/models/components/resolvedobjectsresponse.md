@@ -9,26 +9,26 @@ let value: ResolvedObjectsResponse = {
   users: {
     "key": {
       id: "<value>",
-      username: "Henry.Aufderhar66",
+      username: "Liana.Collins",
       discriminator: "<value>",
-      publicFlags: 618016,
-      flags: 428769,
+      publicFlags: 574325,
+      flags: 653201,
     },
   },
   members: {
     "key": {
-      flags: 135474,
-      joinedAt: new Date("2023-11-23T22:01:05.887Z"),
+      flags: 652103,
+      joinedAt: new Date("2024-04-17T20:01:49.892Z"),
       pending: false,
       roles: [
         "<value>",
       ],
       user: {
         id: "<value>",
-        username: "Kevon_Marvin",
+        username: "Sophie80",
         discriminator: "<value>",
-        publicFlags: 896547,
-        flags: 367562,
+        publicFlags: 100226,
+        flags: 919483,
       },
       mute: false,
       deaf: false,
@@ -37,14 +37,14 @@ let value: ResolvedObjectsResponse = {
   channels: {
     "key": {
       id: "<value>",
-      flags: 891924,
+      flags: 998848,
       recipients: [
         {
           id: "<value>",
-          username: "Rachel71",
+          username: "Camden12",
           discriminator: "<value>",
-          publicFlags: 149448,
-          flags: 868126,
+          publicFlags: 807319,
+          flags: 569101,
         },
       ],
     },
@@ -54,8 +54,8 @@ let value: ResolvedObjectsResponse = {
       id: "<value>",
       name: "<value>",
       permissions: "<value>",
-      position: 162493,
-      color: 615560,
+      position: 407183,
+      color: 69167,
       hoist: false,
       managed: false,
       mentionable: false,

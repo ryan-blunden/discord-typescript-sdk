@@ -6,7 +6,7 @@
 ### `number`
 
 ```typescript
-const value: number = 891773;
+const value: number = 71036;
 ```
 
 ### `string`

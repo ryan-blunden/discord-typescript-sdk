@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildStickersList: ToolDefinition<typeof args> = {
-  name: "guild-stickers_list",
+  name: "guild-stickers-list",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

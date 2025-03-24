@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsGetVanityUrl: ToolDefinition<typeof args> = {
-  name: "guilds_get-vanity-url",
+  name: "guilds-get-vanity-url",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

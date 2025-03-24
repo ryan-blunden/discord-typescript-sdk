@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$threadMembersDelete: ToolDefinition<typeof args> = {
-  name: "thread-members_delete",
+  name: "thread-members-delete",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

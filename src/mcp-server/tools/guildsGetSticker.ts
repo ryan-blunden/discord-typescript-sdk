@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsGetSticker: ToolDefinition<typeof args> = {
-  name: "guilds_get-sticker",
+  name: "guilds-get-sticker",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

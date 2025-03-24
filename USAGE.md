@@ -2,17 +2,13 @@
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
+const discord = new Discord();
 
 async function run() {
-  const result = await discord.threadSearch({
-    channelId: "<value>",
+  await discord.partnerSDKUnmergeProvisionalAccount({
+    clientId: "<value>",
+    externalAuthToken: "<value>",
   });
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

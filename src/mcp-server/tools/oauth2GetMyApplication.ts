@@ -6,7 +6,7 @@ import { oauth2GetMyApplication } from "../../funcs/oauth2GetMyApplication.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$oauth2GetMyApplication: ToolDefinition = {
-  name: "oauth2_get-my-application",
+  name: "oauth2-get-my-application",
   description: ``,
   tool: async (client, ctx) => {
     const [result, apiCall] = await oauth2GetMyApplication(

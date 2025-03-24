@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$autoModerationRulesDelete: ToolDefinition<typeof args> = {
-  name: "auto-moderation-rules_delete",
+  name: "auto-moderation-rules-delete",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

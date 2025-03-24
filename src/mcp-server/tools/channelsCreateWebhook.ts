@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsCreateWebhook: ToolDefinition<typeof args> = {
-  name: "channels_create-webhook",
+  name: "channels-create-webhook",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

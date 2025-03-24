@@ -7,10 +7,10 @@ import { UserPIIResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: UserPIIResponse = {
   id: "<value>",
-  username: "Alexanne.Keebler25",
+  username: "Gwen.Goldner40",
   discriminator: "<value>",
-  publicFlags: 253191,
-  flags: 131055,
+  publicFlags: 505866,
+  flags: 310381,
   mfaEnabled: false,
 };
 ```

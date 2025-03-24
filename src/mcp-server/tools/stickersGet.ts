@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$stickersGet: ToolDefinition<typeof args> = {
-  name: "stickers_get",
+  name: "stickers-get",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

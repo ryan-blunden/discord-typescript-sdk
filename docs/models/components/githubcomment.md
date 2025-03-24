@@ -6,13 +6,13 @@
 import { GithubComment } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GithubComment = {
-  id: 596333,
-  htmlUrl: "https://extra-large-daughter.info/",
+  id: 721090,
+  htmlUrl: "https://elementary-digit.biz",
   user: {
-    id: 47289,
-    login: "Edyth_Mraz74",
-    htmlUrl: "https://jittery-fraudster.org",
-    avatarUrl: "https://failing-lotion.com",
+    id: 495842,
+    login: "Alysha81",
+    htmlUrl: "https://official-hundred.info/",
+    avatarUrl: "https://querulous-director.name",
   },
   body: "<value>",
 };

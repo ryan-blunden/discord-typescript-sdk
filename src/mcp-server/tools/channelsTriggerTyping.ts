@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsTriggerTyping: ToolDefinition<typeof args> = {
-  name: "channels_trigger-typing",
+  name: "channels-trigger-typing",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

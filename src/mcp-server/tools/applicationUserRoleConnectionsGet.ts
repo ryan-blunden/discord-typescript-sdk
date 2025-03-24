@@ -13,7 +13,7 @@ const args = {
 export const tool$applicationUserRoleConnectionsGet: ToolDefinition<
   typeof args
 > = {
-  name: "application-user-role-connections_get",
+  name: "application-user-role-connections-get",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

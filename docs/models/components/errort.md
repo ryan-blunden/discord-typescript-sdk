@@ -8,7 +8,7 @@ A single error, either for an API response or a specific field.
 import { ErrorT } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ErrorT = {
-  code: 368584,
+  code: 602763,
   message: "<value>",
 };
 ```

@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$threadsListPublicArchived: ToolDefinition<typeof args> = {
-  name: "threads_list-public-archived",
+  name: "threads-list-public-archived",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

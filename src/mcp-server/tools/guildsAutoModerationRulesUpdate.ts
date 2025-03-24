@@ -12,7 +12,7 @@ const args = {
 
 export const tool$guildsAutoModerationRulesUpdate: ToolDefinition<typeof args> =
   {
-    name: "guilds-auto-moderation-rules_update",
+    name: "guilds-auto-moderation-rules-update",
     description: ``,
     args,
     tool: async (client, args, ctx) => {

@@ -12,7 +12,7 @@ const args = {
 
 export const tool$applicationsGetActivityInstance: ToolDefinition<typeof args> =
   {
-    name: "applications_get-activity-instance",
+    name: "applications-get-activity-instance",
     description: ``,
     args,
     tool: async (client, args, ctx) => {

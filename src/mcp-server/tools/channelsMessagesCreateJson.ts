@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsMessagesCreateJson: ToolDefinition<typeof args> = {
-  name: "channels-messages_create-json",
+  name: "channels-messages-create-json",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

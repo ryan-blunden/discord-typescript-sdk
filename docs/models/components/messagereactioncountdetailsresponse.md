@@ -6,8 +6,8 @@
 import { MessageReactionCountDetailsResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: MessageReactionCountDetailsResponse = {
-  burst: 981830,
-  normal: 478370,
+  burst: 306810,
+  normal: 577543,
 };
 ```
 

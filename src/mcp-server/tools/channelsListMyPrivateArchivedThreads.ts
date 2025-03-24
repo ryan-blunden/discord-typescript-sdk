@@ -13,7 +13,7 @@ const args = {
 export const tool$channelsListMyPrivateArchivedThreads: ToolDefinition<
   typeof args
 > = {
-  name: "channels_list-my-private-archived-threads",
+  name: "channels-list-my-private-archived-threads",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

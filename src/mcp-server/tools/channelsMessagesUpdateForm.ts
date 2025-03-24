@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsMessagesUpdateForm: ToolDefinition<typeof args> = {
-  name: "channels-messages_update-form",
+  name: "channels-messages-update-form",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

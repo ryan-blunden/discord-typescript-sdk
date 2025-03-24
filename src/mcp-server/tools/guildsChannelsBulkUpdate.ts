@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsChannelsBulkUpdate: ToolDefinition<typeof args> = {
-  name: "guilds-channels_bulk-update",
+  name: "guilds-channels-bulk-update",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

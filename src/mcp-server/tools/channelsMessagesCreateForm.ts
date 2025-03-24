@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsMessagesCreateForm: ToolDefinition<typeof args> = {
-  name: "channels-messages_create-form",
+  name: "channels-messages-create-form",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

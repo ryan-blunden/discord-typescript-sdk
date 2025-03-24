@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsBanUser: ToolDefinition<typeof args> = {
-  name: "guilds_ban-user",
+  name: "guilds-ban-user",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

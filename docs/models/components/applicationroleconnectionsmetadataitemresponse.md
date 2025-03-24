@@ -8,7 +8,7 @@ import { ApplicationRoleConnectionsMetadataItemResponse } from "@ryan.blunden/di
 let value: ApplicationRoleConnectionsMetadataItemResponse = {
   key: "<key>",
   name: "<value>",
-  description: "fatally forceful describe yesterday",
+  description: "onset flustered against",
 };
 ```
 

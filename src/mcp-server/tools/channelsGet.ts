@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsGet: ToolDefinition<typeof args> = {
-  name: "channels_get",
+  name: "channels-get",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

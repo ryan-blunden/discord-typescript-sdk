@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsPinsUnpin: ToolDefinition<typeof args> = {
-  name: "channels-pins_unpin",
+  name: "channels-pins-unpin",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

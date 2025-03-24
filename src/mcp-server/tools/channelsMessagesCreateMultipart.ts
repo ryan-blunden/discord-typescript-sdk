@@ -12,7 +12,7 @@ const args = {
 
 export const tool$channelsMessagesCreateMultipart: ToolDefinition<typeof args> =
   {
-    name: "channels-messages_create-multipart",
+    name: "channels-messages-create-multipart",
     description: ``,
     args,
     tool: async (client, args, ctx) => {

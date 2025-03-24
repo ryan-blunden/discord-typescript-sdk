@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsUpdateRole: ToolDefinition<typeof args> = {
-  name: "guilds_update-role",
+  name: "guilds-update-role",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

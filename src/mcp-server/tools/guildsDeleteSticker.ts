@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsDeleteSticker: ToolDefinition<typeof args> = {
-  name: "guilds_delete-sticker",
+  name: "guilds-delete-sticker",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

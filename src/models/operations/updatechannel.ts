@@ -10,14 +10,16 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateChannelRequestBody =
-  | components.PrivateChannelRequestPartial
+  | components.UpdateDMRequestPartial
+  | components.UpdateGroupDMRequestPartial
   | components.UpdateThreadRequestPartial
   | components.UpdateGuildChannelRequestPartial;
 
 export type UpdateChannelRequest = {
   channelId: string;
   requestBody:
-    | components.PrivateChannelRequestPartial
+    | components.UpdateDMRequestPartial
+    | components.UpdateGroupDMRequestPartial
     | components.UpdateThreadRequestPartial
     | components.UpdateGuildChannelRequestPartial;
 };
@@ -37,14 +39,16 @@ export const UpdateChannelRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.PrivateChannelRequestPartial$inboundSchema,
+  components.UpdateDMRequestPartial$inboundSchema,
+  components.UpdateGroupDMRequestPartial$inboundSchema,
   components.UpdateThreadRequestPartial$inboundSchema,
   components.UpdateGuildChannelRequestPartial$inboundSchema,
 ]);
 
 /** @internal */
 export type UpdateChannelRequestBody$Outbound =
-  | components.PrivateChannelRequestPartial$Outbound
+  | components.UpdateDMRequestPartial$Outbound
+  | components.UpdateGroupDMRequestPartial$Outbound
   | components.UpdateThreadRequestPartial$Outbound
   | components.UpdateGuildChannelRequestPartial$Outbound;
 
@@ -54,7 +58,8 @@ export const UpdateChannelRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateChannelRequestBody
 > = z.union([
-  components.PrivateChannelRequestPartial$outboundSchema,
+  components.UpdateDMRequestPartial$outboundSchema,
+  components.UpdateGroupDMRequestPartial$outboundSchema,
   components.UpdateThreadRequestPartial$outboundSchema,
   components.UpdateGuildChannelRequestPartial$outboundSchema,
 ]);
@@ -98,7 +103,8 @@ export const UpdateChannelRequest$inboundSchema: z.ZodType<
 > = z.object({
   channel_id: z.string(),
   RequestBody: z.union([
-    components.PrivateChannelRequestPartial$inboundSchema,
+    components.UpdateDMRequestPartial$inboundSchema,
+    components.UpdateGroupDMRequestPartial$inboundSchema,
     components.UpdateThreadRequestPartial$inboundSchema,
     components.UpdateGuildChannelRequestPartial$inboundSchema,
   ]),
@@ -113,7 +119,8 @@ export const UpdateChannelRequest$inboundSchema: z.ZodType<
 export type UpdateChannelRequest$Outbound = {
   channel_id: string;
   RequestBody:
-    | components.PrivateChannelRequestPartial$Outbound
+    | components.UpdateDMRequestPartial$Outbound
+    | components.UpdateGroupDMRequestPartial$Outbound
     | components.UpdateThreadRequestPartial$Outbound
     | components.UpdateGuildChannelRequestPartial$Outbound;
 };
@@ -126,7 +133,8 @@ export const UpdateChannelRequest$outboundSchema: z.ZodType<
 > = z.object({
   channelId: z.string(),
   requestBody: z.union([
-    components.PrivateChannelRequestPartial$outboundSchema,
+    components.UpdateDMRequestPartial$outboundSchema,
+    components.UpdateGroupDMRequestPartial$outboundSchema,
     components.UpdateThreadRequestPartial$outboundSchema,
     components.UpdateGuildChannelRequestPartial$outboundSchema,
   ]),

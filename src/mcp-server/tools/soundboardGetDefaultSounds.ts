@@ -6,7 +6,7 @@ import { soundboardGetDefaultSounds } from "../../funcs/soundboardGetDefaultSoun
 import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$soundboardGetDefaultSounds: ToolDefinition = {
-  name: "soundboard_get-default-sounds",
+  name: "soundboard-get-default-sounds",
   description: ``,
   tool: async (client, ctx) => {
     const [result, apiCall] = await soundboardGetDefaultSounds(

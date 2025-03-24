@@ -6,18 +6,18 @@
 import { GuildMemberResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GuildMemberResponse = {
-  flags: 577229,
-  joinedAt: new Date("2023-09-18T17:31:57.984Z"),
+  flags: 589910,
+  joinedAt: new Date("2025-03-11T05:07:47.512Z"),
   pending: false,
   roles: [
     "<value>",
   ],
   user: {
     id: "<value>",
-    username: "Tracey_Leuschke73",
+    username: "Elvis94",
     discriminator: "<value>",
-    publicFlags: 398221,
-    flags: 209843,
+    publicFlags: 490459,
+    flags: 227414,
   },
   mute: false,
   deaf: false,

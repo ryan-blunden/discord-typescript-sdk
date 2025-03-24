@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$applicationsUpdateEmoji: ToolDefinition<typeof args> = {
-  name: "applications_update-emoji",
+  name: "applications-update-emoji",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

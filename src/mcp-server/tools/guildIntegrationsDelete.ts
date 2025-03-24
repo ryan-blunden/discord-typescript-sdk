@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildIntegrationsDelete: ToolDefinition<typeof args> = {
-  name: "guild-integrations_delete",
+  name: "guild-integrations-delete",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

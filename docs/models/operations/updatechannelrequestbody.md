@@ -3,10 +3,16 @@
 
 ## Supported Types
 
-### `components.PrivateChannelRequestPartial`
+### `components.UpdateDMRequestPartial`
 
 ```typescript
-const value: components.PrivateChannelRequestPartial = {};
+const value: components.UpdateDMRequestPartial = {};
+```
+
+### `components.UpdateGroupDMRequestPartial`
+
+```typescript
+const value: components.UpdateGroupDMRequestPartial = {};
 ```
 
 ### `components.UpdateGuildChannelRequestPartial`

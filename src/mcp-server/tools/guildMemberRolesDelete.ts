@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildMemberRolesDelete: ToolDefinition<typeof args> = {
-  name: "guild-member-roles_delete",
+  name: "guild-member-roles-delete",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

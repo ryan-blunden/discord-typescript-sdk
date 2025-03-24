@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsFollow: ToolDefinition<typeof args> = {
-  name: "channels_follow",
+  name: "channels-follow",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

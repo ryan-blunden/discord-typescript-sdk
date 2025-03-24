@@ -13,7 +13,7 @@ const args = {
 export const tool$channelsRecipientsAddGroupDmUser: ToolDefinition<
   typeof args
 > = {
-  name: "channels-recipients_add-group-dm-user",
+  name: "channels-recipients-add-group-dm-user",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

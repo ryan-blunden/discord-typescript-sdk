@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsMfaSetLevel: ToolDefinition<typeof args> = {
-  name: "guilds-mfa_set-level",
+  name: "guilds-mfa-set-level",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

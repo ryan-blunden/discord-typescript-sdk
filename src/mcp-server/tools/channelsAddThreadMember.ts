@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$channelsAddThreadMember: ToolDefinition<typeof args> = {
-  name: "channels_add-thread-member",
+  name: "channels-add-thread-member",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

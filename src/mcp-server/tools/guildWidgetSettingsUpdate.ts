@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildWidgetSettingsUpdate: ToolDefinition<typeof args> = {
-  name: "guild-widget-settings_update",
+  name: "guild-widget-settings-update",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

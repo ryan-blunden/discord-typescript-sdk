@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsTemplatesDelete: ToolDefinition<typeof args> = {
-  name: "guilds-templates_delete",
+  name: "guilds-templates-delete",
   description: ``,
   args,
   tool: async (client, args, ctx) => {

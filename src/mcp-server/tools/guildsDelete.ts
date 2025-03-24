@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$guildsDelete: ToolDefinition<typeof args> = {
-  name: "guilds_delete",
+  name: "guilds-delete",
   description: ``,
   args,
   tool: async (client, args, ctx) => {
