@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d6760420-c0f7-476a-a38c-38dd82de2cc6
 management:
-  docChecksum: a41ca23b6fcdd0f00d9ef372a80742e9
+  docChecksum: e6bc10daa57c0b6636d8cdc1b6b5ee5f
   docVersion: "10"
-  speakeasyVersion: 1.523.0
-  generationVersion: 2.559.0
-  releaseVersion: 0.3.0
-  configChecksum: e74cba01c79c4fb186cf7973ac65423f
+  speakeasyVersion: 1.526.0
+  generationVersion: 2.563.0
+  releaseVersion: 0.3.1
+  configChecksum: 96c28654c26127b1d62fb46572919f56
   repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
   installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
   published: true
