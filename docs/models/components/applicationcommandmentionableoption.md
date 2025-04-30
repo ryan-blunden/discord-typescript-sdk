@@ -7,7 +7,7 @@ import { ApplicationCommandMentionableOption } from "@ryan.blunden/discord-sdk/m
 
 let value: ApplicationCommandMentionableOption = {
   name: "<value>",
-  description: "clavicle cantaloupe inside towards ignorance drain brr",
+  description: "quinoa playfully inconsequential behind",
 };
 ```
 

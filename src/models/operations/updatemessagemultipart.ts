@@ -10,14 +10,16 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateMessageMultipartRequestBody = {
+  content?: string | null | undefined;
+  embeds?: Array<components.RichEmbed> | null | undefined;
+  flags?: number | null | undefined;
   allowedMentions?: components.MessageAllowedMentionsRequest | null | undefined;
-  attachments?: Array<components.MessageAttachmentRequest> | null | undefined;
+  stickerIds?: Array<string> | null | undefined;
   components?:
     | Array<components.ActionRowComponentForMessageRequest>
     | null
     | undefined;
-  content?: string | null | undefined;
-  embeds?: Array<components.RichEmbed> | null | undefined;
+  attachments?: Array<components.MessageAttachmentRequest> | null | undefined;
   files0?: string | undefined;
   files1?: string | undefined;
   files2?: string | undefined;
@@ -28,8 +30,6 @@ export type UpdateMessageMultipartRequestBody = {
   files7?: string | undefined;
   files8?: string | undefined;
   files9?: string | undefined;
-  flags?: number | null | undefined;
-  stickerIds?: Array<string> | null | undefined;
 };
 
 export type UpdateMessageMultipartRequest = {
@@ -44,17 +44,19 @@ export const UpdateMessageMultipartRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  content: z.nullable(z.string()).optional(),
+  embeds: z.nullable(z.array(components.RichEmbed$inboundSchema)).optional(),
+  flags: z.nullable(z.number().int()).optional(),
   allowed_mentions: z.nullable(
     components.MessageAllowedMentionsRequest$inboundSchema,
+  ).optional(),
+  sticker_ids: z.nullable(z.array(z.string())).optional(),
+  components: z.nullable(
+    z.array(components.ActionRowComponentForMessageRequest$inboundSchema),
   ).optional(),
   attachments: z.nullable(
     z.array(components.MessageAttachmentRequest$inboundSchema),
   ).optional(),
-  components: z.nullable(
-    z.array(components.ActionRowComponentForMessageRequest$inboundSchema),
-  ).optional(),
-  content: z.nullable(z.string()).optional(),
-  embeds: z.nullable(z.array(components.RichEmbed$inboundSchema)).optional(),
   "files[0]": z.string().optional(),
   "files[1]": z.string().optional(),
   "files[2]": z.string().optional(),
@@ -65,11 +67,10 @@ export const UpdateMessageMultipartRequestBody$inboundSchema: z.ZodType<
   "files[7]": z.string().optional(),
   "files[8]": z.string().optional(),
   "files[9]": z.string().optional(),
-  flags: z.nullable(z.number().int()).optional(),
-  sticker_ids: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "allowed_mentions": "allowedMentions",
+    "sticker_ids": "stickerIds",
     "files[0]": "files0",
     "files[1]": "files1",
     "files[2]": "files2",
@@ -80,26 +81,27 @@ export const UpdateMessageMultipartRequestBody$inboundSchema: z.ZodType<
     "files[7]": "files7",
     "files[8]": "files8",
     "files[9]": "files9",
-    "sticker_ids": "stickerIds",
   });
 });
 
 /** @internal */
 export type UpdateMessageMultipartRequestBody$Outbound = {
+  content?: string | null | undefined;
+  embeds?: Array<components.RichEmbed$Outbound> | null | undefined;
+  flags?: number | null | undefined;
   allowed_mentions?:
     | components.MessageAllowedMentionsRequest$Outbound
+    | null
+    | undefined;
+  sticker_ids?: Array<string> | null | undefined;
+  components?:
+    | Array<components.ActionRowComponentForMessageRequest$Outbound>
     | null
     | undefined;
   attachments?:
     | Array<components.MessageAttachmentRequest$Outbound>
     | null
     | undefined;
-  components?:
-    | Array<components.ActionRowComponentForMessageRequest$Outbound>
-    | null
-    | undefined;
-  content?: string | null | undefined;
-  embeds?: Array<components.RichEmbed$Outbound> | null | undefined;
   "files[0]"?: string | undefined;
   "files[1]"?: string | undefined;
   "files[2]"?: string | undefined;
@@ -110,8 +112,6 @@ export type UpdateMessageMultipartRequestBody$Outbound = {
   "files[7]"?: string | undefined;
   "files[8]"?: string | undefined;
   "files[9]"?: string | undefined;
-  flags?: number | null | undefined;
-  sticker_ids?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -120,17 +120,19 @@ export const UpdateMessageMultipartRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateMessageMultipartRequestBody
 > = z.object({
+  content: z.nullable(z.string()).optional(),
+  embeds: z.nullable(z.array(components.RichEmbed$outboundSchema)).optional(),
+  flags: z.nullable(z.number().int()).optional(),
   allowedMentions: z.nullable(
     components.MessageAllowedMentionsRequest$outboundSchema,
+  ).optional(),
+  stickerIds: z.nullable(z.array(z.string())).optional(),
+  components: z.nullable(
+    z.array(components.ActionRowComponentForMessageRequest$outboundSchema),
   ).optional(),
   attachments: z.nullable(
     z.array(components.MessageAttachmentRequest$outboundSchema),
   ).optional(),
-  components: z.nullable(
-    z.array(components.ActionRowComponentForMessageRequest$outboundSchema),
-  ).optional(),
-  content: z.nullable(z.string()).optional(),
-  embeds: z.nullable(z.array(components.RichEmbed$outboundSchema)).optional(),
   files0: z.string().optional(),
   files1: z.string().optional(),
   files2: z.string().optional(),
@@ -141,11 +143,10 @@ export const UpdateMessageMultipartRequestBody$outboundSchema: z.ZodType<
   files7: z.string().optional(),
   files8: z.string().optional(),
   files9: z.string().optional(),
-  flags: z.nullable(z.number().int()).optional(),
-  stickerIds: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     allowedMentions: "allowed_mentions",
+    stickerIds: "sticker_ids",
     files0: "files[0]",
     files1: "files[1]",
     files2: "files[2]",
@@ -156,7 +157,6 @@ export const UpdateMessageMultipartRequestBody$outboundSchema: z.ZodType<
     files7: "files[7]",
     files8: "files[8]",
     files9: "files[9]",
-    stickerIds: "sticker_ids",
   });
 });
 

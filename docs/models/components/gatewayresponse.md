@@ -6,7 +6,7 @@
 import { GatewayResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GatewayResponse = {
-  url: "https://artistic-object.info/",
+  url: "https://sore-birdcage.org/",
 };
 ```
 

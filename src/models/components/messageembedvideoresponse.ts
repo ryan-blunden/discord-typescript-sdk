@@ -15,6 +15,7 @@ export type MessageEmbedVideoResponse = {
   height?: number | null | undefined;
   placeholder?: string | null | undefined;
   placeholderVersion?: number | null | undefined;
+  description?: string | null | undefined;
   flags?: number | null | undefined;
 };
 
@@ -30,6 +31,7 @@ export const MessageEmbedVideoResponse$inboundSchema: z.ZodType<
   height: z.nullable(z.number().int()).optional(),
   placeholder: z.nullable(z.string()).optional(),
   placeholder_version: z.nullable(z.number().int()).optional(),
+  description: z.nullable(z.string()).optional(),
   flags: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -46,6 +48,7 @@ export type MessageEmbedVideoResponse$Outbound = {
   height?: number | null | undefined;
   placeholder?: string | null | undefined;
   placeholder_version?: number | null | undefined;
+  description?: string | null | undefined;
   flags?: number | null | undefined;
 };
 
@@ -61,6 +64,7 @@ export const MessageEmbedVideoResponse$outboundSchema: z.ZodType<
   height: z.nullable(z.number().int()).optional(),
   placeholder: z.nullable(z.string()).optional(),
   placeholderVersion: z.nullable(z.number().int()).optional(),
+  description: z.nullable(z.string()).optional(),
   flags: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {

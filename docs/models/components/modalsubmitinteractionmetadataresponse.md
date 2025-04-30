@@ -15,7 +15,6 @@ let value: ModalSubmitInteractionMetadataResponse = {
     authorizingIntegrationOwners: {
       "key": "<value>",
     },
-    interactedMessageId: "<value>",
   },
 };
 ```

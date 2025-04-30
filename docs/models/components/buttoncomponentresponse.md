@@ -6,7 +6,7 @@
 import { ButtonComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ButtonComponentResponse = {
-  id: 67249,
+  id: 354713,
 };
 ```
 

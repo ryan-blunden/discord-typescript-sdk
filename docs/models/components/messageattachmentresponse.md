@@ -8,9 +8,9 @@ import { MessageAttachmentResponse } from "@ryan.blunden/discord-sdk/models/comp
 let value: MessageAttachmentResponse = {
   id: "<value>",
   filename: "example.file",
-  size: 663078,
-  url: "https://ajar-reward.biz/",
-  proxyUrl: "https://oval-sonata.name/",
+  size: 187275,
+  url: "https://vast-creator.com/",
+  proxyUrl: "https://ordinary-onset.biz/",
 };
 ```
 

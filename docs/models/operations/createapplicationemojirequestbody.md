@@ -7,7 +7,7 @@ import { CreateApplicationEmojiRequestBody } from "@ryan.blunden/discord-sdk/mod
 
 let value: CreateApplicationEmojiRequestBody = {
   name: "<value>",
-  image: "https://picsum.photos/seed/AaWxepIVU8/2931/1619",
+  image: "https://picsum.photos/seed/vi92j/1135/1843",
 };
 ```
 

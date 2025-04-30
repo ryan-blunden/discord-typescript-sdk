@@ -10,8 +10,7 @@ let value: ApplicationCommandResponse = {
   applicationId: "<value>",
   version: "<value>",
   name: "<value>",
-  description:
-    "lawmaker per moment devastation spanish boldly cauliflower horst miserably",
+  description: "geez before hmph",
 };
 ```
 

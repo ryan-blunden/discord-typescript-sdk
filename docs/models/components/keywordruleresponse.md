@@ -13,7 +13,7 @@ let value: KeywordRuleResponse = {
   actions: [
     {
       metadata: {
-        channelId: "<value>",
+        durationSeconds: 974890,
       },
     },
   ],

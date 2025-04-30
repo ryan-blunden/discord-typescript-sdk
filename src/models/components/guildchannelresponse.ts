@@ -54,6 +54,7 @@ export type GuildChannelResponse = {
   defaultReactionEmoji?: DefaultReactionEmojiResponse | null | undefined;
   defaultSortOrder?: 0 | null | undefined;
   defaultForumLayout?: 0 | null | undefined;
+  defaultTagSetting?: string | null | undefined;
   hdStreamingUntil?: Date | null | undefined;
   hdStreamingBuyerId?: string | null | undefined;
 };
@@ -94,6 +95,7 @@ export const GuildChannelResponse$inboundSchema: z.ZodType<
     .optional(),
   default_sort_order: z.nullable(z.literal(0)).optional(),
   default_forum_layout: z.nullable(z.literal(0)).optional(),
+  default_tag_setting: z.nullable(z.string()).optional(),
   hd_streaming_until: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -115,6 +117,7 @@ export const GuildChannelResponse$inboundSchema: z.ZodType<
     "default_reaction_emoji": "defaultReactionEmoji",
     "default_sort_order": "defaultSortOrder",
     "default_forum_layout": "defaultForumLayout",
+    "default_tag_setting": "defaultTagSetting",
     "hd_streaming_until": "hdStreamingUntil",
     "hd_streaming_buyer_id": "hdStreamingBuyerId",
   });
@@ -152,6 +155,7 @@ export type GuildChannelResponse$Outbound = {
     | undefined;
   default_sort_order: 0 | null;
   default_forum_layout: 0 | null;
+  default_tag_setting?: string | null | undefined;
   hd_streaming_until?: string | null | undefined;
   hd_streaming_buyer_id?: string | null | undefined;
 };
@@ -191,6 +195,7 @@ export const GuildChannelResponse$outboundSchema: z.ZodType<
     .optional(),
   defaultSortOrder: z.nullable(z.literal(0).default(0 as const)),
   defaultForumLayout: z.nullable(z.literal(0).default(0 as const)),
+  defaultTagSetting: z.nullable(z.string()).optional(),
   hdStreamingUntil: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   hdStreamingBuyerId: z.nullable(z.string()).optional(),
@@ -211,6 +216,7 @@ export const GuildChannelResponse$outboundSchema: z.ZodType<
     defaultReactionEmoji: "default_reaction_emoji",
     defaultSortOrder: "default_sort_order",
     defaultForumLayout: "default_forum_layout",
+    defaultTagSetting: "default_tag_setting",
     hdStreamingUntil: "hd_streaming_until",
     hdStreamingBuyerId: "hd_streaming_buyer_id",
   });

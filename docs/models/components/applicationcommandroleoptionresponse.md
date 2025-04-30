@@ -7,7 +7,7 @@ import { ApplicationCommandRoleOptionResponse } from "@ryan.blunden/discord-sdk/
 
 let value: ApplicationCommandRoleOptionResponse = {
   name: "<value>",
-  description: "intermarry colonialism worthy",
+  description: "chapel after unrealistic",
 };
 ```
 

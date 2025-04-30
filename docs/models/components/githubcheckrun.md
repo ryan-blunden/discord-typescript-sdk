@@ -7,7 +7,7 @@ import { GithubCheckRun } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GithubCheckRun = {
   name: "<value>",
-  htmlUrl: "https://crushing-corral.biz/",
+  htmlUrl: "https://internal-futon.org/",
   checkSuite: {
     headSha: "<value>",
     app: {

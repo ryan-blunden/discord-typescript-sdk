@@ -7,7 +7,7 @@ import { ApplicationCommandOptionNumberChoiceResponse } from "@ryan.blunden/disc
 
 let value: ApplicationCommandOptionNumberChoiceResponse = {
   name: "<value>",
-  value: 7562.87,
+  value: 8099.52,
 };
 ```
 

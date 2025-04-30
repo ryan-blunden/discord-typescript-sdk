@@ -9,6 +9,7 @@ let value: CreateAutoModerationRuleRequest = {
   guildId: "<value>",
   requestBody: {
     name: "<value>",
+    triggerMetadata: {},
   },
 };
 ```

@@ -7,7 +7,7 @@ import { ApplicationCommandBooleanOption } from "@ryan.blunden/discord-sdk/model
 
 let value: ApplicationCommandBooleanOption = {
   name: "<value>",
-  description: "regularly whose recovery furthermore glaring huddle",
+  description: "for hose planula yin atop pace freckle once instead afore",
 };
 ```
 

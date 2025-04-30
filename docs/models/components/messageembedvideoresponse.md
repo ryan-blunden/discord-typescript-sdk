@@ -18,4 +18,5 @@ let value: MessageEmbedVideoResponse = {};
 | `height`             | *number*             | :heavy_minus_sign:   | N/A                  |
 | `placeholder`        | *string*             | :heavy_minus_sign:   | N/A                  |
 | `placeholderVersion` | *number*             | :heavy_minus_sign:   | N/A                  |
+| `description`        | *string*             | :heavy_minus_sign:   | N/A                  |
 | `flags`              | *number*             | :heavy_minus_sign:   | N/A                  |

@@ -12,7 +12,8 @@ let value: OnboardingPromptResponse = {
     {
       id: "<value>",
       title: "<value>",
-      description: "since raw depart whoever SUV carefully",
+      description:
+        "amidst excluding innovate polyester finally redound clone yawningly",
       emoji: {},
       roleIds: [
         "<value>",

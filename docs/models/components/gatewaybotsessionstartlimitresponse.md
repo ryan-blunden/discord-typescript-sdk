@@ -6,10 +6,10 @@
 import { GatewayBotSessionStartLimitResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GatewayBotSessionStartLimitResponse = {
-  maxConcurrency: 743023,
-  remaining: 906775,
-  resetAfter: 295651,
-  total: 649901,
+  maxConcurrency: 521755,
+  remaining: 92346,
+  resetAfter: 159663,
+  total: 930132,
 };
 ```
 

@@ -8,7 +8,7 @@ import { ProvisionalTokenResponse } from "@ryan.blunden/discord-sdk/models/compo
 let value: ProvisionalTokenResponse = {
   tokenType: "<value>",
   accessToken: "<value>",
-  expiresIn: 544883,
+  expiresIn: 959783,
   scope: "<value>",
   idToken: "<value>",
 };

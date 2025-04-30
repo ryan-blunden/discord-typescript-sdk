@@ -15,7 +15,7 @@ let value: StickerPackResponse = {
       name: "<value>",
       tags: "<value>",
       packId: "<value>",
-      sortValue: 91668,
+      sortValue: 751305,
     },
   ],
 };

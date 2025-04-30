@@ -1369,9 +1369,7 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
-    requestBody: [
-
-    ],
+    requestBody: [],
   });
 
   // Handle the result
@@ -1398,9 +1396,7 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
-    requestBody: [
-  
-    ],
+    requestBody: [],
   });
 
   if (!res.ok) {

@@ -9,9 +9,9 @@ let value: ApplicationResponse = {
   id: "<value>",
   name: "<value>",
   description:
-    "underplay hippodrome league given only trash within ack incidentally",
+    "bruised towards beret supposing proper solution quit out banish throughout",
   verifyKey: "<value>",
-  flags: 148141,
+  flags: 664619,
 };
 ```
 

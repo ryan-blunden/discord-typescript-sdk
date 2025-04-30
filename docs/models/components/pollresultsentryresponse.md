@@ -6,8 +6,8 @@
 import { PollResultsEntryResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: PollResultsEntryResponse = {
-  id: 368584,
-  count: 136900,
+  id: 409343,
+  count: 158823,
 };
 ```
 

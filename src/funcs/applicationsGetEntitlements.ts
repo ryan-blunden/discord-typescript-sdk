@@ -124,7 +124,7 @@ async function $do(
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "get_entitlements",
-    oAuth2Scopes: ["applications.entitlements"],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

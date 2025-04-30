@@ -9,7 +9,7 @@ let value: GuildWelcomeScreenResponse = {
   welcomeChannels: [
     {
       channelId: "<value>",
-      description: "because midwife fold celsius brr near mmm ah",
+      description: "pish likewise miserably inasmuch mid",
     },
   ],
 };

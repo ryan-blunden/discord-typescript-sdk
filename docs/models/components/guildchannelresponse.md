@@ -7,10 +7,10 @@ import { GuildChannelResponse } from "@ryan.blunden/discord-sdk/models/component
 
 let value: GuildChannelResponse = {
   id: "<value>",
-  flags: 423655,
+  flags: 76437,
   guildId: "<value>",
   name: "<value>",
-  position: 645894,
+  position: 849560,
 };
 ```
 
@@ -42,5 +42,6 @@ let value: GuildChannelResponse = {
 | `defaultReactionEmoji`                                                                                           | [components.DefaultReactionEmojiResponse](../../models/components/defaultreactionemojiresponse.md)               | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `defaultSortOrder`                                                                                               | *number*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `defaultForumLayout`                                                                                             | *number*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `defaultTagSetting`                                                                                              | *string*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `hdStreamingUntil`                                                                                               | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                    | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `hdStreamingBuyerId`                                                                                             | *string*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |

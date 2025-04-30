@@ -7,7 +7,7 @@ import { ApplicationCommandIntegerOption } from "@ryan.blunden/discord-sdk/model
 
 let value: ApplicationCommandIntegerOption = {
   name: "<value>",
-  description: "throughout undergo beside confusion chainstay provided",
+  description: "monster modulo instead",
 };
 ```
 

@@ -7,7 +7,7 @@ import { LobbyMemberResponse } from "@ryan.blunden/discord-sdk/models/components
 
 let value: LobbyMemberResponse = {
   id: "<value>",
-  flags: 437587,
+  flags: 680453,
 };
 ```
 

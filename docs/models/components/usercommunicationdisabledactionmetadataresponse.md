@@ -6,7 +6,7 @@
 import { UserCommunicationDisabledActionMetadataResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: UserCommunicationDisabledActionMetadataResponse = {
-  durationSeconds: 428028,
+  durationSeconds: 542530,
 };
 ```
 

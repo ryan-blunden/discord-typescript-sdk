@@ -8,10 +8,10 @@ import { GuildBanResponse } from "@ryan.blunden/discord-sdk/models/components";
 let value: GuildBanResponse = {
   user: {
     id: "<value>",
-    username: "Neva_Schneider41",
+    username: "Alycia.Wilkinson",
     discriminator: "<value>",
-    publicFlags: 282079,
-    flags: 690987,
+    publicFlags: 189619,
+    flags: 618795,
   },
 };
 ```

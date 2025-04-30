@@ -7,7 +7,7 @@ import { UserCommunicationDisabledActionResponse } from "@ryan.blunden/discord-s
 
 let value: UserCommunicationDisabledActionResponse = {
   metadata: {
-    durationSeconds: 43445,
+    durationSeconds: 656095,
   },
 };
 ```

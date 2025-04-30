@@ -7607,6 +7607,8 @@ components:
           const: "EPIC_ONLINE_SERVICES_ID_TOKEN"
         - title: "STEAM_SESSION_TICKET"
           const: "STEAM_SESSION_TICKET"
+        - title: "UNITY_SERVICES_ID_TOKEN"
+          const: "UNITY_SERVICES_ID_TOKEN"
     "ApplicationIncomingWebhookResponse":
       type: "object"
       properties:
@@ -8352,7 +8354,7 @@ components:
             - "array"
             - "null"
           items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 10
+          maxItems: 30
         "flags":
           type:
             - "integer"
@@ -9304,6 +9306,10 @@ components:
           oneOf:
             - type: "null"
             - {"$ref": "#/components/schemas/ForumLayout"}
+        "default_tag_setting":
+          oneOf:
+            - type: "null"
+            - {"$ref": "#/components/schemas/ThreadSearchTagSetting"}
         "available_tags":
           type:
             - "array"
@@ -9447,6 +9453,10 @@ components:
           oneOf:
             - type: "null"
             - {"$ref": "#/components/schemas/ForumLayout"}
+        "default_tag_setting":
+          oneOf:
+            - type: "null"
+            - {"$ref": "#/components/schemas/ThreadSearchTagSetting"}
         "id":
           oneOf:
             - type: "null"
@@ -11098,6 +11108,10 @@ components:
           oneOf:
             - type: "null"
             - {"$ref": "#/components/schemas/ForumLayout"}
+        "default_tag_setting":
+          oneOf:
+            - type: "null"
+            - {"$ref": "#/components/schemas/ThreadSearchTagSetting"}
         "hd_streaming_until":
           type:
             - "string"
@@ -12107,6 +12121,10 @@ components:
           oneOf:
             - type: "null"
             - {"$ref": "#/components/schemas/ForumLayout"}
+        "default_tag_setting":
+          oneOf:
+            - type: "null"
+            - {"$ref": "#/components/schemas/ThreadSearchTagSetting"}
         "icon_emoji":
           oneOf:
             - type: "null"
@@ -12484,7 +12502,7 @@ components:
             - "array"
             - "null"
           items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 10
+          maxItems: 30
         "attachments":
           type:
             - "array"
@@ -12526,7 +12544,7 @@ components:
             - "array"
             - "null"
           items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 10
+          maxItems: 30
         "attachments":
           type:
             - "array"
@@ -12591,7 +12609,7 @@ components:
             - "array"
             - "null"
           items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 10
+          maxItems: 30
         "attachments":
           type:
             - "array"
@@ -12625,7 +12643,7 @@ components:
             - "array"
             - "null"
           items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 10
+          maxItems: 30
         "attachments":
           type:
             - "array"
@@ -14059,7 +14077,7 @@ components:
             - "array"
             - "null"
           items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 10
+          maxItems: 30
         "flags":
           type:
             - "integer"
@@ -14133,7 +14151,7 @@ components:
             - "array"
             - "null"
           items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 10
+          maxItems: 30
         "attachments":
           type:
             - "array"
@@ -14217,6 +14235,10 @@ components:
           oneOf:
             - type: "null"
             - {"$ref": "#/components/schemas/UInt32Type"}
+        "description":
+          type:
+            - "string"
+            - "null"
         "flags":
           oneOf:
             - type: "null"
@@ -14320,6 +14342,10 @@ components:
           oneOf:
             - type: "null"
             - {"$ref": "#/components/schemas/UInt32Type"}
+        "description":
+          type:
+            - "string"
+            - "null"
         "flags":
           oneOf:
             - type: "null"
@@ -14722,6 +14748,8 @@ components:
           const: 38
         - title: "GUILD_INCIDENT_REPORT_FALSE_ALARM"
           const: 39
+        - title: "POLL_RESULT"
+          const: 46
         - title: "HD_STREAMING_UPGRADED"
           const: 55
       format: "int32"
@@ -14840,7 +14868,7 @@ components:
           type: "array"
           items: {"$ref": "#/components/schemas/ActionRowComponentForModalRequest"}
           minItems: 1
-          maxItems: 10
+          maxItems: 30
       required:
         - "custom_id"
         - "title"
@@ -16089,6 +16117,11 @@ components:
           type:
             - "boolean"
             - "null"
+        "description":
+          type:
+            - "string"
+            - "null"
+          maxLength: 4096
     "RichEmbedProvider":
       type: "object"
       properties:
@@ -16135,6 +16168,11 @@ components:
           type:
             - "boolean"
             - "null"
+        "description":
+          type:
+            - "string"
+            - "null"
+          maxLength: 4096
     "RichEmbedVideo":
       type: "object"
       properties:
@@ -16167,6 +16205,11 @@ components:
           type:
             - "boolean"
             - "null"
+        "description":
+          type:
+            - "string"
+            - "null"
+          maxLength: 4096
     "RoleSelectComponentForMessageRequest":
       type: "object"
       properties:
@@ -16307,7 +16350,7 @@ components:
             - "array"
             - "null"
           items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 10
+          maxItems: 30
         "flags":
           type:
             - "integer"
@@ -17547,6 +17590,10 @@ components:
           oneOf:
             - type: "null"
             - {"$ref": "#/components/schemas/ForumLayout"}
+        "default_tag_setting":
+          oneOf:
+            - type: "null"
+            - {"$ref": "#/components/schemas/ThreadSearchTagSetting"}
         "flags":
           type:
             - "integer"

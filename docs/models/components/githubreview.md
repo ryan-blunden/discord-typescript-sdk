@@ -7,13 +7,13 @@ import { GithubReview } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GithubReview = {
   user: {
-    id: 235427,
-    login: "Candelario.Erdman",
-    htmlUrl: "https://helpless-epic.com",
-    avatarUrl: "https://entire-roadway.com/",
+    id: 125132,
+    login: "Hassie77",
+    htmlUrl: "https://infamous-pliers.com/",
+    avatarUrl: "https://unlawful-insolence.org/",
   },
-  htmlUrl: "https://flickering-electronics.org/",
-  state: "South Carolina",
+  htmlUrl: "https://long-behest.com/",
+  state: "Delaware",
 };
 ```
 

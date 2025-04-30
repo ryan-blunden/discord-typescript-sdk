@@ -9,12 +9,11 @@ let value: OAuth2GetAuthorizationResponse = {
   application: {
     id: "<value>",
     name: "<value>",
-    description:
-      "baseboard psst till with furthermore jaggedly hence runny knavishly egg",
+    description: "opposite zowie duster",
     verifyKey: "<value>",
-    flags: 592231,
+    flags: 101619,
   },
-  expires: new Date("2025-09-09T20:24:19.822Z"),
+  expires: new Date("2025-07-13T16:37:19.918Z"),
   scopes: [
     "<value>",
   ],
