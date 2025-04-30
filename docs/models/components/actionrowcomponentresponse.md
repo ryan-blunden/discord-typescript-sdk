@@ -6,7 +6,7 @@
 import { ActionRowComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ActionRowComponentResponse = {
-  id: 24678,
+  id: 68524,
 };
 ```
 

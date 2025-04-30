@@ -9,10 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateGuildStickerRequestBody = {
-  file: string;
   name: string;
   tags: string;
   description?: string | null | undefined;
+  file: string;
 };
 
 export type CreateGuildStickerRequest = {
@@ -26,18 +26,18 @@ export const CreateGuildStickerRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file: z.string(),
   name: z.string(),
   tags: z.string(),
   description: z.nullable(z.string()).optional(),
+  file: z.string(),
 });
 
 /** @internal */
 export type CreateGuildStickerRequestBody$Outbound = {
-  file: string;
   name: string;
   tags: string;
   description?: string | null | undefined;
+  file: string;
 };
 
 /** @internal */
@@ -46,10 +46,10 @@ export const CreateGuildStickerRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateGuildStickerRequestBody
 > = z.object({
-  file: z.string(),
   name: z.string(),
   tags: z.string(),
   description: z.nullable(z.string()).optional(),
+  file: z.string(),
 });
 
 /**

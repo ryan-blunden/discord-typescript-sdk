@@ -10,10 +10,10 @@ let value: MessageResponse = {
   mentions: [
     {
       id: "<value>",
-      username: "Aiyana97",
+      username: "Elias_Mohr",
       discriminator: "<value>",
-      publicFlags: 461479,
-      flags: 780529,
+      publicFlags: 785074,
+      flags: 554294,
     },
   ],
   mentionRoles: [
@@ -23,9 +23,9 @@ let value: MessageResponse = {
     {
       id: "<value>",
       filename: "example.file",
-      size: 118274,
-      url: "https://corrupt-unblinking.name",
-      proxyUrl: "https://favorable-sand.info/",
+      size: 36171,
+      url: "https://sarcastic-encouragement.name/",
+      proxyUrl: "https://outrageous-pinstripe.org/",
     },
   ],
   embeds: [
@@ -33,21 +33,21 @@ let value: MessageResponse = {
       type: "<value>",
     },
   ],
-  timestamp: new Date("2024-09-15T00:05:11.728Z"),
-  flags: 18789,
+  timestamp: new Date("2025-09-15T22:23:16.663Z"),
+  flags: 645636,
   components: [
     {
-      id: 617636,
+      id: 709443,
     },
   ],
   id: "<value>",
   channelId: "<value>",
   author: {
     id: "<value>",
-    username: "Leora_Welch",
+    username: "Lavinia_Gislason85",
     discriminator: "<value>",
-    publicFlags: 697631,
-    flags: 60225,
+    publicFlags: 753732,
+    flags: 261050,
   },
   pinned: false,
   mentionEveryone: false,

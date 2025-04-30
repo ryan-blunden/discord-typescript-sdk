@@ -7,10 +7,10 @@ import { MessageReactionResponse } from "@ryan.blunden/discord-sdk/models/compon
 
 let value: MessageReactionResponse = {
   emoji: {},
-  count: 799796,
+  count: 416828,
   countDetails: {
-    burst: 76956,
-    normal: 518835,
+    burst: 984198,
+    normal: 108844,
   },
   burstColors: [
     "<value>",

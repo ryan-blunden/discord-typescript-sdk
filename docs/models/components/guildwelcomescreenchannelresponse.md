@@ -7,7 +7,7 @@ import { GuildWelcomeScreenChannelResponse } from "@ryan.blunden/discord-sdk/mod
 
 let value: GuildWelcomeScreenChannelResponse = {
   channelId: "<value>",
-  description: "rapidly brr ew bah whether sediment litter oxidise",
+  description: "for authentic spew nor excepting hm zany amount",
 };
 ```
 

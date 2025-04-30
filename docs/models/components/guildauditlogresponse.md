@@ -14,10 +14,10 @@ let value: GuildAuditLogResponse = {
   users: [
     {
       id: "<value>",
-      username: "Scottie19",
+      username: "Emmett_Pfannerstill14",
       discriminator: "<value>",
-      publicFlags: 153732,
-      flags: 616690,
+      publicFlags: 744114,
+      flags: 803960,
     },
   ],
   integrations: [
@@ -37,22 +37,19 @@ let value: GuildAuditLogResponse = {
       id: "<value>",
       guildId: "<value>",
       name: "<value>",
-      scheduledStartTime: new Date("2024-10-08T05:48:00.559Z"),
-      entityMetadata: {
-        location: "<value>",
-      },
+      scheduledStartTime: new Date("2025-11-15T20:16:48.429Z"),
     },
   ],
   threads: [
     {
       id: "<value>",
-      flags: 129509,
+      flags: 137784,
       guildId: "<value>",
       name: "<value>",
       ownerId: "<value>",
-      messageCount: 479372,
-      memberCount: 608836,
-      totalMessageSent: 770696,
+      messageCount: 380981,
+      memberCount: 148440,
+      totalMessageSent: 647518,
     },
   ],
   applicationCommands: [
@@ -61,7 +58,7 @@ let value: GuildAuditLogResponse = {
       applicationId: "<value>",
       version: "<value>",
       name: "<value>",
-      description: "why rarely splurge electrify fooey now punctually",
+      description: "scheme pastel especially",
     },
   ],
   autoModerationRules: [
@@ -72,10 +69,22 @@ let value: GuildAuditLogResponse = {
       name: "<value>",
       actions: [
         {
-          metadata: {},
+          metadata: {
+            channelId: "<value>",
+          },
         },
       ],
-      triggerMetadata: {},
+      triggerMetadata: {
+        keywordFilter: [
+          "<value>",
+        ],
+        regexPatterns: [
+          "<value>",
+        ],
+        allowList: [
+          "<value>",
+        ],
+      },
     },
   ],
 };

@@ -12,7 +12,9 @@ let value: SpamLinkRuleResponse = {
   name: "<value>",
   actions: [
     {
-      metadata: {},
+      metadata: {
+        durationSeconds: 724075,
+      },
     },
   ],
   triggerMetadata: {},

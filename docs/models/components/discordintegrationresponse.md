@@ -10,7 +10,7 @@ let value: DiscordIntegrationResponse = {
   application: {
     id: "<value>",
     name: "<value>",
-    description: "reluctantly allegation indeed near whoever",
+    description: "meh scrape while solace why busily wherever",
   },
   scopes: [
     "<value>",

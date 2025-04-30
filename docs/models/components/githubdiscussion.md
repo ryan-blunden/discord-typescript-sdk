@@ -7,13 +7,13 @@ import { GithubDiscussion } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GithubDiscussion = {
   title: "<value>",
-  number: 520686,
-  htmlUrl: "https://caring-postbox.info/",
+  number: 600943,
+  htmlUrl: "https://empty-term.net",
   user: {
-    id: 948639,
-    login: "Talon_Hodkiewicz",
-    htmlUrl: "https://vain-pine.biz",
-    avatarUrl: "https://innocent-precedent.info",
+    id: 978276,
+    login: "Sydney_Leannon",
+    htmlUrl: "https://rich-goat.name",
+    avatarUrl: "https://stunning-gastropod.com/",
   },
 };
 ```

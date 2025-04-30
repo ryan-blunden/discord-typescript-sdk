@@ -12,18 +12,18 @@ let value: WidgetResponse = {
     {
       id: "<value>",
       name: "<value>",
-      position: 967492,
+      position: 155002,
     },
   ],
   members: [
     {
       id: "<id>",
-      username: "Mona.Marquardt",
+      username: "Scotty.Dickinson",
       status: "<value>",
-      avatarUrl: "https://sour-litter.biz/",
+      avatarUrl: "https://impolite-soybean.org",
     },
   ],
-  presenceCount: 814191,
+  presenceCount: 130960,
 };
 ```
 

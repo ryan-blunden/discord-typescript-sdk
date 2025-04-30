@@ -8,7 +8,7 @@
 ```typescript
 const value: components.ApplicationCommandAttachmentOption = {
   name: "<value>",
-  description: "forecast dense beneath astride verbally smug up adult beyond",
+  description: "violin provided qua ick twist stoop scheme cappelletti",
 };
 ```
 
@@ -17,7 +17,7 @@ const value: components.ApplicationCommandAttachmentOption = {
 ```typescript
 const value: components.ApplicationCommandBooleanOption = {
   name: "<value>",
-  description: "arbitrate lend sometimes roughly",
+  description: "fervently on perfectly",
 };
 ```
 
@@ -26,7 +26,7 @@ const value: components.ApplicationCommandBooleanOption = {
 ```typescript
 const value: components.ApplicationCommandChannelOption = {
   name: "<value>",
-  description: "printer even boo amongst brr cautious",
+  description: "fortunately within at improbable yahoo founder over coast",
 };
 ```
 
@@ -35,7 +35,7 @@ const value: components.ApplicationCommandChannelOption = {
 ```typescript
 const value: components.ApplicationCommandIntegerOption = {
   name: "<value>",
-  description: "unless if upliftingly affect incidentally vamoose quiet",
+  description: "adviser monasticism hence elevation discourse",
 };
 ```
 
@@ -44,7 +44,8 @@ const value: components.ApplicationCommandIntegerOption = {
 ```typescript
 const value: components.ApplicationCommandMentionableOption = {
   name: "<value>",
-  description: "matter cheerfully yuck statement oof scruple carelessly",
+  description:
+    "amongst babushka gadzooks victoriously rejoin yet and officially",
 };
 ```
 
@@ -53,7 +54,8 @@ const value: components.ApplicationCommandMentionableOption = {
 ```typescript
 const value: components.ApplicationCommandNumberOption = {
   name: "<value>",
-  description: "direct ham antagonize off yahoo above",
+  description:
+    "pension relieve mmm loyally daintily best incidentally rewrite every",
 };
 ```
 
@@ -62,7 +64,7 @@ const value: components.ApplicationCommandNumberOption = {
 ```typescript
 const value: components.ApplicationCommandRoleOption = {
   name: "<value>",
-  description: "political inasmuch deduction cop ack",
+  description: "swine slump honestly till normal amongst",
 };
 ```
 
@@ -71,7 +73,8 @@ const value: components.ApplicationCommandRoleOption = {
 ```typescript
 const value: components.ApplicationCommandStringOption = {
   name: "<value>",
-  description: "react slump via only lest",
+  description:
+    "zowie well-to-do furthermore gallery ravage rebuke fairly oh when each",
 };
 ```
 
@@ -80,7 +83,7 @@ const value: components.ApplicationCommandStringOption = {
 ```typescript
 const value: components.ApplicationCommandSubcommandGroupOption = {
   name: "<value>",
-  description: "beyond perspire sate fireplace writ unnecessarily",
+  description: "victoriously woot adolescent",
 };
 ```
 
@@ -89,7 +92,7 @@ const value: components.ApplicationCommandSubcommandGroupOption = {
 ```typescript
 const value: components.ApplicationCommandSubcommandOption = {
   name: "<value>",
-  description: "duster monthly ick backbone or",
+  description: "pfft uh-huh imaginative whenever",
 };
 ```
 
@@ -98,7 +101,7 @@ const value: components.ApplicationCommandSubcommandOption = {
 ```typescript
 const value: components.ApplicationCommandUserOption = {
   name: "<value>",
-  description: "kinase mainstream smoothly male",
+  description: "small serve via sticky what obligation alert barring bravely",
 };
 ```
 

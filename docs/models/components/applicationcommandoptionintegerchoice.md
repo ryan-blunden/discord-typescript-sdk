@@ -7,7 +7,7 @@ import { ApplicationCommandOptionIntegerChoice } from "@ryan.blunden/discord-sdk
 
 let value: ApplicationCommandOptionIntegerChoice = {
   name: "<value>",
-  value: 198406,
+  value: 810892,
 };
 ```
 

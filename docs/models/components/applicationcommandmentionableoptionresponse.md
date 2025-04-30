@@ -7,8 +7,7 @@ import { ApplicationCommandMentionableOptionResponse } from "@ryan.blunden/disco
 
 let value: ApplicationCommandMentionableOptionResponse = {
   name: "<value>",
-  description:
-    "rue alarmed beyond quaver shaft rekindle vibration tomorrow optimistically everlasting",
+  description: "impact whoa boohoo aha",
 };
 ```
 

@@ -18,3 +18,4 @@ let value: RichEmbedVideo = {};
 | `placeholder`        | *string*             | :heavy_minus_sign:   | N/A                  |
 | `placeholderVersion` | *number*             | :heavy_minus_sign:   | N/A                  |
 | `isAnimated`         | *boolean*            | :heavy_minus_sign:   | N/A                  |
+| `description`        | *string*             | :heavy_minus_sign:   | N/A                  |

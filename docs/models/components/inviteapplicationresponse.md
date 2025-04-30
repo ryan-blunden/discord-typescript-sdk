@@ -8,9 +8,9 @@ import { InviteApplicationResponse } from "@ryan.blunden/discord-sdk/models/comp
 let value: InviteApplicationResponse = {
   id: "<value>",
   name: "<value>",
-  description: "ferociously screw defendant brown across",
+  description: "during immaculate hygienic",
   verifyKey: "<value>",
-  flags: 493467,
+  flags: 245036,
 };
 ```
 

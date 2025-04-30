@@ -7,7 +7,7 @@ import { ApplicationCommandUserOptionResponse } from "@ryan.blunden/discord-sdk/
 
 let value: ApplicationCommandUserOptionResponse = {
   name: "<value>",
-  description: "amongst promptly eggplant solidly concerning",
+  description: "blindly decriminalize outside after overdub stuff federate how",
 };
 ```
 

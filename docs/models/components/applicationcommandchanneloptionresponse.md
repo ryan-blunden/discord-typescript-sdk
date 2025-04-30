@@ -7,8 +7,7 @@ import { ApplicationCommandChannelOptionResponse } from "@ryan.blunden/discord-s
 
 let value: ApplicationCommandChannelOptionResponse = {
   name: "<value>",
-  description:
-    "dulcimer before when excluding worthless up transcend since while",
+  description: "notwithstanding yahoo unwilling lock now",
 };
 ```
 

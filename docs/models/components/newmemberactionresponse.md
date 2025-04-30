@@ -8,8 +8,7 @@ import { NewMemberActionResponse } from "@ryan.blunden/discord-sdk/models/compon
 let value: NewMemberActionResponse = {
   channelId: "<value>",
   title: "<value>",
-  description:
-    "planula forenenst eminent inasmuch beloved powerfully squeaky rim of notwithstanding",
+  description: "viciously innovate mature vicinity ah outdo via",
 };
 ```
 

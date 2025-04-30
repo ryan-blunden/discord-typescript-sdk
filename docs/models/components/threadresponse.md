@@ -7,13 +7,13 @@ import { ThreadResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ThreadResponse = {
   id: "<value>",
-  flags: 621479,
+  flags: 906542,
   guildId: "<value>",
   name: "<value>",
   ownerId: "<value>",
-  messageCount: 577229,
-  memberCount: 237893,
-  totalMessageSent: 934214,
+  messageCount: 767761,
+  memberCount: 973464,
+  totalMessageSent: 499430,
 };
 ```
 

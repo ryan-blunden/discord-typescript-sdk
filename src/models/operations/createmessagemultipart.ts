@@ -12,16 +12,22 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type Nonce = number | string;
 
 export type CreateMessageMultipartRequestBody = {
+  content?: string | null | undefined;
+  embeds?: Array<components.RichEmbed> | null | undefined;
   allowedMentions?: components.MessageAllowedMentionsRequest | null | undefined;
-  attachments?: Array<components.MessageAttachmentRequest> | null | undefined;
+  stickerIds?: Array<string> | null | undefined;
   components?:
     | Array<components.ActionRowComponentForMessageRequest>
     | null
     | undefined;
+  flags?: number | null | undefined;
+  attachments?: Array<components.MessageAttachmentRequest> | null | undefined;
+  poll?: components.PollCreateRequest | null | undefined;
   confettiPotion?: components.ConfettiPotionCreateRequest | null | undefined;
-  content?: string | null | undefined;
-  embeds?: Array<components.RichEmbed> | null | undefined;
+  messageReference?: components.MessageReferenceRequest | null | undefined;
+  nonce?: number | string | null | undefined;
   enforceNonce?: boolean | null | undefined;
+  tts?: boolean | null | undefined;
   files0?: string | undefined;
   files1?: string | undefined;
   files2?: string | undefined;
@@ -32,12 +38,6 @@ export type CreateMessageMultipartRequestBody = {
   files7?: string | undefined;
   files8?: string | undefined;
   files9?: string | undefined;
-  flags?: number | null | undefined;
-  messageReference?: components.MessageReferenceRequest | null | undefined;
-  nonce?: number | string | null | undefined;
-  poll?: components.PollCreateRequest | null | undefined;
-  stickerIds?: Array<string> | null | undefined;
-  tts?: boolean | null | undefined;
 };
 
 export type CreateMessageMultipartRequest = {
@@ -92,21 +92,29 @@ export const CreateMessageMultipartRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  content: z.nullable(z.string()).optional(),
+  embeds: z.nullable(z.array(components.RichEmbed$inboundSchema)).optional(),
   allowed_mentions: z.nullable(
     components.MessageAllowedMentionsRequest$inboundSchema,
   ).optional(),
-  attachments: z.nullable(
-    z.array(components.MessageAttachmentRequest$inboundSchema),
-  ).optional(),
+  sticker_ids: z.nullable(z.array(z.string())).optional(),
   components: z.nullable(
     z.array(components.ActionRowComponentForMessageRequest$inboundSchema),
   ).optional(),
+  flags: z.nullable(z.number().int()).optional(),
+  attachments: z.nullable(
+    z.array(components.MessageAttachmentRequest$inboundSchema),
+  ).optional(),
+  poll: z.nullable(components.PollCreateRequest$inboundSchema).optional(),
   confetti_potion: z.nullable(
     components.ConfettiPotionCreateRequest$inboundSchema,
   ).optional(),
-  content: z.nullable(z.string()).optional(),
-  embeds: z.nullable(z.array(components.RichEmbed$inboundSchema)).optional(),
+  message_reference: z.nullable(
+    components.MessageReferenceRequest$inboundSchema,
+  ).optional(),
+  nonce: z.nullable(z.union([z.number().int(), z.string()])).optional(),
   enforce_nonce: z.nullable(z.boolean()).optional(),
+  tts: z.nullable(z.boolean()).optional(),
   "files[0]": z.string().optional(),
   "files[1]": z.string().optional(),
   "files[2]": z.string().optional(),
@@ -117,18 +125,12 @@ export const CreateMessageMultipartRequestBody$inboundSchema: z.ZodType<
   "files[7]": z.string().optional(),
   "files[8]": z.string().optional(),
   "files[9]": z.string().optional(),
-  flags: z.nullable(z.number().int()).optional(),
-  message_reference: z.nullable(
-    components.MessageReferenceRequest$inboundSchema,
-  ).optional(),
-  nonce: z.nullable(z.union([z.number().int(), z.string()])).optional(),
-  poll: z.nullable(components.PollCreateRequest$inboundSchema).optional(),
-  sticker_ids: z.nullable(z.array(z.string())).optional(),
-  tts: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "allowed_mentions": "allowedMentions",
+    "sticker_ids": "stickerIds",
     "confetti_potion": "confettiPotion",
+    "message_reference": "messageReference",
     "enforce_nonce": "enforceNonce",
     "files[0]": "files0",
     "files[1]": "files1",
@@ -140,32 +142,39 @@ export const CreateMessageMultipartRequestBody$inboundSchema: z.ZodType<
     "files[7]": "files7",
     "files[8]": "files8",
     "files[9]": "files9",
-    "message_reference": "messageReference",
-    "sticker_ids": "stickerIds",
   });
 });
 
 /** @internal */
 export type CreateMessageMultipartRequestBody$Outbound = {
+  content?: string | null | undefined;
+  embeds?: Array<components.RichEmbed$Outbound> | null | undefined;
   allowed_mentions?:
     | components.MessageAllowedMentionsRequest$Outbound
     | null
     | undefined;
-  attachments?:
-    | Array<components.MessageAttachmentRequest$Outbound>
-    | null
-    | undefined;
+  sticker_ids?: Array<string> | null | undefined;
   components?:
     | Array<components.ActionRowComponentForMessageRequest$Outbound>
     | null
     | undefined;
+  flags?: number | null | undefined;
+  attachments?:
+    | Array<components.MessageAttachmentRequest$Outbound>
+    | null
+    | undefined;
+  poll?: components.PollCreateRequest$Outbound | null | undefined;
   confetti_potion?:
     | components.ConfettiPotionCreateRequest$Outbound
     | null
     | undefined;
-  content?: string | null | undefined;
-  embeds?: Array<components.RichEmbed$Outbound> | null | undefined;
+  message_reference?:
+    | components.MessageReferenceRequest$Outbound
+    | null
+    | undefined;
+  nonce?: number | string | null | undefined;
   enforce_nonce?: boolean | null | undefined;
+  tts?: boolean | null | undefined;
   "files[0]"?: string | undefined;
   "files[1]"?: string | undefined;
   "files[2]"?: string | undefined;
@@ -176,15 +185,6 @@ export type CreateMessageMultipartRequestBody$Outbound = {
   "files[7]"?: string | undefined;
   "files[8]"?: string | undefined;
   "files[9]"?: string | undefined;
-  flags?: number | null | undefined;
-  message_reference?:
-    | components.MessageReferenceRequest$Outbound
-    | null
-    | undefined;
-  nonce?: number | string | null | undefined;
-  poll?: components.PollCreateRequest$Outbound | null | undefined;
-  sticker_ids?: Array<string> | null | undefined;
-  tts?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -193,21 +193,29 @@ export const CreateMessageMultipartRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateMessageMultipartRequestBody
 > = z.object({
+  content: z.nullable(z.string()).optional(),
+  embeds: z.nullable(z.array(components.RichEmbed$outboundSchema)).optional(),
   allowedMentions: z.nullable(
     components.MessageAllowedMentionsRequest$outboundSchema,
   ).optional(),
-  attachments: z.nullable(
-    z.array(components.MessageAttachmentRequest$outboundSchema),
-  ).optional(),
+  stickerIds: z.nullable(z.array(z.string())).optional(),
   components: z.nullable(
     z.array(components.ActionRowComponentForMessageRequest$outboundSchema),
   ).optional(),
+  flags: z.nullable(z.number().int()).optional(),
+  attachments: z.nullable(
+    z.array(components.MessageAttachmentRequest$outboundSchema),
+  ).optional(),
+  poll: z.nullable(components.PollCreateRequest$outboundSchema).optional(),
   confettiPotion: z.nullable(
     components.ConfettiPotionCreateRequest$outboundSchema,
   ).optional(),
-  content: z.nullable(z.string()).optional(),
-  embeds: z.nullable(z.array(components.RichEmbed$outboundSchema)).optional(),
+  messageReference: z.nullable(
+    components.MessageReferenceRequest$outboundSchema,
+  ).optional(),
+  nonce: z.nullable(z.union([z.number().int(), z.string()])).optional(),
   enforceNonce: z.nullable(z.boolean()).optional(),
+  tts: z.nullable(z.boolean()).optional(),
   files0: z.string().optional(),
   files1: z.string().optional(),
   files2: z.string().optional(),
@@ -218,18 +226,12 @@ export const CreateMessageMultipartRequestBody$outboundSchema: z.ZodType<
   files7: z.string().optional(),
   files8: z.string().optional(),
   files9: z.string().optional(),
-  flags: z.nullable(z.number().int()).optional(),
-  messageReference: z.nullable(
-    components.MessageReferenceRequest$outboundSchema,
-  ).optional(),
-  nonce: z.nullable(z.union([z.number().int(), z.string()])).optional(),
-  poll: z.nullable(components.PollCreateRequest$outboundSchema).optional(),
-  stickerIds: z.nullable(z.array(z.string())).optional(),
-  tts: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     allowedMentions: "allowed_mentions",
+    stickerIds: "sticker_ids",
     confettiPotion: "confetti_potion",
+    messageReference: "message_reference",
     enforceNonce: "enforce_nonce",
     files0: "files[0]",
     files1: "files[1]",
@@ -241,8 +243,6 @@ export const CreateMessageMultipartRequestBody$outboundSchema: z.ZodType<
     files7: "files[7]",
     files8: "files[8]",
     files9: "files[9]",
-    messageReference: "message_reference",
-    stickerIds: "sticker_ids",
   });
 });
 

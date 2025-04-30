@@ -15,6 +15,7 @@ export type RichEmbedImage = {
   placeholder?: string | null | undefined;
   placeholderVersion?: number | null | undefined;
   isAnimated?: boolean | null | undefined;
+  description?: string | null | undefined;
 };
 
 /** @internal */
@@ -29,6 +30,7 @@ export const RichEmbedImage$inboundSchema: z.ZodType<
   placeholder: z.nullable(z.string()).optional(),
   placeholder_version: z.nullable(z.number().int()).optional(),
   is_animated: z.nullable(z.boolean()).optional(),
+  description: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "placeholder_version": "placeholderVersion",
@@ -44,6 +46,7 @@ export type RichEmbedImage$Outbound = {
   placeholder?: string | null | undefined;
   placeholder_version?: number | null | undefined;
   is_animated?: boolean | null | undefined;
+  description?: string | null | undefined;
 };
 
 /** @internal */
@@ -58,6 +61,7 @@ export const RichEmbedImage$outboundSchema: z.ZodType<
   placeholder: z.nullable(z.string()).optional(),
   placeholderVersion: z.nullable(z.number().int()).optional(),
   isAnimated: z.nullable(z.boolean()).optional(),
+  description: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     placeholderVersion: "placeholder_version",

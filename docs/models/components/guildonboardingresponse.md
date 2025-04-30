@@ -15,7 +15,7 @@ let value: GuildOnboardingResponse = {
         {
           id: "<value>",
           title: "<value>",
-          description: "though whether modulo sway advanced corporation",
+          description: "duh shoulder scent pfft whoa",
           emoji: {},
           roleIds: [
             "<value>",

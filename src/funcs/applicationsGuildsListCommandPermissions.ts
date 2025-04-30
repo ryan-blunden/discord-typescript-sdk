@@ -118,7 +118,7 @@ async function $do(
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "list_guild_application_command_permissions",
-    oAuth2Scopes: ["applications.commands.permissions.update"],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

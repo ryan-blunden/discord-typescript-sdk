@@ -7,8 +7,7 @@ import { ApplicationCommandSubcommandGroupOptionResponse } from "@ryan.blunden/d
 
 let value: ApplicationCommandSubcommandGroupOptionResponse = {
   name: "<value>",
-  description:
-    "needily wetly govern cleverly upon around glaring untrue suspension",
+  description: "for vacantly ordinary without",
 };
 ```
 

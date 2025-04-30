@@ -115,7 +115,7 @@ async function $do(
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "delete_entitlement",
-    oAuth2Scopes: ["applications.entitlements"],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

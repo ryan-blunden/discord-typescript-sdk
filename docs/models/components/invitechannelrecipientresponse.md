@@ -6,7 +6,7 @@
 import { InviteChannelRecipientResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: InviteChannelRecipientResponse = {
-  username: "Adolf73",
+  username: "Gus_Dietrich56",
 };
 ```
 

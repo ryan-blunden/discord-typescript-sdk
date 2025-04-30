@@ -10,7 +10,7 @@ let value: CreateEntitlementRequest = {
   createEntitlementRequestData: {
     skuId: "<value>",
     ownerId: "<value>",
-    ownerType: 318614,
+    ownerType: 179717,
   },
 };
 ```

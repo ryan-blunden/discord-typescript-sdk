@@ -10,7 +10,7 @@ let value: DefaultKeywordListTriggerMetadataResponse = {
     "<value>",
   ],
   presets: [
-    502675,
+    899672,
   ],
 };
 ```

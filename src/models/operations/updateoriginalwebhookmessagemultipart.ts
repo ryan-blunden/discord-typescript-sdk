@@ -14,14 +14,16 @@ export type UpdateOriginalWebhookMessageMultipartSecurity = {
 };
 
 export type UpdateOriginalWebhookMessageMultipartRequestBody = {
+  content?: string | null | undefined;
+  embeds?: Array<components.RichEmbed> | null | undefined;
   allowedMentions?: components.MessageAllowedMentionsRequest | null | undefined;
-  attachments?: Array<components.MessageAttachmentRequest> | null | undefined;
   components?:
     | Array<components.ActionRowComponentForMessageRequest>
     | null
     | undefined;
-  content?: string | null | undefined;
-  embeds?: Array<components.RichEmbed> | null | undefined;
+  attachments?: Array<components.MessageAttachmentRequest> | null | undefined;
+  poll?: components.PollCreateRequest | null | undefined;
+  flags?: number | null | undefined;
   files0?: string | undefined;
   files1?: string | undefined;
   files2?: string | undefined;
@@ -32,8 +34,6 @@ export type UpdateOriginalWebhookMessageMultipartRequestBody = {
   files7?: string | undefined;
   files8?: string | undefined;
   files9?: string | undefined;
-  flags?: number | null | undefined;
-  poll?: components.PollCreateRequest | null | undefined;
 };
 
 export type UpdateOriginalWebhookMessageMultipartRequest = {
@@ -126,17 +126,19 @@ export const UpdateOriginalWebhookMessageMultipartRequestBody$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
+    content: z.nullable(z.string()).optional(),
+    embeds: z.nullable(z.array(components.RichEmbed$inboundSchema)).optional(),
     allowed_mentions: z.nullable(
       components.MessageAllowedMentionsRequest$inboundSchema,
-    ).optional(),
-    attachments: z.nullable(
-      z.array(components.MessageAttachmentRequest$inboundSchema),
     ).optional(),
     components: z.nullable(
       z.array(components.ActionRowComponentForMessageRequest$inboundSchema),
     ).optional(),
-    content: z.nullable(z.string()).optional(),
-    embeds: z.nullable(z.array(components.RichEmbed$inboundSchema)).optional(),
+    attachments: z.nullable(
+      z.array(components.MessageAttachmentRequest$inboundSchema),
+    ).optional(),
+    poll: z.nullable(components.PollCreateRequest$inboundSchema).optional(),
+    flags: z.nullable(z.number().int()).optional(),
     "files[0]": z.string().optional(),
     "files[1]": z.string().optional(),
     "files[2]": z.string().optional(),
@@ -147,8 +149,6 @@ export const UpdateOriginalWebhookMessageMultipartRequestBody$inboundSchema:
     "files[7]": z.string().optional(),
     "files[8]": z.string().optional(),
     "files[9]": z.string().optional(),
-    flags: z.nullable(z.number().int()).optional(),
-    poll: z.nullable(components.PollCreateRequest$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "allowed_mentions": "allowedMentions",
@@ -167,20 +167,22 @@ export const UpdateOriginalWebhookMessageMultipartRequestBody$inboundSchema:
 
 /** @internal */
 export type UpdateOriginalWebhookMessageMultipartRequestBody$Outbound = {
+  content?: string | null | undefined;
+  embeds?: Array<components.RichEmbed$Outbound> | null | undefined;
   allowed_mentions?:
     | components.MessageAllowedMentionsRequest$Outbound
-    | null
-    | undefined;
-  attachments?:
-    | Array<components.MessageAttachmentRequest$Outbound>
     | null
     | undefined;
   components?:
     | Array<components.ActionRowComponentForMessageRequest$Outbound>
     | null
     | undefined;
-  content?: string | null | undefined;
-  embeds?: Array<components.RichEmbed$Outbound> | null | undefined;
+  attachments?:
+    | Array<components.MessageAttachmentRequest$Outbound>
+    | null
+    | undefined;
+  poll?: components.PollCreateRequest$Outbound | null | undefined;
+  flags?: number | null | undefined;
   "files[0]"?: string | undefined;
   "files[1]"?: string | undefined;
   "files[2]"?: string | undefined;
@@ -191,8 +193,6 @@ export type UpdateOriginalWebhookMessageMultipartRequestBody$Outbound = {
   "files[7]"?: string | undefined;
   "files[8]"?: string | undefined;
   "files[9]"?: string | undefined;
-  flags?: number | null | undefined;
-  poll?: components.PollCreateRequest$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -202,17 +202,19 @@ export const UpdateOriginalWebhookMessageMultipartRequestBody$outboundSchema:
     z.ZodTypeDef,
     UpdateOriginalWebhookMessageMultipartRequestBody
   > = z.object({
+    content: z.nullable(z.string()).optional(),
+    embeds: z.nullable(z.array(components.RichEmbed$outboundSchema)).optional(),
     allowedMentions: z.nullable(
       components.MessageAllowedMentionsRequest$outboundSchema,
-    ).optional(),
-    attachments: z.nullable(
-      z.array(components.MessageAttachmentRequest$outboundSchema),
     ).optional(),
     components: z.nullable(
       z.array(components.ActionRowComponentForMessageRequest$outboundSchema),
     ).optional(),
-    content: z.nullable(z.string()).optional(),
-    embeds: z.nullable(z.array(components.RichEmbed$outboundSchema)).optional(),
+    attachments: z.nullable(
+      z.array(components.MessageAttachmentRequest$outboundSchema),
+    ).optional(),
+    poll: z.nullable(components.PollCreateRequest$outboundSchema).optional(),
+    flags: z.nullable(z.number().int()).optional(),
     files0: z.string().optional(),
     files1: z.string().optional(),
     files2: z.string().optional(),
@@ -223,8 +225,6 @@ export const UpdateOriginalWebhookMessageMultipartRequestBody$outboundSchema:
     files7: z.string().optional(),
     files8: z.string().optional(),
     files9: z.string().optional(),
-    flags: z.nullable(z.number().int()).optional(),
-    poll: z.nullable(components.PollCreateRequest$outboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       allowedMentions: "allowed_mentions",

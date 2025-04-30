@@ -47,6 +47,7 @@ export type UpdateGuildChannelRequestPartial = {
   defaultThreadRateLimitPerUser?: number | null | undefined;
   defaultSortOrder?: 0 | null | undefined;
   defaultForumLayout?: 0 | null | undefined;
+  defaultTagSetting?: string | null | undefined;
   flags?: number | null | undefined;
   availableTags?: Array<UpdateThreadTagRequest> | null | undefined;
 };
@@ -78,6 +79,7 @@ export const UpdateGuildChannelRequestPartial$inboundSchema: z.ZodType<
   default_thread_rate_limit_per_user: z.nullable(z.number().int()).optional(),
   default_sort_order: z.nullable(z.literal(0)).optional(),
   default_forum_layout: z.nullable(z.literal(0)).optional(),
+  default_tag_setting: z.nullable(z.string()).optional(),
   flags: z.nullable(z.number().int()).optional(),
   available_tags: z.nullable(z.array(UpdateThreadTagRequest$inboundSchema))
     .optional(),
@@ -94,6 +96,7 @@ export const UpdateGuildChannelRequestPartial$inboundSchema: z.ZodType<
     "default_thread_rate_limit_per_user": "defaultThreadRateLimitPerUser",
     "default_sort_order": "defaultSortOrder",
     "default_forum_layout": "defaultForumLayout",
+    "default_tag_setting": "defaultTagSetting",
     "available_tags": "availableTags",
   });
 });
@@ -123,6 +126,7 @@ export type UpdateGuildChannelRequestPartial$Outbound = {
   default_thread_rate_limit_per_user?: number | null | undefined;
   default_sort_order: 0 | null;
   default_forum_layout: 0 | null;
+  default_tag_setting?: string | null | undefined;
   flags?: number | null | undefined;
   available_tags?: Array<UpdateThreadTagRequest$Outbound> | null | undefined;
 };
@@ -154,6 +158,7 @@ export const UpdateGuildChannelRequestPartial$outboundSchema: z.ZodType<
   defaultThreadRateLimitPerUser: z.nullable(z.number().int()).optional(),
   defaultSortOrder: z.nullable(z.literal(0).default(0 as const)),
   defaultForumLayout: z.nullable(z.literal(0).default(0 as const)),
+  defaultTagSetting: z.nullable(z.string()).optional(),
   flags: z.nullable(z.number().int()).optional(),
   availableTags: z.nullable(z.array(UpdateThreadTagRequest$outboundSchema))
     .optional(),
@@ -170,6 +175,7 @@ export const UpdateGuildChannelRequestPartial$outboundSchema: z.ZodType<
     defaultThreadRateLimitPerUser: "default_thread_rate_limit_per_user",
     defaultSortOrder: "default_sort_order",
     defaultForumLayout: "default_forum_layout",
+    defaultTagSetting: "default_tag_setting",
     availableTags: "available_tags",
   });
 });

@@ -6,10 +6,10 @@
 import { GuildTemplateChannelResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GuildTemplateChannelResponse = {
-  bitrate: 143278,
-  userLimit: 761563,
+  bitrate: 198395,
+  userLimit: 418129,
   nsfw: false,
-  rateLimitPerUser: 93445,
+  rateLimitPerUser: 550885,
   permissionOverwrites: [
     {
       id: "<value>",
@@ -43,5 +43,6 @@ let value: GuildTemplateChannelResponse = {
 | `defaultThreadRateLimitPerUser`                                                                                  | *number*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `defaultSortOrder`                                                                                               | *number*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `defaultForumLayout`                                                                                             | *number*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `defaultTagSetting`                                                                                              | *string*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `iconEmoji`                                                                                                      | [components.IconEmojiResponse](../../models/components/iconemojiresponse.md)                                     | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `themeColor`                                                                                                     | *number*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |

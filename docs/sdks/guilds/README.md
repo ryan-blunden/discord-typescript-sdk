@@ -1582,9 +1582,9 @@ async function run() {
   const result = await discord.guilds.createSticker({
     guildId: "<value>",
     requestBody: {
-      file: "<value>",
       name: "<value>",
       tags: "<value>",
+      file: "<value>",
     },
   });
 
@@ -1613,9 +1613,9 @@ async function run() {
   const res = await guildsCreateSticker(discord, {
     guildId: "<value>",
     requestBody: {
-      file: "<value>",
       name: "<value>",
       tags: "<value>",
+      file: "<value>",
     },
   });
 

@@ -9,9 +9,9 @@ let value: ActivitiesAttachmentResponse = {
   attachment: {
     id: "<value>",
     filename: "example.file",
-    size: 743643,
-    url: "https://infinite-agreement.biz/",
-    proxyUrl: "https://stormy-reporter.com",
+    size: 313044,
+    url: "https://direct-pigsty.info",
+    proxyUrl: "https://official-elver.info",
   },
 };
 ```

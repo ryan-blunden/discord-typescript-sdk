@@ -86,7 +86,7 @@ async function $do(
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "get_openid_connect_userinfo",
-    oAuth2Scopes: ["openid"],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

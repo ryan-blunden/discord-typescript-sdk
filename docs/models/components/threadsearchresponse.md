@@ -9,21 +9,21 @@ let value: ThreadSearchResponse = {
   threads: [
     {
       id: "<value>",
-      flags: 891773,
+      flags: 974946,
       guildId: "<value>",
       name: "<value>",
       ownerId: "<value>",
-      messageCount: 963663,
-      memberCount: 383441,
-      totalMessageSent: 791725,
+      messageCount: 648746,
+      memberCount: 257651,
+      totalMessageSent: 159639,
     },
   ],
   members: [
     {
       id: "<value>",
       userId: "<value>",
-      joinTimestamp: new Date("2024-08-02T16:03:07.089Z"),
-      flags: 568045,
+      joinTimestamp: new Date("2023-11-03T03:02:37.100Z"),
+      flags: 568672,
     },
   ],
 };

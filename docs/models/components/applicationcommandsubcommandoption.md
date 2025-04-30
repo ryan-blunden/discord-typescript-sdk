@@ -7,7 +7,8 @@ import { ApplicationCommandSubcommandOption } from "@ryan.blunden/discord-sdk/mo
 
 let value: ApplicationCommandSubcommandOption = {
   name: "<value>",
-  description: "along wrathful allegation supplier well-lit",
+  description:
+    "underneath that likewise but middle modulo gah since noon weatherize",
 };
 ```
 

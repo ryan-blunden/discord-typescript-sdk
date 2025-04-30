@@ -87,7 +87,7 @@ async function $do(
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "list_my_connections",
-    oAuth2Scopes: ["connections"],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

@@ -6,10 +6,10 @@
 import { GithubUser } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GithubUser = {
-  id: 95232,
-  login: "Nathanial1",
-  htmlUrl: "https://lovely-excess.info",
-  avatarUrl: "https://clueless-allegation.biz",
+  id: 96495,
+  login: "Malinda44",
+  htmlUrl: "https://splendid-cap.net/",
+  avatarUrl: "https://dutiful-innovation.net",
 };
 ```
 

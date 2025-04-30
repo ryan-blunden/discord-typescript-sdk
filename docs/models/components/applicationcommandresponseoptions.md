@@ -8,7 +8,7 @@
 ```typescript
 const value: components.ApplicationCommandAttachmentOptionResponse = {
   name: "<value>",
-  description: "thigh arraign into defenseless",
+  description: "gosh meh gosh",
 };
 ```
 
@@ -17,7 +17,8 @@ const value: components.ApplicationCommandAttachmentOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandBooleanOptionResponse = {
   name: "<value>",
-  description: "minister flood private curiously censor",
+  description:
+    "indeed after whether acidly round huzzah fluctuate per whenever",
 };
 ```
 
@@ -26,7 +27,8 @@ const value: components.ApplicationCommandBooleanOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandChannelOptionResponse = {
   name: "<value>",
-  description: "joshingly overload nor",
+  description:
+    "key riser mean bravely quantify woot before blah dreamily fooey",
 };
 ```
 
@@ -35,8 +37,7 @@ const value: components.ApplicationCommandChannelOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandIntegerOptionResponse = {
   name: "<value>",
-  description:
-    "rationalize blank kiddingly overheard or astride baseboard councilman ambitious hefty",
+  description: "phew voluminous royal however into inasmuch muffled pick",
 };
 ```
 
@@ -45,7 +46,8 @@ const value: components.ApplicationCommandIntegerOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandMentionableOptionResponse = {
   name: "<value>",
-  description: "aw quarrelsomely since hence weary exactly tepid",
+  description:
+    "amongst justly than zowie following phooey past dazzling near typeface",
 };
 ```
 
@@ -54,7 +56,7 @@ const value: components.ApplicationCommandMentionableOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandNumberOptionResponse = {
   name: "<value>",
-  description: "briefly waist on uselessly",
+  description: "winged inside dim queasily store insignificant cone pro",
 };
 ```
 
@@ -64,7 +66,7 @@ const value: components.ApplicationCommandNumberOptionResponse = {
 const value: components.ApplicationCommandRoleOptionResponse = {
   name: "<value>",
   description:
-    "contractor phooey nightlife avow forenenst short crossly whole aw",
+    "suffocate worldly orchestrate option gadzooks whoa vanadyl or versus",
 };
 ```
 
@@ -73,7 +75,7 @@ const value: components.ApplicationCommandRoleOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandStringOptionResponse = {
   name: "<value>",
-  description: "shabby shocked pluck guilty converse",
+  description: "bogus damaged oh eek council ski abaft",
 };
 ```
 
@@ -82,7 +84,8 @@ const value: components.ApplicationCommandStringOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandSubcommandGroupOptionResponse = {
   name: "<value>",
-  description: "hm zowie utterly",
+  description:
+    "gadzooks terribly improbable source ack miscalculate hm though stylish hm",
 };
 ```
 
@@ -91,7 +94,7 @@ const value: components.ApplicationCommandSubcommandGroupOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandSubcommandOptionResponse = {
   name: "<value>",
-  description: "highly experience confiscate",
+  description: "even lest zowie",
 };
 ```
 
@@ -100,7 +103,7 @@ const value: components.ApplicationCommandSubcommandOptionResponse = {
 ```typescript
 const value: components.ApplicationCommandUserOptionResponse = {
   name: "<value>",
-  description: "electric mmm zen strange earnest",
+  description: "down wherever upon quarrelsomely",
 };
 ```
 

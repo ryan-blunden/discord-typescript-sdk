@@ -7,7 +7,7 @@ import { ApplicationCommandAttachmentOptionResponse } from "@ryan.blunden/discor
 
 let value: ApplicationCommandAttachmentOptionResponse = {
   name: "<value>",
-  description: "same willfully sadly phew er",
+  description: "provided from extremely",
 };
 ```
 
