@@ -14,6 +14,24 @@ import {
   ActionRowComponentForMessageRequest$outboundSchema,
 } from "./actionrowcomponentformessagerequest.js";
 import {
+  ContainerComponentForMessageRequest,
+  ContainerComponentForMessageRequest$inboundSchema,
+  ContainerComponentForMessageRequest$Outbound,
+  ContainerComponentForMessageRequest$outboundSchema,
+} from "./containercomponentformessagerequest.js";
+import {
+  FileComponentForMessageRequest,
+  FileComponentForMessageRequest$inboundSchema,
+  FileComponentForMessageRequest$Outbound,
+  FileComponentForMessageRequest$outboundSchema,
+} from "./filecomponentformessagerequest.js";
+import {
+  MediaGalleryComponentForMessageRequest,
+  MediaGalleryComponentForMessageRequest$inboundSchema,
+  MediaGalleryComponentForMessageRequest$Outbound,
+  MediaGalleryComponentForMessageRequest$outboundSchema,
+} from "./mediagallerycomponentformessagerequest.js";
+import {
   MessageAllowedMentionsRequest,
   MessageAllowedMentionsRequest$inboundSchema,
   MessageAllowedMentionsRequest$Outbound,
@@ -31,6 +49,33 @@ import {
   RichEmbed$Outbound,
   RichEmbed$outboundSchema,
 } from "./richembed.js";
+import {
+  SectionComponentForMessageRequest,
+  SectionComponentForMessageRequest$inboundSchema,
+  SectionComponentForMessageRequest$Outbound,
+  SectionComponentForMessageRequest$outboundSchema,
+} from "./sectioncomponentformessagerequest.js";
+import {
+  SeparatorComponentForMessageRequest,
+  SeparatorComponentForMessageRequest$inboundSchema,
+  SeparatorComponentForMessageRequest$Outbound,
+  SeparatorComponentForMessageRequest$outboundSchema,
+} from "./separatorcomponentformessagerequest.js";
+import {
+  TextDisplayComponentForMessageRequest,
+  TextDisplayComponentForMessageRequest$inboundSchema,
+  TextDisplayComponentForMessageRequest$Outbound,
+  TextDisplayComponentForMessageRequest$outboundSchema,
+} from "./textdisplaycomponentformessagerequest.js";
+
+export type MessageEditRequestPartialComponents =
+  | ActionRowComponentForMessageRequest
+  | MediaGalleryComponentForMessageRequest
+  | TextDisplayComponentForMessageRequest
+  | FileComponentForMessageRequest
+  | SectionComponentForMessageRequest
+  | SeparatorComponentForMessageRequest
+  | ContainerComponentForMessageRequest;
 
 export type MessageEditRequestPartial = {
   content?: string | null | undefined;
@@ -38,9 +83,96 @@ export type MessageEditRequestPartial = {
   flags?: number | null | undefined;
   allowedMentions?: MessageAllowedMentionsRequest | null | undefined;
   stickerIds?: Array<string> | null | undefined;
-  components?: Array<ActionRowComponentForMessageRequest> | null | undefined;
+  components?:
+    | Array<
+      | ActionRowComponentForMessageRequest
+      | MediaGalleryComponentForMessageRequest
+      | TextDisplayComponentForMessageRequest
+      | FileComponentForMessageRequest
+      | SectionComponentForMessageRequest
+      | SeparatorComponentForMessageRequest
+      | ContainerComponentForMessageRequest
+    >
+    | null
+    | undefined;
   attachments?: Array<MessageAttachmentRequest> | null | undefined;
 };
+
+/** @internal */
+export const MessageEditRequestPartialComponents$inboundSchema: z.ZodType<
+  MessageEditRequestPartialComponents,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  ActionRowComponentForMessageRequest$inboundSchema,
+  MediaGalleryComponentForMessageRequest$inboundSchema,
+  TextDisplayComponentForMessageRequest$inboundSchema,
+  FileComponentForMessageRequest$inboundSchema,
+  SectionComponentForMessageRequest$inboundSchema,
+  SeparatorComponentForMessageRequest$inboundSchema,
+  ContainerComponentForMessageRequest$inboundSchema,
+]);
+
+/** @internal */
+export type MessageEditRequestPartialComponents$Outbound =
+  | ActionRowComponentForMessageRequest$Outbound
+  | MediaGalleryComponentForMessageRequest$Outbound
+  | TextDisplayComponentForMessageRequest$Outbound
+  | FileComponentForMessageRequest$Outbound
+  | SectionComponentForMessageRequest$Outbound
+  | SeparatorComponentForMessageRequest$Outbound
+  | ContainerComponentForMessageRequest$Outbound;
+
+/** @internal */
+export const MessageEditRequestPartialComponents$outboundSchema: z.ZodType<
+  MessageEditRequestPartialComponents$Outbound,
+  z.ZodTypeDef,
+  MessageEditRequestPartialComponents
+> = z.union([
+  ActionRowComponentForMessageRequest$outboundSchema,
+  MediaGalleryComponentForMessageRequest$outboundSchema,
+  TextDisplayComponentForMessageRequest$outboundSchema,
+  FileComponentForMessageRequest$outboundSchema,
+  SectionComponentForMessageRequest$outboundSchema,
+  SeparatorComponentForMessageRequest$outboundSchema,
+  ContainerComponentForMessageRequest$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace MessageEditRequestPartialComponents$ {
+  /** @deprecated use `MessageEditRequestPartialComponents$inboundSchema` instead. */
+  export const inboundSchema =
+    MessageEditRequestPartialComponents$inboundSchema;
+  /** @deprecated use `MessageEditRequestPartialComponents$outboundSchema` instead. */
+  export const outboundSchema =
+    MessageEditRequestPartialComponents$outboundSchema;
+  /** @deprecated use `MessageEditRequestPartialComponents$Outbound` instead. */
+  export type Outbound = MessageEditRequestPartialComponents$Outbound;
+}
+
+export function messageEditRequestPartialComponentsToJSON(
+  messageEditRequestPartialComponents: MessageEditRequestPartialComponents,
+): string {
+  return JSON.stringify(
+    MessageEditRequestPartialComponents$outboundSchema.parse(
+      messageEditRequestPartialComponents,
+    ),
+  );
+}
+
+export function messageEditRequestPartialComponentsFromJSON(
+  jsonString: string,
+): SafeParseResult<MessageEditRequestPartialComponents, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      MessageEditRequestPartialComponents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessageEditRequestPartialComponents' from JSON`,
+  );
+}
 
 /** @internal */
 export const MessageEditRequestPartial$inboundSchema: z.ZodType<
@@ -55,7 +187,17 @@ export const MessageEditRequestPartial$inboundSchema: z.ZodType<
     .optional(),
   sticker_ids: z.nullable(z.array(z.string())).optional(),
   components: z.nullable(
-    z.array(ActionRowComponentForMessageRequest$inboundSchema),
+    z.array(
+      z.union([
+        ActionRowComponentForMessageRequest$inboundSchema,
+        MediaGalleryComponentForMessageRequest$inboundSchema,
+        TextDisplayComponentForMessageRequest$inboundSchema,
+        FileComponentForMessageRequest$inboundSchema,
+        SectionComponentForMessageRequest$inboundSchema,
+        SeparatorComponentForMessageRequest$inboundSchema,
+        ContainerComponentForMessageRequest$inboundSchema,
+      ]),
+    ),
   ).optional(),
   attachments: z.nullable(z.array(MessageAttachmentRequest$inboundSchema))
     .optional(),
@@ -74,7 +216,15 @@ export type MessageEditRequestPartial$Outbound = {
   allowed_mentions?: MessageAllowedMentionsRequest$Outbound | null | undefined;
   sticker_ids?: Array<string> | null | undefined;
   components?:
-    | Array<ActionRowComponentForMessageRequest$Outbound>
+    | Array<
+      | ActionRowComponentForMessageRequest$Outbound
+      | MediaGalleryComponentForMessageRequest$Outbound
+      | TextDisplayComponentForMessageRequest$Outbound
+      | FileComponentForMessageRequest$Outbound
+      | SectionComponentForMessageRequest$Outbound
+      | SeparatorComponentForMessageRequest$Outbound
+      | ContainerComponentForMessageRequest$Outbound
+    >
     | null
     | undefined;
   attachments?: Array<MessageAttachmentRequest$Outbound> | null | undefined;
@@ -93,7 +243,17 @@ export const MessageEditRequestPartial$outboundSchema: z.ZodType<
     .optional(),
   stickerIds: z.nullable(z.array(z.string())).optional(),
   components: z.nullable(
-    z.array(ActionRowComponentForMessageRequest$outboundSchema),
+    z.array(
+      z.union([
+        ActionRowComponentForMessageRequest$outboundSchema,
+        MediaGalleryComponentForMessageRequest$outboundSchema,
+        TextDisplayComponentForMessageRequest$outboundSchema,
+        FileComponentForMessageRequest$outboundSchema,
+        SectionComponentForMessageRequest$outboundSchema,
+        SeparatorComponentForMessageRequest$outboundSchema,
+        ContainerComponentForMessageRequest$outboundSchema,
+      ]),
+    ),
   ).optional(),
   attachments: z.nullable(z.array(MessageAttachmentRequest$outboundSchema))
     .optional(),

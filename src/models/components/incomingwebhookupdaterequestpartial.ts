@@ -14,6 +14,24 @@ import {
   ActionRowComponentForMessageRequest$outboundSchema,
 } from "./actionrowcomponentformessagerequest.js";
 import {
+  ContainerComponentForMessageRequest,
+  ContainerComponentForMessageRequest$inboundSchema,
+  ContainerComponentForMessageRequest$Outbound,
+  ContainerComponentForMessageRequest$outboundSchema,
+} from "./containercomponentformessagerequest.js";
+import {
+  FileComponentForMessageRequest,
+  FileComponentForMessageRequest$inboundSchema,
+  FileComponentForMessageRequest$Outbound,
+  FileComponentForMessageRequest$outboundSchema,
+} from "./filecomponentformessagerequest.js";
+import {
+  MediaGalleryComponentForMessageRequest,
+  MediaGalleryComponentForMessageRequest$inboundSchema,
+  MediaGalleryComponentForMessageRequest$Outbound,
+  MediaGalleryComponentForMessageRequest$outboundSchema,
+} from "./mediagallerycomponentformessagerequest.js";
+import {
   MessageAllowedMentionsRequest,
   MessageAllowedMentionsRequest$inboundSchema,
   MessageAllowedMentionsRequest$Outbound,
@@ -37,16 +55,138 @@ import {
   RichEmbed$Outbound,
   RichEmbed$outboundSchema,
 } from "./richembed.js";
+import {
+  SectionComponentForMessageRequest,
+  SectionComponentForMessageRequest$inboundSchema,
+  SectionComponentForMessageRequest$Outbound,
+  SectionComponentForMessageRequest$outboundSchema,
+} from "./sectioncomponentformessagerequest.js";
+import {
+  SeparatorComponentForMessageRequest,
+  SeparatorComponentForMessageRequest$inboundSchema,
+  SeparatorComponentForMessageRequest$Outbound,
+  SeparatorComponentForMessageRequest$outboundSchema,
+} from "./separatorcomponentformessagerequest.js";
+import {
+  TextDisplayComponentForMessageRequest,
+  TextDisplayComponentForMessageRequest$inboundSchema,
+  TextDisplayComponentForMessageRequest$Outbound,
+  TextDisplayComponentForMessageRequest$outboundSchema,
+} from "./textdisplaycomponentformessagerequest.js";
+
+export type IncomingWebhookUpdateRequestPartialComponents =
+  | ActionRowComponentForMessageRequest
+  | MediaGalleryComponentForMessageRequest
+  | TextDisplayComponentForMessageRequest
+  | FileComponentForMessageRequest
+  | SectionComponentForMessageRequest
+  | SeparatorComponentForMessageRequest
+  | ContainerComponentForMessageRequest;
 
 export type IncomingWebhookUpdateRequestPartial = {
   content?: string | null | undefined;
   embeds?: Array<RichEmbed> | null | undefined;
   allowedMentions?: MessageAllowedMentionsRequest | null | undefined;
-  components?: Array<ActionRowComponentForMessageRequest> | null | undefined;
+  components?:
+    | Array<
+      | ActionRowComponentForMessageRequest
+      | MediaGalleryComponentForMessageRequest
+      | TextDisplayComponentForMessageRequest
+      | FileComponentForMessageRequest
+      | SectionComponentForMessageRequest
+      | SeparatorComponentForMessageRequest
+      | ContainerComponentForMessageRequest
+    >
+    | null
+    | undefined;
   attachments?: Array<MessageAttachmentRequest> | null | undefined;
   poll?: PollCreateRequest | null | undefined;
   flags?: number | null | undefined;
 };
+
+/** @internal */
+export const IncomingWebhookUpdateRequestPartialComponents$inboundSchema:
+  z.ZodType<
+    IncomingWebhookUpdateRequestPartialComponents,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    ActionRowComponentForMessageRequest$inboundSchema,
+    MediaGalleryComponentForMessageRequest$inboundSchema,
+    TextDisplayComponentForMessageRequest$inboundSchema,
+    FileComponentForMessageRequest$inboundSchema,
+    SectionComponentForMessageRequest$inboundSchema,
+    SeparatorComponentForMessageRequest$inboundSchema,
+    ContainerComponentForMessageRequest$inboundSchema,
+  ]);
+
+/** @internal */
+export type IncomingWebhookUpdateRequestPartialComponents$Outbound =
+  | ActionRowComponentForMessageRequest$Outbound
+  | MediaGalleryComponentForMessageRequest$Outbound
+  | TextDisplayComponentForMessageRequest$Outbound
+  | FileComponentForMessageRequest$Outbound
+  | SectionComponentForMessageRequest$Outbound
+  | SeparatorComponentForMessageRequest$Outbound
+  | ContainerComponentForMessageRequest$Outbound;
+
+/** @internal */
+export const IncomingWebhookUpdateRequestPartialComponents$outboundSchema:
+  z.ZodType<
+    IncomingWebhookUpdateRequestPartialComponents$Outbound,
+    z.ZodTypeDef,
+    IncomingWebhookUpdateRequestPartialComponents
+  > = z.union([
+    ActionRowComponentForMessageRequest$outboundSchema,
+    MediaGalleryComponentForMessageRequest$outboundSchema,
+    TextDisplayComponentForMessageRequest$outboundSchema,
+    FileComponentForMessageRequest$outboundSchema,
+    SectionComponentForMessageRequest$outboundSchema,
+    SeparatorComponentForMessageRequest$outboundSchema,
+    ContainerComponentForMessageRequest$outboundSchema,
+  ]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace IncomingWebhookUpdateRequestPartialComponents$ {
+  /** @deprecated use `IncomingWebhookUpdateRequestPartialComponents$inboundSchema` instead. */
+  export const inboundSchema =
+    IncomingWebhookUpdateRequestPartialComponents$inboundSchema;
+  /** @deprecated use `IncomingWebhookUpdateRequestPartialComponents$outboundSchema` instead. */
+  export const outboundSchema =
+    IncomingWebhookUpdateRequestPartialComponents$outboundSchema;
+  /** @deprecated use `IncomingWebhookUpdateRequestPartialComponents$Outbound` instead. */
+  export type Outbound = IncomingWebhookUpdateRequestPartialComponents$Outbound;
+}
+
+export function incomingWebhookUpdateRequestPartialComponentsToJSON(
+  incomingWebhookUpdateRequestPartialComponents:
+    IncomingWebhookUpdateRequestPartialComponents,
+): string {
+  return JSON.stringify(
+    IncomingWebhookUpdateRequestPartialComponents$outboundSchema.parse(
+      incomingWebhookUpdateRequestPartialComponents,
+    ),
+  );
+}
+
+export function incomingWebhookUpdateRequestPartialComponentsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  IncomingWebhookUpdateRequestPartialComponents,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      IncomingWebhookUpdateRequestPartialComponents$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'IncomingWebhookUpdateRequestPartialComponents' from JSON`,
+  );
+}
 
 /** @internal */
 export const IncomingWebhookUpdateRequestPartial$inboundSchema: z.ZodType<
@@ -59,7 +199,17 @@ export const IncomingWebhookUpdateRequestPartial$inboundSchema: z.ZodType<
   allowed_mentions: z.nullable(MessageAllowedMentionsRequest$inboundSchema)
     .optional(),
   components: z.nullable(
-    z.array(ActionRowComponentForMessageRequest$inboundSchema),
+    z.array(
+      z.union([
+        ActionRowComponentForMessageRequest$inboundSchema,
+        MediaGalleryComponentForMessageRequest$inboundSchema,
+        TextDisplayComponentForMessageRequest$inboundSchema,
+        FileComponentForMessageRequest$inboundSchema,
+        SectionComponentForMessageRequest$inboundSchema,
+        SeparatorComponentForMessageRequest$inboundSchema,
+        ContainerComponentForMessageRequest$inboundSchema,
+      ]),
+    ),
   ).optional(),
   attachments: z.nullable(z.array(MessageAttachmentRequest$inboundSchema))
     .optional(),
@@ -77,7 +227,15 @@ export type IncomingWebhookUpdateRequestPartial$Outbound = {
   embeds?: Array<RichEmbed$Outbound> | null | undefined;
   allowed_mentions?: MessageAllowedMentionsRequest$Outbound | null | undefined;
   components?:
-    | Array<ActionRowComponentForMessageRequest$Outbound>
+    | Array<
+      | ActionRowComponentForMessageRequest$Outbound
+      | MediaGalleryComponentForMessageRequest$Outbound
+      | TextDisplayComponentForMessageRequest$Outbound
+      | FileComponentForMessageRequest$Outbound
+      | SectionComponentForMessageRequest$Outbound
+      | SeparatorComponentForMessageRequest$Outbound
+      | ContainerComponentForMessageRequest$Outbound
+    >
     | null
     | undefined;
   attachments?: Array<MessageAttachmentRequest$Outbound> | null | undefined;
@@ -96,7 +254,17 @@ export const IncomingWebhookUpdateRequestPartial$outboundSchema: z.ZodType<
   allowedMentions: z.nullable(MessageAllowedMentionsRequest$outboundSchema)
     .optional(),
   components: z.nullable(
-    z.array(ActionRowComponentForMessageRequest$outboundSchema),
+    z.array(
+      z.union([
+        ActionRowComponentForMessageRequest$outboundSchema,
+        MediaGalleryComponentForMessageRequest$outboundSchema,
+        TextDisplayComponentForMessageRequest$outboundSchema,
+        FileComponentForMessageRequest$outboundSchema,
+        SectionComponentForMessageRequest$outboundSchema,
+        SeparatorComponentForMessageRequest$outboundSchema,
+        ContainerComponentForMessageRequest$outboundSchema,
+      ]),
+    ),
   ).optional(),
   attachments: z.nullable(z.array(MessageAttachmentRequest$outboundSchema))
     .optional(),

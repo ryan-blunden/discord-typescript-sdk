@@ -9,6 +9,15 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type CreateMessageMultipartComponents =
+  | components.ActionRowComponentForMessageRequest
+  | components.MediaGalleryComponentForMessageRequest
+  | components.TextDisplayComponentForMessageRequest
+  | components.FileComponentForMessageRequest
+  | components.SectionComponentForMessageRequest
+  | components.SeparatorComponentForMessageRequest
+  | components.ContainerComponentForMessageRequest;
+
 export type Nonce = number | string;
 
 export type CreateMessageMultipartRequestBody = {
@@ -17,7 +26,15 @@ export type CreateMessageMultipartRequestBody = {
   allowedMentions?: components.MessageAllowedMentionsRequest | null | undefined;
   stickerIds?: Array<string> | null | undefined;
   components?:
-    | Array<components.ActionRowComponentForMessageRequest>
+    | Array<
+      | components.ActionRowComponentForMessageRequest
+      | components.MediaGalleryComponentForMessageRequest
+      | components.TextDisplayComponentForMessageRequest
+      | components.FileComponentForMessageRequest
+      | components.SectionComponentForMessageRequest
+      | components.SeparatorComponentForMessageRequest
+      | components.ContainerComponentForMessageRequest
+    >
     | null
     | undefined;
   flags?: number | null | undefined;
@@ -44,6 +61,79 @@ export type CreateMessageMultipartRequest = {
   channelId: string;
   requestBody: CreateMessageMultipartRequestBody;
 };
+
+/** @internal */
+export const CreateMessageMultipartComponents$inboundSchema: z.ZodType<
+  CreateMessageMultipartComponents,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.ActionRowComponentForMessageRequest$inboundSchema,
+  components.MediaGalleryComponentForMessageRequest$inboundSchema,
+  components.TextDisplayComponentForMessageRequest$inboundSchema,
+  components.FileComponentForMessageRequest$inboundSchema,
+  components.SectionComponentForMessageRequest$inboundSchema,
+  components.SeparatorComponentForMessageRequest$inboundSchema,
+  components.ContainerComponentForMessageRequest$inboundSchema,
+]);
+
+/** @internal */
+export type CreateMessageMultipartComponents$Outbound =
+  | components.ActionRowComponentForMessageRequest$Outbound
+  | components.MediaGalleryComponentForMessageRequest$Outbound
+  | components.TextDisplayComponentForMessageRequest$Outbound
+  | components.FileComponentForMessageRequest$Outbound
+  | components.SectionComponentForMessageRequest$Outbound
+  | components.SeparatorComponentForMessageRequest$Outbound
+  | components.ContainerComponentForMessageRequest$Outbound;
+
+/** @internal */
+export const CreateMessageMultipartComponents$outboundSchema: z.ZodType<
+  CreateMessageMultipartComponents$Outbound,
+  z.ZodTypeDef,
+  CreateMessageMultipartComponents
+> = z.union([
+  components.ActionRowComponentForMessageRequest$outboundSchema,
+  components.MediaGalleryComponentForMessageRequest$outboundSchema,
+  components.TextDisplayComponentForMessageRequest$outboundSchema,
+  components.FileComponentForMessageRequest$outboundSchema,
+  components.SectionComponentForMessageRequest$outboundSchema,
+  components.SeparatorComponentForMessageRequest$outboundSchema,
+  components.ContainerComponentForMessageRequest$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateMessageMultipartComponents$ {
+  /** @deprecated use `CreateMessageMultipartComponents$inboundSchema` instead. */
+  export const inboundSchema = CreateMessageMultipartComponents$inboundSchema;
+  /** @deprecated use `CreateMessageMultipartComponents$outboundSchema` instead. */
+  export const outboundSchema = CreateMessageMultipartComponents$outboundSchema;
+  /** @deprecated use `CreateMessageMultipartComponents$Outbound` instead. */
+  export type Outbound = CreateMessageMultipartComponents$Outbound;
+}
+
+export function createMessageMultipartComponentsToJSON(
+  createMessageMultipartComponents: CreateMessageMultipartComponents,
+): string {
+  return JSON.stringify(
+    CreateMessageMultipartComponents$outboundSchema.parse(
+      createMessageMultipartComponents,
+    ),
+  );
+}
+
+export function createMessageMultipartComponentsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateMessageMultipartComponents, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateMessageMultipartComponents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateMessageMultipartComponents' from JSON`,
+  );
+}
 
 /** @internal */
 export const Nonce$inboundSchema: z.ZodType<Nonce, z.ZodTypeDef, unknown> = z
@@ -99,7 +189,17 @@ export const CreateMessageMultipartRequestBody$inboundSchema: z.ZodType<
   ).optional(),
   sticker_ids: z.nullable(z.array(z.string())).optional(),
   components: z.nullable(
-    z.array(components.ActionRowComponentForMessageRequest$inboundSchema),
+    z.array(
+      z.union([
+        components.ActionRowComponentForMessageRequest$inboundSchema,
+        components.MediaGalleryComponentForMessageRequest$inboundSchema,
+        components.TextDisplayComponentForMessageRequest$inboundSchema,
+        components.FileComponentForMessageRequest$inboundSchema,
+        components.SectionComponentForMessageRequest$inboundSchema,
+        components.SeparatorComponentForMessageRequest$inboundSchema,
+        components.ContainerComponentForMessageRequest$inboundSchema,
+      ]),
+    ),
   ).optional(),
   flags: z.nullable(z.number().int()).optional(),
   attachments: z.nullable(
@@ -155,7 +255,15 @@ export type CreateMessageMultipartRequestBody$Outbound = {
     | undefined;
   sticker_ids?: Array<string> | null | undefined;
   components?:
-    | Array<components.ActionRowComponentForMessageRequest$Outbound>
+    | Array<
+      | components.ActionRowComponentForMessageRequest$Outbound
+      | components.MediaGalleryComponentForMessageRequest$Outbound
+      | components.TextDisplayComponentForMessageRequest$Outbound
+      | components.FileComponentForMessageRequest$Outbound
+      | components.SectionComponentForMessageRequest$Outbound
+      | components.SeparatorComponentForMessageRequest$Outbound
+      | components.ContainerComponentForMessageRequest$Outbound
+    >
     | null
     | undefined;
   flags?: number | null | undefined;
@@ -200,7 +308,17 @@ export const CreateMessageMultipartRequestBody$outboundSchema: z.ZodType<
   ).optional(),
   stickerIds: z.nullable(z.array(z.string())).optional(),
   components: z.nullable(
-    z.array(components.ActionRowComponentForMessageRequest$outboundSchema),
+    z.array(
+      z.union([
+        components.ActionRowComponentForMessageRequest$outboundSchema,
+        components.MediaGalleryComponentForMessageRequest$outboundSchema,
+        components.TextDisplayComponentForMessageRequest$outboundSchema,
+        components.FileComponentForMessageRequest$outboundSchema,
+        components.SectionComponentForMessageRequest$outboundSchema,
+        components.SeparatorComponentForMessageRequest$outboundSchema,
+        components.ContainerComponentForMessageRequest$outboundSchema,
+      ]),
+    ),
   ).optional(),
   flags: z.nullable(z.number().int()).optional(),
   attachments: z.nullable(

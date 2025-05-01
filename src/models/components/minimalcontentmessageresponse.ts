@@ -14,11 +14,29 @@ import {
   ActionRowComponentResponse$outboundSchema,
 } from "./actionrowcomponentresponse.js";
 import {
+  ContainerComponentResponse,
+  ContainerComponentResponse$inboundSchema,
+  ContainerComponentResponse$Outbound,
+  ContainerComponentResponse$outboundSchema,
+} from "./containercomponentresponse.js";
+import {
+  FileComponentResponse,
+  FileComponentResponse$inboundSchema,
+  FileComponentResponse$Outbound,
+  FileComponentResponse$outboundSchema,
+} from "./filecomponentresponse.js";
+import {
   GuildStickerResponse,
   GuildStickerResponse$inboundSchema,
   GuildStickerResponse$Outbound,
   GuildStickerResponse$outboundSchema,
 } from "./guildstickerresponse.js";
+import {
+  MediaGalleryComponentResponse,
+  MediaGalleryComponentResponse$inboundSchema,
+  MediaGalleryComponentResponse$Outbound,
+  MediaGalleryComponentResponse$outboundSchema,
+} from "./mediagallerycomponentresponse.js";
 import {
   MessageAttachmentResponse,
   MessageAttachmentResponse$inboundSchema,
@@ -44,17 +62,44 @@ import {
   ResolvedObjectsResponse$outboundSchema,
 } from "./resolvedobjectsresponse.js";
 import {
+  SectionComponentResponse,
+  SectionComponentResponse$inboundSchema,
+  SectionComponentResponse$Outbound,
+  SectionComponentResponse$outboundSchema,
+} from "./sectioncomponentresponse.js";
+import {
+  SeparatorComponentResponse,
+  SeparatorComponentResponse$inboundSchema,
+  SeparatorComponentResponse$Outbound,
+  SeparatorComponentResponse$outboundSchema,
+} from "./separatorcomponentresponse.js";
+import {
   StandardStickerResponse,
   StandardStickerResponse$inboundSchema,
   StandardStickerResponse$Outbound,
   StandardStickerResponse$outboundSchema,
 } from "./standardstickerresponse.js";
 import {
+  TextDisplayComponentResponse,
+  TextDisplayComponentResponse$inboundSchema,
+  TextDisplayComponentResponse$Outbound,
+  TextDisplayComponentResponse$outboundSchema,
+} from "./textdisplaycomponentresponse.js";
+import {
   UserResponse,
   UserResponse$inboundSchema,
   UserResponse$Outbound,
   UserResponse$outboundSchema,
 } from "./userresponse.js";
+
+export type MinimalContentMessageResponseComponents =
+  | ActionRowComponentResponse
+  | MediaGalleryComponentResponse
+  | TextDisplayComponentResponse
+  | SectionComponentResponse
+  | SeparatorComponentResponse
+  | ContainerComponentResponse
+  | FileComponentResponse;
 
 export type MinimalContentMessageResponseStickers =
   | StandardStickerResponse
@@ -70,7 +115,15 @@ export type MinimalContentMessageResponse = {
   timestamp: Date;
   editedTimestamp?: Date | null | undefined;
   flags: number;
-  components: Array<ActionRowComponentResponse>;
+  components: Array<
+    | ActionRowComponentResponse
+    | MediaGalleryComponentResponse
+    | TextDisplayComponentResponse
+    | SectionComponentResponse
+    | SeparatorComponentResponse
+    | ContainerComponentResponse
+    | FileComponentResponse
+  >;
   resolved?: ResolvedObjectsResponse | null | undefined;
   stickers?:
     | Array<StandardStickerResponse | GuildStickerResponse>
@@ -78,6 +131,88 @@ export type MinimalContentMessageResponse = {
     | undefined;
   stickerItems?: Array<MessageStickerItemResponse> | null | undefined;
 };
+
+/** @internal */
+export const MinimalContentMessageResponseComponents$inboundSchema: z.ZodType<
+  MinimalContentMessageResponseComponents,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  ActionRowComponentResponse$inboundSchema,
+  MediaGalleryComponentResponse$inboundSchema,
+  TextDisplayComponentResponse$inboundSchema,
+  SectionComponentResponse$inboundSchema,
+  SeparatorComponentResponse$inboundSchema,
+  ContainerComponentResponse$inboundSchema,
+  FileComponentResponse$inboundSchema,
+]);
+
+/** @internal */
+export type MinimalContentMessageResponseComponents$Outbound =
+  | ActionRowComponentResponse$Outbound
+  | MediaGalleryComponentResponse$Outbound
+  | TextDisplayComponentResponse$Outbound
+  | SectionComponentResponse$Outbound
+  | SeparatorComponentResponse$Outbound
+  | ContainerComponentResponse$Outbound
+  | FileComponentResponse$Outbound;
+
+/** @internal */
+export const MinimalContentMessageResponseComponents$outboundSchema: z.ZodType<
+  MinimalContentMessageResponseComponents$Outbound,
+  z.ZodTypeDef,
+  MinimalContentMessageResponseComponents
+> = z.union([
+  ActionRowComponentResponse$outboundSchema,
+  MediaGalleryComponentResponse$outboundSchema,
+  TextDisplayComponentResponse$outboundSchema,
+  SectionComponentResponse$outboundSchema,
+  SeparatorComponentResponse$outboundSchema,
+  ContainerComponentResponse$outboundSchema,
+  FileComponentResponse$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace MinimalContentMessageResponseComponents$ {
+  /** @deprecated use `MinimalContentMessageResponseComponents$inboundSchema` instead. */
+  export const inboundSchema =
+    MinimalContentMessageResponseComponents$inboundSchema;
+  /** @deprecated use `MinimalContentMessageResponseComponents$outboundSchema` instead. */
+  export const outboundSchema =
+    MinimalContentMessageResponseComponents$outboundSchema;
+  /** @deprecated use `MinimalContentMessageResponseComponents$Outbound` instead. */
+  export type Outbound = MinimalContentMessageResponseComponents$Outbound;
+}
+
+export function minimalContentMessageResponseComponentsToJSON(
+  minimalContentMessageResponseComponents:
+    MinimalContentMessageResponseComponents,
+): string {
+  return JSON.stringify(
+    MinimalContentMessageResponseComponents$outboundSchema.parse(
+      minimalContentMessageResponseComponents,
+    ),
+  );
+}
+
+export function minimalContentMessageResponseComponentsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  MinimalContentMessageResponseComponents,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      MinimalContentMessageResponseComponents$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'MinimalContentMessageResponseComponents' from JSON`,
+  );
+}
 
 /** @internal */
 export const MinimalContentMessageResponseStickers$inboundSchema: z.ZodType<
@@ -157,7 +292,17 @@ export const MinimalContentMessageResponse$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   flags: z.number().int(),
-  components: z.array(ActionRowComponentResponse$inboundSchema),
+  components: z.array(
+    z.union([
+      ActionRowComponentResponse$inboundSchema,
+      MediaGalleryComponentResponse$inboundSchema,
+      TextDisplayComponentResponse$inboundSchema,
+      SectionComponentResponse$inboundSchema,
+      SeparatorComponentResponse$inboundSchema,
+      ContainerComponentResponse$inboundSchema,
+      FileComponentResponse$inboundSchema,
+    ]),
+  ),
   resolved: z.nullable(ResolvedObjectsResponse$inboundSchema).optional(),
   stickers: z.nullable(
     z.array(
@@ -188,7 +333,15 @@ export type MinimalContentMessageResponse$Outbound = {
   timestamp: string;
   edited_timestamp?: string | null | undefined;
   flags: number;
-  components: Array<ActionRowComponentResponse$Outbound>;
+  components: Array<
+    | ActionRowComponentResponse$Outbound
+    | MediaGalleryComponentResponse$Outbound
+    | TextDisplayComponentResponse$Outbound
+    | SectionComponentResponse$Outbound
+    | SeparatorComponentResponse$Outbound
+    | ContainerComponentResponse$Outbound
+    | FileComponentResponse$Outbound
+  >;
   resolved?: ResolvedObjectsResponse$Outbound | null | undefined;
   stickers?:
     | Array<StandardStickerResponse$Outbound | GuildStickerResponse$Outbound>
@@ -213,7 +366,17 @@ export const MinimalContentMessageResponse$outboundSchema: z.ZodType<
   editedTimestamp: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   flags: z.number().int(),
-  components: z.array(ActionRowComponentResponse$outboundSchema),
+  components: z.array(
+    z.union([
+      ActionRowComponentResponse$outboundSchema,
+      MediaGalleryComponentResponse$outboundSchema,
+      TextDisplayComponentResponse$outboundSchema,
+      SectionComponentResponse$outboundSchema,
+      SeparatorComponentResponse$outboundSchema,
+      ContainerComponentResponse$outboundSchema,
+      FileComponentResponse$outboundSchema,
+    ]),
+  ),
   resolved: z.nullable(ResolvedObjectsResponse$outboundSchema).optional(),
   stickers: z.nullable(
     z.array(

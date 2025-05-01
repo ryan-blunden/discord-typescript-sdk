@@ -8353,8 +8353,16 @@ components:
           type:
             - "array"
             - "null"
-          items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 30
+          items:
+            oneOf:
+              - {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/ContainerComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/FileComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/MediaGalleryComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SectionComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SeparatorComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/TextDisplayComponentForMessageRequest"}
+          maxItems: 40
         "flags":
           type:
             - "integer"
@@ -8437,7 +8445,15 @@ components:
           format: "int32"
         "components":
           type: "array"
-          items: {"$ref": "#/components/schemas/ActionRowComponentResponse"}
+          items:
+            oneOf:
+              - {"$ref": "#/components/schemas/ActionRowComponentResponse"}
+              - {"$ref": "#/components/schemas/ContainerComponentResponse"}
+              - {"$ref": "#/components/schemas/FileComponentResponse"}
+              - {"$ref": "#/components/schemas/MediaGalleryComponentResponse"}
+              - {"$ref": "#/components/schemas/SectionComponentResponse"}
+              - {"$ref": "#/components/schemas/SeparatorComponentResponse"}
+              - {"$ref": "#/components/schemas/TextDisplayComponentResponse"}
         "resolved":
           oneOf:
             - type: "null"
@@ -9165,6 +9181,76 @@ components:
         - title: "EVERYONE"
           const: 1
       format: "int32"
+    "ContainerComponentForMessageRequest":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 17
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "accent_color":
+          type:
+            - "integer"
+            - "null"
+          minimum: 0
+          maximum: 16777215
+        "components":
+          type: "array"
+          items:
+            oneOf:
+              - {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/FileComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/MediaGalleryComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SectionComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SeparatorComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/TextDisplayComponentForMessageRequest"}
+          minItems: 1
+          maxItems: 40
+        "spoiler":
+          type:
+            - "boolean"
+            - "null"
+      required:
+        - "type"
+        - "components"
+    "ContainerComponentResponse":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 17
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "id":
+          type: "integer"
+          format: "int32"
+        "accent_color":
+          type:
+            - "integer"
+            - "null"
+          format: "int32"
+        "components":
+          type: "array"
+          items:
+            oneOf:
+              - {"$ref": "#/components/schemas/ActionRowComponentResponse"}
+              - {"$ref": "#/components/schemas/FileComponentResponse"}
+              - {"$ref": "#/components/schemas/MediaGalleryComponentResponse"}
+              - {"$ref": "#/components/schemas/SectionComponentResponse"}
+              - {"$ref": "#/components/schemas/SeparatorComponentResponse"}
+              - {"$ref": "#/components/schemas/TextDisplayComponentResponse"}
+        "spoiler":
+          type: "boolean"
+      required:
+        - "type"
+        - "id"
+        - "components"
+        - "spoiler"
     "CreateEntitlementRequestData":
       type: "object"
       properties:
@@ -10329,6 +10415,54 @@ components:
         - "entity_type"
         - "privacy_level"
         - "entity_metadata"
+    "FileComponentForMessageRequest":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 13
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "spoiler":
+          type:
+            - "boolean"
+            - "null"
+        "file": {"$ref": "#/components/schemas/UnfurledMediaRequestWithAttachmentReferenceRequired"}
+      required:
+        - "type"
+        - "file"
+    "FileComponentResponse":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 13
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "id":
+          type: "integer"
+          format: "int32"
+        "file": {"$ref": "#/components/schemas/UnfurledMediaResponse"}
+        "name":
+          type:
+            - "string"
+            - "null"
+        "size":
+          type:
+            - "integer"
+            - "null"
+          format: "int32"
+        "spoiler":
+          type: "boolean"
+      required:
+        - "type"
+        - "id"
+        - "file"
+        - "spoiler"
     "FlagToChannelAction":
       type: "object"
       properties:
@@ -12501,8 +12635,16 @@ components:
           type:
             - "array"
             - "null"
-          items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 30
+          items:
+            oneOf:
+              - {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/ContainerComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/FileComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/MediaGalleryComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SectionComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SeparatorComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/TextDisplayComponentForMessageRequest"}
+          maxItems: 40
         "attachments":
           type:
             - "array"
@@ -12543,8 +12685,16 @@ components:
           type:
             - "array"
             - "null"
-          items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 30
+          items:
+            oneOf:
+              - {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/ContainerComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/FileComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/MediaGalleryComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SectionComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SeparatorComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/TextDisplayComponentForMessageRequest"}
+          maxItems: 40
         "attachments":
           type:
             - "array"
@@ -12608,8 +12758,16 @@ components:
           type:
             - "array"
             - "null"
-          items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 30
+          items:
+            oneOf:
+              - {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/ContainerComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/FileComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/MediaGalleryComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SectionComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SeparatorComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/TextDisplayComponentForMessageRequest"}
+          maxItems: 40
         "attachments":
           type:
             - "array"
@@ -12642,8 +12800,16 @@ components:
           type:
             - "array"
             - "null"
-          items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 30
+          items:
+            oneOf:
+              - {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/ContainerComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/FileComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/MediaGalleryComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SectionComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SeparatorComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/TextDisplayComponentForMessageRequest"}
+          maxItems: 40
         "attachments":
           type:
             - "array"
@@ -13566,6 +13732,73 @@ components:
           oneOf:
             - type: "null"
             - {"$ref": "#/components/schemas/MLSpamTriggerMetadata"}
+    "MediaGalleryComponentForMessageRequest":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 12
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "items":
+          type: "array"
+          items: {"$ref": "#/components/schemas/MediaGalleryItemRequest"}
+          minItems: 1
+          maxItems: 10
+      required:
+        - "type"
+        - "items"
+    "MediaGalleryComponentResponse":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 12
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "id":
+          type: "integer"
+          format: "int32"
+        "items":
+          type: "array"
+          items: {"$ref": "#/components/schemas/MediaGalleryItemResponse"}
+      required:
+        - "type"
+        - "id"
+        - "items"
+    "MediaGalleryItemRequest":
+      type: "object"
+      properties:
+        "description":
+          type:
+            - "string"
+            - "null"
+          minLength: 1
+          maxLength: 1024
+        "spoiler":
+          type:
+            - "boolean"
+            - "null"
+        "media": {"$ref": "#/components/schemas/UnfurledMediaRequest"}
+      required:
+        - "media"
+    "MediaGalleryItemResponse":
+      type: "object"
+      properties:
+        "media": {"$ref": "#/components/schemas/UnfurledMediaResponse"}
+        "description":
+          type:
+            - "string"
+            - "null"
+        "spoiler":
+          type: "boolean"
+      required:
+        - "media"
+        - "spoiler"
     "MentionSpamRuleResponse":
       type: "object"
       properties:
@@ -14020,6 +14253,16 @@ components:
         - "type"
         - "authorizing_integration_owners"
         - "interacted_message_id"
+    "MessageComponentSeparatorSpacingSize":
+      type: "integer"
+      oneOf:
+        - title: "SMALL"
+          description: "Small spacing"
+          const: 1
+        - title: "LARGE"
+          description: "Large spacing"
+          const: 2
+      format: "int32"
     "MessageComponentTypes":
       type: "integer"
       oneOf:
@@ -14047,6 +14290,27 @@ components:
         - title: "CHANNEL_SELECT"
           description: "Select menu for channels"
           const: 8
+        - title: "SECTION"
+          description: "Section component"
+          const: 9
+        - title: "TEXT_DISPLAY"
+          description: "Text component"
+          const: 10
+        - title: "THUMBNAIL"
+          description: "Thumbnail component"
+          const: 11
+        - title: "MEDIA_GALLERY"
+          description: "Media gallery component"
+          const: 12
+        - title: "FILE"
+          description: "File component"
+          const: 13
+        - title: "SEPARATOR"
+          description: "Separator component"
+          const: 14
+        - title: "CONTAINER"
+          description: "Container component"
+          const: 17
       format: "int32"
     "MessageCreateRequest":
       type: "object"
@@ -14076,8 +14340,16 @@ components:
           type:
             - "array"
             - "null"
-          items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 30
+          items:
+            oneOf:
+              - {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/ContainerComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/FileComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/MediaGalleryComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SectionComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SeparatorComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/TextDisplayComponentForMessageRequest"}
+          maxItems: 40
         "flags":
           type:
             - "integer"
@@ -14150,8 +14422,16 @@ components:
           type:
             - "array"
             - "null"
-          items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 30
+          items:
+            oneOf:
+              - {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/ContainerComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/FileComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/MediaGalleryComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SectionComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SeparatorComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/TextDisplayComponentForMessageRequest"}
+          maxItems: 40
         "attachments":
           type:
             - "array"
@@ -14511,7 +14791,15 @@ components:
           format: "int32"
         "components":
           type: "array"
-          items: {"$ref": "#/components/schemas/ActionRowComponentResponse"}
+          items:
+            oneOf:
+              - {"$ref": "#/components/schemas/ActionRowComponentResponse"}
+              - {"$ref": "#/components/schemas/ContainerComponentResponse"}
+              - {"$ref": "#/components/schemas/FileComponentResponse"}
+              - {"$ref": "#/components/schemas/MediaGalleryComponentResponse"}
+              - {"$ref": "#/components/schemas/SectionComponentResponse"}
+              - {"$ref": "#/components/schemas/SeparatorComponentResponse"}
+              - {"$ref": "#/components/schemas/TextDisplayComponentResponse"}
         "resolved":
           oneOf:
             - type: "null"
@@ -14813,7 +15101,15 @@ components:
           format: "int32"
         "components":
           type: "array"
-          items: {"$ref": "#/components/schemas/ActionRowComponentResponse"}
+          items:
+            oneOf:
+              - {"$ref": "#/components/schemas/ActionRowComponentResponse"}
+              - {"$ref": "#/components/schemas/ContainerComponentResponse"}
+              - {"$ref": "#/components/schemas/FileComponentResponse"}
+              - {"$ref": "#/components/schemas/MediaGalleryComponentResponse"}
+              - {"$ref": "#/components/schemas/SectionComponentResponse"}
+              - {"$ref": "#/components/schemas/SeparatorComponentResponse"}
+              - {"$ref": "#/components/schemas/TextDisplayComponentResponse"}
         "resolved":
           oneOf:
             - type: "null"
@@ -14868,7 +15164,7 @@ components:
           type: "array"
           items: {"$ref": "#/components/schemas/ActionRowComponentForModalRequest"}
           minItems: 1
-          maxItems: 30
+          maxItems: 40
       required:
         - "custom_id"
         - "title"
@@ -16349,8 +16645,16 @@ components:
           type:
             - "array"
             - "null"
-          items: {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
-          maxItems: 30
+          items:
+            oneOf:
+              - {"$ref": "#/components/schemas/ActionRowComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/ContainerComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/FileComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/MediaGalleryComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SectionComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/SeparatorComponentForMessageRequest"}
+              - {"$ref": "#/components/schemas/TextDisplayComponentForMessageRequest"}
+          maxItems: 40
         "flags":
           type:
             - "integer"
@@ -16466,6 +16770,95 @@ components:
       required:
         - "guild_scheduled_event_id"
         - "user_id"
+    "SectionComponentForMessageRequest":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 9
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "components":
+          type: "array"
+          items: {"$ref": "#/components/schemas/TextDisplayComponentForMessageRequest"}
+          minItems: 1
+          maxItems: 3
+        "accessory":
+          oneOf:
+            - {"$ref": "#/components/schemas/ButtonComponentForMessageRequest"}
+            - {"$ref": "#/components/schemas/ThumbnailComponentForMessageRequest"}
+      required:
+        - "type"
+        - "components"
+        - "accessory"
+    "SectionComponentResponse":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 9
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "id":
+          type: "integer"
+          format: "int32"
+        "components":
+          type: "array"
+          items: {"$ref": "#/components/schemas/TextDisplayComponentResponse"}
+        "accessory":
+          oneOf:
+            - {"$ref": "#/components/schemas/ButtonComponentResponse"}
+            - {"$ref": "#/components/schemas/ThumbnailComponentResponse"}
+      required:
+        - "type"
+        - "id"
+        - "components"
+        - "accessory"
+    "SeparatorComponentForMessageRequest":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 14
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "spacing":
+          oneOf:
+            - type: "null"
+            - {"$ref": "#/components/schemas/MessageComponentSeparatorSpacingSize"}
+        "divider":
+          type:
+            - "boolean"
+            - "null"
+      required:
+        - "type"
+    "SeparatorComponentResponse":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 14
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "id":
+          type: "integer"
+          format: "int32"
+        "spacing": {"$ref": "#/components/schemas/MessageComponentSeparatorSpacingSize"}
+        "divider":
+          type: "boolean"
+      required:
+        - "type"
+        - "id"
+        - "spacing"
+        - "divider"
     "SettingsEmojiResponse":
       type: "object"
       properties:
@@ -17127,6 +17520,42 @@ components:
         - "name"
         - "owner_user_id"
         - "members"
+    "TextDisplayComponentForMessageRequest":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 10
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "content":
+          type: "string"
+          minLength: 1
+          maxLength: 4000
+      required:
+        - "type"
+        - "content"
+    "TextDisplayComponentResponse":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 10
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "id":
+          type: "integer"
+          format: "int32"
+        "content":
+          type: "string"
+      required:
+        - "type"
+        - "id"
+        - "content"
     "TextInputComponentForModalRequest":
       type: "object"
       properties:
@@ -17456,6 +17885,55 @@ components:
       required:
         - "threads"
         - "members"
+    "ThumbnailComponentForMessageRequest":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 11
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "description":
+          type:
+            - "string"
+            - "null"
+          minLength: 1
+          maxLength: 1024
+        "spoiler":
+          type:
+            - "boolean"
+            - "null"
+        "media": {"$ref": "#/components/schemas/UnfurledMediaRequest"}
+      required:
+        - "type"
+        - "media"
+    "ThumbnailComponentResponse":
+      type: "object"
+      properties:
+        "type":
+          type: "integer"
+          enum:
+            - 11
+          allOf:
+            - {"$ref": "#/components/schemas/MessageComponentTypes"}
+          format: "int32"
+        "id":
+          type: "integer"
+          format: "int32"
+        "media": {"$ref": "#/components/schemas/UnfurledMediaResponse"}
+        "description":
+          type:
+            - "string"
+            - "null"
+        "spoiler":
+          type: "boolean"
+      required:
+        - "type"
+        - "id"
+        - "media"
+        - "spoiler"
     "TypingIndicatorResponse":
       type: "object"
     "UInt32Type":
@@ -17463,6 +17941,50 @@ components:
       minimum: 0
       maximum: 4294967295
       format: "int64"
+    "UnfurledMediaRequest":
+      type: "object"
+      properties:
+        "url":
+          type: "string"
+          maxLength: 2048
+          format: "uri"
+      required:
+        - "url"
+    "UnfurledMediaRequestWithAttachmentReferenceRequired":
+      type: "object"
+      properties:
+        "url":
+          type: "string"
+          maxLength: 2048
+          format: "uri"
+      required:
+        - "url"
+    "UnfurledMediaResponse":
+      type: "object"
+      properties:
+        "id": {"$ref": "#/components/schemas/SnowflakeType"}
+        "url":
+          type: "string"
+        "proxy_url":
+          type: "string"
+        "width":
+          type:
+            - "integer"
+            - "null"
+          format: "int32"
+        "height":
+          type:
+            - "integer"
+            - "null"
+          format: "int32"
+        "content_type":
+          type:
+            - "string"
+            - "null"
+      required:
+        - "id"
+        - "url"
+        - "proxy_url"
     "UpdateDMRequestPartial":
       type: "object"
       properties:

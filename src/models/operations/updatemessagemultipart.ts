@@ -9,6 +9,15 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type UpdateMessageMultipartComponents =
+  | components.ActionRowComponentForMessageRequest
+  | components.MediaGalleryComponentForMessageRequest
+  | components.TextDisplayComponentForMessageRequest
+  | components.FileComponentForMessageRequest
+  | components.SectionComponentForMessageRequest
+  | components.SeparatorComponentForMessageRequest
+  | components.ContainerComponentForMessageRequest;
+
 export type UpdateMessageMultipartRequestBody = {
   content?: string | null | undefined;
   embeds?: Array<components.RichEmbed> | null | undefined;
@@ -16,7 +25,15 @@ export type UpdateMessageMultipartRequestBody = {
   allowedMentions?: components.MessageAllowedMentionsRequest | null | undefined;
   stickerIds?: Array<string> | null | undefined;
   components?:
-    | Array<components.ActionRowComponentForMessageRequest>
+    | Array<
+      | components.ActionRowComponentForMessageRequest
+      | components.MediaGalleryComponentForMessageRequest
+      | components.TextDisplayComponentForMessageRequest
+      | components.FileComponentForMessageRequest
+      | components.SectionComponentForMessageRequest
+      | components.SeparatorComponentForMessageRequest
+      | components.ContainerComponentForMessageRequest
+    >
     | null
     | undefined;
   attachments?: Array<components.MessageAttachmentRequest> | null | undefined;
@@ -39,6 +56,79 @@ export type UpdateMessageMultipartRequest = {
 };
 
 /** @internal */
+export const UpdateMessageMultipartComponents$inboundSchema: z.ZodType<
+  UpdateMessageMultipartComponents,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.ActionRowComponentForMessageRequest$inboundSchema,
+  components.MediaGalleryComponentForMessageRequest$inboundSchema,
+  components.TextDisplayComponentForMessageRequest$inboundSchema,
+  components.FileComponentForMessageRequest$inboundSchema,
+  components.SectionComponentForMessageRequest$inboundSchema,
+  components.SeparatorComponentForMessageRequest$inboundSchema,
+  components.ContainerComponentForMessageRequest$inboundSchema,
+]);
+
+/** @internal */
+export type UpdateMessageMultipartComponents$Outbound =
+  | components.ActionRowComponentForMessageRequest$Outbound
+  | components.MediaGalleryComponentForMessageRequest$Outbound
+  | components.TextDisplayComponentForMessageRequest$Outbound
+  | components.FileComponentForMessageRequest$Outbound
+  | components.SectionComponentForMessageRequest$Outbound
+  | components.SeparatorComponentForMessageRequest$Outbound
+  | components.ContainerComponentForMessageRequest$Outbound;
+
+/** @internal */
+export const UpdateMessageMultipartComponents$outboundSchema: z.ZodType<
+  UpdateMessageMultipartComponents$Outbound,
+  z.ZodTypeDef,
+  UpdateMessageMultipartComponents
+> = z.union([
+  components.ActionRowComponentForMessageRequest$outboundSchema,
+  components.MediaGalleryComponentForMessageRequest$outboundSchema,
+  components.TextDisplayComponentForMessageRequest$outboundSchema,
+  components.FileComponentForMessageRequest$outboundSchema,
+  components.SectionComponentForMessageRequest$outboundSchema,
+  components.SeparatorComponentForMessageRequest$outboundSchema,
+  components.ContainerComponentForMessageRequest$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateMessageMultipartComponents$ {
+  /** @deprecated use `UpdateMessageMultipartComponents$inboundSchema` instead. */
+  export const inboundSchema = UpdateMessageMultipartComponents$inboundSchema;
+  /** @deprecated use `UpdateMessageMultipartComponents$outboundSchema` instead. */
+  export const outboundSchema = UpdateMessageMultipartComponents$outboundSchema;
+  /** @deprecated use `UpdateMessageMultipartComponents$Outbound` instead. */
+  export type Outbound = UpdateMessageMultipartComponents$Outbound;
+}
+
+export function updateMessageMultipartComponentsToJSON(
+  updateMessageMultipartComponents: UpdateMessageMultipartComponents,
+): string {
+  return JSON.stringify(
+    UpdateMessageMultipartComponents$outboundSchema.parse(
+      updateMessageMultipartComponents,
+    ),
+  );
+}
+
+export function updateMessageMultipartComponentsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateMessageMultipartComponents, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateMessageMultipartComponents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateMessageMultipartComponents' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateMessageMultipartRequestBody$inboundSchema: z.ZodType<
   UpdateMessageMultipartRequestBody,
   z.ZodTypeDef,
@@ -52,7 +142,17 @@ export const UpdateMessageMultipartRequestBody$inboundSchema: z.ZodType<
   ).optional(),
   sticker_ids: z.nullable(z.array(z.string())).optional(),
   components: z.nullable(
-    z.array(components.ActionRowComponentForMessageRequest$inboundSchema),
+    z.array(
+      z.union([
+        components.ActionRowComponentForMessageRequest$inboundSchema,
+        components.MediaGalleryComponentForMessageRequest$inboundSchema,
+        components.TextDisplayComponentForMessageRequest$inboundSchema,
+        components.FileComponentForMessageRequest$inboundSchema,
+        components.SectionComponentForMessageRequest$inboundSchema,
+        components.SeparatorComponentForMessageRequest$inboundSchema,
+        components.ContainerComponentForMessageRequest$inboundSchema,
+      ]),
+    ),
   ).optional(),
   attachments: z.nullable(
     z.array(components.MessageAttachmentRequest$inboundSchema),
@@ -95,7 +195,15 @@ export type UpdateMessageMultipartRequestBody$Outbound = {
     | undefined;
   sticker_ids?: Array<string> | null | undefined;
   components?:
-    | Array<components.ActionRowComponentForMessageRequest$Outbound>
+    | Array<
+      | components.ActionRowComponentForMessageRequest$Outbound
+      | components.MediaGalleryComponentForMessageRequest$Outbound
+      | components.TextDisplayComponentForMessageRequest$Outbound
+      | components.FileComponentForMessageRequest$Outbound
+      | components.SectionComponentForMessageRequest$Outbound
+      | components.SeparatorComponentForMessageRequest$Outbound
+      | components.ContainerComponentForMessageRequest$Outbound
+    >
     | null
     | undefined;
   attachments?:
@@ -128,7 +236,17 @@ export const UpdateMessageMultipartRequestBody$outboundSchema: z.ZodType<
   ).optional(),
   stickerIds: z.nullable(z.array(z.string())).optional(),
   components: z.nullable(
-    z.array(components.ActionRowComponentForMessageRequest$outboundSchema),
+    z.array(
+      z.union([
+        components.ActionRowComponentForMessageRequest$outboundSchema,
+        components.MediaGalleryComponentForMessageRequest$outboundSchema,
+        components.TextDisplayComponentForMessageRequest$outboundSchema,
+        components.FileComponentForMessageRequest$outboundSchema,
+        components.SectionComponentForMessageRequest$outboundSchema,
+        components.SeparatorComponentForMessageRequest$outboundSchema,
+        components.ContainerComponentForMessageRequest$outboundSchema,
+      ]),
+    ),
   ).optional(),
   attachments: z.nullable(
     z.array(components.MessageAttachmentRequest$outboundSchema),
