@@ -37,17 +37,26 @@ let value: MessageResponse = {
   flags: 645636,
   components: [
     {
-      id: 709443,
+      id: 598440,
+      components: [
+        {
+          id: 501270,
+          content: "<value>",
+        },
+      ],
+      accessory: {
+        id: 770437,
+      },
     },
   ],
   id: "<value>",
   channelId: "<value>",
   author: {
     id: "<value>",
-    username: "Lavinia_Gislason85",
+    username: "Ryleigh55",
     discriminator: "<value>",
-    publicFlags: 753732,
-    flags: 261050,
+    publicFlags: 162451,
+    flags: 657448,
   },
   pinned: false,
   mentionEveryone: false,
@@ -68,7 +77,7 @@ let value: MessageResponse = {
 | `timestamp`                                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                    | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `editedTimestamp`                                                                                                | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                    | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `flags`                                                                                                          | *number*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
-| `components`                                                                                                     | [components.ActionRowComponentResponse](../../models/components/actionrowcomponentresponse.md)[]                 | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `components`                                                                                                     | *components.MessageResponseComponents*[]                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `resolved`                                                                                                       | [components.ResolvedObjectsResponse](../../models/components/resolvedobjectsresponse.md)                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `stickers`                                                                                                       | *components.Stickers*[]                                                                                          | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `stickerItems`                                                                                                   | [components.MessageStickerItemResponse](../../models/components/messagestickeritemresponse.md)[]                 | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |

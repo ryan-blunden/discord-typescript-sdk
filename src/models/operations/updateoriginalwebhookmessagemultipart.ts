@@ -13,12 +13,29 @@ export type UpdateOriginalWebhookMessageMultipartSecurity = {
   botToken?: string | undefined;
 };
 
+export type Components =
+  | components.ActionRowComponentForMessageRequest
+  | components.MediaGalleryComponentForMessageRequest
+  | components.TextDisplayComponentForMessageRequest
+  | components.FileComponentForMessageRequest
+  | components.SectionComponentForMessageRequest
+  | components.SeparatorComponentForMessageRequest
+  | components.ContainerComponentForMessageRequest;
+
 export type UpdateOriginalWebhookMessageMultipartRequestBody = {
   content?: string | null | undefined;
   embeds?: Array<components.RichEmbed> | null | undefined;
   allowedMentions?: components.MessageAllowedMentionsRequest | null | undefined;
   components?:
-    | Array<components.ActionRowComponentForMessageRequest>
+    | Array<
+      | components.ActionRowComponentForMessageRequest
+      | components.MediaGalleryComponentForMessageRequest
+      | components.TextDisplayComponentForMessageRequest
+      | components.FileComponentForMessageRequest
+      | components.SectionComponentForMessageRequest
+      | components.SeparatorComponentForMessageRequest
+      | components.ContainerComponentForMessageRequest
+    >
     | null
     | undefined;
   attachments?: Array<components.MessageAttachmentRequest> | null | undefined;
@@ -120,6 +137,73 @@ export function updateOriginalWebhookMessageMultipartSecurityFromJSON(
 }
 
 /** @internal */
+export const Components$inboundSchema: z.ZodType<
+  Components,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.ActionRowComponentForMessageRequest$inboundSchema,
+  components.MediaGalleryComponentForMessageRequest$inboundSchema,
+  components.TextDisplayComponentForMessageRequest$inboundSchema,
+  components.FileComponentForMessageRequest$inboundSchema,
+  components.SectionComponentForMessageRequest$inboundSchema,
+  components.SeparatorComponentForMessageRequest$inboundSchema,
+  components.ContainerComponentForMessageRequest$inboundSchema,
+]);
+
+/** @internal */
+export type Components$Outbound =
+  | components.ActionRowComponentForMessageRequest$Outbound
+  | components.MediaGalleryComponentForMessageRequest$Outbound
+  | components.TextDisplayComponentForMessageRequest$Outbound
+  | components.FileComponentForMessageRequest$Outbound
+  | components.SectionComponentForMessageRequest$Outbound
+  | components.SeparatorComponentForMessageRequest$Outbound
+  | components.ContainerComponentForMessageRequest$Outbound;
+
+/** @internal */
+export const Components$outboundSchema: z.ZodType<
+  Components$Outbound,
+  z.ZodTypeDef,
+  Components
+> = z.union([
+  components.ActionRowComponentForMessageRequest$outboundSchema,
+  components.MediaGalleryComponentForMessageRequest$outboundSchema,
+  components.TextDisplayComponentForMessageRequest$outboundSchema,
+  components.FileComponentForMessageRequest$outboundSchema,
+  components.SectionComponentForMessageRequest$outboundSchema,
+  components.SeparatorComponentForMessageRequest$outboundSchema,
+  components.ContainerComponentForMessageRequest$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Components$ {
+  /** @deprecated use `Components$inboundSchema` instead. */
+  export const inboundSchema = Components$inboundSchema;
+  /** @deprecated use `Components$outboundSchema` instead. */
+  export const outboundSchema = Components$outboundSchema;
+  /** @deprecated use `Components$Outbound` instead. */
+  export type Outbound = Components$Outbound;
+}
+
+export function componentsToJSON(components: Components): string {
+  return JSON.stringify(Components$outboundSchema.parse(components));
+}
+
+export function componentsFromJSON(
+  jsonString: string,
+): SafeParseResult<Components, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Components$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Components' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateOriginalWebhookMessageMultipartRequestBody$inboundSchema:
   z.ZodType<
     UpdateOriginalWebhookMessageMultipartRequestBody,
@@ -132,7 +216,17 @@ export const UpdateOriginalWebhookMessageMultipartRequestBody$inboundSchema:
       components.MessageAllowedMentionsRequest$inboundSchema,
     ).optional(),
     components: z.nullable(
-      z.array(components.ActionRowComponentForMessageRequest$inboundSchema),
+      z.array(
+        z.union([
+          components.ActionRowComponentForMessageRequest$inboundSchema,
+          components.MediaGalleryComponentForMessageRequest$inboundSchema,
+          components.TextDisplayComponentForMessageRequest$inboundSchema,
+          components.FileComponentForMessageRequest$inboundSchema,
+          components.SectionComponentForMessageRequest$inboundSchema,
+          components.SeparatorComponentForMessageRequest$inboundSchema,
+          components.ContainerComponentForMessageRequest$inboundSchema,
+        ]),
+      ),
     ).optional(),
     attachments: z.nullable(
       z.array(components.MessageAttachmentRequest$inboundSchema),
@@ -174,7 +268,15 @@ export type UpdateOriginalWebhookMessageMultipartRequestBody$Outbound = {
     | null
     | undefined;
   components?:
-    | Array<components.ActionRowComponentForMessageRequest$Outbound>
+    | Array<
+      | components.ActionRowComponentForMessageRequest$Outbound
+      | components.MediaGalleryComponentForMessageRequest$Outbound
+      | components.TextDisplayComponentForMessageRequest$Outbound
+      | components.FileComponentForMessageRequest$Outbound
+      | components.SectionComponentForMessageRequest$Outbound
+      | components.SeparatorComponentForMessageRequest$Outbound
+      | components.ContainerComponentForMessageRequest$Outbound
+    >
     | null
     | undefined;
   attachments?:
@@ -208,7 +310,17 @@ export const UpdateOriginalWebhookMessageMultipartRequestBody$outboundSchema:
       components.MessageAllowedMentionsRequest$outboundSchema,
     ).optional(),
     components: z.nullable(
-      z.array(components.ActionRowComponentForMessageRequest$outboundSchema),
+      z.array(
+        z.union([
+          components.ActionRowComponentForMessageRequest$outboundSchema,
+          components.MediaGalleryComponentForMessageRequest$outboundSchema,
+          components.TextDisplayComponentForMessageRequest$outboundSchema,
+          components.FileComponentForMessageRequest$outboundSchema,
+          components.SectionComponentForMessageRequest$outboundSchema,
+          components.SeparatorComponentForMessageRequest$outboundSchema,
+          components.ContainerComponentForMessageRequest$outboundSchema,
+        ]),
+      ),
     ).optional(),
     attachments: z.nullable(
       z.array(components.MessageAttachmentRequest$outboundSchema),

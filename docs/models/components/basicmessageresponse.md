@@ -37,17 +37,18 @@ let value: BasicMessageResponse = {
   flags: 561206,
   components: [
     {
-      id: 755783,
+      id: 34635,
+      divider: false,
     },
   ],
   id: "<value>",
   channelId: "<value>",
   author: {
     id: "<value>",
-    username: "Alf.Gorczany34",
+    username: "Britney.Hayes",
     discriminator: "<value>",
-    publicFlags: 383265,
-    flags: 100888,
+    publicFlags: 100888,
+    flags: 771199,
   },
   pinned: false,
   mentionEveryone: false,
@@ -68,7 +69,7 @@ let value: BasicMessageResponse = {
 | `timestamp`                                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                    | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `editedTimestamp`                                                                                                | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                    | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `flags`                                                                                                          | *number*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
-| `components`                                                                                                     | [components.ActionRowComponentResponse](../../models/components/actionrowcomponentresponse.md)[]                 | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `components`                                                                                                     | *components.BasicMessageResponseComponents*[]                                                                    | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `resolved`                                                                                                       | [components.ResolvedObjectsResponse](../../models/components/resolvedobjectsresponse.md)                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `stickers`                                                                                                       | *components.BasicMessageResponseStickers*[]                                                                      | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `stickerItems`                                                                                                   | [components.MessageStickerItemResponse](../../models/components/messagestickeritemresponse.md)[]                 | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |

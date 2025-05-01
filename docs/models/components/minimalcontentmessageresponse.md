@@ -37,7 +37,13 @@ let value: MinimalContentMessageResponse = {
   flags: 624013,
   components: [
     {
-      id: 416998,
+      id: 525257,
+      file: {
+        id: "<value>",
+        url: "https://unrealistic-bran.net/",
+        proxyUrl: "https://haunting-chapel.com",
+      },
+      spoiler: false,
     },
   ],
 };
@@ -56,7 +62,7 @@ let value: MinimalContentMessageResponse = {
 | `timestamp`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)    | :heavy_check_mark:                                                                               | N/A                                                                                              |
 | `editedTimestamp`                                                                                | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)    | :heavy_minus_sign:                                                                               | N/A                                                                                              |
 | `flags`                                                                                          | *number*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
-| `components`                                                                                     | [components.ActionRowComponentResponse](../../models/components/actionrowcomponentresponse.md)[] | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `components`                                                                                     | *components.MinimalContentMessageResponseComponents*[]                                           | :heavy_check_mark:                                                                               | N/A                                                                                              |
 | `resolved`                                                                                       | [components.ResolvedObjectsResponse](../../models/components/resolvedobjectsresponse.md)         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
 | `stickers`                                                                                       | *components.MinimalContentMessageResponseStickers*[]                                             | :heavy_minus_sign:                                                                               | N/A                                                                                              |
 | `stickerItems`                                                                                   | [components.MessageStickerItemResponse](../../models/components/messagestickeritemresponse.md)[] | :heavy_minus_sign:                                                                               | N/A                                                                                              |

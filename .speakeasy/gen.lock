@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d6760420-c0f7-476a-a38c-38dd82de2cc6
 management:
-  docChecksum: 53bb8d66a7441914e5177849482a7567
+  docChecksum: 6df524fe2968c90ac9839d17648495db
   docVersion: "10"
-  speakeasyVersion: 1.540.1
-  generationVersion: 2.593.4
-  releaseVersion: 0.3.1
-  configChecksum: 69d17dc65daa72ff2d54f34a732b73fe
+  speakeasyVersion: 1.541.2
+  generationVersion: 2.595.4
+  releaseVersion: 0.3.2
+  configChecksum: 14f9dff60de0dd89d1b617f7eb421b0a
   repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
   installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
   published: true
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.21.6
+    core: 3.21.7
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
@@ -42,6 +42,7 @@ generatedFiles:
   - RUNTIMES.md
   - USAGE.md
   - docs/lib/utils/retryconfig.md
+  - docs/models/components/accessory.md
   - docs/models/components/accountresponse.md
   - docs/models/components/actionrowcomponentformessagerequest.md
   - docs/models/components/actionrowcomponentformessagerequestcomponents.md
@@ -102,8 +103,10 @@ generatedFiles:
   - docs/models/components/auditlogobjectchangeresponse.md
   - docs/models/components/automoderationrules.md
   - docs/models/components/basecreatemessagecreaterequest.md
+  - docs/models/components/basecreatemessagecreaterequestcomponents.md
   - docs/models/components/basicapplicationresponse.md
   - docs/models/components/basicmessageresponse.md
+  - docs/models/components/basicmessageresponsecomponents.md
   - docs/models/components/basicmessageresponseinteractionmetadata.md
   - docs/models/components/basicmessageresponsenonce.md
   - docs/models/components/basicmessageresponsestickers.md
@@ -133,6 +136,10 @@ generatedFiles:
   - docs/models/components/connectedaccountguildresponse.md
   - docs/models/components/connectedaccountintegrationresponse.md
   - docs/models/components/connectedaccountresponse.md
+  - docs/models/components/containercomponentformessagerequest.md
+  - docs/models/components/containercomponentformessagerequestcomponents.md
+  - docs/models/components/containercomponentresponse.md
+  - docs/models/components/containercomponentresponsecomponents.md
   - docs/models/components/createdthreadresponse.md
   - docs/models/components/createentitlementrequestdata.md
   - docs/models/components/createforumthreadrequest.md
@@ -171,6 +178,8 @@ generatedFiles:
   - docs/models/components/externalscheduledeventcreaterequest.md
   - docs/models/components/externalscheduledeventpatchrequestpartial.md
   - docs/models/components/externalscheduledeventresponse.md
+  - docs/models/components/filecomponentformessagerequest.md
+  - docs/models/components/filecomponentresponse.md
   - docs/models/components/flags.md
   - docs/models/components/flagtochannelaction.md
   - docs/models/components/flagtochannelactionmetadata.md
@@ -229,6 +238,7 @@ generatedFiles:
   - docs/models/components/guildwithcountsresponse.md
   - docs/models/components/iconemojiresponse.md
   - docs/models/components/incomingwebhookupdaterequestpartial.md
+  - docs/models/components/incomingwebhookupdaterequestpartialcomponents.md
   - docs/models/components/innererrors.md
   - docs/models/components/integrationapplicationresponse.md
   - docs/models/components/integrations.md
@@ -253,6 +263,10 @@ generatedFiles:
   - docs/models/components/lobbymessageresponse.md
   - docs/models/components/lobbyresponse.md
   - docs/models/components/location.md
+  - docs/models/components/mediagallerycomponentformessagerequest.md
+  - docs/models/components/mediagallerycomponentresponse.md
+  - docs/models/components/mediagalleryitemrequest.md
+  - docs/models/components/mediagalleryitemresponse.md
   - docs/models/components/mentionableselectcomponentformessagerequest.md
   - docs/models/components/mentionableselectcomponentformessagerequestdefaultvalues.md
   - docs/models/components/mentionableselectcomponentresponse.md
@@ -271,8 +285,10 @@ generatedFiles:
   - docs/models/components/messagecallresponse.md
   - docs/models/components/messagecomponentinteractionmetadataresponse.md
   - docs/models/components/messagecreaterequest.md
+  - docs/models/components/messagecreaterequestcomponents.md
   - docs/models/components/messagecreaterequestnonce.md
   - docs/models/components/messageeditrequestpartial.md
+  - docs/models/components/messageeditrequestpartialcomponents.md
   - docs/models/components/messageembedauthorresponse.md
   - docs/models/components/messageembedfieldresponse.md
   - docs/models/components/messageembedfooterresponse.md
@@ -288,10 +304,12 @@ generatedFiles:
   - docs/models/components/messagereferencerequest.md
   - docs/models/components/messagereferenceresponse.md
   - docs/models/components/messageresponse.md
+  - docs/models/components/messageresponsecomponents.md
   - docs/models/components/messagerolesubscriptiondataresponse.md
   - docs/models/components/messagesnapshotresponse.md
   - docs/models/components/messagestickeritemresponse.md
   - docs/models/components/minimalcontentmessageresponse.md
+  - docs/models/components/minimalcontentmessageresponsecomponents.md
   - docs/models/components/minimalcontentmessageresponsestickers.md
   - docs/models/components/mlspamruleresponse.md
   - docs/models/components/mlspamruleresponseactions.md
@@ -356,8 +374,14 @@ generatedFiles:
   - docs/models/components/scheduledeventresponse.md
   - docs/models/components/scheduledeventuserresponse.md
   - docs/models/components/sdkmessagerequest.md
+  - docs/models/components/sdkmessagerequestcomponents.md
   - docs/models/components/sdkmessagerequestnonce.md
+  - docs/models/components/sectioncomponentformessagerequest.md
+  - docs/models/components/sectioncomponentformessagerequestaccessory.md
+  - docs/models/components/sectioncomponentresponse.md
   - docs/models/components/security.md
+  - docs/models/components/separatorcomponentformessagerequest.md
+  - docs/models/components/separatorcomponentresponse.md
   - docs/models/components/settingsemojiresponse.md
   - docs/models/components/slackwebhook.md
   - docs/models/components/soundboardcreaterequest.md
@@ -381,14 +405,21 @@ generatedFiles:
   - docs/models/components/stringselectoptionresponse.md
   - docs/models/components/teammemberresponse.md
   - docs/models/components/teamresponse.md
+  - docs/models/components/textdisplaycomponentformessagerequest.md
+  - docs/models/components/textdisplaycomponentresponse.md
   - docs/models/components/textinputcomponentresponse.md
   - docs/models/components/threadmemberresponse.md
   - docs/models/components/threadmetadataresponse.md
   - docs/models/components/threadresponse.md
   - docs/models/components/threadsearchresponse.md
   - docs/models/components/threadsresponse.md
+  - docs/models/components/thumbnailcomponentformessagerequest.md
+  - docs/models/components/thumbnailcomponentresponse.md
   - docs/models/components/triggeringinteractionmetadata.md
   - docs/models/components/typingindicatorresponse.md
+  - docs/models/components/unfurledmediarequest.md
+  - docs/models/components/unfurledmediarequestwithattachmentreferencerequired.md
+  - docs/models/components/unfurledmediaresponse.md
   - docs/models/components/updatedefaultreactionemojirequest.md
   - docs/models/components/updatedmrequestpartial.md
   - docs/models/components/updategroupdmrequestpartial.md
@@ -456,6 +487,7 @@ generatedFiles:
   - docs/models/operations/bulkupdateguildchannelsrequest.md
   - docs/models/operations/bulkupdateguildrolesrequest.md
   - docs/models/operations/bulkupdateguildrolesrequestbody.md
+  - docs/models/operations/components.md
   - docs/models/operations/consumeentitlementrequest.md
   - docs/models/operations/consumeentitlementsecurity.md
   - docs/models/operations/createapplicationcommandrequest.md
@@ -492,6 +524,7 @@ generatedFiles:
   - docs/models/operations/createlobbyrequestbody.md
   - docs/models/operations/createmessageformrequest.md
   - docs/models/operations/createmessagejsonrequest.md
+  - docs/models/operations/createmessagemultipartcomponents.md
   - docs/models/operations/createmessagemultipartrequest.md
   - docs/models/operations/createmessagemultipartrequestbody.md
   - docs/models/operations/createorjoinlobbyrequestbody.md
@@ -740,6 +773,7 @@ generatedFiles:
   - docs/models/operations/updateguildwidgetsettingsrequestbody.md
   - docs/models/operations/updatemessageformrequest.md
   - docs/models/operations/updatemessagejsonrequest.md
+  - docs/models/operations/updatemessagemultipartcomponents.md
   - docs/models/operations/updatemessagemultipartrequest.md
   - docs/models/operations/updatemessagemultipartrequestbody.md
   - docs/models/operations/updatemyguildmemberrequest.md
@@ -765,6 +799,7 @@ generatedFiles:
   - docs/models/operations/updatewebhookmessageformsecurity.md
   - docs/models/operations/updatewebhookmessagejsonrequest.md
   - docs/models/operations/updatewebhookmessagejsonsecurity.md
+  - docs/models/operations/updatewebhookmessagemultipartcomponents.md
   - docs/models/operations/updatewebhookmessagemultipartrequest.md
   - docs/models/operations/updatewebhookmessagemultipartrequestbody.md
   - docs/models/operations/updatewebhookmessagemultipartsecurity.md
@@ -1351,6 +1386,8 @@ generatedFiles:
   - src/models/components/connectedaccountguildresponse.ts
   - src/models/components/connectedaccountintegrationresponse.ts
   - src/models/components/connectedaccountresponse.ts
+  - src/models/components/containercomponentformessagerequest.ts
+  - src/models/components/containercomponentresponse.ts
   - src/models/components/createdthreadresponse.ts
   - src/models/components/createentitlementrequestdata.ts
   - src/models/components/createforumthreadrequest.ts
@@ -1385,6 +1422,8 @@ generatedFiles:
   - src/models/components/externalscheduledeventcreaterequest.ts
   - src/models/components/externalscheduledeventpatchrequestpartial.ts
   - src/models/components/externalscheduledeventresponse.ts
+  - src/models/components/filecomponentformessagerequest.ts
+  - src/models/components/filecomponentresponse.ts
   - src/models/components/flagtochannelaction.ts
   - src/models/components/flagtochannelactionmetadata.ts
   - src/models/components/flagtochannelactionmetadataresponse.ts
@@ -1460,6 +1499,10 @@ generatedFiles:
   - src/models/components/lobbymemberresponse.ts
   - src/models/components/lobbymessageresponse.ts
   - src/models/components/lobbyresponse.ts
+  - src/models/components/mediagallerycomponentformessagerequest.ts
+  - src/models/components/mediagallerycomponentresponse.ts
+  - src/models/components/mediagalleryitemrequest.ts
+  - src/models/components/mediagalleryitemresponse.ts
   - src/models/components/mentionableselectcomponentformessagerequest.ts
   - src/models/components/mentionableselectcomponentresponse.ts
   - src/models/components/mentionspamruleresponse.ts
@@ -1552,7 +1595,11 @@ generatedFiles:
   - src/models/components/scheduledeventresponse.ts
   - src/models/components/scheduledeventuserresponse.ts
   - src/models/components/sdkmessagerequest.ts
+  - src/models/components/sectioncomponentformessagerequest.ts
+  - src/models/components/sectioncomponentresponse.ts
   - src/models/components/security.ts
+  - src/models/components/separatorcomponentformessagerequest.ts
+  - src/models/components/separatorcomponentresponse.ts
   - src/models/components/settingsemojiresponse.ts
   - src/models/components/slackwebhook.ts
   - src/models/components/soundboardcreaterequest.ts
@@ -1574,13 +1621,20 @@ generatedFiles:
   - src/models/components/stringselectoptionresponse.ts
   - src/models/components/teammemberresponse.ts
   - src/models/components/teamresponse.ts
+  - src/models/components/textdisplaycomponentformessagerequest.ts
+  - src/models/components/textdisplaycomponentresponse.ts
   - src/models/components/textinputcomponentresponse.ts
   - src/models/components/threadmemberresponse.ts
   - src/models/components/threadmetadataresponse.ts
   - src/models/components/threadresponse.ts
   - src/models/components/threadsearchresponse.ts
   - src/models/components/threadsresponse.ts
+  - src/models/components/thumbnailcomponentformessagerequest.ts
+  - src/models/components/thumbnailcomponentresponse.ts
   - src/models/components/typingindicatorresponse.ts
+  - src/models/components/unfurledmediarequest.ts
+  - src/models/components/unfurledmediarequestwithattachmentreferencerequired.ts
+  - src/models/components/unfurledmediaresponse.ts
   - src/models/components/updatedefaultreactionemojirequest.ts
   - src/models/components/updatedmrequestpartial.ts
   - src/models/components/updategroupdmrequestpartial.ts
@@ -2548,7 +2602,7 @@ examples:
           guild_id: "<value>"
       responses:
         "200":
-          application/json: [{"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {}}, {"metadata": {}}, {"metadata": {"duration_seconds": 415754}}], "trigger_metadata": {"allow_list": ["<value>", "<value>", "<value>"], "presets": []}}]
+          application/json: [{"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [], "trigger_metadata": {"keyword_filter": ["<value>", "<value>", "<value>"], "regex_patterns": ["<value>", "<value>"], "allow_list": ["<value>", "<value>"]}}]
         4XX:
           application/json: {"code": 990634, "message": "<value>"}
   search_guild_members:
@@ -2668,7 +2722,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"audit_log_entries": [{"id": "<value>"}, {"id": "<value>"}], "users": [{"id": "<value>", "username": "Winifred_Watsica58", "discriminator": "<value>", "public_flags": 59716, "flags": 853102}, {"id": "<value>", "username": "Donavon30", "discriminator": "<value>", "public_flags": 861807, "flags": 938891}, {"id": "<value>", "username": "Alexandra.Ratke", "discriminator": "<value>", "public_flags": 542539, "flags": 249518}], "integrations": [], "webhooks": [], "guild_scheduled_events": [{"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-09-03T08:13:22.944Z", "entity_metadata": {"location": "<value>"}}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-08-21T14:59:42.182Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-11-04T22:11:33.417Z"}], "threads": [{"id": "<value>", "flags": 425168, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 567784, "member_count": 782420, "total_message_sent": 788852}], "application_commands": [{"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "break furthermore unnecessarily except"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "norm ack closely whose owlishly variable"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "aha while for beyond corral lest that a nice in"}], "auto_moderation_rules": [{"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [], "trigger_metadata": {"keyword_filter": ["<value>"], "regex_patterns": [], "allow_list": ["<value>"]}}, {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {}}], "trigger_metadata": {"keyword_filter": ["<value>", "<value>"], "regex_patterns": ["<value>", "<value>", "<value>"], "allow_list": ["<value>", "<value>"]}}]}
+          application/json: {"audit_log_entries": [{"id": "<value>"}, {"id": "<value>"}], "users": [{"id": "<value>", "username": "Winifred_Watsica58", "discriminator": "<value>", "public_flags": 59716, "flags": 853102}, {"id": "<value>", "username": "Donavon30", "discriminator": "<value>", "public_flags": 861807, "flags": 938891}, {"id": "<value>", "username": "Alexandra.Ratke", "discriminator": "<value>", "public_flags": 542539, "flags": 249518}], "integrations": [], "webhooks": [], "guild_scheduled_events": [{"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2025-08-07T23:55:18.983Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-02-13T09:50:38.110Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-10-02T16:15:05.876Z"}], "threads": [{"id": "<value>", "flags": 425168, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 567784, "member_count": 782420, "total_message_sent": 788852}], "application_commands": [{"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "break furthermore unnecessarily except"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "norm ack closely whose owlishly variable"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "aha while for beyond corral lest that a nice in"}], "auto_moderation_rules": [{"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [], "trigger_metadata": {}}, {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {"channel_id": "<value>"}}, {"metadata": {"channel_id": "<value>"}}, {"metadata": {}}], "trigger_metadata": {"allow_list": ["<value>"], "presets": [755506]}}]}
         4XX:
           application/json: {"code": 982705, "message": "<value>"}
   get_guild_widget_png:
@@ -2765,7 +2819,7 @@ examples:
           guild_id: "<value>"
       responses:
         "200":
-          application/json: [{"id": "<value>", "flags": 309264, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 590460, "member_count": 478714, "total_message_sent": 800045}, {"id": "<value>", "flags": 444492, "recipients": [{"id": "<value>", "username": "Diamond_Labadie33", "discriminator": "<value>", "public_flags": 234305, "flags": 372075}, {"id": "<value>", "username": "Jefferey_McKenzie", "discriminator": "<value>", "public_flags": 236342, "flags": 106222}, {"id": "<value>", "username": "Owen_Casper71", "discriminator": "<value>", "public_flags": 288382, "flags": 783844}]}]
+          application/json: [{"id": "<value>", "flags": 807698, "recipients": [{"id": "<value>", "username": "Lance44", "discriminator": "<value>", "public_flags": 263479, "flags": 404566}]}, {"id": "<value>", "flags": 707166, "recipients": [{"id": "<value>", "username": "Eliseo.Hilpert", "discriminator": "<value>", "public_flags": 604291, "flags": 751949}]}]
         4XX:
           application/json: {"code": 397220, "message": "<value>"}
   delete_guild_member:
@@ -3011,7 +3065,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: [{"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2025-01-13T10:26:00.433Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-09-09T18:28:08.953Z", "entity_metadata": {"location": "<value>"}}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-11-27T13:02:27.296Z", "entity_metadata": {"location": "<value>"}}]
+          application/json: [{"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-08-22T19:26:20.850Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-07-14T18:23:27.528Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-06-17T12:14:27.999Z", "entity_metadata": {"location": "<value>"}}]
         4XX:
           application/json: {"code": 639387, "message": "<value>"}
   update_guild_scheduled_event:
@@ -3024,7 +3078,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-01-13T16:52:57.274Z"}
+          application/json: {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-10-16T10:52:42.015Z"}
         4XX:
           application/json: {"code": 991464, "message": "<value>"}
   list_guild_scheduled_event_users:
@@ -3049,7 +3103,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {"duration_seconds": 627690}}], "trigger_metadata": {}}
+          application/json: {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {"channel_id": "<value>"}}, {"metadata": {"duration_seconds": 627690}}], "trigger_metadata": {}}
         4XX:
           application/json: {"code": 488852, "message": "<value>"}
   get_self_voice_state:
@@ -3103,7 +3157,7 @@ examples:
           guild_id: "<value>"
       responses:
         "200":
-          application/json: [{"id": "<id>", "user": {"id": "<value>", "username": "Marie.Fay", "discriminator": "<value>", "public_flags": 17577, "flags": 718303}}, {"id": "<value>", "application": {"id": "<value>", "name": "<value>", "description": "miserably fedora blah"}, "scopes": ["<value>", "<value>", "<value>"]}, {"id": "<value>", "application": {"id": "<value>", "name": "<value>", "description": "aha although gosh whenever as plastic"}, "scopes": ["<value>"]}]
+          application/json: [{"id": "<value>"}, {"id": "<id>", "user": {"id": "<value>", "username": "Marie.Fay", "discriminator": "<value>", "public_flags": 17577, "flags": 718303}}, {"id": "<value>", "application": {"id": "<value>", "name": "<value>", "description": "miserably fedora blah"}, "scopes": ["<value>", "<value>", "<value>"]}]
         4XX:
           application/json: {"code": 5229, "message": "<value>"}
   delete_guild_template:
@@ -3205,7 +3259,7 @@ examples:
           message_id: "<value>"
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Madalyn78", "discriminator": "<value>", "public_flags": 135689, "flags": 792377}], "mention_roles": ["<value>", "<value>"], "attachments": [], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-08-06T16:36:01.790Z", "flags": 696508, "components": [{"id": 906563}, {"id": 993532}, {"id": 602172}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Rossie.Bailey77", "discriminator": "<value>", "public_flags": 461218, "flags": 215383}, "pinned": false, "mention_everyone": false, "tts": true}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Madalyn78", "discriminator": "<value>", "public_flags": 135689, "flags": 792377}], "mention_roles": ["<value>", "<value>"], "attachments": [], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-08-06T16:36:01.790Z", "flags": 696508, "components": [{"id": 653327, "file": {"id": "<value>", "url": "https://unrealistic-chow.net/", "proxy_url": "https://concrete-seafood.net"}, "spoiler": true}, {"id": 532565, "content": "<value>"}, {"id": 859491, "components": [{"id": 993532, "content": "<value>"}, {"id": 602172, "content": "<value>"}, {"id": 849932, "content": "<value>"}], "accessory": {"id": 24316}}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Rossie.Bailey77", "discriminator": "<value>", "public_flags": 461218, "flags": 215383}, "pinned": false, "mention_everyone": false, "tts": true}
         4XX:
           application/json: {"code": 321812, "message": "<value>"}
   create_thread_from_message:
@@ -3229,7 +3283,7 @@ examples:
           message_id: "<value>"
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Leland_Lynch70", "discriminator": "<value>", "public_flags": 905336, "flags": 164360}, {"id": "<value>", "username": "Janessa.Dietrich", "discriminator": "<value>", "public_flags": 916536, "flags": 162722}, {"id": "<value>", "username": "Madaline_Carter", "discriminator": "<value>", "public_flags": 85862, "flags": 38800}], "mention_roles": [], "attachments": [{"id": "<value>", "filename": "example.file", "size": 653551, "url": "https://woeful-parsnip.com/", "proxy_url": "https://sudden-captain.net/"}], "embeds": [], "timestamp": "2025-11-19T06:55:30.391Z", "flags": 327590, "components": [{"id": 746520}, {"id": 627600}, {"id": 841747}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Jaime_Osinski29", "discriminator": "<value>", "public_flags": 598049, "flags": 144550}, "pinned": true, "mention_everyone": false, "tts": true}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Leland_Lynch70", "discriminator": "<value>", "public_flags": 905336, "flags": 164360}, {"id": "<value>", "username": "Janessa.Dietrich", "discriminator": "<value>", "public_flags": 916536, "flags": 162722}, {"id": "<value>", "username": "Madaline_Carter", "discriminator": "<value>", "public_flags": 85862, "flags": 38800}], "mention_roles": [], "attachments": [{"id": "<value>", "filename": "example.file", "size": 653551, "url": "https://woeful-parsnip.com/", "proxy_url": "https://sudden-captain.net/"}], "embeds": [], "timestamp": "2025-11-19T06:55:30.391Z", "flags": 327590, "components": [{"id": 605204, "content": "<value>"}, {"id": 557347, "components": [{"id": 208150, "divider": false}, {"id": 469294}, {"id": 196379}], "spoiler": true}, {"id": 584097, "divider": false}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Jaime_Osinski29", "discriminator": "<value>", "public_flags": 598049, "flags": 144550}, "pinned": true, "mention_everyone": false, "tts": true}
         4XX:
           application/json: {"code": 270549, "message": "<value>"}
   send_soundboard_sound:
@@ -3374,7 +3428,7 @@ examples:
           channel_id: "<value>"
       responses:
         "200":
-          application/json: [{"content": "<value>", "mentions": [{"id": "<value>", "username": "Luther_Muller", "discriminator": "<value>", "public_flags": 99793, "flags": 803259}], "mention_roles": ["<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 343453, "url": "https://insignificant-ceramic.info/", "proxy_url": "https://fragrant-adaptation.net"}, {"id": "<value>", "filename": "example.file", "size": 796541, "url": "https://silver-overheard.info/", "proxy_url": "https://scented-contractor.biz"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-11-29T01:38:03.491Z", "flags": 733641, "components": [{"id": 964797}, {"id": 334078}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Ozella.Wuckert", "discriminator": "<value>", "public_flags": 735021, "flags": 981148}, "pinned": true, "mention_everyone": false, "tts": false}, {"content": "<value>", "mentions": [{"id": "<value>", "username": "Jaleel90", "discriminator": "<value>", "public_flags": 484146, "flags": 112425}, {"id": "<value>", "username": "Lon29", "discriminator": "<value>", "public_flags": 79386, "flags": 420691}, {"id": "<value>", "username": "Clare35", "discriminator": "<value>", "public_flags": 699652, "flags": 740786}], "mention_roles": ["<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 691234, "url": "https://scented-going.biz/", "proxy_url": "https://frizzy-muscat.biz"}, {"id": "<value>", "filename": "example.file", "size": 271832, "url": "https://plain-pigsty.com/", "proxy_url": "https://shimmering-aftermath.info"}, {"id": "<value>", "filename": "example.file", "size": 686430, "url": "https://dreary-freight.name", "proxy_url": "https://moral-drive.com/"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2025-05-01T14:36:35.859Z", "flags": 897147, "components": [{"id": 224798}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Rene.Rosenbaum", "discriminator": "<value>", "public_flags": 600920, "flags": 394037}, "pinned": true, "mention_everyone": true, "tts": true}]
+          application/json: [{"content": "<value>", "mentions": [{"id": "<value>", "username": "Luther_Muller", "discriminator": "<value>", "public_flags": 99793, "flags": 803259}], "mention_roles": ["<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 343453, "url": "https://insignificant-ceramic.info/", "proxy_url": "https://fragrant-adaptation.net"}, {"id": "<value>", "filename": "example.file", "size": 796541, "url": "https://silver-overheard.info/", "proxy_url": "https://scented-contractor.biz"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-11-29T01:38:03.491Z", "flags": 733641, "components": [{"id": 292842, "components": [{"id": 436081, "content": "<value>"}, {"id": 624513, "content": "<value>"}], "accessory": {"id": 226671, "media": {"id": "<value>", "url": "https://buzzing-settler.name", "proxy_url": "https://growing-fold.info"}, "spoiler": true}}, {"id": 821746, "items": [{"media": {"id": "<value>", "url": "https://silver-secrecy.biz/", "proxy_url": "https://prickly-graffiti.net"}, "spoiler": false}]}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Ozella.Wuckert", "discriminator": "<value>", "public_flags": 735021, "flags": 981148}, "pinned": true, "mention_everyone": false, "tts": false}, {"content": "<value>", "mentions": [{"id": "<value>", "username": "Jaleel90", "discriminator": "<value>", "public_flags": 484146, "flags": 112425}, {"id": "<value>", "username": "Lon29", "discriminator": "<value>", "public_flags": 79386, "flags": 420691}, {"id": "<value>", "username": "Clare35", "discriminator": "<value>", "public_flags": 699652, "flags": 740786}], "mention_roles": ["<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 691234, "url": "https://scented-going.biz/", "proxy_url": "https://frizzy-muscat.biz"}, {"id": "<value>", "filename": "example.file", "size": 271832, "url": "https://plain-pigsty.com/", "proxy_url": "https://shimmering-aftermath.info"}, {"id": "<value>", "filename": "example.file", "size": 686430, "url": "https://dreary-freight.name", "proxy_url": "https://moral-drive.com/"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2025-05-01T14:36:35.859Z", "flags": 897147, "components": [{"id": 182119, "components": [{"id": 733641, "components": [{"id": 964797, "content": "<value>"}, {"id": 334078, "content": "<value>"}], "accessory": {"id": 476277, "media": {"id": "<value>", "url": "https://granular-middle.info", "proxy_url": "https://worse-kielbasa.net"}, "spoiler": false}}, {"id": 462472, "content": "<value>"}, {"id": 692276}], "spoiler": true}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Rene.Rosenbaum", "discriminator": "<value>", "public_flags": 600920, "flags": 394037}, "pinned": true, "mention_everyone": true, "tts": true}]
         4XX:
           application/json: {"code": 366237, "message": "<value>"}
   get_channel:
@@ -3406,7 +3460,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"id": "<value>", "flags": 344620, "recipients": [{"id": "<value>", "username": "Lizzie.Wyman", "discriminator": "<value>", "public_flags": 311507, "flags": 249440}, {"id": "<value>", "username": "Brody46", "discriminator": "<value>", "public_flags": 693508, "flags": 404265}, {"id": "<value>", "username": "Alexys.Schroeder50", "discriminator": "<value>", "public_flags": 232374, "flags": 352933}]}
+          application/json: {"id": "<value>", "flags": 597129, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 344620, "member_count": 991464, "total_message_sent": 627690}
         4XX:
           application/json: {"code": 824679, "message": "<value>"}
   delete_my_message_reaction:
@@ -3446,7 +3500,7 @@ examples:
           message_id: "<value>"
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Keeley_Lebsack", "discriminator": "<value>", "public_flags": 262795, "flags": 213457}, {"id": "<value>", "username": "Tressa.Schmitt21", "discriminator": "<value>", "public_flags": 94589, "flags": 552582}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 746585, "url": "https://nervous-fedora.biz", "proxy_url": "https://excited-scaffold.biz/"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}], "timestamp": "2025-04-26T05:27:06.241Z", "flags": 710500, "components": [{"id": 324692}, {"id": 32069}, {"id": 963286}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Irwin.Cole55", "discriminator": "<value>", "public_flags": 862018, "flags": 644971}, "pinned": false, "mention_everyone": true, "tts": false}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Keeley_Lebsack", "discriminator": "<value>", "public_flags": 262795, "flags": 213457}, {"id": "<value>", "username": "Tressa.Schmitt21", "discriminator": "<value>", "public_flags": 94589, "flags": 552582}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 746585, "url": "https://nervous-fedora.biz", "proxy_url": "https://excited-scaffold.biz/"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}], "timestamp": "2025-04-26T05:27:06.241Z", "flags": 710500, "components": [{"id": 558834, "components": [{"id": 521235, "content": "<value>"}, {"id": 969961, "content": "<value>"}], "accessory": {"id": 450824}}, {"id": 213457, "components": [{"id": 801373, "items": []}, {"id": 313464, "file": {"id": "<value>", "url": "https://next-shark.info/", "proxy_url": "https://physical-march.biz"}, "spoiler": true}, {"id": 243354, "file": {"id": "<value>", "url": "https://fond-reconsideration.net", "proxy_url": "https://unused-fen.com"}, "spoiler": false}], "spoiler": true}, {"id": 132944, "file": {"id": "<value>", "url": "https://nervous-cafe.org/", "proxy_url": "https://narrow-embarrassment.net"}, "spoiler": false}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Irwin.Cole55", "discriminator": "<value>", "public_flags": 862018, "flags": 644971}, "pinned": false, "mention_everyone": true, "tts": false}
         4XX:
           application/json: {"code": 765998, "message": "<value>"}
   update_message:
@@ -3459,7 +3513,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Declan.Koepp94", "discriminator": "<value>", "public_flags": 662818, "flags": 734469}, {"id": "<value>", "username": "Lavinia12", "discriminator": "<value>", "public_flags": 485263, "flags": 549074}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [], "embeds": [], "timestamp": "2023-08-19T06:08:33.415Z", "flags": 663536, "components": [{"id": 952983}, {"id": 155537}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Cordie90", "discriminator": "<value>", "public_flags": 409390, "flags": 666200}, "pinned": true, "mention_everyone": false, "tts": false}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Declan.Koepp94", "discriminator": "<value>", "public_flags": 662818, "flags": 734469}, {"id": "<value>", "username": "Lavinia12", "discriminator": "<value>", "public_flags": 485263, "flags": 549074}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [], "embeds": [], "timestamp": "2023-08-19T06:08:33.415Z", "flags": 663536, "components": [{"id": 242978, "components": [], "accessory": {"id": 82606}}, {"id": 55739, "content": "<value>"}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Cordie90", "discriminator": "<value>", "public_flags": 409390, "flags": 666200}, "pinned": true, "mention_everyone": false, "tts": false}
         4XX:
           application/json: {"code": 405506, "message": "<value>"}
     speakeasy-default-update-message-form:
@@ -3471,7 +3525,7 @@ examples:
         application/x-www-form-urlencoded: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Alexa_Bogan49", "discriminator": "<value>", "public_flags": 974821, "flags": 519033}], "mention_roles": ["<value>", "<value>"], "attachments": [], "embeds": [{"type": "<value>"}], "timestamp": "2024-01-11T00:07:28.590Z", "flags": 559938, "components": [{"id": 481682}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Everardo.Mitchell", "discriminator": "<value>", "public_flags": 498451, "flags": 739211}, "pinned": false, "mention_everyone": false, "tts": false}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Alexa_Bogan49", "discriminator": "<value>", "public_flags": 974821, "flags": 519033}], "mention_roles": ["<value>", "<value>"], "attachments": [], "embeds": [{"type": "<value>"}], "timestamp": "2024-01-11T00:07:28.590Z", "flags": 559938, "components": [{"id": 30090, "items": []}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Everardo.Mitchell", "discriminator": "<value>", "public_flags": 498451, "flags": 739211}, "pinned": false, "mention_everyone": false, "tts": false}
         4XX:
           application/json: {"code": 790273, "message": "<value>"}
     speakeasy-default-update-message-multipart:
@@ -3494,7 +3548,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: [{"content": "<value>", "mentions": [{"id": "<value>", "username": "Marie.Fay", "discriminator": "<value>", "public_flags": 17577, "flags": 718303}, {"id": "<value>", "username": "Aryanna_Pfeffer63", "discriminator": "<value>", "public_flags": 54607, "flags": 367745}], "mention_roles": ["<value>"], "attachments": [], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-09-13T22:04:07.138Z", "flags": 876407, "components": [{"id": 51681}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Enid42", "discriminator": "<value>", "public_flags": 173090, "flags": 75058}, "pinned": false, "mention_everyone": true, "tts": true}, {"content": "<value>", "mentions": [{"id": "<value>", "username": "Hope_Brakus", "discriminator": "<value>", "public_flags": 863466, "flags": 307390}], "mention_roles": ["<value>"], "attachments": [], "embeds": [], "timestamp": "2025-09-28T13:56:10.162Z", "flags": 33597, "components": [{"id": 934960}, {"id": 918561}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Art81", "discriminator": "<value>", "public_flags": 81309, "flags": 164965}, "pinned": true, "mention_everyone": false, "tts": false}, {"content": "<value>", "mentions": [], "mention_roles": ["<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 781409, "url": "https://biodegradable-bandwidth.biz", "proxy_url": "https://simple-disk.biz"}], "embeds": [], "timestamp": "2025-01-13T06:48:49.446Z", "flags": 445673, "components": [], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Ramona_Sanford-Lakin90", "discriminator": "<value>", "public_flags": 467775, "flags": 993677}, "pinned": false, "mention_everyone": false, "tts": true}]
+          application/json: [{"content": "<value>", "mentions": [{"id": "<value>", "username": "Marie.Fay", "discriminator": "<value>", "public_flags": 17577, "flags": 718303}, {"id": "<value>", "username": "Aryanna_Pfeffer63", "discriminator": "<value>", "public_flags": 54607, "flags": 367745}], "mention_roles": ["<value>"], "attachments": [], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-09-13T22:04:07.138Z", "flags": 876407, "components": [{"id": 547272, "divider": false}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Enid42", "discriminator": "<value>", "public_flags": 173090, "flags": 75058}, "pinned": false, "mention_everyone": true, "tts": true}, {"content": "<value>", "mentions": [{"id": "<value>", "username": "Hope_Brakus", "discriminator": "<value>", "public_flags": 863466, "flags": 307390}], "mention_roles": ["<value>"], "attachments": [], "embeds": [], "timestamp": "2025-09-28T13:56:10.162Z", "flags": 33597, "components": [{"id": 229716, "components": [], "spoiler": false}, {"id": 17577, "components": [{"id": 86140, "content": "<value>"}, {"id": 68504, "content": "<value>"}], "accessory": {"id": 509883, "media": {"id": "<value>", "url": "https://acidic-avalanche.info", "proxy_url": "https://blind-trench.name/"}, "spoiler": false}}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Art81", "discriminator": "<value>", "public_flags": 81309, "flags": 164965}, "pinned": true, "mention_everyone": false, "tts": false}, {"content": "<value>", "mentions": [], "mention_roles": ["<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 781409, "url": "https://biodegradable-bandwidth.biz", "proxy_url": "https://simple-disk.biz"}], "embeds": [], "timestamp": "2025-01-13T06:48:49.446Z", "flags": 445673, "components": [], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Ramona_Sanford-Lakin90", "discriminator": "<value>", "public_flags": 467775, "flags": 993677}, "pinned": false, "mention_everyone": false, "tts": true}]
         4XX:
           application/json: {"code": 29267, "message": "<value>"}
   create_message:
@@ -3506,7 +3560,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Katrina.Walter5", "discriminator": "<value>", "public_flags": 540356, "flags": 387}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 822360, "url": "https://honored-cardboard.com", "proxy_url": "https://unknown-fork.name"}], "embeds": [{"type": "<value>"}], "timestamp": "2023-09-23T02:08:18.241Z", "flags": 150058, "components": [{"id": 943309}, {"id": 557379}, {"id": 222942}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Laurie57", "discriminator": "<value>", "public_flags": 81853, "flags": 783651}, "pinned": false, "mention_everyone": false, "tts": true}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Katrina.Walter5", "discriminator": "<value>", "public_flags": 540356, "flags": 387}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 822360, "url": "https://honored-cardboard.com", "proxy_url": "https://unknown-fork.name"}], "embeds": [{"type": "<value>"}], "timestamp": "2023-09-23T02:08:18.241Z", "flags": 150058, "components": [{"id": 551848, "file": {"id": "<value>", "url": "https://vast-going.com/", "proxy_url": "https://naughty-cd.net/"}, "spoiler": true}, {"id": 849120, "divider": true}, {"id": 67496}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Laurie57", "discriminator": "<value>", "public_flags": 81853, "flags": 783651}, "pinned": false, "mention_everyone": false, "tts": true}
         4XX:
           application/json: {"code": 947259, "message": "<value>"}
     speakeasy-default-create-message-form:
@@ -3517,7 +3571,7 @@ examples:
         application/x-www-form-urlencoded: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [], "mention_roles": ["<value>"], "attachments": [], "embeds": [{"type": "<value>"}], "timestamp": "2025-12-12T09:36:39.839Z", "flags": 336175, "components": [{"id": 691474}, {"id": 39716}, {"id": 552969}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Godfrey_Satterfield", "discriminator": "<value>", "public_flags": 79982, "flags": 46213}, "pinned": false, "mention_everyone": true, "tts": false}
+          application/json: {"content": "<value>", "mentions": [], "mention_roles": ["<value>"], "attachments": [], "embeds": [{"type": "<value>"}], "timestamp": "2025-12-12T09:36:39.839Z", "flags": 336175, "components": [{"id": 383802, "components": [], "spoiler": true}, {"id": 336175, "content": "<value>"}, {"id": 691474, "content": "<value>"}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Godfrey_Satterfield", "discriminator": "<value>", "public_flags": 79982, "flags": 46213}, "pinned": false, "mention_everyone": true, "tts": false}
         4XX:
           application/json: {"code": 519448, "message": "<value>"}
     speakeasy-default-create-message-multipart:
@@ -3730,7 +3784,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Reinhold_Robel", "discriminator": "<value>", "public_flags": 760120, "flags": 253515}, {"id": "<value>", "username": "Kamren30", "discriminator": "<value>", "public_flags": 78446, "flags": 208699}], "mention_roles": ["<value>"], "attachments": [], "embeds": [{"type": "<value>"}], "timestamp": "2024-09-25T12:32:56.280Z", "flags": 219948, "components": [{"id": 829802}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Caden50", "discriminator": "<value>", "public_flags": 120051, "flags": 433469}, "pinned": true, "mention_everyone": false, "tts": true}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Reinhold_Robel", "discriminator": "<value>", "public_flags": 760120, "flags": 253515}, {"id": "<value>", "username": "Kamren30", "discriminator": "<value>", "public_flags": 78446, "flags": 208699}], "mention_roles": ["<value>"], "attachments": [], "embeds": [{"type": "<value>"}], "timestamp": "2024-09-25T12:32:56.280Z", "flags": 219948, "components": [{"id": 822220, "components": [{"id": 740864, "content": "<value>"}, {"id": 846836, "content": "<value>"}, {"id": 627260, "content": "<value>"}], "accessory": {"id": 760120, "media": {"id": "<value>", "url": "https://natural-switch.org/", "proxy_url": "https://functional-sediment.com"}, "spoiler": true}}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Caden50", "discriminator": "<value>", "public_flags": 120051, "flags": 433469}, "pinned": true, "mention_everyone": false, "tts": true}
         4XX:
           application/json: {"code": 484089, "message": "<value>"}
   delete_original_webhook_message:
@@ -3754,7 +3808,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Tremaine.Gleason", "discriminator": "<value>", "public_flags": 35051, "flags": 554809}, {"id": "<value>", "username": "Elvera92", "discriminator": "<value>", "public_flags": 62324, "flags": 691854}], "mention_roles": [], "attachments": [], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2025-11-19T04:58:39.630Z", "flags": 227365, "components": [{"id": 118669}, {"id": 434025}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Claire_Glover55", "discriminator": "<value>", "public_flags": 985020, "flags": 324816}, "pinned": false, "mention_everyone": false, "tts": true}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Tremaine.Gleason", "discriminator": "<value>", "public_flags": 35051, "flags": 554809}, {"id": "<value>", "username": "Elvera92", "discriminator": "<value>", "public_flags": 62324, "flags": 691854}], "mention_roles": [], "attachments": [], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2025-11-19T04:58:39.630Z", "flags": 227365, "components": [{"id": 935979, "items": [{"media": {"id": "<value>", "url": "https://buttery-lieu.info/", "proxy_url": "https://nifty-exploration.net/"}, "spoiler": false}, {"media": {"id": "<value>", "url": "https://variable-tenant.com", "proxy_url": "https://elastic-character.net"}, "spoiler": false}]}, {"id": 546988, "components": [], "spoiler": true}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Claire_Glover55", "discriminator": "<value>", "public_flags": 985020, "flags": 324816}, "pinned": false, "mention_everyone": false, "tts": true}
         4XX:
           application/json: {"code": 257521, "message": "<value>"}
     speakeasy-default-update-original-webhook-message-form:
@@ -3767,7 +3821,7 @@ examples:
         application/x-www-form-urlencoded: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Anastasia_Donnelly", "discriminator": "<value>", "public_flags": 264219, "flags": 605332}, {"id": "<value>", "username": "Darien_Kassulke", "discriminator": "<value>", "public_flags": 221446, "flags": 779027}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 943761, "url": "https://untried-cinder.info", "proxy_url": "https://grouchy-nudge.biz"}, {"id": "<value>", "filename": "example.file", "size": 629989, "url": "https://favorable-devil.biz/", "proxy_url": "https://mysterious-deer.biz"}, {"id": "<value>", "filename": "example.file", "size": 654707, "url": "https://sick-finger.com/", "proxy_url": "https://charming-rationale.com/"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-09-24T07:15:06.244Z", "flags": 17555, "components": [{"id": 938045}, {"id": 81998}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Pansy_Nikolaus", "discriminator": "<value>", "public_flags": 675264, "flags": 264917}, "pinned": false, "mention_everyone": true, "tts": true}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Anastasia_Donnelly", "discriminator": "<value>", "public_flags": 264219, "flags": 605332}, {"id": "<value>", "username": "Darien_Kassulke", "discriminator": "<value>", "public_flags": 221446, "flags": 779027}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 943761, "url": "https://untried-cinder.info", "proxy_url": "https://grouchy-nudge.biz"}, {"id": "<value>", "filename": "example.file", "size": 629989, "url": "https://favorable-devil.biz/", "proxy_url": "https://mysterious-deer.biz"}, {"id": "<value>", "filename": "example.file", "size": 654707, "url": "https://sick-finger.com/", "proxy_url": "https://charming-rationale.com/"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-09-24T07:15:06.244Z", "flags": 17555, "components": [{"id": 57611, "divider": true}, {"id": 979125, "components": [{"id": 264219, "components": [{"id": 231530, "content": "<value>"}, {"id": 159380, "content": "<value>"}], "accessory": {"id": 868343}}, {"id": 466059, "content": "<value>"}], "spoiler": true}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Pansy_Nikolaus", "discriminator": "<value>", "public_flags": 675264, "flags": 264917}, "pinned": false, "mention_everyone": true, "tts": true}
         4XX:
           application/json: {"code": 614669, "message": "<value>"}
     speakeasy-default-update-original-webhook-message-multipart:
@@ -3780,7 +3834,7 @@ examples:
         multipart/form-data: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [], "mention_roles": [], "attachments": [], "embeds": [{"type": "<value>"}, {"type": "<value>"}], "timestamp": "2023-05-31T19:28:49.527Z", "flags": 91864, "components": [{"id": 263058}, {"id": 669918}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Cindy.Gutkowski", "discriminator": "<value>", "public_flags": 657283, "flags": 855621}, "pinned": false, "mention_everyone": true, "tts": false}
+          application/json: {"content": "<value>", "mentions": [], "mention_roles": [], "attachments": [], "embeds": [{"type": "<value>"}, {"type": "<value>"}], "timestamp": "2023-05-31T19:28:49.527Z", "flags": 91864, "components": [{"id": 243193}, {"id": 646509, "components": [], "spoiler": true}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Cindy.Gutkowski", "discriminator": "<value>", "public_flags": 657283, "flags": 855621}, "pinned": false, "mention_everyone": true, "tts": false}
         4XX:
           application/json: {"code": 66832, "message": "<value>"}
   get_webhook_message:
@@ -3793,7 +3847,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Elenora_Boyle", "discriminator": "<value>", "public_flags": 780144, "flags": 362378}, {"id": "<value>", "username": "Eleanora.Schinner", "discriminator": "<value>", "public_flags": 302834, "flags": 474599}], "mention_roles": [], "attachments": [{"id": "<value>", "filename": "example.file", "size": 285875, "url": "https://aged-haircut.name", "proxy_url": "https://overcooked-pantyhose.biz/"}], "embeds": [{"type": "<value>"}], "timestamp": "2023-03-28T01:14:20.633Z", "flags": 911769, "components": [{"id": 839783}, {"id": 903260}, {"id": 706891}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Lelah_Lakin59", "discriminator": "<value>", "public_flags": 150609, "flags": 239944}, "pinned": true, "mention_everyone": true, "tts": false}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Elenora_Boyle", "discriminator": "<value>", "public_flags": 780144, "flags": 362378}, {"id": "<value>", "username": "Eleanora.Schinner", "discriminator": "<value>", "public_flags": 302834, "flags": 474599}], "mention_roles": [], "attachments": [{"id": "<value>", "filename": "example.file", "size": 285875, "url": "https://aged-haircut.name", "proxy_url": "https://overcooked-pantyhose.biz/"}], "embeds": [{"type": "<value>"}], "timestamp": "2023-03-28T01:14:20.633Z", "flags": 911769, "components": [{"id": 296823, "components": [{"id": 98239, "content": "<value>"}, {"id": 505491, "content": "<value>"}, {"id": 69509, "content": "<value>"}], "accessory": {"id": 780144, "media": {"id": "<value>", "url": "https://free-dependency.net/", "proxy_url": "https://unused-hovel.biz/"}, "spoiler": true}}, {"id": 430209}, {"id": 675274, "file": {"id": "<value>", "url": "https://impressive-numeracy.info/", "proxy_url": "https://proper-digestive.info"}, "spoiler": true}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Lelah_Lakin59", "discriminator": "<value>", "public_flags": 150609, "flags": 239944}, "pinned": true, "mention_everyone": true, "tts": false}
         4XX:
           application/json: {"code": 404572, "message": "<value>"}
   update_webhook_message:
@@ -3822,7 +3876,7 @@ examples:
         application/x-www-form-urlencoded: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Darrick_Mohr", "discriminator": "<value>", "public_flags": 28816, "flags": 421221}, {"id": "<value>", "username": "Jamie_Buckridge", "discriminator": "<value>", "public_flags": 560322, "flags": 192810}, {"id": "<value>", "username": "Elvis.Schulist", "discriminator": "<value>", "public_flags": 17261, "flags": 891963}], "mention_roles": [], "attachments": [{"id": "<value>", "filename": "example.file", "size": 774262, "url": "https://same-deck.info", "proxy_url": "https://joyful-perfection.biz"}, {"id": "<value>", "filename": "example.file", "size": 267515, "url": "https://bare-stitcher.net/", "proxy_url": "https://profitable-iridescence.biz/"}, {"id": "<value>", "filename": "example.file", "size": 245043, "url": "https://pointed-procurement.org", "proxy_url": "https://muddy-hydrant.name"}], "embeds": [{"type": "<value>"}], "timestamp": "2024-12-14T09:00:11.224Z", "flags": 542005, "components": [{"id": 35911}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Kellie18", "discriminator": "<value>", "public_flags": 125323, "flags": 592865}, "pinned": false, "mention_everyone": false, "tts": false}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Darrick_Mohr", "discriminator": "<value>", "public_flags": 28816, "flags": 421221}, {"id": "<value>", "username": "Jamie_Buckridge", "discriminator": "<value>", "public_flags": 560322, "flags": 192810}, {"id": "<value>", "username": "Elvis.Schulist", "discriminator": "<value>", "public_flags": 17261, "flags": 891963}], "mention_roles": [], "attachments": [{"id": "<value>", "filename": "example.file", "size": 774262, "url": "https://same-deck.info", "proxy_url": "https://joyful-perfection.biz"}, {"id": "<value>", "filename": "example.file", "size": 267515, "url": "https://bare-stitcher.net/", "proxy_url": "https://profitable-iridescence.biz/"}, {"id": "<value>", "filename": "example.file", "size": 245043, "url": "https://pointed-procurement.org", "proxy_url": "https://muddy-hydrant.name"}], "embeds": [{"type": "<value>"}], "timestamp": "2024-12-14T09:00:11.224Z", "flags": 542005, "components": [{"id": 234566, "divider": true}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Kellie18", "discriminator": "<value>", "public_flags": 125323, "flags": 592865}, "pinned": false, "mention_everyone": false, "tts": false}
         4XX:
           application/json: {"code": 59939, "message": "<value>"}
     speakeasy-default-update-webhook-message-multipart:
@@ -3836,7 +3890,7 @@ examples:
         multipart/form-data: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Gloria_Torphy28", "discriminator": "<value>", "public_flags": 611005, "flags": 418062}, {"id": "<value>", "username": "Urban77", "discriminator": "<value>", "public_flags": 411709, "flags": 803331}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 548745, "url": "https://extra-large-sermon.biz", "proxy_url": "https://brown-brush.org"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2025-09-21T10:36:24.314Z", "flags": 40658, "components": [{"id": 759775}, {"id": 910686}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Darrion.Nicolas69", "discriminator": "<value>", "public_flags": 560301, "flags": 680380}, "pinned": false, "mention_everyone": true, "tts": false}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Gloria_Torphy28", "discriminator": "<value>", "public_flags": 611005, "flags": 418062}, {"id": "<value>", "username": "Urban77", "discriminator": "<value>", "public_flags": 411709, "flags": 803331}], "mention_roles": ["<value>", "<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 548745, "url": "https://extra-large-sermon.biz", "proxy_url": "https://brown-brush.org"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2025-09-21T10:36:24.314Z", "flags": 40658, "components": [{"id": 394161, "components": [{"id": 887809, "content": "<value>"}, {"id": 730027, "content": "<value>"}], "accessory": {"id": 151655}}, {"id": 418062, "components": [{"id": 97202, "content": "<value>"}, {"id": 658571, "content": "<value>"}, {"id": 623993, "content": "<value>"}], "accessory": {"id": 829007, "media": {"id": "<value>", "url": "https://stormy-resource.info/", "proxy_url": "https://unwilling-digit.net"}, "spoiler": true}}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Darrion.Nicolas69", "discriminator": "<value>", "public_flags": 560301, "flags": 680380}, "pinned": false, "mention_everyone": true, "tts": false}
         4XX:
           application/json: {"code": 265115, "message": "<value>"}
   execute_github_compatible_webhook:

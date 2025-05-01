@@ -13,12 +13,29 @@ export type UpdateWebhookMessageMultipartSecurity = {
   botToken?: string | undefined;
 };
 
+export type UpdateWebhookMessageMultipartComponents =
+  | components.ActionRowComponentForMessageRequest
+  | components.MediaGalleryComponentForMessageRequest
+  | components.TextDisplayComponentForMessageRequest
+  | components.FileComponentForMessageRequest
+  | components.SectionComponentForMessageRequest
+  | components.SeparatorComponentForMessageRequest
+  | components.ContainerComponentForMessageRequest;
+
 export type UpdateWebhookMessageMultipartRequestBody = {
   content?: string | null | undefined;
   embeds?: Array<components.RichEmbed> | null | undefined;
   allowedMentions?: components.MessageAllowedMentionsRequest | null | undefined;
   components?:
-    | Array<components.ActionRowComponentForMessageRequest>
+    | Array<
+      | components.ActionRowComponentForMessageRequest
+      | components.MediaGalleryComponentForMessageRequest
+      | components.TextDisplayComponentForMessageRequest
+      | components.FileComponentForMessageRequest
+      | components.SectionComponentForMessageRequest
+      | components.SeparatorComponentForMessageRequest
+      | components.ContainerComponentForMessageRequest
+    >
     | null
     | undefined;
   attachments?: Array<components.MessageAttachmentRequest> | null | undefined;
@@ -113,6 +130,88 @@ export function updateWebhookMessageMultipartSecurityFromJSON(
 }
 
 /** @internal */
+export const UpdateWebhookMessageMultipartComponents$inboundSchema: z.ZodType<
+  UpdateWebhookMessageMultipartComponents,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.ActionRowComponentForMessageRequest$inboundSchema,
+  components.MediaGalleryComponentForMessageRequest$inboundSchema,
+  components.TextDisplayComponentForMessageRequest$inboundSchema,
+  components.FileComponentForMessageRequest$inboundSchema,
+  components.SectionComponentForMessageRequest$inboundSchema,
+  components.SeparatorComponentForMessageRequest$inboundSchema,
+  components.ContainerComponentForMessageRequest$inboundSchema,
+]);
+
+/** @internal */
+export type UpdateWebhookMessageMultipartComponents$Outbound =
+  | components.ActionRowComponentForMessageRequest$Outbound
+  | components.MediaGalleryComponentForMessageRequest$Outbound
+  | components.TextDisplayComponentForMessageRequest$Outbound
+  | components.FileComponentForMessageRequest$Outbound
+  | components.SectionComponentForMessageRequest$Outbound
+  | components.SeparatorComponentForMessageRequest$Outbound
+  | components.ContainerComponentForMessageRequest$Outbound;
+
+/** @internal */
+export const UpdateWebhookMessageMultipartComponents$outboundSchema: z.ZodType<
+  UpdateWebhookMessageMultipartComponents$Outbound,
+  z.ZodTypeDef,
+  UpdateWebhookMessageMultipartComponents
+> = z.union([
+  components.ActionRowComponentForMessageRequest$outboundSchema,
+  components.MediaGalleryComponentForMessageRequest$outboundSchema,
+  components.TextDisplayComponentForMessageRequest$outboundSchema,
+  components.FileComponentForMessageRequest$outboundSchema,
+  components.SectionComponentForMessageRequest$outboundSchema,
+  components.SeparatorComponentForMessageRequest$outboundSchema,
+  components.ContainerComponentForMessageRequest$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateWebhookMessageMultipartComponents$ {
+  /** @deprecated use `UpdateWebhookMessageMultipartComponents$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateWebhookMessageMultipartComponents$inboundSchema;
+  /** @deprecated use `UpdateWebhookMessageMultipartComponents$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateWebhookMessageMultipartComponents$outboundSchema;
+  /** @deprecated use `UpdateWebhookMessageMultipartComponents$Outbound` instead. */
+  export type Outbound = UpdateWebhookMessageMultipartComponents$Outbound;
+}
+
+export function updateWebhookMessageMultipartComponentsToJSON(
+  updateWebhookMessageMultipartComponents:
+    UpdateWebhookMessageMultipartComponents,
+): string {
+  return JSON.stringify(
+    UpdateWebhookMessageMultipartComponents$outboundSchema.parse(
+      updateWebhookMessageMultipartComponents,
+    ),
+  );
+}
+
+export function updateWebhookMessageMultipartComponentsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateWebhookMessageMultipartComponents,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateWebhookMessageMultipartComponents$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateWebhookMessageMultipartComponents' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateWebhookMessageMultipartRequestBody$inboundSchema: z.ZodType<
   UpdateWebhookMessageMultipartRequestBody,
   z.ZodTypeDef,
@@ -124,7 +223,17 @@ export const UpdateWebhookMessageMultipartRequestBody$inboundSchema: z.ZodType<
     components.MessageAllowedMentionsRequest$inboundSchema,
   ).optional(),
   components: z.nullable(
-    z.array(components.ActionRowComponentForMessageRequest$inboundSchema),
+    z.array(
+      z.union([
+        components.ActionRowComponentForMessageRequest$inboundSchema,
+        components.MediaGalleryComponentForMessageRequest$inboundSchema,
+        components.TextDisplayComponentForMessageRequest$inboundSchema,
+        components.FileComponentForMessageRequest$inboundSchema,
+        components.SectionComponentForMessageRequest$inboundSchema,
+        components.SeparatorComponentForMessageRequest$inboundSchema,
+        components.ContainerComponentForMessageRequest$inboundSchema,
+      ]),
+    ),
   ).optional(),
   attachments: z.nullable(
     z.array(components.MessageAttachmentRequest$inboundSchema),
@@ -166,7 +275,15 @@ export type UpdateWebhookMessageMultipartRequestBody$Outbound = {
     | null
     | undefined;
   components?:
-    | Array<components.ActionRowComponentForMessageRequest$Outbound>
+    | Array<
+      | components.ActionRowComponentForMessageRequest$Outbound
+      | components.MediaGalleryComponentForMessageRequest$Outbound
+      | components.TextDisplayComponentForMessageRequest$Outbound
+      | components.FileComponentForMessageRequest$Outbound
+      | components.SectionComponentForMessageRequest$Outbound
+      | components.SeparatorComponentForMessageRequest$Outbound
+      | components.ContainerComponentForMessageRequest$Outbound
+    >
     | null
     | undefined;
   attachments?:
@@ -199,7 +316,17 @@ export const UpdateWebhookMessageMultipartRequestBody$outboundSchema: z.ZodType<
     components.MessageAllowedMentionsRequest$outboundSchema,
   ).optional(),
   components: z.nullable(
-    z.array(components.ActionRowComponentForMessageRequest$outboundSchema),
+    z.array(
+      z.union([
+        components.ActionRowComponentForMessageRequest$outboundSchema,
+        components.MediaGalleryComponentForMessageRequest$outboundSchema,
+        components.TextDisplayComponentForMessageRequest$outboundSchema,
+        components.FileComponentForMessageRequest$outboundSchema,
+        components.SectionComponentForMessageRequest$outboundSchema,
+        components.SeparatorComponentForMessageRequest$outboundSchema,
+        components.ContainerComponentForMessageRequest$outboundSchema,
+      ]),
+    ),
   ).optional(),
   attachments: z.nullable(
     z.array(components.MessageAttachmentRequest$outboundSchema),
