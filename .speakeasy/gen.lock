@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d6760420-c0f7-476a-a38c-38dd82de2cc6
 management:
-  docChecksum: 6df524fe2968c90ac9839d17648495db
+  docChecksum: 552b0d3835e42f5a6d352b9143794668
   docVersion: "10"
-  speakeasyVersion: 1.541.2
-  generationVersion: 2.595.4
-  releaseVersion: 0.3.2
-  configChecksum: 14f9dff60de0dd89d1b617f7eb421b0a
+  speakeasyVersion: 1.542.0
+  generationVersion: 2.596.2
+  releaseVersion: 0.3.3
+  configChecksum: 77d3076dab7f8e2f802d7dcda25fa435
   repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
   installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
   published: true
@@ -247,7 +247,6 @@ generatedFiles:
   - docs/models/components/invitechannelrecipientresponse.md
   - docs/models/components/invitechannelresponse.md
   - docs/models/components/inviteguildresponse.md
-  - docs/models/components/invitestageinstanceresponse.md
   - docs/models/components/keywordruleresponse.md
   - docs/models/components/keywordruleresponseactions.md
   - docs/models/components/keywordtriggermetadata.md
@@ -1487,7 +1486,6 @@ generatedFiles:
   - src/models/components/invitechannelrecipientresponse.ts
   - src/models/components/invitechannelresponse.ts
   - src/models/components/inviteguildresponse.ts
-  - src/models/components/invitestageinstanceresponse.ts
   - src/models/components/keywordruleresponse.ts
   - src/models/components/keywordtriggermetadata.ts
   - src/models/components/keywordtriggermetadataresponse.ts
