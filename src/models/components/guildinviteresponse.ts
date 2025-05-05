@@ -26,12 +26,6 @@ import {
   InviteGuildResponse$outboundSchema,
 } from "./inviteguildresponse.js";
 import {
-  InviteStageInstanceResponse,
-  InviteStageInstanceResponse$inboundSchema,
-  InviteStageInstanceResponse$Outbound,
-  InviteStageInstanceResponse$outboundSchema,
-} from "./invitestageinstanceresponse.js";
-import {
   ScheduledEventResponse,
   ScheduledEventResponse$inboundSchema,
   ScheduledEventResponse$Outbound,
@@ -56,7 +50,6 @@ export type GuildInviteResponse = {
   guild?: InviteGuildResponse | null | undefined;
   guildId?: string | null | undefined;
   channel?: InviteChannelResponse | null | undefined;
-  stageInstance?: InviteStageInstanceResponse | null | undefined;
   targetType?: 1 | null | undefined;
   targetUser?: UserResponse | null | undefined;
   targetApplication?: InviteApplicationResponse | null | undefined;
@@ -90,8 +83,6 @@ export const GuildInviteResponse$inboundSchema: z.ZodType<
   guild: z.nullable(InviteGuildResponse$inboundSchema).optional(),
   guild_id: z.nullable(z.string()).optional(),
   channel: z.nullable(InviteChannelResponse$inboundSchema).optional(),
-  stage_instance: z.nullable(InviteStageInstanceResponse$inboundSchema)
-    .optional(),
   target_type: z.nullable(z.literal(1)).optional(),
   target_user: z.nullable(UserResponse$inboundSchema).optional(),
   target_application: z.nullable(InviteApplicationResponse$inboundSchema)
@@ -111,7 +102,6 @@ export const GuildInviteResponse$inboundSchema: z.ZodType<
     "expires_at": "expiresAt",
     "is_contact": "isContact",
     "guild_id": "guildId",
-    "stage_instance": "stageInstance",
     "target_type": "targetType",
     "target_user": "targetUser",
     "target_application": "targetApplication",
@@ -136,7 +126,6 @@ export type GuildInviteResponse$Outbound = {
   guild?: InviteGuildResponse$Outbound | null | undefined;
   guild_id?: string | null | undefined;
   channel?: InviteChannelResponse$Outbound | null | undefined;
-  stage_instance?: InviteStageInstanceResponse$Outbound | null | undefined;
   target_type: 1 | null;
   target_user?: UserResponse$Outbound | null | undefined;
   target_application?: InviteApplicationResponse$Outbound | null | undefined;
@@ -166,8 +155,6 @@ export const GuildInviteResponse$outboundSchema: z.ZodType<
   guild: z.nullable(InviteGuildResponse$outboundSchema).optional(),
   guildId: z.nullable(z.string()).optional(),
   channel: z.nullable(InviteChannelResponse$outboundSchema).optional(),
-  stageInstance: z.nullable(InviteStageInstanceResponse$outboundSchema)
-    .optional(),
   targetType: z.nullable(z.literal(1).default(1 as const)),
   targetUser: z.nullable(UserResponse$outboundSchema).optional(),
   targetApplication: z.nullable(InviteApplicationResponse$outboundSchema)
@@ -187,7 +174,6 @@ export const GuildInviteResponse$outboundSchema: z.ZodType<
     expiresAt: "expires_at",
     isContact: "is_contact",
     guildId: "guild_id",
-    stageInstance: "stage_instance",
     targetType: "target_type",
     targetUser: "target_user",
     targetApplication: "target_application",

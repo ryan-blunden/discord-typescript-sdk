@@ -11554,10 +11554,6 @@ components:
           oneOf:
             - type: "null"
             - {"$ref": "#/components/schemas/InviteChannelResponse"}
-        "stage_instance":
-          oneOf:
-            - type: "null"
-            - {"$ref": "#/components/schemas/InviteStageInstanceResponse"}
         "target_type":
           oneOf:
             - type: "null"
@@ -13207,28 +13203,6 @@ components:
         - "id"
         - "name"
         - "features"
-    "InviteStageInstanceResponse":
-      type: "object"
-      properties:
-        "topic":
-          type: "string"
-        "participant_count":
-          type:
-            - "integer"
-            - "null"
-          format: "int32"
-        "speaker_count":
-          type:
-            - "integer"
-            - "null"
-          format: "int32"
-        "members":
-          type:
-            - "array"
-            - "null"
-          items: {"$ref": "#/components/schemas/GuildMemberResponse"}
-      required:
-        - "topic"
     "InviteTargetTypes":
       type: "integer"
       oneOf:

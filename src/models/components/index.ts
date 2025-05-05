@@ -180,7 +180,6 @@ export * from "./inviteapplicationresponse.js";
 export * from "./invitechannelrecipientresponse.js";
 export * from "./invitechannelresponse.js";
 export * from "./inviteguildresponse.js";
-export * from "./invitestageinstanceresponse.js";
 export * from "./keywordruleresponse.js";
 export * from "./keywordtriggermetadata.js";
 export * from "./keywordtriggermetadataresponse.js";
