@@ -7,6 +7,7 @@ sources:
         overlays:
             - location: .speakeasy/openapi-fixes-overlay.yaml
             - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            - location: .speakeasy/mcp-server-overlay.yaml
         output: .speakeasy/openapi-output.yaml
         registry:
             location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryanblunden/discord-sdk
