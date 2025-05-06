@@ -11,7 +11,7 @@ actions:
       description: Get a list of users that voted for a specific answer in a poll.
       x-speakeasy-mcp:
         scopes:
-          - poll
+          - polls
           - read
     x-speakeasy-metadata:
       after: sdk.polls.getAnswerVoters()
@@ -24,7 +24,7 @@ actions:
       description: Immediately ends the poll. You cannot end polls from other users. Returns a message object. Fires a Message Update Gateway event.
       x-speakeasy-mcp:
         scopes:
-          - poll
+          - polls
           - write
     x-speakeasy-metadata:
       after: sdk.polls.expire()

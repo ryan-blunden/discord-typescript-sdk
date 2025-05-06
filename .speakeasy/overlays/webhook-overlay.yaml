@@ -11,7 +11,7 @@ actions:
       description: Creates a new webhook and returns a webhook object on success. Requires the MANAGE_WEBHOOKS permission. Fires a Webhooks Update Gateway event.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - write
     x-speakeasy-metadata:
       after: sdk.webhooks.create()
@@ -24,7 +24,7 @@ actions:
       description: Returns a list of channel webhook objects. Requires the MANAGE_WEBHOOKS permission.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - read
     x-speakeasy-metadata:
       after: sdk.webhooks.listForChannel()
@@ -37,7 +37,7 @@ actions:
       description: Returns a list of guild webhook objects. Requires the MANAGE_WEBHOOKS permission.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - read
     x-speakeasy-metadata:
       after: sdk.webhooks.listForGuild()
@@ -50,7 +50,7 @@ actions:
       description: Returns the new webhook object for the given id.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - read
     x-speakeasy-metadata:
       after: sdk.webhooks.get()
@@ -63,7 +63,7 @@ actions:
       description: Same as above, except this call does not require authentication and returns no user in the webhook object.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - read
     x-speakeasy-metadata:
       after: sdk.webhooks.getWithToken()
@@ -76,7 +76,7 @@ actions:
       description: Modify a webhook. Requires the MANAGE_WEBHOOKS permission. Returns the updated webhook object on success. Fires a Webhooks Update Gateway event.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - write
     x-speakeasy-metadata:
       after: sdk.webhooks.update()
@@ -89,7 +89,7 @@ actions:
       description: Same as above, except this call does not require authentication, does not accept a channel_id parameter in the body, and does not return a user in the webhook object.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - write
     x-speakeasy-metadata:
       after: sdk.webhooks.updateWithToken()
@@ -102,7 +102,7 @@ actions:
       description: Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. Returns a 204 No Content response on success. Fires a Webhooks Update Gateway event.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - write
     x-speakeasy-metadata:
       after: sdk.webhooks.delete()
@@ -115,7 +115,7 @@ actions:
       description: Same as above, except this call does not require authentication.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - write
     x-speakeasy-metadata:
       after: sdk.webhooks.deleteWithToken()
@@ -128,7 +128,7 @@ actions:
       description: Refer to Uploading Files for details on attachments and multipart/form-data requests. Returns a message or 204 No Content depending on the wait query parameter.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - write
     x-speakeasy-metadata:
       after: sdk.webhooks.execute()
@@ -141,7 +141,7 @@ actions:
       description: Refer to Slack's documentation for more information. We do not support Slack's channel, icon_emoji, mrkdwn, or mrkdwn_in properties.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - write
     x-speakeasy-metadata:
       after: sdk.webhooks.executeSlack()
@@ -154,7 +154,7 @@ actions:
       description: Add a new webhook to your GitHub repo (in the repo's settings), and use this endpoint as the "Payload URL."
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - write
     x-speakeasy-metadata:
       after: sdk.webhooks.executeGithub()
@@ -167,7 +167,7 @@ actions:
       description: Returns a previously-sent webhook message from the same token. Returns a message object on success.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - read
     x-speakeasy-metadata:
       after: sdk.webhooks.getMessage()
@@ -180,7 +180,7 @@ actions:
       description: Edits a previously-sent webhook message from the same token. Returns a message object on success.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - write
     x-speakeasy-metadata:
       after: sdk.webhooks.updateMessage()
@@ -193,7 +193,7 @@ actions:
       description: Deletes a message that was created by the webhook. Returns a 204 No Content response on success.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - write
     x-speakeasy-metadata:
       after: sdk.webhooks.deleteMessage()
@@ -206,7 +206,7 @@ actions:
       description: Returns the initial webhook message.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - read
     x-speakeasy-metadata:
       after: sdk.webhooks.getOriginalMessage()
@@ -219,7 +219,7 @@ actions:
       description: Deletes the initial webhook message.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - write
     x-speakeasy-metadata:
       after: sdk.webhooks.deleteOriginalMessage()
@@ -232,7 +232,7 @@ actions:
       description: Edits the initial webhook message.
       x-speakeasy-mcp:
         scopes:
-          - webhook
+          - webhooks
           - write
     x-speakeasy-metadata:
       after: sdk.webhooks.updateOriginalMessage()

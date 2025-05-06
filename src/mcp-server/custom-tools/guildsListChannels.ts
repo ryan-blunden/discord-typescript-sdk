@@ -8,18 +8,20 @@ const args = {
 
 export const tool$guildsListChannels: ToolDefinition<typeof args> = {
   name: "guilds-list-channels",
-  description: `List all channels in a guild`,
+  description: `Returns a list of guild channel objects for a specific guild. Does not include threads.`,
+  scopes: ["guilds", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsListChannels(
       client,
       {
-        botToken: typeof client._options.botToken === "function" 
-          ? await client._options.botToken() 
-          : client._options.botToken
+        botToken:
+          typeof client._options.botToken === "function"
+            ? await client._options.botToken()
+            : client._options.botToken,
       },
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.signal } }
     ).$inspect();
 
     if (!result.ok) {
