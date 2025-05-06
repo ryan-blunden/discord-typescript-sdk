@@ -1,0 +1,45 @@
+overlay: 1.0.0
+info:
+  title: Application Role Connection Metadata Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Application Role Connection Metadata resource endpoints
+actions:
+  - target: $["paths"]["/applications/{application_id}/role-connections/metadata"]["get"]
+    update:
+      x-speakeasy-group: applicationRoleConnectionMetadata
+      x-speakeasy-name-override: list
+      description: Returns a list of application role connection metadata objects for the given application.
+      x-speakeasy-mcp:
+        scopes:
+          - application-role-connection-metadata
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applicationRoleConnectionMetadata.list()
+      before: sdk.<no_group>.get_application_role_connections_metadata()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/role-connections/metadata"]["put"]
+    update:
+      x-speakeasy-group: applicationRoleConnectionMetadata
+      x-speakeasy-name-override: update
+      description: Updates and returns a list of application role connection metadata objects for the given application. An application can have a maximum of 5 metadata records.
+      x-speakeasy-mcp:
+        scopes:
+          - application-role-connection-metadata
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applicationRoleConnectionMetadata.update()
+      before: sdk.<no_group>.update_application_role_connections_metadata()
+      type: method-name
+  - target: $["paths"]["/users/@me/applications/{application_id}/role-connection"]["delete"]
+    update:
+      x-speakeasy-group: applicationRoleConnectionMetadata
+      x-speakeasy-name-override: deleteUserConnection
+      description: Deletes the application role connection for the user.
+      x-speakeasy-mcp:
+        scopes:
+          - application-role-connection-metadata
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applicationRoleConnectionMetadata.deleteUserConnection()
+      before: sdk.<no_group>.delete_application_user_role_connection()
+      type: method-name

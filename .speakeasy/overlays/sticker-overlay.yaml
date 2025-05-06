@@ -1,0 +1,110 @@
+overlay: 1.0.0
+info:
+  title: Sticker Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Sticker resource endpoints
+actions:
+  - target: $["paths"]["/stickers/{sticker_id}"]["get"]
+    update:
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: get
+      description: Returns a sticker object for the given sticker ID.
+      x-speakeasy-mcp:
+        scopes:
+          - sticker
+          - read
+    x-speakeasy-metadata:
+      after: sdk.stickers.get()
+      before: sdk.<no_group>.get_sticker()
+      type: method-name
+  - target: $["paths"]["/sticker-packs"]["get"]
+    update:
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: listPacks
+      description: Returns a list of available sticker packs.
+      x-speakeasy-mcp:
+        scopes:
+          - sticker
+          - read
+    x-speakeasy-metadata:
+      after: sdk.stickers.listPacks()
+      before: sdk.<no_group>.list_sticker_packs()
+      type: method-name
+  - target: $["paths"]["/sticker-packs/{pack_id}"]["get"]
+    update:
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: getPack
+      description: Returns a sticker pack object for the given sticker pack ID.
+      x-speakeasy-mcp:
+        scopes:
+          - sticker
+          - read
+    x-speakeasy-metadata:
+      after: sdk.stickers.getPack()
+      before: sdk.<no_group>.get_sticker_pack()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/stickers"]["get"]
+    update:
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: listGuildStickers
+      description: Returns an array of sticker objects for the given guild. Includes user fields if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
+      x-speakeasy-mcp:
+        scopes:
+          - sticker
+          - read
+    x-speakeasy-metadata:
+      after: sdk.stickers.listGuildStickers()
+      before: sdk.<no_group>.list_guild_stickers()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/stickers/{sticker_id}"]["get"]
+    update:
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: getGuildSticker
+      description: Returns a sticker object for the given guild and sticker IDs. Includes the user field if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
+      x-speakeasy-mcp:
+        scopes:
+          - sticker
+          - read
+    x-speakeasy-metadata:
+      after: sdk.stickers.getGuildSticker()
+      before: sdk.<no_group>.get_guild_sticker()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/stickers"]["post"]
+    update:
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: createGuildSticker
+      description: Create a new sticker for the guild. Send a multipart/form-data body. Requires the CREATE_GUILD_EXPRESSIONS permission. Returns the new sticker object on success. Fires a Guild Stickers Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - sticker
+          - write
+    x-speakeasy-metadata:
+      after: sdk.stickers.createGuildSticker()
+      before: sdk.<no_group>.create_guild_sticker()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/stickers/{sticker_id}"]["patch"]
+    update:
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: updateGuildSticker
+      description: Modify the given sticker. For stickers created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other stickers, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns the updated sticker object on success. Fires a Guild Stickers Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - sticker
+          - write
+    x-speakeasy-metadata:
+      after: sdk.stickers.updateGuildSticker()
+      before: sdk.<no_group>.update_guild_sticker()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/stickers/{sticker_id}"]["delete"]
+    update:
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: deleteGuildSticker
+      description: Delete the given sticker. For stickers created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other stickers, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns 204 No Content on success. Fires a Guild Stickers Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - sticker
+          - write
+    x-speakeasy-metadata:
+      after: sdk.stickers.deleteGuildSticker()
+      before: sdk.<no_group>.delete_guild_sticker()
+      type: method-name

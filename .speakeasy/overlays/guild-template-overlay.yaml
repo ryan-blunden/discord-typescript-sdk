@@ -1,0 +1,110 @@
+overlay: 1.0.0
+info:
+  title: Guild Template Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Guild Template resource endpoints
+actions:
+  - target: $["paths"]["/guilds/templates/{code}"]["get"]
+    update:
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: get
+      description: Returns a guild template object for the given code.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - read
+    x-speakeasy-metadata:
+      after: sdk.guildTemplates.get()
+      before: sdk.<no_group>.get_guild_template()
+      type: method-name
+  - target: $["paths"]["/guilds/templates/{code}"]["post"]
+    update:
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: createGuild
+      description: Create a new guild based on a template. Returns a guild object on success. Fires a Guild Create Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - write
+    x-speakeasy-metadata:
+      after: sdk.guildTemplates.createGuild()
+      before: sdk.<no_group>.create_guild_from_template()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/templates"]["get"]
+    update:
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: list
+      description: Returns an array of guild template objects. Requires the MANAGE_GUILD permission.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - read
+    x-speakeasy-metadata:
+      after: sdk.guildTemplates.list()
+      before: sdk.<no_group>.list_guild_templates()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/templates"]["post"]
+    update:
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: create
+      description: Creates a template for the guild. Requires the MANAGE_GUILD permission. Returns the created guild template object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - write
+    x-speakeasy-metadata:
+      after: sdk.guildTemplates.create()
+      before: sdk.<no_group>.create_guild_template()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/templates/{code}"]["put"]
+    update:
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: sync
+      description: Syncs the template to the guild's current state. Requires the MANAGE_GUILD permission. Returns the guild template object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - write
+    x-speakeasy-metadata:
+      after: sdk.guildTemplates.sync()
+      before: sdk.<no_group>.sync_guild_template()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/templates/{code}"]["patch"]
+    update:
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: update
+      description: Modifies the template's metadata. Requires the MANAGE_GUILD permission. Returns the guild template object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - write
+    x-speakeasy-metadata:
+      after: sdk.guildTemplates.update()
+      before: sdk.<no_group>.update_guild_template()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/templates/{code}"]["delete"]
+    update:
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: delete
+      description: Deletes the template. Requires the MANAGE_GUILD permission. Returns the deleted guild template object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - write
+    x-speakeasy-metadata:
+      after: sdk.guildTemplates.delete()
+      before: sdk.<no_group>.delete_guild_template()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/new-member-welcome"]["get"]
+    update:
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: getNewMemberWelcome
+      description: Returns the welcome screen object for the guild.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - read
+    x-speakeasy-metadata:
+      after: sdk.guildTemplates.getNewMemberWelcome()
+      before: sdk.<no_group>.get_guild_new_member_welcome()
+      type: method-name

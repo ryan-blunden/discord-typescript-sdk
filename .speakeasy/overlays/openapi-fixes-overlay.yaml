@@ -12,27 +12,67 @@ actions:
   - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/@original"]["patch"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
+      x-speakeasy-mcp:
+        name: ''
+        scopes:
+          - openapi-fixes
+          - write
   - target: $["paths"]["/interactions/{interaction_id}/{interaction_token}/callback"]["post"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
+      x-speakeasy-mcp:
+        name: ''
+        scopes:
+          - openapi-fixes
+          - write
   - target: $["paths"]["/channels/{channel_id}/messages/{message_id}"]["patch"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
+      x-speakeasy-mcp:
+        name: ''
+        scopes:
+          - openapi-fixes
+          - write
   - target: $["paths"]["/channels/{channel_id}/messages"]["post"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
+      x-speakeasy-mcp:
+        name: ''
+        scopes:
+          - openapi-fixes
+          - write
   - target: $["paths"]["/channels/{channel_id}/threads"]["post"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
+      x-speakeasy-mcp:
+        name: ''
+        scopes:
+          - openapi-fixes
+          - write
   - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}"]["patch"]["requestBody"]["content"]["application/x-www-form-urlencoded"]["schema"]
     update:
       type: object
+      x-speakeasy-mcp:
+        name: ''
+        scopes:
+          - openapi-fixes
+          - write
   - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}"]["patch"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
+      x-speakeasy-mcp:
+        name: ''
+        scopes:
+          - openapi-fixes
+          - write
   - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}"]["post"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
+      x-speakeasy-mcp:
+        name: ''
+        scopes:
+          - openapi-fixes
+          - write
   - target: $["components"]["schemas"]["ApplicationCommandHandler"]["oneOf"]
     remove: true
   - target: $["components"]["schemas"]["EntitlementOwnerTypes"]["oneOf"]
@@ -43,7 +83,20 @@ actions:
     remove: true
   - target: $["components"]["schemas"]["ChannelTypes"]
     update:
-      enum: [0, 1, 2, 3, 4, 5, 7, 10, 11, 12, 13, 14, 15]
-      description: "Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)"
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 7
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+      description: 'Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)'
   - target: $..x-discord-union
     remove: true

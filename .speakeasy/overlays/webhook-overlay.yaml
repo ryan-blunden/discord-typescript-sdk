@@ -1,0 +1,240 @@
+overlay: 1.0.0
+info:
+  title: Webhook Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Webhook resource endpoints
+actions:
+  - target: $["paths"]["/channels/{channel_id}/webhooks"]["post"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: create
+      description: Creates a new webhook and returns a webhook object on success. Requires the MANAGE_WEBHOOKS permission. Fires a Webhooks Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - write
+    x-speakeasy-metadata:
+      after: sdk.webhooks.create()
+      before: sdk.<no_group>.create_webhook()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/webhooks"]["get"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: listForChannel
+      description: Returns a list of channel webhook objects. Requires the MANAGE_WEBHOOKS permission.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - read
+    x-speakeasy-metadata:
+      after: sdk.webhooks.listForChannel()
+      before: sdk.<no_group>.get_channel_webhooks()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/webhooks"]["get"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: listForGuild
+      description: Returns a list of guild webhook objects. Requires the MANAGE_WEBHOOKS permission.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - read
+    x-speakeasy-metadata:
+      after: sdk.webhooks.listForGuild()
+      before: sdk.<no_group>.get_guild_webhooks()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}"]["get"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: get
+      description: Returns the new webhook object for the given id.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - read
+    x-speakeasy-metadata:
+      after: sdk.webhooks.get()
+      before: sdk.<no_group>.get_webhook()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}"]["get"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: getWithToken
+      description: Same as above, except this call does not require authentication and returns no user in the webhook object.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - read
+    x-speakeasy-metadata:
+      after: sdk.webhooks.getWithToken()
+      before: sdk.<no_group>.get_webhook_with_token()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}"]["patch"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: update
+      description: Modify a webhook. Requires the MANAGE_WEBHOOKS permission. Returns the updated webhook object on success. Fires a Webhooks Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - write
+    x-speakeasy-metadata:
+      after: sdk.webhooks.update()
+      before: sdk.<no_group>.modify_webhook()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}"]["patch"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: updateWithToken
+      description: Same as above, except this call does not require authentication, does not accept a channel_id parameter in the body, and does not return a user in the webhook object.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - write
+    x-speakeasy-metadata:
+      after: sdk.webhooks.updateWithToken()
+      before: sdk.<no_group>.modify_webhook_with_token()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}"]["delete"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: delete
+      description: Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. Returns a 204 No Content response on success. Fires a Webhooks Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - write
+    x-speakeasy-metadata:
+      after: sdk.webhooks.delete()
+      before: sdk.<no_group>.delete_webhook()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}"]["delete"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: deleteWithToken
+      description: Same as above, except this call does not require authentication.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - write
+    x-speakeasy-metadata:
+      after: sdk.webhooks.deleteWithToken()
+      before: sdk.<no_group>.delete_webhook_with_token()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}"]["post"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: execute
+      description: Refer to Uploading Files for details on attachments and multipart/form-data requests. Returns a message or 204 No Content depending on the wait query parameter.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - write
+    x-speakeasy-metadata:
+      after: sdk.webhooks.execute()
+      before: sdk.<no_group>.execute_webhook()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/slack"]["post"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: executeSlack
+      description: Refer to Slack's documentation for more information. We do not support Slack's channel, icon_emoji, mrkdwn, or mrkdwn_in properties.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - write
+    x-speakeasy-metadata:
+      after: sdk.webhooks.executeSlack()
+      before: sdk.<no_group>.execute_slack_compatible_webhook()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/github"]["post"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: executeGithub
+      description: Add a new webhook to your GitHub repo (in the repo's settings), and use this endpoint as the "Payload URL."
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - write
+    x-speakeasy-metadata:
+      after: sdk.webhooks.executeGithub()
+      before: sdk.<no_group>.execute_github_compatible_webhook()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}"]["get"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: getMessage
+      description: Returns a previously-sent webhook message from the same token. Returns a message object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - read
+    x-speakeasy-metadata:
+      after: sdk.webhooks.getMessage()
+      before: sdk.<no_group>.get_webhook_message()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}"]["patch"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: updateMessage
+      description: Edits a previously-sent webhook message from the same token. Returns a message object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - write
+    x-speakeasy-metadata:
+      after: sdk.webhooks.updateMessage()
+      before: sdk.<no_group>.edit_webhook_message()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}"]["delete"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: deleteMessage
+      description: Deletes a message that was created by the webhook. Returns a 204 No Content response on success.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - write
+    x-speakeasy-metadata:
+      after: sdk.webhooks.deleteMessage()
+      before: sdk.<no_group>.delete_webhook_message()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/@original"]["get"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: getOriginalMessage
+      description: Returns the initial webhook message.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - read
+    x-speakeasy-metadata:
+      after: sdk.webhooks.getOriginalMessage()
+      before: sdk.<no_group>.get_original_webhook_message()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/@original"]["delete"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: deleteOriginalMessage
+      description: Deletes the initial webhook message.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - write
+    x-speakeasy-metadata:
+      after: sdk.webhooks.deleteOriginalMessage()
+      before: sdk.<no_group>.delete_original_webhook_message()
+      type: method-name
+  - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/@original"]["patch"]
+    update:
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: updateOriginalMessage
+      description: Edits the initial webhook message.
+      x-speakeasy-mcp:
+        scopes:
+          - webhook
+          - write
+    x-speakeasy-metadata:
+      after: sdk.webhooks.updateOriginalMessage()
+      before: sdk.<no_group>.update_original_webhook_message()
+      type: method-name

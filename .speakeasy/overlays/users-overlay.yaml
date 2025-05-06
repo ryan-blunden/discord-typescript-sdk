@@ -1,0 +1,136 @@
+overlay: 1.0.0
+info:
+  title: Users Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Users resource endpoints
+actions:
+  - target: $["paths"]["/users/@me"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: getCurrent
+      description: Returns the user object of the requester's account. For OAuth2, this requires the identify scope, which will return the object without an email, and optionally the email scope, which returns the object with an email if the user has one.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - read
+    x-speakeasy-metadata:
+      after: sdk.users.getCurrent()
+      before: sdk.<no_group>.get_my_user()
+      type: method-name
+  - target: $["paths"]["/users/{user_id}"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: get
+      description: Returns a user object for a given user ID.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - read
+    x-speakeasy-metadata:
+      after: sdk.users.get()
+      before: sdk.<no_group>.get_user()
+      type: method-name
+  - target: $["paths"]["/users/@me"]["patch"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: updateCurrent
+      description: Modify the requester's user account settings. Returns a user object on success. Fires a User Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - write
+    x-speakeasy-metadata:
+      after: sdk.users.updateCurrent()
+      before: sdk.<no_group>.update_my_user()
+      type: method-name
+  - target: $["paths"]["/users/@me/guilds"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: listGuilds
+      description: Returns a list of partial guild objects the current user is a member of. For OAuth2, requires the guilds scope.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - read
+    x-speakeasy-metadata:
+      after: sdk.users.listGuilds()
+      before: sdk.<no_group>.list_my_guilds()
+      type: method-name
+  - target: $["paths"]["/users/@me/guilds/{guild_id}/member"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: getGuildMember
+      description: Returns a guild member object for the current user. Requires the guilds.members.read OAuth2 scope.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - read
+    x-speakeasy-metadata:
+      after: sdk.users.getGuildMember()
+      before: sdk.<no_group>.get_my_guild_member()
+      type: method-name
+  - target: $["paths"]["/users/@me/guilds/{guild_id}"]["delete"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: leaveGuild
+      description: Leave a guild. Returns a 204 empty response on success. Fires a Guild Delete Gateway event and a Guild Member Remove Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - write
+    x-speakeasy-metadata:
+      after: sdk.users.leaveGuild()
+      before: sdk.<no_group>.leave_guild()
+      type: method-name
+  - target: $["paths"]["/users/@me/connections"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: listConnections
+      description: Returns a list of connection objects. Requires the connections OAuth2 scope.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - read
+    x-speakeasy-metadata:
+      after: sdk.users.listConnections()
+      before: sdk.<no_group>.list_my_connections()
+      type: method-name
+  - target: $["paths"]["/users/@me/channels"]["post"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: createDM
+      description: Create a new DM channel with a user. Returns a DM channel object (if one already exists, it will be returned instead).
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - write
+    x-speakeasy-metadata:
+      after: sdk.users.createDM()
+      before: sdk.<no_group>.create_dm()
+      type: method-name
+  - target: $["paths"]["/users/@me/applications/{application_id}/role-connection"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: getApplicationRoleConnection
+      description: Returns the application role connection for the user. Requires an OAuth2 access token with role_connections.write scope for the application specified in the path.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - read
+    x-speakeasy-metadata:
+      after: sdk.users.getApplicationRoleConnection()
+      before: sdk.<no_group>.get_application_user_role_connection()
+      type: method-name
+  - target: $["paths"]["/users/@me/applications/{application_id}/role-connection"]["put"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: updateApplicationRoleConnection
+      description: Updates and returns the application role connection for the user. Requires an OAuth2 access token with role_connections.write scope for the application specified in the path.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - write
+    x-speakeasy-metadata:
+      after: sdk.users.updateApplicationRoleConnection()
+      before: sdk.<no_group>.update_application_user_role_connection()
+      type: method-name

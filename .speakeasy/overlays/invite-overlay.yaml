@@ -1,0 +1,32 @@
+overlay: 1.0.0
+info:
+  title: Invite Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Invite resource endpoints
+actions:
+  - target: $["paths"]["/invites/{code}"]["get"]
+    update:
+      x-speakeasy-group: invites
+      x-speakeasy-name-override: get
+      description: Returns an invite object for the given code.
+      x-speakeasy-mcp:
+        scopes:
+          - invite
+          - read
+    x-speakeasy-metadata:
+      after: sdk.invites.get()
+      before: sdk.<no_group>.invite_resolve()
+      type: method-name
+  - target: $["paths"]["/invites/{code}"]["delete"]
+    update:
+      x-speakeasy-group: invites
+      x-speakeasy-name-override: delete
+      description: Delete an invite. Requires the MANAGE_CHANNELS permission on the channel this invite belongs to, or MANAGE_GUILD to remove any invite across the guild. Returns an invite object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - invite
+          - write
+    x-speakeasy-metadata:
+      after: sdk.invites.delete()
+      before: sdk.<no_group>.invite_revoke()
+      type: method-name
