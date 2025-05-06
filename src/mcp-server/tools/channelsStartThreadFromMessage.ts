@@ -13,7 +13,9 @@ const args = {
 export const tool$channelsStartThreadFromMessage: ToolDefinition<typeof args> =
   {
     name: "channels-start-thread-from-message",
-    description: ``,
+    description:
+      `Creates a new thread from an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create and a Message Update Gateway event.`,
+    scopes: ["channels", "write"],
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await channelsStartThreadFromMessage(

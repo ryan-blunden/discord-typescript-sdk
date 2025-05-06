@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsPrune: ToolDefinition<typeof args> = {
   name: "guilds-prune",
-  description: ``,
+  description:
+    `Begin a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions. Returns an object with one pruned key indicating the number of members that were removed in the prune operation. Fires multiple Guild Member Remove Gateway events.`,
+  scopes: ["guilds", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsPrune(

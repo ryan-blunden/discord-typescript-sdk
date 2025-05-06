@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Gets the stage instance associated with the Stage channel, if it exists.
+ */
 export function stageInstancesGet(
   client: DiscordCore,
   request: operations.GetStageInstanceRequest,

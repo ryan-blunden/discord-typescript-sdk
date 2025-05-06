@@ -30,6 +30,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Edits the initial webhook message.
+ */
 export function webhooksUpdateOriginalMessageMultipart(
   client: DiscordCore,
   request: operations.UpdateOriginalWebhookMessageMultipartRequest,

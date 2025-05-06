@@ -12,7 +12,9 @@ const args = {
 
 export const tool$stageInstancesCreate: ToolDefinition<typeof args> = {
   name: "stage-instances-create",
-  description: ``,
+  description:
+    `Creates a new Stage instance associated to a Stage channel. Returns that Stage instance. Fires a Stage Instance Create Gateway event. Requires the user to be a moderator of the Stage channel.`,
+  scopes: ["stage-instance", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await stageInstancesCreate(

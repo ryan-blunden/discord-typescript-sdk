@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsSearchMembers: ToolDefinition<typeof args> = {
   name: "guilds-search-members",
-  description: ``,
+  description:
+    `Returns a list of guild member objects whose username or nickname starts with a provided string.`,
+  scopes: ["guilds", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsSearchMembers(

@@ -12,7 +12,9 @@ const args = {
 
 export const tool$stageInstancesGet: ToolDefinition<typeof args> = {
   name: "stage-instances-get",
-  description: ``,
+  description:
+    `Gets the stage instance associated with the Stage channel, if it exists.`,
+  scopes: ["stage-instance", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await stageInstancesGet(

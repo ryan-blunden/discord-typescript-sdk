@@ -26,6 +26,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns a list of guild member objects whose username or nickname starts with a provided string.
+ */
 export function guildsSearchMembers(
   client: DiscordCore,
   request: operations.SearchGuildMembersRequest,

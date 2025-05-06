@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,8 +27,33 @@ import {
   UpdateThreadTagRequest$outboundSchema,
 } from "./updatethreadtagrequest.js";
 
+/**
+ * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
+ */
+export const UpdateGuildChannelRequestPartialType = {
+  Zero: 0,
+  One: 1,
+  Two: 2,
+  Three: 3,
+  Four: 4,
+  Five: 5,
+  Seven: 7,
+  Ten: 10,
+  Eleven: 11,
+  Twelve: 12,
+  Thirteen: 13,
+  Fourteen: 14,
+  Fifteen: 15,
+} as const;
+/**
+ * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
+ */
+export type UpdateGuildChannelRequestPartialType = ClosedEnum<
+  typeof UpdateGuildChannelRequestPartialType
+>;
+
 export type UpdateGuildChannelRequestPartial = {
-  type?: 1 | undefined;
+  type?: UpdateGuildChannelRequestPartialType | undefined;
   name?: string | undefined;
   position?: number | null | undefined;
   topic?: string | null | undefined;
@@ -53,12 +79,36 @@ export type UpdateGuildChannelRequestPartial = {
 };
 
 /** @internal */
+export const UpdateGuildChannelRequestPartialType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateGuildChannelRequestPartialType> = z.nativeEnum(
+    UpdateGuildChannelRequestPartialType,
+  );
+
+/** @internal */
+export const UpdateGuildChannelRequestPartialType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateGuildChannelRequestPartialType> =
+    UpdateGuildChannelRequestPartialType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateGuildChannelRequestPartialType$ {
+  /** @deprecated use `UpdateGuildChannelRequestPartialType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateGuildChannelRequestPartialType$inboundSchema;
+  /** @deprecated use `UpdateGuildChannelRequestPartialType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateGuildChannelRequestPartialType$outboundSchema;
+}
+
+/** @internal */
 export const UpdateGuildChannelRequestPartial$inboundSchema: z.ZodType<
   UpdateGuildChannelRequestPartial,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: UpdateGuildChannelRequestPartialType$inboundSchema.optional(),
   name: z.string().optional(),
   position: z.nullable(z.number().int()).optional(),
   topic: z.nullable(z.string()).optional(),
@@ -103,7 +153,7 @@ export const UpdateGuildChannelRequestPartial$inboundSchema: z.ZodType<
 
 /** @internal */
 export type UpdateGuildChannelRequestPartial$Outbound = {
-  type: 1;
+  type?: number | undefined;
   name?: string | undefined;
   position?: number | null | undefined;
   topic?: string | null | undefined;
@@ -137,7 +187,7 @@ export const UpdateGuildChannelRequestPartial$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateGuildChannelRequestPartial
 > = z.object({
-  type: z.literal(1).default(1 as const),
+  type: UpdateGuildChannelRequestPartialType$outboundSchema.optional(),
   name: z.string().optional(),
   position: z.nullable(z.number().int()).optional(),
   topic: z.nullable(z.string()).optional(),

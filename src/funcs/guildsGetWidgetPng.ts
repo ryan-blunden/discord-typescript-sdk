@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns a PNG image widget for the guild. Requires no permissions or authentication.
+ */
 export function guildsGetWidgetPng(
   client: DiscordCore,
   request: operations.GetGuildWidgetPngRequest,

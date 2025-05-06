@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns a thread member object for the specified user if they are a member of the thread, returns a 404 response otherwise.
+ */
 export function channelsGetThreadMember(
   client: DiscordCore,
   request: operations.GetThreadMemberRequest,

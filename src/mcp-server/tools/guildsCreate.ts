@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsCreate: ToolDefinition<typeof args> = {
   name: "guilds-create",
-  description: ``,
+  description:
+    `Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.`,
+  scopes: ["guilds", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsCreate(

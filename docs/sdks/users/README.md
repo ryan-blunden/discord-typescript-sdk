@@ -5,14 +5,20 @@
 
 ### Available Operations
 
-* [listMyConnections](#listmyconnections)
-* [createDm](#createdm)
-* [listMyGuilds](#listmyguilds)
-* [getMe](#getme)
-* [updateMe](#updateme)
-* [get](#get)
+* [listConnections](#listconnections) - Returns a list of connection objects. Requires the connections OAuth2 scope.
+* [createDM](#createdm) - Create a new DM channel with a user. Returns a DM channel object (if one already exists, it will be returned instead).
+* [listGuilds](#listguilds) - Returns a list of partial guild objects the current user is a member of. For OAuth2, requires the guilds scope.
+* [getCurrent](#getcurrent) - Returns the user object of the requester's account. For OAuth2, this requires the identify scope, which will return the object without an email, and optionally the email scope, which returns the object with an email if the user has one.
+* [updateCurrent](#updatecurrent) - Modify the requester's user account settings. Returns a user object on success. Fires a User Update Gateway event.
+* [getApplicationRoleConnection](#getapplicationroleconnection) - Returns the application role connection for the user. Requires an OAuth2 access token with role_connections.write scope for the application specified in the path.
+* [updateApplicationRoleConnection](#updateapplicationroleconnection) - Updates and returns the application role connection for the user. Requires an OAuth2 access token with role_connections.write scope for the application specified in the path.
+* [getGuildMember](#getguildmember) - Returns a guild member object for the current user. Requires the guilds.members.read OAuth2 scope.
+* [leaveGuild](#leaveguild) - Leave a guild. Returns a 204 empty response on success. Fires a Guild Delete Gateway event and a Guild Member Remove Gateway event.
+* [get](#get) - Returns a user object for a given user ID.
 
-## listMyConnections
+## listConnections
+
+Returns a list of connection objects. Requires the connections OAuth2 scope.
 
 ### Example Usage
 
@@ -22,7 +28,7 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  const result = await discord.users.listMyConnections({
+  const result = await discord.users.listConnections({
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   });
 
@@ -39,14 +45,14 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { usersListMyConnections } from "@ryan.blunden/discord-sdk/funcs/usersListMyConnections.js";
+import { usersListConnections } from "@ryan.blunden/discord-sdk/funcs/usersListConnections.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const discord = new DiscordCore();
 
 async function run() {
-  const res = await usersListMyConnections(discord, {
+  const res = await usersListConnections(discord, {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   });
 
@@ -83,7 +89,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## createDm
+## createDM
+
+Create a new DM channel with a user. Returns a DM channel object (if one already exists, it will be returned instead).
 
 ### Example Usage
 
@@ -95,7 +103,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.users.createDm({});
+  const result = await discord.users.createDM({});
 
   // Handle the result
   console.log(result);
@@ -110,7 +118,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { usersCreateDm } from "@ryan.blunden/discord-sdk/funcs/usersCreateDm.js";
+import { usersCreateDM } from "@ryan.blunden/discord-sdk/funcs/usersCreateDM.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -119,7 +127,7 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await usersCreateDm(discord, {});
+  const res = await usersCreateDM(discord, {});
 
   if (!res.ok) {
     throw res.error;
@@ -154,7 +162,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## listMyGuilds
+## listGuilds
+
+Returns a list of partial guild objects the current user is a member of. For OAuth2, requires the guilds scope.
 
 ### Example Usage
 
@@ -164,7 +174,7 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  const result = await discord.users.listMyGuilds({
+  const result = await discord.users.listGuilds({
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {});
 
@@ -181,14 +191,14 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { usersListMyGuilds } from "@ryan.blunden/discord-sdk/funcs/usersListMyGuilds.js";
+import { usersListGuilds } from "@ryan.blunden/discord-sdk/funcs/usersListGuilds.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const discord = new DiscordCore();
 
 async function run() {
-  const res = await usersListMyGuilds(discord, {
+  const res = await usersListGuilds(discord, {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {});
 
@@ -226,7 +236,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## getMe
+## getCurrent
+
+Returns the user object of the requester's account. For OAuth2, this requires the identify scope, which will return the object without an email, and optionally the email scope, which returns the object with an email if the user has one.
 
 ### Example Usage
 
@@ -236,7 +248,7 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  const result = await discord.users.getMe({
+  const result = await discord.users.getCurrent({
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   });
 
@@ -253,14 +265,14 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { usersGetMe } from "@ryan.blunden/discord-sdk/funcs/usersGetMe.js";
+import { usersGetCurrent } from "@ryan.blunden/discord-sdk/funcs/usersGetCurrent.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const discord = new DiscordCore();
 
 async function run() {
-  const res = await usersGetMe(discord, {
+  const res = await usersGetCurrent(discord, {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   });
 
@@ -297,7 +309,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## updateMe
+## updateCurrent
+
+Modify the requester's user account settings. Returns a user object on success. Fires a User Update Gateway event.
 
 ### Example Usage
 
@@ -309,7 +323,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.users.updateMe({
+  const result = await discord.users.updateCurrent({
     username: "Neva.West",
   });
 
@@ -326,7 +340,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { usersUpdateMe } from "@ryan.blunden/discord-sdk/funcs/usersUpdateMe.js";
+import { usersUpdateCurrent } from "@ryan.blunden/discord-sdk/funcs/usersUpdateCurrent.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -335,7 +349,7 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await usersUpdateMe(discord, {
+  const res = await usersUpdateCurrent(discord, {
     username: "Neva.West",
   });
 
@@ -372,7 +386,317 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
+## getApplicationRoleConnection
+
+Returns the application role connection for the user. Requires an OAuth2 access token with role_connections.write scope for the application specified in the path.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.users.getApplicationRoleConnection({
+    applicationId: "<value>",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { usersGetApplicationRoleConnection } from "@ryan.blunden/discord-sdk/funcs/usersGetApplicationRoleConnection.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await usersGetApplicationRoleConnection(discord, {
+    applicationId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetApplicationUserRoleConnectionRequest](../../models/operations/getapplicationuserroleconnectionrequest.md)                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.ApplicationUserRoleConnectionResponse](../../models/components/applicationuserroleconnectionresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## updateApplicationRoleConnection
+
+Updates and returns the application role connection for the user. Requires an OAuth2 access token with role_connections.write scope for the application specified in the path.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.users.updateApplicationRoleConnection({
+    applicationId: "<value>",
+    requestBody: {},
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { usersUpdateApplicationRoleConnection } from "@ryan.blunden/discord-sdk/funcs/usersUpdateApplicationRoleConnection.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await usersUpdateApplicationRoleConnection(discord, {
+    applicationId: "<value>",
+    requestBody: {},
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UpdateApplicationUserRoleConnectionRequest](../../models/operations/updateapplicationuserroleconnectionrequest.md)                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.ApplicationUserRoleConnectionResponse](../../models/components/applicationuserroleconnectionresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## getGuildMember
+
+Returns a guild member object for the current user. Requires the guilds.members.read OAuth2 scope.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.users.getGuildMember({
+    guildId: "<value>",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { usersGetGuildMember } from "@ryan.blunden/discord-sdk/funcs/usersGetGuildMember.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await usersGetGuildMember(discord, {
+    guildId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetMyGuildMemberRequest](../../models/operations/getmyguildmemberrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.PrivateGuildMemberResponse](../../models/components/privateguildmemberresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## leaveGuild
+
+Leave a guild. Returns a 204 empty response on success. Fires a Guild Delete Gateway event and a Guild Member Remove Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  await discord.users.leaveGuild({
+    guildId: "<value>",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { usersLeaveGuild } from "@ryan.blunden/discord-sdk/funcs/usersLeaveGuild.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await usersLeaveGuild(discord, {
+    guildId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.LeaveGuildRequest](../../models/operations/leaveguildrequest.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
 ## get
+
+Returns a user object for a given user ID.
 
 ### Example Usage
 

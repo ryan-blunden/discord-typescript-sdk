@@ -12,7 +12,9 @@ const args = {
 
 export const tool$channelsDelete: ToolDefinition<typeof args> = {
   name: "channels-delete",
-  description: ``,
+  description:
+    `Delete a channel, or close a private message. Requires the MANAGE_CHANNELS permission for the guild, or MANAGE_THREADS if the channel is a thread. Returns a channel object on success. Fires a Channel Delete Gateway event (or Thread Delete if the channel was a thread).`,
+  scopes: ["channels", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsDelete(

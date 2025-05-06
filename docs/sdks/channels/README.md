@@ -5,31 +5,38 @@
 
 ### Available Operations
 
-* [listMyPrivateArchivedThreads](#listmyprivatearchivedthreads)
-* [listPrivateArchivedThreads](#listprivatearchivedthreads)
-* [deleteUserMessageReaction](#deleteusermessagereaction)
-* [crosspostMessage](#crosspostmessage)
-* [startThreadFromMessage](#startthreadfrommessage)
-* [expirePoll](#expirepoll)
-* [sendSoundboardSound](#sendsoundboardsound)
-* [getThreadMember](#getthreadmember)
-* [addThreadMember](#addthreadmember)
-* [listThreadMembers](#listthreadmembers)
-* [deleteDmUser](#deletedmuser)
-* [follow](#follow)
-* [deleteMessage](#deletemessage)
-* [listWebhooks](#listwebhooks)
-* [createWebhook](#createwebhook)
-* [listInvites](#listinvites)
-* [createInvite](#createinvite)
-* [triggerTyping](#triggertyping)
-* [pinMessage](#pinmessage)
-* [listPinnedMessages](#listpinnedmessages)
-* [get](#get)
-* [delete](#delete)
-* [update](#update)
+* [listJoinedPrivateArchivedThreads](#listjoinedprivatearchivedthreads) - Returns archived threads in the channel that are of type PRIVATE_THREAD, and the user has joined. Threads are ordered by their id, in descending order. Requires the READ_MESSAGE_HISTORY permission.
+* [listPrivateArchivedThreads](#listprivatearchivedthreads) - Returns archived threads in the channel that are of type PRIVATE_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions.
+* [listPublicArchivedThreads](#listpublicarchivedthreads) - Returns archived threads in the channel that are public. When called on a GUILD_TEXT channel, returns threads of type PUBLIC_THREAD. When called on a GUILD_ANNOUNCEMENT channel returns threads of type ANNOUNCEMENT_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires the READ_MESSAGE_HISTORY permission.
+* [joinThread](#jointhread) - Adds the current user to a thread. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update and a Thread Create Gateway event.
+* [leaveThread](#leavethread) - Removes the current user from a thread. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update Gateway event.
+* [startThreadFromMessage](#startthreadfrommessage) - Creates a new thread from an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create and a Message Update Gateway event.
+* [searchThreads](#searchthreads) - Search for threads in a channel.
+* [getThreadMember](#getthreadmember) - Returns a thread member object for the specified user if they are a member of the thread, returns a 404 response otherwise.
+* [addThreadMember](#addthreadmember) - Adds another member to a thread. Requires the ability to send messages in the thread. Also requires the thread is not archived. Returns a 204 empty response if the member is successfully added or was already a member of the thread. Fires a Thread Members Update Gateway event.
+* [removeThreadMember](#removethreadmember) - Removes another member from a thread. Requires the MANAGE_THREADS permission, or the creator of the thread if it is a PRIVATE_THREAD. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update Gateway event.
+* [listThreadMembers](#listthreadmembers) - Returns array of thread member objects that are members of the thread.
+* [setPermissionOverwrite](#setpermissionoverwrite) - Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
+* [deletePermissionOverwrite](#deletepermissionoverwrite) - Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
+* [addGroupDMRecipient](#addgroupdmrecipient) - Adds a recipient to a Group DM using their access token.
+* [removeGroupDMRecipient](#removegroupdmrecipient) - Removes a recipient from a Group DM.
+* [follow](#follow) - Follow an Announcement Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. Returns a followed channel object. Fires a Webhooks Update Gateway event for the target channel.
+* [listInvites](#listinvites) - Returns a list of invite objects (with invite metadata) for the channel.
+* [createInvite](#createinvite) - Create a new invite object for the channel.
+* [startThreadJson](#startthreadjson) - Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+* [startThreadForm](#startthreadform) - Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+* [startThreadMultipart](#startthreadmultipart) - Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+* [triggerTypingIndicator](#triggertypingindicator) - Post a typing indicator for the specified channel, which expires after 10 seconds. Returns a 204 empty response on success. Fires a Typing Start Gateway event.
+* [pinMessage](#pinmessage) - Pin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+* [unpinMessage](#unpinmessage) - Unpin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+* [listPinnedMessages](#listpinnedmessages) - Returns all pinned messages in the channel as an array of message objects.
+* [get](#get) - Returns a channel object for the given channel ID.
+* [delete](#delete) - Delete a channel, or close a private message. Requires the MANAGE_CHANNELS permission for the guild, or MANAGE_THREADS if the channel is a thread. Returns a channel object on success. Fires a Channel Delete Gateway event (or Thread Delete if the channel was a thread).
+* [update](#update) - Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.
 
-## listMyPrivateArchivedThreads
+## listJoinedPrivateArchivedThreads
+
+Returns archived threads in the channel that are of type PRIVATE_THREAD, and the user has joined. Threads are ordered by their id, in descending order. Requires the READ_MESSAGE_HISTORY permission.
 
 ### Example Usage
 
@@ -41,7 +48,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.channels.listMyPrivateArchivedThreads({
+  const result = await discord.channels.listJoinedPrivateArchivedThreads({
     channelId: "<value>",
   });
 
@@ -58,7 +65,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsListMyPrivateArchivedThreads } from "@ryan.blunden/discord-sdk/funcs/channelsListMyPrivateArchivedThreads.js";
+import { channelsListJoinedPrivateArchivedThreads } from "@ryan.blunden/discord-sdk/funcs/channelsListJoinedPrivateArchivedThreads.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -67,7 +74,7 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await channelsListMyPrivateArchivedThreads(discord, {
+  const res = await channelsListJoinedPrivateArchivedThreads(discord, {
     channelId: "<value>",
   });
 
@@ -105,6 +112,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## listPrivateArchivedThreads
+
+Returns archived threads in the channel that are of type PRIVATE_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions.
 
 ### Example Usage
 
@@ -179,7 +188,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## deleteUserMessageReaction
+## listPublicArchivedThreads
+
+Returns archived threads in the channel that are public. When called on a GUILD_TEXT channel, returns threads of type PUBLIC_THREAD. When called on a GUILD_ANNOUNCEMENT channel returns threads of type ANNOUNCEMENT_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires the READ_MESSAGE_HISTORY permission.
 
 ### Example Usage
 
@@ -191,11 +202,85 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.channels.deleteUserMessageReaction({
+  const result = await discord.channels.listPublicArchivedThreads({
     channelId: "<value>",
-    messageId: "<value>",
-    emojiName: "<value>",
-    userId: "<value>",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { channelsListPublicArchivedThreads } from "@ryan.blunden/discord-sdk/funcs/channelsListPublicArchivedThreads.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await channelsListPublicArchivedThreads(discord, {
+    channelId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListPublicArchivedThreadsRequest](../../models/operations/listpublicarchivedthreadsrequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.ThreadsResponse](../../models/components/threadsresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## joinThread
+
+Adds the current user to a thread. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update and a Thread Create Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  await discord.channels.joinThread({
+    channelId: "<value>",
   });
 
 
@@ -210,7 +295,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsDeleteUserMessageReaction } from "@ryan.blunden/discord-sdk/funcs/channelsDeleteUserMessageReaction.js";
+import { channelsJoinThread } from "@ryan.blunden/discord-sdk/funcs/channelsJoinThread.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -219,11 +304,8 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await channelsDeleteUserMessageReaction(discord, {
+  const res = await channelsJoinThread(discord, {
     channelId: "<value>",
-    messageId: "<value>",
-    emojiName: "<value>",
-    userId: "<value>",
   });
 
   if (!res.ok) {
@@ -242,7 +324,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteUserMessageReactionRequest](../../models/operations/deleteusermessagereactionrequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.JoinThreadRequest](../../models/operations/jointhreadrequest.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -258,7 +340,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## crosspostMessage
+## leaveThread
+
+Removes the current user from a thread. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update Gateway event.
 
 ### Example Usage
 
@@ -270,13 +354,11 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.channels.crosspostMessage({
+  await discord.channels.leaveThread({
     channelId: "<value>",
-    messageId: "<value>",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -288,7 +370,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsCrosspostMessage } from "@ryan.blunden/discord-sdk/funcs/channelsCrosspostMessage.js";
+import { channelsLeaveThread } from "@ryan.blunden/discord-sdk/funcs/channelsLeaveThread.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -297,9 +379,8 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await channelsCrosspostMessage(discord, {
+  const res = await channelsLeaveThread(discord, {
     channelId: "<value>",
-    messageId: "<value>",
   });
 
   if (!res.ok) {
@@ -308,8 +389,7 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
@@ -319,14 +399,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CrosspostMessageRequest](../../models/operations/crosspostmessagerequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.LeaveThreadRequest](../../models/operations/leavethreadrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
@@ -336,6 +416,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## startThreadFromMessage
+
+Creates a new thread from an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create and a Message Update Gateway event.
 
 ### Example Usage
 
@@ -418,7 +500,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## expirePoll
+## searchThreads
+
+Search for threads in a channel.
 
 ### Example Usage
 
@@ -430,9 +514,8 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.channels.expirePoll({
+  const result = await discord.channels.searchThreads({
     channelId: "<value>",
-    messageId: "<value>",
   });
 
   // Handle the result
@@ -448,7 +531,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsExpirePoll } from "@ryan.blunden/discord-sdk/funcs/channelsExpirePoll.js";
+import { channelsSearchThreads } from "@ryan.blunden/discord-sdk/funcs/channelsSearchThreads.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -457,9 +540,8 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await channelsExpirePoll(discord, {
+  const res = await channelsSearchThreads(discord, {
     channelId: "<value>",
-    messageId: "<value>",
   });
 
   if (!res.ok) {
@@ -479,93 +561,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PollExpireRequest](../../models/operations/pollexpirerequest.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ThreadSearchRequest](../../models/operations/threadsearchrequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## sendSoundboardSound
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  await discord.channels.sendSoundboardSound({
-    channelId: "<value>",
-    soundboardSoundSendRequest: {
-      soundId: "<value>",
-    },
-  });
-
-
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsSendSoundboardSound } from "@ryan.blunden/discord-sdk/funcs/channelsSendSoundboardSound.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await channelsSendSoundboardSound(discord, {
-    channelId: "<value>",
-    soundboardSoundSendRequest: {
-      soundId: "<value>",
-    },
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.SendSoundboardSoundRequest](../../models/operations/sendsoundboardsoundrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<void\>**
+**Promise\<[components.ThreadSearchResponse](../../models/components/threadsearchresponse.md)\>**
 
 ### Errors
 
@@ -575,6 +578,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## getThreadMember
+
+Returns a thread member object for the specified user if they are a member of the thread, returns a 404 response otherwise.
 
 ### Example Usage
 
@@ -653,6 +658,8 @@ run();
 
 ## addThreadMember
 
+Adds another member to a thread. Requires the ability to send messages in the thread. Also requires the thread is not archived. Returns a 204 empty response if the member is successfully added or was already a member of the thread. Fires a Thread Members Update Gateway event.
+
 ### Example Usage
 
 ```typescript
@@ -726,7 +733,86 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
+## removeThreadMember
+
+Removes another member from a thread. Requires the MANAGE_THREADS permission, or the creator of the thread if it is a PRIVATE_THREAD. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  await discord.channels.removeThreadMember({
+    channelId: "<value>",
+    userId: "<value>",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { channelsRemoveThreadMember } from "@ryan.blunden/discord-sdk/funcs/channelsRemoveThreadMember.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await channelsRemoveThreadMember(discord, {
+    channelId: "<value>",
+    userId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteThreadMemberRequest](../../models/operations/deletethreadmemberrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
 ## listThreadMembers
+
+Returns array of thread member objects that are members of the thread.
 
 ### Example Usage
 
@@ -801,7 +887,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## deleteDmUser
+## setPermissionOverwrite
+
+Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
 
 ### Example Usage
 
@@ -813,7 +901,244 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.channels.deleteDmUser({
+  await discord.channels.setPermissionOverwrite({
+    channelId: "<value>",
+    overwriteId: "<value>",
+    requestBody: {},
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { channelsSetPermissionOverwrite } from "@ryan.blunden/discord-sdk/funcs/channelsSetPermissionOverwrite.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await channelsSetPermissionOverwrite(discord, {
+    channelId: "<value>",
+    overwriteId: "<value>",
+    requestBody: {},
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.SetChannelPermissionOverwriteRequest](../../models/operations/setchannelpermissionoverwriterequest.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## deletePermissionOverwrite
+
+Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  await discord.channels.deletePermissionOverwrite({
+    channelId: "<value>",
+    overwriteId: "<value>",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { channelsDeletePermissionOverwrite } from "@ryan.blunden/discord-sdk/funcs/channelsDeletePermissionOverwrite.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await channelsDeletePermissionOverwrite(discord, {
+    channelId: "<value>",
+    overwriteId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteChannelPermissionOverwriteRequest](../../models/operations/deletechannelpermissionoverwriterequest.md)                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## addGroupDMRecipient
+
+Adds a recipient to a Group DM using their access token.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.channels.addGroupDMRecipient({
+    channelId: "<value>",
+    userId: "<value>",
+    requestBody: {},
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { channelsAddGroupDMRecipient } from "@ryan.blunden/discord-sdk/funcs/channelsAddGroupDMRecipient.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await channelsAddGroupDMRecipient(discord, {
+    channelId: "<value>",
+    userId: "<value>",
+    requestBody: {},
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.AddGroupDmUserRequest](../../models/operations/addgroupdmuserrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.AddGroupDmUserResponseBody](../../models/operations/addgroupdmuserresponsebody.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## removeGroupDMRecipient
+
+Removes a recipient from a Group DM.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  await discord.channels.removeGroupDMRecipient({
     channelId: "<value>",
     userId: "<value>",
   });
@@ -830,7 +1155,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsDeleteDmUser } from "@ryan.blunden/discord-sdk/funcs/channelsDeleteDmUser.js";
+import { channelsRemoveGroupDMRecipient } from "@ryan.blunden/discord-sdk/funcs/channelsRemoveGroupDMRecipient.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -839,7 +1164,7 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await channelsDeleteDmUser(discord, {
+  const res = await channelsRemoveGroupDMRecipient(discord, {
     channelId: "<value>",
     userId: "<value>",
   });
@@ -877,6 +1202,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## follow
+
+Follow an Announcement Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. Returns a followed channel object. Fires a Webhooks Update Gateway event for the target channel.
 
 ### Example Usage
 
@@ -957,238 +1284,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## deleteMessage
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  await discord.channels.deleteMessage({
-    channelId: "<value>",
-    messageId: "<value>",
-  });
-
-
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsDeleteMessage } from "@ryan.blunden/discord-sdk/funcs/channelsDeleteMessage.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await channelsDeleteMessage(discord, {
-    channelId: "<value>",
-    messageId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteMessageRequest](../../models/operations/deletemessagerequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<void\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## listWebhooks
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.channels.listWebhooks({
-    channelId: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsListWebhooks } from "@ryan.blunden/discord-sdk/funcs/channelsListWebhooks.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await channelsListWebhooks(discord, {
-    channelId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ListChannelWebhooksRequest](../../models/operations/listchannelwebhooksrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.ListChannelWebhooksResponseBody[]](../../models/.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## createWebhook
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.channels.createWebhook({
-    channelId: "<value>",
-    requestBody: {
-      name: "<value>",
-    },
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsCreateWebhook } from "@ryan.blunden/discord-sdk/funcs/channelsCreateWebhook.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await channelsCreateWebhook(discord, {
-    channelId: "<value>",
-    requestBody: {
-      name: "<value>",
-    },
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CreateWebhookRequest](../../models/operations/createwebhookrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.GuildIncomingWebhookResponse](../../models/components/guildincomingwebhookresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
 ## listInvites
+
+Returns a list of invite objects (with invite metadata) for the channel.
 
 ### Example Usage
 
@@ -1265,6 +1363,8 @@ run();
 
 ## createInvite
 
+Create a new invite object for the channel.
+
 ### Example Usage
 
 ```typescript
@@ -1340,7 +1440,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## triggerTyping
+## startThreadJson
+
+Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
 
 ### Example Usage
 
@@ -1352,7 +1454,262 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.channels.triggerTyping({
+  const result = await discord.channels.startThreadJson({
+    channelId: "<value>",
+    requestBody: {
+      name: "<value>",
+      message: {},
+    },
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { channelsStartThreadJson } from "@ryan.blunden/discord-sdk/funcs/channelsStartThreadJson.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await channelsStartThreadJson(discord, {
+    channelId: "<value>",
+    requestBody: {
+      name: "<value>",
+      message: {},
+    },
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.CreateThreadJsonRequest](../../models/operations/createthreadjsonrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.CreatedThreadResponse](../../models/components/createdthreadresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## startThreadForm
+
+Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.channels.startThreadForm({
+    channelId: "<value>",
+    requestBody: {
+      name: "<value>",
+      message: {},
+    },
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { channelsStartThreadForm } from "@ryan.blunden/discord-sdk/funcs/channelsStartThreadForm.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await channelsStartThreadForm(discord, {
+    channelId: "<value>",
+    requestBody: {
+      name: "<value>",
+      message: {},
+    },
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.CreateThreadFormRequest](../../models/operations/createthreadformrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.CreatedThreadResponse](../../models/components/createdthreadresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## startThreadMultipart
+
+Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.channels.startThreadMultipart({
+    channelId: "<value>",
+    requestBody: {
+      name: "<value>",
+      message: {},
+    },
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { channelsStartThreadMultipart } from "@ryan.blunden/discord-sdk/funcs/channelsStartThreadMultipart.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await channelsStartThreadMultipart(discord, {
+    channelId: "<value>",
+    requestBody: {
+      name: "<value>",
+      message: {},
+    },
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.CreateThreadMultipartRequest](../../models/operations/createthreadmultipartrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.CreatedThreadResponse](../../models/components/createdthreadresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## triggerTypingIndicator
+
+Post a typing indicator for the specified channel, which expires after 10 seconds. Returns a 204 empty response on success. Fires a Typing Start Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.channels.triggerTypingIndicator({
     channelId: "<value>",
   });
 
@@ -1369,7 +1726,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsTriggerTyping } from "@ryan.blunden/discord-sdk/funcs/channelsTriggerTyping.js";
+import { channelsTriggerTypingIndicator } from "@ryan.blunden/discord-sdk/funcs/channelsTriggerTypingIndicator.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1378,7 +1735,7 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await channelsTriggerTyping(discord, {
+  const res = await channelsTriggerTypingIndicator(discord, {
     channelId: "<value>",
   });
 
@@ -1416,6 +1773,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## pinMessage
+
+Pin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
 
 ### Example Usage
 
@@ -1490,7 +1849,86 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
+## unpinMessage
+
+Unpin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  await discord.channels.unpinMessage({
+    channelId: "<value>",
+    messageId: "<value>",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { channelsUnpinMessage } from "@ryan.blunden/discord-sdk/funcs/channelsUnpinMessage.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await channelsUnpinMessage(discord, {
+    channelId: "<value>",
+    messageId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UnpinMessageRequest](../../models/operations/unpinmessagerequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
 ## listPinnedMessages
+
+Returns all pinned messages in the channel as an array of message objects.
 
 ### Example Usage
 
@@ -1567,6 +2005,8 @@ run();
 
 ## get
 
+Returns a channel object for the given channel ID.
+
 ### Example Usage
 
 ```typescript
@@ -1642,6 +2082,8 @@ run();
 
 ## delete
 
+Delete a channel, or close a private message. Requires the MANAGE_CHANNELS permission for the guild, or MANAGE_THREADS if the channel is a thread. Returns a channel object on success. Fires a Channel Delete Gateway event (or Thread Delete if the channel was a thread).
+
 ### Example Usage
 
 ```typescript
@@ -1716,6 +2158,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## update
+
+Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.
 
 ### Example Usage
 

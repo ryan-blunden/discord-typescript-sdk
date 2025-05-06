@@ -1,21 +1,21 @@
-speakeasyVersion: 1.542.0
+speakeasyVersion: 1.542.3
 sources:
     Discord HTTP API (Preview):
         sourceNamespace: discord-sdk
-        sourceRevisionDigest: sha256:537babd8004a4e676b46dda059d9306c6a0efb2b3fbc5d6c1d935fbc7b3cd492
-        sourceBlobDigest: sha256:d3ae3000bfec1b5bc5ab99e1a1c8c7215acb087117e792b555b6b891c1fabd08
+        sourceRevisionDigest: sha256:b91633b846ede33db78381308cee4ffae9877112a4ba7b89ac535b0cdff6a1c2
+        sourceBlobDigest: sha256:07a966971e8a8b14baa75574f8d05428e903afad172d4cb7c489e3b2cd2b1f16
         tags:
             - latest
-            - speakeasy-sdk-regen-1746230690
+            - speakeasy-sdk-regen-1746572917
             - "10"
 targets:
     discord:
         source: Discord HTTP API (Preview)
         sourceNamespace: discord-sdk
-        sourceRevisionDigest: sha256:537babd8004a4e676b46dda059d9306c6a0efb2b3fbc5d6c1d935fbc7b3cd492
-        sourceBlobDigest: sha256:d3ae3000bfec1b5bc5ab99e1a1c8c7215acb087117e792b555b6b891c1fabd08
+        sourceRevisionDigest: sha256:b91633b846ede33db78381308cee4ffae9877112a4ba7b89ac535b0cdff6a1c2
+        sourceBlobDigest: sha256:07a966971e8a8b14baa75574f8d05428e903afad172d4cb7c489e3b2cd2b1f16
         codeSamplesNamespace: discord-sdk-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:59a7f4ac034b2334516faef229e7f6fc3356a8d6f513c275ed1d55e99f82963e
+        codeSamplesRevisionDigest: sha256:73d28f51049705a5d430c8e2c3262b2a852858f798dbb7347ccba3fab97403d1
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -24,8 +24,27 @@ workflow:
             inputs:
                 - location: https://raw.githubusercontent.com/discord/discord-api-spec/refs/heads/main/specs/openapi.json
             overlays:
-                - location: .speakeasy/openapi-fixes-overlay.yaml
-                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+                - location: .speakeasy//overlays/openapi-fixes-overlay.yaml
+                - location: .speakeasy/overlays/application-overlay.yaml
+                - location: .speakeasy/overlays/application-role-connection-metadata-overlay.yaml
+                - location: .speakeasy/overlays/channels-overlay.yaml
+                - location: .speakeasy/overlays/emoji-overlay.yaml
+                - location: .speakeasy/overlays/entitlements-overlay.yaml
+                - location: .speakeasy/overlays/guild-scheduled-event-overlay.yaml
+                - location: .speakeasy/overlays/guild-template-overlay.yaml
+                - location: .speakeasy/overlays/guild-overlay.yaml
+                - location: .speakeasy/overlays/invite-overlay.yaml
+                - location: .speakeasy/overlays/lobby-overlay.yaml
+                - location: .speakeasy/overlays/messages-overlay.yaml
+                - location: .speakeasy/overlays/poll-overlay.yaml
+                - location: .speakeasy/overlays/soundboard-overlay.yaml
+                - location: .speakeasy/overlays/stage-instance-overlay.yaml
+                - location: .speakeasy/overlays/sticker-overlay.yaml
+                - location: .speakeasy/overlays/users-overlay.yaml
+                - location: .speakeasy/overlays/audit-logs-overlay.yaml
+                - location: .speakeasy/overlays/auto-moderation-overlay.yaml
+                - location: .speakeasy/overlays/voice-overlay.yaml
+                - location: .speakeasy/overlays/webhook-overlay.yaml
             output: .speakeasy/openapi-output.yaml
             registry:
                 location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryanblunden/discord-sdk

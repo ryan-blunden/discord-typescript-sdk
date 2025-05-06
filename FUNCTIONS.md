@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { partnerSDKUnmergeProvisionalAccount } from "@ryan.blunden/discord-sdk/funcs/partnerSDKUnmergeProvisionalAccount.js";
+import { applicationsPartnerSDKUnmergeProvisionalAccount } from "@ryan.blunden/discord-sdk/funcs/applicationsPartnerSDKUnmergeProvisionalAccount.js";
 import { SDKValidationError } from "@ryan.blunden/discord-sdk/models/errors/sdkvalidationerror.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
@@ -28,7 +28,7 @@ import { SDKValidationError } from "@ryan.blunden/discord-sdk/models/errors/sdkv
 const discord = new DiscordCore();
 
 async function run() {
-  const res = await partnerSDKUnmergeProvisionalAccount(discord, {
+  const res = await applicationsPartnerSDKUnmergeProvisionalAccount(discord, {
     clientId: "<value>",
     externalAuthToken: "<value>",
   });

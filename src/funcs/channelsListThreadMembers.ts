@@ -26,6 +26,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns array of thread member objects that are members of the thread.
+ */
 export function channelsListThreadMembers(
   client: DiscordCore,
   request: operations.ListThreadMembersRequest,

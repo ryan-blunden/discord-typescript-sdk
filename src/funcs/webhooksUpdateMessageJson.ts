@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Edits a previously-sent webhook message from the same token. Returns a message object on success.
+ */
 export function webhooksUpdateMessageJson(
   client: DiscordCore,
   request: operations.UpdateWebhookMessageJsonRequest,

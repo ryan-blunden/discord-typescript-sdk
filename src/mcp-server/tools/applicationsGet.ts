@@ -12,7 +12,8 @@ const args = {
 
 export const tool$applicationsGet: ToolDefinition<typeof args> = {
   name: "applications-get",
-  description: ``,
+  description: `Returns information about a specific application.`,
+  scopes: ["application", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await applicationsGet(

@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsDelete: ToolDefinition<typeof args> = {
   name: "guilds-delete",
-  description: ``,
+  description:
+    `Delete a guild permanently. User must be owner. Returns 204 No Content on success. Fires a Guild Delete Gateway event.`,
+  scopes: ["guilds", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsDelete(

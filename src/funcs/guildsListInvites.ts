@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns a list of invite objects (with invite metadata) for the guild. Requires the MANAGE_GUILD permission.
+ */
 export function guildsListInvites(
   client: DiscordCore,
   request: operations.ListGuildInvitesRequest,

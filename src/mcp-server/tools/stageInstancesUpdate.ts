@@ -12,7 +12,9 @@ const args = {
 
 export const tool$stageInstancesUpdate: ToolDefinition<typeof args> = {
   name: "stage-instances-update",
-  description: ``,
+  description:
+    `Updates fields of an existing Stage instance. Returns the updated Stage instance. Fires a Stage Instance Update Gateway event. Requires the user to be a moderator of the Stage channel.`,
+  scopes: ["stage-instance", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await stageInstancesUpdate(

@@ -24,6 +24,9 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.
+ */
 export function guildsCreate(
   client: DiscordCore,
   request: components.GuildCreateRequest,

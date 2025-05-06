@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns a serialized activity instance, if it exists. Useful for preventing unwanted activity sessions.
+ */
 export function applicationsGetActivityInstance(
   client: DiscordCore,
   request: operations.ApplicationsGetActivityInstanceRequest,

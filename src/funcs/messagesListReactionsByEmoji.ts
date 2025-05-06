@@ -26,6 +26,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Get a list of users that reacted with a specific emoji.
+ */
 export function messagesListReactionsByEmoji(
   client: DiscordCore,
   request: operations.ListMessageReactionsByEmojiRequest,

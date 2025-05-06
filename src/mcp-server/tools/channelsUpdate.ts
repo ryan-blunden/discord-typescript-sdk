@@ -12,7 +12,9 @@ const args = {
 
 export const tool$channelsUpdate: ToolDefinition<typeof args> = {
   name: "channels-update",
-  description: ``,
+  description:
+    `Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.`,
+  scopes: ["channels", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsUpdate(

@@ -5,31 +5,170 @@
 
 ### Available Operations
 
-* [getMe](#getme)
-* [updateSelf](#updateself)
-* [setGuildCommandPermissions](#setguildcommandpermissions)
-* [deleteUserRoleConnection](#deleteuserroleconnection)
-* [getRoleConnectionsMetadata](#getroleconnectionsmetadata)
-* [updateRoleConnectionsMetadata](#updateroleconnectionsmetadata)
-* [consumeEntitlement](#consumeentitlement)
-* [createGuildCommand](#createguildcommand)
-* [getActivityInstance](#getactivityinstance)
-* [getEntitlement](#getentitlement)
-* [deleteEntitlement](#deleteentitlement)
-* [getEntitlements](#getentitlements)
-* [createEntitlement](#createentitlement)
-* [uploadAttachment](#uploadattachment)
-* [getCommand](#getcommand)
-* [deleteCommand](#deletecommand)
-* [listCommands](#listcommands)
-* [bulkSetCommands](#bulksetcommands)
-* [getEmoji](#getemoji)
-* [updateEmoji](#updateemoji)
-* [listEmojis](#listemojis)
-* [get](#get)
-* [update](#update)
+* [partnerSDKUnmergeProvisionalAccount](#partnersdkunmergeprovisionalaccount) - Unmerges a provisional account.
+* [getOAuth2Me](#getoauth2me) - Returns the OAuth2 application object associated with the requesting bot user.
+* [getMe](#getme) - Returns the application object associated with the requesting bot user.
+* [updateSelf](#updateself) - Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated. Returns the updated application object on success.
+* [partnerSDKToken](#partnersdktoken) - Gets a token for the partner SDK.
+* [getBotGateway](#getbotgateway) - Returns an object with the same information as Get Gateway, plus a shards key, containing the recommended number of shards to connect with.
+* [getOpenIDConnectUserInfo](#getopenidconnectuserinfo) - Returns the user info for the current user.
+* [getPublicKeys](#getpublickeys) - Returns a list of public keys used for verifying signatures.
+* [getOAuth2Authorization](#getoauth2authorization) - Returns info about the current authorization.
+* [getGateway](#getgateway) - Returns an object with a single valid WSS URL, which the client can use for connecting to Discord.
+* [getActivityInstance](#getactivityinstance) - Returns a serialized activity instance, if it exists. Useful for preventing unwanted activity sessions.
+* [uploadAttachment](#uploadattachment) - Uploads an attachment for an application.
+* [get](#get) - Returns information about a specific application.
+* [update](#update) - Updates an application. Returns the updated application object on success.
+
+## partnerSDKUnmergeProvisionalAccount
+
+Unmerges a provisional account.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord();
+
+async function run() {
+  await discord.applications.partnerSDKUnmergeProvisionalAccount({
+    clientId: "<value>",
+    externalAuthToken: "<value>",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { applicationsPartnerSDKUnmergeProvisionalAccount } from "@ryan.blunden/discord-sdk/funcs/applicationsPartnerSDKUnmergeProvisionalAccount.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore();
+
+async function run() {
+  const res = await applicationsPartnerSDKUnmergeProvisionalAccount(discord, {
+    clientId: "<value>",
+    externalAuthToken: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PartnerSDKUnmergeProvisionalAccountRequestBody](../../models/operations/partnersdkunmergeprovisionalaccountrequestbody.md)                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [operations.PartnerSDKUnmergeProvisionalAccountSecurity](../../models/operations/partnersdkunmergeprovisionalaccountsecurity.md)                                               | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## getOAuth2Me
+
+Returns the OAuth2 application object associated with the requesting bot user.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.applications.getOAuth2Me();
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { applicationsGetOAuth2Me } from "@ryan.blunden/discord-sdk/funcs/applicationsGetOAuth2Me.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await applicationsGetOAuth2Me(discord);
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.PrivateApplicationResponse](../../models/components/privateapplicationresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
 
 ## getMe
+
+Returns the application object associated with the requesting bot user.
 
 ### Example Usage
 
@@ -101,6 +240,8 @@ run();
 
 ## updateSelf
 
+Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated. Returns the updated application object on success.
+
 ### Example Usage
 
 ```typescript
@@ -170,7 +311,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## setGuildCommandPermissions
+## partnerSDKToken
+
+Gets a token for the partner SDK.
 
 ### Example Usage
 
@@ -180,13 +323,9 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  const result = await discord.applications.setGuildCommandPermissions({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    guildId: "<value>",
-    commandId: "<value>",
-    requestBody: {},
+  const result = await discord.applications.partnerSDKToken({
+    clientId: "<value>",
+    externalAuthToken: "<value>",
   });
 
   // Handle the result
@@ -202,20 +341,16 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsSetGuildCommandPermissions } from "@ryan.blunden/discord-sdk/funcs/applicationsSetGuildCommandPermissions.js";
+import { applicationsPartnerSDKToken } from "@ryan.blunden/discord-sdk/funcs/applicationsPartnerSDKToken.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const discord = new DiscordCore();
 
 async function run() {
-  const res = await applicationsSetGuildCommandPermissions(discord, {
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    guildId: "<value>",
-    commandId: "<value>",
-    requestBody: {},
+  const res = await applicationsPartnerSDKToken(discord, {
+    clientId: "<value>",
+    externalAuthToken: "<value>",
   });
 
   if (!res.ok) {
@@ -235,15 +370,15 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.SetGuildApplicationCommandPermissionsRequest](../../models/operations/setguildapplicationcommandpermissionsrequest.md)                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.SetGuildApplicationCommandPermissionsSecurity](../../models/operations/setguildapplicationcommandpermissionssecurity.md)                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
+| `request`                                                                                                                                                                      | [operations.PartnerSDKTokenRequestBody](../../models/operations/partnersdktokenrequestbody.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [operations.PartnerSDKTokenSecurity](../../models/operations/partnersdktokensecurity.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.CommandPermissionsResponse](../../models/components/commandpermissionsresponse.md)\>**
+**Promise\<[components.ProvisionalTokenResponse](../../models/components/provisionaltokenresponse.md)\>**
 
 ### Errors
 
@@ -252,7 +387,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## deleteUserRoleConnection
+## getBotGateway
+
+Returns an object with the same information as Get Gateway, plus a shards key, containing the recommended number of shards to connect with.
 
 ### Example Usage
 
@@ -264,82 +401,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.applications.deleteUserRoleConnection({
-    applicationId: "<value>",
-  });
-
-
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsDeleteUserRoleConnection } from "@ryan.blunden/discord-sdk/funcs/applicationsDeleteUserRoleConnection.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await applicationsDeleteUserRoleConnection(discord, {
-    applicationId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteApplicationUserRoleConnectionRequest](../../models/operations/deleteapplicationuserroleconnectionrequest.md)                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<void\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## getRoleConnectionsMetadata
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.applications.getRoleConnectionsMetadata({
-    applicationId: "<value>",
-  });
+  const result = await discord.applications.getBotGateway();
 
   // Handle the result
   console.log(result);
@@ -354,7 +416,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsGetRoleConnectionsMetadata } from "@ryan.blunden/discord-sdk/funcs/applicationsGetRoleConnectionsMetadata.js";
+import { applicationsGetBotGateway } from "@ryan.blunden/discord-sdk/funcs/applicationsGetBotGateway.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -363,9 +425,7 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await applicationsGetRoleConnectionsMetadata(discord, {
-    applicationId: "<value>",
-  });
+  const res = await applicationsGetBotGateway(discord);
 
   if (!res.ok) {
     throw res.error;
@@ -384,14 +444,13 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetApplicationRoleConnectionsMetadataRequest](../../models/operations/getapplicationroleconnectionsmetadatarequest.md)                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.ApplicationRoleConnectionsMetadataItemResponse[]](../../models/.md)\>**
+**Promise\<[components.GatewayBotResponse](../../models/components/gatewaybotresponse.md)\>**
 
 ### Errors
 
@@ -400,96 +459,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## updateRoleConnectionsMetadata
+## getOpenIDConnectUserInfo
 
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.applications.updateRoleConnectionsMetadata({
-    applicationId: "<value>",
-    requestBody: [
-      {
-        key: "<key>",
-        name: "<value>",
-        description: "overcharge popularity willfully scamper headline soon than",
-      },
-    ],
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsUpdateRoleConnectionsMetadata } from "@ryan.blunden/discord-sdk/funcs/applicationsUpdateRoleConnectionsMetadata.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await applicationsUpdateRoleConnectionsMetadata(discord, {
-    applicationId: "<value>",
-    requestBody: [
-      {
-        key: "<key>",
-        name: "<value>",
-        description: "overcharge popularity willfully scamper headline soon than",
-      },
-    ],
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.UpdateApplicationRoleConnectionsMetadataRequest](../../models/operations/updateapplicationroleconnectionsmetadatarequest.md)                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.ApplicationRoleConnectionsMetadataItemResponse[]](../../models/.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## consumeEntitlement
+Returns the user info for the current user.
 
 ### Example Usage
 
@@ -499,14 +471,12 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  await discord.applications.consumeEntitlement({
+  const result = await discord.applications.getOpenIDConnectUserInfo({
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    entitlementId: "<value>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -518,18 +488,15 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsConsumeEntitlement } from "@ryan.blunden/discord-sdk/funcs/applicationsConsumeEntitlement.js";
+import { applicationsGetOpenIDConnectUserInfo } from "@ryan.blunden/discord-sdk/funcs/applicationsGetOpenIDConnectUserInfo.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const discord = new DiscordCore();
 
 async function run() {
-  const res = await applicationsConsumeEntitlement(discord, {
+  const res = await applicationsGetOpenIDConnectUserInfo(discord, {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    entitlementId: "<value>",
   });
 
   if (!res.ok) {
@@ -538,7 +505,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -548,15 +516,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ConsumeEntitlementRequest](../../models/operations/consumeentitlementrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.ConsumeEntitlementSecurity](../../models/operations/consumeentitlementsecurity.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
+| `security`                                                                                                                                                                     | [operations.GetOpenidConnectUserinfoSecurity](../../models/operations/getopenidconnectuserinfosecurity.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[components.OAuth2GetOpenIDConnectUserInfoResponse](../../models/components/oauth2getopenidconnectuserinforesponse.md)\>**
 
 ### Errors
 
@@ -565,7 +532,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## createGuildCommand
+## getPublicKeys
+
+Returns a list of public keys used for verifying signatures.
 
 ### Example Usage
 
@@ -575,14 +544,77 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  const result = await discord.applications.createGuildCommand({
+  const result = await discord.applications.getPublicKeys();
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { applicationsGetPublicKeys } from "@ryan.blunden/discord-sdk/funcs/applicationsGetPublicKeys.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore();
+
+async function run() {
+  const res = await applicationsGetPublicKeys(discord);
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [operations.GetPublicKeysSecurity](../../models/operations/getpublickeyssecurity.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.OAuth2GetKeys](../../models/components/oauth2getkeys.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## getOAuth2Authorization
+
+Returns info about the current authorization.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord();
+
+async function run() {
+  const result = await discord.applications.getOAuth2Authorization({
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    guildId: "<value>",
-    applicationCommandCreateRequest: {
-      name: "<value>",
-    },
   });
 
   // Handle the result
@@ -598,21 +630,15 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsCreateGuildCommand } from "@ryan.blunden/discord-sdk/funcs/applicationsCreateGuildCommand.js";
+import { applicationsGetOAuth2Authorization } from "@ryan.blunden/discord-sdk/funcs/applicationsGetOAuth2Authorization.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const discord = new DiscordCore();
 
 async function run() {
-  const res = await applicationsCreateGuildCommand(discord, {
+  const res = await applicationsGetOAuth2Authorization(discord, {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    guildId: "<value>",
-    applicationCommandCreateRequest: {
-      name: "<value>",
-    },
   });
 
   if (!res.ok) {
@@ -632,15 +658,83 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CreateGuildApplicationCommandRequest](../../models/operations/createguildapplicationcommandrequest.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.CreateGuildApplicationCommandSecurity](../../models/operations/createguildapplicationcommandsecurity.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
+| `security`                                                                                                                                                                     | [operations.GetMyOauth2AuthorizationSecurity](../../models/operations/getmyoauth2authorizationsecurity.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
+**Promise\<[components.OAuth2GetAuthorizationResponse](../../models/components/oauth2getauthorizationresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## getGateway
+
+Returns an object with a single valid WSS URL, which the client can use for connecting to Discord.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord();
+
+async function run() {
+  const result = await discord.applications.getGateway();
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { applicationsGetGateway } from "@ryan.blunden/discord-sdk/funcs/applicationsGetGateway.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore();
+
+async function run() {
+  const res = await applicationsGetGateway(discord);
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [operations.GetGatewaySecurity](../../models/operations/getgatewaysecurity.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.GatewayResponse](../../models/components/gatewayresponse.md)\>**
 
 ### Errors
 
@@ -650,6 +744,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## getActivityInstance
+
+Returns a serialized activity instance, if it exists. Useful for preventing unwanted activity sessions.
 
 ### Example Usage
 
@@ -726,324 +822,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## getEntitlement
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord();
-
-async function run() {
-  const result = await discord.applications.getEntitlement({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    entitlementId: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsGetEntitlement } from "@ryan.blunden/discord-sdk/funcs/applicationsGetEntitlement.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore();
-
-async function run() {
-  const res = await applicationsGetEntitlement(discord, {
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    entitlementId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetEntitlementRequest](../../models/operations/getentitlementrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.GetEntitlementSecurity](../../models/operations/getentitlementsecurity.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.EntitlementResponse](../../models/components/entitlementresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## deleteEntitlement
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord();
-
-async function run() {
-  await discord.applications.deleteEntitlement({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    entitlementId: "<value>",
-  });
-
-
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsDeleteEntitlement } from "@ryan.blunden/discord-sdk/funcs/applicationsDeleteEntitlement.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore();
-
-async function run() {
-  const res = await applicationsDeleteEntitlement(discord, {
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    entitlementId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteEntitlementRequest](../../models/operations/deleteentitlementrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.DeleteEntitlementSecurity](../../models/operations/deleteentitlementsecurity.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<void\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## getEntitlements
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord();
-
-async function run() {
-  const result = await discord.applications.getEntitlements({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    skuIds: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsGetEntitlements } from "@ryan.blunden/discord-sdk/funcs/applicationsGetEntitlements.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore();
-
-async function run() {
-  const res = await applicationsGetEntitlements(discord, {
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    skuIds: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetEntitlementsRequest](../../models/operations/getentitlementsrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.GetEntitlementsSecurity](../../models/operations/getentitlementssecurity.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.EntitlementResponse[]](../../models/.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## createEntitlement
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.applications.createEntitlement({
-    applicationId: "<value>",
-    createEntitlementRequestData: {
-      skuId: "<value>",
-      ownerId: "<value>",
-      ownerType: 617153,
-    },
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsCreateEntitlement } from "@ryan.blunden/discord-sdk/funcs/applicationsCreateEntitlement.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await applicationsCreateEntitlement(discord, {
-    applicationId: "<value>",
-    createEntitlementRequestData: {
-      skuId: "<value>",
-      ownerId: "<value>",
-      ownerType: 617153,
-    },
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CreateEntitlementRequest](../../models/operations/createentitlementrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.EntitlementResponse](../../models/components/entitlementresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
 ## uploadAttachment
+
+Uploads an attachment for an application.
 
 ### Example Usage
 
@@ -1125,546 +906,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## getCommand
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord();
-
-async function run() {
-  const result = await discord.applications.getCommand({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    commandId: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsGetCommand } from "@ryan.blunden/discord-sdk/funcs/applicationsGetCommand.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore();
-
-async function run() {
-  const res = await applicationsGetCommand(discord, {
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    commandId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetApplicationCommandRequest](../../models/operations/getapplicationcommandrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.GetApplicationCommandSecurity](../../models/operations/getapplicationcommandsecurity.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## deleteCommand
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord();
-
-async function run() {
-  await discord.applications.deleteCommand({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    commandId: "<value>",
-  });
-
-
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsDeleteCommand } from "@ryan.blunden/discord-sdk/funcs/applicationsDeleteCommand.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore();
-
-async function run() {
-  const res = await applicationsDeleteCommand(discord, {
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    commandId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteApplicationCommandRequest](../../models/operations/deleteapplicationcommandrequest.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.DeleteApplicationCommandSecurity](../../models/operations/deleteapplicationcommandsecurity.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<void\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## listCommands
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord();
-
-async function run() {
-  const result = await discord.applications.listCommands({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsListCommands } from "@ryan.blunden/discord-sdk/funcs/applicationsListCommands.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore();
-
-async function run() {
-  const res = await applicationsListCommands(discord, {
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ListApplicationCommandsRequest](../../models/operations/listapplicationcommandsrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.ListApplicationCommandsSecurity](../../models/operations/listapplicationcommandssecurity.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.ApplicationCommandResponse[]](../../models/.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## bulkSetCommands
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord();
-
-async function run() {
-  const result = await discord.applications.bulkSetCommands({
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    requestBody: [],
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsBulkSetCommands } from "@ryan.blunden/discord-sdk/funcs/applicationsBulkSetCommands.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore();
-
-async function run() {
-  const res = await applicationsBulkSetCommands(discord, {
-    botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-  }, {
-    applicationId: "<value>",
-    requestBody: [],
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.BulkSetApplicationCommandsRequest](../../models/operations/bulksetapplicationcommandsrequest.md)                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.BulkSetApplicationCommandsSecurity](../../models/operations/bulksetapplicationcommandssecurity.md)                                                                 | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.ApplicationCommandResponse[]](../../models/.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## getEmoji
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.applications.getEmoji({
-    applicationId: "<value>",
-    emojiId: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsGetEmoji } from "@ryan.blunden/discord-sdk/funcs/applicationsGetEmoji.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await applicationsGetEmoji(discord, {
-    applicationId: "<value>",
-    emojiId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetApplicationEmojiRequest](../../models/operations/getapplicationemojirequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## updateEmoji
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.applications.updateEmoji({
-    applicationId: "<value>",
-    emojiId: "<value>",
-    requestBody: {},
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsUpdateEmoji } from "@ryan.blunden/discord-sdk/funcs/applicationsUpdateEmoji.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await applicationsUpdateEmoji(discord, {
-    applicationId: "<value>",
-    emojiId: "<value>",
-    requestBody: {},
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.UpdateApplicationEmojiRequest](../../models/operations/updateapplicationemojirequest.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## listEmojis
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.applications.listEmojis({
-    applicationId: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsListEmojis } from "@ryan.blunden/discord-sdk/funcs/applicationsListEmojis.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await applicationsListEmojis(discord, {
-    applicationId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ListApplicationEmojisRequest](../../models/operations/listapplicationemojisrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.ListApplicationEmojisResponse](../../models/components/listapplicationemojisresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
 ## get
+
+Returns information about a specific application.
 
 ### Example Usage
 
@@ -1740,6 +984,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## update
+
+Updates an application. Returns the updated application object on success.
 
 ### Example Usage
 

@@ -12,7 +12,9 @@ const args = {
 
 export const tool$channelsFollow: ToolDefinition<typeof args> = {
   name: "channels-follow",
-  description: ``,
+  description:
+    `Follow an Announcement Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. Returns a followed channel object. Fires a Webhooks Update Gateway event for the target channel.`,
+  scopes: ["channels", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsFollow(

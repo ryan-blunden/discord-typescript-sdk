@@ -24,6 +24,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.
+ */
 export function channelsUpdate(
   client: DiscordCore,
   request: operations.UpdateChannelRequest,

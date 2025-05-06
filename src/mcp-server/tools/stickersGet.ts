@@ -12,7 +12,8 @@ const args = {
 
 export const tool$stickersGet: ToolDefinition<typeof args> = {
   name: "stickers-get",
-  description: ``,
+  description: `Returns a sticker object for the given sticker ID.`,
+  scopes: ["stickers", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await stickersGet(

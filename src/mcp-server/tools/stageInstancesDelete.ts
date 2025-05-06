@@ -12,7 +12,9 @@ const args = {
 
 export const tool$stageInstancesDelete: ToolDefinition<typeof args> = {
   name: "stage-instances-delete",
-  description: ``,
+  description:
+    `Deletes the Stage instance. Returns 204 No Content. Fires a Stage Instance Delete Gateway event. Requires the user to be a moderator of the Stage channel.`,
+  scopes: ["stage-instance", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await stageInstancesDelete(

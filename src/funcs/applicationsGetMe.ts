@@ -22,6 +22,9 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns the application object associated with the requesting bot user.
+ */
 export function applicationsGetMe(
   client: DiscordCore,
   options?: RequestOptions,

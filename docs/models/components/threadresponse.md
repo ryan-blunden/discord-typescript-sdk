@@ -7,13 +7,14 @@ import { ThreadResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ThreadResponse = {
   id: "<value>",
-  flags: 906542,
+  type: 14,
+  flags: 767761,
   guildId: "<value>",
   name: "<value>",
   ownerId: "<value>",
-  messageCount: 767761,
-  memberCount: 973464,
-  totalMessageSent: 499430,
+  messageCount: 973464,
+  memberCount: 499430,
+  totalMessageSent: 246379,
 };
 ```
 
@@ -22,7 +23,7 @@ let value: ThreadResponse = {
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `type`                                                                                        | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | [components.ThreadResponseType](../../models/components/threadresponsetype.md)                | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `lastMessageId`                                                                               | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `flags`                                                                                       | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `lastPinTimestamp`                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |

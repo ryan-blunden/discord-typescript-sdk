@@ -12,7 +12,9 @@ const args = {
 
 export const tool$channelsListPinnedMessages: ToolDefinition<typeof args> = {
   name: "channels-list-pinned-messages",
-  description: ``,
+  description:
+    `Returns all pinned messages in the channel as an array of message objects.`,
+  scopes: ["channels", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsListPinnedMessages(

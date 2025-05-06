@@ -43,13 +43,14 @@ let value: GuildAuditLogResponse = {
   threads: [
     {
       id: "<value>",
-      flags: 137784,
+      type: 1,
+      flags: 380981,
       guildId: "<value>",
       name: "<value>",
       ownerId: "<value>",
-      messageCount: 380981,
-      memberCount: 148440,
-      totalMessageSent: 647518,
+      messageCount: 148440,
+      memberCount: 647518,
+      totalMessageSent: 15821,
     },
   ],
   applicationCommands: [
@@ -58,7 +59,7 @@ let value: GuildAuditLogResponse = {
       applicationId: "<value>",
       version: "<value>",
       name: "<value>",
-      description: "scheme pastel especially",
+      description: "uncommon internal indeed",
     },
   ],
   autoModerationRules: [
@@ -70,7 +71,7 @@ let value: GuildAuditLogResponse = {
       actions: [
         {
           metadata: {
-            channelId: "<value>",
+            durationSeconds: 580510,
           },
         },
       ],

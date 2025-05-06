@@ -28,10 +28,11 @@ let value: GuildTemplateResponse = {
     ],
     channels: [
       {
-        bitrate: 869107,
-        userLimit: 781664,
+        type: 14,
+        bitrate: 781664,
+        userLimit: 886207,
         nsfw: false,
-        rateLimitPerUser: 886207,
+        rateLimitPerUser: 473536,
         permissionOverwrites: [
           {
             id: "<value>",

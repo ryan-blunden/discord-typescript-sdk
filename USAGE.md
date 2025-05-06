@@ -5,7 +5,7 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  await discord.partnerSDKUnmergeProvisionalAccount({
+  await discord.applications.partnerSDKUnmergeProvisionalAccount({
     clientId: "<value>",
     externalAuthToken: "<value>",
   });

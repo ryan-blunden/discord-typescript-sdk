@@ -5,10 +5,12 @@
 
 ### Available Operations
 
-* [resolve](#resolve)
-* [revoke](#revoke)
+* [get](#get) - Returns an invite object for the given code.
+* [delete](#delete) - Delete an invite. Requires the MANAGE_CHANNELS permission on the channel this invite belongs to, or MANAGE_GUILD to remove any invite across the guild. Returns an invite object on success.
 
-## resolve
+## get
+
+Returns an invite object for the given code.
 
 ### Example Usage
 
@@ -18,7 +20,7 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  const result = await discord.invites.resolve({
+  const result = await discord.invites.get({
     code: "<value>",
   });
 
@@ -35,14 +37,14 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { invitesResolve } from "@ryan.blunden/discord-sdk/funcs/invitesResolve.js";
+import { invitesGet } from "@ryan.blunden/discord-sdk/funcs/invitesGet.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const discord = new DiscordCore();
 
 async function run() {
-  const res = await invitesResolve(discord, {
+  const res = await invitesGet(discord, {
     code: "<value>",
   });
 
@@ -80,7 +82,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## revoke
+## delete
+
+Delete an invite. Requires the MANAGE_CHANNELS permission on the channel this invite belongs to, or MANAGE_GUILD to remove any invite across the guild. Returns an invite object on success.
 
 ### Example Usage
 
@@ -92,7 +96,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.invites.revoke({
+  const result = await discord.invites.delete({
     code: "<value>",
   });
 
@@ -109,7 +113,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { invitesRevoke } from "@ryan.blunden/discord-sdk/funcs/invitesRevoke.js";
+import { invitesDelete } from "@ryan.blunden/discord-sdk/funcs/invitesDelete.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -118,7 +122,7 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await invitesRevoke(discord, {
+  const res = await invitesDelete(discord, {
     code: "<value>",
   });
 

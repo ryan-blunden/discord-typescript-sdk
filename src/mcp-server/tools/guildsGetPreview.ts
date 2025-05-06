@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsGetPreview: ToolDefinition<typeof args> = {
   name: "guilds-get-preview",
-  description: ``,
+  description:
+    `Returns the guild preview object for the given id. If the user is not in the guild, then the guild must be discoverable.`,
+  scopes: ["guilds", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsGetPreview(

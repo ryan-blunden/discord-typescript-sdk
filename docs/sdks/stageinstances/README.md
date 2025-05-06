@@ -5,12 +5,14 @@
 
 ### Available Operations
 
-* [create](#create)
-* [get](#get)
-* [delete](#delete)
-* [update](#update)
+* [create](#create) - Creates a new Stage instance associated to a Stage channel. Returns that Stage instance. Fires a Stage Instance Create Gateway event. Requires the user to be a moderator of the Stage channel.
+* [get](#get) - Gets the stage instance associated with the Stage channel, if it exists.
+* [delete](#delete) - Deletes the Stage instance. Returns 204 No Content. Fires a Stage Instance Delete Gateway event. Requires the user to be a moderator of the Stage channel.
+* [update](#update) - Updates fields of an existing Stage instance. Returns the updated Stage instance. Fires a Stage Instance Update Gateway event. Requires the user to be a moderator of the Stage channel.
 
 ## create
+
+Creates a new Stage instance associated to a Stage channel. Returns that Stage instance. Fires a Stage Instance Create Gateway event. Requires the user to be a moderator of the Stage channel.
 
 ### Example Usage
 
@@ -89,6 +91,8 @@ run();
 
 ## get
 
+Gets the stage instance associated with the Stage channel, if it exists.
+
 ### Example Usage
 
 ```typescript
@@ -164,6 +168,8 @@ run();
 
 ## delete
 
+Deletes the Stage instance. Returns 204 No Content. Fires a Stage Instance Delete Gateway event. Requires the user to be a moderator of the Stage channel.
+
 ### Example Usage
 
 ```typescript
@@ -236,6 +242,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## update
+
+Updates fields of an existing Stage instance. Returns the updated Stage instance. Fires a Stage Instance Update Gateway event. Requires the user to be a moderator of the Stage channel.
 
 ### Example Usage
 

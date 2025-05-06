@@ -24,6 +24,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Modify a webhook. Requires the MANAGE_WEBHOOKS permission. Returns the updated webhook object on success. Fires a Webhooks Update Gateway event.
+ */
 export function webhooksUpdate(
   client: DiscordCore,
   request: operations.UpdateWebhookRequest,

@@ -5,52 +5,55 @@
 
 ### Available Operations
 
-* [create](#create)
-* [getMyMember](#getmymember)
-* [listAutoModerationRules](#listautomoderationrules)
-* [searchMembers](#searchmembers)
-* [getTemplate](#gettemplate)
-* [getNewMemberWelcome](#getnewmemberwelcome)
-* [getSoundboardSound](#getsoundboardsound)
-* [createSoundboardSound](#createsoundboardsound)
-* [getWelcomeScreen](#getwelcomescreen)
-* [updateWelcomeScreen](#updatewelcomescreen)
-* [getVoiceState](#getvoicestate)
-* [getWidget](#getwidget)
-* [getVanityUrl](#getvanityurl)
-* [listAuditLogs](#listauditlogs)
-* [getWidgetPng](#getwidgetpng)
-* [syncTemplate](#synctemplate)
-* [updateTemplate](#updatetemplate)
-* [listTemplates](#listtemplates)
-* [getSticker](#getsticker)
-* [deleteSticker](#deletesticker)
-* [createSticker](#createsticker)
-* [listWebhooks](#listwebhooks)
-* [listChannels](#listchannels)
-* [deleteMember](#deletemember)
-* [listMembers](#listmembers)
-* [getPreview](#getpreview)
-* [listInvites](#listinvites)
-* [deleteEmoji](#deleteemoji)
-* [updateEmoji](#updateemoji)
-* [listEmojis](#listemojis)
-* [createEmoji](#createemoji)
-* [getWidgetSettings](#getwidgetsettings)
-* [getRole](#getrole)
-* [deleteRole](#deleterole)
-* [updateRole](#updaterole)
-* [listRoles](#listroles)
-* [createRole](#createrole)
-* [previewPrune](#previewprune)
-* [prune](#prune)
-* [banUser](#banuser)
-* [unbanUser](#unbanuser)
-* [get](#get)
-* [delete](#delete)
-* [update](#update)
+* [create](#create) - Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.
+* [searchMembers](#searchmembers) - Returns a list of guild member objects whose username or nickname starts with a provided string.
+* [listActiveThreads](#listactivethreads) - Returns all active threads in the guild, including public and private threads. Threads are ordered by their id, in descending order.
+* [updateCurrentMember](#updatecurrentmember) - Modifies the current member in a guild. Returns a 200 with the updated member object on success. Fires a Guild Member Update Gateway event.
+* [addMemberRole](#addmemberrole) - Adds a role to a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
+* [removeMemberRole](#removememberrole) - Removes a role from a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
+* [getWelcomeScreen](#getwelcomescreen) - Returns the Welcome Screen object for the guild. If the welcome screen is not enabled, the MANAGE_GUILD permission is required.
+* [updateWelcomeScreen](#updatewelcomescreen) - Modify the guild's Welcome Screen. Requires the MANAGE_GUILD permission. Returns the updated Welcome Screen object. May fire a Guild Update Gateway event.
+* [deleteIntegration](#deleteintegration) - Delete the attached integration object for the guild. Deletes any associated webhooks and kicks the associated bot if there is one. Requires the MANAGE_GUILD permission. Returns a 204 empty response on success. Fires Guild Integrations Update and Integration Delete Gateway events.
+* [listIntegrations](#listintegrations) - Returns a list of integration objects for the guild. Requires the MANAGE_GUILD permission.
+* [getWidget](#getwidget) - Returns the widget for the guild. Fires an Invite Create Gateway event when an invite channel is defined and a new Invite is generated.
+* [getOnboarding](#getonboarding) - Returns the Onboarding object for the guild.
+* [updateOnboarding](#updateonboarding) - Modifies the onboarding configuration of the guild. Returns a 200 with the Onboarding object for the guild. Requires the MANAGE_GUILD and MANAGE_ROLES permissions.
+* [getVanityUrl](#getvanityurl) - Returns a partial invite object for guilds with that feature enabled. Requires the MANAGE_GUILD permission. code will be null if a vanity url for the guild is not set.
+* [getWidgetPng](#getwidgetpng) - Returns a PNG image widget for the guild. Requires no permissions or authentication.
+* [bulkBan](#bulkban) - Ban up to 200 users from a guild, and optionally delete previous messages sent by the banned users. Requires both the BAN_MEMBERS and MANAGE_GUILD permissions. Returns a 200 response on success, including the fields banned_users with the IDs of the banned users and failed_users with IDs that could not be banned or were already banned.
+* [listChannels](#listchannels) - Returns a list of guild channel objects. Does not include threads.
+* [createChannel](#createchannel) - Create a new channel object for the guild. Requires the MANAGE_CHANNELS permission. If setting permission overwrites, only permissions your bot has in the guild can be allowed/denied. Setting MANAGE_ROLES permission in channels is only possible for guild administrators. Returns the new channel object on success. Fires a Channel Create Gateway event.
+* [updateChannelPositions](#updatechannelpositions) - Modify the positions of a set of channel objects for the guild. Requires MANAGE_CHANNELS permission. Returns a 204 empty response on success. Fires multiple Channel Update Gateway events.
+* [getMember](#getmember) - Returns a guild member object for the specified user.
+* [addMember](#addmember) - Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. Returns a 201 Created with the guild member as the body, or 204 No Content if the user is already a member of the guild. Fires a Guild Member Add Gateway event.
+* [removeMember](#removemember) - Remove a member from a guild. Requires KICK_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Member Remove Gateway event.
+* [updateMember](#updatemember) - Modify attributes of a guild member. Returns a 200 OK with the guild member as the body. Fires a Guild Member Update Gateway event. If the channel_id is set to null, this will force the target user to be disconnected from voice.
+* [listMembers](#listmembers) - Returns a list of guild member objects that are members of the guild.
+* [getPreview](#getpreview) - Returns the guild preview object for the given id. If the user is not in the guild, then the guild must be discoverable.
+* [listInvites](#listinvites) - Returns a list of invite objects (with invite metadata) for the guild. Requires the MANAGE_GUILD permission.
+* [listVoiceRegions](#listvoiceregions) - Returns a list of voice region objects for the guild. Unlike the similar /voice route, this returns VIP servers when the guild is VIP-enabled.
+* [getWidgetSettings](#getwidgetsettings) - Returns a guild widget settings object. Requires the MANAGE_GUILD permission.
+* [updateWidgetSettings](#updatewidgetsettings) - Modify a guild widget settings object for the guild. All attributes may be passed in with JSON and modified. Requires the MANAGE_GUILD permission. Returns the updated guild widget settings object. Fires a Guild Update Gateway event.
+* [getRole](#getrole) - Returns a role object for the specified role.
+* [deleteRole](#deleterole) - Delete a guild role. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Role Delete Gateway event.
+* [updateRole](#updaterole) - Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated role on success. Fires a Guild Role Update Gateway event.
+* [listRoles](#listroles) - Returns a list of role objects for the guild.
+* [createRole](#createrole) - Create a new role for the guild. Requires the MANAGE_ROLES permission. Returns the new role object on success. Fires a Guild Role Create Gateway event. All JSON params are optional.
+* [updateRolePositions](#updaterolepositions) - Modify the positions of a set of role objects for the guild. Requires the MANAGE_ROLES permission. Returns a list of all of the guild's role objects on success. Fires multiple Guild Role Update Gateway events.
+* [previewPrune](#previewprune) - Returns an object with one pruned key indicating the number of members that would be removed in a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions.
+* [prune](#prune) - Begin a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions. Returns an object with one pruned key indicating the number of members that were removed in the prune operation. Fires multiple Guild Member Remove Gateway events.
+* [getBan](#getban) - Returns a ban object for the given user or a 404 not found if the ban cannot be found. Requires the BAN_MEMBERS permission.
+* [createBan](#createban) - Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the BAN_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Ban Add Gateway event.
+* [removeBan](#removeban) - Remove the ban for a user. Requires the BAN_MEMBERS permissions. Returns a 204 empty response on success. Fires a Guild Ban Remove Gateway event.
+* [listBans](#listbans) - Returns a list of ban objects for the users banned from this guild. Requires the BAN_MEMBERS permission.
+* [setMfaLevel](#setmfalevel) - Modify a guild's MFA level. Requires guild ownership. Returns the updated level on success. Fires a Guild Update Gateway event.
+* [get](#get) - Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.
+* [delete](#delete) - Delete a guild permanently. User must be owner. Returns 204 No Content on success. Fires a Guild Delete Gateway event.
+* [update](#update) - Modify a guild's settings. Requires the MANAGE_GUILD permission. Returns the updated guild object on success. Fires a Guild Update Gateway event.
 
 ## create
+
+Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.
 
 ### Example Usage
 
@@ -125,157 +128,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## getMyMember
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.getMyMember({
-    guildId: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsGetMyMember } from "@ryan.blunden/discord-sdk/funcs/guildsGetMyMember.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsGetMyMember(discord, {
-    guildId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetMyGuildMemberRequest](../../models/operations/getmyguildmemberrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.PrivateGuildMemberResponse](../../models/components/privateguildmemberresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## listAutoModerationRules
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.listAutoModerationRules({
-    guildId: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsListAutoModerationRules } from "@ryan.blunden/discord-sdk/funcs/guildsListAutoModerationRules.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsListAutoModerationRules(discord, {
-    guildId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ListAutoModerationRulesRequest](../../models/operations/listautomoderationrulesrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.ResponseBody[]](../../models/.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
 ## searchMembers
+
+Returns a list of guild member objects whose username or nickname starts with a provided string.
 
 ### Example Usage
 
@@ -354,79 +209,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## getTemplate
+## listActiveThreads
 
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord();
-
-async function run() {
-  const result = await discord.guilds.getTemplate({
-    code: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsGetTemplate } from "@ryan.blunden/discord-sdk/funcs/guildsGetTemplate.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore();
-
-async function run() {
-  const res = await guildsGetTemplate(discord, {
-    code: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetGuildTemplateRequest](../../models/operations/getguildtemplaterequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.GetGuildTemplateSecurity](../../models/operations/getguildtemplatesecurity.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.GuildTemplateResponse](../../models/components/guildtemplateresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## getNewMemberWelcome
+Returns all active threads in the guild, including public and private threads. Threads are ordered by their id, in descending order.
 
 ### Example Usage
 
@@ -438,7 +223,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.guilds.getNewMemberWelcome({
+  const result = await discord.guilds.listActiveThreads({
     guildId: "<value>",
   });
 
@@ -455,7 +240,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsGetNewMemberWelcome } from "@ryan.blunden/discord-sdk/funcs/guildsGetNewMemberWelcome.js";
+import { guildsListActiveThreads } from "@ryan.blunden/discord-sdk/funcs/guildsListActiveThreads.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -464,7 +249,7 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await guildsGetNewMemberWelcome(discord, {
+  const res = await guildsListActiveThreads(discord, {
     guildId: "<value>",
   });
 
@@ -485,14 +270,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetGuildNewMemberWelcomeRequest](../../models/operations/getguildnewmemberwelcomerequest.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetActiveGuildThreadsRequest](../../models/operations/getactiveguildthreadsrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.GuildHomeSettingsResponse](../../models/components/guildhomesettingsresponse.md)\>**
+**Promise\<[components.ThreadsResponse](../../models/components/threadsresponse.md)\>**
 
 ### Errors
 
@@ -501,7 +286,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## getSoundboardSound
+## updateCurrentMember
+
+Modifies the current member in a guild. Returns a 200 with the updated member object on success. Fires a Guild Member Update Gateway event.
 
 ### Example Usage
 
@@ -513,9 +300,9 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.guilds.getSoundboardSound({
+  const result = await discord.guilds.updateCurrentMember({
     guildId: "<value>",
-    soundId: "<value>",
+    requestBody: {},
   });
 
   // Handle the result
@@ -531,7 +318,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsGetSoundboardSound } from "@ryan.blunden/discord-sdk/funcs/guildsGetSoundboardSound.js";
+import { guildsUpdateCurrentMember } from "@ryan.blunden/discord-sdk/funcs/guildsUpdateCurrentMember.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -540,9 +327,9 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await guildsGetSoundboardSound(discord, {
+  const res = await guildsUpdateCurrentMember(discord, {
     guildId: "<value>",
-    soundId: "<value>",
+    requestBody: {},
   });
 
   if (!res.ok) {
@@ -562,14 +349,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetGuildSoundboardSoundRequest](../../models/operations/getguildsoundboardsoundrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.UpdateMyGuildMemberRequest](../../models/operations/updatemyguildmemberrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.SoundboardSoundResponse](../../models/components/soundboardsoundresponse.md)\>**
+**Promise\<[components.PrivateGuildMemberResponse](../../models/components/privateguildmemberresponse.md)\>**
 
 ### Errors
 
@@ -578,7 +365,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## createSoundboardSound
+## addMemberRole
+
+Adds a role to a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
 
 ### Example Usage
 
@@ -590,16 +379,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.guilds.createSoundboardSound({
+  await discord.guilds.addMemberRole({
     guildId: "<value>",
-    soundboardCreateRequest: {
-      name: "<value>",
-      sound: "<value>",
-    },
+    userId: "<value>",
+    roleId: "<value>",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -611,7 +397,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsCreateSoundboardSound } from "@ryan.blunden/discord-sdk/funcs/guildsCreateSoundboardSound.js";
+import { guildsAddMemberRole } from "@ryan.blunden/discord-sdk/funcs/guildsAddMemberRole.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -620,12 +406,10 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await guildsCreateSoundboardSound(discord, {
+  const res = await guildsAddMemberRole(discord, {
     guildId: "<value>",
-    soundboardCreateRequest: {
-      name: "<value>",
-      sound: "<value>",
-    },
+    userId: "<value>",
+    roleId: "<value>",
   });
 
   if (!res.ok) {
@@ -634,8 +418,7 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
@@ -645,14 +428,93 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CreateGuildSoundboardSoundRequest](../../models/operations/createguildsoundboardsoundrequest.md)                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.AddGuildMemberRoleRequest](../../models/operations/addguildmemberrolerequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.SoundboardSoundResponse](../../models/components/soundboardsoundresponse.md)\>**
+**Promise\<void\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## removeMemberRole
+
+Removes a role from a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  await discord.guilds.removeMemberRole({
+    guildId: "<value>",
+    userId: "<value>",
+    roleId: "<value>",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsRemoveMemberRole } from "@ryan.blunden/discord-sdk/funcs/guildsRemoveMemberRole.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsRemoveMemberRole(discord, {
+    guildId: "<value>",
+    userId: "<value>",
+    roleId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteGuildMemberRoleRequest](../../models/operations/deleteguildmemberrolerequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
 
 ### Errors
 
@@ -662,6 +524,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## getWelcomeScreen
+
+Returns the Welcome Screen object for the guild. If the welcome screen is not enabled, the MANAGE_GUILD permission is required.
 
 ### Example Usage
 
@@ -738,6 +602,8 @@ run();
 
 ## updateWelcomeScreen
 
+Modify the guild's Welcome Screen. Requires the MANAGE_GUILD permission. Returns the updated Welcome Screen object. May fire a Guild Update Gateway event.
+
 ### Example Usage
 
 ```typescript
@@ -813,7 +679,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## getVoiceState
+## deleteIntegration
+
+Delete the attached integration object for the guild. Deletes any associated webhooks and kicks the associated bot if there is one. Requires the MANAGE_GUILD permission. Returns a 204 empty response on success. Fires Guild Integrations Update and Integration Delete Gateway events.
 
 ### Example Usage
 
@@ -825,9 +693,85 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.guilds.getVoiceState({
+  await discord.guilds.deleteIntegration({
     guildId: "<value>",
-    userId: "<value>",
+    integrationId: "<value>",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsDeleteIntegration } from "@ryan.blunden/discord-sdk/funcs/guildsDeleteIntegration.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsDeleteIntegration(discord, {
+    guildId: "<value>",
+    integrationId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteGuildIntegrationRequest](../../models/operations/deleteguildintegrationrequest.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## listIntegrations
+
+Returns a list of integration objects for the guild. Requires the MANAGE_GUILD permission.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.guilds.listIntegrations({
+    guildId: "<value>",
   });
 
   // Handle the result
@@ -843,7 +787,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsGetVoiceState } from "@ryan.blunden/discord-sdk/funcs/guildsGetVoiceState.js";
+import { guildsListIntegrations } from "@ryan.blunden/discord-sdk/funcs/guildsListIntegrations.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -852,9 +796,8 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await guildsGetVoiceState(discord, {
+  const res = await guildsListIntegrations(discord, {
     guildId: "<value>",
-    userId: "<value>",
   });
 
   if (!res.ok) {
@@ -874,14 +817,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetVoiceStateRequest](../../models/operations/getvoicestaterequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ListGuildIntegrationsRequest](../../models/operations/listguildintegrationsrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.VoiceStateResponse](../../models/components/voicestateresponse.md)\>**
+**Promise\<[operations.ListGuildIntegrationsResponseBody[]](../../models/.md)\>**
 
 ### Errors
 
@@ -891,6 +834,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## getWidget
+
+Returns the widget for the guild. Fires an Invite Create Gateway event when an invite channel is defined and a new Invite is generated.
 
 ### Example Usage
 
@@ -962,7 +907,165 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
+## getOnboarding
+
+Returns the Onboarding object for the guild.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.guilds.getOnboarding({
+    guildId: "<value>",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsGetOnboarding } from "@ryan.blunden/discord-sdk/funcs/guildsGetOnboarding.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsGetOnboarding(discord, {
+    guildId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetGuildsOnboardingRequest](../../models/operations/getguildsonboardingrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.UserGuildOnboardingResponse](../../models/components/userguildonboardingresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## updateOnboarding
+
+Modifies the onboarding configuration of the guild. Returns a 200 with the Onboarding object for the guild. Requires the MANAGE_GUILD and MANAGE_ROLES permissions.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.guilds.updateOnboarding({
+    guildId: "<value>",
+    updateGuildOnboardingRequest: {},
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsUpdateOnboarding } from "@ryan.blunden/discord-sdk/funcs/guildsUpdateOnboarding.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsUpdateOnboarding(discord, {
+    guildId: "<value>",
+    updateGuildOnboardingRequest: {},
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PutGuildsOnboardingRequest](../../models/operations/putguildsonboardingrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.GuildOnboardingResponse](../../models/components/guildonboardingresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
 ## getVanityUrl
+
+Returns a partial invite object for guilds with that feature enabled. Requires the MANAGE_GUILD permission. code will be null if a vanity url for the guild is not set.
 
 ### Example Usage
 
@@ -1037,82 +1140,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## listAuditLogs
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.listAuditLogs({
-    guildId: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsListAuditLogs } from "@ryan.blunden/discord-sdk/funcs/guildsListAuditLogs.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsListAuditLogs(discord, {
-    guildId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ListGuildAuditLogEntriesRequest](../../models/operations/listguildauditlogentriesrequest.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.GuildAuditLogResponse](../../models/components/guildauditlogresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
 ## getWidgetPng
+
+Returns a PNG image widget for the guild. Requires no permissions or authentication.
 
 ### Example Usage
 
@@ -1184,7 +1214,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## syncTemplate
+## bulkBan
+
+Ban up to 200 users from a guild, and optionally delete previous messages sent by the banned users. Requires both the BAN_MEMBERS and MANAGE_GUILD permissions. Returns a 200 response on success, including the fields banned_users with the IDs of the banned users and failed_users with IDs that could not be banned or were already banned.
 
 ### Example Usage
 
@@ -1196,395 +1228,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.guilds.syncTemplate({
-    guildId: "<value>",
-    code: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsSyncTemplate } from "@ryan.blunden/discord-sdk/funcs/guildsSyncTemplate.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsSyncTemplate(discord, {
-    guildId: "<value>",
-    code: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.SyncGuildTemplateRequest](../../models/operations/syncguildtemplaterequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.GuildTemplateResponse](../../models/components/guildtemplateresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## updateTemplate
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.updateTemplate({
-    guildId: "<value>",
-    code: "<value>",
-    requestBody: {},
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsUpdateTemplate } from "@ryan.blunden/discord-sdk/funcs/guildsUpdateTemplate.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsUpdateTemplate(discord, {
-    guildId: "<value>",
-    code: "<value>",
-    requestBody: {},
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.UpdateGuildTemplateRequest](../../models/operations/updateguildtemplaterequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.GuildTemplateResponse](../../models/components/guildtemplateresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## listTemplates
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.listTemplates({
-    guildId: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsListTemplates } from "@ryan.blunden/discord-sdk/funcs/guildsListTemplates.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsListTemplates(discord, {
-    guildId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ListGuildTemplatesRequest](../../models/operations/listguildtemplatesrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.GuildTemplateResponse[]](../../models/.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## getSticker
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.getSticker({
-    guildId: "<value>",
-    stickerId: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsGetSticker } from "@ryan.blunden/discord-sdk/funcs/guildsGetSticker.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsGetSticker(discord, {
-    guildId: "<value>",
-    stickerId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetGuildStickerRequest](../../models/operations/getguildstickerrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.GuildStickerResponse](../../models/components/guildstickerresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## deleteSticker
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  await discord.guilds.deleteSticker({
-    guildId: "<value>",
-    stickerId: "<value>",
-  });
-
-
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsDeleteSticker } from "@ryan.blunden/discord-sdk/funcs/guildsDeleteSticker.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsDeleteSticker(discord, {
-    guildId: "<value>",
-    stickerId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteGuildStickerRequest](../../models/operations/deleteguildstickerrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<void\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## createSticker
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.createSticker({
+  const result = await discord.guilds.bulkBan({
     guildId: "<value>",
     requestBody: {
-      name: "<value>",
-      tags: "<value>",
-      file: "<value>",
+      userIds: [
+        "<value>",
+      ],
     },
   });
 
@@ -1601,7 +1250,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsCreateSticker } from "@ryan.blunden/discord-sdk/funcs/guildsCreateSticker.js";
+import { guildsBulkBan } from "@ryan.blunden/discord-sdk/funcs/guildsBulkBan.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1610,12 +1259,12 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await guildsCreateSticker(discord, {
+  const res = await guildsBulkBan(discord, {
     guildId: "<value>",
     requestBody: {
-      name: "<value>",
-      tags: "<value>",
-      file: "<value>",
+      userIds: [
+        "<value>",
+      ],
     },
   });
 
@@ -1636,89 +1285,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CreateGuildStickerRequest](../../models/operations/createguildstickerrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.BulkBanUsersFromGuildRequest](../../models/operations/bulkbanusersfromguildrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.GuildStickerResponse](../../models/components/guildstickerresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## listWebhooks
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.listWebhooks({
-    guildId: "<value>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsListWebhooks } from "@ryan.blunden/discord-sdk/funcs/guildsListWebhooks.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsListWebhooks(discord, {
-    guildId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetGuildWebhooksRequest](../../models/operations/getguildwebhooksrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.GetGuildWebhooksResponseBody[]](../../models/.md)\>**
+**Promise\<[components.BulkBanUsersResponse](../../models/components/bulkbanusersresponse.md)\>**
 
 ### Errors
 
@@ -1728,6 +1302,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## listChannels
+
+Returns a list of guild channel objects. Does not include threads.
 
 ### Example Usage
 
@@ -1803,7 +1379,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## deleteMember
+## createChannel
+
+Create a new channel object for the guild. Requires the MANAGE_CHANNELS permission. If setting permission overwrites, only permissions your bot has in the guild can be allowed/denied. Setting MANAGE_ROLES permission in channels is only possible for guild administrators. Returns the new channel object on success. Fires a Channel Create Gateway event.
 
 ### Example Usage
 
@@ -1815,7 +1393,339 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.deleteMember({
+  const result = await discord.guilds.createChannel({
+    guildId: "<value>",
+    createGuildChannelRequest: {
+      name: "<value>",
+    },
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsCreateChannel } from "@ryan.blunden/discord-sdk/funcs/guildsCreateChannel.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsCreateChannel(discord, {
+    guildId: "<value>",
+    createGuildChannelRequest: {
+      name: "<value>",
+    },
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.CreateGuildChannelRequest](../../models/operations/createguildchannelrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.GuildChannelResponse](../../models/components/guildchannelresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## updateChannelPositions
+
+Modify the positions of a set of channel objects for the guild. Requires MANAGE_CHANNELS permission. Returns a 204 empty response on success. Fires multiple Channel Update Gateway events.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  await discord.guilds.updateChannelPositions({
+    guildId: "<value>",
+    requestBody: [
+      {},
+      {},
+      {},
+    ],
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsUpdateChannelPositions } from "@ryan.blunden/discord-sdk/funcs/guildsUpdateChannelPositions.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsUpdateChannelPositions(discord, {
+    guildId: "<value>",
+    requestBody: [
+      {},
+      {},
+      {},
+    ],
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.BulkUpdateGuildChannelsRequest](../../models/operations/bulkupdateguildchannelsrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## getMember
+
+Returns a guild member object for the specified user.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.guilds.getMember({
+    guildId: "<value>",
+    userId: "<value>",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsGetMember } from "@ryan.blunden/discord-sdk/funcs/guildsGetMember.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsGetMember(discord, {
+    guildId: "<value>",
+    userId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetGuildMemberRequest](../../models/operations/getguildmemberrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.GuildMemberResponse](../../models/components/guildmemberresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## addMember
+
+Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. Returns a 201 Created with the guild member as the body, or 204 No Content if the user is already a member of the guild. Fires a Guild Member Add Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.guilds.addMember({
+    guildId: "<value>",
+    userId: "<value>",
+    requestBody: {
+      accessToken: "<value>",
+    },
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsAddMember } from "@ryan.blunden/discord-sdk/funcs/guildsAddMember.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsAddMember(discord, {
+    guildId: "<value>",
+    userId: "<value>",
+    requestBody: {
+      accessToken: "<value>",
+    },
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.AddGuildMemberRequest](../../models/operations/addguildmemberrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.GuildMemberResponse](../../models/components/guildmemberresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## removeMember
+
+Remove a member from a guild. Requires KICK_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Member Remove Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  await discord.guilds.removeMember({
     guildId: "<value>",
     userId: "<value>",
   });
@@ -1832,7 +1742,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsDeleteMember } from "@ryan.blunden/discord-sdk/funcs/guildsDeleteMember.js";
+import { guildsRemoveMember } from "@ryan.blunden/discord-sdk/funcs/guildsRemoveMember.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1841,7 +1751,7 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await guildsDeleteMember(discord, {
+  const res = await guildsRemoveMember(discord, {
     guildId: "<value>",
     userId: "<value>",
   });
@@ -1878,7 +1788,90 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
+## updateMember
+
+Modify attributes of a guild member. Returns a 200 OK with the guild member as the body. Fires a Guild Member Update Gateway event. If the channel_id is set to null, this will force the target user to be disconnected from voice.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.guilds.updateMember({
+    guildId: "<value>",
+    userId: "<value>",
+    requestBody: {},
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsUpdateMember } from "@ryan.blunden/discord-sdk/funcs/guildsUpdateMember.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsUpdateMember(discord, {
+    guildId: "<value>",
+    userId: "<value>",
+    requestBody: {},
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UpdateGuildMemberRequest](../../models/operations/updateguildmemberrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.GuildMemberResponse](../../models/components/guildmemberresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
 ## listMembers
+
+Returns a list of guild member objects that are members of the guild.
 
 ### Example Usage
 
@@ -1955,6 +1948,8 @@ run();
 
 ## getPreview
 
+Returns the guild preview object for the given id. If the user is not in the guild, then the guild must be discoverable.
+
 ### Example Usage
 
 ```typescript
@@ -2030,6 +2025,8 @@ run();
 
 ## listInvites
 
+Returns a list of invite objects (with invite metadata) for the guild. Requires the MANAGE_GUILD permission.
+
 ### Example Usage
 
 ```typescript
@@ -2103,7 +2100,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## deleteEmoji
+## listVoiceRegions
+
+Returns a list of voice region objects for the guild. Unlike the similar /voice route, this returns VIP servers when the guild is VIP-enabled.
 
 ### Example Usage
 
@@ -2115,161 +2114,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.deleteEmoji({
-    guildId: "<value>",
-    emojiId: "<value>",
-  });
-
-
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsDeleteEmoji } from "@ryan.blunden/discord-sdk/funcs/guildsDeleteEmoji.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsDeleteEmoji(discord, {
-    guildId: "<value>",
-    emojiId: "<value>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteGuildEmojiRequest](../../models/operations/deleteguildemojirequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<void\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## updateEmoji
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.updateEmoji({
-    guildId: "<value>",
-    emojiId: "<value>",
-    requestBody: {},
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsUpdateEmoji } from "@ryan.blunden/discord-sdk/funcs/guildsUpdateEmoji.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsUpdateEmoji(discord, {
-    guildId: "<value>",
-    emojiId: "<value>",
-    requestBody: {},
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.UpdateGuildEmojiRequest](../../models/operations/updateguildemojirequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## listEmojis
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.listEmojis({
+  const result = await discord.guilds.listVoiceRegions({
     guildId: "<value>",
   });
 
@@ -2286,7 +2131,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsListEmojis } from "@ryan.blunden/discord-sdk/funcs/guildsListEmojis.js";
+import { guildsListVoiceRegions } from "@ryan.blunden/discord-sdk/funcs/guildsListVoiceRegions.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -2295,7 +2140,7 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await guildsListEmojis(discord, {
+  const res = await guildsListVoiceRegions(discord, {
     guildId: "<value>",
   });
 
@@ -2316,97 +2161,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ListGuildEmojisRequest](../../models/operations/listguildemojisrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ListGuildVoiceRegionsRequest](../../models/operations/listguildvoiceregionsrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.EmojiResponse[]](../../models/.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## createEmoji
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.createEmoji({
-    guildId: "<value>",
-    requestBody: {
-      name: "<value>",
-      image: "https://loremflickr.com/2512/1139?lock=1643596044790752",
-    },
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsCreateEmoji } from "@ryan.blunden/discord-sdk/funcs/guildsCreateEmoji.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsCreateEmoji(discord, {
-    guildId: "<value>",
-    requestBody: {
-      name: "<value>",
-      image: "https://loremflickr.com/2512/1139?lock=1643596044790752",
-    },
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CreateGuildEmojiRequest](../../models/operations/createguildemojirequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
+**Promise\<[components.VoiceRegionResponse[]](../../models/.md)\>**
 
 ### Errors
 
@@ -2416,6 +2178,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## getWidgetSettings
+
+Returns a guild widget settings object. Requires the MANAGE_GUILD permission.
 
 ### Example Usage
 
@@ -2490,7 +2254,88 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
+## updateWidgetSettings
+
+Modify a guild widget settings object for the guild. All attributes may be passed in with JSON and modified. Requires the MANAGE_GUILD permission. Returns the updated guild widget settings object. Fires a Guild Update Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.guilds.updateWidgetSettings({
+    guildId: "<value>",
+    requestBody: {},
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsUpdateWidgetSettings } from "@ryan.blunden/discord-sdk/funcs/guildsUpdateWidgetSettings.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsUpdateWidgetSettings(discord, {
+    guildId: "<value>",
+    requestBody: {},
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UpdateGuildWidgetSettingsRequest](../../models/operations/updateguildwidgetsettingsrequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.WidgetSettingsResponse](../../models/components/widgetsettingsresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
 ## getRole
+
+Returns a role object for the specified role.
 
 ### Example Usage
 
@@ -2569,6 +2414,8 @@ run();
 
 ## deleteRole
 
+Delete a guild role. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Role Delete Gateway event.
+
 ### Example Usage
 
 ```typescript
@@ -2643,6 +2490,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## updateRole
+
+Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated role on success. Fires a Guild Role Update Gateway event.
 
 ### Example Usage
 
@@ -2723,6 +2572,8 @@ run();
 
 ## listRoles
 
+Returns a list of role objects for the guild.
+
 ### Example Usage
 
 ```typescript
@@ -2797,6 +2648,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## createRole
+
+Create a new role for the guild. Requires the MANAGE_ROLES permission. Returns the new role object on success. Fires a Guild Role Create Gateway event. All JSON params are optional.
 
 ### Example Usage
 
@@ -2873,7 +2726,96 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
+## updateRolePositions
+
+Modify the positions of a set of role objects for the guild. Requires the MANAGE_ROLES permission. Returns a list of all of the guild's role objects on success. Fires multiple Guild Role Update Gateway events.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.guilds.updateRolePositions({
+    guildId: "<value>",
+    requestBody: [
+      {},
+      {},
+      {},
+    ],
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsUpdateRolePositions } from "@ryan.blunden/discord-sdk/funcs/guildsUpdateRolePositions.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsUpdateRolePositions(discord, {
+    guildId: "<value>",
+    requestBody: [
+      {},
+      {},
+      {},
+    ],
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.BulkUpdateGuildRolesRequest](../../models/operations/bulkupdateguildrolesrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.GuildRoleResponse[]](../../models/.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
 ## previewPrune
+
+Returns an object with one pruned key indicating the number of members that would be removed in a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions.
 
 ### Example Usage
 
@@ -2950,6 +2892,8 @@ run();
 
 ## prune
 
+Begin a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions. Returns an object with one pruned key indicating the number of members that were removed in the prune operation. Fires multiple Guild Member Remove Gateway events.
+
 ### Example Usage
 
 ```typescript
@@ -3025,7 +2969,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## banUser
+## getBan
+
+Returns a ban object for the given user or a 404 not found if the ban cannot be found. Requires the BAN_MEMBERS permission.
 
 ### Example Usage
 
@@ -3037,7 +2983,86 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.banUser({
+  const result = await discord.guilds.getBan({
+    guildId: "<value>",
+    userId: "<value>",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsGetBan } from "@ryan.blunden/discord-sdk/funcs/guildsGetBan.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsGetBan(discord, {
+    guildId: "<value>",
+    userId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetGuildBanRequest](../../models/operations/getguildbanrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.GuildBanResponse](../../models/components/guildbanresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## createBan
+
+Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the BAN_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Ban Add Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  await discord.guilds.createBan({
     guildId: "<value>",
     userId: "<value>",
     requestBody: {},
@@ -3055,7 +3080,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsBanUser } from "@ryan.blunden/discord-sdk/funcs/guildsBanUser.js";
+import { guildsCreateBan } from "@ryan.blunden/discord-sdk/funcs/guildsCreateBan.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -3064,7 +3089,7 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await guildsBanUser(discord, {
+  const res = await guildsCreateBan(discord, {
     guildId: "<value>",
     userId: "<value>",
     requestBody: {},
@@ -3102,7 +3127,9 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## unbanUser
+## removeBan
+
+Remove the ban for a user. Requires the BAN_MEMBERS permissions. Returns a 204 empty response on success. Fires a Guild Ban Remove Gateway event.
 
 ### Example Usage
 
@@ -3114,7 +3141,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.unbanUser({
+  await discord.guilds.removeBan({
     guildId: "<value>",
     userId: "<value>",
   });
@@ -3131,7 +3158,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsUnbanUser } from "@ryan.blunden/discord-sdk/funcs/guildsUnbanUser.js";
+import { guildsRemoveBan } from "@ryan.blunden/discord-sdk/funcs/guildsRemoveBan.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -3140,7 +3167,7 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await guildsUnbanUser(discord, {
+  const res = await guildsRemoveBan(discord, {
     guildId: "<value>",
     userId: "<value>",
   });
@@ -3177,7 +3204,165 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
+## listBans
+
+Returns a list of ban objects for the users banned from this guild. Requires the BAN_MEMBERS permission.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.guilds.listBans({
+    guildId: "<value>",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsListBans } from "@ryan.blunden/discord-sdk/funcs/guildsListBans.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsListBans(discord, {
+    guildId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListGuildBansRequest](../../models/operations/listguildbansrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.GuildBanResponse[]](../../models/.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
+## setMfaLevel
+
+Modify a guild's MFA level. Requires guild ownership. Returns the updated level on success. Fires a Guild Update Gateway event.
+
+### Example Usage
+
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.guilds.setMfaLevel({
+    guildId: "<value>",
+    requestBody: {},
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { guildsSetMfaLevel } from "@ryan.blunden/discord-sdk/funcs/guildsSetMfaLevel.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await guildsSetMfaLevel(discord, {
+    guildId: "<value>",
+    requestBody: {},
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.SetGuildMfaLevelRequest](../../models/operations/setguildmfalevelrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.GuildMFALevelResponse](../../models/components/guildmfalevelresponse.md)\>**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 4XX                  | application/json     |
+| errors.APIError      | 5XX                  | \*/\*                |
+
 ## get
+
+Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.
 
 ### Example Usage
 
@@ -3254,6 +3439,8 @@ run();
 
 ## delete
 
+Delete a guild permanently. User must be owner. Returns 204 No Content on success. Fires a Guild Delete Gateway event.
+
 ### Example Usage
 
 ```typescript
@@ -3326,6 +3513,8 @@ run();
 | errors.APIError      | 5XX                  | \*/\*                |
 
 ## update
+
+Modify a guild's settings. Requires the MANAGE_GUILD permission. Returns the updated guild object on success. Fires a Guild Update Gateway event.
 
 ### Example Usage
 

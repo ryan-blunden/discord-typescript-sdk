@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns the guild preview object for the given id. If the user is not in the guild, then the guild must be discoverable.
+ */
 export function guildsGetPreview(
   client: DiscordCore,
   request: operations.GetGuildPreviewRequest,

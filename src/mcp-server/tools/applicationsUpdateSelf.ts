@@ -12,7 +12,9 @@ const args = {
 
 export const tool$applicationsUpdateSelf: ToolDefinition<typeof args> = {
   name: "applications-update-self",
-  description: ``,
+  description:
+    `Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated. Returns the updated application object on success.`,
+  scopes: ["application", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await applicationsUpdateSelf(

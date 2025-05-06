@@ -7,6 +7,11 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  ChannelTypes,
+  ChannelTypes$inboundSchema,
+  ChannelTypes$outboundSchema,
+} from "./channeltypes.js";
+import {
   InviteChannelRecipientResponse,
   InviteChannelRecipientResponse$inboundSchema,
   InviteChannelRecipientResponse$Outbound,
@@ -15,7 +20,10 @@ import {
 
 export type InviteChannelResponse = {
   id: string;
-  type?: 1 | undefined;
+  /**
+   * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
+   */
+  type: ChannelTypes;
   name?: string | null | undefined;
   icon?: string | null | undefined;
   recipients?: Array<InviteChannelRecipientResponse> | null | undefined;
@@ -28,7 +36,7 @@ export const InviteChannelResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  type: z.literal(1).optional(),
+  type: ChannelTypes$inboundSchema,
   name: z.nullable(z.string()).optional(),
   icon: z.nullable(z.string()).optional(),
   recipients: z.nullable(z.array(InviteChannelRecipientResponse$inboundSchema))
@@ -38,7 +46,7 @@ export const InviteChannelResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type InviteChannelResponse$Outbound = {
   id: string;
-  type: 1;
+  type: number;
   name?: string | null | undefined;
   icon?: string | null | undefined;
   recipients?:
@@ -54,7 +62,7 @@ export const InviteChannelResponse$outboundSchema: z.ZodType<
   InviteChannelResponse
 > = z.object({
   id: z.string(),
-  type: z.literal(1).default(1 as const),
+  type: ChannelTypes$outboundSchema,
   name: z.nullable(z.string()).optional(),
   icon: z.nullable(z.string()).optional(),
   recipients: z.nullable(z.array(InviteChannelRecipientResponse$outboundSchema))

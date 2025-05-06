@@ -12,7 +12,8 @@ const args = {
 
 export const tool$channelsGet: ToolDefinition<typeof args> = {
   name: "channels-get",
-  description: ``,
+  description: `Returns a channel object for the given channel ID.`,
+  scopes: ["channels", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsGet(

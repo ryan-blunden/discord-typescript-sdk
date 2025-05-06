@@ -7,6 +7,11 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ChannelTypes,
+  ChannelTypes$inboundSchema,
+  ChannelTypes$outboundSchema,
+} from "./channeltypes.js";
 
 export type ApplicationCommandChannelOption = {
   type?: 1 | undefined;
@@ -15,7 +20,7 @@ export type ApplicationCommandChannelOption = {
   description: string;
   descriptionLocalizations?: { [k: string]: string } | null | undefined;
   required?: boolean | null | undefined;
-  channelTypes?: Array<number> | null | undefined;
+  channelTypes?: Array<ChannelTypes> | null | undefined;
 };
 
 /** @internal */
@@ -30,7 +35,7 @@ export const ApplicationCommandChannelOption$inboundSchema: z.ZodType<
   description: z.string(),
   description_localizations: z.nullable(z.record(z.string())).optional(),
   required: z.nullable(z.boolean()).optional(),
-  channel_types: z.nullable(z.array(z.number().int())).optional(),
+  channel_types: z.nullable(z.array(ChannelTypes$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "name_localizations": "nameLocalizations",
@@ -62,7 +67,7 @@ export const ApplicationCommandChannelOption$outboundSchema: z.ZodType<
   description: z.string(),
   descriptionLocalizations: z.nullable(z.record(z.string())).optional(),
   required: z.nullable(z.boolean()).optional(),
-  channelTypes: z.nullable(z.array(z.number().int())).optional(),
+  channelTypes: z.nullable(z.array(ChannelTypes$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     nameLocalizations: "name_localizations",

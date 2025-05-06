@@ -12,6 +12,9 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class StageInstances extends ClientSDK {
+  /**
+   * Creates a new Stage instance associated to a Stage channel. Returns that Stage instance. Fires a Stage Instance Create Gateway event. Requires the user to be a moderator of the Stage channel.
+   */
   async create(
     request: operations.CreateStageInstanceRequestBody,
     options?: RequestOptions,
@@ -23,6 +26,9 @@ export class StageInstances extends ClientSDK {
     ));
   }
 
+  /**
+   * Gets the stage instance associated with the Stage channel, if it exists.
+   */
   async get(
     request: operations.GetStageInstanceRequest,
     options?: RequestOptions,
@@ -34,6 +40,9 @@ export class StageInstances extends ClientSDK {
     ));
   }
 
+  /**
+   * Deletes the Stage instance. Returns 204 No Content. Fires a Stage Instance Delete Gateway event. Requires the user to be a moderator of the Stage channel.
+   */
   async delete(
     request: operations.DeleteStageInstanceRequest,
     options?: RequestOptions,
@@ -45,6 +54,9 @@ export class StageInstances extends ClientSDK {
     ));
   }
 
+  /**
+   * Updates fields of an existing Stage instance. Returns the updated Stage instance. Fires a Stage Instance Update Gateway event. Requires the user to be a moderator of the Stage channel.
+   */
   async update(
     request: operations.UpdateStageInstanceRequest,
     options?: RequestOptions,

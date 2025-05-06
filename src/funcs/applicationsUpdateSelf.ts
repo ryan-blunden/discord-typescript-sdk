@@ -24,6 +24,9 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated. Returns the updated application object on success.
+ */
 export function applicationsUpdateSelf(
   client: DiscordCore,
   request: components.ApplicationFormPartial,

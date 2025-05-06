@@ -12,7 +12,9 @@ const args = {
 
 export const tool$channelsPinMessage: ToolDefinition<typeof args> = {
   name: "channels-pin-message",
-  description: ``,
+  description:
+    `Pin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.`,
+  scopes: ["channels", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsPinMessage(

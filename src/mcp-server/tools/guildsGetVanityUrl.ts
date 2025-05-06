@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsGetVanityUrl: ToolDefinition<typeof args> = {
   name: "guilds-get-vanity-url",
-  description: ``,
+  description:
+    `Returns a partial invite object for guilds with that feature enabled. Requires the MANAGE_GUILD permission. code will be null if a vanity url for the guild is not set.`,
+  scopes: ["guilds", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsGetVanityUrl(

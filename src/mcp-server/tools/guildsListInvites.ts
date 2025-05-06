@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsListInvites: ToolDefinition<typeof args> = {
   name: "guilds-list-invites",
-  description: ``,
+  description:
+    `Returns a list of invite objects (with invite metadata) for the guild. Requires the MANAGE_GUILD permission.`,
+  scopes: ["guilds", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsListInvites(

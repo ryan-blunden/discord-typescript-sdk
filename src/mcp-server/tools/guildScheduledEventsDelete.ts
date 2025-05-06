@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildScheduledEventsDelete: ToolDefinition<typeof args> = {
   name: "guild-scheduled-events-delete",
-  description: ``,
+  description:
+    `Delete a guild scheduled event. Returns a 204 on success. Fires a Guild Scheduled Event Delete Gateway event.`,
+  scopes: ["guild-scheduled-event", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildScheduledEventsDelete(
