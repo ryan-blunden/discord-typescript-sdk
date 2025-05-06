@@ -1,0 +1,110 @@
+overlay: 1.0.0
+info:
+  title: Auto Moderation Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Auto Moderation resource endpoints
+actions:
+  - target: $["paths"]["/guilds/{guild_id}/auto-moderation/rules"]["get"]
+    update:
+      x-speakeasy-group: autoModeration
+      x-speakeasy-name-override: listRules
+      description: Get a list of all rules currently configured for the guild. Returns a list of auto moderation rule objects for the given guild. This endpoint requires the MANAGE_GUILD permission.
+      x-speakeasy-mcp:
+        scopes:
+          - auto-moderation
+          - read
+    x-speakeasy-metadata:
+      after: sdk.autoModeration.listRules()
+      before: sdk.<no_group>.list_auto_moderation_rules_for_guild()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/auto-moderation/rules/{rule_id}"]["get"]
+    update:
+      x-speakeasy-group: autoModeration
+      x-speakeasy-name-override: getRule
+      description: Get a single rule. Returns an auto moderation rule object. This endpoint requires the MANAGE_GUILD permission.
+      x-speakeasy-mcp:
+        scopes:
+          - auto-moderation
+          - read
+    x-speakeasy-metadata:
+      after: sdk.autoModeration.getRule()
+      before: sdk.<no_group>.get_auto_moderation_rule()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/auto-moderation/rules/{rule_id}"]["get"]
+    update:
+      x-speakeasy-group: autoModeration
+      x-speakeasy-name-override: getRule
+      description: Get a single rule. Returns an auto moderation rule object. This endpoint requires the MANAGE_GUILD permission.
+      x-speakeasy-mcp:
+        scopes:
+          - auto-moderation
+          - read
+    x-speakeasy-metadata:
+      after: sdk.autoModeration.getRule()
+      before: sdk.<no_group>.get_auto_moderation_rule()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/auto-moderation/rules"]["post"]
+    update:
+      x-speakeasy-group: autoModeration
+      x-speakeasy-name-override: createRule
+      description: Create a new rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Create Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - auto-moderation
+          - write
+    x-speakeasy-metadata:
+      after: sdk.autoModeration.createRule()
+      before: sdk.<no_group>.create_auto_moderation_rule()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/auto-moderation/rules/{rule_id}"]["patch"]
+    update:
+      x-speakeasy-group: autoModeration
+      x-speakeasy-name-override: updateRule
+      description: Modify an existing rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - auto-moderation
+          - write
+    x-speakeasy-metadata:
+      after: sdk.autoModeration.updateRule()
+      before: sdk.<no_group>.modify_auto_moderation_rule()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/auto-moderation/rules/{rule_id}"]["patch"]
+    update:
+      x-speakeasy-group: autoModeration
+      x-speakeasy-name-override: updateRule
+      description: Modify an existing rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - auto-moderation
+          - write
+    x-speakeasy-metadata:
+      after: sdk.autoModeration.updateRule()
+      before: sdk.<no_group>.update_auto_moderation_rule()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/auto-moderation/rules/{rule_id}"]["delete"]
+    update:
+      x-speakeasy-group: autoModeration
+      x-speakeasy-name-override: deleteRule
+      description: Delete a rule. Returns a 204 on success. Fires an Auto Moderation Rule Delete Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - auto-moderation
+          - write
+    x-speakeasy-metadata:
+      after: sdk.autoModeration.deleteRule()
+      before: sdk.<no_group>.delete_auto_moderation_rule()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/auto-moderation/rules/{rule_id}"]["delete"]
+    update:
+      x-speakeasy-group: autoModeration
+      x-speakeasy-name-override: deleteRule
+      description: Delete a rule. Returns a 204 on success. Fires an Auto Moderation Rule Delete Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - auto-moderation
+          - write
+    x-speakeasy-metadata:
+      after: sdk.autoModeration.deleteRule()
+      before: sdk.<no_group>.delete_auto_moderation_rule()
+      type: method-name

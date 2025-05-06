@@ -1,0 +1,344 @@
+overlay: 1.0.0
+info:
+  title: Channels Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Channels resource endpoints
+actions:
+  - target: $["paths"]["/channels/{channel_id}"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: get
+      description: Returns a channel object for the given channel ID.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
+    x-speakeasy-metadata:
+      after: sdk.channels.get()
+      before: sdk.<no_group>.get_channel()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}"]["patch"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: update
+      description: Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.update()
+      before: sdk.<no_group>.update_channel()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}"]["delete"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: delete
+      description: Delete a channel, or close a private message. Requires the MANAGE_CHANNELS permission for the guild, or MANAGE_THREADS if the channel is a thread. Returns a channel object on success. Fires a Channel Delete Gateway event (or Thread Delete if the channel was a thread).
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.delete()
+      before: sdk.<no_group>.delete_channel()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/pins"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: listPinnedMessages
+      description: Returns all pinned messages in the channel as an array of message objects.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
+    x-speakeasy-metadata:
+      after: sdk.channels.listPinnedMessages()
+      before: sdk.<no_group>.list_pinned_messages()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/pins/{message_id}"]["put"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: pinMessage
+      description: Pin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.pinMessage()
+      before: sdk.<no_group>.pin_message()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/pins/{message_id}"]["delete"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: unpinMessage
+      description: Unpin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.unpinMessage()
+      before: sdk.<no_group>.unpin_message()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/typing"]["post"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: triggerTypingIndicator
+      description: Post a typing indicator for the specified channel, which expires after 10 seconds. Returns a 204 empty response on success. Fires a Typing Start Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.triggerTypingIndicator()
+      before: sdk.<no_group>.trigger_typing_indicator()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/followers"]["post"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: follow
+      description: Follow an Announcement Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. Returns a followed channel object. Fires a Webhooks Update Gateway event for the target channel.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.follow()
+      before: sdk.<no_group>.follow_channel()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/permissions/{overwrite_id}"]["put"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: setPermissionOverwrite
+      description: Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.setPermissionOverwrite()
+      before: sdk.<no_group>.set_channel_permission_overwrite()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/permissions/{overwrite_id}"]["delete"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: deletePermissionOverwrite
+      description: Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.deletePermissionOverwrite()
+      before: sdk.<no_group>.delete_channel_permission_overwrite()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/recipients/{user_id}"]["put"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: addGroupDMRecipient
+      description: Adds a recipient to a Group DM using their access token.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.addGroupDMRecipient()
+      before: sdk.<no_group>.add_group_dm_user()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/recipients/{user_id}"]["delete"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: removeGroupDMRecipient
+      description: Removes a recipient from a Group DM.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.removeGroupDMRecipient()
+      before: sdk.<no_group>.remove_group_dm_user()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/threads"]["post"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: startThreadFromMessage
+      description: Creates a new thread from an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create and a Message Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.startThreadFromMessage()
+      before: sdk.<no_group>.create_thread_from_message()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/threads"]["post"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: startThread
+      description: Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.startThread()
+      before: sdk.<no_group>.create_thread()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/thread-members/@me"]["put"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: joinThread
+      description: Adds the current user to a thread. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update and a Thread Create Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.joinThread()
+      before: sdk.<no_group>.join_thread()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/thread-members/{user_id}"]["put"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: addThreadMember
+      description: Adds another member to a thread. Requires the ability to send messages in the thread. Also requires the thread is not archived. Returns a 204 empty response if the member is successfully added or was already a member of the thread. Fires a Thread Members Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.addThreadMember()
+      before: sdk.<no_group>.add_thread_member()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/thread-members/@me"]["delete"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: leaveThread
+      description: Removes the current user from a thread. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.leaveThread()
+      before: sdk.<no_group>.leave_thread()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/thread-members/{user_id}"]["delete"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: removeThreadMember
+      description: Removes another member from a thread. Requires the MANAGE_THREADS permission, or the creator of the thread if it is a PRIVATE_THREAD. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.removeThreadMember()
+      before: sdk.<no_group>.remove_thread_member()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/thread-members/{user_id}"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: getThreadMember
+      description: Returns a thread member object for the specified user if they are a member of the thread, returns a 404 response otherwise.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
+    x-speakeasy-metadata:
+      after: sdk.channels.getThreadMember()
+      before: sdk.<no_group>.get_thread_member()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/thread-members"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: listThreadMembers
+      description: Returns array of thread member objects that are members of the thread.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
+    x-speakeasy-metadata:
+      after: sdk.channels.listThreadMembers()
+      before: sdk.<no_group>.list_thread_members()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/threads/archived/public"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: listPublicArchivedThreads
+      description: Returns archived threads in the channel that are public. When called on a GUILD_TEXT channel, returns threads of type PUBLIC_THREAD. When called on a GUILD_ANNOUNCEMENT channel returns threads of type ANNOUNCEMENT_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires the READ_MESSAGE_HISTORY permission.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
+    x-speakeasy-metadata:
+      after: sdk.channels.listPublicArchivedThreads()
+      before: sdk.<no_group>.list_public_archived_threads()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/threads/archived/private"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: listPrivateArchivedThreads
+      description: Returns archived threads in the channel that are of type PRIVATE_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
+    x-speakeasy-metadata:
+      after: sdk.channels.listPrivateArchivedThreads()
+      before: sdk.<no_group>.list_private_archived_threads()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/users/@me/threads/archived/private"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: listJoinedPrivateArchivedThreads
+      description: Returns archived threads in the channel that are of type PRIVATE_THREAD, and the user has joined. Threads are ordered by their id, in descending order. Requires the READ_MESSAGE_HISTORY permission.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
+    x-speakeasy-metadata:
+      after: sdk.channels.listJoinedPrivateArchivedThreads()
+      before: sdk.<no_group>.list_my_private_archived_threads()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/threads/search"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: searchThreads
+      description: Search for threads in a channel.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
+    x-speakeasy-metadata:
+      after: sdk.channels.searchThreads()
+      before: sdk.<no_group>.thread_search()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/invites"]["get"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: listInvites
+      description: Returns a list of invite objects (with invite metadata) for the channel.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
+    x-speakeasy-metadata:
+      after: sdk.channels.listInvites()
+      before: sdk.<no_group>.list_channel_invites()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/invites"]["post"]
+    update:
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: createInvite
+      description: Create a new invite object for the channel.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
+    x-speakeasy-metadata:
+      after: sdk.channels.createInvite()
+      before: sdk.<no_group>.create_channel_invite()
+      type: method-name

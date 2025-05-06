@@ -1,0 +1,58 @@
+overlay: 1.0.0
+info:
+  title: Stage Instance Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Stage Instance resource endpoints
+actions:
+  - target: $["paths"]["/stage-instances"]["post"]
+    update:
+      x-speakeasy-group: stageInstances
+      x-speakeasy-name-override: create
+      description: Creates a new Stage instance associated to a Stage channel. Returns that Stage instance. Fires a Stage Instance Create Gateway event. Requires the user to be a moderator of the Stage channel.
+      x-speakeasy-mcp:
+        scopes:
+          - stage-instance
+          - write
+    x-speakeasy-metadata:
+      after: sdk.stageInstances.create()
+      before: sdk.<no_group>.create_stage_instance()
+      type: method-name
+  - target: $["paths"]["/stage-instances/{channel_id}"]["get"]
+    update:
+      x-speakeasy-group: stageInstances
+      x-speakeasy-name-override: get
+      description: Gets the stage instance associated with the Stage channel, if it exists.
+      x-speakeasy-mcp:
+        scopes:
+          - stage-instance
+          - read
+    x-speakeasy-metadata:
+      after: sdk.stageInstances.get()
+      before: sdk.<no_group>.get_stage_instance()
+      type: method-name
+  - target: $["paths"]["/stage-instances/{channel_id}"]["patch"]
+    update:
+      x-speakeasy-group: stageInstances
+      x-speakeasy-name-override: update
+      description: Updates fields of an existing Stage instance. Returns the updated Stage instance. Fires a Stage Instance Update Gateway event. Requires the user to be a moderator of the Stage channel.
+      x-speakeasy-mcp:
+        scopes:
+          - stage-instance
+          - write
+    x-speakeasy-metadata:
+      after: sdk.stageInstances.update()
+      before: sdk.<no_group>.update_stage_instance()
+      type: method-name
+  - target: $["paths"]["/stage-instances/{channel_id}"]["delete"]
+    update:
+      x-speakeasy-group: stageInstances
+      x-speakeasy-name-override: delete
+      description: Deletes the Stage instance. Returns 204 No Content. Fires a Stage Instance Delete Gateway event. Requires the user to be a moderator of the Stage channel.
+      x-speakeasy-mcp:
+        scopes:
+          - stage-instance
+          - write
+    x-speakeasy-metadata:
+      after: sdk.stageInstances.delete()
+      before: sdk.<no_group>.delete_stage_instance()
+      type: method-name

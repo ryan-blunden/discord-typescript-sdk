@@ -1,0 +1,383 @@
+overlay: 1.0.0
+info:
+  title: Application Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Application resource endpoints
+actions:
+  - target: $["paths"]["/applications/@me"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getMe
+      description: Returns the application object associated with the requesting bot user.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applications.getMe()
+      before: sdk.<no_group>.get_my_application()
+      type: method-name
+  - target: $["paths"]["/applications/@me"]["patch"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: updateSelf
+      description: Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated. Returns the updated application object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applications.updateSelf()
+      before: sdk.<no_group>.update_my_application()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/activity-instances/{instance_id}"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getActivityInstance
+      description: Returns a serialized activity instance, if it exists. Useful for preventing unwanted activity sessions.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applications.getActivityInstance()
+      before: sdk.<no_group>.applications_get_activity_instance()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: get
+      description: Returns information about a specific application.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applications.get()
+      before: sdk.<no_group>.get_application()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}"]["patch"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: update
+      description: Updates an application. Returns the updated application object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applications.update()
+      before: sdk.<no_group>.update_application()
+      type: method-name
+  - target: $["paths"]["/oauth2/applications/@me"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getOAuth2Me
+      description: Returns the OAuth2 application object associated with the requesting bot user.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applications.getOAuth2Me()
+      before: sdk.<no_group>.get_my_oauth2_application()
+      type: method-name
+  - target: $["paths"]["/gateway/bot"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getBotGateway
+      description: Returns an object with the same information as Get Gateway, plus a shards key, containing the recommended number of shards to connect with.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applications.getBotGateway()
+      before: sdk.<no_group>.get_bot_gateway()
+      type: method-name
+  - target: $["paths"]["/gateway"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getGateway
+      description: Returns an object with a single valid WSS URL, which the client can use for connecting to Discord.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applications.getGateway()
+      before: sdk.<no_group>.get_gateway()
+      type: method-name
+  - target: $["paths"]["/oauth2/userinfo"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getOpenIDConnectUserInfo
+      description: Returns the user info for the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applications.getOpenIDConnectUserInfo()
+      before: sdk.<no_group>.get_openid_connect_userinfo()
+      type: method-name
+  - target: $["paths"]["/oauth2/keys"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getPublicKeys
+      description: Returns a list of public keys used for verifying signatures.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applications.getPublicKeys()
+      before: sdk.<no_group>.get_public_keys()
+      type: method-name
+  - target: $["paths"]["/oauth2/@me"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getOAuth2Authorization
+      description: Returns info about the current authorization.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applications.getOAuth2Authorization()
+      before: sdk.<no_group>.get_my_oauth2_authorization()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/attachment"]["post"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: uploadAttachment
+      description: Uploads an attachment for an application.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applications.uploadAttachment()
+      before: sdk.<no_group>.upload_application_attachment()
+      type: method-name
+  - target: $["paths"]["/partner-sdk/provisional-accounts/unmerge"]["post"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: partnerSDKUnmergeProvisionalAccount
+      description: Unmerges a provisional account.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applications.partnerSDKUnmergeProvisionalAccount()
+      before: sdk.<no_group>.partner_sdk_unmerge_provisional_account()
+      type: method-name
+  - target: $["paths"]["/partner-sdk/token"]["post"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: partnerSDKToken
+      description: Gets a token for the partner SDK.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applications.partnerSDKToken()
+      before: sdk.<no_group>.partner_sdk_token()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/commands/{command_id}"]["get"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: get
+      description: Fetch a global command for your application.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.get()
+      before: sdk.<no_group>.get_application_command()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/commands/{command_id}"]["delete"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: delete
+      description: Delete a global command.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.delete()
+      before: sdk.<no_group>.delete_application_command()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/commands/{command_id}"]["patch"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: update
+      description: Edit a global command. Updates will be available in all guilds after 1 hour.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.update()
+      before: sdk.<no_group>.update_application_command()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/commands"]["get"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: list
+      description: Fetch all global commands for your application.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.list()
+      before: sdk.<no_group>.list_application_commands()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/commands"]["put"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: bulkSet
+      description: Takes a list of application commands, overwriting the existing global command list for this application.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.bulkSet()
+      before: sdk.<no_group>.bulk_set_application_commands()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/commands"]["post"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: create
+      description: Create a new global command. New global commands will be available in all guilds after 1 hour.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.create()
+      before: sdk.<no_group>.create_application_command()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands/permissions"]["get"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: listGuildPermissions
+      description: Fetches command permissions for all commands for your application in a guild.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.listGuildPermissions()
+      before: sdk.<no_group>.list_guild_application_command_permissions()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands/{command_id}/permissions"]["get"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: getGuildPermissions
+      description: Fetches command permissions for a specific command for your application in a guild.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.getGuildPermissions()
+      before: sdk.<no_group>.get_guild_application_command_permissions()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands/{command_id}/permissions"]["put"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: setGuildPermissions
+      description: Edits command permissions for a specific command for your application in a guild.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.setGuildPermissions()
+      before: sdk.<no_group>.set_guild_application_command_permissions()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands/{command_id}"]["get"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: getGuild
+      description: Fetch a guild command for your application.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.getGuild()
+      before: sdk.<no_group>.get_guild_application_command()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands/{command_id}"]["delete"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: deleteGuild
+      description: Delete a guild command.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.deleteGuild()
+      before: sdk.<no_group>.delete_guild_application_command()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands/{command_id}"]["patch"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: updateGuild
+      description: Edit a guild command. Updates for guild commands will be available immediately.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.updateGuild()
+      before: sdk.<no_group>.update_guild_application_command()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands"]["get"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: listGuild
+      description: Fetch all guild commands for your application for a specific guild.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.listGuild()
+      before: sdk.<no_group>.list_guild_application_commands()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands"]["put"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: bulkSetGuild
+      description: Takes a list of application commands, overwriting the existing command list for this application for the targeted guild.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.bulkSetGuild()
+      before: sdk.<no_group>.bulk_set_guild_application_commands()
+      type: method-name
+  - target: $["paths"]["/applications/{application_id}/guilds/{guild_id}/commands"]["post"]
+    update:
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: createGuild
+      description: Create a new guild command. New guild commands will be available in the guild immediately.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
+    x-speakeasy-metadata:
+      after: sdk.applicationCommands.createGuild()
+      before: sdk.<no_group>.create_guild_application_command()
+      type: method-name

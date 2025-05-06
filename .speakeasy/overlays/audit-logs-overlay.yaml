@@ -1,0 +1,19 @@
+overlay: 1.0.0
+info:
+  title: Audit Logs Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Audit Logs resource endpoints
+actions:
+  - target: $["paths"]["/guilds/{guild_id}/audit-logs"]["get"]
+    update:
+      x-speakeasy-group: auditLogs
+      x-speakeasy-name-override: list
+      description: Returns an audit log object for the guild. Requires the VIEW_AUDIT_LOG permission.
+      x-speakeasy-mcp:
+        scopes:
+          - audit-logs
+          - read
+    x-speakeasy-metadata:
+      after: sdk.auditLogs.list()
+      before: sdk.<no_group>.get_guild_audit_log()
+      type: method-name

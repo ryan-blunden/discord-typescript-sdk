@@ -1,0 +1,188 @@
+overlay: 1.0.0
+info:
+  title: Messages Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Messages resource endpoints
+actions:
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}"]["get"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: get
+      description: Returns a specific message in the channel. If operating on a guild channel, this endpoint requires the READ_MESSAGE_HISTORY permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - read
+    x-speakeasy-metadata:
+      after: sdk.messages.get()
+      before: sdk.<no_group>.get_message()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages"]["post"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: create
+      description: Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
+    x-speakeasy-metadata:
+      after: sdk.messages.create()
+      before: sdk.<no_group>.create_message_json()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}"]["delete"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: delete
+      description: Delete a message. If operating on a guild channel and trying to delete a message that was not sent by the current user, this endpoint requires the MANAGE_MESSAGES permission.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
+    x-speakeasy-metadata:
+      after: sdk.messages.delete()
+      before: sdk.<no_group>.delete_message()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}"]["patch"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: update
+      description: Edit a previously sent message. The fields content, embeds, and flags can be edited by the original message author. Other users can only edit flags and only if they have the MANAGE_MESSAGES permission in the corresponding channel.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
+    x-speakeasy-metadata:
+      after: sdk.messages.update()
+      before: sdk.<no_group>.update_message_json()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages"]["get"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: list
+      description: Returns the messages for a channel. If operating on a guild channel, this endpoint requires the VIEW_CHANNEL permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - read
+    x-speakeasy-metadata:
+      after: sdk.messages.list()
+      before: sdk.<no_group>.list_messages()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages/bulk-delete"]["post"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: bulkDelete
+      description: Delete multiple messages in a single request. This endpoint can only be used on guild channels and requires the MANAGE_MESSAGES permission.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
+    x-speakeasy-metadata:
+      after: sdk.messages.bulkDelete()
+      before: sdk.<no_group>.bulk_delete_messages()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/crosspost"]["post"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: crosspost
+      description: Crosspost a message in an Announcement Channel to following channels. This endpoint requires the SEND_MESSAGES permission, if the current user sent the message, or additionally the MANAGE_MESSAGES permission, for all other messages, to be present for the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
+    x-speakeasy-metadata:
+      after: sdk.messages.crosspost()
+      before: sdk.<no_group>.crosspost_message()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}/@me"]["put"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: createReaction
+      description: Create a reaction for the message. This endpoint requires the READ_MESSAGE_HISTORY permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
+    x-speakeasy-metadata:
+      after: sdk.messages.createReaction()
+      before: sdk.<no_group>.add_my_message_reaction()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}/@me"]["delete"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: deleteOwnReaction
+      description: Delete a reaction the current user has made for the message. Returns a 204 empty response on success.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
+    x-speakeasy-metadata:
+      after: sdk.messages.deleteOwnReaction()
+      before: sdk.<no_group>.delete_my_message_reaction()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}/{user_id}"]["delete"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: deleteUserReaction
+      description: Deletes another user's reaction. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
+    x-speakeasy-metadata:
+      after: sdk.messages.deleteUserReaction()
+      before: sdk.<no_group>.delete_user_message_reaction()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}"]["get"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: getReactions
+      description: Get a list of users that reacted with this emoji. Returns an array of user objects on success.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - read
+    x-speakeasy-metadata:
+      after: sdk.messages.getReactions()
+      before: sdk.<no_group>.get_message_reactions()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/reactions"]["delete"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: deleteAllReactions
+      description: Deletes all reactions on a message. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
+    x-speakeasy-metadata:
+      after: sdk.messages.deleteAllReactions()
+      before: sdk.<no_group>.delete_all_message_reactions()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}"]["delete"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: deleteAllReactionsForEmoji
+      description: Deletes all the reactions for a given emoji on a message. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
+    x-speakeasy-metadata:
+      after: sdk.messages.deleteAllReactionsForEmoji()
+      before: sdk.<no_group>.delete_all_message_reactions_for_emoji()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}"]["get"]
+    update:
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: listReactionsByEmoji
+      description: Get a list of users that reacted with a specific emoji.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - read
+    x-speakeasy-metadata:
+      after: sdk.messages.listReactionsByEmoji()
+      before: sdk.<no_group>.list_message_reactions_by_emoji()
+      type: method-name

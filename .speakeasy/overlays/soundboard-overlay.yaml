@@ -1,0 +1,97 @@
+overlay: 1.0.0
+info:
+  title: Soundboard Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Soundboard resource endpoints
+actions:
+  - target: $["paths"]["/soundboard-default-sounds"]["get"]
+    update:
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: getSoundboardDefaultSounds
+      description: Returns a list of the default sounds available in the soundboard.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - read
+    x-speakeasy-metadata:
+      after: sdk.soundboards.getSoundboardDefaultSounds()
+      before: sdk.<no_group>.get_soundboard_default_sounds()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/send-soundboard-sound"]["post"]
+    update:
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: sendSoundboardSound
+      description: Sends a soundboard sound to a channel.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - write
+    x-speakeasy-metadata:
+      after: sdk.soundboards.sendSoundboardSound()
+      before: sdk.<no_group>.send_soundboard_sound()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/soundboard-sounds/{sound_id}"]["get"]
+    update:
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: getGuildSoundboardSound
+      description: Returns a soundboard sound object for the given guild and sound IDs.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - read
+    x-speakeasy-metadata:
+      after: sdk.soundboards.getGuildSoundboardSound()
+      before: sdk.<no_group>.get_guild_soundboard_sound()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/soundboard-sounds/{sound_id}"]["delete"]
+    update:
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: deleteGuildSoundboardSound
+      description: Delete a soundboard sound from a guild. Returns 204 No Content on success.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - write
+    x-speakeasy-metadata:
+      after: sdk.soundboards.deleteGuildSoundboardSound()
+      before: sdk.<no_group>.delete_guild_soundboard_sound()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/soundboard-sounds/{sound_id}"]["patch"]
+    update:
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: updateGuildSoundboardSound
+      description: Update a soundboard sound in a guild. Returns the updated soundboard sound object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - write
+    x-speakeasy-metadata:
+      after: sdk.soundboards.updateGuildSoundboardSound()
+      before: sdk.<no_group>.update_guild_soundboard_sound()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/soundboard-sounds"]["get"]
+    update:
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: listGuildSoundboardSounds
+      description: Returns a list of soundboard sound objects for the given guild.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - read
+    x-speakeasy-metadata:
+      after: sdk.soundboards.listGuildSoundboardSounds()
+      before: sdk.<no_group>.list_guild_soundboard_sounds()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/soundboard-sounds"]["post"]
+    update:
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: createGuildSoundboardSound
+      description: Create a new soundboard sound for the guild. Returns the new soundboard sound object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - write
+    x-speakeasy-metadata:
+      after: sdk.soundboards.createGuildSoundboardSound()
+      before: sdk.<no_group>.create_guild_soundboard_sound()
+      type: method-name

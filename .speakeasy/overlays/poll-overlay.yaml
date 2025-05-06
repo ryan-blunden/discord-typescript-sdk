@@ -1,0 +1,32 @@
+overlay: 1.0.0
+info:
+  title: Poll Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Poll resource endpoints
+actions:
+  - target: $["paths"]["/channels/{channel_id}/polls/{message_id}/answers/{answer_id}"]["get"]
+    update:
+      x-speakeasy-group: polls
+      x-speakeasy-name-override: getAnswerVoters
+      description: Get a list of users that voted for a specific answer in a poll.
+      x-speakeasy-mcp:
+        scopes:
+          - poll
+          - read
+    x-speakeasy-metadata:
+      after: sdk.polls.getAnswerVoters()
+      before: sdk.<no_group>.get_answer_voters()
+      type: method-name
+  - target: $["paths"]["/channels/{channel_id}/polls/{message_id}/expire"]["post"]
+    update:
+      x-speakeasy-group: polls
+      x-speakeasy-name-override: expire
+      description: Immediately ends the poll. You cannot end polls from other users. Returns a message object. Fires a Message Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - poll
+          - write
+    x-speakeasy-metadata:
+      after: sdk.polls.expire()
+      before: sdk.<no_group>.poll_expire()
+      type: method-name

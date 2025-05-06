@@ -1,0 +1,71 @@
+overlay: 1.0.0
+info:
+  title: Voice Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Voice resource endpoints
+actions:
+  - target: $["paths"]["/voice/regions"]["get"]
+    update:
+      x-speakeasy-group: voice
+      x-speakeasy-name-override: listRegions
+      description: Returns an array of voice region objects that can be used when setting a voice or stage channel's rtc_region.
+      x-speakeasy-mcp:
+        scopes:
+          - voice
+          - read
+    x-speakeasy-metadata:
+      after: sdk.voice.listRegions()
+      before: sdk.<no_group>.list_voice_regions()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/voice-states/@me"]["get"]
+    update:
+      x-speakeasy-group: voice
+      x-speakeasy-name-override: getCurrentUserState
+      description: Returns the current user's voice state in the guild.
+      x-speakeasy-mcp:
+        scopes:
+          - voice
+          - read
+    x-speakeasy-metadata:
+      after: sdk.voice.getCurrentUserState()
+      before: sdk.<no_group>.get_current_user_voice_state()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/voice-states/{user_id}"]["get"]
+    update:
+      x-speakeasy-group: voice
+      x-speakeasy-name-override: getUserState
+      description: Returns the specified user's voice state in the guild.
+      x-speakeasy-mcp:
+        scopes:
+          - voice
+          - read
+    x-speakeasy-metadata:
+      after: sdk.voice.getUserState()
+      before: sdk.<no_group>.get_user_voice_state()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/voice-states/@me"]["patch"]
+    update:
+      x-speakeasy-group: voice
+      x-speakeasy-name-override: updateCurrentUserState
+      description: Updates the current user's voice state. Returns 204 No Content on success. Fires a Voice State Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - voice
+          - write
+    x-speakeasy-metadata:
+      after: sdk.voice.updateCurrentUserState()
+      before: sdk.<no_group>.modify_current_user_voice_state()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/voice-states/{user_id}"]["patch"]
+    update:
+      x-speakeasy-group: voice
+      x-speakeasy-name-override: updateUserState
+      description: Updates another user's voice state. Fires a Voice State Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - voice
+          - write
+    x-speakeasy-metadata:
+      after: sdk.voice.updateUserState()
+      before: sdk.<no_group>.modify_user_voice_state()
+      type: method-name

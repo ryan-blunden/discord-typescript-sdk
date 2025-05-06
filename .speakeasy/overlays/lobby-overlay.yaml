@@ -1,0 +1,123 @@
+overlay: 1.0.0
+info:
+  title: Lobby Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Lobby resource endpoints
+actions:
+  - target: $["paths"]["/lobbies/{lobby_id}"]["get"]
+    update:
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: get
+      description: Returns the lobby object for the given id.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - read
+    x-speakeasy-metadata:
+      after: sdk.lobbies.get()
+      before: sdk.<no_group>.get_lobby()
+      type: method-name
+  - target: $["paths"]["/lobbies"]["post"]
+    update:
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: create
+      description: Creates a new lobby. Returns a lobby object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
+    x-speakeasy-metadata:
+      after: sdk.lobbies.create()
+      before: sdk.<no_group>.create_lobby()
+      type: method-name
+  - target: $["paths"]["/lobbies"]["put"]
+    update:
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: createOrJoin
+      description: Creates a new lobby or joins an existing one. Returns a lobby object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
+    x-speakeasy-metadata:
+      after: sdk.lobbies.createOrJoin()
+      before: sdk.<no_group>.create_or_join_lobby()
+      type: method-name
+  - target: $["paths"]["/lobbies/{lobby_id}"]["patch"]
+    update:
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: update
+      description: Updates a lobby. Returns a lobby object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
+    x-speakeasy-metadata:
+      after: sdk.lobbies.update()
+      before: sdk.<no_group>.edit_lobby()
+      type: method-name
+  - target: $["paths"]["/lobbies/{lobby_id}/messages"]["post"]
+    update:
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: sendMessage
+      description: Sends a message to the lobby.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
+    x-speakeasy-metadata:
+      after: sdk.lobbies.sendMessage()
+      before: sdk.<no_group>.create_lobby_message()
+      type: method-name
+  - target: $["paths"]["/lobbies/{lobby_id}/members/{user_id}"]["put"]
+    update:
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: addMember
+      description: Adds a user to a lobby.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
+    x-speakeasy-metadata:
+      after: sdk.lobbies.addMember()
+      before: sdk.<no_group>.add_lobby_member()
+      type: method-name
+  - target: $["paths"]["/lobbies/{lobby_id}/members/{user_id}"]["delete"]
+    update:
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: removeMember
+      description: Removes a user from a lobby.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
+    x-speakeasy-metadata:
+      after: sdk.lobbies.removeMember()
+      before: sdk.<no_group>.delete_lobby_member()
+      type: method-name
+  - target: $["paths"]["/lobbies/{lobby_id}/members/@me"]["delete"]
+    update:
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: leave
+      description: Removes the current user from the specified lobby. It is safe to call this even if the user is no longer a member of the lobby, but will fail if the lobby does not exist.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
+    x-speakeasy-metadata:
+      after: sdk.lobbies.leave()
+      before: sdk.<no_group>.leave_lobby()
+      type: method-name
+  - target: $["paths"]["/lobbies/{lobby_id}/channel-linking"]["patch"]
+    update:
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: connectToChannel
+      description: Connects a lobby to a channel.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
+    x-speakeasy-metadata:
+      after: sdk.lobbies.connectToChannel()
+      before: sdk.<no_group>.edit_lobby_channel_link()
+      type: method-name

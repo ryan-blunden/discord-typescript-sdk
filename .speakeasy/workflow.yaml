@@ -5,9 +5,27 @@ sources:
         inputs:
             - location: https://raw.githubusercontent.com/discord/discord-api-spec/refs/heads/main/specs/openapi.json
         overlays:
-            - location: .speakeasy/openapi-fixes-overlay.yaml
-            - location: .speakeasy/speakeasy-modifications-overlay.yaml
-            - location: .speakeasy/mcp-server-overlay.yaml
+            - location: .speakeasy//overlays/openapi-fixes-overlay.yaml
+            - location: .speakeasy/overlays/application-overlay.yaml
+            - location: .speakeasy/overlays/application-role-connection-metadata-overlay.yaml
+            - location: .speakeasy/overlays/channels-overlay.yaml
+            - location: .speakeasy/overlays/emoji-overlay.yaml
+            - location: .speakeasy/overlays/entitlements-overlay.yaml
+            - location: .speakeasy/overlays/guild-scheduled-event-overlay.yaml
+            - location: .speakeasy/overlays/guild-template-overlay.yaml
+            - location: .speakeasy/overlays/guild-overlay.yaml
+            - location: .speakeasy/overlays/invite-overlay.yaml
+            - location: .speakeasy/overlays/lobby-overlay.yaml
+            - location: .speakeasy/overlays/messages-overlay.yaml
+            - location: .speakeasy/overlays/poll-overlay.yaml
+            - location: .speakeasy/overlays/soundboard-overlay.yaml
+            - location: .speakeasy/overlays/stage-instance-overlay.yaml
+            - location: .speakeasy/overlays/sticker-overlay.yaml
+            - location: .speakeasy/overlays/users-overlay.yaml
+            - location: .speakeasy/overlays/audit-logs-overlay.yaml
+            - location: .speakeasy/overlays/auto-moderation-overlay.yaml
+            - location: .speakeasy/overlays/voice-overlay.yaml
+            - location: .speakeasy/overlays/webhook-overlay.yaml
         output: .speakeasy/openapi-output.yaml
         registry:
             location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryanblunden/discord-sdk

@@ -1,0 +1,84 @@
+overlay: 1.0.0
+info:
+  title: Guild Scheduled Event Resource Overlay
+  version: 0.0.1
+  description: Overlay file for organizing Discord Guild Scheduled Event resource endpoints
+actions:
+  - target: $["paths"]["/guilds/{guild_id}/scheduled-events"]["get"]
+    update:
+      x-speakeasy-group: guildScheduledEvents
+      x-speakeasy-name-override: list
+      description: Returns a list of guild scheduled event objects for the given guild.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-scheduled-event
+          - read
+    x-speakeasy-metadata:
+      after: sdk.guildScheduledEvents.list()
+      before: sdk.<no_group>.list_guild_scheduled_events()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/scheduled-events"]["post"]
+    update:
+      x-speakeasy-group: guildScheduledEvents
+      x-speakeasy-name-override: create
+      description: Create a guild scheduled event in the guild. Returns a guild scheduled event object on success. Fires a Guild Scheduled Event Create Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-scheduled-event
+          - write
+    x-speakeasy-metadata:
+      after: sdk.guildScheduledEvents.create()
+      before: sdk.<no_group>.create_guild_scheduled_event()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}"]["get"]
+    update:
+      x-speakeasy-group: guildScheduledEvents
+      x-speakeasy-name-override: get
+      description: Get a guild scheduled event. Returns a guild scheduled event object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-scheduled-event
+          - read
+    x-speakeasy-metadata:
+      after: sdk.guildScheduledEvents.get()
+      before: sdk.<no_group>.get_guild_scheduled_event()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}"]["patch"]
+    update:
+      x-speakeasy-group: guildScheduledEvents
+      x-speakeasy-name-override: update
+      description: Modify a guild scheduled event. Returns the modified guild scheduled event object on success. Fires a Guild Scheduled Event Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-scheduled-event
+          - write
+    x-speakeasy-metadata:
+      after: sdk.guildScheduledEvents.update()
+      before: sdk.<no_group>.update_guild_scheduled_event()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}"]["delete"]
+    update:
+      x-speakeasy-group: guildScheduledEvents
+      x-speakeasy-name-override: delete
+      description: Delete a guild scheduled event. Returns a 204 on success. Fires a Guild Scheduled Event Delete Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-scheduled-event
+          - write
+    x-speakeasy-metadata:
+      after: sdk.guildScheduledEvents.delete()
+      before: sdk.<no_group>.delete_guild_scheduled_event()
+      type: method-name
+  - target: $["paths"]["/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}/users"]["get"]
+    update:
+      x-speakeasy-group: guildScheduledEvents
+      x-speakeasy-name-override: getUsers
+      description: Get a list of guild scheduled event users subscribed to a guild scheduled event. Returns a list of guild scheduled event user objects on success. Guild member data, if it exists, is included if the with_member query parameter is set.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-scheduled-event
+          - read
+    x-speakeasy-metadata:
+      after: sdk.guildScheduledEvents.getUsers()
+      before: sdk.<no_group>.get_guild_scheduled_event_users()
+      type: method-name
