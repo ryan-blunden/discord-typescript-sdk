@@ -15,6 +15,7 @@ export const tool$messageReactionsDeleteAllByEmoji: ToolDefinition<
 > = {
   name: "message-reactions-delete-all-by-emoji",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await messageReactionsDeleteAllByEmoji(

@@ -13,6 +13,7 @@ const args = {
 export const tool$autoModerationRulesGet: ToolDefinition<typeof args> = {
   name: "auto-moderation-rules-get",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await autoModerationRulesGet(

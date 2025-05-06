@@ -8,6 +8,7 @@ import { formatResult, ToolDefinition } from "../tools.js";
 export const tool$applicationsGetMe: ToolDefinition = {
   name: "applications-get-me",
   description: ``,
+  scopes: ["read"],
   tool: async (client, ctx) => {
     const [result, apiCall] = await applicationsGetMe(
       client,

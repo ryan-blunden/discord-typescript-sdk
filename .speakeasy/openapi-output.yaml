@@ -44,6 +44,7 @@ paths:
       security:
         - {}
         - BotToken: []
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/oauth2/applications/@me":
     get:
       operationId: "get_my_oauth2_application"
@@ -58,6 +59,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: oauth2
       x-speakeasy-name-override: get_my_application
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/users/@me/connections":
     get:
       operationId: "list_my_connections"
@@ -78,6 +80,7 @@ paths:
             - connections
       x-speakeasy-group: users
       x-speakeasy-name-override: listMyConnections
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/users/@me/channels":
     post:
       operationId: "create_dm"
@@ -99,6 +102,7 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: users
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/users/@me/guilds":
     get:
       operationId: "list_my_guilds"
@@ -136,6 +140,7 @@ paths:
             - guilds
       x-speakeasy-group: users
       x-speakeasy-name-override: listMyGuilds
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/applications/@me":
     get:
       operationId: "get_my_application"
@@ -150,6 +155,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: getMe
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     patch:
       operationId: "update_my_application"
       requestBody:
@@ -168,6 +174,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: updateSelf
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/partner-sdk/token":
     post:
       operationId: "partner_sdk_token"
@@ -202,6 +209,7 @@ paths:
       security:
         - {}
         - BotToken: []
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/gateway/bot":
     get:
       operationId: "get_bot_gateway"
@@ -216,6 +224,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: gateway
       x-speakeasy-name-override: getBot
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/oauth2/userinfo":
     get:
       operationId: "get_openid_connect_userinfo"
@@ -232,6 +241,7 @@ paths:
             - openid
       x-speakeasy-group: openidConnect
       x-speakeasy-name-override: getUserinfo
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/oauth2/keys":
     get:
       operationId: "get_public_keys"
@@ -247,6 +257,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: oauth2
       x-speakeasy-name-override: getKeys
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/oauth2/@me":
     get:
       operationId: "get_my_oauth2_authorization"
@@ -296,6 +307,7 @@ paths:
             - webhook.incoming
       x-speakeasy-group: oauth2
       x-speakeasy-name-override: get_authorization
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/voice/regions":
     get:
       operationId: "list_voice_regions"
@@ -314,6 +326,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: voice
       x-speakeasy-name-override: list_regions
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/users/@me":
     get:
       operationId: "get_my_user"
@@ -330,6 +343,7 @@ paths:
             - identify
       x-speakeasy-group: users
       x-speakeasy-name-override: get_me
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     patch:
       operationId: "update_my_user"
       requestBody:
@@ -348,6 +362,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: users
       x-speakeasy-name-override: updateMe
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/soundboard-default-sounds":
     get:
       operationId: "get_soundboard_default_sounds"
@@ -364,6 +379,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: soundboard
       x-speakeasy-name-override: getDefaultSounds
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/stage-instances":
     post:
       operationId: "create_stage_instance"
@@ -405,6 +421,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: stageInstances
       x-speakeasy-name-override: create
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/sticker-packs":
     get:
       operationId: "list_sticker_packs"
@@ -420,6 +437,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: stickerPacks
       x-speakeasy-name-override: list
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/gateway":
     get:
       operationId: "get_gateway"
@@ -435,6 +453,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: gateway
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/lobbies":
     put:
       operationId: "create_or_join_lobby"
@@ -483,6 +502,7 @@ paths:
       security:
         - BotToken: []
         - OAuth2: []
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     post:
       operationId: "create_lobby"
       requestBody:
@@ -522,6 +542,7 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds":
     post:
       operationId: "create_guild"
@@ -541,6 +562,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: create
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/users/@me/threads/archived/private":
     parameters:
       - name: "channel_id"
@@ -570,6 +592,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: list_my_private_archived_threads
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/applications/{application_id}/guilds/{guild_id}/commands/permissions":
     parameters:
       - name: "application_id"
@@ -597,6 +620,7 @@ paths:
             - applications.commands.permissions.update
       x-speakeasy-group: applications.guilds
       x-speakeasy-name-override: list_command_permissions
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/applications/{application_id}/guilds/{guild_id}/commands/{command_id}/permissions":
     parameters:
       - name: "application_id"
@@ -626,6 +650,7 @@ paths:
             - applications.commands.permissions.update
       x-speakeasy-group: applications.guilds
       x-speakeasy-name-override: get_command_permissions
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     put:
       operationId: "set_guild_application_command_permissions"
       requestBody:
@@ -654,6 +679,7 @@ paths:
             - applications.commands.permissions.update
       x-speakeasy-group: applications
       x-speakeasy-name-override: setGuildCommandPermissions
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}/@me":
     parameters:
       - name: "channel_id"
@@ -680,6 +706,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels.messages.reactions
       x-speakeasy-name-override: add
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     delete:
       operationId: "delete_my_message_reaction"
       responses:
@@ -690,6 +717,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels.messages
       x-speakeasy-name-override: deleteMyReaction
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/threads/archived/private":
     parameters:
       - name: "channel_id"
@@ -721,6 +749,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: listPrivateArchivedThreads
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/channels/{channel_id}/threads/archived/public":
     parameters:
       - name: "channel_id"
@@ -752,6 +781,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: threads
       x-speakeasy-name-override: list_public_archived
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/users/@me/applications/{application_id}/role-connection":
     parameters:
       - name: "application_id"
@@ -772,6 +802,7 @@ paths:
             - role_connections.write
       x-speakeasy-group: application_user_role_connections
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     put:
       operationId: "update_application_user_role_connection"
       requestBody:
@@ -812,6 +843,7 @@ paths:
             - role_connections.write
       x-speakeasy-group: applicationUserRoleConnection
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     delete:
       operationId: "delete_application_user_role_connection"
       responses:
@@ -823,6 +855,7 @@ paths:
             - role_connections.write
       x-speakeasy-group: applications
       x-speakeasy-name-override: delete_user_role_connection
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/users/@me/guilds/{guild_id}/member":
     parameters:
       - name: "guild_id"
@@ -843,6 +876,7 @@ paths:
             - guilds.members.read
       x-speakeasy-group: guilds
       x-speakeasy-name-override: getMyMember
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/applications/{application_id}/role-connections/metadata":
     parameters:
       - name: "application_id"
@@ -866,6 +900,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: getRoleConnectionsMetadata
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     put:
       operationId: "update_application_role_connections_metadata"
       requestBody:
@@ -893,6 +928,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: updateRoleConnectionsMetadata
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/applications/{application_id}/entitlements/{entitlement_id}/consume":
     parameters:
       - name: "application_id"
@@ -914,6 +950,7 @@ paths:
         - OAuth2:
             - applications.entitlements
       x-speakeasy-group: applications
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/applications/{application_id}/guilds/{guild_id}/commands/{command_id}":
     parameters:
       - name: "application_id"
@@ -943,6 +980,7 @@ paths:
             - applications.commands.update
       x-speakeasy-group: guildCommands
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_guild_application_command"
       responses:
@@ -955,6 +993,7 @@ paths:
             - applications.commands.update
       x-speakeasy-group: guild_application_commands
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_guild_application_command"
       requestBody:
@@ -975,6 +1014,7 @@ paths:
             - applications.commands.update
       x-speakeasy-group: guildApplicationCommands
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/applications/{application_id}/guilds/{guild_id}/commands":
     parameters:
       - name: "application_id"
@@ -1009,6 +1049,7 @@ paths:
             - applications.commands.update
       x-speakeasy-group: guild_application_commands
       x-speakeasy-name-override: list
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     put:
       operationId: "bulk_set_guild_application_commands"
       requestBody:
@@ -1038,6 +1079,7 @@ paths:
             - applications.commands.update
       x-speakeasy-group: guildApplicationCommands
       x-speakeasy-name-override: bulkSet
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     post:
       operationId: "create_guild_application_command"
       requestBody:
@@ -1063,6 +1105,7 @@ paths:
             - applications.commands.update
       x-speakeasy-group: applications
       x-speakeasy-name-override: createGuildCommand
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/thread-members/@me":
     parameters:
       - name: "channel_id"
@@ -1079,6 +1122,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels_thread_members
       x-speakeasy-name-override: join
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     delete:
       operationId: "leave_thread"
       responses:
@@ -1089,6 +1133,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels.threadMembers
       x-speakeasy-name-override: leave
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/messages/bulk-delete":
     parameters:
       - name: "channel_id"
@@ -1120,6 +1165,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels.messages
       x-speakeasy-name-override: bulkDelete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}/{user_id}":
     parameters:
       - name: "channel_id"
@@ -1150,6 +1196,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: deleteUserMessageReaction
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}":
     parameters:
       - name: "channel_id"
@@ -1194,6 +1241,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: messages
       x-speakeasy-name-override: listReactionsByEmoji
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_all_message_reactions_by_emoji"
       responses:
@@ -1204,6 +1252,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: messageReactions
       x-speakeasy-name-override: deleteAllByEmoji
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/messages/{message_id}/reactions":
     parameters:
       - name: "channel_id"
@@ -1224,6 +1273,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels.messages
       x-speakeasy-name-override: deleteAllReactions
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/messages/{message_id}/crosspost":
     parameters:
       - name: "channel_id"
@@ -1247,6 +1297,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: crosspostMessage
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/messages/{message_id}/threads":
     parameters:
       - name: "channel_id"
@@ -1275,6 +1326,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: startThreadFromMessage
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/threads/search":
     parameters:
       - name: "channel_id"
@@ -1344,6 +1396,7 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/channels/{channel_id}/polls/{message_id}/answers/{answer_id}":
     parameters:
       - name: "channel_id"
@@ -1385,6 +1438,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: answers
       x-speakeasy-name-override: getVoters
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/channels/{channel_id}/polls/{message_id}/expire":
     parameters:
       - name: "channel_id"
@@ -1408,6 +1462,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: expirePoll
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/webhooks/{webhook_id}/{webhook_token}/messages/@original":
     parameters:
       - name: "webhook_id"
@@ -1438,6 +1493,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhookMessages
       x-speakeasy-name-override: getOriginal
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_original_webhook_message"
       parameters:
@@ -1453,6 +1509,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: deleteOriginalMessage
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_original_webhook_message"
       parameters:
@@ -1509,6 +1566,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: updateOriginalMessage
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/lobbies/{lobby_id}/members/@me":
     parameters:
       - name: "lobby_id"
@@ -1524,6 +1582,7 @@ paths:
       security:
         - BotToken: []
         - OAuth2: []
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}/users":
     parameters:
       - name: "guild_id"
@@ -1568,6 +1627,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.scheduledEvents.users
       x-speakeasy-name-override: list
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/auto-moderation/rules/{rule_id}":
     parameters:
       - name: "guild_id"
@@ -1597,6 +1657,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: autoModerationRules
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_auto_moderation_rule"
       responses:
@@ -1607,6 +1668,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: autoModerationRules
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_auto_moderation_rule"
       requestBody:
@@ -1618,7 +1680,6 @@ paths:
                 - {"$ref": "#/components/schemas/KeywordUpsertRequestPartial"}
                 - {"$ref": "#/components/schemas/MLSpamUpsertRequestPartial"}
                 - {"$ref": "#/components/schemas/MentionSpamUpsertRequestPartial"}
-              x-discord-union: "oneOf"
         required: true
       responses:
         "200":
@@ -1637,6 +1698,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.autoModeration.rules
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/auto-moderation/rules":
     parameters:
       - name: "guild_id"
@@ -1667,6 +1729,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: listAutoModerationRules
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_auto_moderation_rule"
       requestBody:
@@ -1696,6 +1759,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: auto_moderation_rules
       x-speakeasy-name-override: create
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/voice-states/@me":
     parameters:
       - name: "guild_id"
@@ -1715,6 +1779,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.voice_states
       x-speakeasy-name-override: get_self
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     patch:
       operationId: "update_self_voice_state"
       requestBody:
@@ -1745,6 +1810,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.voiceStates
       x-speakeasy-name-override: updateSelf
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/members/search":
     parameters:
       - name: "guild_id"
@@ -1781,6 +1847,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: searchMembers
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/threads/active":
     parameters:
       - name: "guild_id"
@@ -1800,6 +1867,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildThreads
       x-speakeasy-name-override: getActive
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/members/@me":
     parameters:
       - name: "guild_id"
@@ -1831,6 +1899,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds_members
       x-speakeasy-name-override: update_me
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/members/{user_id}/roles/{role_id}":
     parameters:
       - name: "guild_id"
@@ -1855,6 +1924,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guild_member_roles
       x-speakeasy-name-override: add
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     delete:
       operationId: "delete_guild_member_role"
       responses:
@@ -1865,6 +1935,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guild_member_roles
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/users/@me/guilds/{guild_id}":
     parameters:
       - name: "guild_id"
@@ -1881,6 +1952,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: users.guilds
       x-speakeasy-name-override: leave
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/applications/{application_id}/activity-instances/{instance_id}":
     parameters:
       - name: "application_id"
@@ -1906,6 +1978,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: getActivityInstance
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/applications/{application_id}/entitlements/{entitlement_id}":
     parameters:
       - name: "application_id"
@@ -1931,6 +2004,7 @@ paths:
             - applications.entitlements
       x-speakeasy-group: applications
       x-speakeasy-name-override: getEntitlement
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_entitlement"
       responses:
@@ -1943,6 +2017,7 @@ paths:
             - applications.entitlements
       x-speakeasy-group: applications
       x-speakeasy-name-override: deleteEntitlement
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/applications/{application_id}/entitlements":
     parameters:
       - name: "application_id"
@@ -2012,6 +2087,7 @@ paths:
         - OAuth2:
             - applications.entitlements
       x-speakeasy-group: applications
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_entitlement"
       requestBody:
@@ -2029,6 +2105,7 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: applications
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/applications/{application_id}/attachment":
     parameters:
       - name: "application_id"
@@ -2094,6 +2171,7 @@ paths:
             - webhook.incoming
       x-speakeasy-group: applications
       x-speakeasy-name-override: upload_attachment
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/applications/{application_id}/commands/{command_id}":
     parameters:
       - name: "application_id"
@@ -2119,6 +2197,7 @@ paths:
             - applications.commands.update
       x-speakeasy-group: applications
       x-speakeasy-name-override: get_command
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_application_command"
       responses:
@@ -2131,6 +2210,7 @@ paths:
             - applications.commands.update
       x-speakeasy-group: applications
       x-speakeasy-name-override: deleteCommand
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_application_command"
       requestBody:
@@ -2151,6 +2231,7 @@ paths:
             - applications.commands.update
       x-speakeasy-group: applications.commands
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/applications/{application_id}/commands":
     parameters:
       - name: "application_id"
@@ -2181,6 +2262,7 @@ paths:
             - applications.commands.update
       x-speakeasy-group: applications
       x-speakeasy-name-override: listCommands
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     put:
       operationId: "bulk_set_application_commands"
       requestBody:
@@ -2210,6 +2292,7 @@ paths:
             - applications.commands.update
       x-speakeasy-group: applications
       x-speakeasy-name-override: bulk_set_commands
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     post:
       operationId: "create_application_command"
       requestBody:
@@ -2235,6 +2318,7 @@ paths:
             - applications.commands.update
       x-speakeasy-group: applications_commands
       x-speakeasy-name-override: create
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/applications/{application_id}/emojis/{emoji_id}":
     parameters:
       - name: "application_id"
@@ -2258,6 +2342,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: get_emoji
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_application_emoji"
       responses:
@@ -2268,6 +2353,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications.emojis
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_application_emoji"
       requestBody:
@@ -2292,6 +2378,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: updateEmoji
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/applications/{application_id}/emojis":
     parameters:
       - name: "application_id"
@@ -2311,6 +2398,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: listEmojis
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_application_emoji"
       requestBody:
@@ -2340,6 +2428,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications.emojis
       x-speakeasy-name-override: create
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/interactions/{interaction_id}/{interaction_token}/callback":
     parameters:
       - name: "interaction_id"
@@ -2370,7 +2459,6 @@ paths:
                 - {"$ref": "#/components/schemas/ModalInteractionCallbackRequest"}
                 - {"$ref": "#/components/schemas/PongInteractionCallbackRequest"}
                 - {"$ref": "#/components/schemas/UpdateMessageInteractionCallbackRequest"}
-              x-discord-union: "oneOf"
           "application/x-www-form-urlencoded":
             schema:
               anyOf:
@@ -2380,7 +2468,6 @@ paths:
                 - {"$ref": "#/components/schemas/ModalInteractionCallbackRequest"}
                 - {"$ref": "#/components/schemas/PongInteractionCallbackRequest"}
                 - {"$ref": "#/components/schemas/UpdateMessageInteractionCallbackRequest"}
-              x-discord-union: "oneOf"
           "multipart/form-data":
             schema:
               anyOf:
@@ -2390,7 +2477,6 @@ paths:
                 - {"$ref": "#/components/schemas/ModalInteractionCallbackRequest"}
                 - {"$ref": "#/components/schemas/PongInteractionCallbackRequest"}
                 - {"$ref": "#/components/schemas/UpdateMessageInteractionCallbackRequest"}
-              x-discord-union: "oneOf"
               type: "object"
         required: true
       responses:
@@ -2407,6 +2493,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: interactions
       x-speakeasy-name-override: create_response
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/send-soundboard-sound":
     parameters:
       - name: "channel_id"
@@ -2427,6 +2514,7 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: channels
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/thread-members/{user_id}":
     parameters:
       - name: "channel_id"
@@ -2455,6 +2543,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: getThreadMember
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     put:
       operationId: "add_thread_member"
       responses:
@@ -2464,6 +2553,7 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: channels
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     delete:
       operationId: "delete_thread_member"
       responses:
@@ -2474,6 +2564,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: threadMembers
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/thread-members":
     parameters:
       - name: "channel_id"
@@ -2509,6 +2600,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: listThreadMembers
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/channels/{channel_id}/permissions/{overwrite_id}":
     parameters:
       - name: "channel_id"
@@ -2548,6 +2640,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels.permissions
       x-speakeasy-name-override: setOverwrite
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     delete:
       operationId: "delete_channel_permission_overwrite"
       responses:
@@ -2558,6 +2651,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channel_permissions
       x-speakeasy-name-override: delete_overwrite
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/recipients/{user_id}":
     parameters:
       - name: "channel_id"
@@ -2602,6 +2696,7 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: channels_recipients
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     delete:
       operationId: "delete_group_dm_user"
       responses:
@@ -2612,6 +2707,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: delete_dm_user
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/followers":
     parameters:
       - name: "channel_id"
@@ -2641,6 +2737,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: follow
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/messages/{message_id}":
     parameters:
       - name: "channel_id"
@@ -2664,6 +2761,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels.messages
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_message"
       responses:
@@ -2674,6 +2772,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: deleteMessage
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_message"
       requestBody:
@@ -2721,6 +2820,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels.messages
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/messages":
     parameters:
       - name: "channel_id"
@@ -2760,6 +2860,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels.messages
       x-speakeasy-name-override: list
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_message"
       requestBody:
@@ -2807,6 +2908,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels.messages
       x-speakeasy-name-override: create
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/webhooks":
     parameters:
       - name: "channel_id"
@@ -2834,6 +2936,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: listWebhooks
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_webhook"
       requestBody:
@@ -2864,6 +2967,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: createWebhook
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/invites":
     parameters:
       - name: "channel_id"
@@ -2891,6 +2995,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: listInvites
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_channel_invite"
       requestBody:
@@ -2900,7 +3005,6 @@ paths:
               anyOf:
                 - {"$ref": "#/components/schemas/CreateGroupDMInviteRequest"}
                 - {"$ref": "#/components/schemas/CreateGuildInviteRequest"}
-              x-discord-union: "oneOf"
         required: true
       responses:
         "200":
@@ -2912,7 +3016,6 @@ paths:
                   - {"$ref": "#/components/schemas/FriendInviteResponse"}
                   - {"$ref": "#/components/schemas/GroupDMInviteResponse"}
                   - {"$ref": "#/components/schemas/GuildInviteResponse"}
-                x-discord-union: "oneOf"
         "204":
           description: "204 response for create_channel_invite"
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
@@ -2920,6 +3023,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: create_invite
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/threads":
     parameters:
       - name: "channel_id"
@@ -2935,19 +3039,16 @@ paths:
               anyOf:
                 - {"$ref": "#/components/schemas/CreateForumThreadRequest"}
                 - {"$ref": "#/components/schemas/CreateTextThreadWithoutMessageRequest"}
-              x-discord-union: "oneOf"
           "application/x-www-form-urlencoded":
             schema:
               anyOf:
                 - {"$ref": "#/components/schemas/CreateForumThreadRequest"}
                 - {"$ref": "#/components/schemas/CreateTextThreadWithoutMessageRequest"}
-              x-discord-union: "oneOf"
           "multipart/form-data":
             schema:
               anyOf:
                 - {"$ref": "#/components/schemas/CreateForumThreadRequest"}
                 - {"$ref": "#/components/schemas/CreateTextThreadWithoutMessageRequest"}
-              x-discord-union: "oneOf"
               type: "object"
         required: true
       responses:
@@ -2961,6 +3062,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels.threads
       x-speakeasy-name-override: create
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/typing":
     parameters:
       - name: "channel_id"
@@ -2982,6 +3084,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: triggerTyping
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/pins/{message_id}":
     parameters:
       - name: "channel_id"
@@ -3002,6 +3105,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: pinMessage
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     delete:
       operationId: "unpin_message"
       responses:
@@ -3012,6 +3116,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels.pins
       x-speakeasy-name-override: unpin
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}/pins":
     parameters:
       - name: "channel_id"
@@ -3034,6 +3139,7 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: channels
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}":
     parameters:
       - name: "webhook_id"
@@ -3068,6 +3174,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: get_message
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_webhook_message"
       parameters:
@@ -3083,6 +3190,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks.messages
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_webhook_message"
       parameters:
@@ -3139,6 +3247,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: updateMessage
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/webhooks/{webhook_id}/{webhook_token}/github":
     parameters:
       - name: "webhook_id"
@@ -3175,6 +3284,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: executeGithubCompatible
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/webhooks/{webhook_id}/{webhook_token}/slack":
     parameters:
       - name: "webhook_id"
@@ -3221,6 +3331,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: executeSlackCompatible
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/lobbies/{lobby_id}/channel-linking":
     parameters:
       - name: "lobby_id"
@@ -3250,6 +3361,7 @@ paths:
       security:
         - BotToken: []
         - OAuth2: []
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/lobbies/{lobby_id}/messages":
     parameters:
       - name: "lobby_id"
@@ -3277,6 +3389,7 @@ paths:
       security:
         - BotToken: []
         - OAuth2: []
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/lobbies/{lobby_id}/members/{user_id}":
     parameters:
       - name: "lobby_id"
@@ -3319,6 +3432,7 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     delete:
       operationId: "delete_lobby_member"
       responses:
@@ -3327,6 +3441,7 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/templates/{code}":
     parameters:
       - name: "code"
@@ -3349,6 +3464,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: getTemplate
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_guild_from_template"
       requestBody:
@@ -3379,6 +3495,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guild_templates
       x-speakeasy-name-override: create_from_code
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/new-member-welcome":
     parameters:
       - name: "guild_id"
@@ -3400,6 +3517,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: get_new_member_welcome
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/soundboard-sounds/{sound_id}":
     parameters:
       - name: "guild_id"
@@ -3423,6 +3541,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: getSoundboardSound
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_guild_soundboard_sound"
       responses:
@@ -3433,6 +3552,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildSoundboardSounds
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_guild_soundboard_sound"
       requestBody:
@@ -3451,6 +3571,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.soundboardSounds
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/soundboard-sounds":
     parameters:
       - name: "guild_id"
@@ -3470,6 +3591,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds_soundboard_sounds
       x-speakeasy-name-override: list
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_guild_soundboard_sound"
       requestBody:
@@ -3488,6 +3610,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: create_soundboard_sound
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}":
     parameters:
       - name: "guild_id"
@@ -3520,6 +3643,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.scheduledEvents
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_guild_scheduled_event"
       responses:
@@ -3530,6 +3654,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guild_scheduled_events
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_guild_scheduled_event"
       requestBody:
@@ -3540,7 +3665,6 @@ paths:
                 - {"$ref": "#/components/schemas/ExternalScheduledEventPatchRequestPartial"}
                 - {"$ref": "#/components/schemas/StageScheduledEventPatchRequestPartial"}
                 - {"$ref": "#/components/schemas/VoiceScheduledEventPatchRequestPartial"}
-              x-discord-union: "oneOf"
         required: true
       responses:
         "200":
@@ -3557,6 +3681,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.scheduled_events
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/scheduled-events":
     parameters:
       - name: "guild_id"
@@ -3589,6 +3714,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.scheduledEvents
       x-speakeasy-name-override: list
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_guild_scheduled_event"
       requestBody:
@@ -3615,6 +3741,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: scheduledEvents
       x-speakeasy-name-override: create
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/welcome-screen":
     parameters:
       - name: "guild_id"
@@ -3634,6 +3761,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: get_welcome_screen
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     patch:
       operationId: "update_guild_welcome_screen"
       requestBody:
@@ -3652,6 +3780,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: updateWelcomeScreen
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/voice-states/{user_id}":
     parameters:
       - name: "guild_id"
@@ -3674,6 +3803,7 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: guilds
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     patch:
       operationId: "update_voice_state"
       requestBody:
@@ -3699,6 +3829,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.voiceStates
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/integrations/{integration_id}":
     parameters:
       - name: "guild_id"
@@ -3719,6 +3850,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildIntegrations
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/integrations":
     parameters:
       - name: "guild_id"
@@ -3746,6 +3878,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.integrations
       x-speakeasy-name-override: list
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/widget.json":
     parameters:
       - name: "guild_id"
@@ -3766,6 +3899,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: get_widget
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/onboarding":
     parameters:
       - name: "guild_id"
@@ -3785,6 +3919,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildOnboarding
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     put:
       operationId: "put_guilds_onboarding"
       requestBody:
@@ -3803,6 +3938,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildOnboarding
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/vanity-url":
     parameters:
       - name: "guild_id"
@@ -3822,6 +3958,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: getVanityUrl
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/audit-logs":
     parameters:
       - name: "guild_id"
@@ -3864,6 +4001,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: listAuditLogs
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/widget.png":
     parameters:
       - name: "guild_id"
@@ -3889,6 +4027,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: get_widget_png
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/templates/{code}":
     parameters:
       - name: "guild_id"
@@ -3914,6 +4053,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: syncTemplate
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     delete:
       operationId: "delete_guild_template"
       responses:
@@ -3927,6 +4067,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.templates
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_guild_template"
       requestBody:
@@ -3956,6 +4097,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: update_template
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/templates":
     parameters:
       - name: "guild_id"
@@ -3979,6 +4121,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: list_templates
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_guild_template"
       requestBody:
@@ -4010,6 +4153,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.templates
       x-speakeasy-name-override: create
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/stickers/{sticker_id}":
     parameters:
       - name: "guild_id"
@@ -4033,6 +4177,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: getSticker
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_guild_sticker"
       responses:
@@ -4043,6 +4188,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: delete_sticker
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_guild_sticker"
       requestBody:
@@ -4076,6 +4222,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.stickers
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/bulk-ban":
     parameters:
       - name: "guild_id"
@@ -4115,6 +4262,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildBans
       x-speakeasy-name-override: bulkBan
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/stickers":
     parameters:
       - name: "guild_id"
@@ -4136,6 +4284,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildStickers
       x-speakeasy-name-override: list
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_guild_sticker"
       requestBody:
@@ -4175,6 +4324,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: createSticker
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/webhooks":
     parameters:
       - name: "guild_id"
@@ -4202,6 +4352,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: listWebhooks
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/channels":
     parameters:
       - name: "guild_id"
@@ -4231,6 +4382,7 @@ paths:
         - OAuth2: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: listChannels
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_guild_channel"
       requestBody:
@@ -4249,6 +4401,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds_channels
       x-speakeasy-name-override: create
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "bulk_update_guild_channels"
       requestBody:
@@ -4283,6 +4436,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.channels
       x-speakeasy-name-override: bulkUpdate
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/members/{user_id}":
     parameters:
       - name: "guild_id"
@@ -4306,6 +4460,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds_members
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     put:
       operationId: "add_guild_member"
       requestBody:
@@ -4360,6 +4515,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildMembers
       x-speakeasy-name-override: add
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     delete:
       operationId: "delete_guild_member"
       responses:
@@ -4370,6 +4526,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: deleteMember
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_guild_member"
       requestBody:
@@ -4428,6 +4585,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds_members
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/members":
     parameters:
       - name: "guild_id"
@@ -4461,6 +4619,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: listMembers
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/preview":
     parameters:
       - name: "guild_id"
@@ -4480,6 +4639,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: getPreview
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/invites":
     parameters:
       - name: "guild_id"
@@ -4507,6 +4667,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: listInvites
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/regions":
     parameters:
       - name: "guild_id"
@@ -4530,6 +4691,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildVoiceRegions
       x-speakeasy-name-override: list
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/emojis/{emoji_id}":
     parameters:
       - name: "guild_id"
@@ -4553,6 +4715,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildEmojis
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_guild_emoji"
       responses:
@@ -4563,6 +4726,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: delete_emoji
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_guild_emoji"
       requestBody:
@@ -4597,6 +4761,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: updateEmoji
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/emojis":
     parameters:
       - name: "guild_id"
@@ -4620,6 +4785,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: list_emojis
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_guild_emoji"
       requestBody:
@@ -4659,6 +4825,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: createEmoji
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/widget":
     parameters:
       - name: "guild_id"
@@ -4678,6 +4845,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: getWidgetSettings
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     patch:
       operationId: "update_guild_widget_settings"
       requestBody:
@@ -4706,6 +4874,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildWidgetSettings
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/roles/{role_id}":
     parameters:
       - name: "guild_id"
@@ -4729,6 +4898,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: getRole
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_guild_role"
       responses:
@@ -4739,6 +4909,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: delete_role
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_guild_role"
       requestBody:
@@ -4791,6 +4962,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: updateRole
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/roles":
     parameters:
       - name: "guild_id"
@@ -4812,6 +4984,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: listRoles
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "create_guild_role"
       requestBody:
@@ -4864,6 +5037,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: create_role
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "bulk_update_guild_roles"
       requestBody:
@@ -4897,6 +5071,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildRoles
       x-speakeasy-name-override: bulkUpdate
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/prune":
     parameters:
       - name: "guild_id"
@@ -4935,6 +5110,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: preview_prune
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "prune_guild"
       requestBody:
@@ -4976,6 +5152,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: prune
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/bans/{user_id}":
     parameters:
       - name: "guild_id"
@@ -4999,6 +5176,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildBans
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     put:
       operationId: "ban_user_from_guild"
       requestBody:
@@ -5028,6 +5206,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: banUser
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     delete:
       operationId: "unban_user_from_guild"
       responses:
@@ -5038,6 +5217,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: unbanUser
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}/bans":
     parameters:
       - name: "guild_id"
@@ -5074,6 +5254,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guildBans
       x-speakeasy-name-override: list
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/guilds/{guild_id}/mfa":
     parameters:
       - name: "guild_id"
@@ -5103,6 +5284,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds.mfa
       x-speakeasy-name-override: setLevel
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/stage-instances/{channel_id}":
     parameters:
       - name: "channel_id"
@@ -5122,6 +5304,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: stageInstances
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_stage_instance"
       responses:
@@ -5132,6 +5315,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: stageInstances
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_stage_instance"
       requestBody:
@@ -5157,6 +5341,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: stage_instances
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/sticker-packs/{pack_id}":
     parameters:
       - name: "pack_id"
@@ -5176,6 +5361,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: stickerPacks
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/applications/{application_id}":
     parameters:
       - name: "application_id"
@@ -5195,6 +5381,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     patch:
       operationId: "update_application"
       requestBody:
@@ -5213,6 +5400,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/webhooks/{webhook_id}/{webhook_token}":
     parameters:
       - name: "webhook_id"
@@ -5243,6 +5431,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: get_by_token
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     post:
       operationId: "execute_webhook"
       parameters:
@@ -5264,19 +5453,16 @@ paths:
               anyOf:
                 - {"$ref": "#/components/schemas/IncomingWebhookRequestPartial"}
                 - {"$ref": "#/components/schemas/IncomingWebhookUpdateRequestPartial"}
-              x-discord-union: "oneOf"
           "application/x-www-form-urlencoded":
             schema:
               anyOf:
                 - {"$ref": "#/components/schemas/IncomingWebhookRequestPartial"}
                 - {"$ref": "#/components/schemas/IncomingWebhookUpdateRequestPartial"}
-              x-discord-union: "oneOf"
           "multipart/form-data":
             schema:
               anyOf:
                 - {"$ref": "#/components/schemas/IncomingWebhookRequestPartial"}
                 - {"$ref": "#/components/schemas/IncomingWebhookUpdateRequestPartial"}
-              x-discord-union: "oneOf"
               type: "object"
         required: true
       responses:
@@ -5293,6 +5479,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: execute
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     delete:
       operationId: "delete_webhook_by_token"
       responses:
@@ -5304,6 +5491,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: delete_by_token
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_webhook_by_token"
       requestBody:
@@ -5337,6 +5525,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: update_by_token
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/stickers/{sticker_id}":
     parameters:
       - name: "sticker_id"
@@ -5359,6 +5548,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: stickers
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
   "/webhooks/{webhook_id}":
     parameters:
       - name: "webhook_id"
@@ -5382,6 +5572,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_webhook"
       responses:
@@ -5392,6 +5583,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_webhook"
       requestBody:
@@ -5428,6 +5620,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/channels/{channel_id}":
     parameters:
       - name: "channel_id"
@@ -5452,6 +5645,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_channel"
       responses:
@@ -5470,6 +5664,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_channel"
       requestBody:
@@ -5481,7 +5676,6 @@ paths:
                 - {"$ref": "#/components/schemas/UpdateGroupDMRequestPartial"}
                 - {"$ref": "#/components/schemas/UpdateGuildChannelRequestPartial"}
                 - {"$ref": "#/components/schemas/UpdateThreadRequestPartial"}
-              x-discord-union: "oneOf"
         required: true
       responses:
         "200":
@@ -5499,6 +5693,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/invites/{code}":
     parameters:
       - name: "code"
@@ -5527,13 +5722,13 @@ paths:
                   - {"$ref": "#/components/schemas/FriendInviteResponse"}
                   - {"$ref": "#/components/schemas/GroupDMInviteResponse"}
                   - {"$ref": "#/components/schemas/GuildInviteResponse"}
-                x-discord-union: "oneOf"
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - {}
         - BotToken: []
       x-speakeasy-group: invites
       x-speakeasy-name-override: resolve
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "invite_revoke"
       responses:
@@ -5546,12 +5741,12 @@ paths:
                   - {"$ref": "#/components/schemas/FriendInviteResponse"}
                   - {"$ref": "#/components/schemas/GroupDMInviteResponse"}
                   - {"$ref": "#/components/schemas/GuildInviteResponse"}
-                x-discord-union: "oneOf"
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
       x-speakeasy-group: invites
       x-speakeasy-name-override: revoke
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/lobbies/{lobby_id}":
     parameters:
       - name: "lobby_id"
@@ -5569,6 +5764,7 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     patch:
       operationId: "edit_lobby"
       requestBody:
@@ -5608,6 +5804,7 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/guilds/{guild_id}":
     parameters:
       - name: "guild_id"
@@ -5632,6 +5829,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
     delete:
       operationId: "delete_guild"
       responses:
@@ -5642,6 +5840,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: delete
+      "x-speakeasy-mcp": {"scopes": ["write"]}
     patch:
       operationId: "update_guild"
       requestBody:
@@ -5660,6 +5859,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: update
+      "x-speakeasy-mcp": {"scopes": ["write"]}
   "/users/{user_id}":
     parameters:
       - name: "user_id"
@@ -5679,6 +5879,7 @@ paths:
         - BotToken: []
       x-speakeasy-group: users
       x-speakeasy-name-override: get
+      "x-speakeasy-mcp": {"scopes": ["read"]}
 components:
   schemas:
     "AccountResponse":
@@ -5897,7 +6098,6 @@ components:
             - {"$ref": "#/components/schemas/InteractionApplicationCommandAutocompleteCallbackIntegerData"}
             - {"$ref": "#/components/schemas/InteractionApplicationCommandAutocompleteCallbackNumberData"}
             - {"$ref": "#/components/schemas/InteractionApplicationCommandAutocompleteCallbackStringData"}
-          x-discord-union: "oneOf"
       required:
         - "type"
         - "data"
@@ -8968,44 +9168,22 @@ components:
         - "id"
     "ChannelTypes":
       type: "integer"
-      oneOf:
-        - title: "DM"
-          description: "A direct message between users"
-          const: 1
-        - title: "GROUP_DM"
-          description: "A direct message between multiple users"
-          const: 3
-        - title: "GUILD_TEXT"
-          description: "A text channel within a server"
-          const: 0
-        - title: "GUILD_VOICE"
-          description: "A voice channel within a server"
-          const: 2
-        - title: "GUILD_CATEGORY"
-          description: "An organizational category that contains up to 50 channels"
-          const: 4
-        - title: "GUILD_ANNOUNCEMENT"
-          description: "A channel that users can follow and crosspost into their own server (formerly news channels)"
-          const: 5
-        - title: "ANNOUNCEMENT_THREAD"
-          description: "A temporary sub-channel within a GUILD_ANNOUNCEMENT channel"
-          const: 10
-        - title: "PUBLIC_THREAD"
-          description: "A temporary sub-channel within a GUILD_TEXT or GUILD_THREADS_ONLY channel type set"
-          const: 11
-        - title: "PRIVATE_THREAD"
-          description: "A temporary sub-channel within a GUILD_TEXT channel that is only viewable by those invited and those with the MANAGE_THREADS permission"
-          const: 12
-        - title: "GUILD_STAGE_VOICE"
-          description: "A voice channel for hosting events with an audience"
-          const: 13
-        - title: "GUILD_DIRECTORY"
-          description: "The channel in a hub containing the listed servers"
-          const: 14
-        - title: "GUILD_FORUM"
-          description: "Channel that can only contain threads"
-          const: 15
       format: "int32"
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 7
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+      description: "Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)"
     "CommandPermissionResponse":
       type: "object"
       properties:

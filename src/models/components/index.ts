@@ -72,6 +72,7 @@ export * from "./channelselectcomponentformessagerequest.js";
 export * from "./channelselectcomponentresponse.js";
 export * from "./channelselectdefaultvalue.js";
 export * from "./channelselectdefaultvalueresponse.js";
+export * from "./channeltypes.js";
 export * from "./commandpermissionresponse.js";
 export * from "./commandpermissionsresponse.js";
 export * from "./componentemojiformessagerequest.js";

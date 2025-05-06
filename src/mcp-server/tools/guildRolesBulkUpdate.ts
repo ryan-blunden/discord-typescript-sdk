@@ -13,6 +13,7 @@ const args = {
 export const tool$guildRolesBulkUpdate: ToolDefinition<typeof args> = {
   name: "guild-roles-bulk-update",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildRolesBulkUpdate(

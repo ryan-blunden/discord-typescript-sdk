@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsPrune: ToolDefinition<typeof args> = {
   name: "guilds-prune",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsPrune(

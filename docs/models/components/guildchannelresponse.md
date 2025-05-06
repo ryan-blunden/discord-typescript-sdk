@@ -7,10 +7,11 @@ import { GuildChannelResponse } from "@ryan.blunden/discord-sdk/models/component
 
 let value: GuildChannelResponse = {
   id: "<value>",
-  flags: 76437,
+  type: 0,
+  flags: 849560,
   guildId: "<value>",
   name: "<value>",
-  position: 849560,
+  position: 864386,
 };
 ```
 
@@ -19,7 +20,7 @@ let value: GuildChannelResponse = {
 | Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `id`                                                                                                             | *string*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
-| `type`                                                                                                           | *number*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `type`                                                                                                           | [components.GuildChannelResponseType](../../models/components/guildchannelresponsetype.md)                       | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `lastMessageId`                                                                                                  | *string*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `flags`                                                                                                          | *number*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `lastPinTimestamp`                                                                                               | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                    | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |

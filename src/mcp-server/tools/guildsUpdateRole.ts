@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsUpdateRole: ToolDefinition<typeof args> = {
   name: "guilds-update-role",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsUpdateRole(

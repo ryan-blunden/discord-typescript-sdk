@@ -13,6 +13,7 @@ const args = {
 export const tool$channelsPinMessage: ToolDefinition<typeof args> = {
   name: "channels-pin-message",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsPinMessage(

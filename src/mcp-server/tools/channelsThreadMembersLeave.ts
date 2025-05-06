@@ -13,6 +13,7 @@ const args = {
 export const tool$channelsThreadMembersLeave: ToolDefinition<typeof args> = {
   name: "channels-thread-members-leave",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsThreadMembersLeave(

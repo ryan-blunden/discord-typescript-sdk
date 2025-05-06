@@ -13,6 +13,7 @@ const args = {
 export const tool$channelsSendSoundboardSound: ToolDefinition<typeof args> = {
   name: "channels-send-soundboard-sound",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsSendSoundboardSound(

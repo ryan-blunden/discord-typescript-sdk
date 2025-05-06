@@ -14,6 +14,7 @@ export const tool$channelsPermissionsSetOverwrite: ToolDefinition<typeof args> =
   {
     name: "channels-permissions-set-overwrite",
     description: ``,
+    scopes: ["write"],
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await channelsPermissionsSetOverwrite(

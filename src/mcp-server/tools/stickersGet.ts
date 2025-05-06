@@ -13,6 +13,7 @@ const args = {
 export const tool$stickersGet: ToolDefinition<typeof args> = {
   name: "stickers-get",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await stickersGet(

@@ -15,6 +15,7 @@ export const tool$channelsListPrivateArchivedThreads: ToolDefinition<
 > = {
   name: "channels-list-private-archived-threads",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsListPrivateArchivedThreads(

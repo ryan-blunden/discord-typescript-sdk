@@ -13,6 +13,7 @@ const args = {
 export const tool$channelsCrosspostMessage: ToolDefinition<typeof args> = {
   name: "channels-crosspost-message",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsCrosspostMessage(

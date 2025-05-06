@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsGetVanityUrl: ToolDefinition<typeof args> = {
   name: "guilds-get-vanity-url",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsGetVanityUrl(

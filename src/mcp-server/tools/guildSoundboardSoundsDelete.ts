@@ -13,6 +13,7 @@ const args = {
 export const tool$guildSoundboardSoundsDelete: ToolDefinition<typeof args> = {
   name: "guild-soundboard-sounds-delete",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildSoundboardSoundsDelete(

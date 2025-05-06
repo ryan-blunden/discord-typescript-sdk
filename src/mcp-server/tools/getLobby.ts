@@ -13,6 +13,7 @@ const args = {
 export const tool$getLobby: ToolDefinition<typeof args> = {
   name: "get-lobby",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await getLobby(

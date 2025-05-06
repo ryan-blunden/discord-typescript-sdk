@@ -13,6 +13,7 @@ const args = {
 export const tool$editLobby: ToolDefinition<typeof args> = {
   name: "edit-lobby",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await editLobby(

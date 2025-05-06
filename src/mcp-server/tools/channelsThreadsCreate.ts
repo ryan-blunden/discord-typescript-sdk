@@ -13,6 +13,7 @@ const args = {
 export const tool$channelsThreadsCreate: ToolDefinition<typeof args> = {
   name: "channels-threads-create",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsThreadsCreate(

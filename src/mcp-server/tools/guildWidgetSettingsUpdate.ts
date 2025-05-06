@@ -13,6 +13,7 @@ const args = {
 export const tool$guildWidgetSettingsUpdate: ToolDefinition<typeof args> = {
   name: "guild-widget-settings-update",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildWidgetSettingsUpdate(

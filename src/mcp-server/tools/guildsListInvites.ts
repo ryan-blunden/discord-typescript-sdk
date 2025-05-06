@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsListInvites: ToolDefinition<typeof args> = {
   name: "guilds-list-invites",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsListInvites(

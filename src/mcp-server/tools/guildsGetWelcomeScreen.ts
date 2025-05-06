@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsGetWelcomeScreen: ToolDefinition<typeof args> = {
   name: "guilds-get-welcome-screen",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsGetWelcomeScreen(

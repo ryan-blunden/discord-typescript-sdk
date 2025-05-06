@@ -14,6 +14,7 @@ export const tool$channelsMessagesCreateMultipart: ToolDefinition<typeof args> =
   {
     name: "channels-messages-create-multipart",
     description: ``,
+    scopes: ["write"],
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await channelsMessagesCreateMultipart(

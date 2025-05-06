@@ -14,6 +14,7 @@ export const tool$guildsAutoModerationRulesUpdate: ToolDefinition<typeof args> =
   {
     name: "guilds-auto-moderation-rules-update",
     description: ``,
+    scopes: ["write"],
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await guildsAutoModerationRulesUpdate(

@@ -37,14 +37,15 @@ let value: ResolvedObjectsResponse = {
   channels: {
     "key": {
       id: "<value>",
-      flags: 521301,
+      type: 7,
+      flags: 352317,
       recipients: [
         {
           id: "<value>",
-          username: "Felix_Christiansen",
+          username: "Orville.Windler",
           discriminator: "<value>",
-          publicFlags: 414483,
-          flags: 136423,
+          publicFlags: 136423,
+          flags: 162030,
         },
       ],
     },
@@ -54,8 +55,8 @@ let value: ResolvedObjectsResponse = {
       id: "<value>",
       name: "<value>",
       permissions: "<value>",
-      position: 162030,
-      color: 996856,
+      position: 996856,
+      color: 288975,
       hoist: false,
       managed: false,
       mentionable: false,

@@ -13,6 +13,7 @@ const args = {
 export const tool$scheduledEventsCreate: ToolDefinition<typeof args> = {
   name: "scheduled-events-create",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await scheduledEventsCreate(

@@ -14,6 +14,7 @@ export const tool$channelsStartThreadFromMessage: ToolDefinition<typeof args> =
   {
     name: "channels-start-thread-from-message",
     description: ``,
+    scopes: ["write"],
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await channelsStartThreadFromMessage(

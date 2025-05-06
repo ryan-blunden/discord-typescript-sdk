@@ -13,6 +13,7 @@ const args = {
 export const tool$guildThreadsGetActive: ToolDefinition<typeof args> = {
   name: "guild-threads-get-active",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildThreadsGetActive(

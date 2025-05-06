@@ -13,6 +13,7 @@ const args = {
 export const tool$invitesRevoke: ToolDefinition<typeof args> = {
   name: "invites-revoke",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await invitesRevoke(

@@ -13,6 +13,7 @@ const args = {
 export const tool$channelsMessagesCreateJson: ToolDefinition<typeof args> = {
   name: "channels-messages-create-json",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsMessagesCreateJson(

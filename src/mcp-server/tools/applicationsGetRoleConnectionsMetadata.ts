@@ -16,6 +16,7 @@ export const tool$applicationsGetRoleConnectionsMetadata: ToolDefinition<
 > = {
   name: "applications-get-role-connections-metadata",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await applicationsGetRoleConnectionsMetadata(

@@ -13,6 +13,7 @@ const args = {
 export const tool$channelsMessagesUpdateForm: ToolDefinition<typeof args> = {
   name: "channels-messages-update-form",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsMessagesUpdateForm(

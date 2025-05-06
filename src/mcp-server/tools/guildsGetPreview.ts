@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsGetPreview: ToolDefinition<typeof args> = {
   name: "guilds-get-preview",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsGetPreview(

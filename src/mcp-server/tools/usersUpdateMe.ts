@@ -13,6 +13,7 @@ const args = {
 export const tool$usersUpdateMe: ToolDefinition<typeof args> = {
   name: "users-update-me",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await usersUpdateMe(

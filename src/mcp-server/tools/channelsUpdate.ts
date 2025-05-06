@@ -13,6 +13,7 @@ const args = {
 export const tool$channelsUpdate: ToolDefinition<typeof args> = {
   name: "channels-update",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsUpdate(

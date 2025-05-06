@@ -13,6 +13,7 @@ const args = {
 export const tool$channelsCreateWebhook: ToolDefinition<typeof args> = {
   name: "channels-create-webhook",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsCreateWebhook(

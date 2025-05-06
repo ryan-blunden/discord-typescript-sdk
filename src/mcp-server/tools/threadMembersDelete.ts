@@ -13,6 +13,7 @@ const args = {
 export const tool$threadMembersDelete: ToolDefinition<typeof args> = {
   name: "thread-members-delete",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await threadMembersDelete(

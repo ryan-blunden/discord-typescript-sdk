@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsListAutoModerationRules: ToolDefinition<typeof args> = {
   name: "guilds-list-auto-moderation-rules",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsListAutoModerationRules(

@@ -15,6 +15,7 @@ export const tool$applicationsDeleteUserRoleConnection: ToolDefinition<
 > = {
   name: "applications-delete-user-role-connection",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await applicationsDeleteUserRoleConnection(

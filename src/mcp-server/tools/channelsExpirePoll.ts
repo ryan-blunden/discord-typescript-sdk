@@ -13,6 +13,7 @@ const args = {
 export const tool$channelsExpirePoll: ToolDefinition<typeof args> = {
   name: "channels-expire-poll",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsExpirePoll(

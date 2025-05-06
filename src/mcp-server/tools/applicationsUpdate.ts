@@ -13,6 +13,7 @@ const args = {
 export const tool$applicationsUpdate: ToolDefinition<typeof args> = {
   name: "applications-update",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await applicationsUpdate(

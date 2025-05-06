@@ -1,21 +1,21 @@
-speakeasyVersion: 1.542.0
+speakeasyVersion: 1.542.3
 sources:
     Discord HTTP API (Preview):
         sourceNamespace: discord-sdk
-        sourceRevisionDigest: sha256:537babd8004a4e676b46dda059d9306c6a0efb2b3fbc5d6c1d935fbc7b3cd492
-        sourceBlobDigest: sha256:d3ae3000bfec1b5bc5ab99e1a1c8c7215acb087117e792b555b6b891c1fabd08
+        sourceRevisionDigest: sha256:28dd68a547cac47fd596fcb2bf46ebe7b692854b84fadc33fc799ff7c2a25071
+        sourceBlobDigest: sha256:242a0175b35e9ce26f0f0adc8e87bc2cad218cc4d2240ce8a846a25451cc18a8
         tags:
             - latest
-            - speakeasy-sdk-regen-1746230690
+            - speakeasy-sdk-regen-1746488195
             - "10"
 targets:
     discord:
         source: Discord HTTP API (Preview)
         sourceNamespace: discord-sdk
-        sourceRevisionDigest: sha256:537babd8004a4e676b46dda059d9306c6a0efb2b3fbc5d6c1d935fbc7b3cd492
-        sourceBlobDigest: sha256:d3ae3000bfec1b5bc5ab99e1a1c8c7215acb087117e792b555b6b891c1fabd08
+        sourceRevisionDigest: sha256:28dd68a547cac47fd596fcb2bf46ebe7b692854b84fadc33fc799ff7c2a25071
+        sourceBlobDigest: sha256:242a0175b35e9ce26f0f0adc8e87bc2cad218cc4d2240ce8a846a25451cc18a8
         codeSamplesNamespace: discord-sdk-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:59a7f4ac034b2334516faef229e7f6fc3356a8d6f513c275ed1d55e99f82963e
+        codeSamplesRevisionDigest: sha256:c74b36311f9f1c0c5a625f84b9fd728f22f2a4b331f22d48944e989b4495f2cb
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -26,6 +26,7 @@ workflow:
             overlays:
                 - location: .speakeasy/openapi-fixes-overlay.yaml
                 - location: .speakeasy/speakeasy-modifications-overlay.yaml
+                - location: .speakeasy/mcp-server-overlay.yaml
             output: .speakeasy/openapi-output.yaml
             registry:
                 location: registry.speakeasyapi.dev/ryan-blunden-l5y/ryanblunden/discord-sdk

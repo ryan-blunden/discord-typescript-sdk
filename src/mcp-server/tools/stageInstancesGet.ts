@@ -13,6 +13,7 @@ const args = {
 export const tool$stageInstancesGet: ToolDefinition<typeof args> = {
   name: "stage-instances-get",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await stageInstancesGet(

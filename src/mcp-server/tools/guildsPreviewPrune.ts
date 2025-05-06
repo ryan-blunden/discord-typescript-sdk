@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsPreviewPrune: ToolDefinition<typeof args> = {
   name: "guilds-preview-prune",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsPreviewPrune(

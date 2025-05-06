@@ -15,6 +15,7 @@ export const tool$channelsRecipientsAddGroupDmUser: ToolDefinition<
 > = {
   name: "channels-recipients-add-group-dm-user",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsRecipientsAddGroupDmUser(

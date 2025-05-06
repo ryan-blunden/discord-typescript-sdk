@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsGetWidgetSettings: ToolDefinition<typeof args> = {
   name: "guilds-get-widget-settings",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsGetWidgetSettings(

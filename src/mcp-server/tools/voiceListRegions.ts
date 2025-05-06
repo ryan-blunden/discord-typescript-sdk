@@ -8,6 +8,7 @@ import { formatResult, ToolDefinition } from "../tools.js";
 export const tool$voiceListRegions: ToolDefinition = {
   name: "voice-list-regions",
   description: ``,
+  scopes: ["read"],
   tool: async (client, ctx) => {
     const [result, apiCall] = await voiceListRegions(
       client,

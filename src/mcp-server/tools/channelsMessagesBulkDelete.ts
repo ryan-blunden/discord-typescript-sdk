@@ -13,6 +13,7 @@ const args = {
 export const tool$channelsMessagesBulkDelete: ToolDefinition<typeof args> = {
   name: "channels-messages-bulk-delete",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsMessagesBulkDelete(

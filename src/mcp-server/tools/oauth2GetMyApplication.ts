@@ -8,6 +8,7 @@ import { formatResult, ToolDefinition } from "../tools.js";
 export const tool$oauth2GetMyApplication: ToolDefinition = {
   name: "oauth2-get-my-application",
   description: ``,
+  scopes: ["read"],
   tool: async (client, ctx) => {
     const [result, apiCall] = await oauth2GetMyApplication(
       client,

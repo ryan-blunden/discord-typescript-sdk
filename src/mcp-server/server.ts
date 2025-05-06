@@ -6,12 +6,14 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { DiscordCore } from "../core.js";
 import { SDKOptions } from "../lib/config.js";
 import type { ConsoleLogger } from "./console-logger.js";
+import { Register } from "./extensions.js";
 import { createRegisterPrompt } from "./prompts.js";
 import {
   createRegisterResource,
   createRegisterResourceTemplate,
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
+import { registerMCPExtensions } from "./server.extensions.js";
 import { createRegisterTool } from "./tools.js";
 import { tool$addLobbyMember } from "./tools/addLobbyMember.js";
 import { tool$answersGetVoters } from "./tools/answersGetVoters.js";
@@ -193,7 +195,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Discord",
-    version: "0.3.3",
+    version: "0.3.4",
   });
 
   const client = new DiscordCore({
@@ -392,6 +394,8 @@ export function createMCPServer(deps: {
   tool(tool$guildsScheduledEventsUsersList);
   tool(tool$guildsAutoModerationRulesUpdate);
   tool(tool$channelsMessagesReactionsAdd);
+
+  registerMCPExtensions(register satisfies Register);
 
   return server;
 }

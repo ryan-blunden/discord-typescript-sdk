@@ -15,6 +15,7 @@ export const tool$channelsMessagesDeleteMyReaction: ToolDefinition<
 > = {
   name: "channels-messages-delete-my-reaction",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsMessagesDeleteMyReaction(

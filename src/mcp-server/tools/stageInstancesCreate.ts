@@ -13,6 +13,7 @@ const args = {
 export const tool$stageInstancesCreate: ToolDefinition<typeof args> = {
   name: "stage-instances-create",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await stageInstancesCreate(

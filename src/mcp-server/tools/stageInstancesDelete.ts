@@ -13,6 +13,7 @@ const args = {
 export const tool$stageInstancesDelete: ToolDefinition<typeof args> = {
   name: "stage-instances-delete",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await stageInstancesDelete(

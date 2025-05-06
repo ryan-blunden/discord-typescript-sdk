@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsUpdateTemplate: ToolDefinition<typeof args> = {
   name: "guilds-update-template",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsUpdateTemplate(

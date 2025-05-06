@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsScheduledEventsList: ToolDefinition<typeof args> = {
   name: "guilds-scheduled-events-list",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsScheduledEventsList(

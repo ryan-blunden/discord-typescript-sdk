@@ -14,6 +14,7 @@ export const tool$applicationsGetActivityInstance: ToolDefinition<typeof args> =
   {
     name: "applications-get-activity-instance",
     description: ``,
+    scopes: ["read"],
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await applicationsGetActivityInstance(

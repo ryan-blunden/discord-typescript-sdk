@@ -13,6 +13,7 @@ const args = {
 export const tool$threadsListPublicArchived: ToolDefinition<typeof args> = {
   name: "threads-list-public-archived",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await threadsListPublicArchived(

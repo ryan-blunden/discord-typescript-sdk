@@ -13,6 +13,7 @@ const args = {
 export const tool$threadSearch: ToolDefinition<typeof args> = {
   name: "thread-search",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await threadSearch(

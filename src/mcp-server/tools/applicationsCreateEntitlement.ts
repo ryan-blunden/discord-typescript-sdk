@@ -13,6 +13,7 @@ const args = {
 export const tool$applicationsCreateEntitlement: ToolDefinition<typeof args> = {
   name: "applications-create-entitlement",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await applicationsCreateEntitlement(

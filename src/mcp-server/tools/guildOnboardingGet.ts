@@ -13,6 +13,7 @@ const args = {
 export const tool$guildOnboardingGet: ToolDefinition<typeof args> = {
   name: "guild-onboarding-get",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildOnboardingGet(

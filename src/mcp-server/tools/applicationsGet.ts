@@ -13,6 +13,7 @@ const args = {
 export const tool$applicationsGet: ToolDefinition<typeof args> = {
   name: "applications-get",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await applicationsGet(

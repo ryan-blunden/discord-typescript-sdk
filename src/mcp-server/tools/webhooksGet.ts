@@ -13,6 +13,7 @@ const args = {
 export const tool$webhooksGet: ToolDefinition<typeof args> = {
   name: "webhooks-get",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await webhooksGet(

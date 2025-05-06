@@ -13,6 +13,7 @@ const args = {
 export const tool$autoModerationRulesDelete: ToolDefinition<typeof args> = {
   name: "auto-moderation-rules-delete",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await autoModerationRulesDelete(

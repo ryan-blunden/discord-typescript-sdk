@@ -13,6 +13,7 @@ const args = {
 export const tool$channelsMessagesReactionsAdd: ToolDefinition<typeof args> = {
   name: "channels-messages-reactions-add",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsMessagesReactionsAdd(

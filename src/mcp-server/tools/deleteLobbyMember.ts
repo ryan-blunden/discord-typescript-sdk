@@ -13,6 +13,7 @@ const args = {
 export const tool$deleteLobbyMember: ToolDefinition<typeof args> = {
   name: "delete-lobby-member",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await deleteLobbyMember(

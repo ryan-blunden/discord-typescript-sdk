@@ -13,6 +13,7 @@ const args = {
 export const tool$guildVoiceRegionsList: ToolDefinition<typeof args> = {
   name: "guild-voice-regions-list",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildVoiceRegionsList(

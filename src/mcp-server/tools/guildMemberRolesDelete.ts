@@ -13,6 +13,7 @@ const args = {
 export const tool$guildMemberRolesDelete: ToolDefinition<typeof args> = {
   name: "guild-member-roles-delete",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildMemberRolesDelete(

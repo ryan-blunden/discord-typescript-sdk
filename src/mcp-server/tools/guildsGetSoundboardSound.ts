@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsGetSoundboardSound: ToolDefinition<typeof args> = {
   name: "guilds-get-soundboard-sound",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsGetSoundboardSound(

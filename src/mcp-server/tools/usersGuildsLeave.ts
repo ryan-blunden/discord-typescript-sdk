@@ -13,6 +13,7 @@ const args = {
 export const tool$usersGuildsLeave: ToolDefinition<typeof args> = {
   name: "users-guilds-leave",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await usersGuildsLeave(

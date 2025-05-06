@@ -13,6 +13,7 @@ const args = {
 export const tool$addLobbyMember: ToolDefinition<typeof args> = {
   name: "add-lobby-member",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await addLobbyMember(

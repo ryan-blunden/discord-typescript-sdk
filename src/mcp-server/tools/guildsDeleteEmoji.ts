@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsDeleteEmoji: ToolDefinition<typeof args> = {
   name: "guilds-delete-emoji",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsDeleteEmoji(

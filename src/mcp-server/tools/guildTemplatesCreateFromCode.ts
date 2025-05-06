@@ -13,6 +13,7 @@ const args = {
 export const tool$guildTemplatesCreateFromCode: ToolDefinition<typeof args> = {
   name: "guild-templates-create-from-code",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildTemplatesCreateFromCode(

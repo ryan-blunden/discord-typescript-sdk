@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsListWebhooks: ToolDefinition<typeof args> = {
   name: "guilds-list-webhooks",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsListWebhooks(

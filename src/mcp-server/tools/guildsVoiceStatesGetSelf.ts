@@ -13,6 +13,7 @@ const args = {
 export const tool$guildsVoiceStatesGetSelf: ToolDefinition<typeof args> = {
   name: "guilds-voice-states-get-self",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsVoiceStatesGetSelf(

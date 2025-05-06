@@ -13,6 +13,7 @@ const args = {
 export const tool$channelsDeleteMessage: ToolDefinition<typeof args> = {
   name: "channels-delete-message",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsDeleteMessage(

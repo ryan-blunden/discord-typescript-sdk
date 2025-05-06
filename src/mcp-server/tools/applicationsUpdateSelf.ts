@@ -13,6 +13,7 @@ const args = {
 export const tool$applicationsUpdateSelf: ToolDefinition<typeof args> = {
   name: "applications-update-self",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await applicationsUpdateSelf(

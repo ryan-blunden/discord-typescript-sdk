@@ -13,6 +13,7 @@ const args = {
 export const tool$messagesListReactionsByEmoji: ToolDefinition<typeof args> = {
   name: "messages-list-reactions-by-emoji",
   description: ``,
+  scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await messagesListReactionsByEmoji(

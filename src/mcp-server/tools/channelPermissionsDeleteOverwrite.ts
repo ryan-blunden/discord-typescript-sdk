@@ -15,6 +15,7 @@ export const tool$channelPermissionsDeleteOverwrite: ToolDefinition<
 > = {
   name: "channel-permissions-delete-overwrite",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelPermissionsDeleteOverwrite(

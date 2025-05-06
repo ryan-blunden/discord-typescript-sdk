@@ -13,6 +13,7 @@ const args = {
 export const tool$applicationsUpdateEmoji: ToolDefinition<typeof args> = {
   name: "applications-update-emoji",
   description: ``,
+  scopes: ["write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await applicationsUpdateEmoji(
