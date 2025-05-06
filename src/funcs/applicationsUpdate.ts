@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Updates an application. Returns the updated application object on success.
+ */
 export function applicationsUpdate(
   client: DiscordCore,
   request: operations.UpdateApplicationRequest,

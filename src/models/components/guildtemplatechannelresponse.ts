@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,9 +33,34 @@ import {
   IconEmojiResponse$outboundSchema,
 } from "./iconemojiresponse.js";
 
+/**
+ * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
+ */
+export const GuildTemplateChannelResponseType = {
+  Zero: 0,
+  One: 1,
+  Two: 2,
+  Three: 3,
+  Four: 4,
+  Five: 5,
+  Seven: 7,
+  Ten: 10,
+  Eleven: 11,
+  Twelve: 12,
+  Thirteen: 13,
+  Fourteen: 14,
+  Fifteen: 15,
+} as const;
+/**
+ * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
+ */
+export type GuildTemplateChannelResponseType = ClosedEnum<
+  typeof GuildTemplateChannelResponseType
+>;
+
 export type GuildTemplateChannelResponse = {
   id?: number | null | undefined;
-  type?: 1 | undefined;
+  type: GuildTemplateChannelResponseType;
   name?: string | null | undefined;
   position?: number | null | undefined;
   topic?: string | null | undefined;
@@ -57,13 +83,34 @@ export type GuildTemplateChannelResponse = {
 };
 
 /** @internal */
+export const GuildTemplateChannelResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof GuildTemplateChannelResponseType
+> = z.nativeEnum(GuildTemplateChannelResponseType);
+
+/** @internal */
+export const GuildTemplateChannelResponseType$outboundSchema: z.ZodNativeEnum<
+  typeof GuildTemplateChannelResponseType
+> = GuildTemplateChannelResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GuildTemplateChannelResponseType$ {
+  /** @deprecated use `GuildTemplateChannelResponseType$inboundSchema` instead. */
+  export const inboundSchema = GuildTemplateChannelResponseType$inboundSchema;
+  /** @deprecated use `GuildTemplateChannelResponseType$outboundSchema` instead. */
+  export const outboundSchema = GuildTemplateChannelResponseType$outboundSchema;
+}
+
+/** @internal */
 export const GuildTemplateChannelResponse$inboundSchema: z.ZodType<
   GuildTemplateChannelResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.nullable(z.number().int()).optional(),
-  type: z.literal(1).optional(),
+  type: GuildTemplateChannelResponseType$inboundSchema,
   name: z.nullable(z.string()).optional(),
   position: z.nullable(z.number().int()).optional(),
   topic: z.nullable(z.string()).optional(),
@@ -108,7 +155,7 @@ export const GuildTemplateChannelResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type GuildTemplateChannelResponse$Outbound = {
   id?: number | null | undefined;
-  type: 1;
+  type: number;
   name?: string | null | undefined;
   position?: number | null | undefined;
   topic?: string | null | undefined;
@@ -142,7 +189,7 @@ export const GuildTemplateChannelResponse$outboundSchema: z.ZodType<
   GuildTemplateChannelResponse
 > = z.object({
   id: z.nullable(z.number().int()).optional(),
-  type: z.literal(1).default(1 as const),
+  type: GuildTemplateChannelResponseType$outboundSchema,
   name: z.nullable(z.string()).optional(),
   position: z.nullable(z.number().int()).optional(),
   topic: z.nullable(z.string()).optional(),

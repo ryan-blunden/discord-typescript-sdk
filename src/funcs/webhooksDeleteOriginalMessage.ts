@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Deletes the initial webhook message.
+ */
 export function webhooksDeleteOriginalMessage(
   client: DiscordCore,
   request: operations.DeleteOriginalWebhookMessageRequest,

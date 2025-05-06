@@ -12,7 +12,9 @@ const args = {
 
 export const tool$channelsListThreadMembers: ToolDefinition<typeof args> = {
   name: "channels-list-thread-members",
-  description: ``,
+  description:
+    `Returns array of thread member objects that are members of the thread.`,
+  scopes: ["channels", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsListThreadMembers(

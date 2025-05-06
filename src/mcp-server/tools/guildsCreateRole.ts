@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsCreateRole: ToolDefinition<typeof args> = {
   name: "guilds-create-role",
-  description: ``,
+  description:
+    `Create a new role for the guild. Requires the MANAGE_ROLES permission. Returns the new role object on success. Fires a Guild Role Create Gateway event. All JSON params are optional.`,
+  scopes: ["guilds", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsCreateRole(

@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns the Welcome Screen object for the guild. If the welcome screen is not enabled, the MANAGE_GUILD permission is required.
+ */
 export function guildsGetWelcomeScreen(
   client: DiscordCore,
   request: operations.GetGuildWelcomeScreenRequest,

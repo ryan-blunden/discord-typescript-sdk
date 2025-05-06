@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -14,9 +15,34 @@ import {
   UserResponse$outboundSchema,
 } from "./userresponse.js";
 
+/**
+ * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
+ */
+export const PrivateGroupChannelResponseType = {
+  Zero: 0,
+  One: 1,
+  Two: 2,
+  Three: 3,
+  Four: 4,
+  Five: 5,
+  Seven: 7,
+  Ten: 10,
+  Eleven: 11,
+  Twelve: 12,
+  Thirteen: 13,
+  Fourteen: 14,
+  Fifteen: 15,
+} as const;
+/**
+ * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
+ */
+export type PrivateGroupChannelResponseType = ClosedEnum<
+  typeof PrivateGroupChannelResponseType
+>;
+
 export type PrivateGroupChannelResponse = {
   id: string;
-  type?: 1 | undefined;
+  type: PrivateGroupChannelResponseType;
   lastMessageId?: string | null | undefined;
   flags: number;
   lastPinTimestamp?: Date | null | undefined;
@@ -29,13 +55,34 @@ export type PrivateGroupChannelResponse = {
 };
 
 /** @internal */
+export const PrivateGroupChannelResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof PrivateGroupChannelResponseType
+> = z.nativeEnum(PrivateGroupChannelResponseType);
+
+/** @internal */
+export const PrivateGroupChannelResponseType$outboundSchema: z.ZodNativeEnum<
+  typeof PrivateGroupChannelResponseType
+> = PrivateGroupChannelResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PrivateGroupChannelResponseType$ {
+  /** @deprecated use `PrivateGroupChannelResponseType$inboundSchema` instead. */
+  export const inboundSchema = PrivateGroupChannelResponseType$inboundSchema;
+  /** @deprecated use `PrivateGroupChannelResponseType$outboundSchema` instead. */
+  export const outboundSchema = PrivateGroupChannelResponseType$outboundSchema;
+}
+
+/** @internal */
 export const PrivateGroupChannelResponse$inboundSchema: z.ZodType<
   PrivateGroupChannelResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
-  type: z.literal(1).optional(),
+  type: PrivateGroupChannelResponseType$inboundSchema,
   last_message_id: z.nullable(z.string()).optional(),
   flags: z.number().int(),
   last_pin_timestamp: z.nullable(
@@ -59,7 +106,7 @@ export const PrivateGroupChannelResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type PrivateGroupChannelResponse$Outbound = {
   id: string;
-  type: 1;
+  type: number;
   last_message_id?: string | null | undefined;
   flags: number;
   last_pin_timestamp?: string | null | undefined;
@@ -78,7 +125,7 @@ export const PrivateGroupChannelResponse$outboundSchema: z.ZodType<
   PrivateGroupChannelResponse
 > = z.object({
   id: z.string(),
-  type: z.literal(1).default(1 as const),
+  type: PrivateGroupChannelResponseType$outboundSchema,
   lastMessageId: z.nullable(z.string()).optional(),
   flags: z.number().int(),
   lastPinTimestamp: z.nullable(z.date().transform(v => v.toISOString()))

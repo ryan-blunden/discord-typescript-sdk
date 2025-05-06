@@ -12,7 +12,8 @@ const args = {
 
 export const tool$webhooksGet: ToolDefinition<typeof args> = {
   name: "webhooks-get",
-  description: ``,
+  description: `Returns the new webhook object for the given id.`,
+  scopes: ["webhooks", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await webhooksGet(

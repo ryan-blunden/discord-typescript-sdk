@@ -14,7 +14,9 @@ export const tool$channelsListPrivateArchivedThreads: ToolDefinition<
   typeof args
 > = {
   name: "channels-list-private-archived-threads",
-  description: ``,
+  description:
+    `Returns archived threads in the channel that are of type PRIVATE_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions.`,
+  scopes: ["channels", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsListPrivateArchivedThreads(

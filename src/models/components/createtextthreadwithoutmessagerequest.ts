@@ -5,16 +5,65 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
+ */
+export const CreateTextThreadWithoutMessageRequestType = {
+  Zero: 0,
+  One: 1,
+  Two: 2,
+  Three: 3,
+  Four: 4,
+  Five: 5,
+  Seven: 7,
+  Ten: 10,
+  Eleven: 11,
+  Twelve: 12,
+  Thirteen: 13,
+  Fourteen: 14,
+  Fifteen: 15,
+} as const;
+/**
+ * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
+ */
+export type CreateTextThreadWithoutMessageRequestType = ClosedEnum<
+  typeof CreateTextThreadWithoutMessageRequestType
+>;
 
 export type CreateTextThreadWithoutMessageRequest = {
   name: string;
   autoArchiveDuration?: 60 | null | undefined;
   rateLimitPerUser?: number | null | undefined;
-  type?: 1 | undefined;
+  type?: CreateTextThreadWithoutMessageRequestType | undefined;
   invitable?: boolean | null | undefined;
 };
+
+/** @internal */
+export const CreateTextThreadWithoutMessageRequestType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateTextThreadWithoutMessageRequestType> = z
+    .nativeEnum(CreateTextThreadWithoutMessageRequestType);
+
+/** @internal */
+export const CreateTextThreadWithoutMessageRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateTextThreadWithoutMessageRequestType> =
+    CreateTextThreadWithoutMessageRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateTextThreadWithoutMessageRequestType$ {
+  /** @deprecated use `CreateTextThreadWithoutMessageRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateTextThreadWithoutMessageRequestType$inboundSchema;
+  /** @deprecated use `CreateTextThreadWithoutMessageRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateTextThreadWithoutMessageRequestType$outboundSchema;
+}
 
 /** @internal */
 export const CreateTextThreadWithoutMessageRequest$inboundSchema: z.ZodType<
@@ -25,7 +74,7 @@ export const CreateTextThreadWithoutMessageRequest$inboundSchema: z.ZodType<
   name: z.string(),
   auto_archive_duration: z.nullable(z.literal(60)).optional(),
   rate_limit_per_user: z.nullable(z.number().int()).optional(),
-  type: z.literal(1).optional(),
+  type: CreateTextThreadWithoutMessageRequestType$inboundSchema.optional(),
   invitable: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -39,7 +88,7 @@ export type CreateTextThreadWithoutMessageRequest$Outbound = {
   name: string;
   auto_archive_duration: 60 | null;
   rate_limit_per_user?: number | null | undefined;
-  type: 1;
+  type?: number | undefined;
   invitable?: boolean | null | undefined;
 };
 
@@ -52,7 +101,7 @@ export const CreateTextThreadWithoutMessageRequest$outboundSchema: z.ZodType<
   name: z.string(),
   autoArchiveDuration: z.nullable(z.literal(60).default(60 as const)),
   rateLimitPerUser: z.nullable(z.number().int()).optional(),
-  type: z.literal(1).default(1 as const),
+  type: CreateTextThreadWithoutMessageRequestType$outboundSchema.optional(),
   invitable: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {

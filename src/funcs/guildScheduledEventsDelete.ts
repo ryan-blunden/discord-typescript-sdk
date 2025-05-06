@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Delete a guild scheduled event. Returns a 204 on success. Fires a Guild Scheduled Event Delete Gateway event.
+ */
 export function guildScheduledEventsDelete(
   client: DiscordCore,
   request: operations.DeleteGuildScheduledEventRequest,

@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Begin a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions. Returns an object with one pruned key indicating the number of members that were removed in the prune operation. Fires multiple Guild Member Remove Gateway events.
+ */
 export function guildsPrune(
   client: DiscordCore,
   request: operations.PruneGuildRequest,

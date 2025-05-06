@@ -12,7 +12,8 @@ const args = {
 
 export const tool$channelsCreateInvite: ToolDefinition<typeof args> = {
   name: "channels-create-invite",
-  description: ``,
+  description: `Create a new invite object for the channel.`,
+  scopes: ["channels", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsCreateInvite(

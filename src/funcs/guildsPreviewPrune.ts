@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns an object with one pruned key indicating the number of members that would be removed in a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions.
+ */
 export function guildsPreviewPrune(
   client: DiscordCore,
   request: operations.PreviewPruneGuildRequest,

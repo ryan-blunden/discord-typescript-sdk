@@ -12,7 +12,9 @@ const args = {
 
 export const tool$channelsAddThreadMember: ToolDefinition<typeof args> = {
   name: "channels-add-thread-member",
-  description: ``,
+  description:
+    `Adds another member to a thread. Requires the ability to send messages in the thread. Also requires the thread is not archived. Returns a 204 empty response if the member is successfully added or was already a member of the thread. Fires a Thread Members Update Gateway event.`,
+  scopes: ["channels", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsAddThreadMember(

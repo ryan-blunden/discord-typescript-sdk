@@ -12,7 +12,9 @@ const args = {
 
 export const tool$webhooksUpdate: ToolDefinition<typeof args> = {
   name: "webhooks-update",
-  description: ``,
+  description:
+    `Modify a webhook. Requires the MANAGE_WEBHOOKS permission. Returns the updated webhook object on success. Fires a Webhooks Update Gateway event.`,
+  scopes: ["webhooks", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await webhooksUpdate(

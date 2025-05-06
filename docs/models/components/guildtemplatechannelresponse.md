@@ -6,10 +6,11 @@
 import { GuildTemplateChannelResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GuildTemplateChannelResponse = {
-  bitrate: 198395,
-  userLimit: 418129,
+  type: 2,
+  bitrate: 418129,
+  userLimit: 550885,
   nsfw: false,
-  rateLimitPerUser: 550885,
+  rateLimitPerUser: 656507,
   permissionOverwrites: [
     {
       id: "<value>",
@@ -26,7 +27,7 @@ let value: GuildTemplateChannelResponse = {
 | Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `id`                                                                                                             | *number*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
-| `type`                                                                                                           | *number*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `type`                                                                                                           | [components.GuildTemplateChannelResponseType](../../models/components/guildtemplatechannelresponsetype.md)       | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `name`                                                                                                           | *string*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `position`                                                                                                       | *number*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `topic`                                                                                                          | *string*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |

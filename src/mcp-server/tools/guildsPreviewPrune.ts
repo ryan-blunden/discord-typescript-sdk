@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsPreviewPrune: ToolDefinition<typeof args> = {
   name: "guilds-preview-prune",
-  description: ``,
+  description:
+    `Returns an object with one pruned key indicating the number of members that would be removed in a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions.`,
+  scopes: ["guilds", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsPreviewPrune(

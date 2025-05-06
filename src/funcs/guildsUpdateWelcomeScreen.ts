@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Modify the guild's Welcome Screen. Requires the MANAGE_GUILD permission. Returns the updated Welcome Screen object. May fire a Guild Update Gateway event.
+ */
 export function guildsUpdateWelcomeScreen(
   client: DiscordCore,
   request: operations.UpdateGuildWelcomeScreenRequest,

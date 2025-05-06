@@ -12,7 +12,9 @@ const args = {
 
 export const tool$webhooksDelete: ToolDefinition<typeof args> = {
   name: "webhooks-delete",
-  description: ``,
+  description:
+    `Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. Returns a 204 No Content response on success. Fires a Webhooks Update Gateway event.`,
+  scopes: ["webhooks", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await webhooksDelete(

@@ -24,6 +24,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns a sticker object for the given sticker ID.
+ */
 export function stickersGet(
   client: DiscordCore,
   request: operations.GetStickerRequest,

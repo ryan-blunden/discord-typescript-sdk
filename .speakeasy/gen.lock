@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d6760420-c0f7-476a-a38c-38dd82de2cc6
 management:
-  docChecksum: 552b0d3835e42f5a6d352b9143794668
+  docChecksum: 7ca118d8eb83c06493d2fbe43e4eed83
   docVersion: "10"
-  speakeasyVersion: 1.542.0
-  generationVersion: 2.596.2
-  releaseVersion: 0.3.3
-  configChecksum: 77d3076dab7f8e2f802d7dcda25fa435
+  speakeasyVersion: 1.542.3
+  generationVersion: 2.597.9
+  releaseVersion: 0.3.4
+  configChecksum: 4b0161f28925ef530cf200af4955d10b
   repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
   installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
   published: true
@@ -127,6 +127,7 @@ generatedFiles:
   - docs/models/components/channelselectcomponentresponse.md
   - docs/models/components/channelselectdefaultvalue.md
   - docs/models/components/channelselectdefaultvalueresponse.md
+  - docs/models/components/channeltypes.md
   - docs/models/components/commandpermissionresponse.md
   - docs/models/components/commandpermissionsresponse.md
   - docs/models/components/componentemojiformessagerequest.md
@@ -141,17 +142,21 @@ generatedFiles:
   - docs/models/components/containercomponentresponse.md
   - docs/models/components/containercomponentresponsecomponents.md
   - docs/models/components/createdthreadresponse.md
+  - docs/models/components/createdthreadresponsetype.md
   - docs/models/components/createentitlementrequestdata.md
   - docs/models/components/createforumthreadrequest.md
   - docs/models/components/creategroupdminviterequest.md
   - docs/models/components/createguildchannelrequest.md
+  - docs/models/components/createguildchannelrequesttype.md
   - docs/models/components/createguildinviterequest.md
   - docs/models/components/createguildrequestchannelitem.md
+  - docs/models/components/createguildrequestchannelitemtype.md
   - docs/models/components/createguildrequestroleitem.md
   - docs/models/components/createorupdatethreadtagrequest.md
   - docs/models/components/createprivatechannelrequest.md
   - docs/models/components/createtextthreadwithmessagerequest.md
   - docs/models/components/createtextthreadwithoutmessagerequest.md
+  - docs/models/components/createtextthreadwithoutmessagerequesttype.md
   - docs/models/components/defaultkeywordlisttriggermetadata.md
   - docs/models/components/defaultkeywordlisttriggermetadataresponse.md
   - docs/models/components/defaultkeywordlistupsertrequest.md
@@ -210,6 +215,7 @@ generatedFiles:
   - docs/models/components/guildbanresponse.md
   - docs/models/components/guildchannellocation.md
   - docs/models/components/guildchannelresponse.md
+  - docs/models/components/guildchannelresponsetype.md
   - docs/models/components/guildcreaterequest.md
   - docs/models/components/guildhomesettingsresponse.md
   - docs/models/components/guildincomingwebhookresponse.md
@@ -228,6 +234,7 @@ generatedFiles:
   - docs/models/components/guildstickerresponse.md
   - docs/models/components/guildsubscriptionintegrationresponse.md
   - docs/models/components/guildtemplatechannelresponse.md
+  - docs/models/components/guildtemplatechannelresponsetype.md
   - docs/models/components/guildtemplatechanneltags.md
   - docs/models/components/guildtemplateresponse.md
   - docs/models/components/guildtemplateroleresponse.md
@@ -349,6 +356,7 @@ generatedFiles:
   - docs/models/components/privatechannellocation.md
   - docs/models/components/privatechannelresponse.md
   - docs/models/components/privategroupchannelresponse.md
+  - docs/models/components/privategroupchannelresponsetype.md
   - docs/models/components/privateguildmemberresponse.md
   - docs/models/components/provisionaltokenresponse.md
   - docs/models/components/purchasenotificationresponse.md
@@ -410,11 +418,13 @@ generatedFiles:
   - docs/models/components/threadmemberresponse.md
   - docs/models/components/threadmetadataresponse.md
   - docs/models/components/threadresponse.md
+  - docs/models/components/threadresponsetype.md
   - docs/models/components/threadsearchresponse.md
   - docs/models/components/threadsresponse.md
   - docs/models/components/thumbnailcomponentformessagerequest.md
   - docs/models/components/thumbnailcomponentresponse.md
   - docs/models/components/triggeringinteractionmetadata.md
+  - docs/models/components/type.md
   - docs/models/components/typingindicatorresponse.md
   - docs/models/components/unfurledmediarequest.md
   - docs/models/components/unfurledmediarequestwithattachmentreferencerequired.md
@@ -423,6 +433,7 @@ generatedFiles:
   - docs/models/components/updatedmrequestpartial.md
   - docs/models/components/updategroupdmrequestpartial.md
   - docs/models/components/updateguildchannelrequestpartial.md
+  - docs/models/components/updateguildchannelrequestpartialtype.md
   - docs/models/components/updateguildonboardingrequest.md
   - docs/models/components/updateonboardingpromptrequest.md
   - docs/models/components/updatethreadrequestpartial.md
@@ -501,6 +512,7 @@ generatedFiles:
   - docs/models/operations/createchannelinviteresponsebody.md
   - docs/models/operations/createdmresponsebody.md
   - docs/models/operations/createentitlementrequest.md
+  - docs/models/operations/createforumthreadrequest.md
   - docs/models/operations/createguildapplicationcommandrequest.md
   - docs/models/operations/createguildapplicationcommandsecurity.md
   - docs/models/operations/createguildchannelrequest.md
@@ -529,9 +541,14 @@ generatedFiles:
   - docs/models/operations/createorjoinlobbyrequestbody.md
   - docs/models/operations/createorjoinlobbysecurity.md
   - docs/models/operations/createstageinstancerequestbody.md
-  - docs/models/operations/createthreadchannelsthreadsrequestrequestbody.md
+  - docs/models/operations/createtextthreadwithoutmessagerequest.md
+  - docs/models/operations/createthreadformrequest.md
+  - docs/models/operations/createthreadformrequestbody.md
   - docs/models/operations/createthreadfrommessagerequest.md
-  - docs/models/operations/createthreadrequest.md
+  - docs/models/operations/createthreadjsonrequest.md
+  - docs/models/operations/createthreadjsonrequestbody.md
+  - docs/models/operations/createthreadmultipartrequest.md
+  - docs/models/operations/createthreadmultipartrequestbody.md
   - docs/models/operations/createwebhookrequest.md
   - docs/models/operations/createwebhookrequestbody.md
   - docs/models/operations/crosspostmessagerequest.md
@@ -734,6 +751,7 @@ generatedFiles:
   - docs/models/operations/tag.md
   - docs/models/operations/threadsearchrequest.md
   - docs/models/operations/triggertypingindicatorrequest.md
+  - docs/models/operations/type.md
   - docs/models/operations/unbanuserfromguildrequest.md
   - docs/models/operations/unpinmessagerequest.md
   - docs/models/operations/updateapplicationcommandrequest.md
@@ -808,303 +826,257 @@ generatedFiles:
   - docs/models/operations/uploadapplicationattachmentrequest.md
   - docs/models/operations/uploadapplicationattachmentrequestbody.md
   - docs/models/operations/uploadapplicationattachmentsecurity.md
-  - docs/sdks/answers/README.md
+  - docs/sdks/applicationcommands/README.md
+  - docs/sdks/applicationroleconnectionmetadata/README.md
   - docs/sdks/applications/README.md
-  - docs/sdks/applicationscommands/README.md
-  - docs/sdks/applicationuserroleconnection/README.md
-  - docs/sdks/applicationuserroleconnections/README.md
+  - docs/sdks/auditlogs/README.md
   - docs/sdks/automoderation/README.md
-  - docs/sdks/automoderationrules/README.md
-  - docs/sdks/channelpermissions/README.md
   - docs/sdks/channels/README.md
-  - docs/sdks/channelsrecipients/README.md
-  - docs/sdks/channelsthreadmembers/README.md
-  - docs/sdks/commands/README.md
   - docs/sdks/discord/README.md
-  - docs/sdks/discordchannels/README.md
-  - docs/sdks/discordguilds/README.md
-  - docs/sdks/discordguildsscheduledevents/README.md
-  - docs/sdks/discordmessages/README.md
-  - docs/sdks/discordstickers/README.md
-  - docs/sdks/discordthreadmembers/README.md
-  - docs/sdks/discordthreads/README.md
-  - docs/sdks/discordusers/README.md
-  - docs/sdks/discordusersguilds/README.md
-  - docs/sdks/discordwebhooksmessages/README.md
-  - docs/sdks/emojis/README.md
-  - docs/sdks/gateway/README.md
-  - docs/sdks/guildapplicationcommands/README.md
-  - docs/sdks/guildbans/README.md
-  - docs/sdks/guildcommands/README.md
-  - docs/sdks/guildemojis/README.md
-  - docs/sdks/guildintegrations/README.md
-  - docs/sdks/guildmemberroles/README.md
-  - docs/sdks/guildmembers/README.md
-  - docs/sdks/guildonboarding/README.md
-  - docs/sdks/guildroles/README.md
+  - docs/sdks/emoji/README.md
+  - docs/sdks/entitlements/README.md
   - docs/sdks/guilds/README.md
-  - docs/sdks/guildschannels/README.md
   - docs/sdks/guildscheduledevents/README.md
-  - docs/sdks/guildsmembers/README.md
-  - docs/sdks/guildsoundboardsounds/README.md
-  - docs/sdks/guildssoundboardsounds/README.md
-  - docs/sdks/guildstickers/README.md
   - docs/sdks/guildtemplates/README.md
-  - docs/sdks/guildthreads/README.md
-  - docs/sdks/guildvoiceregions/README.md
-  - docs/sdks/guildwidgetsettings/README.md
-  - docs/sdks/integrations/README.md
   - docs/sdks/invites/README.md
-  - docs/sdks/messagereactions/README.md
+  - docs/sdks/lobbies/README.md
   - docs/sdks/messages/README.md
-  - docs/sdks/mfa/README.md
-  - docs/sdks/oauth2/README.md
-  - docs/sdks/openidconnect/README.md
-  - docs/sdks/permissions/README.md
-  - docs/sdks/pins/README.md
-  - docs/sdks/reactions/README.md
-  - docs/sdks/rules/README.md
-  - docs/sdks/scheduledevents/README.md
-  - docs/sdks/soundboard/README.md
-  - docs/sdks/soundboardsounds/README.md
+  - docs/sdks/polls/README.md
+  - docs/sdks/soundboards/README.md
   - docs/sdks/stageinstances/README.md
-  - docs/sdks/stickerpacks/README.md
   - docs/sdks/stickers/README.md
-  - docs/sdks/templates/README.md
-  - docs/sdks/threadmembers/README.md
-  - docs/sdks/threads/README.md
   - docs/sdks/users/README.md
   - docs/sdks/voice/README.md
-  - docs/sdks/voicestates/README.md
-  - docs/sdks/webhookmessages/README.md
   - docs/sdks/webhooks/README.md
   - eslint.config.mjs
   - jsr.json
   - package.json
   - src/core.ts
-  - src/funcs/addLobbyMember.ts
-  - src/funcs/answersGetVoters.ts
-  - src/funcs/applicationUserRoleConnectionUpdate.ts
-  - src/funcs/applicationUserRoleConnectionsGet.ts
-  - src/funcs/applicationsBulkSetCommands.ts
-  - src/funcs/applicationsCommandsCreate.ts
-  - src/funcs/applicationsCommandsUpdate.ts
-  - src/funcs/applicationsConsumeEntitlement.ts
-  - src/funcs/applicationsCreateEntitlement.ts
-  - src/funcs/applicationsCreateGuildCommand.ts
-  - src/funcs/applicationsDeleteCommand.ts
-  - src/funcs/applicationsDeleteEntitlement.ts
-  - src/funcs/applicationsDeleteUserRoleConnection.ts
-  - src/funcs/applicationsEmojisCreate.ts
-  - src/funcs/applicationsEmojisDelete.ts
+  - src/funcs/applicationCommandsBulkSet.ts
+  - src/funcs/applicationCommandsBulkSetGuild.ts
+  - src/funcs/applicationCommandsCreate.ts
+  - src/funcs/applicationCommandsCreateGuild.ts
+  - src/funcs/applicationCommandsDelete.ts
+  - src/funcs/applicationCommandsDeleteGuild.ts
+  - src/funcs/applicationCommandsGet.ts
+  - src/funcs/applicationCommandsGetGuild.ts
+  - src/funcs/applicationCommandsGetGuildPermissions.ts
+  - src/funcs/applicationCommandsList.ts
+  - src/funcs/applicationCommandsListGuild.ts
+  - src/funcs/applicationCommandsListGuildPermissions.ts
+  - src/funcs/applicationCommandsSetGuildPermissions.ts
+  - src/funcs/applicationCommandsUpdate.ts
+  - src/funcs/applicationCommandsUpdateGuild.ts
+  - src/funcs/applicationRoleConnectionMetadataDeleteUserConnection.ts
+  - src/funcs/applicationRoleConnectionMetadataList.ts
+  - src/funcs/applicationRoleConnectionMetadataUpdate.ts
   - src/funcs/applicationsGet.ts
   - src/funcs/applicationsGetActivityInstance.ts
-  - src/funcs/applicationsGetCommand.ts
-  - src/funcs/applicationsGetEmoji.ts
-  - src/funcs/applicationsGetEntitlement.ts
-  - src/funcs/applicationsGetEntitlements.ts
+  - src/funcs/applicationsGetBotGateway.ts
+  - src/funcs/applicationsGetGateway.ts
   - src/funcs/applicationsGetMe.ts
-  - src/funcs/applicationsGetRoleConnectionsMetadata.ts
-  - src/funcs/applicationsGuildsGetCommandPermissions.ts
-  - src/funcs/applicationsGuildsListCommandPermissions.ts
-  - src/funcs/applicationsListCommands.ts
-  - src/funcs/applicationsListEmojis.ts
-  - src/funcs/applicationsSetGuildCommandPermissions.ts
+  - src/funcs/applicationsGetOAuth2Authorization.ts
+  - src/funcs/applicationsGetOAuth2Me.ts
+  - src/funcs/applicationsGetOpenIDConnectUserInfo.ts
+  - src/funcs/applicationsGetPublicKeys.ts
+  - src/funcs/applicationsPartnerSDKToken.ts
+  - src/funcs/applicationsPartnerSDKUnmergeProvisionalAccount.ts
   - src/funcs/applicationsUpdate.ts
-  - src/funcs/applicationsUpdateEmoji.ts
-  - src/funcs/applicationsUpdateRoleConnectionsMetadata.ts
   - src/funcs/applicationsUpdateSelf.ts
   - src/funcs/applicationsUploadAttachment.ts
-  - src/funcs/autoModerationRulesCreate.ts
-  - src/funcs/autoModerationRulesDelete.ts
-  - src/funcs/autoModerationRulesGet.ts
-  - src/funcs/channelPermissionsDeleteOverwrite.ts
+  - src/funcs/auditLogsList.ts
+  - src/funcs/autoModerationCreateRule.ts
+  - src/funcs/autoModerationDeleteRule.ts
+  - src/funcs/autoModerationGetRule.ts
+  - src/funcs/autoModerationListRules.ts
+  - src/funcs/autoModerationUpdateRule.ts
+  - src/funcs/channelsAddGroupDMRecipient.ts
   - src/funcs/channelsAddThreadMember.ts
   - src/funcs/channelsCreateInvite.ts
-  - src/funcs/channelsCreateWebhook.ts
-  - src/funcs/channelsCrosspostMessage.ts
   - src/funcs/channelsDelete.ts
-  - src/funcs/channelsDeleteDmUser.ts
-  - src/funcs/channelsDeleteMessage.ts
-  - src/funcs/channelsDeleteUserMessageReaction.ts
-  - src/funcs/channelsExpirePoll.ts
+  - src/funcs/channelsDeletePermissionOverwrite.ts
   - src/funcs/channelsFollow.ts
   - src/funcs/channelsGet.ts
   - src/funcs/channelsGetThreadMember.ts
+  - src/funcs/channelsJoinThread.ts
+  - src/funcs/channelsLeaveThread.ts
   - src/funcs/channelsListInvites.ts
-  - src/funcs/channelsListMyPrivateArchivedThreads.ts
+  - src/funcs/channelsListJoinedPrivateArchivedThreads.ts
   - src/funcs/channelsListPinnedMessages.ts
   - src/funcs/channelsListPrivateArchivedThreads.ts
+  - src/funcs/channelsListPublicArchivedThreads.ts
   - src/funcs/channelsListThreadMembers.ts
-  - src/funcs/channelsListWebhooks.ts
-  - src/funcs/channelsMessagesBulkDelete.ts
-  - src/funcs/channelsMessagesCreateForm.ts
-  - src/funcs/channelsMessagesCreateJson.ts
-  - src/funcs/channelsMessagesCreateMultipart.ts
-  - src/funcs/channelsMessagesDeleteAllReactions.ts
-  - src/funcs/channelsMessagesDeleteMyReaction.ts
-  - src/funcs/channelsMessagesGet.ts
-  - src/funcs/channelsMessagesList.ts
-  - src/funcs/channelsMessagesReactionsAdd.ts
-  - src/funcs/channelsMessagesUpdateForm.ts
-  - src/funcs/channelsMessagesUpdateJson.ts
-  - src/funcs/channelsMessagesUpdateMultipart.ts
-  - src/funcs/channelsPermissionsSetOverwrite.ts
   - src/funcs/channelsPinMessage.ts
-  - src/funcs/channelsPinsUnpin.ts
-  - src/funcs/channelsRecipientsAddGroupDmUser.ts
-  - src/funcs/channelsSendSoundboardSound.ts
+  - src/funcs/channelsRemoveGroupDMRecipient.ts
+  - src/funcs/channelsRemoveThreadMember.ts
+  - src/funcs/channelsSearchThreads.ts
+  - src/funcs/channelsSetPermissionOverwrite.ts
+  - src/funcs/channelsStartThreadForm.ts
   - src/funcs/channelsStartThreadFromMessage.ts
-  - src/funcs/channelsThreadMembersJoin.ts
-  - src/funcs/channelsThreadMembersLeave.ts
-  - src/funcs/channelsThreadsCreate.ts
-  - src/funcs/channelsTriggerTyping.ts
+  - src/funcs/channelsStartThreadJson.ts
+  - src/funcs/channelsStartThreadMultipart.ts
+  - src/funcs/channelsTriggerTypingIndicator.ts
+  - src/funcs/channelsUnpinMessage.ts
   - src/funcs/channelsUpdate.ts
-  - src/funcs/createLobby.ts
-  - src/funcs/createLobbyMessage.ts
-  - src/funcs/createOrJoinLobby.ts
-  - src/funcs/deleteLobbyMember.ts
-  - src/funcs/editLobby.ts
-  - src/funcs/editLobbyChannelLink.ts
-  - src/funcs/gatewayGet.ts
-  - src/funcs/gatewayGetBot.ts
-  - src/funcs/getLobby.ts
-  - src/funcs/guildApplicationCommandsBulkSet.ts
-  - src/funcs/guildApplicationCommandsDelete.ts
-  - src/funcs/guildApplicationCommandsList.ts
-  - src/funcs/guildApplicationCommandsUpdate.ts
-  - src/funcs/guildBansBulkBan.ts
-  - src/funcs/guildBansGet.ts
-  - src/funcs/guildBansList.ts
-  - src/funcs/guildCommandsGet.ts
-  - src/funcs/guildEmojisGet.ts
-  - src/funcs/guildIntegrationsDelete.ts
-  - src/funcs/guildMemberRolesAdd.ts
-  - src/funcs/guildMemberRolesDelete.ts
-  - src/funcs/guildMembersAdd.ts
-  - src/funcs/guildOnboardingGet.ts
-  - src/funcs/guildOnboardingUpdate.ts
-  - src/funcs/guildRolesBulkUpdate.ts
+  - src/funcs/emojiCreateApplicationEmoji.ts
+  - src/funcs/emojiCreateGuildEmoji.ts
+  - src/funcs/emojiDeleteApplicationEmoji.ts
+  - src/funcs/emojiDeleteGuildEmoji.ts
+  - src/funcs/emojiGetApplicationEmoji.ts
+  - src/funcs/emojiGetGuildEmoji.ts
+  - src/funcs/emojiListApplicationEmojis.ts
+  - src/funcs/emojiListGuildEmojis.ts
+  - src/funcs/emojiUpdateApplicationEmoji.ts
+  - src/funcs/emojiUpdateGuildEmoji.ts
+  - src/funcs/entitlementsConsume.ts
+  - src/funcs/entitlementsCreateTest.ts
+  - src/funcs/entitlementsDeleteTest.ts
+  - src/funcs/entitlementsGet.ts
+  - src/funcs/entitlementsList.ts
+  - src/funcs/guildScheduledEventsCreate.ts
   - src/funcs/guildScheduledEventsDelete.ts
-  - src/funcs/guildSoundboardSoundsDelete.ts
-  - src/funcs/guildStickersList.ts
-  - src/funcs/guildTemplatesCreateFromCode.ts
-  - src/funcs/guildThreadsGetActive.ts
-  - src/funcs/guildVoiceRegionsList.ts
-  - src/funcs/guildWidgetSettingsUpdate.ts
-  - src/funcs/guildsAutoModerationRulesUpdate.ts
-  - src/funcs/guildsBanUser.ts
-  - src/funcs/guildsChannelsBulkUpdate.ts
-  - src/funcs/guildsChannelsCreate.ts
+  - src/funcs/guildScheduledEventsGet.ts
+  - src/funcs/guildScheduledEventsGetUsers.ts
+  - src/funcs/guildScheduledEventsList.ts
+  - src/funcs/guildScheduledEventsUpdate.ts
+  - src/funcs/guildTemplatesCreate.ts
+  - src/funcs/guildTemplatesCreateGuild.ts
+  - src/funcs/guildTemplatesDelete.ts
+  - src/funcs/guildTemplatesGet.ts
+  - src/funcs/guildTemplatesGetNewMemberWelcome.ts
+  - src/funcs/guildTemplatesList.ts
+  - src/funcs/guildTemplatesSync.ts
+  - src/funcs/guildTemplatesUpdate.ts
+  - src/funcs/guildsAddMember.ts
+  - src/funcs/guildsAddMemberRole.ts
+  - src/funcs/guildsBulkBan.ts
   - src/funcs/guildsCreate.ts
-  - src/funcs/guildsCreateEmoji.ts
+  - src/funcs/guildsCreateBan.ts
+  - src/funcs/guildsCreateChannel.ts
   - src/funcs/guildsCreateRole.ts
-  - src/funcs/guildsCreateSoundboardSound.ts
-  - src/funcs/guildsCreateSticker.ts
   - src/funcs/guildsDelete.ts
-  - src/funcs/guildsDeleteEmoji.ts
-  - src/funcs/guildsDeleteMember.ts
+  - src/funcs/guildsDeleteIntegration.ts
   - src/funcs/guildsDeleteRole.ts
-  - src/funcs/guildsDeleteSticker.ts
   - src/funcs/guildsGet.ts
-  - src/funcs/guildsGetMyMember.ts
-  - src/funcs/guildsGetNewMemberWelcome.ts
+  - src/funcs/guildsGetBan.ts
+  - src/funcs/guildsGetMember.ts
+  - src/funcs/guildsGetOnboarding.ts
   - src/funcs/guildsGetPreview.ts
   - src/funcs/guildsGetRole.ts
-  - src/funcs/guildsGetSoundboardSound.ts
-  - src/funcs/guildsGetSticker.ts
-  - src/funcs/guildsGetTemplate.ts
   - src/funcs/guildsGetVanityUrl.ts
-  - src/funcs/guildsGetVoiceState.ts
   - src/funcs/guildsGetWelcomeScreen.ts
   - src/funcs/guildsGetWidget.ts
   - src/funcs/guildsGetWidgetPng.ts
   - src/funcs/guildsGetWidgetSettings.ts
-  - src/funcs/guildsIntegrationsList.ts
-  - src/funcs/guildsListAuditLogs.ts
-  - src/funcs/guildsListAutoModerationRules.ts
+  - src/funcs/guildsListActiveThreads.ts
+  - src/funcs/guildsListBans.ts
   - src/funcs/guildsListChannels.ts
-  - src/funcs/guildsListEmojis.ts
+  - src/funcs/guildsListIntegrations.ts
   - src/funcs/guildsListInvites.ts
   - src/funcs/guildsListMembers.ts
   - src/funcs/guildsListRoles.ts
-  - src/funcs/guildsListTemplates.ts
-  - src/funcs/guildsListWebhooks.ts
-  - src/funcs/guildsMembersGet.ts
-  - src/funcs/guildsMembersUpdate.ts
-  - src/funcs/guildsMembersUpdateMe.ts
-  - src/funcs/guildsMfaSetLevel.ts
+  - src/funcs/guildsListVoiceRegions.ts
   - src/funcs/guildsPreviewPrune.ts
   - src/funcs/guildsPrune.ts
-  - src/funcs/guildsScheduledEventsGet.ts
-  - src/funcs/guildsScheduledEventsList.ts
-  - src/funcs/guildsScheduledEventsUpdate.ts
-  - src/funcs/guildsScheduledEventsUsersList.ts
+  - src/funcs/guildsRemoveBan.ts
+  - src/funcs/guildsRemoveMember.ts
+  - src/funcs/guildsRemoveMemberRole.ts
   - src/funcs/guildsSearchMembers.ts
-  - src/funcs/guildsSoundboardSoundsList.ts
-  - src/funcs/guildsSoundboardSoundsUpdate.ts
-  - src/funcs/guildsStickersUpdate.ts
-  - src/funcs/guildsSyncTemplate.ts
-  - src/funcs/guildsTemplatesCreate.ts
-  - src/funcs/guildsTemplatesDelete.ts
-  - src/funcs/guildsUnbanUser.ts
+  - src/funcs/guildsSetMfaLevel.ts
   - src/funcs/guildsUpdate.ts
-  - src/funcs/guildsUpdateEmoji.ts
+  - src/funcs/guildsUpdateChannelPositions.ts
+  - src/funcs/guildsUpdateCurrentMember.ts
+  - src/funcs/guildsUpdateMember.ts
+  - src/funcs/guildsUpdateOnboarding.ts
   - src/funcs/guildsUpdateRole.ts
-  - src/funcs/guildsUpdateTemplate.ts
+  - src/funcs/guildsUpdateRolePositions.ts
   - src/funcs/guildsUpdateWelcomeScreen.ts
-  - src/funcs/guildsVoiceStatesGetSelf.ts
-  - src/funcs/guildsVoiceStatesUpdate.ts
-  - src/funcs/guildsVoiceStatesUpdateSelf.ts
-  - src/funcs/invitesResolve.ts
-  - src/funcs/invitesRevoke.ts
-  - src/funcs/leaveLobby.ts
-  - src/funcs/messageReactionsDeleteAllByEmoji.ts
+  - src/funcs/guildsUpdateWidgetSettings.ts
+  - src/funcs/invitesDelete.ts
+  - src/funcs/invitesGet.ts
+  - src/funcs/lobbiesAddMember.ts
+  - src/funcs/lobbiesConnectToChannel.ts
+  - src/funcs/lobbiesCreate.ts
+  - src/funcs/lobbiesCreateOrJoin.ts
+  - src/funcs/lobbiesGet.ts
+  - src/funcs/lobbiesLeave.ts
+  - src/funcs/lobbiesRemoveMember.ts
+  - src/funcs/lobbiesSendMessage.ts
+  - src/funcs/lobbiesUpdate.ts
+  - src/funcs/messagesBulkDelete.ts
+  - src/funcs/messagesCreateForm.ts
+  - src/funcs/messagesCreateJson.ts
+  - src/funcs/messagesCreateMultipart.ts
+  - src/funcs/messagesCreateReaction.ts
+  - src/funcs/messagesCrosspost.ts
+  - src/funcs/messagesDelete.ts
+  - src/funcs/messagesDeleteAllReactions.ts
+  - src/funcs/messagesDeleteAllReactionsForEmoji.ts
+  - src/funcs/messagesDeleteOwnReaction.ts
+  - src/funcs/messagesDeleteUserReaction.ts
+  - src/funcs/messagesGet.ts
+  - src/funcs/messagesList.ts
   - src/funcs/messagesListReactionsByEmoji.ts
-  - src/funcs/oauth2GetAuthorization.ts
-  - src/funcs/oauth2GetKeys.ts
-  - src/funcs/oauth2GetMyApplication.ts
-  - src/funcs/openidConnectGetUserinfo.ts
-  - src/funcs/partnerSDKToken.ts
-  - src/funcs/partnerSDKUnmergeProvisionalAccount.ts
-  - src/funcs/scheduledEventsCreate.ts
-  - src/funcs/soundboardGetDefaultSounds.ts
+  - src/funcs/messagesUpdateForm.ts
+  - src/funcs/messagesUpdateJson.ts
+  - src/funcs/messagesUpdateMultipart.ts
+  - src/funcs/pollsExpire.ts
+  - src/funcs/pollsGetAnswerVoters.ts
+  - src/funcs/soundboardsCreateGuildSoundboardSound.ts
+  - src/funcs/soundboardsDeleteGuildSoundboardSound.ts
+  - src/funcs/soundboardsGetGuildSoundboardSound.ts
+  - src/funcs/soundboardsGetSoundboardDefaultSounds.ts
+  - src/funcs/soundboardsListGuildSoundboardSounds.ts
+  - src/funcs/soundboardsSendSoundboardSound.ts
+  - src/funcs/soundboardsUpdateGuildSoundboardSound.ts
   - src/funcs/stageInstancesCreate.ts
   - src/funcs/stageInstancesDelete.ts
   - src/funcs/stageInstancesGet.ts
   - src/funcs/stageInstancesUpdate.ts
-  - src/funcs/stickerPacksGet.ts
-  - src/funcs/stickerPacksList.ts
+  - src/funcs/stickersCreateGuildSticker.ts
+  - src/funcs/stickersDeleteGuildSticker.ts
   - src/funcs/stickersGet.ts
-  - src/funcs/threadMembersDelete.ts
-  - src/funcs/threadSearch.ts
-  - src/funcs/threadsListPublicArchived.ts
-  - src/funcs/usersCreateDm.ts
+  - src/funcs/stickersGetGuildSticker.ts
+  - src/funcs/stickersGetPack.ts
+  - src/funcs/stickersListGuildStickers.ts
+  - src/funcs/stickersListPacks.ts
+  - src/funcs/stickersUpdateGuildSticker.ts
+  - src/funcs/usersCreateDM.ts
   - src/funcs/usersGet.ts
-  - src/funcs/usersGetMe.ts
-  - src/funcs/usersGuildsLeave.ts
-  - src/funcs/usersListMyConnections.ts
-  - src/funcs/usersListMyGuilds.ts
-  - src/funcs/usersUpdateMe.ts
+  - src/funcs/usersGetApplicationRoleConnection.ts
+  - src/funcs/usersGetCurrent.ts
+  - src/funcs/usersGetGuildMember.ts
+  - src/funcs/usersLeaveGuild.ts
+  - src/funcs/usersListConnections.ts
+  - src/funcs/usersListGuilds.ts
+  - src/funcs/usersUpdateApplicationRoleConnection.ts
+  - src/funcs/usersUpdateCurrent.ts
+  - src/funcs/voiceGetCurrentUserState.ts
+  - src/funcs/voiceGetUserState.ts
   - src/funcs/voiceListRegions.ts
-  - src/funcs/webhookMessagesGetOriginal.ts
+  - src/funcs/voiceUpdateCurrentUserState.ts
+  - src/funcs/voiceUpdateUserState.ts
+  - src/funcs/webhooksCreate.ts
   - src/funcs/webhooksDelete.ts
-  - src/funcs/webhooksDeleteByToken.ts
+  - src/funcs/webhooksDeleteMessage.ts
   - src/funcs/webhooksDeleteOriginalMessage.ts
-  - src/funcs/webhooksExecuteGithubCompatible.ts
-  - src/funcs/webhooksExecuteSlackCompatible.ts
+  - src/funcs/webhooksDeleteWithToken.ts
+  - src/funcs/webhooksExecuteGithub.ts
+  - src/funcs/webhooksExecuteSlack.ts
   - src/funcs/webhooksGet.ts
-  - src/funcs/webhooksGetByToken.ts
   - src/funcs/webhooksGetMessage.ts
-  - src/funcs/webhooksMessagesDelete.ts
+  - src/funcs/webhooksGetOriginalMessage.ts
+  - src/funcs/webhooksGetWithToken.ts
+  - src/funcs/webhooksListForChannel.ts
+  - src/funcs/webhooksListForGuild.ts
   - src/funcs/webhooksUpdate.ts
-  - src/funcs/webhooksUpdateByToken.ts
   - src/funcs/webhooksUpdateMessageForm.ts
   - src/funcs/webhooksUpdateMessageJson.ts
   - src/funcs/webhooksUpdateMessageMultipart.ts
   - src/funcs/webhooksUpdateOriginalMessageForm.ts
   - src/funcs/webhooksUpdateOriginalMessageJson.ts
   - src/funcs/webhooksUpdateOriginalMessageMultipart.ts
+  - src/funcs/webhooksUpdateWithToken.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts
   - src/hooks/types.ts
@@ -1138,174 +1110,176 @@ generatedFiles:
   - src/mcp-server/server.ts
   - src/mcp-server/shared.ts
   - src/mcp-server/tools.ts
-  - src/mcp-server/tools/addLobbyMember.ts
-  - src/mcp-server/tools/answersGetVoters.ts
-  - src/mcp-server/tools/applicationUserRoleConnectionUpdate.ts
-  - src/mcp-server/tools/applicationUserRoleConnectionsGet.ts
-  - src/mcp-server/tools/applicationsCreateEntitlement.ts
-  - src/mcp-server/tools/applicationsDeleteUserRoleConnection.ts
-  - src/mcp-server/tools/applicationsEmojisCreate.ts
-  - src/mcp-server/tools/applicationsEmojisDelete.ts
+  - src/mcp-server/tools/applicationRoleConnectionMetadataDeleteUserConnection.ts
+  - src/mcp-server/tools/applicationRoleConnectionMetadataList.ts
+  - src/mcp-server/tools/applicationRoleConnectionMetadataUpdate.ts
   - src/mcp-server/tools/applicationsGet.ts
   - src/mcp-server/tools/applicationsGetActivityInstance.ts
-  - src/mcp-server/tools/applicationsGetEmoji.ts
+  - src/mcp-server/tools/applicationsGetBotGateway.ts
   - src/mcp-server/tools/applicationsGetMe.ts
-  - src/mcp-server/tools/applicationsGetRoleConnectionsMetadata.ts
-  - src/mcp-server/tools/applicationsListEmojis.ts
+  - src/mcp-server/tools/applicationsGetOAuth2Me.ts
   - src/mcp-server/tools/applicationsUpdate.ts
-  - src/mcp-server/tools/applicationsUpdateEmoji.ts
-  - src/mcp-server/tools/applicationsUpdateRoleConnectionsMetadata.ts
   - src/mcp-server/tools/applicationsUpdateSelf.ts
-  - src/mcp-server/tools/autoModerationRulesCreate.ts
-  - src/mcp-server/tools/autoModerationRulesDelete.ts
-  - src/mcp-server/tools/autoModerationRulesGet.ts
-  - src/mcp-server/tools/channelPermissionsDeleteOverwrite.ts
+  - src/mcp-server/tools/auditLogsList.ts
+  - src/mcp-server/tools/autoModerationCreateRule.ts
+  - src/mcp-server/tools/autoModerationDeleteRule.ts
+  - src/mcp-server/tools/autoModerationGetRule.ts
+  - src/mcp-server/tools/autoModerationListRules.ts
+  - src/mcp-server/tools/autoModerationUpdateRule.ts
+  - src/mcp-server/tools/channelsAddGroupDMRecipient.ts
   - src/mcp-server/tools/channelsAddThreadMember.ts
   - src/mcp-server/tools/channelsCreateInvite.ts
-  - src/mcp-server/tools/channelsCreateWebhook.ts
-  - src/mcp-server/tools/channelsCrosspostMessage.ts
   - src/mcp-server/tools/channelsDelete.ts
-  - src/mcp-server/tools/channelsDeleteDmUser.ts
-  - src/mcp-server/tools/channelsDeleteMessage.ts
-  - src/mcp-server/tools/channelsDeleteUserMessageReaction.ts
-  - src/mcp-server/tools/channelsExpirePoll.ts
+  - src/mcp-server/tools/channelsDeletePermissionOverwrite.ts
   - src/mcp-server/tools/channelsFollow.ts
   - src/mcp-server/tools/channelsGet.ts
   - src/mcp-server/tools/channelsGetThreadMember.ts
+  - src/mcp-server/tools/channelsJoinThread.ts
+  - src/mcp-server/tools/channelsLeaveThread.ts
   - src/mcp-server/tools/channelsListInvites.ts
-  - src/mcp-server/tools/channelsListMyPrivateArchivedThreads.ts
+  - src/mcp-server/tools/channelsListJoinedPrivateArchivedThreads.ts
   - src/mcp-server/tools/channelsListPinnedMessages.ts
   - src/mcp-server/tools/channelsListPrivateArchivedThreads.ts
+  - src/mcp-server/tools/channelsListPublicArchivedThreads.ts
   - src/mcp-server/tools/channelsListThreadMembers.ts
-  - src/mcp-server/tools/channelsListWebhooks.ts
-  - src/mcp-server/tools/channelsMessagesBulkDelete.ts
-  - src/mcp-server/tools/channelsMessagesCreateForm.ts
-  - src/mcp-server/tools/channelsMessagesCreateJson.ts
-  - src/mcp-server/tools/channelsMessagesCreateMultipart.ts
-  - src/mcp-server/tools/channelsMessagesDeleteAllReactions.ts
-  - src/mcp-server/tools/channelsMessagesDeleteMyReaction.ts
-  - src/mcp-server/tools/channelsMessagesGet.ts
-  - src/mcp-server/tools/channelsMessagesList.ts
-  - src/mcp-server/tools/channelsMessagesReactionsAdd.ts
-  - src/mcp-server/tools/channelsMessagesUpdateForm.ts
-  - src/mcp-server/tools/channelsMessagesUpdateJson.ts
-  - src/mcp-server/tools/channelsMessagesUpdateMultipart.ts
-  - src/mcp-server/tools/channelsPermissionsSetOverwrite.ts
   - src/mcp-server/tools/channelsPinMessage.ts
-  - src/mcp-server/tools/channelsPinsUnpin.ts
-  - src/mcp-server/tools/channelsRecipientsAddGroupDmUser.ts
-  - src/mcp-server/tools/channelsSendSoundboardSound.ts
+  - src/mcp-server/tools/channelsRemoveGroupDMRecipient.ts
+  - src/mcp-server/tools/channelsRemoveThreadMember.ts
+  - src/mcp-server/tools/channelsSearchThreads.ts
+  - src/mcp-server/tools/channelsSetPermissionOverwrite.ts
+  - src/mcp-server/tools/channelsStartThreadForm.ts
   - src/mcp-server/tools/channelsStartThreadFromMessage.ts
-  - src/mcp-server/tools/channelsThreadMembersJoin.ts
-  - src/mcp-server/tools/channelsThreadMembersLeave.ts
-  - src/mcp-server/tools/channelsThreadsCreate.ts
-  - src/mcp-server/tools/channelsTriggerTyping.ts
+  - src/mcp-server/tools/channelsStartThreadJson.ts
+  - src/mcp-server/tools/channelsStartThreadMultipart.ts
+  - src/mcp-server/tools/channelsTriggerTypingIndicator.ts
+  - src/mcp-server/tools/channelsUnpinMessage.ts
   - src/mcp-server/tools/channelsUpdate.ts
-  - src/mcp-server/tools/createLobby.ts
-  - src/mcp-server/tools/deleteLobbyMember.ts
-  - src/mcp-server/tools/editLobby.ts
-  - src/mcp-server/tools/gatewayGetBot.ts
-  - src/mcp-server/tools/getLobby.ts
-  - src/mcp-server/tools/guildBansBulkBan.ts
-  - src/mcp-server/tools/guildBansGet.ts
-  - src/mcp-server/tools/guildBansList.ts
-  - src/mcp-server/tools/guildEmojisGet.ts
-  - src/mcp-server/tools/guildIntegrationsDelete.ts
-  - src/mcp-server/tools/guildMemberRolesAdd.ts
-  - src/mcp-server/tools/guildMemberRolesDelete.ts
-  - src/mcp-server/tools/guildMembersAdd.ts
-  - src/mcp-server/tools/guildOnboardingGet.ts
-  - src/mcp-server/tools/guildOnboardingUpdate.ts
-  - src/mcp-server/tools/guildRolesBulkUpdate.ts
+  - src/mcp-server/tools/emojiCreateApplicationEmoji.ts
+  - src/mcp-server/tools/emojiCreateGuildEmoji.ts
+  - src/mcp-server/tools/emojiDeleteApplicationEmoji.ts
+  - src/mcp-server/tools/emojiDeleteGuildEmoji.ts
+  - src/mcp-server/tools/emojiGetApplicationEmoji.ts
+  - src/mcp-server/tools/emojiGetGuildEmoji.ts
+  - src/mcp-server/tools/emojiListApplicationEmojis.ts
+  - src/mcp-server/tools/emojiListGuildEmojis.ts
+  - src/mcp-server/tools/emojiUpdateApplicationEmoji.ts
+  - src/mcp-server/tools/emojiUpdateGuildEmoji.ts
+  - src/mcp-server/tools/entitlementsCreateTest.ts
+  - src/mcp-server/tools/guildScheduledEventsCreate.ts
   - src/mcp-server/tools/guildScheduledEventsDelete.ts
-  - src/mcp-server/tools/guildSoundboardSoundsDelete.ts
-  - src/mcp-server/tools/guildStickersList.ts
-  - src/mcp-server/tools/guildTemplatesCreateFromCode.ts
-  - src/mcp-server/tools/guildThreadsGetActive.ts
-  - src/mcp-server/tools/guildVoiceRegionsList.ts
-  - src/mcp-server/tools/guildWidgetSettingsUpdate.ts
-  - src/mcp-server/tools/guildsAutoModerationRulesUpdate.ts
-  - src/mcp-server/tools/guildsBanUser.ts
-  - src/mcp-server/tools/guildsChannelsBulkUpdate.ts
-  - src/mcp-server/tools/guildsChannelsCreate.ts
+  - src/mcp-server/tools/guildScheduledEventsGet.ts
+  - src/mcp-server/tools/guildScheduledEventsGetUsers.ts
+  - src/mcp-server/tools/guildScheduledEventsList.ts
+  - src/mcp-server/tools/guildScheduledEventsUpdate.ts
+  - src/mcp-server/tools/guildTemplatesCreate.ts
+  - src/mcp-server/tools/guildTemplatesCreateGuild.ts
+  - src/mcp-server/tools/guildTemplatesDelete.ts
+  - src/mcp-server/tools/guildTemplatesGetNewMemberWelcome.ts
+  - src/mcp-server/tools/guildTemplatesList.ts
+  - src/mcp-server/tools/guildTemplatesSync.ts
+  - src/mcp-server/tools/guildTemplatesUpdate.ts
+  - src/mcp-server/tools/guildsAddMember.ts
+  - src/mcp-server/tools/guildsAddMemberRole.ts
+  - src/mcp-server/tools/guildsBulkBan.ts
   - src/mcp-server/tools/guildsCreate.ts
-  - src/mcp-server/tools/guildsCreateEmoji.ts
+  - src/mcp-server/tools/guildsCreateBan.ts
+  - src/mcp-server/tools/guildsCreateChannel.ts
   - src/mcp-server/tools/guildsCreateRole.ts
-  - src/mcp-server/tools/guildsCreateSoundboardSound.ts
-  - src/mcp-server/tools/guildsCreateSticker.ts
   - src/mcp-server/tools/guildsDelete.ts
-  - src/mcp-server/tools/guildsDeleteEmoji.ts
-  - src/mcp-server/tools/guildsDeleteMember.ts
+  - src/mcp-server/tools/guildsDeleteIntegration.ts
   - src/mcp-server/tools/guildsDeleteRole.ts
-  - src/mcp-server/tools/guildsDeleteSticker.ts
   - src/mcp-server/tools/guildsGet.ts
-  - src/mcp-server/tools/guildsGetMyMember.ts
-  - src/mcp-server/tools/guildsGetNewMemberWelcome.ts
+  - src/mcp-server/tools/guildsGetBan.ts
+  - src/mcp-server/tools/guildsGetMember.ts
+  - src/mcp-server/tools/guildsGetOnboarding.ts
   - src/mcp-server/tools/guildsGetPreview.ts
   - src/mcp-server/tools/guildsGetRole.ts
-  - src/mcp-server/tools/guildsGetSoundboardSound.ts
-  - src/mcp-server/tools/guildsGetSticker.ts
   - src/mcp-server/tools/guildsGetVanityUrl.ts
-  - src/mcp-server/tools/guildsGetVoiceState.ts
   - src/mcp-server/tools/guildsGetWelcomeScreen.ts
   - src/mcp-server/tools/guildsGetWidgetSettings.ts
-  - src/mcp-server/tools/guildsIntegrationsList.ts
-  - src/mcp-server/tools/guildsListAuditLogs.ts
-  - src/mcp-server/tools/guildsListAutoModerationRules.ts
-  - src/mcp-server/tools/guildsListEmojis.ts
+  - src/mcp-server/tools/guildsListActiveThreads.ts
+  - src/mcp-server/tools/guildsListBans.ts
+  - src/mcp-server/tools/guildsListIntegrations.ts
   - src/mcp-server/tools/guildsListInvites.ts
   - src/mcp-server/tools/guildsListMembers.ts
   - src/mcp-server/tools/guildsListRoles.ts
-  - src/mcp-server/tools/guildsListTemplates.ts
-  - src/mcp-server/tools/guildsListWebhooks.ts
-  - src/mcp-server/tools/guildsMembersGet.ts
-  - src/mcp-server/tools/guildsMembersUpdate.ts
-  - src/mcp-server/tools/guildsMembersUpdateMe.ts
-  - src/mcp-server/tools/guildsMfaSetLevel.ts
+  - src/mcp-server/tools/guildsListVoiceRegions.ts
   - src/mcp-server/tools/guildsPreviewPrune.ts
   - src/mcp-server/tools/guildsPrune.ts
-  - src/mcp-server/tools/guildsScheduledEventsGet.ts
-  - src/mcp-server/tools/guildsScheduledEventsList.ts
-  - src/mcp-server/tools/guildsScheduledEventsUpdate.ts
-  - src/mcp-server/tools/guildsScheduledEventsUsersList.ts
+  - src/mcp-server/tools/guildsRemoveBan.ts
+  - src/mcp-server/tools/guildsRemoveMember.ts
+  - src/mcp-server/tools/guildsRemoveMemberRole.ts
   - src/mcp-server/tools/guildsSearchMembers.ts
-  - src/mcp-server/tools/guildsSoundboardSoundsList.ts
-  - src/mcp-server/tools/guildsSoundboardSoundsUpdate.ts
-  - src/mcp-server/tools/guildsStickersUpdate.ts
-  - src/mcp-server/tools/guildsSyncTemplate.ts
-  - src/mcp-server/tools/guildsTemplatesCreate.ts
-  - src/mcp-server/tools/guildsTemplatesDelete.ts
-  - src/mcp-server/tools/guildsUnbanUser.ts
+  - src/mcp-server/tools/guildsSetMfaLevel.ts
   - src/mcp-server/tools/guildsUpdate.ts
-  - src/mcp-server/tools/guildsUpdateEmoji.ts
+  - src/mcp-server/tools/guildsUpdateChannelPositions.ts
+  - src/mcp-server/tools/guildsUpdateCurrentMember.ts
+  - src/mcp-server/tools/guildsUpdateMember.ts
+  - src/mcp-server/tools/guildsUpdateOnboarding.ts
   - src/mcp-server/tools/guildsUpdateRole.ts
-  - src/mcp-server/tools/guildsUpdateTemplate.ts
+  - src/mcp-server/tools/guildsUpdateRolePositions.ts
   - src/mcp-server/tools/guildsUpdateWelcomeScreen.ts
-  - src/mcp-server/tools/guildsVoiceStatesGetSelf.ts
-  - src/mcp-server/tools/guildsVoiceStatesUpdate.ts
-  - src/mcp-server/tools/guildsVoiceStatesUpdateSelf.ts
-  - src/mcp-server/tools/invitesRevoke.ts
-  - src/mcp-server/tools/messageReactionsDeleteAllByEmoji.ts
+  - src/mcp-server/tools/guildsUpdateWidgetSettings.ts
+  - src/mcp-server/tools/invitesDelete.ts
+  - src/mcp-server/tools/lobbiesAddMember.ts
+  - src/mcp-server/tools/lobbiesCreate.ts
+  - src/mcp-server/tools/lobbiesGet.ts
+  - src/mcp-server/tools/lobbiesRemoveMember.ts
+  - src/mcp-server/tools/lobbiesUpdate.ts
+  - src/mcp-server/tools/messagesBulkDelete.ts
+  - src/mcp-server/tools/messagesCreateForm.ts
+  - src/mcp-server/tools/messagesCreateJson.ts
+  - src/mcp-server/tools/messagesCreateMultipart.ts
+  - src/mcp-server/tools/messagesCreateReaction.ts
+  - src/mcp-server/tools/messagesCrosspost.ts
+  - src/mcp-server/tools/messagesDelete.ts
+  - src/mcp-server/tools/messagesDeleteAllReactions.ts
+  - src/mcp-server/tools/messagesDeleteAllReactionsForEmoji.ts
+  - src/mcp-server/tools/messagesDeleteOwnReaction.ts
+  - src/mcp-server/tools/messagesDeleteUserReaction.ts
+  - src/mcp-server/tools/messagesGet.ts
+  - src/mcp-server/tools/messagesList.ts
   - src/mcp-server/tools/messagesListReactionsByEmoji.ts
-  - src/mcp-server/tools/oauth2GetMyApplication.ts
-  - src/mcp-server/tools/scheduledEventsCreate.ts
-  - src/mcp-server/tools/soundboardGetDefaultSounds.ts
+  - src/mcp-server/tools/messagesUpdateForm.ts
+  - src/mcp-server/tools/messagesUpdateJson.ts
+  - src/mcp-server/tools/messagesUpdateMultipart.ts
+  - src/mcp-server/tools/pollsExpire.ts
+  - src/mcp-server/tools/pollsGetAnswerVoters.ts
+  - src/mcp-server/tools/soundboardsCreateGuildSoundboardSound.ts
+  - src/mcp-server/tools/soundboardsDeleteGuildSoundboardSound.ts
+  - src/mcp-server/tools/soundboardsGetGuildSoundboardSound.ts
+  - src/mcp-server/tools/soundboardsGetSoundboardDefaultSounds.ts
+  - src/mcp-server/tools/soundboardsListGuildSoundboardSounds.ts
+  - src/mcp-server/tools/soundboardsSendSoundboardSound.ts
+  - src/mcp-server/tools/soundboardsUpdateGuildSoundboardSound.ts
   - src/mcp-server/tools/stageInstancesCreate.ts
   - src/mcp-server/tools/stageInstancesDelete.ts
   - src/mcp-server/tools/stageInstancesGet.ts
   - src/mcp-server/tools/stageInstancesUpdate.ts
-  - src/mcp-server/tools/stickerPacksGet.ts
+  - src/mcp-server/tools/stickersCreateGuildSticker.ts
+  - src/mcp-server/tools/stickersDeleteGuildSticker.ts
   - src/mcp-server/tools/stickersGet.ts
-  - src/mcp-server/tools/threadMembersDelete.ts
-  - src/mcp-server/tools/threadSearch.ts
-  - src/mcp-server/tools/threadsListPublicArchived.ts
-  - src/mcp-server/tools/usersCreateDm.ts
+  - src/mcp-server/tools/stickersGetGuildSticker.ts
+  - src/mcp-server/tools/stickersGetPack.ts
+  - src/mcp-server/tools/stickersListGuildStickers.ts
+  - src/mcp-server/tools/stickersUpdateGuildSticker.ts
+  - src/mcp-server/tools/usersCreateDM.ts
   - src/mcp-server/tools/usersGet.ts
-  - src/mcp-server/tools/usersGuildsLeave.ts
-  - src/mcp-server/tools/usersUpdateMe.ts
+  - src/mcp-server/tools/usersGetApplicationRoleConnection.ts
+  - src/mcp-server/tools/usersGetGuildMember.ts
+  - src/mcp-server/tools/usersLeaveGuild.ts
+  - src/mcp-server/tools/usersUpdateApplicationRoleConnection.ts
+  - src/mcp-server/tools/usersUpdateCurrent.ts
+  - src/mcp-server/tools/voiceGetCurrentUserState.ts
+  - src/mcp-server/tools/voiceGetUserState.ts
   - src/mcp-server/tools/voiceListRegions.ts
+  - src/mcp-server/tools/voiceUpdateCurrentUserState.ts
+  - src/mcp-server/tools/voiceUpdateUserState.ts
+  - src/mcp-server/tools/webhooksCreate.ts
   - src/mcp-server/tools/webhooksDelete.ts
   - src/mcp-server/tools/webhooksGet.ts
+  - src/mcp-server/tools/webhooksListForChannel.ts
+  - src/mcp-server/tools/webhooksListForGuild.ts
   - src/mcp-server/tools/webhooksUpdate.ts
   - src/models/components/accountresponse.ts
   - src/models/components/actionrowcomponentformessagerequest.ts
@@ -1377,6 +1351,7 @@ generatedFiles:
   - src/models/components/channelselectcomponentresponse.ts
   - src/models/components/channelselectdefaultvalue.ts
   - src/models/components/channelselectdefaultvalueresponse.ts
+  - src/models/components/channeltypes.ts
   - src/models/components/commandpermissionresponse.ts
   - src/models/components/commandpermissionsresponse.ts
   - src/models/components/componentemojiformessagerequest.ts
@@ -1716,8 +1691,10 @@ generatedFiles:
   - src/models/operations/createmessagemultipart.ts
   - src/models/operations/createorjoinlobby.ts
   - src/models/operations/createstageinstance.ts
-  - src/models/operations/createthread.ts
+  - src/models/operations/createthreadform.ts
   - src/models/operations/createthreadfrommessage.ts
+  - src/models/operations/createthreadjson.ts
+  - src/models/operations/createthreadmultipart.ts
   - src/models/operations/createwebhook.ts
   - src/models/operations/crosspostmessage.ts
   - src/models/operations/deleteallmessagereactions.ts
@@ -1895,76 +1872,28 @@ generatedFiles:
   - src/models/operations/updatewebhookmessagejson.ts
   - src/models/operations/updatewebhookmessagemultipart.ts
   - src/models/operations/uploadapplicationattachment.ts
-  - src/sdk/answers.ts
+  - src/sdk/applicationcommands.ts
+  - src/sdk/applicationroleconnectionmetadata.ts
   - src/sdk/applications.ts
-  - src/sdk/applicationscommands.ts
-  - src/sdk/applicationuserroleconnection.ts
-  - src/sdk/applicationuserroleconnections.ts
+  - src/sdk/auditlogs.ts
   - src/sdk/automoderation.ts
-  - src/sdk/automoderationrules.ts
-  - src/sdk/channelpermissions.ts
   - src/sdk/channels.ts
-  - src/sdk/channelsrecipients.ts
-  - src/sdk/channelsthreadmembers.ts
-  - src/sdk/commands.ts
-  - src/sdk/discordchannels.ts
-  - src/sdk/discordguilds.ts
-  - src/sdk/discordguildsscheduledevents.ts
-  - src/sdk/discordmessages.ts
-  - src/sdk/discordstickers.ts
-  - src/sdk/discordthreadmembers.ts
-  - src/sdk/discordthreads.ts
-  - src/sdk/discordusers.ts
-  - src/sdk/discordusersguilds.ts
-  - src/sdk/discordwebhooksmessages.ts
-  - src/sdk/emojis.ts
-  - src/sdk/gateway.ts
-  - src/sdk/guildapplicationcommands.ts
-  - src/sdk/guildbans.ts
-  - src/sdk/guildcommands.ts
-  - src/sdk/guildemojis.ts
-  - src/sdk/guildintegrations.ts
-  - src/sdk/guildmemberroles.ts
-  - src/sdk/guildmembers.ts
-  - src/sdk/guildonboarding.ts
-  - src/sdk/guildroles.ts
+  - src/sdk/emoji.ts
+  - src/sdk/entitlements.ts
   - src/sdk/guilds.ts
-  - src/sdk/guildschannels.ts
   - src/sdk/guildscheduledevents.ts
-  - src/sdk/guildsmembers.ts
-  - src/sdk/guildsoundboardsounds.ts
-  - src/sdk/guildssoundboardsounds.ts
-  - src/sdk/guildstickers.ts
   - src/sdk/guildtemplates.ts
-  - src/sdk/guildthreads.ts
-  - src/sdk/guildvoiceregions.ts
-  - src/sdk/guildwidgetsettings.ts
   - src/sdk/index.ts
-  - src/sdk/integrations.ts
   - src/sdk/invites.ts
-  - src/sdk/messagereactions.ts
+  - src/sdk/lobbies.ts
   - src/sdk/messages.ts
-  - src/sdk/mfa.ts
-  - src/sdk/oauth2.ts
-  - src/sdk/openidconnect.ts
-  - src/sdk/permissions.ts
-  - src/sdk/pins.ts
-  - src/sdk/reactions.ts
-  - src/sdk/rules.ts
-  - src/sdk/scheduledevents.ts
+  - src/sdk/polls.ts
   - src/sdk/sdk.ts
-  - src/sdk/soundboard.ts
-  - src/sdk/soundboardsounds.ts
+  - src/sdk/soundboards.ts
   - src/sdk/stageinstances.ts
-  - src/sdk/stickerpacks.ts
   - src/sdk/stickers.ts
-  - src/sdk/templates.ts
-  - src/sdk/threadmembers.ts
-  - src/sdk/threads.ts
   - src/sdk/users.ts
   - src/sdk/voice.ts
-  - src/sdk/voicestates.ts
-  - src/sdk/webhookmessages.ts
   - src/sdk/webhooks.ts
   - src/types/async.ts
   - src/types/blobs.ts
@@ -2019,7 +1948,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"threads": [{"id": "<value>", "flags": 712792, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 772024, "member_count": 837268, "total_message_sent": 758801}, {"id": "<value>", "flags": 786183, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 525848, "member_count": 123502, "total_message_sent": 637469}], "members": []}
+          application/json: {"threads": [{"id": "<value>", "type": 10, "flags": 712792, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 772024, "member_count": 837268, "total_message_sent": 758801}, {"id": "<value>", "type": 15, "flags": 786183, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 525848, "member_count": 123502, "total_message_sent": 637469}], "members": []}
         4XX:
           application/json: {"code": 830908, "message": "<value>"}
   leave_lobby:
@@ -2134,7 +2063,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"id": "<value>", "flags": 623302, "recipients": [{"id": "<value>", "username": "Krista_Blick", "discriminator": "<value>", "public_flags": 833011, "flags": 124046}]}
+          application/json: {"id": "<value>", "type": 1, "flags": 14650, "recipients": [{"id": "<value>", "username": "Bridie.Bins16", "discriminator": "<value>", "public_flags": 202615, "flags": 852496}]}
         4XX:
           application/json: {"code": 926881, "message": "<value>"}
   list_my_guilds:
@@ -2600,7 +2529,7 @@ examples:
           guild_id: "<value>"
       responses:
         "200":
-          application/json: [{"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [], "trigger_metadata": {"keyword_filter": ["<value>", "<value>", "<value>"], "regex_patterns": ["<value>", "<value>"], "allow_list": ["<value>", "<value>"]}}]
+          application/json: [{"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {}}], "trigger_metadata": {"allow_list": ["<value>"], "presets": [285064, 954672]}}]
         4XX:
           application/json: {"code": 990634, "message": "<value>"}
   search_guild_members:
@@ -2720,7 +2649,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"audit_log_entries": [{"id": "<value>"}, {"id": "<value>"}], "users": [{"id": "<value>", "username": "Winifred_Watsica58", "discriminator": "<value>", "public_flags": 59716, "flags": 853102}, {"id": "<value>", "username": "Donavon30", "discriminator": "<value>", "public_flags": 861807, "flags": 938891}, {"id": "<value>", "username": "Alexandra.Ratke", "discriminator": "<value>", "public_flags": 542539, "flags": 249518}], "integrations": [], "webhooks": [], "guild_scheduled_events": [{"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2025-08-07T23:55:18.983Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-02-13T09:50:38.110Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-10-02T16:15:05.876Z"}], "threads": [{"id": "<value>", "flags": 425168, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 567784, "member_count": 782420, "total_message_sent": 788852}], "application_commands": [{"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "break furthermore unnecessarily except"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "norm ack closely whose owlishly variable"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "aha while for beyond corral lest that a nice in"}], "auto_moderation_rules": [{"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [], "trigger_metadata": {}}, {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {"channel_id": "<value>"}}, {"metadata": {"channel_id": "<value>"}}, {"metadata": {}}], "trigger_metadata": {"allow_list": ["<value>"], "presets": [755506]}}]}
+          application/json: {"audit_log_entries": [{"id": "<value>"}, {"id": "<value>"}], "users": [{"id": "<value>", "username": "Winifred_Watsica58", "discriminator": "<value>", "public_flags": 59716, "flags": 853102}, {"id": "<value>", "username": "Donavon30", "discriminator": "<value>", "public_flags": 861807, "flags": 938891}, {"id": "<value>", "username": "Alexandra.Ratke", "discriminator": "<value>", "public_flags": 542539, "flags": 249518}], "integrations": [], "webhooks": [], "guild_scheduled_events": [{"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-08-22T19:26:20.850Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-07-14T18:23:27.528Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-06-17T12:14:27.999Z", "entity_metadata": {"location": "<value>"}}], "threads": [{"id": "<value>", "type": 11, "flags": 425168, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 567784, "member_count": 782420, "total_message_sent": 788852}], "application_commands": [{"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "break furthermore unnecessarily except"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "norm ack closely whose owlishly variable"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "aha while for beyond corral lest that a nice in"}], "auto_moderation_rules": [{"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [], "trigger_metadata": {"mention_total_limit": 718303}}, {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [], "trigger_metadata": {"allow_list": ["<value>", "<value>"], "presets": [633911, 7468]}}]}
         4XX:
           application/json: {"code": 982705, "message": "<value>"}
   get_guild_widget_png:
@@ -2765,7 +2694,7 @@ examples:
           guild_id: "<value>"
       responses:
         "200":
-          application/json: [{"code": "<value>", "name": "<value>", "usage_count": 125825, "creator_id": "<value>", "created_at": "2024-08-10T16:01:34.701Z", "updated_at": "2025-06-20T22:29:16.807Z", "source_guild_id": "<value>", "serialized_source_guild": {"name": "<value>", "system_channel_flags": 372965, "roles": [{"id": 967115, "name": "<value>", "permissions": "<value>", "color": 507842, "hoist": true, "mentionable": true}, {"id": 416651, "name": "<value>", "permissions": "<value>", "color": 707611, "hoist": false, "mentionable": true}], "channels": [{"bitrate": 263449, "user_limit": 272138, "nsfw": false, "rate_limit_per_user": 846126, "permission_overwrites": [{"id": "<value>", "allow": "<value>", "deny": "<value>"}], "template": "<value>"}]}}, {"code": "<value>", "name": "<value>", "usage_count": 31298, "creator_id": "<value>", "created_at": "2025-03-02T22:19:07.013Z", "updated_at": "2023-08-30T18:00:03.667Z", "source_guild_id": "<value>", "serialized_source_guild": {"name": "<value>", "system_channel_flags": 664197, "roles": [{"id": 216568, "name": "<value>", "permissions": "<value>", "color": 149971, "hoist": true, "mentionable": false}, {"id": 610939, "name": "<value>", "permissions": "<value>", "color": 971334, "hoist": true, "mentionable": true}, {"id": 959094, "name": "<value>", "permissions": "<value>", "color": 487835, "hoist": false, "mentionable": true}], "channels": []}}]
+          application/json: [{"code": "<value>", "name": "<value>", "usage_count": 125825, "creator_id": "<value>", "created_at": "2024-08-10T16:01:34.701Z", "updated_at": "2025-06-20T22:29:16.807Z", "source_guild_id": "<value>", "serialized_source_guild": {"name": "<value>", "system_channel_flags": 372965, "roles": [{"id": 967115, "name": "<value>", "permissions": "<value>", "color": 507842, "hoist": true, "mentionable": true}, {"id": 416651, "name": "<value>", "permissions": "<value>", "color": 707611, "hoist": false, "mentionable": true}], "channels": [{"type": 12, "bitrate": 263449, "user_limit": 272138, "nsfw": false, "rate_limit_per_user": 846126, "permission_overwrites": [{"id": "<value>", "allow": "<value>", "deny": "<value>"}], "template": "<value>"}]}}, {"code": "<value>", "name": "<value>", "usage_count": 31298, "creator_id": "<value>", "created_at": "2025-03-02T22:19:07.013Z", "updated_at": "2023-08-30T18:00:03.667Z", "source_guild_id": "<value>", "serialized_source_guild": {"name": "<value>", "system_channel_flags": 664197, "roles": [{"id": 216568, "name": "<value>", "permissions": "<value>", "color": 149971, "hoist": true, "mentionable": false}, {"id": 610939, "name": "<value>", "permissions": "<value>", "color": 971334, "hoist": true, "mentionable": true}, {"id": 959094, "name": "<value>", "permissions": "<value>", "color": 487835, "hoist": false, "mentionable": true}], "channels": []}}]
         4XX:
           application/json: {"code": 123546, "message": "<value>"}
   get_guild_sticker:
@@ -2817,7 +2746,7 @@ examples:
           guild_id: "<value>"
       responses:
         "200":
-          application/json: [{"id": "<value>", "flags": 807698, "recipients": [{"id": "<value>", "username": "Lance44", "discriminator": "<value>", "public_flags": 263479, "flags": 404566}]}, {"id": "<value>", "flags": 707166, "recipients": [{"id": "<value>", "username": "Eliseo.Hilpert", "discriminator": "<value>", "public_flags": 604291, "flags": 751949}]}]
+          application/json: [{"id": "<value>", "type": 13, "flags": 309264, "recipients": [{"id": "<value>", "username": "Javon.Greenholt90", "discriminator": "<value>", "public_flags": 404566, "flags": 504351}, {"id": "<value>", "username": "Melba.Gutkowski", "discriminator": "<value>", "public_flags": 531413, "flags": 588921}]}, {"id": "<value>", "type": 12, "flags": 561531, "recipients": []}]
         4XX:
           application/json: {"code": 397220, "message": "<value>"}
   delete_guild_member:
@@ -3101,7 +3030,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {"channel_id": "<value>"}}, {"metadata": {"duration_seconds": 627690}}], "trigger_metadata": {}}
+          application/json: {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {"duration_seconds": 803772}}, {"metadata": {}}, {"metadata": {}}], "trigger_metadata": {"mention_total_limit": 906306}}
         4XX:
           application/json: {"code": 488852, "message": "<value>"}
   get_self_voice_state:
@@ -3155,7 +3084,7 @@ examples:
           guild_id: "<value>"
       responses:
         "200":
-          application/json: [{"id": "<value>"}, {"id": "<id>", "user": {"id": "<value>", "username": "Marie.Fay", "discriminator": "<value>", "public_flags": 17577, "flags": 718303}}, {"id": "<value>", "application": {"id": "<value>", "name": "<value>", "description": "miserably fedora blah"}, "scopes": ["<value>", "<value>", "<value>"]}]
+          application/json: [{"id": "<value>", "application": {"id": "<value>", "name": "<value>", "description": "gee save yahoo um bah marimba for tidy reprove"}, "scopes": ["<value>", "<value>", "<value>"]}, {"id": "<value>", "application": {"id": "<value>", "name": "<value>", "description": "versus haul quit juvenile opposite yet cutover contractor gray uh-huh"}, "scopes": ["<value>"]}, {"id": "<value>"}]
         4XX:
           application/json: {"code": 5229, "message": "<value>"}
   delete_guild_template:
@@ -3166,7 +3095,7 @@ examples:
           code: "<value>"
       responses:
         "200":
-          application/json: {"code": "<value>", "name": "<value>", "usage_count": 545907, "creator_id": "<value>", "created_at": "2025-02-04T12:58:08.407Z", "updated_at": "2024-02-28T16:10:49.142Z", "source_guild_id": "<value>", "serialized_source_guild": {"name": "<value>", "system_channel_flags": 952479, "roles": [{"id": 604931, "name": "<value>", "permissions": "<value>", "color": 108105, "hoist": false, "mentionable": false}, {"id": 2184, "name": "<value>", "permissions": "<value>", "color": 690193, "hoist": true, "mentionable": false}, {"id": 223280, "name": "<value>", "permissions": "<value>", "color": 908826, "hoist": false, "mentionable": true}], "channels": [{"bitrate": 914918, "user_limit": 516608, "nsfw": true, "rate_limit_per_user": 645147, "permission_overwrites": [], "template": "<value>"}, {"bitrate": 179304, "user_limit": 956040, "nsfw": true, "rate_limit_per_user": 205517, "permission_overwrites": [{"id": "<value>", "allow": "<value>", "deny": "<value>"}, {"id": "<value>", "allow": "<value>", "deny": "<value>"}], "template": "<value>"}]}}
+          application/json: {"code": "<value>", "name": "<value>", "usage_count": 545907, "creator_id": "<value>", "created_at": "2025-02-04T12:58:08.407Z", "updated_at": "2024-02-28T16:10:49.142Z", "source_guild_id": "<value>", "serialized_source_guild": {"name": "<value>", "system_channel_flags": 952479, "roles": [{"id": 604931, "name": "<value>", "permissions": "<value>", "color": 108105, "hoist": false, "mentionable": false}, {"id": 2184, "name": "<value>", "permissions": "<value>", "color": 690193, "hoist": true, "mentionable": false}, {"id": 223280, "name": "<value>", "permissions": "<value>", "color": 908826, "hoist": false, "mentionable": true}], "channels": [{"type": 10, "bitrate": 914918, "user_limit": 516608, "nsfw": true, "rate_limit_per_user": 645147, "permission_overwrites": [], "template": "<value>"}, {"type": 12, "bitrate": 179304, "user_limit": 956040, "nsfw": true, "rate_limit_per_user": 205517, "permission_overwrites": [{"id": "<value>", "allow": "<value>", "deny": "<value>"}, {"id": "<value>", "allow": "<value>", "deny": "<value>"}], "template": "<value>"}]}}
         4XX:
           application/json: {"code": 563545, "message": "<value>"}
   create_guild_template:
@@ -3178,7 +3107,7 @@ examples:
         application/json: {"name": "<value>"}
       responses:
         "200":
-          application/json: {"code": "<value>", "name": "<value>", "usage_count": 486589, "creator_id": "<value>", "created_at": "2024-11-30T17:06:07.804Z", "updated_at": "2024-04-02T12:48:32.253Z", "source_guild_id": "<value>", "serialized_source_guild": {"name": "<value>", "system_channel_flags": 134365, "roles": [], "channels": [{"bitrate": 951062, "user_limit": 86, "nsfw": true, "rate_limit_per_user": 89964, "permission_overwrites": [{"id": "<value>", "allow": "<value>", "deny": "<value>"}, {"id": "<value>", "allow": "<value>", "deny": "<value>"}, {"id": "<value>", "allow": "<value>", "deny": "<value>"}], "template": "<value>"}, {"bitrate": 816588, "user_limit": 586220, "nsfw": false, "rate_limit_per_user": 957409, "permission_overwrites": [{"id": "<value>", "allow": "<value>", "deny": "<value>"}], "template": "<value>"}, {"bitrate": 259629, "user_limit": 17759, "nsfw": true, "rate_limit_per_user": 211337, "permission_overwrites": [], "template": "<value>"}]}}
+          application/json: {"code": "<value>", "name": "<value>", "usage_count": 486589, "creator_id": "<value>", "created_at": "2024-11-30T17:06:07.804Z", "updated_at": "2024-04-02T12:48:32.253Z", "source_guild_id": "<value>", "serialized_source_guild": {"name": "<value>", "system_channel_flags": 134365, "roles": [], "channels": [{"type": 7, "bitrate": 951062, "user_limit": 86, "nsfw": true, "rate_limit_per_user": 89964, "permission_overwrites": [{"id": "<value>", "allow": "<value>", "deny": "<value>"}, {"id": "<value>", "allow": "<value>", "deny": "<value>"}, {"id": "<value>", "allow": "<value>", "deny": "<value>"}], "template": "<value>"}, {"type": 11, "bitrate": 816588, "user_limit": 586220, "nsfw": false, "rate_limit_per_user": 957409, "permission_overwrites": [{"id": "<value>", "allow": "<value>", "deny": "<value>"}], "template": "<value>"}, {"type": 5, "bitrate": 259629, "user_limit": 17759, "nsfw": true, "rate_limit_per_user": 211337, "permission_overwrites": [], "template": "<value>"}]}}
         4XX:
           application/json: {"code": 322997, "message": "<value>"}
   update_guild_sticker:
@@ -3224,7 +3153,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"threads": [{"id": "<value>", "flags": 744204, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 324192, "member_count": 344446, "total_message_sent": 624915}, {"id": "<value>", "flags": 509173, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 763376, "member_count": 357936, "total_message_sent": 150614}, {"id": "<value>", "flags": 18231, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 503841, "member_count": 300621, "total_message_sent": 654983}], "members": [{"id": "<value>", "user_id": "<value>", "join_timestamp": "2025-04-10T16:22:10.017Z", "flags": 593728}, {"id": "<value>", "user_id": "<value>", "join_timestamp": "2025-03-17T13:18:04.143Z", "flags": 557674}]}
+          application/json: {"threads": [{"id": "<value>", "type": 12, "flags": 744204, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 324192, "member_count": 344446, "total_message_sent": 624915}, {"id": "<value>", "type": 4, "flags": 509173, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 763376, "member_count": 357936, "total_message_sent": 150614}, {"id": "<value>", "type": 7, "flags": 18231, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 503841, "member_count": 300621, "total_message_sent": 654983}], "members": [{"id": "<value>", "user_id": "<value>", "join_timestamp": "2025-04-10T16:22:10.017Z", "flags": 593728}, {"id": "<value>", "user_id": "<value>", "join_timestamp": "2025-03-17T13:18:04.143Z", "flags": 557674}]}
         4XX:
           application/json: {"code": 428668, "message": "<value>"}
   list_private_archived_threads:
@@ -3235,7 +3164,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"threads": [{"id": "<value>", "flags": 395640, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 940509, "member_count": 411067, "total_message_sent": 146719}, {"id": "<value>", "flags": 456173, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 35995, "member_count": 1599, "total_message_sent": 915712}, {"id": "<value>", "flags": 74571, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 41572, "member_count": 366483, "total_message_sent": 372534}], "members": []}
+          application/json: {"threads": [{"id": "<value>", "type": 14, "flags": 395640, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 940509, "member_count": 411067, "total_message_sent": 146719}, {"id": "<value>", "type": 5, "flags": 456173, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 35995, "member_count": 1599, "total_message_sent": 915712}, {"id": "<value>", "type": 15, "flags": 74571, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 41572, "member_count": 366483, "total_message_sent": 372534}], "members": []}
         4XX:
           application/json: {"code": 655725, "message": "<value>"}
   delete_user_message_reaction:
@@ -3257,7 +3186,7 @@ examples:
           message_id: "<value>"
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Madalyn78", "discriminator": "<value>", "public_flags": 135689, "flags": 792377}], "mention_roles": ["<value>", "<value>"], "attachments": [], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-08-06T16:36:01.790Z", "flags": 696508, "components": [{"id": 653327, "file": {"id": "<value>", "url": "https://unrealistic-chow.net/", "proxy_url": "https://concrete-seafood.net"}, "spoiler": true}, {"id": 532565, "content": "<value>"}, {"id": 859491, "components": [{"id": 993532, "content": "<value>"}, {"id": 602172, "content": "<value>"}, {"id": 849932, "content": "<value>"}], "accessory": {"id": 24316}}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Rossie.Bailey77", "discriminator": "<value>", "public_flags": 461218, "flags": 215383}, "pinned": false, "mention_everyone": false, "tts": true}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Madalyn78", "discriminator": "<value>", "public_flags": 135689, "flags": 792377}], "mention_roles": ["<value>", "<value>"], "attachments": [], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-08-06T16:36:01.790Z", "flags": 696508, "components": [{"id": 646126, "divider": false}, {"id": 258730, "components": [{"id": 951479, "file": {"id": "<value>", "url": "https://lanky-publicity.com/", "proxy_url": "https://which-toothpick.name/"}, "spoiler": true}, {"id": 252903, "file": {"id": "<value>", "url": "https://self-assured-fog.com/", "proxy_url": "https://rotating-freezing.com"}, "spoiler": false}, {"id": 847784, "components": [{"id": 777750, "content": "<value>"}], "accessory": {"id": 70009, "media": {"id": "<value>", "url": "https://terrible-eyebrow.com/", "proxy_url": "https://front-typewriter.com/"}, "spoiler": true}}], "spoiler": true}, {"id": 761564, "file": {"id": "<value>", "url": "https://neglected-mentor.name/", "proxy_url": "https://faraway-handful.org/"}, "spoiler": false}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Rossie.Bailey77", "discriminator": "<value>", "public_flags": 461218, "flags": 215383}, "pinned": false, "mention_everyone": false, "tts": true}
         4XX:
           application/json: {"code": 321812, "message": "<value>"}
   create_thread_from_message:
@@ -3270,7 +3199,7 @@ examples:
         application/json: {"name": "<value>"}
       responses:
         "201":
-          application/json: {"id": "<value>", "flags": 485487, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 28708, "member_count": 354375, "total_message_sent": 140519}
+          application/json: {"id": "<value>", "type": 7, "flags": 485487, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 28708, "member_count": 354375, "total_message_sent": 140519}
         4XX:
           application/json: {"code": 525677, "message": "<value>"}
   poll_expire:
@@ -3281,7 +3210,7 @@ examples:
           message_id: "<value>"
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Leland_Lynch70", "discriminator": "<value>", "public_flags": 905336, "flags": 164360}, {"id": "<value>", "username": "Janessa.Dietrich", "discriminator": "<value>", "public_flags": 916536, "flags": 162722}, {"id": "<value>", "username": "Madaline_Carter", "discriminator": "<value>", "public_flags": 85862, "flags": 38800}], "mention_roles": [], "attachments": [{"id": "<value>", "filename": "example.file", "size": 653551, "url": "https://woeful-parsnip.com/", "proxy_url": "https://sudden-captain.net/"}], "embeds": [], "timestamp": "2025-11-19T06:55:30.391Z", "flags": 327590, "components": [{"id": 605204, "content": "<value>"}, {"id": 557347, "components": [{"id": 208150, "divider": false}, {"id": 469294}, {"id": 196379}], "spoiler": true}, {"id": 584097, "divider": false}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Jaime_Osinski29", "discriminator": "<value>", "public_flags": 598049, "flags": 144550}, "pinned": true, "mention_everyone": false, "tts": true}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Leland_Lynch70", "discriminator": "<value>", "public_flags": 905336, "flags": 164360}, {"id": "<value>", "username": "Janessa.Dietrich", "discriminator": "<value>", "public_flags": 916536, "flags": 162722}, {"id": "<value>", "username": "Madaline_Carter", "discriminator": "<value>", "public_flags": 85862, "flags": 38800}], "mention_roles": [], "attachments": [{"id": "<value>", "filename": "example.file", "size": 653551, "url": "https://woeful-parsnip.com/", "proxy_url": "https://sudden-captain.net/"}], "embeds": [], "timestamp": "2025-11-19T06:55:30.391Z", "flags": 327590, "components": [{"id": 765603}, {"id": 745140, "file": {"id": "<value>", "url": "https://diligent-dredger.net/", "proxy_url": "https://diligent-disconnection.org/"}, "spoiler": true}, {"id": 332232, "content": "<value>"}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Jaime_Osinski29", "discriminator": "<value>", "public_flags": 598049, "flags": 144550}, "pinned": true, "mention_everyone": false, "tts": true}
         4XX:
           application/json: {"code": 270549, "message": "<value>"}
   send_soundboard_sound:
@@ -3426,7 +3355,7 @@ examples:
           channel_id: "<value>"
       responses:
         "200":
-          application/json: [{"content": "<value>", "mentions": [{"id": "<value>", "username": "Luther_Muller", "discriminator": "<value>", "public_flags": 99793, "flags": 803259}], "mention_roles": ["<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 343453, "url": "https://insignificant-ceramic.info/", "proxy_url": "https://fragrant-adaptation.net"}, {"id": "<value>", "filename": "example.file", "size": 796541, "url": "https://silver-overheard.info/", "proxy_url": "https://scented-contractor.biz"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-11-29T01:38:03.491Z", "flags": 733641, "components": [{"id": 292842, "components": [{"id": 436081, "content": "<value>"}, {"id": 624513, "content": "<value>"}], "accessory": {"id": 226671, "media": {"id": "<value>", "url": "https://buzzing-settler.name", "proxy_url": "https://growing-fold.info"}, "spoiler": true}}, {"id": 821746, "items": [{"media": {"id": "<value>", "url": "https://silver-secrecy.biz/", "proxy_url": "https://prickly-graffiti.net"}, "spoiler": false}]}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Ozella.Wuckert", "discriminator": "<value>", "public_flags": 735021, "flags": 981148}, "pinned": true, "mention_everyone": false, "tts": false}, {"content": "<value>", "mentions": [{"id": "<value>", "username": "Jaleel90", "discriminator": "<value>", "public_flags": 484146, "flags": 112425}, {"id": "<value>", "username": "Lon29", "discriminator": "<value>", "public_flags": 79386, "flags": 420691}, {"id": "<value>", "username": "Clare35", "discriminator": "<value>", "public_flags": 699652, "flags": 740786}], "mention_roles": ["<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 691234, "url": "https://scented-going.biz/", "proxy_url": "https://frizzy-muscat.biz"}, {"id": "<value>", "filename": "example.file", "size": 271832, "url": "https://plain-pigsty.com/", "proxy_url": "https://shimmering-aftermath.info"}, {"id": "<value>", "filename": "example.file", "size": 686430, "url": "https://dreary-freight.name", "proxy_url": "https://moral-drive.com/"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2025-05-01T14:36:35.859Z", "flags": 897147, "components": [{"id": 182119, "components": [{"id": 733641, "components": [{"id": 964797, "content": "<value>"}, {"id": 334078, "content": "<value>"}], "accessory": {"id": 476277, "media": {"id": "<value>", "url": "https://granular-middle.info", "proxy_url": "https://worse-kielbasa.net"}, "spoiler": false}}, {"id": 462472, "content": "<value>"}, {"id": 692276}], "spoiler": true}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Rene.Rosenbaum", "discriminator": "<value>", "public_flags": 600920, "flags": 394037}, "pinned": true, "mention_everyone": true, "tts": true}]
+          application/json: [{"content": "<value>", "mentions": [{"id": "<value>", "username": "Luther_Muller", "discriminator": "<value>", "public_flags": 99793, "flags": 803259}], "mention_roles": ["<value>", "<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 343453, "url": "https://insignificant-ceramic.info/", "proxy_url": "https://fragrant-adaptation.net"}, {"id": "<value>", "filename": "example.file", "size": 796541, "url": "https://silver-overheard.info/", "proxy_url": "https://scented-contractor.biz"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2024-11-29T01:38:03.491Z", "flags": 733641, "components": [{"id": 231748, "content": "<value>"}, {"id": 218104, "items": [{"media": {"id": "<value>", "url": "https://quiet-flame.info", "proxy_url": "https://nimble-grouper.net"}, "spoiler": false}, {"media": {"id": "<value>", "url": "https://blushing-postbox.net/", "proxy_url": "https://flickering-brook.biz"}, "spoiler": true}]}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Ozella.Wuckert", "discriminator": "<value>", "public_flags": 735021, "flags": 981148}, "pinned": true, "mention_everyone": false, "tts": false}, {"content": "<value>", "mentions": [{"id": "<value>", "username": "Jaleel90", "discriminator": "<value>", "public_flags": 484146, "flags": 112425}, {"id": "<value>", "username": "Lon29", "discriminator": "<value>", "public_flags": 79386, "flags": 420691}, {"id": "<value>", "username": "Clare35", "discriminator": "<value>", "public_flags": 699652, "flags": 740786}], "mention_roles": ["<value>"], "attachments": [{"id": "<value>", "filename": "example.file", "size": 691234, "url": "https://scented-going.biz/", "proxy_url": "https://frizzy-muscat.biz"}, {"id": "<value>", "filename": "example.file", "size": 271832, "url": "https://plain-pigsty.com/", "proxy_url": "https://shimmering-aftermath.info"}, {"id": "<value>", "filename": "example.file", "size": 686430, "url": "https://dreary-freight.name", "proxy_url": "https://moral-drive.com/"}], "embeds": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}], "timestamp": "2025-05-01T14:36:35.859Z", "flags": 897147, "components": [{"id": 636562}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Rene.Rosenbaum", "discriminator": "<value>", "public_flags": 600920, "flags": 394037}, "pinned": true, "mention_everyone": true, "tts": true}]
         4XX:
           application/json: {"code": 366237, "message": "<value>"}
   get_channel:
@@ -3436,7 +3365,7 @@ examples:
           channel_id: "<value>"
       responses:
         "200":
-          application/json: {"id": "<value>", "flags": 558834, "recipients": [{"id": "<value>", "username": "Jovanny21", "discriminator": "<value>", "public_flags": 438142, "flags": 801373}, {"id": "<value>", "username": "Arielle55", "discriminator": "<value>", "public_flags": 380699, "flags": 746585}]}
+          application/json: {"id": "<value>", "type": 10, "flags": 544221, "recipients": [{"id": "<value>", "username": "Waino21", "discriminator": "<value>", "public_flags": 438142, "flags": 801373}, {"id": "<value>", "username": "Arielle55", "discriminator": "<value>", "public_flags": 380699, "flags": 746585}]}
         4XX:
           application/json: {"code": 608535, "message": "<value>"}
   delete_channel:
@@ -3446,7 +3375,7 @@ examples:
           channel_id: "<value>"
       responses:
         "200":
-          application/json: {"id": "<value>", "flags": 698486, "recipients": [{"id": "<value>", "username": "Vaughn.Moen", "discriminator": "<value>", "public_flags": 2184, "flags": 690193}]}
+          application/json: {"id": "<value>", "type": 12, "flags": 386564, "recipients": [{"id": "<value>", "username": "Thelma_Brekke63", "discriminator": "<value>", "public_flags": 690193, "flags": 87361}, {"id": "<value>", "username": "Nadia47", "discriminator": "<value>", "public_flags": 914918, "flags": 516608}, {"id": "<value>", "username": "Daryl.Frami95", "discriminator": "<value>", "public_flags": 205517, "flags": 584887}]}
         4XX:
           application/json: {"code": 87361, "message": "<value>"}
   update_channel:
@@ -3458,7 +3387,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"id": "<value>", "flags": 597129, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 344620, "member_count": 991464, "total_message_sent": 627690}
+          application/json: {"id": "<value>", "type": 10, "flags": 344620, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 991464, "member_count": 627690, "total_message_sent": 488852}
         4XX:
           application/json: {"code": 824679, "message": "<value>"}
   delete_my_message_reaction:
@@ -3626,6 +3555,39 @@ examples:
           application/json: {"id": "<value>", "flags": 638424, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 417458, "member_count": 134365, "total_message_sent": 69025}
         4XX:
           application/json: {"code": 796474, "message": "<value>"}
+    speakeasy-default-create-thread-json:
+      parameters:
+        path:
+          channel_id: "<value>"
+      requestBody:
+        application/json: {"name": "<value>", "message": {}}
+      responses:
+        "201":
+          application/json: {"id": "<value>", "type": 7, "flags": 551717, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 218520, "member_count": 792184, "total_message_sent": 493242}
+        4XX:
+          application/json: {"code": 314720, "message": "<value>"}
+    speakeasy-default-create-thread-form:
+      parameters:
+        path:
+          channel_id: "<value>"
+      requestBody:
+        application/x-www-form-urlencoded: {"name": "<value>"}
+      responses:
+        "201":
+          application/json: {"id": "<value>", "type": 13, "flags": 900888, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 329854, "member_count": 393263, "total_message_sent": 525812}
+        4XX:
+          application/json: {"code": 65586, "message": "<value>"}
+    speakeasy-default-create-thread-multipart:
+      parameters:
+        path:
+          channel_id: "<value>"
+      requestBody:
+        multipart/form-data: {"name": "<value>"}
+      responses:
+        "201":
+          application/json: {"id": "<value>", "type": 15, "flags": 532002, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 206063, "member_count": 237799, "total_message_sent": 536925}
+        4XX:
+          application/json: {"code": 822428, "message": "<value>"}
   unpin_message:
     speakeasy-default-unpin-message:
       parameters:
@@ -3643,7 +3605,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"threads": [{"id": "<value>", "flags": 478559, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 322853, "member_count": 501979, "total_message_sent": 956517}, {"id": "<value>", "flags": 62335, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 228399, "member_count": 649562, "total_message_sent": 190079}, {"id": "<value>", "flags": 15072, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 127105, "member_count": 864123, "total_message_sent": 387229}], "members": [{"id": "<value>", "user_id": "<value>", "join_timestamp": "2024-08-23T14:40:48.728Z", "flags": 255428}]}
+          application/json: {"threads": [{"id": "<value>", "type": 0, "flags": 478559, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 322853, "member_count": 501979, "total_message_sent": 956517}, {"id": "<value>", "type": 5, "flags": 62335, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 228399, "member_count": 649562, "total_message_sent": 190079}, {"id": "<value>", "type": 1, "flags": 15072, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 127105, "member_count": 864123, "total_message_sent": 387229}], "members": [{"id": "<value>", "user_id": "<value>", "join_timestamp": "2024-08-23T14:40:48.728Z", "flags": 255428}]}
         4XX:
           application/json: {"code": 244986, "message": "<value>"}
   get_application_user_role_connection:
@@ -3782,7 +3744,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Reinhold_Robel", "discriminator": "<value>", "public_flags": 760120, "flags": 253515}, {"id": "<value>", "username": "Kamren30", "discriminator": "<value>", "public_flags": 78446, "flags": 208699}], "mention_roles": ["<value>"], "attachments": [], "embeds": [{"type": "<value>"}], "timestamp": "2024-09-25T12:32:56.280Z", "flags": 219948, "components": [{"id": 822220, "components": [{"id": 740864, "content": "<value>"}, {"id": 846836, "content": "<value>"}, {"id": 627260, "content": "<value>"}], "accessory": {"id": 760120, "media": {"id": "<value>", "url": "https://natural-switch.org/", "proxy_url": "https://functional-sediment.com"}, "spoiler": true}}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Caden50", "discriminator": "<value>", "public_flags": 120051, "flags": 433469}, "pinned": true, "mention_everyone": false, "tts": true}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Reinhold_Robel", "discriminator": "<value>", "public_flags": 760120, "flags": 253515}, {"id": "<value>", "username": "Kamren30", "discriminator": "<value>", "public_flags": 78446, "flags": 208699}], "mention_roles": ["<value>"], "attachments": [], "embeds": [{"type": "<value>"}], "timestamp": "2024-09-25T12:32:56.280Z", "flags": 219948, "components": [{"id": 298086, "file": {"id": "<value>", "url": "https://utilized-certification.org", "proxy_url": "https://austere-thigh.biz"}, "spoiler": true}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Caden50", "discriminator": "<value>", "public_flags": 120051, "flags": 433469}, "pinned": true, "mention_everyone": false, "tts": true}
         4XX:
           application/json: {"code": 484089, "message": "<value>"}
   delete_original_webhook_message:
@@ -3845,7 +3807,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Elenora_Boyle", "discriminator": "<value>", "public_flags": 780144, "flags": 362378}, {"id": "<value>", "username": "Eleanora.Schinner", "discriminator": "<value>", "public_flags": 302834, "flags": 474599}], "mention_roles": [], "attachments": [{"id": "<value>", "filename": "example.file", "size": 285875, "url": "https://aged-haircut.name", "proxy_url": "https://overcooked-pantyhose.biz/"}], "embeds": [{"type": "<value>"}], "timestamp": "2023-03-28T01:14:20.633Z", "flags": 911769, "components": [{"id": 296823, "components": [{"id": 98239, "content": "<value>"}, {"id": 505491, "content": "<value>"}, {"id": 69509, "content": "<value>"}], "accessory": {"id": 780144, "media": {"id": "<value>", "url": "https://free-dependency.net/", "proxy_url": "https://unused-hovel.biz/"}, "spoiler": true}}, {"id": 430209}, {"id": 675274, "file": {"id": "<value>", "url": "https://impressive-numeracy.info/", "proxy_url": "https://proper-digestive.info"}, "spoiler": true}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Lelah_Lakin59", "discriminator": "<value>", "public_flags": 150609, "flags": 239944}, "pinned": true, "mention_everyone": true, "tts": false}
+          application/json: {"content": "<value>", "mentions": [{"id": "<value>", "username": "Elenora_Boyle", "discriminator": "<value>", "public_flags": 780144, "flags": 362378}, {"id": "<value>", "username": "Eleanora.Schinner", "discriminator": "<value>", "public_flags": 302834, "flags": 474599}], "mention_roles": [], "attachments": [{"id": "<value>", "filename": "example.file", "size": 285875, "url": "https://aged-haircut.name", "proxy_url": "https://overcooked-pantyhose.biz/"}], "embeds": [{"type": "<value>"}], "timestamp": "2023-03-28T01:14:20.633Z", "flags": 911769, "components": [{"id": 45392, "content": "<value>"}, {"id": 761295}, {"id": 407916, "components": [], "spoiler": true}], "id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Lelah_Lakin59", "discriminator": "<value>", "public_flags": 150609, "flags": 239944}, "pinned": true, "mention_everyone": true, "tts": false}
         4XX:
           application/json: {"code": 404572, "message": "<value>"}
   update_webhook_message:
@@ -4001,7 +3963,7 @@ examples:
           rule_id: "<value>"
       responses:
         "200":
-          application/json: {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {}}, {"metadata": {}}], "trigger_metadata": {"mention_total_limit": 969961}}
+          application/json: {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {}}], "trigger_metadata": {"keyword_filter": ["<value>", "<value>", "<value>"], "regex_patterns": ["<value>", "<value>"], "allow_list": ["<value>", "<value>"]}}
         4XX:
           application/json: {"code": 458049, "message": "<value>"}
   delete_auto_moderation_rule:
@@ -4022,7 +3984,7 @@ examples:
         application/json: {"name": "<value>"}
       responses:
         "200":
-          application/json: {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {}}], "trigger_metadata": {"mention_total_limit": 69025}}
+          application/json: {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [], "trigger_metadata": {"mention_total_limit": 155274}}
         4XX:
           application/json: {"code": 796474, "message": "<value>"}
   get_active_guild_threads:
@@ -4032,7 +3994,7 @@ examples:
           guild_id: "<value>"
       responses:
         "200":
-          application/json: {"threads": [{"id": "<value>", "flags": 577515, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 907814, "member_count": 605492, "total_message_sent": 837613}], "members": [{"id": "<value>", "user_id": "<value>", "join_timestamp": "2023-03-23T10:25:51.891Z", "flags": 40324}, {"id": "<value>", "user_id": "<value>", "join_timestamp": "2024-08-04T14:26:23.819Z", "flags": 572919}]}
+          application/json: {"threads": [{"id": "<value>", "type": 2, "flags": 577515, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 907814, "member_count": 605492, "total_message_sent": 837613}], "members": [{"id": "<value>", "user_id": "<value>", "join_timestamp": "2023-03-23T10:25:51.891Z", "flags": 40324}, {"id": "<value>", "user_id": "<value>", "join_timestamp": "2024-08-04T14:26:23.819Z", "flags": 572919}]}
         4XX:
           application/json: {"code": 249970, "message": "<value>"}
   update_my_guild_member:
@@ -4131,7 +4093,7 @@ examples:
         application/json: {}
       responses:
         "201":
-          application/json: {"id": "<value>", "flags": 175202, "recipients": []}
+          application/json: {"id": "<value>", "type": 13, "flags": 298516, "recipients": [{"id": "<value>", "username": "Amir_Monahan-Lockman", "discriminator": "<value>", "public_flags": 942591, "flags": 741797}, {"id": "<value>", "username": "Pierre.Shields51", "discriminator": "<value>", "public_flags": 706313, "flags": 877092}, {"id": "<value>", "username": "Garret15", "discriminator": "<value>", "public_flags": 863338, "flags": 895555}]}
         4XX:
           application/json: {"code": 49871, "message": "<value>"}
   create_guild_from_template:
@@ -4270,7 +4232,7 @@ examples:
         application/json: {"name": "<value>"}
       responses:
         "201":
-          application/json: {"id": "<value>", "flags": 486589, "guild_id": "<value>", "name": "<value>", "position": 638424}
+          application/json: {"id": "<value>", "type": 15, "flags": 486589, "guild_id": "<value>", "name": "<value>", "position": 638424}
         4XX:
           application/json: {"code": 417458, "message": "<value>"}
   add_guild_member:

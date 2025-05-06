@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsGet: ToolDefinition<typeof args> = {
   name: "guilds-get",
-  description: ``,
+  description:
+    `Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.`,
+  scopes: ["guilds", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsGet(

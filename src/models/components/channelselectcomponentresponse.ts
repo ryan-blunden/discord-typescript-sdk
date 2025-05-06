@@ -13,6 +13,11 @@ import {
   ChannelSelectDefaultValueResponse$Outbound,
   ChannelSelectDefaultValueResponse$outboundSchema,
 } from "./channelselectdefaultvalueresponse.js";
+import {
+  ChannelTypes,
+  ChannelTypes$inboundSchema,
+  ChannelTypes$outboundSchema,
+} from "./channeltypes.js";
 
 export type ChannelSelectComponentResponse = {
   type?: 1 | undefined;
@@ -22,7 +27,7 @@ export type ChannelSelectComponentResponse = {
   minValues?: number | null | undefined;
   maxValues?: number | null | undefined;
   disabled?: boolean | null | undefined;
-  channelTypes?: Array<number> | null | undefined;
+  channelTypes?: Array<ChannelTypes> | null | undefined;
   defaultValues?: Array<ChannelSelectDefaultValueResponse> | null | undefined;
 };
 
@@ -39,7 +44,7 @@ export const ChannelSelectComponentResponse$inboundSchema: z.ZodType<
   min_values: z.nullable(z.number().int()).optional(),
   max_values: z.nullable(z.number().int()).optional(),
   disabled: z.nullable(z.boolean()).optional(),
-  channel_types: z.nullable(z.array(z.number().int())).optional(),
+  channel_types: z.nullable(z.array(ChannelTypes$inboundSchema)).optional(),
   default_values: z.nullable(
     z.array(ChannelSelectDefaultValueResponse$inboundSchema),
   ).optional(),
@@ -82,7 +87,7 @@ export const ChannelSelectComponentResponse$outboundSchema: z.ZodType<
   minValues: z.nullable(z.number().int()).optional(),
   maxValues: z.nullable(z.number().int()).optional(),
   disabled: z.nullable(z.boolean()).optional(),
-  channelTypes: z.nullable(z.array(z.number().int())).optional(),
+  channelTypes: z.nullable(z.array(ChannelTypes$outboundSchema)).optional(),
   defaultValues: z.nullable(
     z.array(ChannelSelectDefaultValueResponse$outboundSchema),
   ).optional(),

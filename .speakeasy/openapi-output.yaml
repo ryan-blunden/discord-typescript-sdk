@@ -44,6 +44,13 @@ paths:
       security:
         - {}
         - BotToken: []
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: partnerSDKUnmergeProvisionalAccount
+      description: Unmerges a provisional account.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
   "/oauth2/applications/@me":
     get:
       operationId: "get_my_oauth2_application"
@@ -56,8 +63,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: oauth2
-      x-speakeasy-name-override: get_my_application
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getOAuth2Me
+      description: Returns the OAuth2 application object associated with the requesting bot user.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
   "/users/@me/connections":
     get:
       operationId: "list_my_connections"
@@ -77,7 +89,12 @@ paths:
         - OAuth2:
             - connections
       x-speakeasy-group: users
-      x-speakeasy-name-override: listMyConnections
+      x-speakeasy-name-override: listConnections
+      description: Returns a list of connection objects. Requires the connections OAuth2 scope.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - read
   "/users/@me/channels":
     post:
       operationId: "create_dm"
@@ -99,6 +116,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: users
+      x-speakeasy-name-override: createDM
+      description: Create a new DM channel with a user. Returns a DM channel object (if one already exists, it will be returned instead).
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - write
   "/users/@me/guilds":
     get:
       operationId: "list_my_guilds"
@@ -135,7 +158,12 @@ paths:
         - OAuth2:
             - guilds
       x-speakeasy-group: users
-      x-speakeasy-name-override: listMyGuilds
+      x-speakeasy-name-override: listGuilds
+      description: Returns a list of partial guild objects the current user is a member of. For OAuth2, requires the guilds scope.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - read
   "/applications/@me":
     get:
       operationId: "get_my_application"
@@ -150,6 +178,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: getMe
+      description: Returns the application object associated with the requesting bot user.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
     patch:
       operationId: "update_my_application"
       requestBody:
@@ -168,6 +201,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: updateSelf
+      description: Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated. Returns the updated application object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
   "/partner-sdk/token":
     post:
       operationId: "partner_sdk_token"
@@ -202,6 +240,13 @@ paths:
       security:
         - {}
         - BotToken: []
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: partnerSDKToken
+      description: Gets a token for the partner SDK.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
   "/gateway/bot":
     get:
       operationId: "get_bot_gateway"
@@ -214,8 +259,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: gateway
-      x-speakeasy-name-override: getBot
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getBotGateway
+      description: Returns an object with the same information as Get Gateway, plus a shards key, containing the recommended number of shards to connect with.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
   "/oauth2/userinfo":
     get:
       operationId: "get_openid_connect_userinfo"
@@ -230,8 +280,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - openid
-      x-speakeasy-group: openidConnect
-      x-speakeasy-name-override: getUserinfo
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getOpenIDConnectUserInfo
+      description: Returns the user info for the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
   "/oauth2/keys":
     get:
       operationId: "get_public_keys"
@@ -245,8 +300,13 @@ paths:
       security:
         - {}
         - BotToken: []
-      x-speakeasy-group: oauth2
-      x-speakeasy-name-override: getKeys
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getPublicKeys
+      description: Returns a list of public keys used for verifying signatures.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
   "/oauth2/@me":
     get:
       operationId: "get_my_oauth2_authorization"
@@ -294,8 +354,13 @@ paths:
             - rpc.voice.write
             - voice
             - webhook.incoming
-      x-speakeasy-group: oauth2
-      x-speakeasy-name-override: get_authorization
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getOAuth2Authorization
+      description: Returns info about the current authorization.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
   "/voice/regions":
     get:
       operationId: "list_voice_regions"
@@ -313,7 +378,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: voice
-      x-speakeasy-name-override: list_regions
+      x-speakeasy-name-override: listRegions
+      description: Returns an array of voice region objects that can be used when setting a voice or stage channel's rtc_region.
+      x-speakeasy-mcp:
+        scopes:
+          - voice
+          - read
   "/users/@me":
     get:
       operationId: "get_my_user"
@@ -329,7 +399,12 @@ paths:
         - OAuth2:
             - identify
       x-speakeasy-group: users
-      x-speakeasy-name-override: get_me
+      x-speakeasy-name-override: getCurrent
+      description: Returns the user object of the requester's account. For OAuth2, this requires the identify scope, which will return the object without an email, and optionally the email scope, which returns the object with an email if the user has one.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - read
     patch:
       operationId: "update_my_user"
       requestBody:
@@ -347,7 +422,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: users
-      x-speakeasy-name-override: updateMe
+      x-speakeasy-name-override: updateCurrent
+      description: Modify the requester's user account settings. Returns a user object on success. Fires a User Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - write
   "/soundboard-default-sounds":
     get:
       operationId: "get_soundboard_default_sounds"
@@ -362,8 +442,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: soundboard
-      x-speakeasy-name-override: getDefaultSounds
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: getSoundboardDefaultSounds
+      description: Returns a list of the default sounds available in the soundboard.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - read
   "/stage-instances":
     post:
       operationId: "create_stage_instance"
@@ -405,6 +490,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: stageInstances
       x-speakeasy-name-override: create
+      description: Creates a new Stage instance associated to a Stage channel. Returns that Stage instance. Fires a Stage Instance Create Gateway event. Requires the user to be a moderator of the Stage channel.
+      x-speakeasy-mcp:
+        scopes:
+          - stage-instance
+          - write
   "/sticker-packs":
     get:
       operationId: "list_sticker_packs"
@@ -418,8 +508,13 @@ paths:
       security:
         - {}
         - BotToken: []
-      x-speakeasy-group: stickerPacks
-      x-speakeasy-name-override: list
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: listPacks
+      description: Returns a list of available sticker packs.
+      x-speakeasy-mcp:
+        scopes:
+          - stickers
+          - read
   "/gateway":
     get:
       operationId: "get_gateway"
@@ -433,8 +528,13 @@ paths:
       security:
         - {}
         - BotToken: []
-      x-speakeasy-group: gateway
-      x-speakeasy-name-override: get
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: getGateway
+      description: Returns an object with a single valid WSS URL, which the client can use for connecting to Discord.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
   "/lobbies":
     put:
       operationId: "create_or_join_lobby"
@@ -483,6 +583,13 @@ paths:
       security:
         - BotToken: []
         - OAuth2: []
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: createOrJoin
+      description: Creates a new lobby or joins an existing one. Returns a lobby object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
     post:
       operationId: "create_lobby"
       requestBody:
@@ -522,6 +629,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: create
+      description: Creates a new lobby. Returns a lobby object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
   "/guilds":
     post:
       operationId: "create_guild"
@@ -541,6 +655,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: create
+      description: Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/channels/{channel_id}/users/@me/threads/archived/private":
     parameters:
       - name: "channel_id"
@@ -569,7 +688,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: channels
-      x-speakeasy-name-override: list_my_private_archived_threads
+      x-speakeasy-name-override: listJoinedPrivateArchivedThreads
+      description: Returns archived threads in the channel that are of type PRIVATE_THREAD, and the user has joined. Threads are ordered by their id, in descending order. Requires the READ_MESSAGE_HISTORY permission.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
   "/applications/{application_id}/guilds/{guild_id}/commands/permissions":
     parameters:
       - name: "application_id"
@@ -595,8 +719,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.permissions.update
-      x-speakeasy-group: applications.guilds
-      x-speakeasy-name-override: list_command_permissions
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: listGuildPermissions
+      description: Fetches command permissions for all commands for your application in a guild.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
   "/applications/{application_id}/guilds/{guild_id}/commands/{command_id}/permissions":
     parameters:
       - name: "application_id"
@@ -624,8 +753,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.permissions.update
-      x-speakeasy-group: applications.guilds
-      x-speakeasy-name-override: get_command_permissions
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: getGuildPermissions
+      description: Fetches command permissions for a specific command for your application in a guild.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
     put:
       operationId: "set_guild_application_command_permissions"
       requestBody:
@@ -652,8 +786,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.permissions.update
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: setGuildCommandPermissions
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: setGuildPermissions
+      description: Edits command permissions for a specific command for your application in a guild.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
   "/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}/@me":
     parameters:
       - name: "channel_id"
@@ -678,8 +817,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels.messages.reactions
-      x-speakeasy-name-override: add
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: createReaction
+      description: Create a reaction for the message. This endpoint requires the READ_MESSAGE_HISTORY permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
     delete:
       operationId: "delete_my_message_reaction"
       responses:
@@ -688,8 +832,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels.messages
-      x-speakeasy-name-override: deleteMyReaction
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: deleteOwnReaction
+      description: Delete a reaction the current user has made for the message. Returns a 204 empty response on success.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
   "/channels/{channel_id}/threads/archived/private":
     parameters:
       - name: "channel_id"
@@ -721,6 +870,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: listPrivateArchivedThreads
+      description: Returns archived threads in the channel that are of type PRIVATE_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
   "/channels/{channel_id}/threads/archived/public":
     parameters:
       - name: "channel_id"
@@ -750,8 +904,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: threads
-      x-speakeasy-name-override: list_public_archived
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: listPublicArchivedThreads
+      description: Returns archived threads in the channel that are public. When called on a GUILD_TEXT channel, returns threads of type PUBLIC_THREAD. When called on a GUILD_ANNOUNCEMENT channel returns threads of type ANNOUNCEMENT_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires the READ_MESSAGE_HISTORY permission.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
   "/users/@me/applications/{application_id}/role-connection":
     parameters:
       - name: "application_id"
@@ -770,8 +929,13 @@ paths:
       security:
         - OAuth2:
             - role_connections.write
-      x-speakeasy-group: application_user_role_connections
-      x-speakeasy-name-override: get
+      x-speakeasy-group: users
+      x-speakeasy-name-override: getApplicationRoleConnection
+      description: Returns the application role connection for the user. Requires an OAuth2 access token with role_connections.write scope for the application specified in the path.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - read
     put:
       operationId: "update_application_user_role_connection"
       requestBody:
@@ -810,8 +974,13 @@ paths:
       security:
         - OAuth2:
             - role_connections.write
-      x-speakeasy-group: applicationUserRoleConnection
-      x-speakeasy-name-override: update
+      x-speakeasy-group: users
+      x-speakeasy-name-override: updateApplicationRoleConnection
+      description: Updates and returns the application role connection for the user. Requires an OAuth2 access token with role_connections.write scope for the application specified in the path.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - write
     delete:
       operationId: "delete_application_user_role_connection"
       responses:
@@ -821,8 +990,13 @@ paths:
       security:
         - OAuth2:
             - role_connections.write
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: delete_user_role_connection
+      x-speakeasy-group: applicationRoleConnectionMetadata
+      x-speakeasy-name-override: deleteUserConnection
+      description: Deletes the application role connection for the user.
+      x-speakeasy-mcp:
+        scopes:
+          - application-role-connection-metadata
+          - write
   "/users/@me/guilds/{guild_id}/member":
     parameters:
       - name: "guild_id"
@@ -841,8 +1015,13 @@ paths:
       security:
         - OAuth2:
             - guilds.members.read
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: getMyMember
+      x-speakeasy-group: users
+      x-speakeasy-name-override: getGuildMember
+      description: Returns a guild member object for the current user. Requires the guilds.members.read OAuth2 scope.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - read
   "/applications/{application_id}/role-connections/metadata":
     parameters:
       - name: "application_id"
@@ -864,8 +1043,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: getRoleConnectionsMetadata
+      x-speakeasy-group: applicationRoleConnectionMetadata
+      x-speakeasy-name-override: list
+      description: Returns a list of application role connection metadata objects for the given application.
+      x-speakeasy-mcp:
+        scopes:
+          - application-role-connection-metadata
+          - read
     put:
       operationId: "update_application_role_connections_metadata"
       requestBody:
@@ -891,8 +1075,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: updateRoleConnectionsMetadata
+      x-speakeasy-group: applicationRoleConnectionMetadata
+      x-speakeasy-name-override: update
+      description: Updates and returns a list of application role connection metadata objects for the given application. An application can have a maximum of 5 metadata records.
+      x-speakeasy-mcp:
+        scopes:
+          - application-role-connection-metadata
+          - write
   "/applications/{application_id}/entitlements/{entitlement_id}/consume":
     parameters:
       - name: "application_id"
@@ -913,7 +1102,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.entitlements
-      x-speakeasy-group: applications
+      x-speakeasy-group: entitlements
+      x-speakeasy-name-override: consume
+      description: 'For One-Time Purchase consumable SKUs, marks a given entitlement for the user as consumed. The entitlement will have consumed: true when using List Entitlements. Returns a 204 No Content on success.'
+      x-speakeasy-mcp:
+        scopes:
+          - entitlements
+          - write
   "/applications/{application_id}/guilds/{guild_id}/commands/{command_id}":
     parameters:
       - name: "application_id"
@@ -941,8 +1136,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.update
-      x-speakeasy-group: guildCommands
-      x-speakeasy-name-override: get
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: getGuild
+      description: Fetch a guild command for your application.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
     delete:
       operationId: "delete_guild_application_command"
       responses:
@@ -953,8 +1153,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.update
-      x-speakeasy-group: guild_application_commands
-      x-speakeasy-name-override: delete
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: deleteGuild
+      description: Delete a guild command.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
     patch:
       operationId: "update_guild_application_command"
       requestBody:
@@ -973,8 +1178,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.update
-      x-speakeasy-group: guildApplicationCommands
-      x-speakeasy-name-override: update
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: updateGuild
+      description: Edit a guild command. Updates for guild commands will be available immediately.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
   "/applications/{application_id}/guilds/{guild_id}/commands":
     parameters:
       - name: "application_id"
@@ -1007,8 +1217,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.update
-      x-speakeasy-group: guild_application_commands
-      x-speakeasy-name-override: list
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: listGuild
+      description: Fetch all guild commands for your application for a specific guild.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
     put:
       operationId: "bulk_set_guild_application_commands"
       requestBody:
@@ -1036,8 +1251,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.update
-      x-speakeasy-group: guildApplicationCommands
-      x-speakeasy-name-override: bulkSet
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: bulkSetGuild
+      description: Takes a list of application commands, overwriting the existing command list for this application for the targeted guild.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
     post:
       operationId: "create_guild_application_command"
       requestBody:
@@ -1061,8 +1281,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.update
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: createGuildCommand
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: createGuild
+      description: Create a new guild command. New guild commands will be available in the guild immediately.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
   "/channels/{channel_id}/thread-members/@me":
     parameters:
       - name: "channel_id"
@@ -1077,8 +1302,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels_thread_members
-      x-speakeasy-name-override: join
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: joinThread
+      description: Adds the current user to a thread. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update and a Thread Create Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
     delete:
       operationId: "leave_thread"
       responses:
@@ -1087,8 +1317,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels.threadMembers
-      x-speakeasy-name-override: leave
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: leaveThread
+      description: Removes the current user from a thread. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
   "/channels/{channel_id}/messages/bulk-delete":
     parameters:
       - name: "channel_id"
@@ -1118,8 +1353,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels.messages
+      x-speakeasy-group: messages
       x-speakeasy-name-override: bulkDelete
+      description: Delete multiple messages in a single request. This endpoint can only be used on guild channels and requires the MANAGE_MESSAGES permission.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
   "/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}/{user_id}":
     parameters:
       - name: "channel_id"
@@ -1148,8 +1388,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels
-      x-speakeasy-name-override: deleteUserMessageReaction
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: deleteUserReaction
+      description: Deletes another user's reaction. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
   "/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}":
     parameters:
       - name: "channel_id"
@@ -1194,6 +1439,13 @@ paths:
         - BotToken: []
       x-speakeasy-group: messages
       x-speakeasy-name-override: listReactionsByEmoji
+      description: Get a list of users that reacted with a specific emoji.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - read
+          - messages
+          - read
     delete:
       operationId: "delete_all_message_reactions_by_emoji"
       responses:
@@ -1202,8 +1454,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: messageReactions
-      x-speakeasy-name-override: deleteAllByEmoji
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: deleteAllReactionsForEmoji
+      description: Deletes all the reactions for a given emoji on a message. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
   "/channels/{channel_id}/messages/{message_id}/reactions":
     parameters:
       - name: "channel_id"
@@ -1222,8 +1479,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels.messages
+      x-speakeasy-group: messages
       x-speakeasy-name-override: deleteAllReactions
+      description: Deletes all reactions on a message. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
   "/channels/{channel_id}/messages/{message_id}/crosspost":
     parameters:
       - name: "channel_id"
@@ -1245,8 +1507,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels
-      x-speakeasy-name-override: crosspostMessage
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: crosspost
+      description: Crosspost a message in an Announcement Channel to following channels. This endpoint requires the SEND_MESSAGES permission, if the current user sent the message, or additionally the MANAGE_MESSAGES permission, for all other messages, to be present for the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
   "/channels/{channel_id}/messages/{message_id}/threads":
     parameters:
       - name: "channel_id"
@@ -1275,6 +1542,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: startThreadFromMessage
+      description: Creates a new thread from an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create and a Message Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
   "/channels/{channel_id}/threads/search":
     parameters:
       - name: "channel_id"
@@ -1344,6 +1616,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: searchThreads
+      description: Search for threads in a channel.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
   "/channels/{channel_id}/polls/{message_id}/answers/{answer_id}":
     parameters:
       - name: "channel_id"
@@ -1383,8 +1662,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: answers
-      x-speakeasy-name-override: getVoters
+      x-speakeasy-group: polls
+      x-speakeasy-name-override: getAnswerVoters
+      description: Get a list of users that voted for a specific answer in a poll.
+      x-speakeasy-mcp:
+        scopes:
+          - polls
+          - read
   "/channels/{channel_id}/polls/{message_id}/expire":
     parameters:
       - name: "channel_id"
@@ -1406,8 +1690,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels
-      x-speakeasy-name-override: expirePoll
+      x-speakeasy-group: polls
+      x-speakeasy-name-override: expire
+      description: Immediately ends the poll. You cannot end polls from other users. Returns a message object. Fires a Message Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - polls
+          - write
   "/webhooks/{webhook_id}/{webhook_token}/messages/@original":
     parameters:
       - name: "webhook_id"
@@ -1436,8 +1725,13 @@ paths:
       security:
         - {}
         - BotToken: []
-      x-speakeasy-group: webhookMessages
-      x-speakeasy-name-override: getOriginal
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: getOriginalMessage
+      description: Returns the initial webhook message.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - read
     delete:
       operationId: "delete_original_webhook_message"
       parameters:
@@ -1453,6 +1747,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: deleteOriginalMessage
+      description: Deletes the initial webhook message.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - write
     patch:
       operationId: "update_original_webhook_message"
       parameters:
@@ -1496,6 +1795,7 @@ paths:
                     "files[9]":
                       type: "string"
               type: "object"
+              x-speakeasy-mcp: {"name": "", "scopes": ["openapi-fixes", "write"]}
         required: true
       responses:
         "200":
@@ -1509,6 +1809,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: updateOriginalMessage
+      description: Edits the initial webhook message.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - write
   "/lobbies/{lobby_id}/members/@me":
     parameters:
       - name: "lobby_id"
@@ -1524,6 +1829,13 @@ paths:
       security:
         - BotToken: []
         - OAuth2: []
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: leave
+      description: Removes the current user from the specified lobby. It is safe to call this even if the user is no longer a member of the lobby, but will fail if the lobby does not exist.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
   "/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}/users":
     parameters:
       - name: "guild_id"
@@ -1566,8 +1878,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.scheduledEvents.users
-      x-speakeasy-name-override: list
+      x-speakeasy-group: guildScheduledEvents
+      x-speakeasy-name-override: getUsers
+      description: Get a list of guild scheduled event users subscribed to a guild scheduled event. Returns a list of guild scheduled event user objects on success. Guild member data, if it exists, is included if the with_member query parameter is set.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-scheduled-event
+          - read
   "/guilds/{guild_id}/auto-moderation/rules/{rule_id}":
     parameters:
       - name: "guild_id"
@@ -1595,8 +1912,15 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: autoModerationRules
-      x-speakeasy-name-override: get
+      x-speakeasy-group: autoModeration
+      x-speakeasy-name-override: getRule
+      description: Get a single rule. Returns an auto moderation rule object. This endpoint requires the MANAGE_GUILD permission.
+      x-speakeasy-mcp:
+        scopes:
+          - auto-moderation
+          - read
+          - auto-moderation
+          - read
     delete:
       operationId: "delete_auto_moderation_rule"
       responses:
@@ -1605,8 +1929,15 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: autoModerationRules
-      x-speakeasy-name-override: delete
+      x-speakeasy-group: autoModeration
+      x-speakeasy-name-override: deleteRule
+      description: Delete a rule. Returns a 204 on success. Fires an Auto Moderation Rule Delete Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - auto-moderation
+          - write
+          - auto-moderation
+          - write
     patch:
       operationId: "update_auto_moderation_rule"
       requestBody:
@@ -1618,7 +1949,6 @@ paths:
                 - {"$ref": "#/components/schemas/KeywordUpsertRequestPartial"}
                 - {"$ref": "#/components/schemas/MLSpamUpsertRequestPartial"}
                 - {"$ref": "#/components/schemas/MentionSpamUpsertRequestPartial"}
-              x-discord-union: "oneOf"
         required: true
       responses:
         "200":
@@ -1635,8 +1965,15 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.autoModeration.rules
-      x-speakeasy-name-override: update
+      x-speakeasy-group: autoModeration
+      x-speakeasy-name-override: updateRule
+      description: Modify an existing rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - auto-moderation
+          - write
+          - auto-moderation
+          - write
   "/guilds/{guild_id}/auto-moderation/rules":
     parameters:
       - name: "guild_id"
@@ -1665,8 +2002,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: listAutoModerationRules
+      x-speakeasy-group: autoModeration
+      x-speakeasy-name-override: listRules
+      description: Get a list of all rules currently configured for the guild. Returns a list of auto moderation rule objects for the given guild. This endpoint requires the MANAGE_GUILD permission.
+      x-speakeasy-mcp:
+        scopes:
+          - auto-moderation
+          - read
     post:
       operationId: "create_auto_moderation_rule"
       requestBody:
@@ -1694,8 +2036,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: auto_moderation_rules
-      x-speakeasy-name-override: create
+      x-speakeasy-group: autoModeration
+      x-speakeasy-name-override: createRule
+      description: Create a new rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Create Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - auto-moderation
+          - write
   "/guilds/{guild_id}/voice-states/@me":
     parameters:
       - name: "guild_id"
@@ -1713,8 +2060,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.voice_states
-      x-speakeasy-name-override: get_self
+      x-speakeasy-group: voice
+      x-speakeasy-name-override: getCurrentUserState
+      description: Returns the current user's voice state in the guild.
+      x-speakeasy-mcp:
+        scopes:
+          - voice
+          - read
     patch:
       operationId: "update_self_voice_state"
       requestBody:
@@ -1743,8 +2095,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.voiceStates
-      x-speakeasy-name-override: updateSelf
+      x-speakeasy-group: voice
+      x-speakeasy-name-override: updateCurrentUserState
+      description: Updates the current user's voice state. Returns 204 No Content on success. Fires a Voice State Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - voice
+          - write
   "/guilds/{guild_id}/members/search":
     parameters:
       - name: "guild_id"
@@ -1781,6 +2138,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: searchMembers
+      description: Returns a list of guild member objects whose username or nickname starts with a provided string.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
   "/guilds/{guild_id}/threads/active":
     parameters:
       - name: "guild_id"
@@ -1798,8 +2160,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildThreads
-      x-speakeasy-name-override: getActive
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: listActiveThreads
+      description: Returns all active threads in the guild, including public and private threads. Threads are ordered by their id, in descending order.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
   "/guilds/{guild_id}/members/@me":
     parameters:
       - name: "guild_id"
@@ -1829,8 +2196,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds_members
-      x-speakeasy-name-override: update_me
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: updateCurrentMember
+      description: Modifies the current member in a guild. Returns a 200 with the updated member object on success. Fires a Guild Member Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/guilds/{guild_id}/members/{user_id}/roles/{role_id}":
     parameters:
       - name: "guild_id"
@@ -1853,8 +2225,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guild_member_roles
-      x-speakeasy-name-override: add
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: addMemberRole
+      description: Adds a role to a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
     delete:
       operationId: "delete_guild_member_role"
       responses:
@@ -1863,8 +2240,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guild_member_roles
-      x-speakeasy-name-override: delete
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: removeMemberRole
+      description: Removes a role from a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/users/@me/guilds/{guild_id}":
     parameters:
       - name: "guild_id"
@@ -1879,8 +2261,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: users.guilds
-      x-speakeasy-name-override: leave
+      x-speakeasy-group: users
+      x-speakeasy-name-override: leaveGuild
+      description: Leave a guild. Returns a 204 empty response on success. Fires a Guild Delete Gateway event and a Guild Member Remove Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - write
   "/applications/{application_id}/activity-instances/{instance_id}":
     parameters:
       - name: "application_id"
@@ -1906,6 +2293,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: getActivityInstance
+      description: Returns a serialized activity instance, if it exists. Useful for preventing unwanted activity sessions.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
   "/applications/{application_id}/entitlements/{entitlement_id}":
     parameters:
       - name: "application_id"
@@ -1929,8 +2321,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.entitlements
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: getEntitlement
+      x-speakeasy-group: entitlements
+      x-speakeasy-name-override: get
+      description: Returns an entitlement.
+      x-speakeasy-mcp:
+        scopes:
+          - entitlements
+          - read
     delete:
       operationId: "delete_entitlement"
       responses:
@@ -1941,8 +2338,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.entitlements
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: deleteEntitlement
+      x-speakeasy-group: entitlements
+      x-speakeasy-name-override: deleteTest
+      description: Deletes a currently-active test entitlement. Discord will act as though that user or guild no longer has entitlement to your premium offering. Returns 204 No Content on success.
+      x-speakeasy-mcp:
+        scopes:
+          - entitlements
+          - write
   "/applications/{application_id}/entitlements":
     parameters:
       - name: "application_id"
@@ -2011,7 +2413,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.entitlements
-      x-speakeasy-group: applications
+      x-speakeasy-group: entitlements
+      x-speakeasy-name-override: list
+      description: Returns all entitlements for a given app, active and expired.
+      x-speakeasy-mcp:
+        scopes:
+          - entitlements
+          - read
     post:
       operationId: "create_entitlement"
       requestBody:
@@ -2028,7 +2436,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: applications
+      x-speakeasy-group: entitlements
+      x-speakeasy-name-override: createTest
+      description: Creates a test entitlement to a given SKU for a given guild or user. Discord will act as though that user or guild has entitlement to your premium offering. This endpoint returns a partial entitlement object.
+      x-speakeasy-mcp:
+        scopes:
+          - entitlements
+          - write
   "/applications/{application_id}/attachment":
     parameters:
       - name: "application_id"
@@ -2093,7 +2507,12 @@ paths:
             - voice
             - webhook.incoming
       x-speakeasy-group: applications
-      x-speakeasy-name-override: upload_attachment
+      x-speakeasy-name-override: uploadAttachment
+      description: Uploads an attachment for an application.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
   "/applications/{application_id}/commands/{command_id}":
     parameters:
       - name: "application_id"
@@ -2117,8 +2536,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.update
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: get_command
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: get
+      description: Fetch a global command for your application.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
     delete:
       operationId: "delete_application_command"
       responses:
@@ -2129,8 +2553,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.update
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: deleteCommand
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: delete
+      description: Delete a global command.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
     patch:
       operationId: "update_application_command"
       requestBody:
@@ -2149,8 +2578,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.update
-      x-speakeasy-group: applications.commands
+      x-speakeasy-group: applicationCommands
       x-speakeasy-name-override: update
+      description: Edit a global command. Updates will be available in all guilds after 1 hour.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
   "/applications/{application_id}/commands":
     parameters:
       - name: "application_id"
@@ -2179,8 +2613,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.update
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: listCommands
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: list
+      description: Fetch all global commands for your application.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
     put:
       operationId: "bulk_set_application_commands"
       requestBody:
@@ -2208,8 +2647,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.update
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: bulk_set_commands
+      x-speakeasy-group: applicationCommands
+      x-speakeasy-name-override: bulkSet
+      description: Takes a list of application commands, overwriting the existing global command list for this application.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
     post:
       operationId: "create_application_command"
       requestBody:
@@ -2233,8 +2677,13 @@ paths:
         - BotToken: []
         - OAuth2:
             - applications.commands.update
-      x-speakeasy-group: applications_commands
+      x-speakeasy-group: applicationCommands
       x-speakeasy-name-override: create
+      description: Create a new global command. New global commands will be available in all guilds after 1 hour.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
   "/applications/{application_id}/emojis/{emoji_id}":
     parameters:
       - name: "application_id"
@@ -2256,8 +2705,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: get_emoji
+      x-speakeasy-group: emoji
+      x-speakeasy-name-override: getApplicationEmoji
+      description: Returns an emoji object for the given application and emoji IDs. Includes the user field.
+      x-speakeasy-mcp:
+        scopes:
+          - emoji
+          - read
     delete:
       operationId: "delete_application_emoji"
       responses:
@@ -2266,8 +2720,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: applications.emojis
-      x-speakeasy-name-override: delete
+      x-speakeasy-group: emoji
+      x-speakeasy-name-override: deleteApplicationEmoji
+      description: Delete the given emoji. Returns 204 No Content on success.
+      x-speakeasy-mcp:
+        scopes:
+          - emoji
+          - write
     patch:
       operationId: "update_application_emoji"
       requestBody:
@@ -2290,8 +2749,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: updateEmoji
+      x-speakeasy-group: emoji
+      x-speakeasy-name-override: updateApplicationEmoji
+      description: Modify the given emoji. Returns the updated emoji object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - emoji
+          - write
   "/applications/{application_id}/emojis":
     parameters:
       - name: "application_id"
@@ -2309,8 +2773,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: applications
-      x-speakeasy-name-override: listEmojis
+      x-speakeasy-group: emoji
+      x-speakeasy-name-override: listApplicationEmojis
+      description: Returns an object containing a list of emoji objects for the given application under the items key. Includes a user object for the team member that uploaded the emoji from the app's settings, or for the bot user if uploaded using the API.
+      x-speakeasy-mcp:
+        scopes:
+          - emoji
+          - read
     post:
       operationId: "create_application_emoji"
       requestBody:
@@ -2338,8 +2807,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: applications.emojis
-      x-speakeasy-name-override: create
+      x-speakeasy-group: emoji
+      x-speakeasy-name-override: createApplicationEmoji
+      description: Create a new emoji for the application. Returns the new emoji object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - emoji
+          - write
   "/interactions/{interaction_id}/{interaction_token}/callback":
     parameters:
       - name: "interaction_id"
@@ -2370,7 +2844,6 @@ paths:
                 - {"$ref": "#/components/schemas/ModalInteractionCallbackRequest"}
                 - {"$ref": "#/components/schemas/PongInteractionCallbackRequest"}
                 - {"$ref": "#/components/schemas/UpdateMessageInteractionCallbackRequest"}
-              x-discord-union: "oneOf"
           "application/x-www-form-urlencoded":
             schema:
               anyOf:
@@ -2380,7 +2853,6 @@ paths:
                 - {"$ref": "#/components/schemas/ModalInteractionCallbackRequest"}
                 - {"$ref": "#/components/schemas/PongInteractionCallbackRequest"}
                 - {"$ref": "#/components/schemas/UpdateMessageInteractionCallbackRequest"}
-              x-discord-union: "oneOf"
           "multipart/form-data":
             schema:
               anyOf:
@@ -2390,8 +2862,8 @@ paths:
                 - {"$ref": "#/components/schemas/ModalInteractionCallbackRequest"}
                 - {"$ref": "#/components/schemas/PongInteractionCallbackRequest"}
                 - {"$ref": "#/components/schemas/UpdateMessageInteractionCallbackRequest"}
-              x-discord-union: "oneOf"
               type: "object"
+              x-speakeasy-mcp: {"name": "", "scopes": ["openapi-fixes", "write"]}
         required: true
       responses:
         "200":
@@ -2405,8 +2877,6 @@ paths:
       security:
         - {}
         - BotToken: []
-      x-speakeasy-group: interactions
-      x-speakeasy-name-override: create_response
   "/channels/{channel_id}/send-soundboard-sound":
     parameters:
       - name: "channel_id"
@@ -2426,7 +2896,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: sendSoundboardSound
+      description: Sends a soundboard sound to a channel.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - write
   "/channels/{channel_id}/thread-members/{user_id}":
     parameters:
       - name: "channel_id"
@@ -2455,6 +2931,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: getThreadMember
+      description: Returns a thread member object for the specified user if they are a member of the thread, returns a 404 response otherwise.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
     put:
       operationId: "add_thread_member"
       responses:
@@ -2464,6 +2945,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: channels
+      x-speakeasy-name-override: addThreadMember
+      description: Adds another member to a thread. Requires the ability to send messages in the thread. Also requires the thread is not archived. Returns a 204 empty response if the member is successfully added or was already a member of the thread. Fires a Thread Members Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
     delete:
       operationId: "delete_thread_member"
       responses:
@@ -2472,8 +2959,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: threadMembers
-      x-speakeasy-name-override: delete
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: removeThreadMember
+      description: Removes another member from a thread. Requires the MANAGE_THREADS permission, or the creator of the thread if it is a PRIVATE_THREAD. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
   "/channels/{channel_id}/thread-members":
     parameters:
       - name: "channel_id"
@@ -2509,6 +3001,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: listThreadMembers
+      description: Returns array of thread member objects that are members of the thread.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
   "/channels/{channel_id}/permissions/{overwrite_id}":
     parameters:
       - name: "channel_id"
@@ -2546,8 +3043,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels.permissions
-      x-speakeasy-name-override: setOverwrite
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: setPermissionOverwrite
+      description: Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
     delete:
       operationId: "delete_channel_permission_overwrite"
       responses:
@@ -2556,8 +3058,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channel_permissions
-      x-speakeasy-name-override: delete_overwrite
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: deletePermissionOverwrite
+      description: Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
   "/channels/{channel_id}/recipients/{user_id}":
     parameters:
       - name: "channel_id"
@@ -2601,7 +3108,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels_recipients
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: addGroupDMRecipient
+      description: Adds a recipient to a Group DM using their access token.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
     delete:
       operationId: "delete_group_dm_user"
       responses:
@@ -2611,7 +3124,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: channels
-      x-speakeasy-name-override: delete_dm_user
+      x-speakeasy-name-override: removeGroupDMRecipient
+      description: Removes a recipient from a Group DM.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
   "/channels/{channel_id}/followers":
     parameters:
       - name: "channel_id"
@@ -2641,6 +3159,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: follow
+      description: Follow an Announcement Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. Returns a followed channel object. Fires a Webhooks Update Gateway event for the target channel.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
   "/channels/{channel_id}/messages/{message_id}":
     parameters:
       - name: "channel_id"
@@ -2662,8 +3185,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels.messages
+      x-speakeasy-group: messages
       x-speakeasy-name-override: get
+      description: Returns a specific message in the channel. If operating on a guild channel, this endpoint requires the READ_MESSAGE_HISTORY permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - read
     delete:
       operationId: "delete_message"
       responses:
@@ -2672,8 +3200,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels
-      x-speakeasy-name-override: deleteMessage
+      x-speakeasy-group: messages
+      x-speakeasy-name-override: delete
+      description: Delete a message. If operating on a guild channel and trying to delete a message that was not sent by the current user, this endpoint requires the MANAGE_MESSAGES permission.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
     patch:
       operationId: "update_message"
       requestBody:
@@ -2709,6 +3242,7 @@ paths:
                     "files[9]":
                       type: "string"
               type: "object"
+              x-speakeasy-mcp: {"name": "", "scopes": ["openapi-fixes", "write"]}
         required: true
       responses:
         "200":
@@ -2719,8 +3253,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels.messages
+      x-speakeasy-group: messages
       x-speakeasy-name-override: update
+      description: Edit a previously sent message. The fields content, embeds, and flags can be edited by the original message author. Other users can only edit flags and only if they have the MANAGE_MESSAGES permission in the corresponding channel.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
   "/channels/{channel_id}/messages":
     parameters:
       - name: "channel_id"
@@ -2758,8 +3297,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels.messages
+      x-speakeasy-group: messages
       x-speakeasy-name-override: list
+      description: Returns the messages for a channel. If operating on a guild channel, this endpoint requires the VIEW_CHANNEL permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - read
     post:
       operationId: "create_message"
       requestBody:
@@ -2795,6 +3339,7 @@ paths:
                     "files[9]":
                       type: "string"
               type: "object"
+              x-speakeasy-mcp: {"name": "", "scopes": ["openapi-fixes", "write"]}
         required: true
       responses:
         "200":
@@ -2805,8 +3350,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels.messages
+      x-speakeasy-group: messages
       x-speakeasy-name-override: create
+      description: Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+      x-speakeasy-mcp:
+        scopes:
+          - messages
+          - write
   "/channels/{channel_id}/webhooks":
     parameters:
       - name: "channel_id"
@@ -2832,8 +3382,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels
-      x-speakeasy-name-override: listWebhooks
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: listForChannel
+      description: Returns a list of channel webhook objects. Requires the MANAGE_WEBHOOKS permission.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - read
     post:
       operationId: "create_webhook"
       requestBody:
@@ -2862,8 +3417,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels
-      x-speakeasy-name-override: createWebhook
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: create
+      description: Creates a new webhook and returns a webhook object on success. Requires the MANAGE_WEBHOOKS permission. Fires a Webhooks Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - write
   "/channels/{channel_id}/invites":
     parameters:
       - name: "channel_id"
@@ -2891,6 +3451,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: listInvites
+      description: Returns a list of invite objects (with invite metadata) for the channel.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
     post:
       operationId: "create_channel_invite"
       requestBody:
@@ -2900,7 +3465,6 @@ paths:
               anyOf:
                 - {"$ref": "#/components/schemas/CreateGroupDMInviteRequest"}
                 - {"$ref": "#/components/schemas/CreateGuildInviteRequest"}
-              x-discord-union: "oneOf"
         required: true
       responses:
         "200":
@@ -2912,14 +3476,18 @@ paths:
                   - {"$ref": "#/components/schemas/FriendInviteResponse"}
                   - {"$ref": "#/components/schemas/GroupDMInviteResponse"}
                   - {"$ref": "#/components/schemas/GuildInviteResponse"}
-                x-discord-union: "oneOf"
         "204":
           description: "204 response for create_channel_invite"
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
       x-speakeasy-group: channels
-      x-speakeasy-name-override: create_invite
+      x-speakeasy-name-override: createInvite
+      description: Create a new invite object for the channel.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
   "/channels/{channel_id}/threads":
     parameters:
       - name: "channel_id"
@@ -2935,20 +3503,18 @@ paths:
               anyOf:
                 - {"$ref": "#/components/schemas/CreateForumThreadRequest"}
                 - {"$ref": "#/components/schemas/CreateTextThreadWithoutMessageRequest"}
-              x-discord-union: "oneOf"
           "application/x-www-form-urlencoded":
             schema:
               anyOf:
                 - {"$ref": "#/components/schemas/CreateForumThreadRequest"}
                 - {"$ref": "#/components/schemas/CreateTextThreadWithoutMessageRequest"}
-              x-discord-union: "oneOf"
           "multipart/form-data":
             schema:
               anyOf:
                 - {"$ref": "#/components/schemas/CreateForumThreadRequest"}
                 - {"$ref": "#/components/schemas/CreateTextThreadWithoutMessageRequest"}
-              x-discord-union: "oneOf"
               type: "object"
+              x-speakeasy-mcp: {"name": "", "scopes": ["openapi-fixes", "write"]}
         required: true
       responses:
         "201":
@@ -2959,8 +3525,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels.threads
-      x-speakeasy-name-override: create
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: startThread
+      description: Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
   "/channels/{channel_id}/typing":
     parameters:
       - name: "channel_id"
@@ -2981,7 +3552,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: channels
-      x-speakeasy-name-override: triggerTyping
+      x-speakeasy-name-override: triggerTypingIndicator
+      description: Post a typing indicator for the specified channel, which expires after 10 seconds. Returns a 204 empty response on success. Fires a Typing Start Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
   "/channels/{channel_id}/pins/{message_id}":
     parameters:
       - name: "channel_id"
@@ -3002,6 +3578,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: pinMessage
+      description: Pin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
     delete:
       operationId: "unpin_message"
       responses:
@@ -3010,8 +3591,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: channels.pins
-      x-speakeasy-name-override: unpin
+      x-speakeasy-group: channels
+      x-speakeasy-name-override: unpinMessage
+      description: Unpin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
   "/channels/{channel_id}/pins":
     parameters:
       - name: "channel_id"
@@ -3034,6 +3620,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: channels
+      x-speakeasy-name-override: listPinnedMessages
+      description: Returns all pinned messages in the channel as an array of message objects.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
   "/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}":
     parameters:
       - name: "webhook_id"
@@ -3067,7 +3659,12 @@ paths:
         - {}
         - BotToken: []
       x-speakeasy-group: webhooks
-      x-speakeasy-name-override: get_message
+      x-speakeasy-name-override: getMessage
+      description: Returns a previously-sent webhook message from the same token. Returns a message object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - read
     delete:
       operationId: "delete_webhook_message"
       parameters:
@@ -3081,8 +3678,13 @@ paths:
       security:
         - {}
         - BotToken: []
-      x-speakeasy-group: webhooks.messages
-      x-speakeasy-name-override: delete
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: deleteMessage
+      description: Deletes a message that was created by the webhook. Returns a 204 No Content response on success.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - write
     patch:
       operationId: "update_webhook_message"
       parameters:
@@ -3098,7 +3700,7 @@ paths:
           "application/json":
             schema: {"$ref": "#/components/schemas/IncomingWebhookUpdateRequestPartial"}
           "application/x-www-form-urlencoded":
-            schema: {"$ref": "#/components/schemas/IncomingWebhookUpdateRequestPartial", "type": "object"}
+            schema: {"$ref": "#/components/schemas/IncomingWebhookUpdateRequestPartial", "type": "object", "x-speakeasy-mcp": {"name": "", "scopes": ["openapi-fixes", "write"]}}
           "multipart/form-data":
             schema:
               allOf:
@@ -3126,6 +3728,7 @@ paths:
                     "files[9]":
                       type: "string"
               type: "object"
+              x-speakeasy-mcp: {"name": "", "scopes": ["openapi-fixes", "write"]}
         required: true
       responses:
         "200":
@@ -3139,6 +3742,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: updateMessage
+      description: Edits a previously-sent webhook message from the same token. Returns a message object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - write
   "/webhooks/{webhook_id}/{webhook_token}/github":
     parameters:
       - name: "webhook_id"
@@ -3174,7 +3782,12 @@ paths:
         - {}
         - BotToken: []
       x-speakeasy-group: webhooks
-      x-speakeasy-name-override: executeGithubCompatible
+      x-speakeasy-name-override: executeGithub
+      description: Add a new webhook to your GitHub repo (in the repo's settings), and use this endpoint as the "Payload URL."
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - write
   "/webhooks/{webhook_id}/{webhook_token}/slack":
     parameters:
       - name: "webhook_id"
@@ -3220,7 +3833,12 @@ paths:
         - {}
         - BotToken: []
       x-speakeasy-group: webhooks
-      x-speakeasy-name-override: executeSlackCompatible
+      x-speakeasy-name-override: executeSlack
+      description: Refer to Slack's documentation for more information. We do not support Slack's channel, icon_emoji, mrkdwn, or mrkdwn_in properties.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - write
   "/lobbies/{lobby_id}/channel-linking":
     parameters:
       - name: "lobby_id"
@@ -3250,6 +3868,13 @@ paths:
       security:
         - BotToken: []
         - OAuth2: []
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: connectToChannel
+      description: Connects a lobby to a channel.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
   "/lobbies/{lobby_id}/messages":
     parameters:
       - name: "lobby_id"
@@ -3277,6 +3902,13 @@ paths:
       security:
         - BotToken: []
         - OAuth2: []
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: sendMessage
+      description: Sends a message to the lobby.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
   "/lobbies/{lobby_id}/members/{user_id}":
     parameters:
       - name: "lobby_id"
@@ -3319,6 +3951,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: addMember
+      description: Adds a user to a lobby.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
     delete:
       operationId: "delete_lobby_member"
       responses:
@@ -3327,6 +3966,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: removeMember
+      description: Removes a user from a lobby.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
   "/guilds/templates/{code}":
     parameters:
       - name: "code"
@@ -3347,8 +3993,13 @@ paths:
       security:
         - {}
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: getTemplate
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: get
+      description: Returns a guild template object for the given code.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - read
     post:
       operationId: "create_guild_from_template"
       requestBody:
@@ -3377,8 +4028,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guild_templates
-      x-speakeasy-name-override: create_from_code
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: createGuild
+      description: Create a new guild based on a template. Returns a guild object on success. Fires a Guild Create Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - write
   "/guilds/{guild_id}/new-member-welcome":
     parameters:
       - name: "guild_id"
@@ -3398,8 +4054,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: get_new_member_welcome
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: getNewMemberWelcome
+      description: Returns the welcome screen object for the guild.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - read
   "/guilds/{guild_id}/soundboard-sounds/{sound_id}":
     parameters:
       - name: "guild_id"
@@ -3421,8 +4082,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: getSoundboardSound
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: getGuildSoundboardSound
+      description: Returns a soundboard sound object for the given guild and sound IDs.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - read
     delete:
       operationId: "delete_guild_soundboard_sound"
       responses:
@@ -3431,8 +4097,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildSoundboardSounds
-      x-speakeasy-name-override: delete
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: deleteGuildSoundboardSound
+      description: Delete a soundboard sound from a guild. Returns 204 No Content on success.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - write
     patch:
       operationId: "update_guild_soundboard_sound"
       requestBody:
@@ -3449,8 +4120,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.soundboardSounds
-      x-speakeasy-name-override: update
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: updateGuildSoundboardSound
+      description: Update a soundboard sound in a guild. Returns the updated soundboard sound object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - write
   "/guilds/{guild_id}/soundboard-sounds":
     parameters:
       - name: "guild_id"
@@ -3468,8 +4144,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds_soundboard_sounds
-      x-speakeasy-name-override: list
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: listGuildSoundboardSounds
+      description: Returns a list of soundboard sound objects for the given guild.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - read
     post:
       operationId: "create_guild_soundboard_sound"
       requestBody:
@@ -3486,8 +4167,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: create_soundboard_sound
+      x-speakeasy-group: soundboards
+      x-speakeasy-name-override: createGuildSoundboardSound
+      description: Create a new soundboard sound for the guild. Returns the new soundboard sound object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - soundboard
+          - write
   "/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}":
     parameters:
       - name: "guild_id"
@@ -3518,8 +4204,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.scheduledEvents
+      x-speakeasy-group: guildScheduledEvents
       x-speakeasy-name-override: get
+      description: Get a guild scheduled event. Returns a guild scheduled event object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-scheduled-event
+          - read
     delete:
       operationId: "delete_guild_scheduled_event"
       responses:
@@ -3528,8 +4219,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guild_scheduled_events
+      x-speakeasy-group: guildScheduledEvents
       x-speakeasy-name-override: delete
+      description: Delete a guild scheduled event. Returns a 204 on success. Fires a Guild Scheduled Event Delete Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-scheduled-event
+          - write
     patch:
       operationId: "update_guild_scheduled_event"
       requestBody:
@@ -3540,7 +4236,6 @@ paths:
                 - {"$ref": "#/components/schemas/ExternalScheduledEventPatchRequestPartial"}
                 - {"$ref": "#/components/schemas/StageScheduledEventPatchRequestPartial"}
                 - {"$ref": "#/components/schemas/VoiceScheduledEventPatchRequestPartial"}
-              x-discord-union: "oneOf"
         required: true
       responses:
         "200":
@@ -3555,8 +4250,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.scheduled_events
+      x-speakeasy-group: guildScheduledEvents
       x-speakeasy-name-override: update
+      description: Modify a guild scheduled event. Returns the modified guild scheduled event object on success. Fires a Guild Scheduled Event Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-scheduled-event
+          - write
   "/guilds/{guild_id}/scheduled-events":
     parameters:
       - name: "guild_id"
@@ -3587,8 +4287,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.scheduledEvents
+      x-speakeasy-group: guildScheduledEvents
       x-speakeasy-name-override: list
+      description: Returns a list of guild scheduled event objects for the given guild.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-scheduled-event
+          - read
     post:
       operationId: "create_guild_scheduled_event"
       requestBody:
@@ -3613,8 +4318,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: scheduledEvents
+      x-speakeasy-group: guildScheduledEvents
       x-speakeasy-name-override: create
+      description: Create a guild scheduled event in the guild. Returns a guild scheduled event object on success. Fires a Guild Scheduled Event Create Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-scheduled-event
+          - write
   "/guilds/{guild_id}/welcome-screen":
     parameters:
       - name: "guild_id"
@@ -3633,7 +4343,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: guilds
-      x-speakeasy-name-override: get_welcome_screen
+      x-speakeasy-name-override: getWelcomeScreen
+      description: Returns the Welcome Screen object for the guild. If the welcome screen is not enabled, the MANAGE_GUILD permission is required.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
     patch:
       operationId: "update_guild_welcome_screen"
       requestBody:
@@ -3652,6 +4367,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: updateWelcomeScreen
+      description: Modify the guild's Welcome Screen. Requires the MANAGE_GUILD permission. Returns the updated Welcome Screen object. May fire a Guild Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/guilds/{guild_id}/voice-states/{user_id}":
     parameters:
       - name: "guild_id"
@@ -3673,7 +4393,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
+      x-speakeasy-group: voice
+      x-speakeasy-name-override: getUserState
+      description: Returns the specified user's voice state in the guild.
+      x-speakeasy-mcp:
+        scopes:
+          - voice
+          - read
     patch:
       operationId: "update_voice_state"
       requestBody:
@@ -3697,8 +4423,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.voiceStates
-      x-speakeasy-name-override: update
+      x-speakeasy-group: voice
+      x-speakeasy-name-override: updateUserState
+      description: Updates another user's voice state. Fires a Voice State Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - voice
+          - write
   "/guilds/{guild_id}/integrations/{integration_id}":
     parameters:
       - name: "guild_id"
@@ -3717,8 +4448,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildIntegrations
-      x-speakeasy-name-override: delete
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: deleteIntegration
+      description: Delete the attached integration object for the guild. Deletes any associated webhooks and kicks the associated bot if there is one. Requires the MANAGE_GUILD permission. Returns a 204 empty response on success. Fires Guild Integrations Update and Integration Delete Gateway events.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/guilds/{guild_id}/integrations":
     parameters:
       - name: "guild_id"
@@ -3744,8 +4480,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.integrations
-      x-speakeasy-name-override: list
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: listIntegrations
+      description: Returns a list of integration objects for the guild. Requires the MANAGE_GUILD permission.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
   "/guilds/{guild_id}/widget.json":
     parameters:
       - name: "guild_id"
@@ -3765,7 +4506,12 @@ paths:
         - {}
         - BotToken: []
       x-speakeasy-group: guilds
-      x-speakeasy-name-override: get_widget
+      x-speakeasy-name-override: getWidget
+      description: Returns the widget for the guild. Fires an Invite Create Gateway event when an invite channel is defined and a new Invite is generated.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
   "/guilds/{guild_id}/onboarding":
     parameters:
       - name: "guild_id"
@@ -3783,8 +4529,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildOnboarding
-      x-speakeasy-name-override: get
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: getOnboarding
+      description: Returns the Onboarding object for the guild.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
     put:
       operationId: "put_guilds_onboarding"
       requestBody:
@@ -3801,8 +4552,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildOnboarding
-      x-speakeasy-name-override: update
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: updateOnboarding
+      description: Modifies the onboarding configuration of the guild. Returns a 200 with the Onboarding object for the guild. Requires the MANAGE_GUILD and MANAGE_ROLES permissions.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/guilds/{guild_id}/vanity-url":
     parameters:
       - name: "guild_id"
@@ -3822,6 +4578,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: getVanityUrl
+      description: Returns a partial invite object for guilds with that feature enabled. Requires the MANAGE_GUILD permission. code will be null if a vanity url for the guild is not set.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
   "/guilds/{guild_id}/audit-logs":
     parameters:
       - name: "guild_id"
@@ -3862,8 +4623,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: listAuditLogs
+      x-speakeasy-group: auditLogs
+      x-speakeasy-name-override: list
+      description: Returns an audit log object for the guild. Requires the VIEW_AUDIT_LOG permission.
+      x-speakeasy-mcp:
+        scopes:
+          - audit-logs
+          - read
   "/guilds/{guild_id}/widget.png":
     parameters:
       - name: "guild_id"
@@ -3888,7 +4654,12 @@ paths:
         - {}
         - BotToken: []
       x-speakeasy-group: guilds
-      x-speakeasy-name-override: get_widget_png
+      x-speakeasy-name-override: getWidgetPng
+      description: Returns a PNG image widget for the guild. Requires no permissions or authentication.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
   "/guilds/{guild_id}/templates/{code}":
     parameters:
       - name: "guild_id"
@@ -3912,8 +4683,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: syncTemplate
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: sync
+      description: Syncs the template to the guild's current state. Requires the MANAGE_GUILD permission. Returns the guild template object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - write
     delete:
       operationId: "delete_guild_template"
       responses:
@@ -3925,8 +4701,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.templates
+      x-speakeasy-group: guildTemplates
       x-speakeasy-name-override: delete
+      description: Deletes the template. Requires the MANAGE_GUILD permission. Returns the deleted guild template object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - write
     patch:
       operationId: "update_guild_template"
       requestBody:
@@ -3954,8 +4735,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: update_template
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: update
+      description: Modifies the template's metadata. Requires the MANAGE_GUILD permission. Returns the guild template object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - write
   "/guilds/{guild_id}/templates":
     parameters:
       - name: "guild_id"
@@ -3977,8 +4763,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: list_templates
+      x-speakeasy-group: guildTemplates
+      x-speakeasy-name-override: list
+      description: Returns an array of guild template objects. Requires the MANAGE_GUILD permission.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - read
     post:
       operationId: "create_guild_template"
       requestBody:
@@ -4008,8 +4799,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.templates
+      x-speakeasy-group: guildTemplates
       x-speakeasy-name-override: create
+      description: Creates a template for the guild. Requires the MANAGE_GUILD permission. Returns the created guild template object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - guild-template
+          - write
   "/guilds/{guild_id}/stickers/{sticker_id}":
     parameters:
       - name: "guild_id"
@@ -4031,8 +4827,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: getSticker
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: getGuildSticker
+      description: Returns a sticker object for the given guild and sticker IDs. Includes the user field if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
+      x-speakeasy-mcp:
+        scopes:
+          - stickers
+          - read
     delete:
       operationId: "delete_guild_sticker"
       responses:
@@ -4041,8 +4842,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: delete_sticker
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: deleteGuildSticker
+      description: Delete the given sticker. For stickers created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other stickers, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns 204 No Content on success. Fires a Guild Stickers Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - stickers
+          - write
     patch:
       operationId: "update_guild_sticker"
       requestBody:
@@ -4074,8 +4880,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.stickers
-      x-speakeasy-name-override: update
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: updateGuildSticker
+      description: Modify the given sticker. For stickers created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other stickers, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns the updated sticker object on success. Fires a Guild Stickers Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - stickers
+          - write
   "/guilds/{guild_id}/bulk-ban":
     parameters:
       - name: "guild_id"
@@ -4113,8 +4924,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildBans
+      x-speakeasy-group: guilds
       x-speakeasy-name-override: bulkBan
+      description: Ban up to 200 users from a guild, and optionally delete previous messages sent by the banned users. Requires both the BAN_MEMBERS and MANAGE_GUILD permissions. Returns a 200 response on success, including the fields banned_users with the IDs of the banned users and failed_users with IDs that could not be banned or were already banned.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/guilds/{guild_id}/stickers":
     parameters:
       - name: "guild_id"
@@ -4134,8 +4950,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildStickers
-      x-speakeasy-name-override: list
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: listGuildStickers
+      description: Returns an array of sticker objects for the given guild. Includes user fields if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
+      x-speakeasy-mcp:
+        scopes:
+          - stickers
+          - read
     post:
       operationId: "create_guild_sticker"
       requestBody:
@@ -4173,8 +4994,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: createSticker
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: createGuildSticker
+      description: Create a new sticker for the guild. Send a multipart/form-data body. Requires the CREATE_GUILD_EXPRESSIONS permission. Returns the new sticker object on success. Fires a Guild Stickers Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - stickers
+          - write
   "/guilds/{guild_id}/webhooks":
     parameters:
       - name: "guild_id"
@@ -4200,8 +5026,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: listWebhooks
+      x-speakeasy-group: webhooks
+      x-speakeasy-name-override: listForGuild
+      description: Returns a list of guild webhook objects. Requires the MANAGE_WEBHOOKS permission.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - read
   "/guilds/{guild_id}/channels":
     parameters:
       - name: "guild_id"
@@ -4231,6 +5062,11 @@ paths:
         - OAuth2: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: listChannels
+      description: Returns a list of guild channel objects. Does not include threads.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
     post:
       operationId: "create_guild_channel"
       requestBody:
@@ -4247,8 +5083,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds_channels
-      x-speakeasy-name-override: create
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: createChannel
+      description: Create a new channel object for the guild. Requires the MANAGE_CHANNELS permission. If setting permission overwrites, only permissions your bot has in the guild can be allowed/denied. Setting MANAGE_ROLES permission in channels is only possible for guild administrators. Returns the new channel object on success. Fires a Channel Create Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
     patch:
       operationId: "bulk_update_guild_channels"
       requestBody:
@@ -4281,8 +5122,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.channels
-      x-speakeasy-name-override: bulkUpdate
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: updateChannelPositions
+      description: Modify the positions of a set of channel objects for the guild. Requires MANAGE_CHANNELS permission. Returns a 204 empty response on success. Fires multiple Channel Update Gateway events.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/guilds/{guild_id}/members/{user_id}":
     parameters:
       - name: "guild_id"
@@ -4304,8 +5150,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds_members
-      x-speakeasy-name-override: get
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: getMember
+      description: Returns a guild member object for the specified user.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
     put:
       operationId: "add_guild_member"
       requestBody:
@@ -4358,8 +5209,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildMembers
-      x-speakeasy-name-override: add
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: addMember
+      description: Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. Returns a 201 Created with the guild member as the body, or 204 No Content if the user is already a member of the guild. Fires a Guild Member Add Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
     delete:
       operationId: "delete_guild_member"
       responses:
@@ -4369,7 +5225,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: guilds
-      x-speakeasy-name-override: deleteMember
+      x-speakeasy-name-override: removeMember
+      description: Remove a member from a guild. Requires KICK_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Member Remove Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
     patch:
       operationId: "update_guild_member"
       requestBody:
@@ -4426,8 +5287,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds_members
-      x-speakeasy-name-override: update
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: updateMember
+      description: Modify attributes of a guild member. Returns a 200 OK with the guild member as the body. Fires a Guild Member Update Gateway event. If the channel_id is set to null, this will force the target user to be disconnected from voice.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/guilds/{guild_id}/members":
     parameters:
       - name: "guild_id"
@@ -4461,6 +5327,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: listMembers
+      description: Returns a list of guild member objects that are members of the guild.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
   "/guilds/{guild_id}/preview":
     parameters:
       - name: "guild_id"
@@ -4480,6 +5351,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: getPreview
+      description: Returns the guild preview object for the given id. If the user is not in the guild, then the guild must be discoverable.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
   "/guilds/{guild_id}/invites":
     parameters:
       - name: "guild_id"
@@ -4507,6 +5383,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: listInvites
+      description: Returns a list of invite objects (with invite metadata) for the guild. Requires the MANAGE_GUILD permission.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
   "/guilds/{guild_id}/regions":
     parameters:
       - name: "guild_id"
@@ -4528,8 +5409,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildVoiceRegions
-      x-speakeasy-name-override: list
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: listVoiceRegions
+      description: Returns a list of voice region objects for the guild. Unlike the similar /voice route, this returns VIP servers when the guild is VIP-enabled.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
   "/guilds/{guild_id}/emojis/{emoji_id}":
     parameters:
       - name: "guild_id"
@@ -4551,8 +5437,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildEmojis
-      x-speakeasy-name-override: get
+      x-speakeasy-group: emoji
+      x-speakeasy-name-override: getGuildEmoji
+      description: Returns an emoji object for the given guild and emoji IDs. Includes the user field if the bot has the MANAGE_GUILD_EXPRESSIONS permission, or if the bot created the emoji and has the the CREATE_GUILD_EXPRESSIONS permission.
+      x-speakeasy-mcp:
+        scopes:
+          - emoji
+          - read
     delete:
       operationId: "delete_guild_emoji"
       responses:
@@ -4561,8 +5452,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: delete_emoji
+      x-speakeasy-group: emoji
+      x-speakeasy-name-override: deleteGuildEmoji
+      description: Delete the given emoji. For emojis created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other emojis, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns 204 No Content on success. Fires a Guild Emojis Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - emoji
+          - write
     patch:
       operationId: "update_guild_emoji"
       requestBody:
@@ -4595,8 +5491,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: updateEmoji
+      x-speakeasy-group: emoji
+      x-speakeasy-name-override: updateGuildEmoji
+      description: Modify the given emoji. For emojis created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other emojis, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns the updated emoji object on success. Fires a Guild Emojis Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - emoji
+          - write
   "/guilds/{guild_id}/emojis":
     parameters:
       - name: "guild_id"
@@ -4618,8 +5519,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: list_emojis
+      x-speakeasy-group: emoji
+      x-speakeasy-name-override: listGuildEmojis
+      description: Returns a list of emoji objects for the given guild. Includes user fields if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
+      x-speakeasy-mcp:
+        scopes:
+          - emoji
+          - read
     post:
       operationId: "create_guild_emoji"
       requestBody:
@@ -4657,8 +5563,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds
-      x-speakeasy-name-override: createEmoji
+      x-speakeasy-group: emoji
+      x-speakeasy-name-override: createGuildEmoji
+      description: Create a new emoji for the guild. Requires the CREATE_GUILD_EXPRESSIONS permission. Returns the new emoji object on success. Fires a Guild Emojis Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - emoji
+          - write
   "/guilds/{guild_id}/widget":
     parameters:
       - name: "guild_id"
@@ -4678,6 +5589,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: getWidgetSettings
+      description: Returns a guild widget settings object. Requires the MANAGE_GUILD permission.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
     patch:
       operationId: "update_guild_widget_settings"
       requestBody:
@@ -4704,8 +5620,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildWidgetSettings
-      x-speakeasy-name-override: update
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: updateWidgetSettings
+      description: Modify a guild widget settings object for the guild. All attributes may be passed in with JSON and modified. Requires the MANAGE_GUILD permission. Returns the updated guild widget settings object. Fires a Guild Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/guilds/{guild_id}/roles/{role_id}":
     parameters:
       - name: "guild_id"
@@ -4729,6 +5650,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: getRole
+      description: Returns a role object for the specified role.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
     delete:
       operationId: "delete_guild_role"
       responses:
@@ -4738,7 +5664,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: guilds
-      x-speakeasy-name-override: delete_role
+      x-speakeasy-name-override: deleteRole
+      description: Delete a guild role. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Role Delete Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
     patch:
       operationId: "update_guild_role"
       requestBody:
@@ -4791,6 +5722,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: updateRole
+      description: Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated role on success. Fires a Guild Role Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/guilds/{guild_id}/roles":
     parameters:
       - name: "guild_id"
@@ -4812,6 +5748,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: listRoles
+      description: Returns a list of role objects for the guild.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
     post:
       operationId: "create_guild_role"
       requestBody:
@@ -4863,7 +5804,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: guilds
-      x-speakeasy-name-override: create_role
+      x-speakeasy-name-override: createRole
+      description: Create a new role for the guild. Requires the MANAGE_ROLES permission. Returns the new role object on success. Fires a Guild Role Create Gateway event. All JSON params are optional.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
     patch:
       operationId: "bulk_update_guild_roles"
       requestBody:
@@ -4895,8 +5841,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildRoles
-      x-speakeasy-name-override: bulkUpdate
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: updateRolePositions
+      description: Modify the positions of a set of role objects for the guild. Requires the MANAGE_ROLES permission. Returns a list of all of the guild's role objects on success. Fires multiple Guild Role Update Gateway events.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/guilds/{guild_id}/prune":
     parameters:
       - name: "guild_id"
@@ -4934,7 +5885,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: guilds
-      x-speakeasy-name-override: preview_prune
+      x-speakeasy-name-override: previewPrune
+      description: Returns an object with one pruned key indicating the number of members that would be removed in a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
     post:
       operationId: "prune_guild"
       requestBody:
@@ -4976,6 +5932,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: prune
+      description: Begin a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions. Returns an object with one pruned key indicating the number of members that were removed in the prune operation. Fires multiple Guild Member Remove Gateway events.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/guilds/{guild_id}/bans/{user_id}":
     parameters:
       - name: "guild_id"
@@ -4997,8 +5958,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildBans
-      x-speakeasy-name-override: get
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: getBan
+      description: Returns a ban object for the given user or a 404 not found if the ban cannot be found. Requires the BAN_MEMBERS permission.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
     put:
       operationId: "ban_user_from_guild"
       requestBody:
@@ -5027,7 +5993,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: guilds
-      x-speakeasy-name-override: banUser
+      x-speakeasy-name-override: createBan
+      description: Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the BAN_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Ban Add Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
     delete:
       operationId: "unban_user_from_guild"
       responses:
@@ -5037,7 +6008,12 @@ paths:
       security:
         - BotToken: []
       x-speakeasy-group: guilds
-      x-speakeasy-name-override: unbanUser
+      x-speakeasy-name-override: removeBan
+      description: Remove the ban for a user. Requires the BAN_MEMBERS permissions. Returns a 204 empty response on success. Fires a Guild Ban Remove Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/guilds/{guild_id}/bans":
     parameters:
       - name: "guild_id"
@@ -5072,8 +6048,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guildBans
-      x-speakeasy-name-override: list
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: listBans
+      description: Returns a list of ban objects for the users banned from this guild. Requires the BAN_MEMBERS permission.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
   "/guilds/{guild_id}/mfa":
     parameters:
       - name: "guild_id"
@@ -5101,8 +6082,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: guilds.mfa
-      x-speakeasy-name-override: setLevel
+      x-speakeasy-group: guilds
+      x-speakeasy-name-override: setMfaLevel
+      description: Modify a guild's MFA level. Requires guild ownership. Returns the updated level on success. Fires a Guild Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/stage-instances/{channel_id}":
     parameters:
       - name: "channel_id"
@@ -5122,6 +6108,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: stageInstances
       x-speakeasy-name-override: get
+      description: Gets the stage instance associated with the Stage channel, if it exists.
+      x-speakeasy-mcp:
+        scopes:
+          - stage-instance
+          - read
     delete:
       operationId: "delete_stage_instance"
       responses:
@@ -5132,6 +6123,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: stageInstances
       x-speakeasy-name-override: delete
+      description: Deletes the Stage instance. Returns 204 No Content. Fires a Stage Instance Delete Gateway event. Requires the user to be a moderator of the Stage channel.
+      x-speakeasy-mcp:
+        scopes:
+          - stage-instance
+          - write
     patch:
       operationId: "update_stage_instance"
       requestBody:
@@ -5155,8 +6151,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: stage_instances
+      x-speakeasy-group: stageInstances
       x-speakeasy-name-override: update
+      description: Updates fields of an existing Stage instance. Returns the updated Stage instance. Fires a Stage Instance Update Gateway event. Requires the user to be a moderator of the Stage channel.
+      x-speakeasy-mcp:
+        scopes:
+          - stage-instance
+          - write
   "/sticker-packs/{pack_id}":
     parameters:
       - name: "pack_id"
@@ -5174,8 +6175,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
-      x-speakeasy-group: stickerPacks
-      x-speakeasy-name-override: get
+      x-speakeasy-group: stickers
+      x-speakeasy-name-override: getPack
+      description: Returns a sticker pack object for the given sticker pack ID.
+      x-speakeasy-mcp:
+        scopes:
+          - stickers
+          - read
   "/applications/{application_id}":
     parameters:
       - name: "application_id"
@@ -5195,6 +6201,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: get
+      description: Returns information about a specific application.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - read
     patch:
       operationId: "update_application"
       requestBody:
@@ -5213,6 +6224,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: applications
       x-speakeasy-name-override: update
+      description: Updates an application. Returns the updated application object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - application
+          - write
   "/webhooks/{webhook_id}/{webhook_token}":
     parameters:
       - name: "webhook_id"
@@ -5242,7 +6258,12 @@ paths:
         - {}
         - BotToken: []
       x-speakeasy-group: webhooks
-      x-speakeasy-name-override: get_by_token
+      x-speakeasy-name-override: getWithToken
+      description: Same as above, except this call does not require authentication and returns no user in the webhook object.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - read
     post:
       operationId: "execute_webhook"
       parameters:
@@ -5264,20 +6285,18 @@ paths:
               anyOf:
                 - {"$ref": "#/components/schemas/IncomingWebhookRequestPartial"}
                 - {"$ref": "#/components/schemas/IncomingWebhookUpdateRequestPartial"}
-              x-discord-union: "oneOf"
           "application/x-www-form-urlencoded":
             schema:
               anyOf:
                 - {"$ref": "#/components/schemas/IncomingWebhookRequestPartial"}
                 - {"$ref": "#/components/schemas/IncomingWebhookUpdateRequestPartial"}
-              x-discord-union: "oneOf"
           "multipart/form-data":
             schema:
               anyOf:
                 - {"$ref": "#/components/schemas/IncomingWebhookRequestPartial"}
                 - {"$ref": "#/components/schemas/IncomingWebhookUpdateRequestPartial"}
-              x-discord-union: "oneOf"
               type: "object"
+              x-speakeasy-mcp: {"name": "", "scopes": ["openapi-fixes", "write"]}
         required: true
       responses:
         "200":
@@ -5293,6 +6312,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: execute
+      description: Refer to Uploading Files for details on attachments and multipart/form-data requests. Returns a message or 204 No Content depending on the wait query parameter.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - write
     delete:
       operationId: "delete_webhook_by_token"
       responses:
@@ -5303,7 +6327,12 @@ paths:
         - {}
         - BotToken: []
       x-speakeasy-group: webhooks
-      x-speakeasy-name-override: delete_by_token
+      x-speakeasy-name-override: deleteWithToken
+      description: Same as above, except this call does not require authentication.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - write
     patch:
       operationId: "update_webhook_by_token"
       requestBody:
@@ -5336,7 +6365,12 @@ paths:
         - {}
         - BotToken: []
       x-speakeasy-group: webhooks
-      x-speakeasy-name-override: update_by_token
+      x-speakeasy-name-override: updateWithToken
+      description: Same as above, except this call does not require authentication, does not accept a channel_id parameter in the body, and does not return a user in the webhook object.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - write
   "/stickers/{sticker_id}":
     parameters:
       - name: "sticker_id"
@@ -5359,6 +6393,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: stickers
       x-speakeasy-name-override: get
+      description: Returns a sticker object for the given sticker ID.
+      x-speakeasy-mcp:
+        scopes:
+          - stickers
+          - read
   "/webhooks/{webhook_id}":
     parameters:
       - name: "webhook_id"
@@ -5382,6 +6421,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: get
+      description: Returns the new webhook object for the given id.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - read
     delete:
       operationId: "delete_webhook"
       responses:
@@ -5392,6 +6436,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: delete
+      description: Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. Returns a 204 No Content response on success. Fires a Webhooks Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - write
     patch:
       operationId: "update_webhook"
       requestBody:
@@ -5428,6 +6477,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: webhooks
       x-speakeasy-name-override: update
+      description: Modify a webhook. Requires the MANAGE_WEBHOOKS permission. Returns the updated webhook object on success. Fires a Webhooks Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - webhooks
+          - write
   "/channels/{channel_id}":
     parameters:
       - name: "channel_id"
@@ -5452,6 +6506,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: get
+      description: Returns a channel object for the given channel ID.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - read
     delete:
       operationId: "delete_channel"
       responses:
@@ -5470,6 +6529,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: delete
+      description: Delete a channel, or close a private message. Requires the MANAGE_CHANNELS permission for the guild, or MANAGE_THREADS if the channel is a thread. Returns a channel object on success. Fires a Channel Delete Gateway event (or Thread Delete if the channel was a thread).
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
     patch:
       operationId: "update_channel"
       requestBody:
@@ -5481,7 +6545,6 @@ paths:
                 - {"$ref": "#/components/schemas/UpdateGroupDMRequestPartial"}
                 - {"$ref": "#/components/schemas/UpdateGuildChannelRequestPartial"}
                 - {"$ref": "#/components/schemas/UpdateThreadRequestPartial"}
-              x-discord-union: "oneOf"
         required: true
       responses:
         "200":
@@ -5499,6 +6562,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: channels
       x-speakeasy-name-override: update
+      description: Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.
+      x-speakeasy-mcp:
+        scopes:
+          - channels
+          - write
   "/invites/{code}":
     parameters:
       - name: "code"
@@ -5527,13 +6595,17 @@ paths:
                   - {"$ref": "#/components/schemas/FriendInviteResponse"}
                   - {"$ref": "#/components/schemas/GroupDMInviteResponse"}
                   - {"$ref": "#/components/schemas/GuildInviteResponse"}
-                x-discord-union: "oneOf"
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - {}
         - BotToken: []
       x-speakeasy-group: invites
-      x-speakeasy-name-override: resolve
+      x-speakeasy-name-override: get
+      description: Returns an invite object for the given code.
+      x-speakeasy-mcp:
+        scopes:
+          - invites
+          - read
     delete:
       operationId: "invite_revoke"
       responses:
@@ -5546,12 +6618,16 @@ paths:
                   - {"$ref": "#/components/schemas/FriendInviteResponse"}
                   - {"$ref": "#/components/schemas/GroupDMInviteResponse"}
                   - {"$ref": "#/components/schemas/GuildInviteResponse"}
-                x-discord-union: "oneOf"
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
       x-speakeasy-group: invites
-      x-speakeasy-name-override: revoke
+      x-speakeasy-name-override: delete
+      description: Delete an invite. Requires the MANAGE_CHANNELS permission on the channel this invite belongs to, or MANAGE_GUILD to remove any invite across the guild. Returns an invite object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - invites
+          - write
   "/lobbies/{lobby_id}":
     parameters:
       - name: "lobby_id"
@@ -5569,6 +6645,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: get
+      description: Returns the lobby object for the given id.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - read
     patch:
       operationId: "edit_lobby"
       requestBody:
@@ -5608,6 +6691,13 @@ paths:
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
+      x-speakeasy-group: lobbies
+      x-speakeasy-name-override: update
+      description: Updates a lobby. Returns a lobby object on success.
+      x-speakeasy-mcp:
+        scopes:
+          - lobby
+          - write
   "/guilds/{guild_id}":
     parameters:
       - name: "guild_id"
@@ -5632,6 +6722,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: get
+      description: Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - read
     delete:
       operationId: "delete_guild"
       responses:
@@ -5642,6 +6737,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: delete
+      description: Delete a guild permanently. User must be owner. Returns 204 No Content on success. Fires a Guild Delete Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
     patch:
       operationId: "update_guild"
       requestBody:
@@ -5660,6 +6760,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: guilds
       x-speakeasy-name-override: update
+      description: Modify a guild's settings. Requires the MANAGE_GUILD permission. Returns the updated guild object on success. Fires a Guild Update Gateway event.
+      x-speakeasy-mcp:
+        scopes:
+          - guilds
+          - write
   "/users/{user_id}":
     parameters:
       - name: "user_id"
@@ -5679,6 +6784,11 @@ paths:
         - BotToken: []
       x-speakeasy-group: users
       x-speakeasy-name-override: get
+      description: Returns a user object for a given user ID.
+      x-speakeasy-mcp:
+        scopes:
+          - users
+          - read
 components:
   schemas:
     "AccountResponse":
@@ -5897,7 +7007,6 @@ components:
             - {"$ref": "#/components/schemas/InteractionApplicationCommandAutocompleteCallbackIntegerData"}
             - {"$ref": "#/components/schemas/InteractionApplicationCommandAutocompleteCallbackNumberData"}
             - {"$ref": "#/components/schemas/InteractionApplicationCommandAutocompleteCallbackStringData"}
-          x-discord-union: "oneOf"
       required:
         - "type"
         - "data"
@@ -8968,44 +10077,22 @@ components:
         - "id"
     "ChannelTypes":
       type: "integer"
-      oneOf:
-        - title: "DM"
-          description: "A direct message between users"
-          const: 1
-        - title: "GROUP_DM"
-          description: "A direct message between multiple users"
-          const: 3
-        - title: "GUILD_TEXT"
-          description: "A text channel within a server"
-          const: 0
-        - title: "GUILD_VOICE"
-          description: "A voice channel within a server"
-          const: 2
-        - title: "GUILD_CATEGORY"
-          description: "An organizational category that contains up to 50 channels"
-          const: 4
-        - title: "GUILD_ANNOUNCEMENT"
-          description: "A channel that users can follow and crosspost into their own server (formerly news channels)"
-          const: 5
-        - title: "ANNOUNCEMENT_THREAD"
-          description: "A temporary sub-channel within a GUILD_ANNOUNCEMENT channel"
-          const: 10
-        - title: "PUBLIC_THREAD"
-          description: "A temporary sub-channel within a GUILD_TEXT or GUILD_THREADS_ONLY channel type set"
-          const: 11
-        - title: "PRIVATE_THREAD"
-          description: "A temporary sub-channel within a GUILD_TEXT channel that is only viewable by those invited and those with the MANAGE_THREADS permission"
-          const: 12
-        - title: "GUILD_STAGE_VOICE"
-          description: "A voice channel for hosting events with an audience"
-          const: 13
-        - title: "GUILD_DIRECTORY"
-          description: "The channel in a hub containing the listed servers"
-          const: 14
-        - title: "GUILD_FORUM"
-          description: "Channel that can only contain threads"
-          const: 15
       format: "int32"
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 7
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+      description: "Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)"
     "CommandPermissionResponse":
       type: "object"
       properties:

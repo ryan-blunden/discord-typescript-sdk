@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsGetWidgetSettings: ToolDefinition<typeof args> = {
   name: "guilds-get-widget-settings",
-  description: ``,
+  description:
+    `Returns a guild widget settings object. Requires the MANAGE_GUILD permission.`,
+  scopes: ["guilds", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsGetWidgetSettings(

@@ -13,7 +13,9 @@ const args = {
 export const tool$applicationsGetActivityInstance: ToolDefinition<typeof args> =
   {
     name: "applications-get-activity-instance",
-    description: ``,
+    description:
+      `Returns a serialized activity instance, if it exists. Useful for preventing unwanted activity sessions.`,
+    scopes: ["application", "read"],
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await applicationsGetActivityInstance(

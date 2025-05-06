@@ -7,7 +7,9 @@ import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$voiceListRegions: ToolDefinition = {
   name: "voice-list-regions",
-  description: ``,
+  description:
+    `Returns an array of voice region objects that can be used when setting a voice or stage channel's rtc_region.`,
+  scopes: ["voice", "read"],
   tool: async (client, ctx) => {
     const [result, apiCall] = await voiceListRegions(
       client,

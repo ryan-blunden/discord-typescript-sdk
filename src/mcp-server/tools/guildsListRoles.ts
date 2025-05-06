@@ -12,7 +12,8 @@ const args = {
 
 export const tool$guildsListRoles: ToolDefinition<typeof args> = {
   name: "guilds-list-roles",
-  description: ``,
+  description: `Returns a list of role objects for the guild.`,
+  scopes: ["guilds", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsListRoles(

@@ -23,6 +23,9 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns an array of voice region objects that can be used when setting a voice or stage channel's rtc_region.
+ */
 export function voiceListRegions(
   client: DiscordCore,
   options?: RequestOptions,

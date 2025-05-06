@@ -26,6 +26,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns a list of guild member objects that are members of the guild.
+ */
 export function guildsListMembers(
   client: DiscordCore,
   request: operations.ListGuildMembersRequest,

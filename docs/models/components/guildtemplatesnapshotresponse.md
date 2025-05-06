@@ -20,10 +20,11 @@ let value: GuildTemplateSnapshotResponse = {
   ],
   channels: [
     {
-      bitrate: 894539,
-      userLimit: 180148,
+      type: 14,
+      bitrate: 180148,
+      userLimit: 850075,
       nsfw: false,
-      rateLimitPerUser: 850075,
+      rateLimitPerUser: 346879,
       permissionOverwrites: [
         {
           id: "<value>",

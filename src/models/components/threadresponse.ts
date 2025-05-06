@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -20,9 +21,32 @@ import {
   ThreadMetadataResponse$outboundSchema,
 } from "./threadmetadataresponse.js";
 
+/**
+ * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
+ */
+export const ThreadResponseType = {
+  Zero: 0,
+  One: 1,
+  Two: 2,
+  Three: 3,
+  Four: 4,
+  Five: 5,
+  Seven: 7,
+  Ten: 10,
+  Eleven: 11,
+  Twelve: 12,
+  Thirteen: 13,
+  Fourteen: 14,
+  Fifteen: 15,
+} as const;
+/**
+ * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
+ */
+export type ThreadResponseType = ClosedEnum<typeof ThreadResponseType>;
+
 export type ThreadResponse = {
   id: string;
-  type?: 1 | undefined;
+  type: ThreadResponseType;
   lastMessageId?: string | null | undefined;
   flags: number;
   lastPinTimestamp?: Date | null | undefined;
@@ -45,13 +69,34 @@ export type ThreadResponse = {
 };
 
 /** @internal */
+export const ThreadResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof ThreadResponseType
+> = z.nativeEnum(ThreadResponseType);
+
+/** @internal */
+export const ThreadResponseType$outboundSchema: z.ZodNativeEnum<
+  typeof ThreadResponseType
+> = ThreadResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ThreadResponseType$ {
+  /** @deprecated use `ThreadResponseType$inboundSchema` instead. */
+  export const inboundSchema = ThreadResponseType$inboundSchema;
+  /** @deprecated use `ThreadResponseType$outboundSchema` instead. */
+  export const outboundSchema = ThreadResponseType$outboundSchema;
+}
+
+/** @internal */
 export const ThreadResponse$inboundSchema: z.ZodType<
   ThreadResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
-  type: z.literal(1).optional(),
+  type: ThreadResponseType$inboundSchema,
   last_message_id: z.nullable(z.string()).optional(),
   flags: z.number().int(),
   last_pin_timestamp: z.nullable(
@@ -95,7 +140,7 @@ export const ThreadResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type ThreadResponse$Outbound = {
   id: string;
-  type: 1;
+  type: number;
   last_message_id?: string | null | undefined;
   flags: number;
   last_pin_timestamp?: string | null | undefined;
@@ -124,7 +169,7 @@ export const ThreadResponse$outboundSchema: z.ZodType<
   ThreadResponse
 > = z.object({
   id: z.string(),
-  type: z.literal(1).default(1 as const),
+  type: ThreadResponseType$outboundSchema,
   lastMessageId: z.nullable(z.string()).optional(),
   flags: z.number().int(),
   lastPinTimestamp: z.nullable(z.date().transform(v => v.toISOString()))

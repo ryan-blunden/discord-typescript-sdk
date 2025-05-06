@@ -7,14 +7,15 @@ import { PrivateChannelResponse } from "@ryan.blunden/discord-sdk/models/compone
 
 let value: PrivateChannelResponse = {
   id: "<value>",
-  flags: 814551,
+  type: 13,
+  flags: 251055,
   recipients: [
     {
       id: "<value>",
-      username: "Demario_Breitenberg9",
+      username: "Piper14",
       discriminator: "<value>",
-      publicFlags: 933853,
-      flags: 852420,
+      publicFlags: 852420,
+      flags: 175853,
     },
   ],
 };
@@ -25,7 +26,7 @@ let value: PrivateChannelResponse = {
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `type`                                                                                        | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | [components.Type](../../models/components/type.md)                                            | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `lastMessageId`                                                                               | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `flags`                                                                                       | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `lastPinTimestamp`                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |

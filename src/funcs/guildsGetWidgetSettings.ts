@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns a guild widget settings object. Requires the MANAGE_GUILD permission.
+ */
 export function guildsGetWidgetSettings(
   client: DiscordCore,
   request: operations.GetGuildWidgetSettingsRequest,

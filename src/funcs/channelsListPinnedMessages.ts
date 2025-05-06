@@ -26,6 +26,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns all pinned messages in the channel as an array of message objects.
+ */
 export function channelsListPinnedMessages(
   client: DiscordCore,
   request: operations.ListPinnedMessagesRequest,

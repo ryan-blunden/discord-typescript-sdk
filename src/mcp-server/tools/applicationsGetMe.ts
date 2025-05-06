@@ -7,7 +7,9 @@ import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$applicationsGetMe: ToolDefinition = {
   name: "applications-get-me",
-  description: ``,
+  description:
+    `Returns the application object associated with the requesting bot user.`,
+  scopes: ["application", "read"],
   tool: async (client, ctx) => {
     const [result, apiCall] = await applicationsGetMe(
       client,

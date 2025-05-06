@@ -7,11 +7,19 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ChannelTypes,
+  ChannelTypes$inboundSchema,
+  ChannelTypes$outboundSchema,
+} from "./channeltypes.js";
 
 export type MessageMentionChannelResponse = {
   id: string;
   name: string;
-  type?: 1 | undefined;
+  /**
+   * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
+   */
+  type: ChannelTypes;
   guildId: string;
 };
 
@@ -23,7 +31,7 @@ export const MessageMentionChannelResponse$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
-  type: z.literal(1).optional(),
+  type: ChannelTypes$inboundSchema,
   guild_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -35,7 +43,7 @@ export const MessageMentionChannelResponse$inboundSchema: z.ZodType<
 export type MessageMentionChannelResponse$Outbound = {
   id: string;
   name: string;
-  type: 1;
+  type: number;
   guild_id: string;
 };
 
@@ -47,7 +55,7 @@ export const MessageMentionChannelResponse$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
-  type: z.literal(1).default(1 as const),
+  type: ChannelTypes$outboundSchema,
   guildId: z.string(),
 }).transform((v) => {
   return remap$(v, {

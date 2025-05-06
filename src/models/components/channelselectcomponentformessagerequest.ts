@@ -13,6 +13,11 @@ import {
   ChannelSelectDefaultValue$Outbound,
   ChannelSelectDefaultValue$outboundSchema,
 } from "./channelselectdefaultvalue.js";
+import {
+  ChannelTypes,
+  ChannelTypes$inboundSchema,
+  ChannelTypes$outboundSchema,
+} from "./channeltypes.js";
 
 export type ChannelSelectComponentForMessageRequest = {
   type?: 1 | undefined;
@@ -22,7 +27,7 @@ export type ChannelSelectComponentForMessageRequest = {
   maxValues?: number | null | undefined;
   disabled?: boolean | null | undefined;
   defaultValues?: Array<ChannelSelectDefaultValue> | null | undefined;
-  channelTypes?: Array<number> | null | undefined;
+  channelTypes?: Array<ChannelTypes> | null | undefined;
 };
 
 /** @internal */
@@ -39,7 +44,7 @@ export const ChannelSelectComponentForMessageRequest$inboundSchema: z.ZodType<
   disabled: z.nullable(z.boolean()).optional(),
   default_values: z.nullable(z.array(ChannelSelectDefaultValue$inboundSchema))
     .optional(),
-  channel_types: z.nullable(z.array(z.number().int())).optional(),
+  channel_types: z.nullable(z.array(ChannelTypes$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "custom_id": "customId",
@@ -76,7 +81,7 @@ export const ChannelSelectComponentForMessageRequest$outboundSchema: z.ZodType<
   disabled: z.nullable(z.boolean()).optional(),
   defaultValues: z.nullable(z.array(ChannelSelectDefaultValue$outboundSchema))
     .optional(),
-  channelTypes: z.nullable(z.array(z.number().int())).optional(),
+  channelTypes: z.nullable(z.array(ChannelTypes$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     customId: "custom_id",

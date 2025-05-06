@@ -12,7 +12,9 @@ const args = {
 
 export const tool$channelsListInvites: ToolDefinition<typeof args> = {
   name: "channels-list-invites",
-  description: ``,
+  description:
+    `Returns a list of invite objects (with invite metadata) for the channel.`,
+  scopes: ["channels", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await channelsListInvites(

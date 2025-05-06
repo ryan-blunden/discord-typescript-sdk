@@ -176,7 +176,7 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  await discord.partnerSDKUnmergeProvisionalAccount({
+  await discord.applications.partnerSDKUnmergeProvisionalAccount({
     clientId: "<value>",
     externalAuthToken: "<value>",
   });
@@ -207,7 +207,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.createLobby({});
+  const result = await discord.applications.getOAuth2Me();
 
   // Handle the result
   console.log(result);
@@ -226,7 +226,7 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  await discord.partnerSDKUnmergeProvisionalAccount({
+  await discord.applications.partnerSDKUnmergeProvisionalAccount({
     clientId: "<value>",
     externalAuthToken: "<value>",
   }, {});
@@ -243,438 +243,294 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [answers](docs/sdks/answers/README.md)
+### [applicationCommands](docs/sdks/applicationcommands/README.md)
 
-* [getVoters](docs/sdks/answers/README.md#getvoters)
+* [listGuildPermissions](docs/sdks/applicationcommands/README.md#listguildpermissions) - Fetches command permissions for all commands for your application in a guild.
+* [getGuildPermissions](docs/sdks/applicationcommands/README.md#getguildpermissions) - Fetches command permissions for a specific command for your application in a guild.
+* [setGuildPermissions](docs/sdks/applicationcommands/README.md#setguildpermissions) - Edits command permissions for a specific command for your application in a guild.
+* [getGuild](docs/sdks/applicationcommands/README.md#getguild) - Fetch a guild command for your application.
+* [deleteGuild](docs/sdks/applicationcommands/README.md#deleteguild) - Delete a guild command.
+* [updateGuild](docs/sdks/applicationcommands/README.md#updateguild) - Edit a guild command. Updates for guild commands will be available immediately.
+* [listGuild](docs/sdks/applicationcommands/README.md#listguild) - Fetch all guild commands for your application for a specific guild.
+* [bulkSetGuild](docs/sdks/applicationcommands/README.md#bulksetguild) - Takes a list of application commands, overwriting the existing command list for this application for the targeted guild.
+* [createGuild](docs/sdks/applicationcommands/README.md#createguild) - Create a new guild command. New guild commands will be available in the guild immediately.
+* [get](docs/sdks/applicationcommands/README.md#get) - Fetch a global command for your application.
+* [delete](docs/sdks/applicationcommands/README.md#delete) - Delete a global command.
+* [update](docs/sdks/applicationcommands/README.md#update) - Edit a global command. Updates will be available in all guilds after 1 hour.
+* [list](docs/sdks/applicationcommands/README.md#list) - Fetch all global commands for your application.
+* [bulkSet](docs/sdks/applicationcommands/README.md#bulkset) - Takes a list of application commands, overwriting the existing global command list for this application.
+* [create](docs/sdks/applicationcommands/README.md#create) - Create a new global command. New global commands will be available in all guilds after 1 hour.
+
+### [applicationRoleConnectionMetadata](docs/sdks/applicationroleconnectionmetadata/README.md)
+
+* [deleteUserConnection](docs/sdks/applicationroleconnectionmetadata/README.md#deleteuserconnection) - Deletes the application role connection for the user.
+* [list](docs/sdks/applicationroleconnectionmetadata/README.md#list) - Returns a list of application role connection metadata objects for the given application.
+* [update](docs/sdks/applicationroleconnectionmetadata/README.md#update) - Updates and returns a list of application role connection metadata objects for the given application. An application can have a maximum of 5 metadata records.
 
 ### [applications](docs/sdks/applications/README.md)
 
-* [getMe](docs/sdks/applications/README.md#getme)
-* [updateSelf](docs/sdks/applications/README.md#updateself)
-* [setGuildCommandPermissions](docs/sdks/applications/README.md#setguildcommandpermissions)
-* [deleteUserRoleConnection](docs/sdks/applications/README.md#deleteuserroleconnection)
-* [getRoleConnectionsMetadata](docs/sdks/applications/README.md#getroleconnectionsmetadata)
-* [updateRoleConnectionsMetadata](docs/sdks/applications/README.md#updateroleconnectionsmetadata)
-* [consumeEntitlement](docs/sdks/applications/README.md#consumeentitlement)
-* [createGuildCommand](docs/sdks/applications/README.md#createguildcommand)
-* [getActivityInstance](docs/sdks/applications/README.md#getactivityinstance)
-* [getEntitlement](docs/sdks/applications/README.md#getentitlement)
-* [deleteEntitlement](docs/sdks/applications/README.md#deleteentitlement)
-* [getEntitlements](docs/sdks/applications/README.md#getentitlements)
-* [createEntitlement](docs/sdks/applications/README.md#createentitlement)
-* [uploadAttachment](docs/sdks/applications/README.md#uploadattachment)
-* [getCommand](docs/sdks/applications/README.md#getcommand)
-* [deleteCommand](docs/sdks/applications/README.md#deletecommand)
-* [listCommands](docs/sdks/applications/README.md#listcommands)
-* [bulkSetCommands](docs/sdks/applications/README.md#bulksetcommands)
-* [getEmoji](docs/sdks/applications/README.md#getemoji)
-* [updateEmoji](docs/sdks/applications/README.md#updateemoji)
-* [listEmojis](docs/sdks/applications/README.md#listemojis)
-* [get](docs/sdks/applications/README.md#get)
-* [update](docs/sdks/applications/README.md#update)
+* [partnerSDKUnmergeProvisionalAccount](docs/sdks/applications/README.md#partnersdkunmergeprovisionalaccount) - Unmerges a provisional account.
+* [getOAuth2Me](docs/sdks/applications/README.md#getoauth2me) - Returns the OAuth2 application object associated with the requesting bot user.
+* [getMe](docs/sdks/applications/README.md#getme) - Returns the application object associated with the requesting bot user.
+* [updateSelf](docs/sdks/applications/README.md#updateself) - Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated. Returns the updated application object on success.
+* [partnerSDKToken](docs/sdks/applications/README.md#partnersdktoken) - Gets a token for the partner SDK.
+* [getBotGateway](docs/sdks/applications/README.md#getbotgateway) - Returns an object with the same information as Get Gateway, plus a shards key, containing the recommended number of shards to connect with.
+* [getOpenIDConnectUserInfo](docs/sdks/applications/README.md#getopenidconnectuserinfo) - Returns the user info for the current user.
+* [getPublicKeys](docs/sdks/applications/README.md#getpublickeys) - Returns a list of public keys used for verifying signatures.
+* [getOAuth2Authorization](docs/sdks/applications/README.md#getoauth2authorization) - Returns info about the current authorization.
+* [getGateway](docs/sdks/applications/README.md#getgateway) - Returns an object with a single valid WSS URL, which the client can use for connecting to Discord.
+* [getActivityInstance](docs/sdks/applications/README.md#getactivityinstance) - Returns a serialized activity instance, if it exists. Useful for preventing unwanted activity sessions.
+* [uploadAttachment](docs/sdks/applications/README.md#uploadattachment) - Uploads an attachment for an application.
+* [get](docs/sdks/applications/README.md#get) - Returns information about a specific application.
+* [update](docs/sdks/applications/README.md#update) - Updates an application. Returns the updated application object on success.
 
-#### [applications.commands](docs/sdks/commands/README.md)
+### [auditLogs](docs/sdks/auditlogs/README.md)
 
-* [update](docs/sdks/commands/README.md#update)
+* [list](docs/sdks/auditlogs/README.md#list) - Returns an audit log object for the guild. Requires the VIEW_AUDIT_LOG permission.
 
-#### [applications.emojis](docs/sdks/emojis/README.md)
+### [autoModeration](docs/sdks/automoderation/README.md)
 
-* [delete](docs/sdks/emojis/README.md#delete)
-* [create](docs/sdks/emojis/README.md#create)
-
-#### [applications.guilds](docs/sdks/discordguilds/README.md)
-
-* [listCommandPermissions](docs/sdks/discordguilds/README.md#listcommandpermissions)
-* [getCommandPermissions](docs/sdks/discordguilds/README.md#getcommandpermissions)
-
-### [applicationsCommands](docs/sdks/applicationscommands/README.md)
-
-* [create](docs/sdks/applicationscommands/README.md#create)
-
-### [applicationUserRoleConnection](docs/sdks/applicationuserroleconnection/README.md)
-
-* [update](docs/sdks/applicationuserroleconnection/README.md#update)
-
-### [applicationUserRoleConnections](docs/sdks/applicationuserroleconnections/README.md)
-
-* [get](docs/sdks/applicationuserroleconnections/README.md#get)
-
-### [autoModerationRules](docs/sdks/automoderationrules/README.md)
-
-* [get](docs/sdks/automoderationrules/README.md#get)
-* [delete](docs/sdks/automoderationrules/README.md#delete)
-* [create](docs/sdks/automoderationrules/README.md#create)
-
-### [channelPermissions](docs/sdks/channelpermissions/README.md)
-
-* [deleteOverwrite](docs/sdks/channelpermissions/README.md#deleteoverwrite)
+* [getRule](docs/sdks/automoderation/README.md#getrule) - Get a single rule. Returns an auto moderation rule object. This endpoint requires the MANAGE_GUILD permission.
+* [deleteRule](docs/sdks/automoderation/README.md#deleterule) - Delete a rule. Returns a 204 on success. Fires an Auto Moderation Rule Delete Gateway event.
+* [updateRule](docs/sdks/automoderation/README.md#updaterule) - Modify an existing rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Update Gateway event.
+* [listRules](docs/sdks/automoderation/README.md#listrules) - Get a list of all rules currently configured for the guild. Returns a list of auto moderation rule objects for the given guild. This endpoint requires the MANAGE_GUILD permission.
+* [createRule](docs/sdks/automoderation/README.md#createrule) - Create a new rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Create Gateway event.
 
 ### [channels](docs/sdks/channels/README.md)
 
-* [listMyPrivateArchivedThreads](docs/sdks/channels/README.md#listmyprivatearchivedthreads)
-* [listPrivateArchivedThreads](docs/sdks/channels/README.md#listprivatearchivedthreads)
-* [deleteUserMessageReaction](docs/sdks/channels/README.md#deleteusermessagereaction)
-* [crosspostMessage](docs/sdks/channels/README.md#crosspostmessage)
-* [startThreadFromMessage](docs/sdks/channels/README.md#startthreadfrommessage)
-* [expirePoll](docs/sdks/channels/README.md#expirepoll)
-* [sendSoundboardSound](docs/sdks/channels/README.md#sendsoundboardsound)
-* [getThreadMember](docs/sdks/channels/README.md#getthreadmember)
-* [addThreadMember](docs/sdks/channels/README.md#addthreadmember)
-* [listThreadMembers](docs/sdks/channels/README.md#listthreadmembers)
-* [deleteDmUser](docs/sdks/channels/README.md#deletedmuser)
-* [follow](docs/sdks/channels/README.md#follow)
-* [deleteMessage](docs/sdks/channels/README.md#deletemessage)
-* [listWebhooks](docs/sdks/channels/README.md#listwebhooks)
-* [createWebhook](docs/sdks/channels/README.md#createwebhook)
-* [listInvites](docs/sdks/channels/README.md#listinvites)
-* [createInvite](docs/sdks/channels/README.md#createinvite)
-* [triggerTyping](docs/sdks/channels/README.md#triggertyping)
-* [pinMessage](docs/sdks/channels/README.md#pinmessage)
-* [listPinnedMessages](docs/sdks/channels/README.md#listpinnedmessages)
-* [get](docs/sdks/channels/README.md#get)
-* [delete](docs/sdks/channels/README.md#delete)
-* [update](docs/sdks/channels/README.md#update)
+* [listJoinedPrivateArchivedThreads](docs/sdks/channels/README.md#listjoinedprivatearchivedthreads) - Returns archived threads in the channel that are of type PRIVATE_THREAD, and the user has joined. Threads are ordered by their id, in descending order. Requires the READ_MESSAGE_HISTORY permission.
+* [listPrivateArchivedThreads](docs/sdks/channels/README.md#listprivatearchivedthreads) - Returns archived threads in the channel that are of type PRIVATE_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions.
+* [listPublicArchivedThreads](docs/sdks/channels/README.md#listpublicarchivedthreads) - Returns archived threads in the channel that are public. When called on a GUILD_TEXT channel, returns threads of type PUBLIC_THREAD. When called on a GUILD_ANNOUNCEMENT channel returns threads of type ANNOUNCEMENT_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires the READ_MESSAGE_HISTORY permission.
+* [joinThread](docs/sdks/channels/README.md#jointhread) - Adds the current user to a thread. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update and a Thread Create Gateway event.
+* [leaveThread](docs/sdks/channels/README.md#leavethread) - Removes the current user from a thread. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update Gateway event.
+* [startThreadFromMessage](docs/sdks/channels/README.md#startthreadfrommessage) - Creates a new thread from an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create and a Message Update Gateway event.
+* [searchThreads](docs/sdks/channels/README.md#searchthreads) - Search for threads in a channel.
+* [getThreadMember](docs/sdks/channels/README.md#getthreadmember) - Returns a thread member object for the specified user if they are a member of the thread, returns a 404 response otherwise.
+* [addThreadMember](docs/sdks/channels/README.md#addthreadmember) - Adds another member to a thread. Requires the ability to send messages in the thread. Also requires the thread is not archived. Returns a 204 empty response if the member is successfully added or was already a member of the thread. Fires a Thread Members Update Gateway event.
+* [removeThreadMember](docs/sdks/channels/README.md#removethreadmember) - Removes another member from a thread. Requires the MANAGE_THREADS permission, or the creator of the thread if it is a PRIVATE_THREAD. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update Gateway event.
+* [listThreadMembers](docs/sdks/channels/README.md#listthreadmembers) - Returns array of thread member objects that are members of the thread.
+* [setPermissionOverwrite](docs/sdks/channels/README.md#setpermissionoverwrite) - Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
+* [deletePermissionOverwrite](docs/sdks/channels/README.md#deletepermissionoverwrite) - Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
+* [addGroupDMRecipient](docs/sdks/channels/README.md#addgroupdmrecipient) - Adds a recipient to a Group DM using their access token.
+* [removeGroupDMRecipient](docs/sdks/channels/README.md#removegroupdmrecipient) - Removes a recipient from a Group DM.
+* [follow](docs/sdks/channels/README.md#follow) - Follow an Announcement Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. Returns a followed channel object. Fires a Webhooks Update Gateway event for the target channel.
+* [listInvites](docs/sdks/channels/README.md#listinvites) - Returns a list of invite objects (with invite metadata) for the channel.
+* [createInvite](docs/sdks/channels/README.md#createinvite) - Create a new invite object for the channel.
+* [startThreadJson](docs/sdks/channels/README.md#startthreadjson) - Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+* [startThreadForm](docs/sdks/channels/README.md#startthreadform) - Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+* [startThreadMultipart](docs/sdks/channels/README.md#startthreadmultipart) - Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+* [triggerTypingIndicator](docs/sdks/channels/README.md#triggertypingindicator) - Post a typing indicator for the specified channel, which expires after 10 seconds. Returns a 204 empty response on success. Fires a Typing Start Gateway event.
+* [pinMessage](docs/sdks/channels/README.md#pinmessage) - Pin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+* [unpinMessage](docs/sdks/channels/README.md#unpinmessage) - Unpin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+* [listPinnedMessages](docs/sdks/channels/README.md#listpinnedmessages) - Returns all pinned messages in the channel as an array of message objects.
+* [get](docs/sdks/channels/README.md#get) - Returns a channel object for the given channel ID.
+* [delete](docs/sdks/channels/README.md#delete) - Delete a channel, or close a private message. Requires the MANAGE_CHANNELS permission for the guild, or MANAGE_THREADS if the channel is a thread. Returns a channel object on success. Fires a Channel Delete Gateway event (or Thread Delete if the channel was a thread).
+* [update](docs/sdks/channels/README.md#update) - Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.
 
-#### [channels.messages](docs/sdks/discordmessages/README.md)
 
-* [deleteMyReaction](docs/sdks/discordmessages/README.md#deletemyreaction)
-* [bulkDelete](docs/sdks/discordmessages/README.md#bulkdelete)
-* [deleteAllReactions](docs/sdks/discordmessages/README.md#deleteallreactions)
-* [get](docs/sdks/discordmessages/README.md#get)
-* [updateJson](docs/sdks/discordmessages/README.md#updatejson)
-* [updateForm](docs/sdks/discordmessages/README.md#updateform)
-* [updateMultipart](docs/sdks/discordmessages/README.md#updatemultipart)
-* [list](docs/sdks/discordmessages/README.md#list)
-* [createJson](docs/sdks/discordmessages/README.md#createjson)
-* [createForm](docs/sdks/discordmessages/README.md#createform)
-* [createMultipart](docs/sdks/discordmessages/README.md#createmultipart)
+### [emoji](docs/sdks/emoji/README.md)
 
-#### [channels.messages.reactions](docs/sdks/reactions/README.md)
+* [getApplicationEmoji](docs/sdks/emoji/README.md#getapplicationemoji) - Returns an emoji object for the given application and emoji IDs. Includes the user field.
+* [deleteApplicationEmoji](docs/sdks/emoji/README.md#deleteapplicationemoji) - Delete the given emoji. Returns 204 No Content on success.
+* [updateApplicationEmoji](docs/sdks/emoji/README.md#updateapplicationemoji) - Modify the given emoji. Returns the updated emoji object on success.
+* [listApplicationEmojis](docs/sdks/emoji/README.md#listapplicationemojis) - Returns an object containing a list of emoji objects for the given application under the items key. Includes a user object for the team member that uploaded the emoji from the app's settings, or for the bot user if uploaded using the API.
+* [createApplicationEmoji](docs/sdks/emoji/README.md#createapplicationemoji) - Create a new emoji for the application. Returns the new emoji object on success.
+* [getGuildEmoji](docs/sdks/emoji/README.md#getguildemoji) - Returns an emoji object for the given guild and emoji IDs. Includes the user field if the bot has the MANAGE_GUILD_EXPRESSIONS permission, or if the bot created the emoji and has the the CREATE_GUILD_EXPRESSIONS permission.
+* [deleteGuildEmoji](docs/sdks/emoji/README.md#deleteguildemoji) - Delete the given emoji. For emojis created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other emojis, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns 204 No Content on success. Fires a Guild Emojis Update Gateway event.
+* [updateGuildEmoji](docs/sdks/emoji/README.md#updateguildemoji) - Modify the given emoji. For emojis created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other emojis, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns the updated emoji object on success. Fires a Guild Emojis Update Gateway event.
+* [listGuildEmojis](docs/sdks/emoji/README.md#listguildemojis) - Returns a list of emoji objects for the given guild. Includes user fields if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
+* [createGuildEmoji](docs/sdks/emoji/README.md#createguildemoji) - Create a new emoji for the guild. Requires the CREATE_GUILD_EXPRESSIONS permission. Returns the new emoji object on success. Fires a Guild Emojis Update Gateway event.
 
-* [add](docs/sdks/reactions/README.md#add)
+### [entitlements](docs/sdks/entitlements/README.md)
 
-#### [channels.permissions](docs/sdks/permissions/README.md)
-
-* [setOverwrite](docs/sdks/permissions/README.md#setoverwrite)
-
-#### [channels.pins](docs/sdks/pins/README.md)
-
-* [unpin](docs/sdks/pins/README.md#unpin)
-
-#### [channels.threadMembers](docs/sdks/discordthreadmembers/README.md)
-
-* [leave](docs/sdks/discordthreadmembers/README.md#leave)
-
-#### [channels.threads](docs/sdks/discordthreads/README.md)
-
-* [create](docs/sdks/discordthreads/README.md#create)
-
-### [channelsRecipients](docs/sdks/channelsrecipients/README.md)
-
-* [addGroupDmUser](docs/sdks/channelsrecipients/README.md#addgroupdmuser)
-
-### [channelsThreadMembers](docs/sdks/channelsthreadmembers/README.md)
-
-* [join](docs/sdks/channelsthreadmembers/README.md#join)
-
-### [Discord SDK](docs/sdks/discord/README.md)
-
-* [partnerSDKUnmergeProvisionalAccount](docs/sdks/discord/README.md#partnersdkunmergeprovisionalaccount)
-* [partnerSDKToken](docs/sdks/discord/README.md#partnersdktoken)
-* [createOrJoinLobby](docs/sdks/discord/README.md#createorjoinlobby)
-* [createLobby](docs/sdks/discord/README.md#createlobby)
-* [threadSearch](docs/sdks/discord/README.md#threadsearch)
-* [leaveLobby](docs/sdks/discord/README.md#leavelobby)
-* [editLobbyChannelLink](docs/sdks/discord/README.md#editlobbychannellink)
-* [createLobbyMessage](docs/sdks/discord/README.md#createlobbymessage)
-* [addLobbyMember](docs/sdks/discord/README.md#addlobbymember)
-* [deleteLobbyMember](docs/sdks/discord/README.md#deletelobbymember)
-* [getLobby](docs/sdks/discord/README.md#getlobby)
-* [editLobby](docs/sdks/discord/README.md#editlobby)
-
-### [gateway](docs/sdks/gateway/README.md)
-
-* [getBot](docs/sdks/gateway/README.md#getbot)
-* [get](docs/sdks/gateway/README.md#get)
-
-### [guildApplicationCommands](docs/sdks/guildapplicationcommands/README.md)
-
-* [delete](docs/sdks/guildapplicationcommands/README.md#delete)
-* [list](docs/sdks/guildapplicationcommands/README.md#list)
-* [update](docs/sdks/guildapplicationcommands/README.md#update)
-* [bulkSet](docs/sdks/guildapplicationcommands/README.md#bulkset)
-
-### [guildBans](docs/sdks/guildbans/README.md)
-
-* [bulkBan](docs/sdks/guildbans/README.md#bulkban)
-* [get](docs/sdks/guildbans/README.md#get)
-* [list](docs/sdks/guildbans/README.md#list)
-
-### [guildCommands](docs/sdks/guildcommands/README.md)
-
-* [get](docs/sdks/guildcommands/README.md#get)
-
-### [guildEmojis](docs/sdks/guildemojis/README.md)
-
-* [get](docs/sdks/guildemojis/README.md#get)
-
-### [guildIntegrations](docs/sdks/guildintegrations/README.md)
-
-* [delete](docs/sdks/guildintegrations/README.md#delete)
-
-### [guildMemberRoles](docs/sdks/guildmemberroles/README.md)
-
-* [add](docs/sdks/guildmemberroles/README.md#add)
-* [delete](docs/sdks/guildmemberroles/README.md#delete)
-
-### [guildMembers](docs/sdks/guildmembers/README.md)
-
-* [add](docs/sdks/guildmembers/README.md#add)
-
-### [guildOnboarding](docs/sdks/guildonboarding/README.md)
-
-* [get](docs/sdks/guildonboarding/README.md#get)
-* [update](docs/sdks/guildonboarding/README.md#update)
-
-### [guildRoles](docs/sdks/guildroles/README.md)
-
-* [bulkUpdate](docs/sdks/guildroles/README.md#bulkupdate)
+* [consume](docs/sdks/entitlements/README.md#consume) - For One-Time Purchase consumable SKUs, marks a given entitlement for the user as consumed. The entitlement will have consumed: true when using List Entitlements. Returns a 204 No Content on success.
+* [get](docs/sdks/entitlements/README.md#get) - Returns an entitlement.
+* [deleteTest](docs/sdks/entitlements/README.md#deletetest) - Deletes a currently-active test entitlement. Discord will act as though that user or guild no longer has entitlement to your premium offering. Returns 204 No Content on success.
+* [list](docs/sdks/entitlements/README.md#list) - Returns all entitlements for a given app, active and expired.
+* [createTest](docs/sdks/entitlements/README.md#createtest) - Creates a test entitlement to a given SKU for a given guild or user. Discord will act as though that user or guild has entitlement to your premium offering. This endpoint returns a partial entitlement object.
 
 ### [guilds](docs/sdks/guilds/README.md)
 
-* [create](docs/sdks/guilds/README.md#create)
-* [getMyMember](docs/sdks/guilds/README.md#getmymember)
-* [listAutoModerationRules](docs/sdks/guilds/README.md#listautomoderationrules)
-* [searchMembers](docs/sdks/guilds/README.md#searchmembers)
-* [getTemplate](docs/sdks/guilds/README.md#gettemplate)
-* [getNewMemberWelcome](docs/sdks/guilds/README.md#getnewmemberwelcome)
-* [getSoundboardSound](docs/sdks/guilds/README.md#getsoundboardsound)
-* [createSoundboardSound](docs/sdks/guilds/README.md#createsoundboardsound)
-* [getWelcomeScreen](docs/sdks/guilds/README.md#getwelcomescreen)
-* [updateWelcomeScreen](docs/sdks/guilds/README.md#updatewelcomescreen)
-* [getVoiceState](docs/sdks/guilds/README.md#getvoicestate)
-* [getWidget](docs/sdks/guilds/README.md#getwidget)
-* [getVanityUrl](docs/sdks/guilds/README.md#getvanityurl)
-* [listAuditLogs](docs/sdks/guilds/README.md#listauditlogs)
-* [getWidgetPng](docs/sdks/guilds/README.md#getwidgetpng)
-* [syncTemplate](docs/sdks/guilds/README.md#synctemplate)
-* [updateTemplate](docs/sdks/guilds/README.md#updatetemplate)
-* [listTemplates](docs/sdks/guilds/README.md#listtemplates)
-* [getSticker](docs/sdks/guilds/README.md#getsticker)
-* [deleteSticker](docs/sdks/guilds/README.md#deletesticker)
-* [createSticker](docs/sdks/guilds/README.md#createsticker)
-* [listWebhooks](docs/sdks/guilds/README.md#listwebhooks)
-* [listChannels](docs/sdks/guilds/README.md#listchannels)
-* [deleteMember](docs/sdks/guilds/README.md#deletemember)
-* [listMembers](docs/sdks/guilds/README.md#listmembers)
-* [getPreview](docs/sdks/guilds/README.md#getpreview)
-* [listInvites](docs/sdks/guilds/README.md#listinvites)
-* [deleteEmoji](docs/sdks/guilds/README.md#deleteemoji)
-* [updateEmoji](docs/sdks/guilds/README.md#updateemoji)
-* [listEmojis](docs/sdks/guilds/README.md#listemojis)
-* [createEmoji](docs/sdks/guilds/README.md#createemoji)
-* [getWidgetSettings](docs/sdks/guilds/README.md#getwidgetsettings)
-* [getRole](docs/sdks/guilds/README.md#getrole)
-* [deleteRole](docs/sdks/guilds/README.md#deleterole)
-* [updateRole](docs/sdks/guilds/README.md#updaterole)
-* [listRoles](docs/sdks/guilds/README.md#listroles)
-* [createRole](docs/sdks/guilds/README.md#createrole)
-* [previewPrune](docs/sdks/guilds/README.md#previewprune)
-* [prune](docs/sdks/guilds/README.md#prune)
-* [banUser](docs/sdks/guilds/README.md#banuser)
-* [unbanUser](docs/sdks/guilds/README.md#unbanuser)
-* [get](docs/sdks/guilds/README.md#get)
-* [delete](docs/sdks/guilds/README.md#delete)
-* [update](docs/sdks/guilds/README.md#update)
-
-#### [guilds.autoModeration](docs/sdks/automoderation/README.md)
-
-
-#### [guilds.autoModeration.rules](docs/sdks/rules/README.md)
-
-* [update](docs/sdks/rules/README.md#update)
-
-#### [guilds.channels](docs/sdks/discordchannels/README.md)
-
-* [bulkUpdate](docs/sdks/discordchannels/README.md#bulkupdate)
-
-#### [guilds.integrations](docs/sdks/integrations/README.md)
-
-* [list](docs/sdks/integrations/README.md#list)
-
-#### [guilds.mfa](docs/sdks/mfa/README.md)
-
-* [setLevel](docs/sdks/mfa/README.md#setlevel)
-
-#### [guilds.scheduledEvents](docs/sdks/discordguildsscheduledevents/README.md)
-
-* [get](docs/sdks/discordguildsscheduledevents/README.md#get)
-* [list](docs/sdks/discordguildsscheduledevents/README.md#list)
-* [update](docs/sdks/discordguildsscheduledevents/README.md#update)
-
-#### [guilds.scheduledEvents.users](docs/sdks/discordusers/README.md)
-
-* [list](docs/sdks/discordusers/README.md#list)
-
-#### [guilds.soundboardSounds](docs/sdks/soundboardsounds/README.md)
-
-* [update](docs/sdks/soundboardsounds/README.md#update)
-
-#### [guilds.stickers](docs/sdks/discordstickers/README.md)
-
-* [update](docs/sdks/discordstickers/README.md#update)
-
-#### [guilds.templates](docs/sdks/templates/README.md)
-
-* [delete](docs/sdks/templates/README.md#delete)
-* [create](docs/sdks/templates/README.md#create)
-
-#### [guilds.voiceStates](docs/sdks/voicestates/README.md)
-
-* [getSelf](docs/sdks/voicestates/README.md#getself)
-* [updateSelf](docs/sdks/voicestates/README.md#updateself)
-* [update](docs/sdks/voicestates/README.md#update)
-
-### [guildsChannels](docs/sdks/guildschannels/README.md)
-
-* [create](docs/sdks/guildschannels/README.md#create)
+* [create](docs/sdks/guilds/README.md#create) - Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.
+* [searchMembers](docs/sdks/guilds/README.md#searchmembers) - Returns a list of guild member objects whose username or nickname starts with a provided string.
+* [listActiveThreads](docs/sdks/guilds/README.md#listactivethreads) - Returns all active threads in the guild, including public and private threads. Threads are ordered by their id, in descending order.
+* [updateCurrentMember](docs/sdks/guilds/README.md#updatecurrentmember) - Modifies the current member in a guild. Returns a 200 with the updated member object on success. Fires a Guild Member Update Gateway event.
+* [addMemberRole](docs/sdks/guilds/README.md#addmemberrole) - Adds a role to a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
+* [removeMemberRole](docs/sdks/guilds/README.md#removememberrole) - Removes a role from a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
+* [getWelcomeScreen](docs/sdks/guilds/README.md#getwelcomescreen) - Returns the Welcome Screen object for the guild. If the welcome screen is not enabled, the MANAGE_GUILD permission is required.
+* [updateWelcomeScreen](docs/sdks/guilds/README.md#updatewelcomescreen) - Modify the guild's Welcome Screen. Requires the MANAGE_GUILD permission. Returns the updated Welcome Screen object. May fire a Guild Update Gateway event.
+* [deleteIntegration](docs/sdks/guilds/README.md#deleteintegration) - Delete the attached integration object for the guild. Deletes any associated webhooks and kicks the associated bot if there is one. Requires the MANAGE_GUILD permission. Returns a 204 empty response on success. Fires Guild Integrations Update and Integration Delete Gateway events.
+* [listIntegrations](docs/sdks/guilds/README.md#listintegrations) - Returns a list of integration objects for the guild. Requires the MANAGE_GUILD permission.
+* [getWidget](docs/sdks/guilds/README.md#getwidget) - Returns the widget for the guild. Fires an Invite Create Gateway event when an invite channel is defined and a new Invite is generated.
+* [getOnboarding](docs/sdks/guilds/README.md#getonboarding) - Returns the Onboarding object for the guild.
+* [updateOnboarding](docs/sdks/guilds/README.md#updateonboarding) - Modifies the onboarding configuration of the guild. Returns a 200 with the Onboarding object for the guild. Requires the MANAGE_GUILD and MANAGE_ROLES permissions.
+* [getVanityUrl](docs/sdks/guilds/README.md#getvanityurl) - Returns a partial invite object for guilds with that feature enabled. Requires the MANAGE_GUILD permission. code will be null if a vanity url for the guild is not set.
+* [getWidgetPng](docs/sdks/guilds/README.md#getwidgetpng) - Returns a PNG image widget for the guild. Requires no permissions or authentication.
+* [bulkBan](docs/sdks/guilds/README.md#bulkban) - Ban up to 200 users from a guild, and optionally delete previous messages sent by the banned users. Requires both the BAN_MEMBERS and MANAGE_GUILD permissions. Returns a 200 response on success, including the fields banned_users with the IDs of the banned users and failed_users with IDs that could not be banned or were already banned.
+* [listChannels](docs/sdks/guilds/README.md#listchannels) - Returns a list of guild channel objects. Does not include threads.
+* [createChannel](docs/sdks/guilds/README.md#createchannel) - Create a new channel object for the guild. Requires the MANAGE_CHANNELS permission. If setting permission overwrites, only permissions your bot has in the guild can be allowed/denied. Setting MANAGE_ROLES permission in channels is only possible for guild administrators. Returns the new channel object on success. Fires a Channel Create Gateway event.
+* [updateChannelPositions](docs/sdks/guilds/README.md#updatechannelpositions) - Modify the positions of a set of channel objects for the guild. Requires MANAGE_CHANNELS permission. Returns a 204 empty response on success. Fires multiple Channel Update Gateway events.
+* [getMember](docs/sdks/guilds/README.md#getmember) - Returns a guild member object for the specified user.
+* [addMember](docs/sdks/guilds/README.md#addmember) - Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. Returns a 201 Created with the guild member as the body, or 204 No Content if the user is already a member of the guild. Fires a Guild Member Add Gateway event.
+* [removeMember](docs/sdks/guilds/README.md#removemember) - Remove a member from a guild. Requires KICK_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Member Remove Gateway event.
+* [updateMember](docs/sdks/guilds/README.md#updatemember) - Modify attributes of a guild member. Returns a 200 OK with the guild member as the body. Fires a Guild Member Update Gateway event. If the channel_id is set to null, this will force the target user to be disconnected from voice.
+* [listMembers](docs/sdks/guilds/README.md#listmembers) - Returns a list of guild member objects that are members of the guild.
+* [getPreview](docs/sdks/guilds/README.md#getpreview) - Returns the guild preview object for the given id. If the user is not in the guild, then the guild must be discoverable.
+* [listInvites](docs/sdks/guilds/README.md#listinvites) - Returns a list of invite objects (with invite metadata) for the guild. Requires the MANAGE_GUILD permission.
+* [listVoiceRegions](docs/sdks/guilds/README.md#listvoiceregions) - Returns a list of voice region objects for the guild. Unlike the similar /voice route, this returns VIP servers when the guild is VIP-enabled.
+* [getWidgetSettings](docs/sdks/guilds/README.md#getwidgetsettings) - Returns a guild widget settings object. Requires the MANAGE_GUILD permission.
+* [updateWidgetSettings](docs/sdks/guilds/README.md#updatewidgetsettings) - Modify a guild widget settings object for the guild. All attributes may be passed in with JSON and modified. Requires the MANAGE_GUILD permission. Returns the updated guild widget settings object. Fires a Guild Update Gateway event.
+* [getRole](docs/sdks/guilds/README.md#getrole) - Returns a role object for the specified role.
+* [deleteRole](docs/sdks/guilds/README.md#deleterole) - Delete a guild role. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Role Delete Gateway event.
+* [updateRole](docs/sdks/guilds/README.md#updaterole) - Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated role on success. Fires a Guild Role Update Gateway event.
+* [listRoles](docs/sdks/guilds/README.md#listroles) - Returns a list of role objects for the guild.
+* [createRole](docs/sdks/guilds/README.md#createrole) - Create a new role for the guild. Requires the MANAGE_ROLES permission. Returns the new role object on success. Fires a Guild Role Create Gateway event. All JSON params are optional.
+* [updateRolePositions](docs/sdks/guilds/README.md#updaterolepositions) - Modify the positions of a set of role objects for the guild. Requires the MANAGE_ROLES permission. Returns a list of all of the guild's role objects on success. Fires multiple Guild Role Update Gateway events.
+* [previewPrune](docs/sdks/guilds/README.md#previewprune) - Returns an object with one pruned key indicating the number of members that would be removed in a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions.
+* [prune](docs/sdks/guilds/README.md#prune) - Begin a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions. Returns an object with one pruned key indicating the number of members that were removed in the prune operation. Fires multiple Guild Member Remove Gateway events.
+* [getBan](docs/sdks/guilds/README.md#getban) - Returns a ban object for the given user or a 404 not found if the ban cannot be found. Requires the BAN_MEMBERS permission.
+* [createBan](docs/sdks/guilds/README.md#createban) - Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the BAN_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Ban Add Gateway event.
+* [removeBan](docs/sdks/guilds/README.md#removeban) - Remove the ban for a user. Requires the BAN_MEMBERS permissions. Returns a 204 empty response on success. Fires a Guild Ban Remove Gateway event.
+* [listBans](docs/sdks/guilds/README.md#listbans) - Returns a list of ban objects for the users banned from this guild. Requires the BAN_MEMBERS permission.
+* [setMfaLevel](docs/sdks/guilds/README.md#setmfalevel) - Modify a guild's MFA level. Requires guild ownership. Returns the updated level on success. Fires a Guild Update Gateway event.
+* [get](docs/sdks/guilds/README.md#get) - Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.
+* [delete](docs/sdks/guilds/README.md#delete) - Delete a guild permanently. User must be owner. Returns 204 No Content on success. Fires a Guild Delete Gateway event.
+* [update](docs/sdks/guilds/README.md#update) - Modify a guild's settings. Requires the MANAGE_GUILD permission. Returns the updated guild object on success. Fires a Guild Update Gateway event.
 
 ### [guildScheduledEvents](docs/sdks/guildscheduledevents/README.md)
 
-* [delete](docs/sdks/guildscheduledevents/README.md#delete)
-
-### [guildsMembers](docs/sdks/guildsmembers/README.md)
-
-* [updateMe](docs/sdks/guildsmembers/README.md#updateme)
-* [get](docs/sdks/guildsmembers/README.md#get)
-* [update](docs/sdks/guildsmembers/README.md#update)
-
-### [guildSoundboardSounds](docs/sdks/guildsoundboardsounds/README.md)
-
-* [delete](docs/sdks/guildsoundboardsounds/README.md#delete)
-
-### [guildsSoundboardSounds](docs/sdks/guildssoundboardsounds/README.md)
-
-* [list](docs/sdks/guildssoundboardsounds/README.md#list)
-
-### [guildStickers](docs/sdks/guildstickers/README.md)
-
-* [list](docs/sdks/guildstickers/README.md#list)
+* [getUsers](docs/sdks/guildscheduledevents/README.md#getusers) - Get a list of guild scheduled event users subscribed to a guild scheduled event. Returns a list of guild scheduled event user objects on success. Guild member data, if it exists, is included if the with_member query parameter is set.
+* [get](docs/sdks/guildscheduledevents/README.md#get) - Get a guild scheduled event. Returns a guild scheduled event object on success.
+* [delete](docs/sdks/guildscheduledevents/README.md#delete) - Delete a guild scheduled event. Returns a 204 on success. Fires a Guild Scheduled Event Delete Gateway event.
+* [update](docs/sdks/guildscheduledevents/README.md#update) - Modify a guild scheduled event. Returns the modified guild scheduled event object on success. Fires a Guild Scheduled Event Update Gateway event.
+* [list](docs/sdks/guildscheduledevents/README.md#list) - Returns a list of guild scheduled event objects for the given guild.
+* [create](docs/sdks/guildscheduledevents/README.md#create) - Create a guild scheduled event in the guild. Returns a guild scheduled event object on success. Fires a Guild Scheduled Event Create Gateway event.
 
 ### [guildTemplates](docs/sdks/guildtemplates/README.md)
 
-* [createFromCode](docs/sdks/guildtemplates/README.md#createfromcode)
-
-### [guildThreads](docs/sdks/guildthreads/README.md)
-
-* [getActive](docs/sdks/guildthreads/README.md#getactive)
-
-### [guildVoiceRegions](docs/sdks/guildvoiceregions/README.md)
-
-* [list](docs/sdks/guildvoiceregions/README.md#list)
-
-### [guildWidgetSettings](docs/sdks/guildwidgetsettings/README.md)
-
-* [update](docs/sdks/guildwidgetsettings/README.md#update)
+* [get](docs/sdks/guildtemplates/README.md#get) - Returns a guild template object for the given code.
+* [createGuild](docs/sdks/guildtemplates/README.md#createguild) - Create a new guild based on a template. Returns a guild object on success. Fires a Guild Create Gateway event.
+* [getNewMemberWelcome](docs/sdks/guildtemplates/README.md#getnewmemberwelcome) - Returns the welcome screen object for the guild.
+* [sync](docs/sdks/guildtemplates/README.md#sync) - Syncs the template to the guild's current state. Requires the MANAGE_GUILD permission. Returns the guild template object on success.
+* [delete](docs/sdks/guildtemplates/README.md#delete) - Deletes the template. Requires the MANAGE_GUILD permission. Returns the deleted guild template object on success.
+* [update](docs/sdks/guildtemplates/README.md#update) - Modifies the template's metadata. Requires the MANAGE_GUILD permission. Returns the guild template object on success.
+* [list](docs/sdks/guildtemplates/README.md#list) - Returns an array of guild template objects. Requires the MANAGE_GUILD permission.
+* [create](docs/sdks/guildtemplates/README.md#create) - Creates a template for the guild. Requires the MANAGE_GUILD permission. Returns the created guild template object on success.
 
 ### [invites](docs/sdks/invites/README.md)
 
-* [resolve](docs/sdks/invites/README.md#resolve)
-* [revoke](docs/sdks/invites/README.md#revoke)
+* [get](docs/sdks/invites/README.md#get) - Returns an invite object for the given code.
+* [delete](docs/sdks/invites/README.md#delete) - Delete an invite. Requires the MANAGE_CHANNELS permission on the channel this invite belongs to, or MANAGE_GUILD to remove any invite across the guild. Returns an invite object on success.
 
-### [messageReactions](docs/sdks/messagereactions/README.md)
+### [lobbies](docs/sdks/lobbies/README.md)
 
-* [deleteAllByEmoji](docs/sdks/messagereactions/README.md#deleteallbyemoji)
+* [createOrJoin](docs/sdks/lobbies/README.md#createorjoin) - Creates a new lobby or joins an existing one. Returns a lobby object on success.
+* [create](docs/sdks/lobbies/README.md#create) - Creates a new lobby. Returns a lobby object on success.
+* [leave](docs/sdks/lobbies/README.md#leave) - Removes the current user from the specified lobby. It is safe to call this even if the user is no longer a member of the lobby, but will fail if the lobby does not exist.
+* [connectToChannel](docs/sdks/lobbies/README.md#connecttochannel) - Connects a lobby to a channel.
+* [sendMessage](docs/sdks/lobbies/README.md#sendmessage) - Sends a message to the lobby.
+* [addMember](docs/sdks/lobbies/README.md#addmember) - Adds a user to a lobby.
+* [removeMember](docs/sdks/lobbies/README.md#removemember) - Removes a user from a lobby.
+* [get](docs/sdks/lobbies/README.md#get) - Returns the lobby object for the given id.
+* [update](docs/sdks/lobbies/README.md#update) - Updates a lobby. Returns a lobby object on success.
 
 ### [messages](docs/sdks/messages/README.md)
 
-* [listReactionsByEmoji](docs/sdks/messages/README.md#listreactionsbyemoji)
+* [createReaction](docs/sdks/messages/README.md#createreaction) - Create a reaction for the message. This endpoint requires the READ_MESSAGE_HISTORY permission to be present on the current user.
+* [deleteOwnReaction](docs/sdks/messages/README.md#deleteownreaction) - Delete a reaction the current user has made for the message. Returns a 204 empty response on success.
+* [bulkDelete](docs/sdks/messages/README.md#bulkdelete) - Delete multiple messages in a single request. This endpoint can only be used on guild channels and requires the MANAGE_MESSAGES permission.
+* [deleteUserReaction](docs/sdks/messages/README.md#deleteuserreaction) - Deletes another user's reaction. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+* [listReactionsByEmoji](docs/sdks/messages/README.md#listreactionsbyemoji) - Get a list of users that reacted with a specific emoji.
+* [deleteAllReactionsForEmoji](docs/sdks/messages/README.md#deleteallreactionsforemoji) - Deletes all the reactions for a given emoji on a message. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+* [deleteAllReactions](docs/sdks/messages/README.md#deleteallreactions) - Deletes all reactions on a message. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+* [crosspost](docs/sdks/messages/README.md#crosspost) - Crosspost a message in an Announcement Channel to following channels. This endpoint requires the SEND_MESSAGES permission, if the current user sent the message, or additionally the MANAGE_MESSAGES permission, for all other messages, to be present for the current user.
+* [get](docs/sdks/messages/README.md#get) - Returns a specific message in the channel. If operating on a guild channel, this endpoint requires the READ_MESSAGE_HISTORY permission to be present on the current user.
+* [delete](docs/sdks/messages/README.md#delete) - Delete a message. If operating on a guild channel and trying to delete a message that was not sent by the current user, this endpoint requires the MANAGE_MESSAGES permission.
+* [updateJson](docs/sdks/messages/README.md#updatejson) - Edit a previously sent message. The fields content, embeds, and flags can be edited by the original message author. Other users can only edit flags and only if they have the MANAGE_MESSAGES permission in the corresponding channel.
+* [updateForm](docs/sdks/messages/README.md#updateform) - Edit a previously sent message. The fields content, embeds, and flags can be edited by the original message author. Other users can only edit flags and only if they have the MANAGE_MESSAGES permission in the corresponding channel.
+* [updateMultipart](docs/sdks/messages/README.md#updatemultipart) - Edit a previously sent message. The fields content, embeds, and flags can be edited by the original message author. Other users can only edit flags and only if they have the MANAGE_MESSAGES permission in the corresponding channel.
+* [list](docs/sdks/messages/README.md#list) - Returns the messages for a channel. If operating on a guild channel, this endpoint requires the VIEW_CHANNEL permission to be present on the current user.
+* [createJson](docs/sdks/messages/README.md#createjson) - Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+* [createForm](docs/sdks/messages/README.md#createform) - Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+* [createMultipart](docs/sdks/messages/README.md#createmultipart) - Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
 
-### [oauth2](docs/sdks/oauth2/README.md)
+### [polls](docs/sdks/polls/README.md)
 
-* [getMyApplication](docs/sdks/oauth2/README.md#getmyapplication)
-* [getKeys](docs/sdks/oauth2/README.md#getkeys)
-* [getAuthorization](docs/sdks/oauth2/README.md#getauthorization)
+* [getAnswerVoters](docs/sdks/polls/README.md#getanswervoters) - Get a list of users that voted for a specific answer in a poll.
+* [expire](docs/sdks/polls/README.md#expire) - Immediately ends the poll. You cannot end polls from other users. Returns a message object. Fires a Message Update Gateway event.
 
-### [openidConnect](docs/sdks/openidconnect/README.md)
+### [soundboards](docs/sdks/soundboards/README.md)
 
-* [getUserinfo](docs/sdks/openidconnect/README.md#getuserinfo)
-
-### [scheduledEvents](docs/sdks/scheduledevents/README.md)
-
-* [create](docs/sdks/scheduledevents/README.md#create)
-
-### [soundboard](docs/sdks/soundboard/README.md)
-
-* [getDefaultSounds](docs/sdks/soundboard/README.md#getdefaultsounds)
+* [getSoundboardDefaultSounds](docs/sdks/soundboards/README.md#getsoundboarddefaultsounds) - Returns a list of the default sounds available in the soundboard.
+* [sendSoundboardSound](docs/sdks/soundboards/README.md#sendsoundboardsound) - Sends a soundboard sound to a channel.
+* [getGuildSoundboardSound](docs/sdks/soundboards/README.md#getguildsoundboardsound) - Returns a soundboard sound object for the given guild and sound IDs.
+* [deleteGuildSoundboardSound](docs/sdks/soundboards/README.md#deleteguildsoundboardsound) - Delete a soundboard sound from a guild. Returns 204 No Content on success.
+* [updateGuildSoundboardSound](docs/sdks/soundboards/README.md#updateguildsoundboardsound) - Update a soundboard sound in a guild. Returns the updated soundboard sound object on success.
+* [listGuildSoundboardSounds](docs/sdks/soundboards/README.md#listguildsoundboardsounds) - Returns a list of soundboard sound objects for the given guild.
+* [createGuildSoundboardSound](docs/sdks/soundboards/README.md#createguildsoundboardsound) - Create a new soundboard sound for the guild. Returns the new soundboard sound object on success.
 
 ### [stageInstances](docs/sdks/stageinstances/README.md)
 
-* [create](docs/sdks/stageinstances/README.md#create)
-* [get](docs/sdks/stageinstances/README.md#get)
-* [delete](docs/sdks/stageinstances/README.md#delete)
-* [update](docs/sdks/stageinstances/README.md#update)
-
-### [stickerPacks](docs/sdks/stickerpacks/README.md)
-
-* [list](docs/sdks/stickerpacks/README.md#list)
-* [get](docs/sdks/stickerpacks/README.md#get)
+* [create](docs/sdks/stageinstances/README.md#create) - Creates a new Stage instance associated to a Stage channel. Returns that Stage instance. Fires a Stage Instance Create Gateway event. Requires the user to be a moderator of the Stage channel.
+* [get](docs/sdks/stageinstances/README.md#get) - Gets the stage instance associated with the Stage channel, if it exists.
+* [delete](docs/sdks/stageinstances/README.md#delete) - Deletes the Stage instance. Returns 204 No Content. Fires a Stage Instance Delete Gateway event. Requires the user to be a moderator of the Stage channel.
+* [update](docs/sdks/stageinstances/README.md#update) - Updates fields of an existing Stage instance. Returns the updated Stage instance. Fires a Stage Instance Update Gateway event. Requires the user to be a moderator of the Stage channel.
 
 ### [stickers](docs/sdks/stickers/README.md)
 
-* [get](docs/sdks/stickers/README.md#get)
-
-### [threadMembers](docs/sdks/threadmembers/README.md)
-
-* [delete](docs/sdks/threadmembers/README.md#delete)
-
-### [threads](docs/sdks/threads/README.md)
-
-* [listPublicArchived](docs/sdks/threads/README.md#listpublicarchived)
+* [listPacks](docs/sdks/stickers/README.md#listpacks) - Returns a list of available sticker packs.
+* [getGuildSticker](docs/sdks/stickers/README.md#getguildsticker) - Returns a sticker object for the given guild and sticker IDs. Includes the user field if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
+* [deleteGuildSticker](docs/sdks/stickers/README.md#deleteguildsticker) - Delete the given sticker. For stickers created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other stickers, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns 204 No Content on success. Fires a Guild Stickers Update Gateway event.
+* [updateGuildSticker](docs/sdks/stickers/README.md#updateguildsticker) - Modify the given sticker. For stickers created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other stickers, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns the updated sticker object on success. Fires a Guild Stickers Update Gateway event.
+* [listGuildStickers](docs/sdks/stickers/README.md#listguildstickers) - Returns an array of sticker objects for the given guild. Includes user fields if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
+* [createGuildSticker](docs/sdks/stickers/README.md#createguildsticker) - Create a new sticker for the guild. Send a multipart/form-data body. Requires the CREATE_GUILD_EXPRESSIONS permission. Returns the new sticker object on success. Fires a Guild Stickers Update Gateway event.
+* [getPack](docs/sdks/stickers/README.md#getpack) - Returns a sticker pack object for the given sticker pack ID.
+* [get](docs/sdks/stickers/README.md#get) - Returns a sticker object for the given sticker ID.
 
 ### [users](docs/sdks/users/README.md)
 
-* [listMyConnections](docs/sdks/users/README.md#listmyconnections)
-* [createDm](docs/sdks/users/README.md#createdm)
-* [listMyGuilds](docs/sdks/users/README.md#listmyguilds)
-* [getMe](docs/sdks/users/README.md#getme)
-* [updateMe](docs/sdks/users/README.md#updateme)
-* [get](docs/sdks/users/README.md#get)
-
-#### [users.guilds](docs/sdks/discordusersguilds/README.md)
-
-* [leave](docs/sdks/discordusersguilds/README.md#leave)
+* [listConnections](docs/sdks/users/README.md#listconnections) - Returns a list of connection objects. Requires the connections OAuth2 scope.
+* [createDM](docs/sdks/users/README.md#createdm) - Create a new DM channel with a user. Returns a DM channel object (if one already exists, it will be returned instead).
+* [listGuilds](docs/sdks/users/README.md#listguilds) - Returns a list of partial guild objects the current user is a member of. For OAuth2, requires the guilds scope.
+* [getCurrent](docs/sdks/users/README.md#getcurrent) - Returns the user object of the requester's account. For OAuth2, this requires the identify scope, which will return the object without an email, and optionally the email scope, which returns the object with an email if the user has one.
+* [updateCurrent](docs/sdks/users/README.md#updatecurrent) - Modify the requester's user account settings. Returns a user object on success. Fires a User Update Gateway event.
+* [getApplicationRoleConnection](docs/sdks/users/README.md#getapplicationroleconnection) - Returns the application role connection for the user. Requires an OAuth2 access token with role_connections.write scope for the application specified in the path.
+* [updateApplicationRoleConnection](docs/sdks/users/README.md#updateapplicationroleconnection) - Updates and returns the application role connection for the user. Requires an OAuth2 access token with role_connections.write scope for the application specified in the path.
+* [getGuildMember](docs/sdks/users/README.md#getguildmember) - Returns a guild member object for the current user. Requires the guilds.members.read OAuth2 scope.
+* [leaveGuild](docs/sdks/users/README.md#leaveguild) - Leave a guild. Returns a 204 empty response on success. Fires a Guild Delete Gateway event and a Guild Member Remove Gateway event.
+* [get](docs/sdks/users/README.md#get) - Returns a user object for a given user ID.
 
 ### [voice](docs/sdks/voice/README.md)
 
-* [listRegions](docs/sdks/voice/README.md#listregions)
-
-### [webhookMessages](docs/sdks/webhookmessages/README.md)
-
-* [getOriginal](docs/sdks/webhookmessages/README.md#getoriginal)
+* [listRegions](docs/sdks/voice/README.md#listregions) - Returns an array of voice region objects that can be used when setting a voice or stage channel's rtc_region.
+* [getCurrentUserState](docs/sdks/voice/README.md#getcurrentuserstate) - Returns the current user's voice state in the guild.
+* [updateCurrentUserState](docs/sdks/voice/README.md#updatecurrentuserstate) - Updates the current user's voice state. Returns 204 No Content on success. Fires a Voice State Update Gateway event.
+* [getUserState](docs/sdks/voice/README.md#getuserstate) - Returns the specified user's voice state in the guild.
+* [updateUserState](docs/sdks/voice/README.md#updateuserstate) - Updates another user's voice state. Fires a Voice State Update Gateway event.
 
 ### [webhooks](docs/sdks/webhooks/README.md)
 
-* [deleteOriginalMessage](docs/sdks/webhooks/README.md#deleteoriginalmessage)
-* [updateOriginalMessageJson](docs/sdks/webhooks/README.md#updateoriginalmessagejson)
-* [updateOriginalMessageForm](docs/sdks/webhooks/README.md#updateoriginalmessageform)
-* [updateOriginalMessageMultipart](docs/sdks/webhooks/README.md#updateoriginalmessagemultipart)
-* [getMessage](docs/sdks/webhooks/README.md#getmessage)
-* [updateMessageJson](docs/sdks/webhooks/README.md#updatemessagejson)
-* [updateMessageForm](docs/sdks/webhooks/README.md#updatemessageform)
-* [updateMessageMultipart](docs/sdks/webhooks/README.md#updatemessagemultipart)
-* [executeGithubCompatible](docs/sdks/webhooks/README.md#executegithubcompatible)
-* [executeSlackCompatible](docs/sdks/webhooks/README.md#executeslackcompatible)
-* [getByToken](docs/sdks/webhooks/README.md#getbytoken)
-* [deleteByToken](docs/sdks/webhooks/README.md#deletebytoken)
-* [updateByToken](docs/sdks/webhooks/README.md#updatebytoken)
-* [get](docs/sdks/webhooks/README.md#get)
-* [delete](docs/sdks/webhooks/README.md#delete)
-* [update](docs/sdks/webhooks/README.md#update)
-
-#### [webhooks.messages](docs/sdks/discordwebhooksmessages/README.md)
-
-* [delete](docs/sdks/discordwebhooksmessages/README.md#delete)
+* [getOriginalMessage](docs/sdks/webhooks/README.md#getoriginalmessage) - Returns the initial webhook message.
+* [deleteOriginalMessage](docs/sdks/webhooks/README.md#deleteoriginalmessage) - Deletes the initial webhook message.
+* [updateOriginalMessageJson](docs/sdks/webhooks/README.md#updateoriginalmessagejson) - Edits the initial webhook message.
+* [updateOriginalMessageForm](docs/sdks/webhooks/README.md#updateoriginalmessageform) - Edits the initial webhook message.
+* [updateOriginalMessageMultipart](docs/sdks/webhooks/README.md#updateoriginalmessagemultipart) - Edits the initial webhook message.
+* [listForChannel](docs/sdks/webhooks/README.md#listforchannel) - Returns a list of channel webhook objects. Requires the MANAGE_WEBHOOKS permission.
+* [create](docs/sdks/webhooks/README.md#create) - Creates a new webhook and returns a webhook object on success. Requires the MANAGE_WEBHOOKS permission. Fires a Webhooks Update Gateway event.
+* [getMessage](docs/sdks/webhooks/README.md#getmessage) - Returns a previously-sent webhook message from the same token. Returns a message object on success.
+* [deleteMessage](docs/sdks/webhooks/README.md#deletemessage) - Deletes a message that was created by the webhook. Returns a 204 No Content response on success.
+* [updateMessageJson](docs/sdks/webhooks/README.md#updatemessagejson) - Edits a previously-sent webhook message from the same token. Returns a message object on success.
+* [updateMessageForm](docs/sdks/webhooks/README.md#updatemessageform) - Edits a previously-sent webhook message from the same token. Returns a message object on success.
+* [updateMessageMultipart](docs/sdks/webhooks/README.md#updatemessagemultipart) - Edits a previously-sent webhook message from the same token. Returns a message object on success.
+* [executeGithub](docs/sdks/webhooks/README.md#executegithub) - Add a new webhook to your GitHub repo (in the repo's settings), and use this endpoint as the "Payload URL."
+* [executeSlack](docs/sdks/webhooks/README.md#executeslack) - Refer to Slack's documentation for more information. We do not support Slack's channel, icon_emoji, mrkdwn, or mrkdwn_in properties.
+* [listForGuild](docs/sdks/webhooks/README.md#listforguild) - Returns a list of guild webhook objects. Requires the MANAGE_WEBHOOKS permission.
+* [getWithToken](docs/sdks/webhooks/README.md#getwithtoken) - Same as above, except this call does not require authentication and returns no user in the webhook object.
+* [deleteWithToken](docs/sdks/webhooks/README.md#deletewithtoken) - Same as above, except this call does not require authentication.
+* [updateWithToken](docs/sdks/webhooks/README.md#updatewithtoken) - Same as above, except this call does not require authentication, does not accept a channel_id parameter in the body, and does not return a user in the webhook object.
+* [get](docs/sdks/webhooks/README.md#get) - Returns the new webhook object for the given id.
+* [delete](docs/sdks/webhooks/README.md#delete) - Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. Returns a 204 No Content response on success. Fires a Webhooks Update Gateway event.
+* [update](docs/sdks/webhooks/README.md#update) - Modify a webhook. Requires the MANAGE_WEBHOOKS permission. Returns the updated webhook object on success. Fires a Webhooks Update Gateway event.
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -694,229 +550,231 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`addLobbyMember`](docs/sdks/discord/README.md#addlobbymember)
-- [`answersGetVoters`](docs/sdks/answers/README.md#getvoters)
-- [`applicationsBulkSetCommands`](docs/sdks/applications/README.md#bulksetcommands)
-- [`applicationsCommandsCreate`](docs/sdks/applicationscommands/README.md#create)
-- [`applicationsCommandsUpdate`](docs/sdks/commands/README.md#update)
-- [`applicationsConsumeEntitlement`](docs/sdks/applications/README.md#consumeentitlement)
-- [`applicationsCreateEntitlement`](docs/sdks/applications/README.md#createentitlement)
-- [`applicationsCreateGuildCommand`](docs/sdks/applications/README.md#createguildcommand)
-- [`applicationsDeleteCommand`](docs/sdks/applications/README.md#deletecommand)
-- [`applicationsDeleteEntitlement`](docs/sdks/applications/README.md#deleteentitlement)
-- [`applicationsDeleteUserRoleConnection`](docs/sdks/applications/README.md#deleteuserroleconnection)
-- [`applicationsEmojisCreate`](docs/sdks/emojis/README.md#create)
-- [`applicationsEmojisDelete`](docs/sdks/emojis/README.md#delete)
-- [`applicationsGet`](docs/sdks/applications/README.md#get)
-- [`applicationsGetActivityInstance`](docs/sdks/applications/README.md#getactivityinstance)
-- [`applicationsGetCommand`](docs/sdks/applications/README.md#getcommand)
-- [`applicationsGetEmoji`](docs/sdks/applications/README.md#getemoji)
-- [`applicationsGetEntitlement`](docs/sdks/applications/README.md#getentitlement)
-- [`applicationsGetEntitlements`](docs/sdks/applications/README.md#getentitlements)
-- [`applicationsGetMe`](docs/sdks/applications/README.md#getme)
-- [`applicationsGetRoleConnectionsMetadata`](docs/sdks/applications/README.md#getroleconnectionsmetadata)
-- [`applicationsGuildsGetCommandPermissions`](docs/sdks/discordguilds/README.md#getcommandpermissions)
-- [`applicationsGuildsListCommandPermissions`](docs/sdks/discordguilds/README.md#listcommandpermissions)
-- [`applicationsListCommands`](docs/sdks/applications/README.md#listcommands)
-- [`applicationsListEmojis`](docs/sdks/applications/README.md#listemojis)
-- [`applicationsSetGuildCommandPermissions`](docs/sdks/applications/README.md#setguildcommandpermissions)
-- [`applicationsUpdate`](docs/sdks/applications/README.md#update)
-- [`applicationsUpdateEmoji`](docs/sdks/applications/README.md#updateemoji)
-- [`applicationsUpdateRoleConnectionsMetadata`](docs/sdks/applications/README.md#updateroleconnectionsmetadata)
-- [`applicationsUpdateSelf`](docs/sdks/applications/README.md#updateself)
-- [`applicationsUploadAttachment`](docs/sdks/applications/README.md#uploadattachment)
-- [`applicationUserRoleConnectionsGet`](docs/sdks/applicationuserroleconnections/README.md#get)
-- [`applicationUserRoleConnectionUpdate`](docs/sdks/applicationuserroleconnection/README.md#update)
-- [`autoModerationRulesCreate`](docs/sdks/automoderationrules/README.md#create)
-- [`autoModerationRulesDelete`](docs/sdks/automoderationrules/README.md#delete)
-- [`autoModerationRulesGet`](docs/sdks/automoderationrules/README.md#get)
-- [`channelPermissionsDeleteOverwrite`](docs/sdks/channelpermissions/README.md#deleteoverwrite)
-- [`channelsAddThreadMember`](docs/sdks/channels/README.md#addthreadmember)
-- [`channelsCreateInvite`](docs/sdks/channels/README.md#createinvite)
-- [`channelsCreateWebhook`](docs/sdks/channels/README.md#createwebhook)
-- [`channelsCrosspostMessage`](docs/sdks/channels/README.md#crosspostmessage)
-- [`channelsDelete`](docs/sdks/channels/README.md#delete)
-- [`channelsDeleteDmUser`](docs/sdks/channels/README.md#deletedmuser)
-- [`channelsDeleteMessage`](docs/sdks/channels/README.md#deletemessage)
-- [`channelsDeleteUserMessageReaction`](docs/sdks/channels/README.md#deleteusermessagereaction)
-- [`channelsExpirePoll`](docs/sdks/channels/README.md#expirepoll)
-- [`channelsFollow`](docs/sdks/channels/README.md#follow)
-- [`channelsGet`](docs/sdks/channels/README.md#get)
-- [`channelsGetThreadMember`](docs/sdks/channels/README.md#getthreadmember)
-- [`channelsListInvites`](docs/sdks/channels/README.md#listinvites)
-- [`channelsListMyPrivateArchivedThreads`](docs/sdks/channels/README.md#listmyprivatearchivedthreads)
-- [`channelsListPinnedMessages`](docs/sdks/channels/README.md#listpinnedmessages)
-- [`channelsListPrivateArchivedThreads`](docs/sdks/channels/README.md#listprivatearchivedthreads)
-- [`channelsListThreadMembers`](docs/sdks/channels/README.md#listthreadmembers)
-- [`channelsListWebhooks`](docs/sdks/channels/README.md#listwebhooks)
-- [`channelsMessagesBulkDelete`](docs/sdks/discordmessages/README.md#bulkdelete)
-- [`channelsMessagesCreateForm`](docs/sdks/discordmessages/README.md#createform)
-- [`channelsMessagesCreateJson`](docs/sdks/discordmessages/README.md#createjson)
-- [`channelsMessagesCreateMultipart`](docs/sdks/discordmessages/README.md#createmultipart)
-- [`channelsMessagesDeleteAllReactions`](docs/sdks/discordmessages/README.md#deleteallreactions)
-- [`channelsMessagesDeleteMyReaction`](docs/sdks/discordmessages/README.md#deletemyreaction)
-- [`channelsMessagesGet`](docs/sdks/discordmessages/README.md#get)
-- [`channelsMessagesList`](docs/sdks/discordmessages/README.md#list)
-- [`channelsMessagesReactionsAdd`](docs/sdks/reactions/README.md#add)
-- [`channelsMessagesUpdateForm`](docs/sdks/discordmessages/README.md#updateform)
-- [`channelsMessagesUpdateJson`](docs/sdks/discordmessages/README.md#updatejson)
-- [`channelsMessagesUpdateMultipart`](docs/sdks/discordmessages/README.md#updatemultipart)
-- [`channelsPermissionsSetOverwrite`](docs/sdks/permissions/README.md#setoverwrite)
-- [`channelsPinMessage`](docs/sdks/channels/README.md#pinmessage)
-- [`channelsPinsUnpin`](docs/sdks/pins/README.md#unpin)
-- [`channelsRecipientsAddGroupDmUser`](docs/sdks/channelsrecipients/README.md#addgroupdmuser)
-- [`channelsSendSoundboardSound`](docs/sdks/channels/README.md#sendsoundboardsound)
-- [`channelsStartThreadFromMessage`](docs/sdks/channels/README.md#startthreadfrommessage)
-- [`channelsThreadMembersJoin`](docs/sdks/channelsthreadmembers/README.md#join)
-- [`channelsThreadMembersLeave`](docs/sdks/discordthreadmembers/README.md#leave)
-- [`channelsThreadsCreate`](docs/sdks/discordthreads/README.md#create)
-- [`channelsTriggerTyping`](docs/sdks/channels/README.md#triggertyping)
-- [`channelsUpdate`](docs/sdks/channels/README.md#update)
-- [`createLobby`](docs/sdks/discord/README.md#createlobby)
-- [`createLobbyMessage`](docs/sdks/discord/README.md#createlobbymessage)
-- [`createOrJoinLobby`](docs/sdks/discord/README.md#createorjoinlobby)
-- [`deleteLobbyMember`](docs/sdks/discord/README.md#deletelobbymember)
-- [`editLobby`](docs/sdks/discord/README.md#editlobby)
-- [`editLobbyChannelLink`](docs/sdks/discord/README.md#editlobbychannellink)
-- [`gatewayGet`](docs/sdks/gateway/README.md#get)
-- [`gatewayGetBot`](docs/sdks/gateway/README.md#getbot)
-- [`getLobby`](docs/sdks/discord/README.md#getlobby)
-- [`guildApplicationCommandsBulkSet`](docs/sdks/guildapplicationcommands/README.md#bulkset)
-- [`guildApplicationCommandsDelete`](docs/sdks/guildapplicationcommands/README.md#delete)
-- [`guildApplicationCommandsList`](docs/sdks/guildapplicationcommands/README.md#list)
-- [`guildApplicationCommandsUpdate`](docs/sdks/guildapplicationcommands/README.md#update)
-- [`guildBansBulkBan`](docs/sdks/guildbans/README.md#bulkban)
-- [`guildBansGet`](docs/sdks/guildbans/README.md#get)
-- [`guildBansList`](docs/sdks/guildbans/README.md#list)
-- [`guildCommandsGet`](docs/sdks/guildcommands/README.md#get)
-- [`guildEmojisGet`](docs/sdks/guildemojis/README.md#get)
-- [`guildIntegrationsDelete`](docs/sdks/guildintegrations/README.md#delete)
-- [`guildMemberRolesAdd`](docs/sdks/guildmemberroles/README.md#add)
-- [`guildMemberRolesDelete`](docs/sdks/guildmemberroles/README.md#delete)
-- [`guildMembersAdd`](docs/sdks/guildmembers/README.md#add)
-- [`guildOnboardingGet`](docs/sdks/guildonboarding/README.md#get)
-- [`guildOnboardingUpdate`](docs/sdks/guildonboarding/README.md#update)
-- [`guildRolesBulkUpdate`](docs/sdks/guildroles/README.md#bulkupdate)
-- [`guildsAutoModerationRulesUpdate`](docs/sdks/rules/README.md#update)
-- [`guildsBanUser`](docs/sdks/guilds/README.md#banuser)
-- [`guildsChannelsBulkUpdate`](docs/sdks/discordchannels/README.md#bulkupdate)
-- [`guildsChannelsCreate`](docs/sdks/guildschannels/README.md#create)
-- [`guildScheduledEventsDelete`](docs/sdks/guildscheduledevents/README.md#delete)
-- [`guildsCreate`](docs/sdks/guilds/README.md#create)
-- [`guildsCreateEmoji`](docs/sdks/guilds/README.md#createemoji)
-- [`guildsCreateRole`](docs/sdks/guilds/README.md#createrole)
-- [`guildsCreateSoundboardSound`](docs/sdks/guilds/README.md#createsoundboardsound)
-- [`guildsCreateSticker`](docs/sdks/guilds/README.md#createsticker)
-- [`guildsDelete`](docs/sdks/guilds/README.md#delete)
-- [`guildsDeleteEmoji`](docs/sdks/guilds/README.md#deleteemoji)
-- [`guildsDeleteMember`](docs/sdks/guilds/README.md#deletemember)
-- [`guildsDeleteRole`](docs/sdks/guilds/README.md#deleterole)
-- [`guildsDeleteSticker`](docs/sdks/guilds/README.md#deletesticker)
-- [`guildsGet`](docs/sdks/guilds/README.md#get)
-- [`guildsGetMyMember`](docs/sdks/guilds/README.md#getmymember)
-- [`guildsGetNewMemberWelcome`](docs/sdks/guilds/README.md#getnewmemberwelcome)
-- [`guildsGetPreview`](docs/sdks/guilds/README.md#getpreview)
-- [`guildsGetRole`](docs/sdks/guilds/README.md#getrole)
-- [`guildsGetSoundboardSound`](docs/sdks/guilds/README.md#getsoundboardsound)
-- [`guildsGetSticker`](docs/sdks/guilds/README.md#getsticker)
-- [`guildsGetTemplate`](docs/sdks/guilds/README.md#gettemplate)
-- [`guildsGetVanityUrl`](docs/sdks/guilds/README.md#getvanityurl)
-- [`guildsGetVoiceState`](docs/sdks/guilds/README.md#getvoicestate)
-- [`guildsGetWelcomeScreen`](docs/sdks/guilds/README.md#getwelcomescreen)
-- [`guildsGetWidget`](docs/sdks/guilds/README.md#getwidget)
-- [`guildsGetWidgetPng`](docs/sdks/guilds/README.md#getwidgetpng)
-- [`guildsGetWidgetSettings`](docs/sdks/guilds/README.md#getwidgetsettings)
-- [`guildsIntegrationsList`](docs/sdks/integrations/README.md#list)
-- [`guildsListAuditLogs`](docs/sdks/guilds/README.md#listauditlogs)
-- [`guildsListAutoModerationRules`](docs/sdks/guilds/README.md#listautomoderationrules)
-- [`guildsListChannels`](docs/sdks/guilds/README.md#listchannels)
-- [`guildsListEmojis`](docs/sdks/guilds/README.md#listemojis)
-- [`guildsListInvites`](docs/sdks/guilds/README.md#listinvites)
-- [`guildsListMembers`](docs/sdks/guilds/README.md#listmembers)
-- [`guildsListRoles`](docs/sdks/guilds/README.md#listroles)
-- [`guildsListTemplates`](docs/sdks/guilds/README.md#listtemplates)
-- [`guildsListWebhooks`](docs/sdks/guilds/README.md#listwebhooks)
-- [`guildsMembersGet`](docs/sdks/guildsmembers/README.md#get)
-- [`guildsMembersUpdate`](docs/sdks/guildsmembers/README.md#update)
-- [`guildsMembersUpdateMe`](docs/sdks/guildsmembers/README.md#updateme)
-- [`guildsMfaSetLevel`](docs/sdks/mfa/README.md#setlevel)
-- [`guildSoundboardSoundsDelete`](docs/sdks/guildsoundboardsounds/README.md#delete)
-- [`guildsPreviewPrune`](docs/sdks/guilds/README.md#previewprune)
-- [`guildsPrune`](docs/sdks/guilds/README.md#prune)
-- [`guildsScheduledEventsGet`](docs/sdks/discordguildsscheduledevents/README.md#get)
-- [`guildsScheduledEventsList`](docs/sdks/discordguildsscheduledevents/README.md#list)
-- [`guildsScheduledEventsUpdate`](docs/sdks/discordguildsscheduledevents/README.md#update)
-- [`guildsScheduledEventsUsersList`](docs/sdks/discordusers/README.md#list)
-- [`guildsSearchMembers`](docs/sdks/guilds/README.md#searchmembers)
-- [`guildsSoundboardSoundsList`](docs/sdks/guildssoundboardsounds/README.md#list)
-- [`guildsSoundboardSoundsUpdate`](docs/sdks/soundboardsounds/README.md#update)
-- [`guildsStickersUpdate`](docs/sdks/discordstickers/README.md#update)
-- [`guildsSyncTemplate`](docs/sdks/guilds/README.md#synctemplate)
-- [`guildsTemplatesCreate`](docs/sdks/templates/README.md#create)
-- [`guildsTemplatesDelete`](docs/sdks/templates/README.md#delete)
-- [`guildStickersList`](docs/sdks/guildstickers/README.md#list)
-- [`guildsUnbanUser`](docs/sdks/guilds/README.md#unbanuser)
-- [`guildsUpdate`](docs/sdks/guilds/README.md#update)
-- [`guildsUpdateEmoji`](docs/sdks/guilds/README.md#updateemoji)
-- [`guildsUpdateRole`](docs/sdks/guilds/README.md#updaterole)
-- [`guildsUpdateTemplate`](docs/sdks/guilds/README.md#updatetemplate)
-- [`guildsUpdateWelcomeScreen`](docs/sdks/guilds/README.md#updatewelcomescreen)
-- [`guildsVoiceStatesGetSelf`](docs/sdks/voicestates/README.md#getself)
-- [`guildsVoiceStatesUpdate`](docs/sdks/voicestates/README.md#update)
-- [`guildsVoiceStatesUpdateSelf`](docs/sdks/voicestates/README.md#updateself)
-- [`guildTemplatesCreateFromCode`](docs/sdks/guildtemplates/README.md#createfromcode)
-- [`guildThreadsGetActive`](docs/sdks/guildthreads/README.md#getactive)
-- [`guildVoiceRegionsList`](docs/sdks/guildvoiceregions/README.md#list)
-- [`guildWidgetSettingsUpdate`](docs/sdks/guildwidgetsettings/README.md#update)
-- [`invitesResolve`](docs/sdks/invites/README.md#resolve)
-- [`invitesRevoke`](docs/sdks/invites/README.md#revoke)
-- [`leaveLobby`](docs/sdks/discord/README.md#leavelobby)
-- [`messageReactionsDeleteAllByEmoji`](docs/sdks/messagereactions/README.md#deleteallbyemoji)
-- [`messagesListReactionsByEmoji`](docs/sdks/messages/README.md#listreactionsbyemoji)
-- [`oauth2GetAuthorization`](docs/sdks/oauth2/README.md#getauthorization)
-- [`oauth2GetKeys`](docs/sdks/oauth2/README.md#getkeys)
-- [`oauth2GetMyApplication`](docs/sdks/oauth2/README.md#getmyapplication)
-- [`openidConnectGetUserinfo`](docs/sdks/openidconnect/README.md#getuserinfo)
-- [`partnerSDKToken`](docs/sdks/discord/README.md#partnersdktoken)
-- [`partnerSDKUnmergeProvisionalAccount`](docs/sdks/discord/README.md#partnersdkunmergeprovisionalaccount)
-- [`scheduledEventsCreate`](docs/sdks/scheduledevents/README.md#create)
-- [`soundboardGetDefaultSounds`](docs/sdks/soundboard/README.md#getdefaultsounds)
-- [`stageInstancesCreate`](docs/sdks/stageinstances/README.md#create)
-- [`stageInstancesDelete`](docs/sdks/stageinstances/README.md#delete)
-- [`stageInstancesGet`](docs/sdks/stageinstances/README.md#get)
-- [`stageInstancesUpdate`](docs/sdks/stageinstances/README.md#update)
-- [`stickerPacksGet`](docs/sdks/stickerpacks/README.md#get)
-- [`stickerPacksList`](docs/sdks/stickerpacks/README.md#list)
-- [`stickersGet`](docs/sdks/stickers/README.md#get)
-- [`threadMembersDelete`](docs/sdks/threadmembers/README.md#delete)
-- [`threadSearch`](docs/sdks/discord/README.md#threadsearch)
-- [`threadsListPublicArchived`](docs/sdks/threads/README.md#listpublicarchived)
-- [`usersCreateDm`](docs/sdks/users/README.md#createdm)
-- [`usersGet`](docs/sdks/users/README.md#get)
-- [`usersGetMe`](docs/sdks/users/README.md#getme)
-- [`usersGuildsLeave`](docs/sdks/discordusersguilds/README.md#leave)
-- [`usersListMyConnections`](docs/sdks/users/README.md#listmyconnections)
-- [`usersListMyGuilds`](docs/sdks/users/README.md#listmyguilds)
-- [`usersUpdateMe`](docs/sdks/users/README.md#updateme)
-- [`voiceListRegions`](docs/sdks/voice/README.md#listregions)
-- [`webhookMessagesGetOriginal`](docs/sdks/webhookmessages/README.md#getoriginal)
-- [`webhooksDelete`](docs/sdks/webhooks/README.md#delete)
-- [`webhooksDeleteByToken`](docs/sdks/webhooks/README.md#deletebytoken)
-- [`webhooksDeleteOriginalMessage`](docs/sdks/webhooks/README.md#deleteoriginalmessage)
-- [`webhooksExecuteGithubCompatible`](docs/sdks/webhooks/README.md#executegithubcompatible)
-- [`webhooksExecuteSlackCompatible`](docs/sdks/webhooks/README.md#executeslackcompatible)
-- [`webhooksGet`](docs/sdks/webhooks/README.md#get)
-- [`webhooksGetByToken`](docs/sdks/webhooks/README.md#getbytoken)
-- [`webhooksGetMessage`](docs/sdks/webhooks/README.md#getmessage)
-- [`webhooksMessagesDelete`](docs/sdks/discordwebhooksmessages/README.md#delete)
-- [`webhooksUpdate`](docs/sdks/webhooks/README.md#update)
-- [`webhooksUpdateByToken`](docs/sdks/webhooks/README.md#updatebytoken)
-- [`webhooksUpdateMessageForm`](docs/sdks/webhooks/README.md#updatemessageform)
-- [`webhooksUpdateMessageJson`](docs/sdks/webhooks/README.md#updatemessagejson)
-- [`webhooksUpdateMessageMultipart`](docs/sdks/webhooks/README.md#updatemessagemultipart)
-- [`webhooksUpdateOriginalMessageForm`](docs/sdks/webhooks/README.md#updateoriginalmessageform)
-- [`webhooksUpdateOriginalMessageJson`](docs/sdks/webhooks/README.md#updateoriginalmessagejson)
-- [`webhooksUpdateOriginalMessageMultipart`](docs/sdks/webhooks/README.md#updateoriginalmessagemultipart)
+- [`applicationCommandsBulkSet`](docs/sdks/applicationcommands/README.md#bulkset) - Takes a list of application commands, overwriting the existing global command list for this application.
+- [`applicationCommandsBulkSetGuild`](docs/sdks/applicationcommands/README.md#bulksetguild) - Takes a list of application commands, overwriting the existing command list for this application for the targeted guild.
+- [`applicationCommandsCreate`](docs/sdks/applicationcommands/README.md#create) - Create a new global command. New global commands will be available in all guilds after 1 hour.
+- [`applicationCommandsCreateGuild`](docs/sdks/applicationcommands/README.md#createguild) - Create a new guild command. New guild commands will be available in the guild immediately.
+- [`applicationCommandsDelete`](docs/sdks/applicationcommands/README.md#delete) - Delete a global command.
+- [`applicationCommandsDeleteGuild`](docs/sdks/applicationcommands/README.md#deleteguild) - Delete a guild command.
+- [`applicationCommandsGet`](docs/sdks/applicationcommands/README.md#get) - Fetch a global command for your application.
+- [`applicationCommandsGetGuild`](docs/sdks/applicationcommands/README.md#getguild) - Fetch a guild command for your application.
+- [`applicationCommandsGetGuildPermissions`](docs/sdks/applicationcommands/README.md#getguildpermissions) - Fetches command permissions for a specific command for your application in a guild.
+- [`applicationCommandsList`](docs/sdks/applicationcommands/README.md#list) - Fetch all global commands for your application.
+- [`applicationCommandsListGuild`](docs/sdks/applicationcommands/README.md#listguild) - Fetch all guild commands for your application for a specific guild.
+- [`applicationCommandsListGuildPermissions`](docs/sdks/applicationcommands/README.md#listguildpermissions) - Fetches command permissions for all commands for your application in a guild.
+- [`applicationCommandsSetGuildPermissions`](docs/sdks/applicationcommands/README.md#setguildpermissions) - Edits command permissions for a specific command for your application in a guild.
+- [`applicationCommandsUpdate`](docs/sdks/applicationcommands/README.md#update) - Edit a global command. Updates will be available in all guilds after 1 hour.
+- [`applicationCommandsUpdateGuild`](docs/sdks/applicationcommands/README.md#updateguild) - Edit a guild command. Updates for guild commands will be available immediately.
+- [`applicationRoleConnectionMetadataDeleteUserConnection`](docs/sdks/applicationroleconnectionmetadata/README.md#deleteuserconnection) - Deletes the application role connection for the user.
+- [`applicationRoleConnectionMetadataList`](docs/sdks/applicationroleconnectionmetadata/README.md#list) - Returns a list of application role connection metadata objects for the given application.
+- [`applicationRoleConnectionMetadataUpdate`](docs/sdks/applicationroleconnectionmetadata/README.md#update) - Updates and returns a list of application role connection metadata objects for the given application. An application can have a maximum of 5 metadata records.
+- [`applicationsGet`](docs/sdks/applications/README.md#get) - Returns information about a specific application.
+- [`applicationsGetActivityInstance`](docs/sdks/applications/README.md#getactivityinstance) - Returns a serialized activity instance, if it exists. Useful for preventing unwanted activity sessions.
+- [`applicationsGetBotGateway`](docs/sdks/applications/README.md#getbotgateway) - Returns an object with the same information as Get Gateway, plus a shards key, containing the recommended number of shards to connect with.
+- [`applicationsGetGateway`](docs/sdks/applications/README.md#getgateway) - Returns an object with a single valid WSS URL, which the client can use for connecting to Discord.
+- [`applicationsGetMe`](docs/sdks/applications/README.md#getme) - Returns the application object associated with the requesting bot user.
+- [`applicationsGetOAuth2Authorization`](docs/sdks/applications/README.md#getoauth2authorization) - Returns info about the current authorization.
+- [`applicationsGetOAuth2Me`](docs/sdks/applications/README.md#getoauth2me) - Returns the OAuth2 application object associated with the requesting bot user.
+- [`applicationsGetOpenIDConnectUserInfo`](docs/sdks/applications/README.md#getopenidconnectuserinfo) - Returns the user info for the current user.
+- [`applicationsGetPublicKeys`](docs/sdks/applications/README.md#getpublickeys) - Returns a list of public keys used for verifying signatures.
+- [`applicationsPartnerSDKToken`](docs/sdks/applications/README.md#partnersdktoken) - Gets a token for the partner SDK.
+- [`applicationsPartnerSDKUnmergeProvisionalAccount`](docs/sdks/applications/README.md#partnersdkunmergeprovisionalaccount) - Unmerges a provisional account.
+- [`applicationsUpdate`](docs/sdks/applications/README.md#update) - Updates an application. Returns the updated application object on success.
+- [`applicationsUpdateSelf`](docs/sdks/applications/README.md#updateself) - Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated. Returns the updated application object on success.
+- [`applicationsUploadAttachment`](docs/sdks/applications/README.md#uploadattachment) - Uploads an attachment for an application.
+- [`auditLogsList`](docs/sdks/auditlogs/README.md#list) - Returns an audit log object for the guild. Requires the VIEW_AUDIT_LOG permission.
+- [`autoModerationCreateRule`](docs/sdks/automoderation/README.md#createrule) - Create a new rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Create Gateway event.
+- [`autoModerationDeleteRule`](docs/sdks/automoderation/README.md#deleterule) - Delete a rule. Returns a 204 on success. Fires an Auto Moderation Rule Delete Gateway event.
+- [`autoModerationGetRule`](docs/sdks/automoderation/README.md#getrule) - Get a single rule. Returns an auto moderation rule object. This endpoint requires the MANAGE_GUILD permission.
+- [`autoModerationListRules`](docs/sdks/automoderation/README.md#listrules) - Get a list of all rules currently configured for the guild. Returns a list of auto moderation rule objects for the given guild. This endpoint requires the MANAGE_GUILD permission.
+- [`autoModerationUpdateRule`](docs/sdks/automoderation/README.md#updaterule) - Modify an existing rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Update Gateway event.
+- [`channelsAddGroupDMRecipient`](docs/sdks/channels/README.md#addgroupdmrecipient) - Adds a recipient to a Group DM using their access token.
+- [`channelsAddThreadMember`](docs/sdks/channels/README.md#addthreadmember) - Adds another member to a thread. Requires the ability to send messages in the thread. Also requires the thread is not archived. Returns a 204 empty response if the member is successfully added or was already a member of the thread. Fires a Thread Members Update Gateway event.
+- [`channelsCreateInvite`](docs/sdks/channels/README.md#createinvite) - Create a new invite object for the channel.
+- [`channelsDelete`](docs/sdks/channels/README.md#delete) - Delete a channel, or close a private message. Requires the MANAGE_CHANNELS permission for the guild, or MANAGE_THREADS if the channel is a thread. Returns a channel object on success. Fires a Channel Delete Gateway event (or Thread Delete if the channel was a thread).
+- [`channelsDeletePermissionOverwrite`](docs/sdks/channels/README.md#deletepermissionoverwrite) - Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
+- [`channelsFollow`](docs/sdks/channels/README.md#follow) - Follow an Announcement Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. Returns a followed channel object. Fires a Webhooks Update Gateway event for the target channel.
+- [`channelsGet`](docs/sdks/channels/README.md#get) - Returns a channel object for the given channel ID.
+- [`channelsGetThreadMember`](docs/sdks/channels/README.md#getthreadmember) - Returns a thread member object for the specified user if they are a member of the thread, returns a 404 response otherwise.
+- [`channelsJoinThread`](docs/sdks/channels/README.md#jointhread) - Adds the current user to a thread. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update and a Thread Create Gateway event.
+- [`channelsLeaveThread`](docs/sdks/channels/README.md#leavethread) - Removes the current user from a thread. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update Gateway event.
+- [`channelsListInvites`](docs/sdks/channels/README.md#listinvites) - Returns a list of invite objects (with invite metadata) for the channel.
+- [`channelsListJoinedPrivateArchivedThreads`](docs/sdks/channels/README.md#listjoinedprivatearchivedthreads) - Returns archived threads in the channel that are of type PRIVATE_THREAD, and the user has joined. Threads are ordered by their id, in descending order. Requires the READ_MESSAGE_HISTORY permission.
+- [`channelsListPinnedMessages`](docs/sdks/channels/README.md#listpinnedmessages) - Returns all pinned messages in the channel as an array of message objects.
+- [`channelsListPrivateArchivedThreads`](docs/sdks/channels/README.md#listprivatearchivedthreads) - Returns archived threads in the channel that are of type PRIVATE_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions.
+- [`channelsListPublicArchivedThreads`](docs/sdks/channels/README.md#listpublicarchivedthreads) - Returns archived threads in the channel that are public. When called on a GUILD_TEXT channel, returns threads of type PUBLIC_THREAD. When called on a GUILD_ANNOUNCEMENT channel returns threads of type ANNOUNCEMENT_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires the READ_MESSAGE_HISTORY permission.
+- [`channelsListThreadMembers`](docs/sdks/channels/README.md#listthreadmembers) - Returns array of thread member objects that are members of the thread.
+- [`channelsPinMessage`](docs/sdks/channels/README.md#pinmessage) - Pin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+- [`channelsRemoveGroupDMRecipient`](docs/sdks/channels/README.md#removegroupdmrecipient) - Removes a recipient from a Group DM.
+- [`channelsRemoveThreadMember`](docs/sdks/channels/README.md#removethreadmember) - Removes another member from a thread. Requires the MANAGE_THREADS permission, or the creator of the thread if it is a PRIVATE_THREAD. Also requires the thread is not archived. Returns a 204 empty response on success. Fires a Thread Members Update Gateway event.
+- [`channelsSearchThreads`](docs/sdks/channels/README.md#searchthreads) - Search for threads in a channel.
+- [`channelsSetPermissionOverwrite`](docs/sdks/channels/README.md#setpermissionoverwrite) - Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
+- [`channelsStartThreadForm`](docs/sdks/channels/README.md#startthreadform) - Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+- [`channelsStartThreadFromMessage`](docs/sdks/channels/README.md#startthreadfrommessage) - Creates a new thread from an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create and a Message Update Gateway event.
+- [`channelsStartThreadJson`](docs/sdks/channels/README.md#startthreadjson) - Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+- [`channelsStartThreadMultipart`](docs/sdks/channels/README.md#startthreadmultipart) - Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+- [`channelsTriggerTypingIndicator`](docs/sdks/channels/README.md#triggertypingindicator) - Post a typing indicator for the specified channel, which expires after 10 seconds. Returns a 204 empty response on success. Fires a Typing Start Gateway event.
+- [`channelsUnpinMessage`](docs/sdks/channels/README.md#unpinmessage) - Unpin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+- [`channelsUpdate`](docs/sdks/channels/README.md#update) - Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.
+- [`emojiCreateApplicationEmoji`](docs/sdks/emoji/README.md#createapplicationemoji) - Create a new emoji for the application. Returns the new emoji object on success.
+- [`emojiCreateGuildEmoji`](docs/sdks/emoji/README.md#createguildemoji) - Create a new emoji for the guild. Requires the CREATE_GUILD_EXPRESSIONS permission. Returns the new emoji object on success. Fires a Guild Emojis Update Gateway event.
+- [`emojiDeleteApplicationEmoji`](docs/sdks/emoji/README.md#deleteapplicationemoji) - Delete the given emoji. Returns 204 No Content on success.
+- [`emojiDeleteGuildEmoji`](docs/sdks/emoji/README.md#deleteguildemoji) - Delete the given emoji. For emojis created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other emojis, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns 204 No Content on success. Fires a Guild Emojis Update Gateway event.
+- [`emojiGetApplicationEmoji`](docs/sdks/emoji/README.md#getapplicationemoji) - Returns an emoji object for the given application and emoji IDs. Includes the user field.
+- [`emojiGetGuildEmoji`](docs/sdks/emoji/README.md#getguildemoji) - Returns an emoji object for the given guild and emoji IDs. Includes the user field if the bot has the MANAGE_GUILD_EXPRESSIONS permission, or if the bot created the emoji and has the the CREATE_GUILD_EXPRESSIONS permission.
+- [`emojiListApplicationEmojis`](docs/sdks/emoji/README.md#listapplicationemojis) - Returns an object containing a list of emoji objects for the given application under the items key. Includes a user object for the team member that uploaded the emoji from the app's settings, or for the bot user if uploaded using the API.
+- [`emojiListGuildEmojis`](docs/sdks/emoji/README.md#listguildemojis) - Returns a list of emoji objects for the given guild. Includes user fields if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
+- [`emojiUpdateApplicationEmoji`](docs/sdks/emoji/README.md#updateapplicationemoji) - Modify the given emoji. Returns the updated emoji object on success.
+- [`emojiUpdateGuildEmoji`](docs/sdks/emoji/README.md#updateguildemoji) - Modify the given emoji. For emojis created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other emojis, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns the updated emoji object on success. Fires a Guild Emojis Update Gateway event.
+- [`entitlementsConsume`](docs/sdks/entitlements/README.md#consume) - For One-Time Purchase consumable SKUs, marks a given entitlement for the user as consumed. The entitlement will have consumed: true when using List Entitlements. Returns a 204 No Content on success.
+- [`entitlementsCreateTest`](docs/sdks/entitlements/README.md#createtest) - Creates a test entitlement to a given SKU for a given guild or user. Discord will act as though that user or guild has entitlement to your premium offering. This endpoint returns a partial entitlement object.
+- [`entitlementsDeleteTest`](docs/sdks/entitlements/README.md#deletetest) - Deletes a currently-active test entitlement. Discord will act as though that user or guild no longer has entitlement to your premium offering. Returns 204 No Content on success.
+- [`entitlementsGet`](docs/sdks/entitlements/README.md#get) - Returns an entitlement.
+- [`entitlementsList`](docs/sdks/entitlements/README.md#list) - Returns all entitlements for a given app, active and expired.
+- [`guildsAddMember`](docs/sdks/guilds/README.md#addmember) - Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. Returns a 201 Created with the guild member as the body, or 204 No Content if the user is already a member of the guild. Fires a Guild Member Add Gateway event.
+- [`guildsAddMemberRole`](docs/sdks/guilds/README.md#addmemberrole) - Adds a role to a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
+- [`guildsBulkBan`](docs/sdks/guilds/README.md#bulkban) - Ban up to 200 users from a guild, and optionally delete previous messages sent by the banned users. Requires both the BAN_MEMBERS and MANAGE_GUILD permissions. Returns a 200 response on success, including the fields banned_users with the IDs of the banned users and failed_users with IDs that could not be banned or were already banned.
+- [`guildScheduledEventsCreate`](docs/sdks/guildscheduledevents/README.md#create) - Create a guild scheduled event in the guild. Returns a guild scheduled event object on success. Fires a Guild Scheduled Event Create Gateway event.
+- [`guildScheduledEventsDelete`](docs/sdks/guildscheduledevents/README.md#delete) - Delete a guild scheduled event. Returns a 204 on success. Fires a Guild Scheduled Event Delete Gateway event.
+- [`guildScheduledEventsGet`](docs/sdks/guildscheduledevents/README.md#get) - Get a guild scheduled event. Returns a guild scheduled event object on success.
+- [`guildScheduledEventsGetUsers`](docs/sdks/guildscheduledevents/README.md#getusers) - Get a list of guild scheduled event users subscribed to a guild scheduled event. Returns a list of guild scheduled event user objects on success. Guild member data, if it exists, is included if the with_member query parameter is set.
+- [`guildScheduledEventsList`](docs/sdks/guildscheduledevents/README.md#list) - Returns a list of guild scheduled event objects for the given guild.
+- [`guildScheduledEventsUpdate`](docs/sdks/guildscheduledevents/README.md#update) - Modify a guild scheduled event. Returns the modified guild scheduled event object on success. Fires a Guild Scheduled Event Update Gateway event.
+- [`guildsCreate`](docs/sdks/guilds/README.md#create) - Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.
+- [`guildsCreateBan`](docs/sdks/guilds/README.md#createban) - Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the BAN_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Ban Add Gateway event.
+- [`guildsCreateChannel`](docs/sdks/guilds/README.md#createchannel) - Create a new channel object for the guild. Requires the MANAGE_CHANNELS permission. If setting permission overwrites, only permissions your bot has in the guild can be allowed/denied. Setting MANAGE_ROLES permission in channels is only possible for guild administrators. Returns the new channel object on success. Fires a Channel Create Gateway event.
+- [`guildsCreateRole`](docs/sdks/guilds/README.md#createrole) - Create a new role for the guild. Requires the MANAGE_ROLES permission. Returns the new role object on success. Fires a Guild Role Create Gateway event. All JSON params are optional.
+- [`guildsDelete`](docs/sdks/guilds/README.md#delete) - Delete a guild permanently. User must be owner. Returns 204 No Content on success. Fires a Guild Delete Gateway event.
+- [`guildsDeleteIntegration`](docs/sdks/guilds/README.md#deleteintegration) - Delete the attached integration object for the guild. Deletes any associated webhooks and kicks the associated bot if there is one. Requires the MANAGE_GUILD permission. Returns a 204 empty response on success. Fires Guild Integrations Update and Integration Delete Gateway events.
+- [`guildsDeleteRole`](docs/sdks/guilds/README.md#deleterole) - Delete a guild role. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Role Delete Gateway event.
+- [`guildsGet`](docs/sdks/guilds/README.md#get) - Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.
+- [`guildsGetBan`](docs/sdks/guilds/README.md#getban) - Returns a ban object for the given user or a 404 not found if the ban cannot be found. Requires the BAN_MEMBERS permission.
+- [`guildsGetMember`](docs/sdks/guilds/README.md#getmember) - Returns a guild member object for the specified user.
+- [`guildsGetOnboarding`](docs/sdks/guilds/README.md#getonboarding) - Returns the Onboarding object for the guild.
+- [`guildsGetPreview`](docs/sdks/guilds/README.md#getpreview) - Returns the guild preview object for the given id. If the user is not in the guild, then the guild must be discoverable.
+- [`guildsGetRole`](docs/sdks/guilds/README.md#getrole) - Returns a role object for the specified role.
+- [`guildsGetVanityUrl`](docs/sdks/guilds/README.md#getvanityurl) - Returns a partial invite object for guilds with that feature enabled. Requires the MANAGE_GUILD permission. code will be null if a vanity url for the guild is not set.
+- [`guildsGetWelcomeScreen`](docs/sdks/guilds/README.md#getwelcomescreen) - Returns the Welcome Screen object for the guild. If the welcome screen is not enabled, the MANAGE_GUILD permission is required.
+- [`guildsGetWidget`](docs/sdks/guilds/README.md#getwidget) - Returns the widget for the guild. Fires an Invite Create Gateway event when an invite channel is defined and a new Invite is generated.
+- [`guildsGetWidgetPng`](docs/sdks/guilds/README.md#getwidgetpng) - Returns a PNG image widget for the guild. Requires no permissions or authentication.
+- [`guildsGetWidgetSettings`](docs/sdks/guilds/README.md#getwidgetsettings) - Returns a guild widget settings object. Requires the MANAGE_GUILD permission.
+- [`guildsListActiveThreads`](docs/sdks/guilds/README.md#listactivethreads) - Returns all active threads in the guild, including public and private threads. Threads are ordered by their id, in descending order.
+- [`guildsListBans`](docs/sdks/guilds/README.md#listbans) - Returns a list of ban objects for the users banned from this guild. Requires the BAN_MEMBERS permission.
+- [`guildsListChannels`](docs/sdks/guilds/README.md#listchannels) - Returns a list of guild channel objects. Does not include threads.
+- [`guildsListIntegrations`](docs/sdks/guilds/README.md#listintegrations) - Returns a list of integration objects for the guild. Requires the MANAGE_GUILD permission.
+- [`guildsListInvites`](docs/sdks/guilds/README.md#listinvites) - Returns a list of invite objects (with invite metadata) for the guild. Requires the MANAGE_GUILD permission.
+- [`guildsListMembers`](docs/sdks/guilds/README.md#listmembers) - Returns a list of guild member objects that are members of the guild.
+- [`guildsListRoles`](docs/sdks/guilds/README.md#listroles) - Returns a list of role objects for the guild.
+- [`guildsListVoiceRegions`](docs/sdks/guilds/README.md#listvoiceregions) - Returns a list of voice region objects for the guild. Unlike the similar /voice route, this returns VIP servers when the guild is VIP-enabled.
+- [`guildsPreviewPrune`](docs/sdks/guilds/README.md#previewprune) - Returns an object with one pruned key indicating the number of members that would be removed in a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions.
+- [`guildsPrune`](docs/sdks/guilds/README.md#prune) - Begin a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions. Returns an object with one pruned key indicating the number of members that were removed in the prune operation. Fires multiple Guild Member Remove Gateway events.
+- [`guildsRemoveBan`](docs/sdks/guilds/README.md#removeban) - Remove the ban for a user. Requires the BAN_MEMBERS permissions. Returns a 204 empty response on success. Fires a Guild Ban Remove Gateway event.
+- [`guildsRemoveMember`](docs/sdks/guilds/README.md#removemember) - Remove a member from a guild. Requires KICK_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Member Remove Gateway event.
+- [`guildsRemoveMemberRole`](docs/sdks/guilds/README.md#removememberrole) - Removes a role from a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
+- [`guildsSearchMembers`](docs/sdks/guilds/README.md#searchmembers) - Returns a list of guild member objects whose username or nickname starts with a provided string.
+- [`guildsSetMfaLevel`](docs/sdks/guilds/README.md#setmfalevel) - Modify a guild's MFA level. Requires guild ownership. Returns the updated level on success. Fires a Guild Update Gateway event.
+- [`guildsUpdate`](docs/sdks/guilds/README.md#update) - Modify a guild's settings. Requires the MANAGE_GUILD permission. Returns the updated guild object on success. Fires a Guild Update Gateway event.
+- [`guildsUpdateChannelPositions`](docs/sdks/guilds/README.md#updatechannelpositions) - Modify the positions of a set of channel objects for the guild. Requires MANAGE_CHANNELS permission. Returns a 204 empty response on success. Fires multiple Channel Update Gateway events.
+- [`guildsUpdateCurrentMember`](docs/sdks/guilds/README.md#updatecurrentmember) - Modifies the current member in a guild. Returns a 200 with the updated member object on success. Fires a Guild Member Update Gateway event.
+- [`guildsUpdateMember`](docs/sdks/guilds/README.md#updatemember) - Modify attributes of a guild member. Returns a 200 OK with the guild member as the body. Fires a Guild Member Update Gateway event. If the channel_id is set to null, this will force the target user to be disconnected from voice.
+- [`guildsUpdateOnboarding`](docs/sdks/guilds/README.md#updateonboarding) - Modifies the onboarding configuration of the guild. Returns a 200 with the Onboarding object for the guild. Requires the MANAGE_GUILD and MANAGE_ROLES permissions.
+- [`guildsUpdateRole`](docs/sdks/guilds/README.md#updaterole) - Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated role on success. Fires a Guild Role Update Gateway event.
+- [`guildsUpdateRolePositions`](docs/sdks/guilds/README.md#updaterolepositions) - Modify the positions of a set of role objects for the guild. Requires the MANAGE_ROLES permission. Returns a list of all of the guild's role objects on success. Fires multiple Guild Role Update Gateway events.
+- [`guildsUpdateWelcomeScreen`](docs/sdks/guilds/README.md#updatewelcomescreen) - Modify the guild's Welcome Screen. Requires the MANAGE_GUILD permission. Returns the updated Welcome Screen object. May fire a Guild Update Gateway event.
+- [`guildsUpdateWidgetSettings`](docs/sdks/guilds/README.md#updatewidgetsettings) - Modify a guild widget settings object for the guild. All attributes may be passed in with JSON and modified. Requires the MANAGE_GUILD permission. Returns the updated guild widget settings object. Fires a Guild Update Gateway event.
+- [`guildTemplatesCreate`](docs/sdks/guildtemplates/README.md#create) - Creates a template for the guild. Requires the MANAGE_GUILD permission. Returns the created guild template object on success.
+- [`guildTemplatesCreateGuild`](docs/sdks/guildtemplates/README.md#createguild) - Create a new guild based on a template. Returns a guild object on success. Fires a Guild Create Gateway event.
+- [`guildTemplatesDelete`](docs/sdks/guildtemplates/README.md#delete) - Deletes the template. Requires the MANAGE_GUILD permission. Returns the deleted guild template object on success.
+- [`guildTemplatesGet`](docs/sdks/guildtemplates/README.md#get) - Returns a guild template object for the given code.
+- [`guildTemplatesGetNewMemberWelcome`](docs/sdks/guildtemplates/README.md#getnewmemberwelcome) - Returns the welcome screen object for the guild.
+- [`guildTemplatesList`](docs/sdks/guildtemplates/README.md#list) - Returns an array of guild template objects. Requires the MANAGE_GUILD permission.
+- [`guildTemplatesSync`](docs/sdks/guildtemplates/README.md#sync) - Syncs the template to the guild's current state. Requires the MANAGE_GUILD permission. Returns the guild template object on success.
+- [`guildTemplatesUpdate`](docs/sdks/guildtemplates/README.md#update) - Modifies the template's metadata. Requires the MANAGE_GUILD permission. Returns the guild template object on success.
+- [`invitesDelete`](docs/sdks/invites/README.md#delete) - Delete an invite. Requires the MANAGE_CHANNELS permission on the channel this invite belongs to, or MANAGE_GUILD to remove any invite across the guild. Returns an invite object on success.
+- [`invitesGet`](docs/sdks/invites/README.md#get) - Returns an invite object for the given code.
+- [`lobbiesAddMember`](docs/sdks/lobbies/README.md#addmember) - Adds a user to a lobby.
+- [`lobbiesConnectToChannel`](docs/sdks/lobbies/README.md#connecttochannel) - Connects a lobby to a channel.
+- [`lobbiesCreate`](docs/sdks/lobbies/README.md#create) - Creates a new lobby. Returns a lobby object on success.
+- [`lobbiesCreateOrJoin`](docs/sdks/lobbies/README.md#createorjoin) - Creates a new lobby or joins an existing one. Returns a lobby object on success.
+- [`lobbiesGet`](docs/sdks/lobbies/README.md#get) - Returns the lobby object for the given id.
+- [`lobbiesLeave`](docs/sdks/lobbies/README.md#leave) - Removes the current user from the specified lobby. It is safe to call this even if the user is no longer a member of the lobby, but will fail if the lobby does not exist.
+- [`lobbiesRemoveMember`](docs/sdks/lobbies/README.md#removemember) - Removes a user from a lobby.
+- [`lobbiesSendMessage`](docs/sdks/lobbies/README.md#sendmessage) - Sends a message to the lobby.
+- [`lobbiesUpdate`](docs/sdks/lobbies/README.md#update) - Updates a lobby. Returns a lobby object on success.
+- [`messagesBulkDelete`](docs/sdks/messages/README.md#bulkdelete) - Delete multiple messages in a single request. This endpoint can only be used on guild channels and requires the MANAGE_MESSAGES permission.
+- [`messagesCreateForm`](docs/sdks/messages/README.md#createform) - Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+- [`messagesCreateJson`](docs/sdks/messages/README.md#createjson) - Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+- [`messagesCreateMultipart`](docs/sdks/messages/README.md#createmultipart) - Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+- [`messagesCreateReaction`](docs/sdks/messages/README.md#createreaction) - Create a reaction for the message. This endpoint requires the READ_MESSAGE_HISTORY permission to be present on the current user.
+- [`messagesCrosspost`](docs/sdks/messages/README.md#crosspost) - Crosspost a message in an Announcement Channel to following channels. This endpoint requires the SEND_MESSAGES permission, if the current user sent the message, or additionally the MANAGE_MESSAGES permission, for all other messages, to be present for the current user.
+- [`messagesDelete`](docs/sdks/messages/README.md#delete) - Delete a message. If operating on a guild channel and trying to delete a message that was not sent by the current user, this endpoint requires the MANAGE_MESSAGES permission.
+- [`messagesDeleteAllReactions`](docs/sdks/messages/README.md#deleteallreactions) - Deletes all reactions on a message. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+- [`messagesDeleteAllReactionsForEmoji`](docs/sdks/messages/README.md#deleteallreactionsforemoji) - Deletes all the reactions for a given emoji on a message. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+- [`messagesDeleteOwnReaction`](docs/sdks/messages/README.md#deleteownreaction) - Delete a reaction the current user has made for the message. Returns a 204 empty response on success.
+- [`messagesDeleteUserReaction`](docs/sdks/messages/README.md#deleteuserreaction) - Deletes another user's reaction. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+- [`messagesGet`](docs/sdks/messages/README.md#get) - Returns a specific message in the channel. If operating on a guild channel, this endpoint requires the READ_MESSAGE_HISTORY permission to be present on the current user.
+- [`messagesList`](docs/sdks/messages/README.md#list) - Returns the messages for a channel. If operating on a guild channel, this endpoint requires the VIEW_CHANNEL permission to be present on the current user.
+- [`messagesListReactionsByEmoji`](docs/sdks/messages/README.md#listreactionsbyemoji) - Get a list of users that reacted with a specific emoji.
+- [`messagesUpdateForm`](docs/sdks/messages/README.md#updateform) - Edit a previously sent message. The fields content, embeds, and flags can be edited by the original message author. Other users can only edit flags and only if they have the MANAGE_MESSAGES permission in the corresponding channel.
+- [`messagesUpdateJson`](docs/sdks/messages/README.md#updatejson) - Edit a previously sent message. The fields content, embeds, and flags can be edited by the original message author. Other users can only edit flags and only if they have the MANAGE_MESSAGES permission in the corresponding channel.
+- [`messagesUpdateMultipart`](docs/sdks/messages/README.md#updatemultipart) - Edit a previously sent message. The fields content, embeds, and flags can be edited by the original message author. Other users can only edit flags and only if they have the MANAGE_MESSAGES permission in the corresponding channel.
+- [`pollsExpire`](docs/sdks/polls/README.md#expire) - Immediately ends the poll. You cannot end polls from other users. Returns a message object. Fires a Message Update Gateway event.
+- [`pollsGetAnswerVoters`](docs/sdks/polls/README.md#getanswervoters) - Get a list of users that voted for a specific answer in a poll.
+- [`soundboardsCreateGuildSoundboardSound`](docs/sdks/soundboards/README.md#createguildsoundboardsound) - Create a new soundboard sound for the guild. Returns the new soundboard sound object on success.
+- [`soundboardsDeleteGuildSoundboardSound`](docs/sdks/soundboards/README.md#deleteguildsoundboardsound) - Delete a soundboard sound from a guild. Returns 204 No Content on success.
+- [`soundboardsGetGuildSoundboardSound`](docs/sdks/soundboards/README.md#getguildsoundboardsound) - Returns a soundboard sound object for the given guild and sound IDs.
+- [`soundboardsGetSoundboardDefaultSounds`](docs/sdks/soundboards/README.md#getsoundboarddefaultsounds) - Returns a list of the default sounds available in the soundboard.
+- [`soundboardsListGuildSoundboardSounds`](docs/sdks/soundboards/README.md#listguildsoundboardsounds) - Returns a list of soundboard sound objects for the given guild.
+- [`soundboardsSendSoundboardSound`](docs/sdks/soundboards/README.md#sendsoundboardsound) - Sends a soundboard sound to a channel.
+- [`soundboardsUpdateGuildSoundboardSound`](docs/sdks/soundboards/README.md#updateguildsoundboardsound) - Update a soundboard sound in a guild. Returns the updated soundboard sound object on success.
+- [`stageInstancesCreate`](docs/sdks/stageinstances/README.md#create) - Creates a new Stage instance associated to a Stage channel. Returns that Stage instance. Fires a Stage Instance Create Gateway event. Requires the user to be a moderator of the Stage channel.
+- [`stageInstancesDelete`](docs/sdks/stageinstances/README.md#delete) - Deletes the Stage instance. Returns 204 No Content. Fires a Stage Instance Delete Gateway event. Requires the user to be a moderator of the Stage channel.
+- [`stageInstancesGet`](docs/sdks/stageinstances/README.md#get) - Gets the stage instance associated with the Stage channel, if it exists.
+- [`stageInstancesUpdate`](docs/sdks/stageinstances/README.md#update) - Updates fields of an existing Stage instance. Returns the updated Stage instance. Fires a Stage Instance Update Gateway event. Requires the user to be a moderator of the Stage channel.
+- [`stickersCreateGuildSticker`](docs/sdks/stickers/README.md#createguildsticker) - Create a new sticker for the guild. Send a multipart/form-data body. Requires the CREATE_GUILD_EXPRESSIONS permission. Returns the new sticker object on success. Fires a Guild Stickers Update Gateway event.
+- [`stickersDeleteGuildSticker`](docs/sdks/stickers/README.md#deleteguildsticker) - Delete the given sticker. For stickers created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other stickers, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns 204 No Content on success. Fires a Guild Stickers Update Gateway event.
+- [`stickersGet`](docs/sdks/stickers/README.md#get) - Returns a sticker object for the given sticker ID.
+- [`stickersGetGuildSticker`](docs/sdks/stickers/README.md#getguildsticker) - Returns a sticker object for the given guild and sticker IDs. Includes the user field if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
+- [`stickersGetPack`](docs/sdks/stickers/README.md#getpack) - Returns a sticker pack object for the given sticker pack ID.
+- [`stickersListGuildStickers`](docs/sdks/stickers/README.md#listguildstickers) - Returns an array of sticker objects for the given guild. Includes user fields if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
+- [`stickersListPacks`](docs/sdks/stickers/README.md#listpacks) - Returns a list of available sticker packs.
+- [`stickersUpdateGuildSticker`](docs/sdks/stickers/README.md#updateguildsticker) - Modify the given sticker. For stickers created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other stickers, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns the updated sticker object on success. Fires a Guild Stickers Update Gateway event.
+- [`usersCreateDM`](docs/sdks/users/README.md#createdm) - Create a new DM channel with a user. Returns a DM channel object (if one already exists, it will be returned instead).
+- [`usersGet`](docs/sdks/users/README.md#get) - Returns a user object for a given user ID.
+- [`usersGetApplicationRoleConnection`](docs/sdks/users/README.md#getapplicationroleconnection) - Returns the application role connection for the user. Requires an OAuth2 access token with role_connections.write scope for the application specified in the path.
+- [`usersGetCurrent`](docs/sdks/users/README.md#getcurrent) - Returns the user object of the requester's account. For OAuth2, this requires the identify scope, which will return the object without an email, and optionally the email scope, which returns the object with an email if the user has one.
+- [`usersGetGuildMember`](docs/sdks/users/README.md#getguildmember) - Returns a guild member object for the current user. Requires the guilds.members.read OAuth2 scope.
+- [`usersLeaveGuild`](docs/sdks/users/README.md#leaveguild) - Leave a guild. Returns a 204 empty response on success. Fires a Guild Delete Gateway event and a Guild Member Remove Gateway event.
+- [`usersListConnections`](docs/sdks/users/README.md#listconnections) - Returns a list of connection objects. Requires the connections OAuth2 scope.
+- [`usersListGuilds`](docs/sdks/users/README.md#listguilds) - Returns a list of partial guild objects the current user is a member of. For OAuth2, requires the guilds scope.
+- [`usersUpdateApplicationRoleConnection`](docs/sdks/users/README.md#updateapplicationroleconnection) - Updates and returns the application role connection for the user. Requires an OAuth2 access token with role_connections.write scope for the application specified in the path.
+- [`usersUpdateCurrent`](docs/sdks/users/README.md#updatecurrent) - Modify the requester's user account settings. Returns a user object on success. Fires a User Update Gateway event.
+- [`voiceGetCurrentUserState`](docs/sdks/voice/README.md#getcurrentuserstate) - Returns the current user's voice state in the guild.
+- [`voiceGetUserState`](docs/sdks/voice/README.md#getuserstate) - Returns the specified user's voice state in the guild.
+- [`voiceListRegions`](docs/sdks/voice/README.md#listregions) - Returns an array of voice region objects that can be used when setting a voice or stage channel's rtc_region.
+- [`voiceUpdateCurrentUserState`](docs/sdks/voice/README.md#updatecurrentuserstate) - Updates the current user's voice state. Returns 204 No Content on success. Fires a Voice State Update Gateway event.
+- [`voiceUpdateUserState`](docs/sdks/voice/README.md#updateuserstate) - Updates another user's voice state. Fires a Voice State Update Gateway event.
+- [`webhooksCreate`](docs/sdks/webhooks/README.md#create) - Creates a new webhook and returns a webhook object on success. Requires the MANAGE_WEBHOOKS permission. Fires a Webhooks Update Gateway event.
+- [`webhooksDelete`](docs/sdks/webhooks/README.md#delete) - Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. Returns a 204 No Content response on success. Fires a Webhooks Update Gateway event.
+- [`webhooksDeleteMessage`](docs/sdks/webhooks/README.md#deletemessage) - Deletes a message that was created by the webhook. Returns a 204 No Content response on success.
+- [`webhooksDeleteOriginalMessage`](docs/sdks/webhooks/README.md#deleteoriginalmessage) - Deletes the initial webhook message.
+- [`webhooksDeleteWithToken`](docs/sdks/webhooks/README.md#deletewithtoken) - Same as above, except this call does not require authentication.
+- [`webhooksExecuteGithub`](docs/sdks/webhooks/README.md#executegithub) - Add a new webhook to your GitHub repo (in the repo's settings), and use this endpoint as the "Payload URL."
+- [`webhooksExecuteSlack`](docs/sdks/webhooks/README.md#executeslack) - Refer to Slack's documentation for more information. We do not support Slack's channel, icon_emoji, mrkdwn, or mrkdwn_in properties.
+- [`webhooksGet`](docs/sdks/webhooks/README.md#get) - Returns the new webhook object for the given id.
+- [`webhooksGetMessage`](docs/sdks/webhooks/README.md#getmessage) - Returns a previously-sent webhook message from the same token. Returns a message object on success.
+- [`webhooksGetOriginalMessage`](docs/sdks/webhooks/README.md#getoriginalmessage) - Returns the initial webhook message.
+- [`webhooksGetWithToken`](docs/sdks/webhooks/README.md#getwithtoken) - Same as above, except this call does not require authentication and returns no user in the webhook object.
+- [`webhooksListForChannel`](docs/sdks/webhooks/README.md#listforchannel) - Returns a list of channel webhook objects. Requires the MANAGE_WEBHOOKS permission.
+- [`webhooksListForGuild`](docs/sdks/webhooks/README.md#listforguild) - Returns a list of guild webhook objects. Requires the MANAGE_WEBHOOKS permission.
+- [`webhooksUpdate`](docs/sdks/webhooks/README.md#update) - Modify a webhook. Requires the MANAGE_WEBHOOKS permission. Returns the updated webhook object on success. Fires a Webhooks Update Gateway event.
+- [`webhooksUpdateMessageForm`](docs/sdks/webhooks/README.md#updatemessageform) - Edits a previously-sent webhook message from the same token. Returns a message object on success.
+- [`webhooksUpdateMessageJson`](docs/sdks/webhooks/README.md#updatemessagejson) - Edits a previously-sent webhook message from the same token. Returns a message object on success.
+- [`webhooksUpdateMessageMultipart`](docs/sdks/webhooks/README.md#updatemessagemultipart) - Edits a previously-sent webhook message from the same token. Returns a message object on success.
+- [`webhooksUpdateOriginalMessageForm`](docs/sdks/webhooks/README.md#updateoriginalmessageform) - Edits the initial webhook message.
+- [`webhooksUpdateOriginalMessageJson`](docs/sdks/webhooks/README.md#updateoriginalmessagejson) - Edits the initial webhook message.
+- [`webhooksUpdateOriginalMessageMultipart`](docs/sdks/webhooks/README.md#updateoriginalmessagemultipart) - Edits the initial webhook message.
+- [`webhooksUpdateWithToken`](docs/sdks/webhooks/README.md#updatewithtoken) - Same as above, except this call does not require authentication, does not accept a channel_id parameter in the body, and does not return a user in the webhook object.
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -933,7 +791,7 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  await discord.partnerSDKUnmergeProvisionalAccount({
+  await discord.applications.partnerSDKUnmergeProvisionalAccount({
     clientId: "<value>",
     externalAuthToken: "<value>",
   }, {
@@ -972,7 +830,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.partnerSDKUnmergeProvisionalAccount({
+  await discord.applications.partnerSDKUnmergeProvisionalAccount({
     clientId: "<value>",
     externalAuthToken: "<value>",
   });
@@ -1006,7 +864,7 @@ const discord = new Discord();
 
 async function run() {
   try {
-    await discord.partnerSDKUnmergeProvisionalAccount({
+    await discord.applications.partnerSDKUnmergeProvisionalAccount({
       clientId: "<value>",
       externalAuthToken: "<value>",
     });
@@ -1064,7 +922,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.partnerSDKUnmergeProvisionalAccount({
+  await discord.applications.partnerSDKUnmergeProvisionalAccount({
     clientId: "<value>",
     externalAuthToken: "<value>",
   });

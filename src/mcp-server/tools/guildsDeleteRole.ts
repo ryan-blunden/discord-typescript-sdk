@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsDeleteRole: ToolDefinition<typeof args> = {
   name: "guilds-delete-role",
-  description: ``,
+  description:
+    `Delete a guild role. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Role Delete Gateway event.`,
+  scopes: ["guilds", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsDeleteRole(

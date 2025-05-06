@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsGetWelcomeScreen: ToolDefinition<typeof args> = {
   name: "guilds-get-welcome-screen",
-  description: ``,
+  description:
+    `Returns the Welcome Screen object for the guild. If the welcome screen is not enabled, the MANAGE_GUILD permission is required.`,
+  scopes: ["guilds", "read"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsGetWelcomeScreen(

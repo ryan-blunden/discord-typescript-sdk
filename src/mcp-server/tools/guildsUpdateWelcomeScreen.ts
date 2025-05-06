@@ -12,7 +12,9 @@ const args = {
 
 export const tool$guildsUpdateWelcomeScreen: ToolDefinition<typeof args> = {
   name: "guilds-update-welcome-screen",
-  description: ``,
+  description:
+    `Modify the guild's Welcome Screen. Requires the MANAGE_GUILD permission. Returns the updated Welcome Screen object. May fire a Guild Update Gateway event.`,
+  scopes: ["guilds", "write"],
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await guildsUpdateWelcomeScreen(

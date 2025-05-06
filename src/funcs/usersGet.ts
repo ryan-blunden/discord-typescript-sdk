@@ -25,6 +25,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Returns a user object for a given user ID.
+ */
 export function usersGet(
   client: DiscordCore,
   request: operations.GetUserRequest,

@@ -10,11 +10,12 @@
 ```typescript
 const value: components.PrivateChannelResponse = {
   id: "<value>",
-  flags: 591851,
+  type: 10,
+  flags: 533007,
   recipients: [
     {
       id: "<value>",
-      username: "Kaci.Franey-Stroman",
+      username: "Verona.Stroman",
       discriminator: "<value>",
       publicFlags: 599322,
       flags: 948718,
@@ -28,14 +29,15 @@ const value: components.PrivateChannelResponse = {
 ```typescript
 const value: components.PrivateGroupChannelResponse = {
   id: "<value>",
-  flags: 29039,
+  type: 0,
+  flags: 385842,
   recipients: [
     {
       id: "<value>",
-      username: "Gerry_Barrows89",
+      username: "Anita_Smith",
       discriminator: "<value>",
-      publicFlags: 605590,
-      flags: 133736,
+      publicFlags: 133736,
+      flags: 827777,
     },
   ],
 };
