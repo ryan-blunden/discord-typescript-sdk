@@ -12,67 +12,27 @@ actions:
   - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/@original"]["patch"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
-      x-speakeasy-mcp:
-        name: ''
-        scopes:
-          - openapi-fixes
-          - write
   - target: $["paths"]["/interactions/{interaction_id}/{interaction_token}/callback"]["post"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
-      x-speakeasy-mcp:
-        name: ''
-        scopes:
-          - openapi-fixes
-          - write
   - target: $["paths"]["/channels/{channel_id}/messages/{message_id}"]["patch"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
-      x-speakeasy-mcp:
-        name: ''
-        scopes:
-          - openapi-fixes
-          - write
   - target: $["paths"]["/channels/{channel_id}/messages"]["post"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
-      x-speakeasy-mcp:
-        name: ''
-        scopes:
-          - openapi-fixes
-          - write
   - target: $["paths"]["/channels/{channel_id}/threads"]["post"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
-      x-speakeasy-mcp:
-        name: ''
-        scopes:
-          - openapi-fixes
-          - write
   - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}"]["patch"]["requestBody"]["content"]["application/x-www-form-urlencoded"]["schema"]
     update:
       type: object
-      x-speakeasy-mcp:
-        name: ''
-        scopes:
-          - openapi-fixes
-          - write
   - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}"]["patch"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
-      x-speakeasy-mcp:
-        name: ''
-        scopes:
-          - openapi-fixes
-          - write
   - target: $["paths"]["/webhooks/{webhook_id}/{webhook_token}"]["post"]["requestBody"]["content"]["multipart/form-data"]["schema"]
     update:
       type: object
-      x-speakeasy-mcp:
-        name: ''
-        scopes:
-          - openapi-fixes
-          - write
   - target: $["components"]["schemas"]["ApplicationCommandHandler"]["oneOf"]
     remove: true
   - target: $["components"]["schemas"]["EntitlementOwnerTypes"]["oneOf"]
