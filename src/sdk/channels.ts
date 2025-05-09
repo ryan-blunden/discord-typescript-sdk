@@ -23,10 +23,8 @@ import { channelsRemoveGroupDMRecipient } from "../funcs/channelsRemoveGroupDMRe
 import { channelsRemoveThreadMember } from "../funcs/channelsRemoveThreadMember.js";
 import { channelsSearchThreads } from "../funcs/channelsSearchThreads.js";
 import { channelsSetPermissionOverwrite } from "../funcs/channelsSetPermissionOverwrite.js";
-import { channelsStartThreadForm } from "../funcs/channelsStartThreadForm.js";
+import { channelsStartThread } from "../funcs/channelsStartThread.js";
 import { channelsStartThreadFromMessage } from "../funcs/channelsStartThreadFromMessage.js";
-import { channelsStartThreadJson } from "../funcs/channelsStartThreadJson.js";
-import { channelsStartThreadMultipart } from "../funcs/channelsStartThreadMultipart.js";
 import { channelsTriggerTypingIndicator } from "../funcs/channelsTriggerTypingIndicator.js";
 import { channelsUnpinMessage } from "../funcs/channelsUnpinMessage.js";
 import { channelsUpdate } from "../funcs/channelsUpdate.js";
@@ -291,39 +289,11 @@ export class Channels extends ClientSDK {
   /**
    * Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
    */
-  async startThreadJson(
-    request: operations.CreateThreadJsonRequest,
+  async startThread(
+    request: operations.CreateThreadRequest,
     options?: RequestOptions,
   ): Promise<components.CreatedThreadResponse> {
-    return unwrapAsync(channelsStartThreadJson(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
-   */
-  async startThreadForm(
-    request: operations.CreateThreadFormRequest,
-    options?: RequestOptions,
-  ): Promise<components.CreatedThreadResponse> {
-    return unwrapAsync(channelsStartThreadForm(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
-   */
-  async startThreadMultipart(
-    request: operations.CreateThreadMultipartRequest,
-    options?: RequestOptions,
-  ): Promise<components.CreatedThreadResponse> {
-    return unwrapAsync(channelsStartThreadMultipart(
+    return unwrapAsync(channelsStartThread(
       this,
       request,
       options,

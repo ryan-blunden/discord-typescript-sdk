@@ -23,9 +23,7 @@
 * [follow](#follow) - Follow an Announcement Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. Returns a followed channel object. Fires a Webhooks Update Gateway event for the target channel.
 * [listInvites](#listinvites) - Returns a list of invite objects (with invite metadata) for the channel.
 * [createInvite](#createinvite) - Create a new invite object for the channel.
-* [startThreadJson](#startthreadjson) - Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
-* [startThreadForm](#startthreadform) - Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
-* [startThreadMultipart](#startthreadmultipart) - Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
+* [startThread](#startthread) - Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
 * [triggerTypingIndicator](#triggertypingindicator) - Post a typing indicator for the specified channel, which expires after 10 seconds. Returns a 204 empty response on success. Fires a Typing Start Gateway event.
 * [pinMessage](#pinmessage) - Pin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
 * [unpinMessage](#unpinmessage) - Unpin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
@@ -1440,7 +1438,7 @@ run();
 | errors.ErrorResponse | 4XX                  | application/json     |
 | errors.APIError      | 5XX                  | \*/\*                |
 
-## startThreadJson
+## startThread
 
 Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
 
@@ -1454,7 +1452,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.channels.startThreadJson({
+  const result = await discord.channels.startThread({
     channelId: "<value>",
     requestBody: {
       name: "<value>",
@@ -1475,7 +1473,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsStartThreadJson } from "@ryan.blunden/discord-sdk/funcs/channelsStartThreadJson.js";
+import { channelsStartThread } from "@ryan.blunden/discord-sdk/funcs/channelsStartThread.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1484,7 +1482,7 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await channelsStartThreadJson(discord, {
+  const res = await channelsStartThread(discord, {
     channelId: "<value>",
     requestBody: {
       name: "<value>",
@@ -1509,177 +1507,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CreateThreadJsonRequest](../../models/operations/createthreadjsonrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.CreatedThreadResponse](../../models/components/createdthreadresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## startThreadForm
-
-Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.channels.startThreadForm({
-    channelId: "<value>",
-    requestBody: {
-      name: "<value>",
-      message: {},
-    },
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsStartThreadForm } from "@ryan.blunden/discord-sdk/funcs/channelsStartThreadForm.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await channelsStartThreadForm(discord, {
-    channelId: "<value>",
-    requestBody: {
-      name: "<value>",
-      message: {},
-    },
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CreateThreadFormRequest](../../models/operations/createthreadformrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.CreatedThreadResponse](../../models/components/createdthreadresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## startThreadMultipart
-
-Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.channels.startThreadMultipart({
-    channelId: "<value>",
-    requestBody: {
-      name: "<value>",
-      message: {},
-    },
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsStartThreadMultipart } from "@ryan.blunden/discord-sdk/funcs/channelsStartThreadMultipart.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await channelsStartThreadMultipart(discord, {
-    channelId: "<value>",
-    requestBody: {
-      name: "<value>",
-      message: {},
-    },
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CreateThreadMultipartRequest](../../models/operations/createthreadmultipartrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.CreateThreadRequest](../../models/operations/createthreadrequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |

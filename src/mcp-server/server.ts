@@ -52,10 +52,8 @@ import { tool$channelsRemoveGroupDMRecipient } from "./tools/channelsRemoveGroup
 import { tool$channelsRemoveThreadMember } from "./tools/channelsRemoveThreadMember.js";
 import { tool$channelsSearchThreads } from "./tools/channelsSearchThreads.js";
 import { tool$channelsSetPermissionOverwrite } from "./tools/channelsSetPermissionOverwrite.js";
-import { tool$channelsStartThreadForm } from "./tools/channelsStartThreadForm.js";
+import { tool$channelsStartThread } from "./tools/channelsStartThread.js";
 import { tool$channelsStartThreadFromMessage } from "./tools/channelsStartThreadFromMessage.js";
-import { tool$channelsStartThreadJson } from "./tools/channelsStartThreadJson.js";
-import { tool$channelsStartThreadMultipart } from "./tools/channelsStartThreadMultipart.js";
 import { tool$channelsTriggerTypingIndicator } from "./tools/channelsTriggerTypingIndicator.js";
 import { tool$channelsUnpinMessage } from "./tools/channelsUnpinMessage.js";
 import { tool$channelsUpdate } from "./tools/channelsUpdate.js";
@@ -197,7 +195,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Discord",
-    version: "0.3.4",
+    version: "0.3.5",
   });
 
   const client = new DiscordCore({
@@ -329,9 +327,7 @@ export function createMCPServer(deps: {
   tool(tool$channelsFollow);
   tool(tool$channelsListInvites);
   tool(tool$channelsCreateInvite);
-  tool(tool$channelsStartThreadJson);
-  tool(tool$channelsStartThreadForm);
-  tool(tool$channelsStartThreadMultipart);
+  tool(tool$channelsStartThread);
   tool(tool$channelsTriggerTypingIndicator);
   tool(tool$channelsPinMessage);
   tool(tool$channelsUnpinMessage);
