@@ -3,7 +3,7 @@
  */
 
 import { DiscordCore } from "../core.js";
-import { encodeBodyForm, encodeSimple } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -28,9 +28,9 @@ import { Result } from "../types/fp.js";
 /**
  * Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
  */
-export function channelsStartThreadForm(
+export function channelsStartThread(
   client: DiscordCore,
-  request: operations.CreateThreadFormRequest,
+  request: operations.CreateThreadRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -54,7 +54,7 @@ export function channelsStartThreadForm(
 
 async function $do(
   client: DiscordCore,
-  request: operations.CreateThreadFormRequest,
+  request: operations.CreateThreadRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -74,17 +74,14 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.CreateThreadFormRequest$outboundSchema.parse(value),
+    (value) => operations.CreateThreadRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-
-  const body = Object.entries(payload.RequestBody || {}).map(([k, v]) => {
-    return encodeBodyForm(k, v, { charEncoding: "percent" });
-  }).join("&");
+  const body = encodeJSON("body", payload.RequestBody, { explode: true });
 
   const pathParams = {
     channel_id: encodeSimple("channel_id", payload.channel_id, {
@@ -96,7 +93,7 @@ async function $do(
   const path = pathToFunc("/channels/{channel_id}/threads")(pathParams);
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/x-www-form-urlencoded",
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -106,7 +103,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "create_thread_form",
+    operationID: "create_thread",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,

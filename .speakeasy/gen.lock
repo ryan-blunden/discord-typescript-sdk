@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d6760420-c0f7-476a-a38c-38dd82de2cc6
 management:
-  docChecksum: 7ca118d8eb83c06493d2fbe43e4eed83
+  docChecksum: d05b8bd08e95fe719ca409af9eef0d63
   docVersion: "10"
-  speakeasyVersion: 1.542.3
-  generationVersion: 2.597.9
-  releaseVersion: 0.3.4
-  configChecksum: 4b0161f28925ef530cf200af4955d10b
+  speakeasyVersion: 1.543.1
+  generationVersion: 2.598.21
+  releaseVersion: 0.3.5
+  configChecksum: 09a5d7590ec3f2c278ee69211f3daa5b
   repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
   installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
   published: true
@@ -512,7 +512,6 @@ generatedFiles:
   - docs/models/operations/createchannelinviteresponsebody.md
   - docs/models/operations/createdmresponsebody.md
   - docs/models/operations/createentitlementrequest.md
-  - docs/models/operations/createforumthreadrequest.md
   - docs/models/operations/createguildapplicationcommandrequest.md
   - docs/models/operations/createguildapplicationcommandsecurity.md
   - docs/models/operations/createguildchannelrequest.md
@@ -541,14 +540,9 @@ generatedFiles:
   - docs/models/operations/createorjoinlobbyrequestbody.md
   - docs/models/operations/createorjoinlobbysecurity.md
   - docs/models/operations/createstageinstancerequestbody.md
-  - docs/models/operations/createtextthreadwithoutmessagerequest.md
-  - docs/models/operations/createthreadformrequest.md
-  - docs/models/operations/createthreadformrequestbody.md
+  - docs/models/operations/createthreadchannelsrequestrequestbody.md
   - docs/models/operations/createthreadfrommessagerequest.md
-  - docs/models/operations/createthreadjsonrequest.md
-  - docs/models/operations/createthreadjsonrequestbody.md
-  - docs/models/operations/createthreadmultipartrequest.md
-  - docs/models/operations/createthreadmultipartrequestbody.md
+  - docs/models/operations/createthreadrequest.md
   - docs/models/operations/createwebhookrequest.md
   - docs/models/operations/createwebhookrequestbody.md
   - docs/models/operations/crosspostmessagerequest.md
@@ -751,7 +745,6 @@ generatedFiles:
   - docs/models/operations/tag.md
   - docs/models/operations/threadsearchrequest.md
   - docs/models/operations/triggertypingindicatorrequest.md
-  - docs/models/operations/type.md
   - docs/models/operations/unbanuserfromguildrequest.md
   - docs/models/operations/unpinmessagerequest.md
   - docs/models/operations/updateapplicationcommandrequest.md
@@ -911,10 +904,8 @@ generatedFiles:
   - src/funcs/channelsRemoveThreadMember.ts
   - src/funcs/channelsSearchThreads.ts
   - src/funcs/channelsSetPermissionOverwrite.ts
-  - src/funcs/channelsStartThreadForm.ts
+  - src/funcs/channelsStartThread.ts
   - src/funcs/channelsStartThreadFromMessage.ts
-  - src/funcs/channelsStartThreadJson.ts
-  - src/funcs/channelsStartThreadMultipart.ts
   - src/funcs/channelsTriggerTypingIndicator.ts
   - src/funcs/channelsUnpinMessage.ts
   - src/funcs/channelsUpdate.ts
@@ -1147,10 +1138,8 @@ generatedFiles:
   - src/mcp-server/tools/channelsRemoveThreadMember.ts
   - src/mcp-server/tools/channelsSearchThreads.ts
   - src/mcp-server/tools/channelsSetPermissionOverwrite.ts
-  - src/mcp-server/tools/channelsStartThreadForm.ts
+  - src/mcp-server/tools/channelsStartThread.ts
   - src/mcp-server/tools/channelsStartThreadFromMessage.ts
-  - src/mcp-server/tools/channelsStartThreadJson.ts
-  - src/mcp-server/tools/channelsStartThreadMultipart.ts
   - src/mcp-server/tools/channelsTriggerTypingIndicator.ts
   - src/mcp-server/tools/channelsUnpinMessage.ts
   - src/mcp-server/tools/channelsUpdate.ts
@@ -1691,10 +1680,8 @@ generatedFiles:
   - src/models/operations/createmessagemultipart.ts
   - src/models/operations/createorjoinlobby.ts
   - src/models/operations/createstageinstance.ts
-  - src/models/operations/createthreadform.ts
+  - src/models/operations/createthread.ts
   - src/models/operations/createthreadfrommessage.ts
-  - src/models/operations/createthreadjson.ts
-  - src/models/operations/createthreadmultipart.ts
   - src/models/operations/createwebhook.ts
   - src/models/operations/crosspostmessage.ts
   - src/models/operations/deleteallmessagereactions.ts
@@ -2649,7 +2636,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"audit_log_entries": [{"id": "<value>"}, {"id": "<value>"}], "users": [{"id": "<value>", "username": "Winifred_Watsica58", "discriminator": "<value>", "public_flags": 59716, "flags": 853102}, {"id": "<value>", "username": "Donavon30", "discriminator": "<value>", "public_flags": 861807, "flags": 938891}, {"id": "<value>", "username": "Alexandra.Ratke", "discriminator": "<value>", "public_flags": 542539, "flags": 249518}], "integrations": [], "webhooks": [], "guild_scheduled_events": [{"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-08-22T19:26:20.850Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-07-14T18:23:27.528Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-06-17T12:14:27.999Z", "entity_metadata": {"location": "<value>"}}], "threads": [{"id": "<value>", "type": 11, "flags": 425168, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 567784, "member_count": 782420, "total_message_sent": 788852}], "application_commands": [{"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "break furthermore unnecessarily except"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "norm ack closely whose owlishly variable"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "aha while for beyond corral lest that a nice in"}], "auto_moderation_rules": [{"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [], "trigger_metadata": {"mention_total_limit": 718303}}, {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [], "trigger_metadata": {"allow_list": ["<value>", "<value>"], "presets": [633911, 7468]}}]}
+          application/json: {"audit_log_entries": [{"id": "<value>"}, {"id": "<value>"}], "users": [{"id": "<value>", "username": "Winifred_Watsica58", "discriminator": "<value>", "public_flags": 59716, "flags": 853102}, {"id": "<value>", "username": "Donavon30", "discriminator": "<value>", "public_flags": 861807, "flags": 938891}, {"id": "<value>", "username": "Alexandra.Ratke", "discriminator": "<value>", "public_flags": 542539, "flags": 249518}], "integrations": [], "webhooks": [], "guild_scheduled_events": [{"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2024-08-22T19:26:20.850Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-07-14T18:23:27.528Z"}, {"id": "<value>", "guild_id": "<value>", "name": "<value>", "scheduled_start_time": "2023-06-17T12:14:27.999Z", "entity_metadata": {"location": "<value>"}}], "threads": [{"id": "<value>", "type": 11, "flags": 425168, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 567784, "member_count": 782420, "total_message_sent": 788852}], "application_commands": [{"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "break furthermore unnecessarily except"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "norm ack closely whose owlishly variable"}, {"id": "<value>", "application_id": "<value>", "version": "<value>", "name": "<value>", "description": "aha while for beyond corral lest that a nice in"}], "auto_moderation_rules": [{"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {}}, {"metadata": {}}], "trigger_metadata": {"mention_total_limit": 86140}}, {"id": "<value>", "guild_id": "<value>", "creator_id": "<value>", "name": "<value>", "actions": [{"metadata": {}}, {"metadata": {}}], "trigger_metadata": {"allow_list": [], "presets": []}}]}
         4XX:
           application/json: {"code": 982705, "message": "<value>"}
   get_guild_widget_png:
@@ -3552,7 +3539,7 @@ examples:
         multipart/form-data: {"name": "<value>", "message": {}}
       responses:
         "201":
-          application/json: {"id": "<value>", "flags": 638424, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 417458, "member_count": 134365, "total_message_sent": 69025}
+          application/json: {"id": "<value>", "type": 4, "flags": 638424, "guild_id": "<value>", "name": "<value>", "owner_id": "<value>", "message_count": 417458, "member_count": 134365, "total_message_sent": 69025}
         4XX:
           application/json: {"code": 796474, "message": "<value>"}
     speakeasy-default-create-thread-json:
