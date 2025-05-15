@@ -12,20 +12,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class ApplicationRoleConnectionMetadata extends ClientSDK {
   /**
-   * Deletes the application role connection for the user.
-   */
-  async deleteUserConnection(
-    request: operations.DeleteApplicationUserRoleConnectionRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(applicationRoleConnectionMetadataDeleteUserConnection(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Returns a list of application role connection metadata objects for the given application.
    */
   async list(
@@ -47,6 +33,20 @@ export class ApplicationRoleConnectionMetadata extends ClientSDK {
     options?: RequestOptions,
   ): Promise<Array<components.ApplicationRoleConnectionsMetadataItemResponse>> {
     return unwrapAsync(applicationRoleConnectionMetadataUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Deletes the application role connection for the user.
+   */
+  async deleteUserConnection(
+    request: operations.DeleteApplicationUserRoleConnectionRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(applicationRoleConnectionMetadataDeleteUserConnection(
       this,
       request,
       options,

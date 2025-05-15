@@ -13,7 +13,7 @@ export type UpdateOriginalWebhookMessageMultipartSecurity = {
   botToken?: string | undefined;
 };
 
-export type Components =
+export type UpdateOriginalWebhookMessageMultipartComponents =
   | components.ActionRowComponentForMessageRequest
   | components.MediaGalleryComponentForMessageRequest
   | components.TextDisplayComponentForMessageRequest
@@ -137,22 +137,23 @@ export function updateOriginalWebhookMessageMultipartSecurityFromJSON(
 }
 
 /** @internal */
-export const Components$inboundSchema: z.ZodType<
-  Components,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.ActionRowComponentForMessageRequest$inboundSchema,
-  components.MediaGalleryComponentForMessageRequest$inboundSchema,
-  components.TextDisplayComponentForMessageRequest$inboundSchema,
-  components.FileComponentForMessageRequest$inboundSchema,
-  components.SectionComponentForMessageRequest$inboundSchema,
-  components.SeparatorComponentForMessageRequest$inboundSchema,
-  components.ContainerComponentForMessageRequest$inboundSchema,
-]);
+export const UpdateOriginalWebhookMessageMultipartComponents$inboundSchema:
+  z.ZodType<
+    UpdateOriginalWebhookMessageMultipartComponents,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    components.ActionRowComponentForMessageRequest$inboundSchema,
+    components.MediaGalleryComponentForMessageRequest$inboundSchema,
+    components.TextDisplayComponentForMessageRequest$inboundSchema,
+    components.FileComponentForMessageRequest$inboundSchema,
+    components.SectionComponentForMessageRequest$inboundSchema,
+    components.SeparatorComponentForMessageRequest$inboundSchema,
+    components.ContainerComponentForMessageRequest$inboundSchema,
+  ]);
 
 /** @internal */
-export type Components$Outbound =
+export type UpdateOriginalWebhookMessageMultipartComponents$Outbound =
   | components.ActionRowComponentForMessageRequest$Outbound
   | components.MediaGalleryComponentForMessageRequest$Outbound
   | components.TextDisplayComponentForMessageRequest$Outbound
@@ -162,44 +163,61 @@ export type Components$Outbound =
   | components.ContainerComponentForMessageRequest$Outbound;
 
 /** @internal */
-export const Components$outboundSchema: z.ZodType<
-  Components$Outbound,
-  z.ZodTypeDef,
-  Components
-> = z.union([
-  components.ActionRowComponentForMessageRequest$outboundSchema,
-  components.MediaGalleryComponentForMessageRequest$outboundSchema,
-  components.TextDisplayComponentForMessageRequest$outboundSchema,
-  components.FileComponentForMessageRequest$outboundSchema,
-  components.SectionComponentForMessageRequest$outboundSchema,
-  components.SeparatorComponentForMessageRequest$outboundSchema,
-  components.ContainerComponentForMessageRequest$outboundSchema,
-]);
+export const UpdateOriginalWebhookMessageMultipartComponents$outboundSchema:
+  z.ZodType<
+    UpdateOriginalWebhookMessageMultipartComponents$Outbound,
+    z.ZodTypeDef,
+    UpdateOriginalWebhookMessageMultipartComponents
+  > = z.union([
+    components.ActionRowComponentForMessageRequest$outboundSchema,
+    components.MediaGalleryComponentForMessageRequest$outboundSchema,
+    components.TextDisplayComponentForMessageRequest$outboundSchema,
+    components.FileComponentForMessageRequest$outboundSchema,
+    components.SectionComponentForMessageRequest$outboundSchema,
+    components.SeparatorComponentForMessageRequest$outboundSchema,
+    components.ContainerComponentForMessageRequest$outboundSchema,
+  ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Components$ {
-  /** @deprecated use `Components$inboundSchema` instead. */
-  export const inboundSchema = Components$inboundSchema;
-  /** @deprecated use `Components$outboundSchema` instead. */
-  export const outboundSchema = Components$outboundSchema;
-  /** @deprecated use `Components$Outbound` instead. */
-  export type Outbound = Components$Outbound;
+export namespace UpdateOriginalWebhookMessageMultipartComponents$ {
+  /** @deprecated use `UpdateOriginalWebhookMessageMultipartComponents$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateOriginalWebhookMessageMultipartComponents$inboundSchema;
+  /** @deprecated use `UpdateOriginalWebhookMessageMultipartComponents$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateOriginalWebhookMessageMultipartComponents$outboundSchema;
+  /** @deprecated use `UpdateOriginalWebhookMessageMultipartComponents$Outbound` instead. */
+  export type Outbound =
+    UpdateOriginalWebhookMessageMultipartComponents$Outbound;
 }
 
-export function componentsToJSON(components: Components): string {
-  return JSON.stringify(Components$outboundSchema.parse(components));
+export function updateOriginalWebhookMessageMultipartComponentsToJSON(
+  updateOriginalWebhookMessageMultipartComponents:
+    UpdateOriginalWebhookMessageMultipartComponents,
+): string {
+  return JSON.stringify(
+    UpdateOriginalWebhookMessageMultipartComponents$outboundSchema.parse(
+      updateOriginalWebhookMessageMultipartComponents,
+    ),
+  );
 }
 
-export function componentsFromJSON(
+export function updateOriginalWebhookMessageMultipartComponentsFromJSON(
   jsonString: string,
-): SafeParseResult<Components, SDKValidationError> {
+): SafeParseResult<
+  UpdateOriginalWebhookMessageMultipartComponents,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => Components$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Components' from JSON`,
+    (x) =>
+      UpdateOriginalWebhookMessageMultipartComponents$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateOriginalWebhookMessageMultipartComponents' from JSON`,
   );
 }
 

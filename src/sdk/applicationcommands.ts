@@ -24,110 +24,14 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class ApplicationCommands extends ClientSDK {
   /**
-   * Fetches command permissions for all commands for your application in a guild.
+   * Fetch all global commands for your application.
    */
-  async listGuildPermissions(
-    security: operations.ListGuildApplicationCommandPermissionsSecurity,
-    request: operations.ListGuildApplicationCommandPermissionsRequest,
-    options?: RequestOptions,
-  ): Promise<Array<components.CommandPermissionsResponse>> {
-    return unwrapAsync(applicationCommandsListGuildPermissions(
-      this,
-      security,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Fetches command permissions for a specific command for your application in a guild.
-   */
-  async getGuildPermissions(
-    security: operations.GetGuildApplicationCommandPermissionsSecurity,
-    request: operations.GetGuildApplicationCommandPermissionsRequest,
-    options?: RequestOptions,
-  ): Promise<components.CommandPermissionsResponse> {
-    return unwrapAsync(applicationCommandsGetGuildPermissions(
-      this,
-      security,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Edits command permissions for a specific command for your application in a guild.
-   */
-  async setGuildPermissions(
-    security: operations.SetGuildApplicationCommandPermissionsSecurity,
-    request: operations.SetGuildApplicationCommandPermissionsRequest,
-    options?: RequestOptions,
-  ): Promise<components.CommandPermissionsResponse> {
-    return unwrapAsync(applicationCommandsSetGuildPermissions(
-      this,
-      security,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Fetch a guild command for your application.
-   */
-  async getGuild(
-    security: operations.GetGuildApplicationCommandSecurity,
-    request: operations.GetGuildApplicationCommandRequest,
-    options?: RequestOptions,
-  ): Promise<components.ApplicationCommandResponse> {
-    return unwrapAsync(applicationCommandsGetGuild(
-      this,
-      security,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a guild command.
-   */
-  async deleteGuild(
-    security: operations.DeleteGuildApplicationCommandSecurity,
-    request: operations.DeleteGuildApplicationCommandRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(applicationCommandsDeleteGuild(
-      this,
-      security,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Edit a guild command. Updates for guild commands will be available immediately.
-   */
-  async updateGuild(
-    security: operations.UpdateGuildApplicationCommandSecurity,
-    request: operations.UpdateGuildApplicationCommandRequest,
-    options?: RequestOptions,
-  ): Promise<components.ApplicationCommandResponse> {
-    return unwrapAsync(applicationCommandsUpdateGuild(
-      this,
-      security,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Fetch all guild commands for your application for a specific guild.
-   */
-  async listGuild(
-    security: operations.ListGuildApplicationCommandsSecurity,
-    request: operations.ListGuildApplicationCommandsRequest,
+  async list(
+    security: operations.ListApplicationCommandsSecurity,
+    request: operations.ListApplicationCommandsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.ApplicationCommandResponse>> {
-    return unwrapAsync(applicationCommandsListGuild(
+    return unwrapAsync(applicationCommandsList(
       this,
       security,
       request,
@@ -136,14 +40,14 @@ export class ApplicationCommands extends ClientSDK {
   }
 
   /**
-   * Takes a list of application commands, overwriting the existing command list for this application for the targeted guild.
+   * Takes a list of application commands, overwriting the existing global command list for this application.
    */
-  async bulkSetGuild(
-    security: operations.BulkSetGuildApplicationCommandsSecurity,
-    request: operations.BulkSetGuildApplicationCommandsRequest,
+  async bulkSet(
+    security: operations.BulkSetApplicationCommandsSecurity,
+    request: operations.BulkSetApplicationCommandsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.ApplicationCommandResponse>> {
-    return unwrapAsync(applicationCommandsBulkSetGuild(
+    return unwrapAsync(applicationCommandsBulkSet(
       this,
       security,
       request,
@@ -152,14 +56,14 @@ export class ApplicationCommands extends ClientSDK {
   }
 
   /**
-   * Create a new guild command. New guild commands will be available in the guild immediately.
+   * Create a new global command. New global commands will be available in all guilds after 1 hour.
    */
-  async createGuild(
-    security: operations.CreateGuildApplicationCommandSecurity,
-    request: operations.CreateGuildApplicationCommandRequest,
+  async create(
+    security: operations.CreateApplicationCommandSecurity,
+    request: operations.CreateApplicationCommandRequest,
     options?: RequestOptions,
   ): Promise<components.ApplicationCommandResponse> {
-    return unwrapAsync(applicationCommandsCreateGuild(
+    return unwrapAsync(applicationCommandsCreate(
       this,
       security,
       request,
@@ -216,14 +120,14 @@ export class ApplicationCommands extends ClientSDK {
   }
 
   /**
-   * Fetch all global commands for your application.
+   * Fetch all guild commands for your application for a specific guild.
    */
-  async list(
-    security: operations.ListApplicationCommandsSecurity,
-    request: operations.ListApplicationCommandsRequest,
+  async listGuild(
+    security: operations.ListGuildApplicationCommandsSecurity,
+    request: operations.ListGuildApplicationCommandsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.ApplicationCommandResponse>> {
-    return unwrapAsync(applicationCommandsList(
+    return unwrapAsync(applicationCommandsListGuild(
       this,
       security,
       request,
@@ -232,14 +136,14 @@ export class ApplicationCommands extends ClientSDK {
   }
 
   /**
-   * Takes a list of application commands, overwriting the existing global command list for this application.
+   * Takes a list of application commands, overwriting the existing command list for this application for the targeted guild.
    */
-  async bulkSet(
-    security: operations.BulkSetApplicationCommandsSecurity,
-    request: operations.BulkSetApplicationCommandsRequest,
+  async bulkSetGuild(
+    security: operations.BulkSetGuildApplicationCommandsSecurity,
+    request: operations.BulkSetGuildApplicationCommandsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.ApplicationCommandResponse>> {
-    return unwrapAsync(applicationCommandsBulkSet(
+    return unwrapAsync(applicationCommandsBulkSetGuild(
       this,
       security,
       request,
@@ -248,14 +152,110 @@ export class ApplicationCommands extends ClientSDK {
   }
 
   /**
-   * Create a new global command. New global commands will be available in all guilds after 1 hour.
+   * Create a new guild command. New guild commands will be available in the guild immediately.
    */
-  async create(
-    security: operations.CreateApplicationCommandSecurity,
-    request: operations.CreateApplicationCommandRequest,
+  async createGuild(
+    security: operations.CreateGuildApplicationCommandSecurity,
+    request: operations.CreateGuildApplicationCommandRequest,
     options?: RequestOptions,
   ): Promise<components.ApplicationCommandResponse> {
-    return unwrapAsync(applicationCommandsCreate(
+    return unwrapAsync(applicationCommandsCreateGuild(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Fetches command permissions for all commands for your application in a guild.
+   */
+  async listGuildPermissions(
+    security: operations.ListGuildApplicationCommandPermissionsSecurity,
+    request: operations.ListGuildApplicationCommandPermissionsRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.CommandPermissionsResponse>> {
+    return unwrapAsync(applicationCommandsListGuildPermissions(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Fetch a guild command for your application.
+   */
+  async getGuild(
+    security: operations.GetGuildApplicationCommandSecurity,
+    request: operations.GetGuildApplicationCommandRequest,
+    options?: RequestOptions,
+  ): Promise<components.ApplicationCommandResponse> {
+    return unwrapAsync(applicationCommandsGetGuild(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a guild command.
+   */
+  async deleteGuild(
+    security: operations.DeleteGuildApplicationCommandSecurity,
+    request: operations.DeleteGuildApplicationCommandRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(applicationCommandsDeleteGuild(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Edit a guild command. Updates for guild commands will be available immediately.
+   */
+  async updateGuild(
+    security: operations.UpdateGuildApplicationCommandSecurity,
+    request: operations.UpdateGuildApplicationCommandRequest,
+    options?: RequestOptions,
+  ): Promise<components.ApplicationCommandResponse> {
+    return unwrapAsync(applicationCommandsUpdateGuild(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Fetches command permissions for a specific command for your application in a guild.
+   */
+  async getGuildPermissions(
+    security: operations.GetGuildApplicationCommandPermissionsSecurity,
+    request: operations.GetGuildApplicationCommandPermissionsRequest,
+    options?: RequestOptions,
+  ): Promise<components.CommandPermissionsResponse> {
+    return unwrapAsync(applicationCommandsGetGuildPermissions(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Edits command permissions for a specific command for your application in a guild.
+   */
+  async setGuildPermissions(
+    security: operations.SetGuildApplicationCommandPermissionsSecurity,
+    request: operations.SetGuildApplicationCommandPermissionsRequest,
+    options?: RequestOptions,
+  ): Promise<components.CommandPermissionsResponse> {
+    return unwrapAsync(applicationCommandsSetGuildPermissions(
       this,
       security,
       request,

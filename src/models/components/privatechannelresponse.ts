@@ -18,7 +18,7 @@ import {
 /**
  * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
  */
-export const Type = {
+export const PrivateChannelResponseType = {
   Zero: 0,
   One: 1,
   Two: 2,
@@ -36,11 +36,13 @@ export const Type = {
 /**
  * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
  */
-export type Type = ClosedEnum<typeof Type>;
+export type PrivateChannelResponseType = ClosedEnum<
+  typeof PrivateChannelResponseType
+>;
 
 export type PrivateChannelResponse = {
   id: string;
-  type: Type;
+  type: PrivateChannelResponseType;
   lastMessageId?: string | null | undefined;
   flags: number;
   lastPinTimestamp?: Date | null | undefined;
@@ -48,23 +50,24 @@ export type PrivateChannelResponse = {
 };
 
 /** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
+export const PrivateChannelResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof PrivateChannelResponseType
+> = z.nativeEnum(PrivateChannelResponseType);
 
 /** @internal */
-export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
-  Type$inboundSchema;
+export const PrivateChannelResponseType$outboundSchema: z.ZodNativeEnum<
+  typeof PrivateChannelResponseType
+> = PrivateChannelResponseType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Type$ {
-  /** @deprecated use `Type$inboundSchema` instead. */
-  export const inboundSchema = Type$inboundSchema;
-  /** @deprecated use `Type$outboundSchema` instead. */
-  export const outboundSchema = Type$outboundSchema;
+export namespace PrivateChannelResponseType$ {
+  /** @deprecated use `PrivateChannelResponseType$inboundSchema` instead. */
+  export const inboundSchema = PrivateChannelResponseType$inboundSchema;
+  /** @deprecated use `PrivateChannelResponseType$outboundSchema` instead. */
+  export const outboundSchema = PrivateChannelResponseType$outboundSchema;
 }
 
 /** @internal */
@@ -74,7 +77,7 @@ export const PrivateChannelResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  type: Type$inboundSchema,
+  type: PrivateChannelResponseType$inboundSchema,
   last_message_id: z.nullable(z.string()).optional(),
   flags: z.number().int(),
   last_pin_timestamp: z.nullable(
@@ -105,7 +108,7 @@ export const PrivateChannelResponse$outboundSchema: z.ZodType<
   PrivateChannelResponse
 > = z.object({
   id: z.string(),
-  type: Type$outboundSchema,
+  type: PrivateChannelResponseType$outboundSchema,
   lastMessageId: z.nullable(z.string()).optional(),
   flags: z.number().int(),
   lastPinTimestamp: z.nullable(z.date().transform(v => v.toISOString()))

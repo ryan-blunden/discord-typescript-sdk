@@ -35,13 +35,13 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Channels extends ClientSDK {
   /**
-   * Returns archived threads in the channel that are of type PRIVATE_THREAD, and the user has joined. Threads are ordered by their id, in descending order. Requires the READ_MESSAGE_HISTORY permission.
+   * Returns a channel object for the given channel ID.
    */
-  async listJoinedPrivateArchivedThreads(
-    request: operations.ListMyPrivateArchivedThreadsRequest,
+  async get(
+    request: operations.GetChannelRequest,
     options?: RequestOptions,
-  ): Promise<components.ThreadsResponse> {
-    return unwrapAsync(channelsListJoinedPrivateArchivedThreads(
+  ): Promise<operations.GetChannelResponseBody> {
+    return unwrapAsync(channelsGet(
       this,
       request,
       options,
@@ -49,13 +49,13 @@ export class Channels extends ClientSDK {
   }
 
   /**
-   * Returns archived threads in the channel that are of type PRIVATE_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions.
+   * Delete a channel, or close a private message. Requires the MANAGE_CHANNELS permission for the guild, or MANAGE_THREADS if the channel is a thread. Returns a channel object on success. Fires a Channel Delete Gateway event (or Thread Delete if the channel was a thread).
    */
-  async listPrivateArchivedThreads(
-    request: operations.ListPrivateArchivedThreadsRequest,
+  async delete(
+    request: operations.DeleteChannelRequest,
     options?: RequestOptions,
-  ): Promise<components.ThreadsResponse> {
-    return unwrapAsync(channelsListPrivateArchivedThreads(
+  ): Promise<operations.DeleteChannelResponseBody> {
+    return unwrapAsync(channelsDelete(
       this,
       request,
       options,
@@ -63,13 +63,181 @@ export class Channels extends ClientSDK {
   }
 
   /**
-   * Returns archived threads in the channel that are public. When called on a GUILD_TEXT channel, returns threads of type PUBLIC_THREAD. When called on a GUILD_ANNOUNCEMENT channel returns threads of type ANNOUNCEMENT_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires the READ_MESSAGE_HISTORY permission.
+   * Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.
    */
-  async listPublicArchivedThreads(
-    request: operations.ListPublicArchivedThreadsRequest,
+  async update(
+    request: operations.UpdateChannelRequest,
     options?: RequestOptions,
-  ): Promise<components.ThreadsResponse> {
-    return unwrapAsync(channelsListPublicArchivedThreads(
+  ): Promise<operations.UpdateChannelResponseBody> {
+    return unwrapAsync(channelsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Follow an Announcement Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. Returns a followed channel object. Fires a Webhooks Update Gateway event for the target channel.
+   */
+  async follow(
+    request: operations.FollowChannelRequest,
+    options?: RequestOptions,
+  ): Promise<components.ChannelFollowerResponse> {
+    return unwrapAsync(channelsFollow(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns a list of invite objects (with invite metadata) for the channel.
+   */
+  async listInvites(
+    request: operations.ListChannelInvitesRequest,
+    options?: RequestOptions,
+  ): Promise<Array<operations.ResponseBody>> {
+    return unwrapAsync(channelsListInvites(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a new invite object for the channel.
+   */
+  async createInvite(
+    request: operations.CreateChannelInviteRequest,
+    options?: RequestOptions,
+  ): Promise<operations.CreateChannelInviteResponseBody | undefined> {
+    return unwrapAsync(channelsCreateInvite(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Creates a new thread from an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create and a Message Update Gateway event.
+   */
+  async startThreadFromMessage(
+    request: operations.CreateThreadFromMessageRequest,
+    options?: RequestOptions,
+  ): Promise<components.ThreadResponse> {
+    return unwrapAsync(channelsStartThreadFromMessage(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
+   */
+  async setPermissionOverwrite(
+    request: operations.SetChannelPermissionOverwriteRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(channelsSetPermissionOverwrite(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
+   */
+  async deletePermissionOverwrite(
+    request: operations.DeleteChannelPermissionOverwriteRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(channelsDeletePermissionOverwrite(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns all pinned messages in the channel as an array of message objects.
+   */
+  async listPinnedMessages(
+    request: operations.ListPinnedMessagesRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.MessageResponse>> {
+    return unwrapAsync(channelsListPinnedMessages(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Pin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+   */
+  async pinMessage(
+    request: operations.PinMessageRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(channelsPinMessage(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Unpin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+   */
+  async unpinMessage(
+    request: operations.UnpinMessageRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(channelsUnpinMessage(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Adds a recipient to a Group DM using their access token.
+   */
+  async addGroupDMRecipient(
+    request: operations.AddGroupDmUserRequest,
+    options?: RequestOptions,
+  ): Promise<operations.AddGroupDmUserResponseBody | undefined> {
+    return unwrapAsync(channelsAddGroupDMRecipient(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Removes a recipient from a Group DM.
+   */
+  async removeGroupDMRecipient(
+    request: operations.DeleteGroupDmUserRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(channelsRemoveGroupDMRecipient(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns array of thread member objects that are members of the thread.
+   */
+  async listThreadMembers(
+    request: operations.ListThreadMembersRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.ThreadMemberResponse>> {
+    return unwrapAsync(channelsListThreadMembers(
       this,
       request,
       options,
@@ -98,34 +266,6 @@ export class Channels extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(channelsLeaveThread(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Creates a new thread from an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create and a Message Update Gateway event.
-   */
-  async startThreadFromMessage(
-    request: operations.CreateThreadFromMessageRequest,
-    options?: RequestOptions,
-  ): Promise<components.ThreadResponse> {
-    return unwrapAsync(channelsStartThreadFromMessage(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Search for threads in a channel.
-   */
-  async searchThreads(
-    request: operations.ThreadSearchRequest,
-    options?: RequestOptions,
-  ): Promise<components.ThreadSearchResponse> {
-    return unwrapAsync(channelsSearchThreads(
       this,
       request,
       options,
@@ -175,118 +315,6 @@ export class Channels extends ClientSDK {
   }
 
   /**
-   * Returns array of thread member objects that are members of the thread.
-   */
-  async listThreadMembers(
-    request: operations.ListThreadMembersRequest,
-    options?: RequestOptions,
-  ): Promise<Array<components.ThreadMemberResponse>> {
-    return unwrapAsync(channelsListThreadMembers(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
-   */
-  async setPermissionOverwrite(
-    request: operations.SetChannelPermissionOverwriteRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(channelsSetPermissionOverwrite(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
-   */
-  async deletePermissionOverwrite(
-    request: operations.DeleteChannelPermissionOverwriteRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(channelsDeletePermissionOverwrite(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Adds a recipient to a Group DM using their access token.
-   */
-  async addGroupDMRecipient(
-    request: operations.AddGroupDmUserRequest,
-    options?: RequestOptions,
-  ): Promise<operations.AddGroupDmUserResponseBody | undefined> {
-    return unwrapAsync(channelsAddGroupDMRecipient(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Removes a recipient from a Group DM.
-   */
-  async removeGroupDMRecipient(
-    request: operations.DeleteGroupDmUserRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(channelsRemoveGroupDMRecipient(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Follow an Announcement Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. Returns a followed channel object. Fires a Webhooks Update Gateway event for the target channel.
-   */
-  async follow(
-    request: operations.FollowChannelRequest,
-    options?: RequestOptions,
-  ): Promise<components.ChannelFollowerResponse> {
-    return unwrapAsync(channelsFollow(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Returns a list of invite objects (with invite metadata) for the channel.
-   */
-  async listInvites(
-    request: operations.ListChannelInvitesRequest,
-    options?: RequestOptions,
-  ): Promise<Array<operations.ListChannelInvitesResponseBody>> {
-    return unwrapAsync(channelsListInvites(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a new invite object for the channel.
-   */
-  async createInvite(
-    request: operations.CreateChannelInviteRequest,
-    options?: RequestOptions,
-  ): Promise<operations.CreateChannelInviteResponseBody | undefined> {
-    return unwrapAsync(channelsCreateInvite(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Creates a new thread that is not connected to an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create Gateway event.
    */
   async startThread(
@@ -294,6 +322,48 @@ export class Channels extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.CreatedThreadResponse> {
     return unwrapAsync(channelsStartThread(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns archived threads in the channel that are of type PRIVATE_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions.
+   */
+  async listPrivateArchivedThreads(
+    request: operations.ListPrivateArchivedThreadsRequest,
+    options?: RequestOptions,
+  ): Promise<components.ThreadsResponse> {
+    return unwrapAsync(channelsListPrivateArchivedThreads(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns archived threads in the channel that are public. When called on a GUILD_TEXT channel, returns threads of type PUBLIC_THREAD. When called on a GUILD_ANNOUNCEMENT channel returns threads of type ANNOUNCEMENT_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires the READ_MESSAGE_HISTORY permission.
+   */
+  async listPublicArchivedThreads(
+    request: operations.ListPublicArchivedThreadsRequest,
+    options?: RequestOptions,
+  ): Promise<components.ThreadsResponse> {
+    return unwrapAsync(channelsListPublicArchivedThreads(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Search for threads in a channel.
+   */
+  async searchThreads(
+    request: operations.ThreadSearchRequest,
+    options?: RequestOptions,
+  ): Promise<components.ThreadSearchResponse> {
+    return unwrapAsync(channelsSearchThreads(
       this,
       request,
       options,
@@ -315,83 +385,13 @@ export class Channels extends ClientSDK {
   }
 
   /**
-   * Pin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
+   * Returns archived threads in the channel that are of type PRIVATE_THREAD, and the user has joined. Threads are ordered by their id, in descending order. Requires the READ_MESSAGE_HISTORY permission.
    */
-  async pinMessage(
-    request: operations.PinMessageRequest,
+  async listJoinedPrivateArchivedThreads(
+    request: operations.ListMyPrivateArchivedThreadsRequest,
     options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(channelsPinMessage(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Unpin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
-   */
-  async unpinMessage(
-    request: operations.UnpinMessageRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(channelsUnpinMessage(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Returns all pinned messages in the channel as an array of message objects.
-   */
-  async listPinnedMessages(
-    request: operations.ListPinnedMessagesRequest,
-    options?: RequestOptions,
-  ): Promise<Array<components.MessageResponse>> {
-    return unwrapAsync(channelsListPinnedMessages(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Returns a channel object for the given channel ID.
-   */
-  async get(
-    request: operations.GetChannelRequest,
-    options?: RequestOptions,
-  ): Promise<operations.GetChannelResponseBody> {
-    return unwrapAsync(channelsGet(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a channel, or close a private message. Requires the MANAGE_CHANNELS permission for the guild, or MANAGE_THREADS if the channel is a thread. Returns a channel object on success. Fires a Channel Delete Gateway event (or Thread Delete if the channel was a thread).
-   */
-  async delete(
-    request: operations.DeleteChannelRequest,
-    options?: RequestOptions,
-  ): Promise<operations.DeleteChannelResponseBody> {
-    return unwrapAsync(channelsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.
-   */
-  async update(
-    request: operations.UpdateChannelRequest,
-    options?: RequestOptions,
-  ): Promise<operations.UpdateChannelResponseBody> {
-    return unwrapAsync(channelsUpdate(
+  ): Promise<components.ThreadsResponse> {
+    return unwrapAsync(channelsListJoinedPrivateArchivedThreads(
       this,
       request,
       options,

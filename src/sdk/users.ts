@@ -19,50 +19,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Users extends ClientSDK {
   /**
-   * Returns a list of connection objects. Requires the connections OAuth2 scope.
-   */
-  async listConnections(
-    security: operations.ListMyConnectionsSecurity,
-    options?: RequestOptions,
-  ): Promise<Array<components.ConnectedAccountResponse>> {
-    return unwrapAsync(usersListConnections(
-      this,
-      security,
-      options,
-    ));
-  }
-
-  /**
-   * Create a new DM channel with a user. Returns a DM channel object (if one already exists, it will be returned instead).
-   */
-  async createDM(
-    request: components.CreatePrivateChannelRequest,
-    options?: RequestOptions,
-  ): Promise<operations.CreateDmResponseBody> {
-    return unwrapAsync(usersCreateDM(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Returns a list of partial guild objects the current user is a member of. For OAuth2, requires the guilds scope.
-   */
-  async listGuilds(
-    security: operations.ListMyGuildsSecurity,
-    request: operations.ListMyGuildsRequest,
-    options?: RequestOptions,
-  ): Promise<Array<components.MyGuildResponse>> {
-    return unwrapAsync(usersListGuilds(
-      this,
-      security,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Returns the user object of the requester's account. For OAuth2, this requires the identify scope, which will return the object without an email, and optionally the email scope, which returns the object with an email if the user has one.
    */
   async getCurrent(
@@ -119,14 +75,44 @@ export class Users extends ClientSDK {
   }
 
   /**
-   * Returns a guild member object for the current user. Requires the guilds.members.read OAuth2 scope.
+   * Create a new DM channel with a user. Returns a DM channel object (if one already exists, it will be returned instead).
    */
-  async getGuildMember(
-    request: operations.GetMyGuildMemberRequest,
+  async createDM(
+    request: components.CreatePrivateChannelRequest,
     options?: RequestOptions,
-  ): Promise<components.PrivateGuildMemberResponse> {
-    return unwrapAsync(usersGetGuildMember(
+  ): Promise<operations.CreateDmResponseBody> {
+    return unwrapAsync(usersCreateDM(
       this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns a list of connection objects. Requires the connections OAuth2 scope.
+   */
+  async listConnections(
+    security: operations.ListMyConnectionsSecurity,
+    options?: RequestOptions,
+  ): Promise<Array<components.ConnectedAccountResponse>> {
+    return unwrapAsync(usersListConnections(
+      this,
+      security,
+      options,
+    ));
+  }
+
+  /**
+   * Returns a list of partial guild objects the current user is a member of. For OAuth2, requires the guilds scope.
+   */
+  async listGuilds(
+    security: operations.ListMyGuildsSecurity,
+    request: operations.ListMyGuildsRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.MyGuildResponse>> {
+    return unwrapAsync(usersListGuilds(
+      this,
+      security,
       request,
       options,
     ));
@@ -140,6 +126,20 @@ export class Users extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(usersLeaveGuild(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns a guild member object for the current user. Requires the guilds.members.read OAuth2 scope.
+   */
+  async getGuildMember(
+    request: operations.GetMyGuildMemberRequest,
+    options?: RequestOptions,
+  ): Promise<components.PrivateGuildMemberResponse> {
+    return unwrapAsync(usersGetGuildMember(
       this,
       request,
       options,

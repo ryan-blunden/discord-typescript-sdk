@@ -13,7 +13,7 @@ export type ListAutoModerationRulesRequest = {
   guildId: string;
 };
 
-export type ResponseBody =
+export type ListAutoModerationRulesResponseBody =
   | components.DefaultKeywordRuleResponse
   | components.KeywordRuleResponse
   | components.MLSpamRuleResponse
@@ -85,8 +85,8 @@ export function listAutoModerationRulesRequestFromJSON(
 }
 
 /** @internal */
-export const ResponseBody$inboundSchema: z.ZodType<
-  ResponseBody,
+export const ListAutoModerationRulesResponseBody$inboundSchema: z.ZodType<
+  ListAutoModerationRulesResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -98,7 +98,7 @@ export const ResponseBody$inboundSchema: z.ZodType<
 ]);
 
 /** @internal */
-export type ResponseBody$Outbound =
+export type ListAutoModerationRulesResponseBody$Outbound =
   | components.DefaultKeywordRuleResponse$Outbound
   | components.KeywordRuleResponse$Outbound
   | components.MLSpamRuleResponse$Outbound
@@ -106,10 +106,10 @@ export type ResponseBody$Outbound =
   | components.SpamLinkRuleResponse$Outbound;
 
 /** @internal */
-export const ResponseBody$outboundSchema: z.ZodType<
-  ResponseBody$Outbound,
+export const ListAutoModerationRulesResponseBody$outboundSchema: z.ZodType<
+  ListAutoModerationRulesResponseBody$Outbound,
   z.ZodTypeDef,
-  ResponseBody
+  ListAutoModerationRulesResponseBody
 > = z.union([
   components.DefaultKeywordRuleResponse$outboundSchema,
   components.KeywordRuleResponse$outboundSchema,
@@ -122,25 +122,34 @@ export const ResponseBody$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ResponseBody$ {
-  /** @deprecated use `ResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ResponseBody$inboundSchema;
-  /** @deprecated use `ResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ResponseBody$outboundSchema;
-  /** @deprecated use `ResponseBody$Outbound` instead. */
-  export type Outbound = ResponseBody$Outbound;
+export namespace ListAutoModerationRulesResponseBody$ {
+  /** @deprecated use `ListAutoModerationRulesResponseBody$inboundSchema` instead. */
+  export const inboundSchema =
+    ListAutoModerationRulesResponseBody$inboundSchema;
+  /** @deprecated use `ListAutoModerationRulesResponseBody$outboundSchema` instead. */
+  export const outboundSchema =
+    ListAutoModerationRulesResponseBody$outboundSchema;
+  /** @deprecated use `ListAutoModerationRulesResponseBody$Outbound` instead. */
+  export type Outbound = ListAutoModerationRulesResponseBody$Outbound;
 }
 
-export function responseBodyToJSON(responseBody: ResponseBody): string {
-  return JSON.stringify(ResponseBody$outboundSchema.parse(responseBody));
+export function listAutoModerationRulesResponseBodyToJSON(
+  listAutoModerationRulesResponseBody: ListAutoModerationRulesResponseBody,
+): string {
+  return JSON.stringify(
+    ListAutoModerationRulesResponseBody$outboundSchema.parse(
+      listAutoModerationRulesResponseBody,
+    ),
+  );
 }
 
-export function responseBodyFromJSON(
+export function listAutoModerationRulesResponseBodyFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBody, SDKValidationError> {
+): SafeParseResult<ListAutoModerationRulesResponseBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBody' from JSON`,
+    (x) =>
+      ListAutoModerationRulesResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAutoModerationRulesResponseBody' from JSON`,
   );
 }

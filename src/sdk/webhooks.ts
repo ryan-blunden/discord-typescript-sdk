@@ -30,6 +30,154 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Webhooks extends ClientSDK {
   /**
+   * Returns a list of channel webhook objects. Requires the MANAGE_WEBHOOKS permission.
+   */
+  async listForChannel(
+    request: operations.ListChannelWebhooksRequest,
+    options?: RequestOptions,
+  ): Promise<Array<operations.ListChannelWebhooksResponseBody>> {
+    return unwrapAsync(webhooksListForChannel(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Creates a new webhook and returns a webhook object on success. Requires the MANAGE_WEBHOOKS permission. Fires a Webhooks Update Gateway event.
+   */
+  async create(
+    request: operations.CreateWebhookRequest,
+    options?: RequestOptions,
+  ): Promise<components.GuildIncomingWebhookResponse> {
+    return unwrapAsync(webhooksCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns a list of guild webhook objects. Requires the MANAGE_WEBHOOKS permission.
+   */
+  async listForGuild(
+    request: operations.GetGuildWebhooksRequest,
+    options?: RequestOptions,
+  ): Promise<Array<operations.GetGuildWebhooksResponseBody>> {
+    return unwrapAsync(webhooksListForGuild(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns the new webhook object for the given id.
+   */
+  async get(
+    request: operations.GetWebhookRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetWebhookResponseBody> {
+    return unwrapAsync(webhooksGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. Returns a 204 No Content response on success. Fires a Webhooks Update Gateway event.
+   */
+  async delete(
+    request: operations.DeleteWebhookRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(webhooksDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Modify a webhook. Requires the MANAGE_WEBHOOKS permission. Returns the updated webhook object on success. Fires a Webhooks Update Gateway event.
+   */
+  async update(
+    request: operations.UpdateWebhookRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateWebhookResponseBody> {
+    return unwrapAsync(webhooksUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Same as above, except this call does not require authentication and returns no user in the webhook object.
+   */
+  async getWithToken(
+    request: operations.GetWebhookByTokenRequest,
+    security?: operations.GetWebhookByTokenSecurity | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.GetWebhookByTokenResponseBody> {
+    return unwrapAsync(webhooksGetWithToken(
+      this,
+      request,
+      security,
+      options,
+    ));
+  }
+
+  /**
+   * Same as above, except this call does not require authentication.
+   */
+  async deleteWithToken(
+    request: operations.DeleteWebhookByTokenRequest,
+    security?: operations.DeleteWebhookByTokenSecurity | undefined,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(webhooksDeleteWithToken(
+      this,
+      request,
+      security,
+      options,
+    ));
+  }
+
+  /**
+   * Same as above, except this call does not require authentication, does not accept a channel_id parameter in the body, and does not return a user in the webhook object.
+   */
+  async updateWithToken(
+    request: operations.UpdateWebhookByTokenRequest,
+    security?: operations.UpdateWebhookByTokenSecurity | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateWebhookByTokenResponseBody> {
+    return unwrapAsync(webhooksUpdateWithToken(
+      this,
+      request,
+      security,
+      options,
+    ));
+  }
+
+  /**
+   * Add a new webhook to your GitHub repo (in the repo's settings), and use this endpoint as the "Payload URL."
+   */
+  async executeGithub(
+    request: operations.ExecuteGithubCompatibleWebhookRequest,
+    security?: operations.ExecuteGithubCompatibleWebhookSecurity | undefined,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(webhooksExecuteGithub(
+      this,
+      request,
+      security,
+      options,
+    ));
+  }
+
+  /**
    * Returns the initial webhook message.
    */
   async getOriginalMessage(
@@ -107,34 +255,6 @@ export class Webhooks extends ClientSDK {
       this,
       request,
       security,
-      options,
-    ));
-  }
-
-  /**
-   * Returns a list of channel webhook objects. Requires the MANAGE_WEBHOOKS permission.
-   */
-  async listForChannel(
-    request: operations.ListChannelWebhooksRequest,
-    options?: RequestOptions,
-  ): Promise<Array<operations.ListChannelWebhooksResponseBody>> {
-    return unwrapAsync(webhooksListForChannel(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Creates a new webhook and returns a webhook object on success. Requires the MANAGE_WEBHOOKS permission. Fires a Webhooks Update Gateway event.
-   */
-  async create(
-    request: operations.CreateWebhookRequest,
-    options?: RequestOptions,
-  ): Promise<components.GuildIncomingWebhookResponse> {
-    return unwrapAsync(webhooksCreate(
-      this,
-      request,
       options,
     ));
   }
@@ -220,22 +340,6 @@ export class Webhooks extends ClientSDK {
   }
 
   /**
-   * Add a new webhook to your GitHub repo (in the repo's settings), and use this endpoint as the "Payload URL."
-   */
-  async executeGithub(
-    request: operations.ExecuteGithubCompatibleWebhookRequest,
-    security?: operations.ExecuteGithubCompatibleWebhookSecurity | undefined,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(webhooksExecuteGithub(
-      this,
-      request,
-      security,
-      options,
-    ));
-  }
-
-  /**
    * Refer to Slack's documentation for more information. We do not support Slack's channel, icon_emoji, mrkdwn, or mrkdwn_in properties.
    */
   async executeSlack(
@@ -247,110 +351,6 @@ export class Webhooks extends ClientSDK {
       this,
       request,
       security,
-      options,
-    ));
-  }
-
-  /**
-   * Returns a list of guild webhook objects. Requires the MANAGE_WEBHOOKS permission.
-   */
-  async listForGuild(
-    request: operations.GetGuildWebhooksRequest,
-    options?: RequestOptions,
-  ): Promise<Array<operations.GetGuildWebhooksResponseBody>> {
-    return unwrapAsync(webhooksListForGuild(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Same as above, except this call does not require authentication and returns no user in the webhook object.
-   */
-  async getWithToken(
-    request: operations.GetWebhookByTokenRequest,
-    security?: operations.GetWebhookByTokenSecurity | undefined,
-    options?: RequestOptions,
-  ): Promise<operations.GetWebhookByTokenResponseBody> {
-    return unwrapAsync(webhooksGetWithToken(
-      this,
-      request,
-      security,
-      options,
-    ));
-  }
-
-  /**
-   * Same as above, except this call does not require authentication.
-   */
-  async deleteWithToken(
-    request: operations.DeleteWebhookByTokenRequest,
-    security?: operations.DeleteWebhookByTokenSecurity | undefined,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(webhooksDeleteWithToken(
-      this,
-      request,
-      security,
-      options,
-    ));
-  }
-
-  /**
-   * Same as above, except this call does not require authentication, does not accept a channel_id parameter in the body, and does not return a user in the webhook object.
-   */
-  async updateWithToken(
-    request: operations.UpdateWebhookByTokenRequest,
-    security?: operations.UpdateWebhookByTokenSecurity | undefined,
-    options?: RequestOptions,
-  ): Promise<operations.UpdateWebhookByTokenResponseBody> {
-    return unwrapAsync(webhooksUpdateWithToken(
-      this,
-      request,
-      security,
-      options,
-    ));
-  }
-
-  /**
-   * Returns the new webhook object for the given id.
-   */
-  async get(
-    request: operations.GetWebhookRequest,
-    options?: RequestOptions,
-  ): Promise<operations.GetWebhookResponseBody> {
-    return unwrapAsync(webhooksGet(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. Returns a 204 No Content response on success. Fires a Webhooks Update Gateway event.
-   */
-  async delete(
-    request: operations.DeleteWebhookRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(webhooksDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Modify a webhook. Requires the MANAGE_WEBHOOKS permission. Returns the updated webhook object on success. Fires a Webhooks Update Gateway event.
-   */
-  async update(
-    request: operations.UpdateWebhookRequest,
-    options?: RequestOptions,
-  ): Promise<operations.UpdateWebhookResponseBody> {
-    return unwrapAsync(webhooksUpdate(
-      this,
-      request,
       options,
     ));
   }

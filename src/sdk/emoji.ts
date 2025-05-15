@@ -19,6 +19,34 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Emoji extends ClientSDK {
   /**
+   * Returns an object containing a list of emoji objects for the given application under the items key. Includes a user object for the team member that uploaded the emoji from the app's settings, or for the bot user if uploaded using the API.
+   */
+  async listApplicationEmojis(
+    request: operations.ListApplicationEmojisRequest,
+    options?: RequestOptions,
+  ): Promise<components.ListApplicationEmojisResponse> {
+    return unwrapAsync(emojiListApplicationEmojis(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a new emoji for the application. Returns the new emoji object on success.
+   */
+  async createApplicationEmoji(
+    request: operations.CreateApplicationEmojiRequest,
+    options?: RequestOptions,
+  ): Promise<components.EmojiResponse> {
+    return unwrapAsync(emojiCreateApplicationEmoji(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Returns an emoji object for the given application and emoji IDs. Includes the user field.
    */
   async getApplicationEmoji(
@@ -61,13 +89,13 @@ export class Emoji extends ClientSDK {
   }
 
   /**
-   * Returns an object containing a list of emoji objects for the given application under the items key. Includes a user object for the team member that uploaded the emoji from the app's settings, or for the bot user if uploaded using the API.
+   * Returns a list of emoji objects for the given guild. Includes user fields if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
    */
-  async listApplicationEmojis(
-    request: operations.ListApplicationEmojisRequest,
+  async listGuildEmojis(
+    request: operations.ListGuildEmojisRequest,
     options?: RequestOptions,
-  ): Promise<components.ListApplicationEmojisResponse> {
-    return unwrapAsync(emojiListApplicationEmojis(
+  ): Promise<Array<components.EmojiResponse>> {
+    return unwrapAsync(emojiListGuildEmojis(
       this,
       request,
       options,
@@ -75,13 +103,13 @@ export class Emoji extends ClientSDK {
   }
 
   /**
-   * Create a new emoji for the application. Returns the new emoji object on success.
+   * Create a new emoji for the guild. Requires the CREATE_GUILD_EXPRESSIONS permission. Returns the new emoji object on success. Fires a Guild Emojis Update Gateway event.
    */
-  async createApplicationEmoji(
-    request: operations.CreateApplicationEmojiRequest,
+  async createGuildEmoji(
+    request: operations.CreateGuildEmojiRequest,
     options?: RequestOptions,
   ): Promise<components.EmojiResponse> {
-    return unwrapAsync(emojiCreateApplicationEmoji(
+    return unwrapAsync(emojiCreateGuildEmoji(
       this,
       request,
       options,
@@ -124,34 +152,6 @@ export class Emoji extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.EmojiResponse> {
     return unwrapAsync(emojiUpdateGuildEmoji(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Returns a list of emoji objects for the given guild. Includes user fields if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
-   */
-  async listGuildEmojis(
-    request: operations.ListGuildEmojisRequest,
-    options?: RequestOptions,
-  ): Promise<Array<components.EmojiResponse>> {
-    return unwrapAsync(emojiListGuildEmojis(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a new emoji for the guild. Requires the CREATE_GUILD_EXPRESSIONS permission. Returns the new emoji object on success. Fires a Guild Emojis Update Gateway event.
-   */
-  async createGuildEmoji(
-    request: operations.CreateGuildEmojiRequest,
-    options?: RequestOptions,
-  ): Promise<components.EmojiResponse> {
-    return unwrapAsync(emojiCreateGuildEmoji(
       this,
       request,
       options,

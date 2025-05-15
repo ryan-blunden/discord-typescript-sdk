@@ -68,13 +68,13 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Returns a list of guild member objects whose username or nickname starts with a provided string.
+   * Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.
    */
-  async searchMembers(
-    request: operations.SearchGuildMembersRequest,
+  async get(
+    request: operations.GetGuildRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.GuildMemberResponse>> {
-    return unwrapAsync(guildsSearchMembers(
+  ): Promise<components.GuildWithCountsResponse> {
+    return unwrapAsync(guildsGet(
       this,
       request,
       options,
@@ -82,41 +82,13 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Returns all active threads in the guild, including public and private threads. Threads are ordered by their id, in descending order.
+   * Delete a guild permanently. User must be owner. Returns 204 No Content on success. Fires a Guild Delete Gateway event.
    */
-  async listActiveThreads(
-    request: operations.GetActiveGuildThreadsRequest,
-    options?: RequestOptions,
-  ): Promise<components.ThreadsResponse> {
-    return unwrapAsync(guildsListActiveThreads(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Modifies the current member in a guild. Returns a 200 with the updated member object on success. Fires a Guild Member Update Gateway event.
-   */
-  async updateCurrentMember(
-    request: operations.UpdateMyGuildMemberRequest,
-    options?: RequestOptions,
-  ): Promise<components.PrivateGuildMemberResponse> {
-    return unwrapAsync(guildsUpdateCurrentMember(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Adds a role to a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
-   */
-  async addMemberRole(
-    request: operations.AddGuildMemberRoleRequest,
+  async delete(
+    request: operations.DeleteGuildRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(guildsAddMemberRole(
+    return unwrapAsync(guildsDelete(
       this,
       request,
       options,
@@ -124,13 +96,55 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Removes a role from a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
+   * Modify a guild's settings. Requires the MANAGE_GUILD permission. Returns the updated guild object on success. Fires a Guild Update Gateway event.
    */
-  async removeMemberRole(
-    request: operations.DeleteGuildMemberRoleRequest,
+  async update(
+    request: operations.UpdateGuildRequest,
+    options?: RequestOptions,
+  ): Promise<components.GuildResponse> {
+    return unwrapAsync(guildsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns a list of ban objects for the users banned from this guild. Requires the BAN_MEMBERS permission.
+   */
+  async listBans(
+    request: operations.ListGuildBansRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.GuildBanResponse>> {
+    return unwrapAsync(guildsListBans(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns a ban object for the given user or a 404 not found if the ban cannot be found. Requires the BAN_MEMBERS permission.
+   */
+  async getBan(
+    request: operations.GetGuildBanRequest,
+    options?: RequestOptions,
+  ): Promise<components.GuildBanResponse> {
+    return unwrapAsync(guildsGetBan(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the BAN_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Ban Add Gateway event.
+   */
+  async createBan(
+    request: operations.BanUserFromGuildRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(guildsRemoveMemberRole(
+    return unwrapAsync(guildsCreateBan(
       this,
       request,
       options,
@@ -138,131 +152,15 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Returns the Welcome Screen object for the guild. If the welcome screen is not enabled, the MANAGE_GUILD permission is required.
+   * Remove the ban for a user. Requires the BAN_MEMBERS permissions. Returns a 204 empty response on success. Fires a Guild Ban Remove Gateway event.
    */
-  async getWelcomeScreen(
-    request: operations.GetGuildWelcomeScreenRequest,
-    options?: RequestOptions,
-  ): Promise<components.GuildWelcomeScreenResponse> {
-    return unwrapAsync(guildsGetWelcomeScreen(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Modify the guild's Welcome Screen. Requires the MANAGE_GUILD permission. Returns the updated Welcome Screen object. May fire a Guild Update Gateway event.
-   */
-  async updateWelcomeScreen(
-    request: operations.UpdateGuildWelcomeScreenRequest,
-    options?: RequestOptions,
-  ): Promise<components.GuildWelcomeScreenResponse> {
-    return unwrapAsync(guildsUpdateWelcomeScreen(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete the attached integration object for the guild. Deletes any associated webhooks and kicks the associated bot if there is one. Requires the MANAGE_GUILD permission. Returns a 204 empty response on success. Fires Guild Integrations Update and Integration Delete Gateway events.
-   */
-  async deleteIntegration(
-    request: operations.DeleteGuildIntegrationRequest,
+  async removeBan(
+    request: operations.UnbanUserFromGuildRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(guildsDeleteIntegration(
+    return unwrapAsync(guildsRemoveBan(
       this,
       request,
-      options,
-    ));
-  }
-
-  /**
-   * Returns a list of integration objects for the guild. Requires the MANAGE_GUILD permission.
-   */
-  async listIntegrations(
-    request: operations.ListGuildIntegrationsRequest,
-    options?: RequestOptions,
-  ): Promise<Array<operations.ListGuildIntegrationsResponseBody>> {
-    return unwrapAsync(guildsListIntegrations(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Returns the widget for the guild. Fires an Invite Create Gateway event when an invite channel is defined and a new Invite is generated.
-   */
-  async getWidget(
-    request: operations.GetGuildWidgetRequest,
-    security?: operations.GetGuildWidgetSecurity | undefined,
-    options?: RequestOptions,
-  ): Promise<components.WidgetResponse> {
-    return unwrapAsync(guildsGetWidget(
-      this,
-      request,
-      security,
-      options,
-    ));
-  }
-
-  /**
-   * Returns the Onboarding object for the guild.
-   */
-  async getOnboarding(
-    request: operations.GetGuildsOnboardingRequest,
-    options?: RequestOptions,
-  ): Promise<components.UserGuildOnboardingResponse> {
-    return unwrapAsync(guildsGetOnboarding(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Modifies the onboarding configuration of the guild. Returns a 200 with the Onboarding object for the guild. Requires the MANAGE_GUILD and MANAGE_ROLES permissions.
-   */
-  async updateOnboarding(
-    request: operations.PutGuildsOnboardingRequest,
-    options?: RequestOptions,
-  ): Promise<components.GuildOnboardingResponse> {
-    return unwrapAsync(guildsUpdateOnboarding(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Returns a partial invite object for guilds with that feature enabled. Requires the MANAGE_GUILD permission. code will be null if a vanity url for the guild is not set.
-   */
-  async getVanityUrl(
-    request: operations.GetGuildVanityUrlRequest,
-    options?: RequestOptions,
-  ): Promise<components.VanityURLResponse> {
-    return unwrapAsync(guildsGetVanityUrl(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Returns a PNG image widget for the guild. Requires no permissions or authentication.
-   */
-  async getWidgetPng(
-    request: operations.GetGuildWidgetPngRequest,
-    security?: operations.GetGuildWidgetPngSecurity | undefined,
-    options?: RequestOptions,
-  ): Promise<string> {
-    return unwrapAsync(guildsGetWidgetPng(
-      this,
-      request,
-      security,
       options,
     ));
   }
@@ -326,6 +224,90 @@ export class Guilds extends ClientSDK {
   }
 
   /**
+   * Returns a list of integration objects for the guild. Requires the MANAGE_GUILD permission.
+   */
+  async listIntegrations(
+    request: operations.ListGuildIntegrationsRequest,
+    options?: RequestOptions,
+  ): Promise<Array<operations.ListGuildIntegrationsResponseBody>> {
+    return unwrapAsync(guildsListIntegrations(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete the attached integration object for the guild. Deletes any associated webhooks and kicks the associated bot if there is one. Requires the MANAGE_GUILD permission. Returns a 204 empty response on success. Fires Guild Integrations Update and Integration Delete Gateway events.
+   */
+  async deleteIntegration(
+    request: operations.DeleteGuildIntegrationRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(guildsDeleteIntegration(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns a list of invite objects (with invite metadata) for the guild. Requires the MANAGE_GUILD permission.
+   */
+  async listInvites(
+    request: operations.ListGuildInvitesRequest,
+    options?: RequestOptions,
+  ): Promise<Array<operations.ListGuildInvitesResponseBody>> {
+    return unwrapAsync(guildsListInvites(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns a list of guild member objects that are members of the guild.
+   */
+  async listMembers(
+    request: operations.ListGuildMembersRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.GuildMemberResponse>> {
+    return unwrapAsync(guildsListMembers(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Modifies the current member in a guild. Returns a 200 with the updated member object on success. Fires a Guild Member Update Gateway event.
+   */
+  async updateCurrentMember(
+    request: operations.UpdateMyGuildMemberRequest,
+    options?: RequestOptions,
+  ): Promise<components.PrivateGuildMemberResponse> {
+    return unwrapAsync(guildsUpdateCurrentMember(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns a list of guild member objects whose username or nickname starts with a provided string.
+   */
+  async searchMembers(
+    request: operations.SearchGuildMembersRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.GuildMemberResponse>> {
+    return unwrapAsync(guildsSearchMembers(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Returns a guild member object for the specified user.
    */
   async getMember(
@@ -382,13 +364,69 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Returns a list of guild member objects that are members of the guild.
+   * Adds a role to a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
    */
-  async listMembers(
-    request: operations.ListGuildMembersRequest,
+  async addMemberRole(
+    request: operations.AddGuildMemberRoleRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.GuildMemberResponse>> {
-    return unwrapAsync(guildsListMembers(
+  ): Promise<void> {
+    return unwrapAsync(guildsAddMemberRole(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Removes a role from a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
+   */
+  async removeMemberRole(
+    request: operations.DeleteGuildMemberRoleRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(guildsRemoveMemberRole(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Modify a guild's MFA level. Requires guild ownership. Returns the updated level on success. Fires a Guild Update Gateway event.
+   */
+  async setMfaLevel(
+    request: operations.SetGuildMfaLevelRequest,
+    options?: RequestOptions,
+  ): Promise<components.GuildMFALevelResponse> {
+    return unwrapAsync(guildsSetMfaLevel(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns the Onboarding object for the guild.
+   */
+  async getOnboarding(
+    request: operations.GetGuildsOnboardingRequest,
+    options?: RequestOptions,
+  ): Promise<components.UserGuildOnboardingResponse> {
+    return unwrapAsync(guildsGetOnboarding(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Modifies the onboarding configuration of the guild. Returns a 200 with the Onboarding object for the guild. Requires the MANAGE_GUILD and MANAGE_ROLES permissions.
+   */
+  async updateOnboarding(
+    request: operations.PutGuildsOnboardingRequest,
+    options?: RequestOptions,
+  ): Promise<components.GuildOnboardingResponse> {
+    return unwrapAsync(guildsUpdateOnboarding(
       this,
       request,
       options,
@@ -410,13 +448,27 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Returns a list of invite objects (with invite metadata) for the guild. Requires the MANAGE_GUILD permission.
+   * Returns an object with one pruned key indicating the number of members that would be removed in a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions.
    */
-  async listInvites(
-    request: operations.ListGuildInvitesRequest,
+  async previewPrune(
+    request: operations.PreviewPruneGuildRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.ListGuildInvitesResponseBody>> {
-    return unwrapAsync(guildsListInvites(
+  ): Promise<components.GuildPruneResponse> {
+    return unwrapAsync(guildsPreviewPrune(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Begin a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions. Returns an object with one pruned key indicating the number of members that were removed in the prune operation. Fires multiple Guild Member Remove Gateway events.
+   */
+  async prune(
+    request: operations.PruneGuildRequest,
+    options?: RequestOptions,
+  ): Promise<components.GuildPruneResponse> {
+    return unwrapAsync(guildsPrune(
       this,
       request,
       options,
@@ -431,76 +483,6 @@ export class Guilds extends ClientSDK {
     options?: RequestOptions,
   ): Promise<Array<components.VoiceRegionResponse>> {
     return unwrapAsync(guildsListVoiceRegions(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Returns a guild widget settings object. Requires the MANAGE_GUILD permission.
-   */
-  async getWidgetSettings(
-    request: operations.GetGuildWidgetSettingsRequest,
-    options?: RequestOptions,
-  ): Promise<components.WidgetSettingsResponse> {
-    return unwrapAsync(guildsGetWidgetSettings(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Modify a guild widget settings object for the guild. All attributes may be passed in with JSON and modified. Requires the MANAGE_GUILD permission. Returns the updated guild widget settings object. Fires a Guild Update Gateway event.
-   */
-  async updateWidgetSettings(
-    request: operations.UpdateGuildWidgetSettingsRequest,
-    options?: RequestOptions,
-  ): Promise<components.WidgetSettingsResponse> {
-    return unwrapAsync(guildsUpdateWidgetSettings(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Returns a role object for the specified role.
-   */
-  async getRole(
-    request: operations.GetGuildRoleRequest,
-    options?: RequestOptions,
-  ): Promise<components.GuildRoleResponse> {
-    return unwrapAsync(guildsGetRole(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a guild role. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Role Delete Gateway event.
-   */
-  async deleteRole(
-    request: operations.DeleteGuildRoleRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(guildsDeleteRole(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated role on success. Fires a Guild Role Update Gateway event.
-   */
-  async updateRole(
-    request: operations.UpdateGuildRoleRequest,
-    options?: RequestOptions,
-  ): Promise<components.GuildRoleResponse> {
-    return unwrapAsync(guildsUpdateRole(
       this,
       request,
       options,
@@ -550,13 +532,13 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Returns an object with one pruned key indicating the number of members that would be removed in a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions.
+   * Returns a role object for the specified role.
    */
-  async previewPrune(
-    request: operations.PreviewPruneGuildRequest,
+  async getRole(
+    request: operations.GetGuildRoleRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildPruneResponse> {
-    return unwrapAsync(guildsPreviewPrune(
+  ): Promise<components.GuildRoleResponse> {
+    return unwrapAsync(guildsGetRole(
       this,
       request,
       options,
@@ -564,41 +546,13 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Begin a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions. Returns an object with one pruned key indicating the number of members that were removed in the prune operation. Fires multiple Guild Member Remove Gateway events.
+   * Delete a guild role. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Role Delete Gateway event.
    */
-  async prune(
-    request: operations.PruneGuildRequest,
-    options?: RequestOptions,
-  ): Promise<components.GuildPruneResponse> {
-    return unwrapAsync(guildsPrune(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Returns a ban object for the given user or a 404 not found if the ban cannot be found. Requires the BAN_MEMBERS permission.
-   */
-  async getBan(
-    request: operations.GetGuildBanRequest,
-    options?: RequestOptions,
-  ): Promise<components.GuildBanResponse> {
-    return unwrapAsync(guildsGetBan(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the BAN_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Ban Add Gateway event.
-   */
-  async createBan(
-    request: operations.BanUserFromGuildRequest,
+  async deleteRole(
+    request: operations.DeleteGuildRoleRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(guildsCreateBan(
+    return unwrapAsync(guildsDeleteRole(
       this,
       request,
       options,
@@ -606,13 +560,13 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Remove the ban for a user. Requires the BAN_MEMBERS permissions. Returns a 204 empty response on success. Fires a Guild Ban Remove Gateway event.
+   * Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated role on success. Fires a Guild Role Update Gateway event.
    */
-  async removeBan(
-    request: operations.UnbanUserFromGuildRequest,
+  async updateRole(
+    request: operations.UpdateGuildRoleRequest,
     options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(guildsRemoveBan(
+  ): Promise<components.GuildRoleResponse> {
+    return unwrapAsync(guildsUpdateRole(
       this,
       request,
       options,
@@ -620,13 +574,13 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Returns a list of ban objects for the users banned from this guild. Requires the BAN_MEMBERS permission.
+   * Returns all active threads in the guild, including public and private threads. Threads are ordered by their id, in descending order.
    */
-  async listBans(
-    request: operations.ListGuildBansRequest,
+  async listActiveThreads(
+    request: operations.GetActiveGuildThreadsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.GuildBanResponse>> {
-    return unwrapAsync(guildsListBans(
+  ): Promise<components.ThreadsResponse> {
+    return unwrapAsync(guildsListActiveThreads(
       this,
       request,
       options,
@@ -634,13 +588,13 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Modify a guild's MFA level. Requires guild ownership. Returns the updated level on success. Fires a Guild Update Gateway event.
+   * Returns a partial invite object for guilds with that feature enabled. Requires the MANAGE_GUILD permission. code will be null if a vanity url for the guild is not set.
    */
-  async setMfaLevel(
-    request: operations.SetGuildMfaLevelRequest,
+  async getVanityUrl(
+    request: operations.GetGuildVanityUrlRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildMFALevelResponse> {
-    return unwrapAsync(guildsSetMfaLevel(
+  ): Promise<components.VanityURLResponse> {
+    return unwrapAsync(guildsGetVanityUrl(
       this,
       request,
       options,
@@ -648,13 +602,13 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.
+   * Returns the Welcome Screen object for the guild. If the welcome screen is not enabled, the MANAGE_GUILD permission is required.
    */
-  async get(
-    request: operations.GetGuildRequest,
+  async getWelcomeScreen(
+    request: operations.GetGuildWelcomeScreenRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildWithCountsResponse> {
-    return unwrapAsync(guildsGet(
+  ): Promise<components.GuildWelcomeScreenResponse> {
+    return unwrapAsync(guildsGetWelcomeScreen(
       this,
       request,
       options,
@@ -662,13 +616,13 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Delete a guild permanently. User must be owner. Returns 204 No Content on success. Fires a Guild Delete Gateway event.
+   * Modify the guild's Welcome Screen. Requires the MANAGE_GUILD permission. Returns the updated Welcome Screen object. May fire a Guild Update Gateway event.
    */
-  async delete(
-    request: operations.DeleteGuildRequest,
+  async updateWelcomeScreen(
+    request: operations.UpdateGuildWelcomeScreenRequest,
     options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(guildsDelete(
+  ): Promise<components.GuildWelcomeScreenResponse> {
+    return unwrapAsync(guildsUpdateWelcomeScreen(
       this,
       request,
       options,
@@ -676,15 +630,61 @@ export class Guilds extends ClientSDK {
   }
 
   /**
-   * Modify a guild's settings. Requires the MANAGE_GUILD permission. Returns the updated guild object on success. Fires a Guild Update Gateway event.
+   * Returns a guild widget settings object. Requires the MANAGE_GUILD permission.
    */
-  async update(
-    request: operations.UpdateGuildRequest,
+  async getWidgetSettings(
+    request: operations.GetGuildWidgetSettingsRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildResponse> {
-    return unwrapAsync(guildsUpdate(
+  ): Promise<components.WidgetSettingsResponse> {
+    return unwrapAsync(guildsGetWidgetSettings(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * Modify a guild widget settings object for the guild. All attributes may be passed in with JSON and modified. Requires the MANAGE_GUILD permission. Returns the updated guild widget settings object. Fires a Guild Update Gateway event.
+   */
+  async updateWidgetSettings(
+    request: operations.UpdateGuildWidgetSettingsRequest,
+    options?: RequestOptions,
+  ): Promise<components.WidgetSettingsResponse> {
+    return unwrapAsync(guildsUpdateWidgetSettings(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns the widget for the guild. Fires an Invite Create Gateway event when an invite channel is defined and a new Invite is generated.
+   */
+  async getWidget(
+    request: operations.GetGuildWidgetRequest,
+    security?: operations.GetGuildWidgetSecurity | undefined,
+    options?: RequestOptions,
+  ): Promise<components.WidgetResponse> {
+    return unwrapAsync(guildsGetWidget(
+      this,
+      request,
+      security,
+      options,
+    ));
+  }
+
+  /**
+   * Returns a PNG image widget for the guild. Requires no permissions or authentication.
+   */
+  async getWidgetPng(
+    request: operations.GetGuildWidgetPngRequest,
+    security?: operations.GetGuildWidgetPngSecurity | undefined,
+    options?: RequestOptions,
+  ): Promise<string> {
+    return unwrapAsync(guildsGetWidgetPng(
+      this,
+      request,
+      security,
       options,
     ));
   }

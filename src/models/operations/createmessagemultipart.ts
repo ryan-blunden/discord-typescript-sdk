@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type CreateMessageMultipartComponents =
+export type Components =
   | components.ActionRowComponentForMessageRequest
   | components.MediaGalleryComponentForMessageRequest
   | components.TextDisplayComponentForMessageRequest
@@ -63,8 +63,8 @@ export type CreateMessageMultipartRequest = {
 };
 
 /** @internal */
-export const CreateMessageMultipartComponents$inboundSchema: z.ZodType<
-  CreateMessageMultipartComponents,
+export const Components$inboundSchema: z.ZodType<
+  Components,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -78,7 +78,7 @@ export const CreateMessageMultipartComponents$inboundSchema: z.ZodType<
 ]);
 
 /** @internal */
-export type CreateMessageMultipartComponents$Outbound =
+export type Components$Outbound =
   | components.ActionRowComponentForMessageRequest$Outbound
   | components.MediaGalleryComponentForMessageRequest$Outbound
   | components.TextDisplayComponentForMessageRequest$Outbound
@@ -88,10 +88,10 @@ export type CreateMessageMultipartComponents$Outbound =
   | components.ContainerComponentForMessageRequest$Outbound;
 
 /** @internal */
-export const CreateMessageMultipartComponents$outboundSchema: z.ZodType<
-  CreateMessageMultipartComponents$Outbound,
+export const Components$outboundSchema: z.ZodType<
+  Components$Outbound,
   z.ZodTypeDef,
-  CreateMessageMultipartComponents
+  Components
 > = z.union([
   components.ActionRowComponentForMessageRequest$outboundSchema,
   components.MediaGalleryComponentForMessageRequest$outboundSchema,
@@ -106,32 +106,26 @@ export const CreateMessageMultipartComponents$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateMessageMultipartComponents$ {
-  /** @deprecated use `CreateMessageMultipartComponents$inboundSchema` instead. */
-  export const inboundSchema = CreateMessageMultipartComponents$inboundSchema;
-  /** @deprecated use `CreateMessageMultipartComponents$outboundSchema` instead. */
-  export const outboundSchema = CreateMessageMultipartComponents$outboundSchema;
-  /** @deprecated use `CreateMessageMultipartComponents$Outbound` instead. */
-  export type Outbound = CreateMessageMultipartComponents$Outbound;
+export namespace Components$ {
+  /** @deprecated use `Components$inboundSchema` instead. */
+  export const inboundSchema = Components$inboundSchema;
+  /** @deprecated use `Components$outboundSchema` instead. */
+  export const outboundSchema = Components$outboundSchema;
+  /** @deprecated use `Components$Outbound` instead. */
+  export type Outbound = Components$Outbound;
 }
 
-export function createMessageMultipartComponentsToJSON(
-  createMessageMultipartComponents: CreateMessageMultipartComponents,
-): string {
-  return JSON.stringify(
-    CreateMessageMultipartComponents$outboundSchema.parse(
-      createMessageMultipartComponents,
-    ),
-  );
+export function componentsToJSON(components: Components): string {
+  return JSON.stringify(Components$outboundSchema.parse(components));
 }
 
-export function createMessageMultipartComponentsFromJSON(
+export function componentsFromJSON(
   jsonString: string,
-): SafeParseResult<CreateMessageMultipartComponents, SDKValidationError> {
+): SafeParseResult<Components, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateMessageMultipartComponents$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateMessageMultipartComponents' from JSON`,
+    (x) => Components$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Components' from JSON`,
   );
 }
 

@@ -1,4 +1,4 @@
-# CreateMessageMultipartComponents
+# UpdateOriginalWebhookMessageMultipartComponents
 
 
 ## Supported Types
