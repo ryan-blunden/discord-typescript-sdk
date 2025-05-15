@@ -14,18 +14,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Voice extends ClientSDK {
   /**
-   * Returns an array of voice region objects that can be used when setting a voice or stage channel's rtc_region.
-   */
-  async listRegions(
-    options?: RequestOptions,
-  ): Promise<Array<components.VoiceRegionResponse>> {
-    return unwrapAsync(voiceListRegions(
-      this,
-      options,
-    ));
-  }
-
-  /**
    * Returns the current user's voice state in the guild.
    */
   async getCurrentUserState(
@@ -77,6 +65,18 @@ export class Voice extends ClientSDK {
     return unwrapAsync(voiceUpdateUserState(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns an array of voice region objects that can be used when setting a voice or stage channel's rtc_region.
+   */
+  async listRegions(
+    options?: RequestOptions,
+  ): Promise<Array<components.VoiceRegionResponse>> {
+    return unwrapAsync(voiceListRegions(
+      this,
       options,
     ));
   }

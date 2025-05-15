@@ -48,16 +48,28 @@ export class Lobbies extends ClientSDK {
   }
 
   /**
-   * Removes the current user from the specified lobby. It is safe to call this even if the user is no longer a member of the lobby, but will fail if the lobby does not exist.
+   * Returns the lobby object for the given id.
    */
-  async leave(
-    security: operations.LeaveLobbySecurity,
-    request: operations.LeaveLobbyRequest,
+  async get(
+    request: operations.GetLobbyRequest,
     options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(lobbiesLeave(
+  ): Promise<components.LobbyResponse> {
+    return unwrapAsync(lobbiesGet(
       this,
-      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Updates a lobby. Returns a lobby object on success.
+   */
+  async update(
+    request: operations.EditLobbyRequest,
+    options?: RequestOptions,
+  ): Promise<components.LobbyResponse> {
+    return unwrapAsync(lobbiesUpdate(
+      this,
       request,
       options,
     ));
@@ -80,14 +92,14 @@ export class Lobbies extends ClientSDK {
   }
 
   /**
-   * Sends a message to the lobby.
+   * Removes the current user from the specified lobby. It is safe to call this even if the user is no longer a member of the lobby, but will fail if the lobby does not exist.
    */
-  async sendMessage(
-    security: operations.CreateLobbyMessageSecurity,
-    request: operations.CreateLobbyMessageRequest,
+  async leave(
+    security: operations.LeaveLobbySecurity,
+    request: operations.LeaveLobbyRequest,
     options?: RequestOptions,
-  ): Promise<components.LobbyMessageResponse> {
-    return unwrapAsync(lobbiesSendMessage(
+  ): Promise<void> {
+    return unwrapAsync(lobbiesLeave(
       this,
       security,
       request,
@@ -124,28 +136,16 @@ export class Lobbies extends ClientSDK {
   }
 
   /**
-   * Returns the lobby object for the given id.
+   * Sends a message to the lobby.
    */
-  async get(
-    request: operations.GetLobbyRequest,
+  async sendMessage(
+    security: operations.CreateLobbyMessageSecurity,
+    request: operations.CreateLobbyMessageRequest,
     options?: RequestOptions,
-  ): Promise<components.LobbyResponse> {
-    return unwrapAsync(lobbiesGet(
+  ): Promise<components.LobbyMessageResponse> {
+    return unwrapAsync(lobbiesSendMessage(
       this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Updates a lobby. Returns a lobby object on success.
-   */
-  async update(
-    request: operations.EditLobbyRequest,
-    options?: RequestOptions,
-  ): Promise<components.LobbyResponse> {
-    return unwrapAsync(lobbiesUpdate(
-      this,
+      security,
       request,
       options,
     ));

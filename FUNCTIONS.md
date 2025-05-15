@@ -20,18 +20,17 @@ specific category of applications.
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { applicationsPartnerSDKUnmergeProvisionalAccount } from "@ryan.blunden/discord-sdk/funcs/applicationsPartnerSDKUnmergeProvisionalAccount.js";
+import { applicationsGetMe } from "@ryan.blunden/discord-sdk/funcs/applicationsGetMe.js";
 import { SDKValidationError } from "@ryan.blunden/discord-sdk/models/errors/sdkvalidationerror.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
-  const res = await applicationsPartnerSDKUnmergeProvisionalAccount(discord, {
-    clientId: "<value>",
-    externalAuthToken: "<value>",
-  });
+  const res = await applicationsGetMe(discord);
 
   switch (true) {
     case res.ok:
@@ -52,7 +51,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();

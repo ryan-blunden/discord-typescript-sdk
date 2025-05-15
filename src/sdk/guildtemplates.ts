@@ -61,6 +61,34 @@ export class GuildTemplates extends ClientSDK {
   }
 
   /**
+   * Returns an array of guild template objects. Requires the MANAGE_GUILD permission.
+   */
+  async list(
+    request: operations.ListGuildTemplatesRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.GuildTemplateResponse>> {
+    return unwrapAsync(guildTemplatesList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Creates a template for the guild. Requires the MANAGE_GUILD permission. Returns the created guild template object on success.
+   */
+  async create(
+    request: operations.CreateGuildTemplateRequest,
+    options?: RequestOptions,
+  ): Promise<components.GuildTemplateResponse> {
+    return unwrapAsync(guildTemplatesCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Syncs the template to the guild's current state. Requires the MANAGE_GUILD permission. Returns the guild template object on success.
    */
   async sync(
@@ -96,34 +124,6 @@ export class GuildTemplates extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.GuildTemplateResponse> {
     return unwrapAsync(guildTemplatesUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Returns an array of guild template objects. Requires the MANAGE_GUILD permission.
-   */
-  async list(
-    request: operations.ListGuildTemplatesRequest,
-    options?: RequestOptions,
-  ): Promise<Array<components.GuildTemplateResponse>> {
-    return unwrapAsync(guildTemplatesList(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Creates a template for the guild. Requires the MANAGE_GUILD permission. Returns the created guild template object on success.
-   */
-  async create(
-    request: operations.CreateGuildTemplateRequest,
-    options?: RequestOptions,
-  ): Promise<components.GuildTemplateResponse> {
-    return unwrapAsync(guildTemplatesCreate(
       this,
       request,
       options,

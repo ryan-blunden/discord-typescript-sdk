@@ -13,6 +13,34 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class AutoModeration extends ClientSDK {
   /**
+   * Get a list of all rules currently configured for the guild. Returns a list of auto moderation rule objects for the given guild. This endpoint requires the MANAGE_GUILD permission.
+   */
+  async listRules(
+    request: operations.ListAutoModerationRulesRequest,
+    options?: RequestOptions,
+  ): Promise<Array<operations.ListAutoModerationRulesResponseBody | null>> {
+    return unwrapAsync(autoModerationListRules(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a new rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Create Gateway event.
+   */
+  async createRule(
+    request: operations.CreateAutoModerationRuleRequest,
+    options?: RequestOptions,
+  ): Promise<operations.CreateAutoModerationRuleResponseBody> {
+    return unwrapAsync(autoModerationCreateRule(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get a single rule. Returns an auto moderation rule object. This endpoint requires the MANAGE_GUILD permission.
    */
   async getRule(
@@ -48,34 +76,6 @@ export class AutoModeration extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.UpdateAutoModerationRuleResponseBody> {
     return unwrapAsync(autoModerationUpdateRule(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get a list of all rules currently configured for the guild. Returns a list of auto moderation rule objects for the given guild. This endpoint requires the MANAGE_GUILD permission.
-   */
-  async listRules(
-    request: operations.ListAutoModerationRulesRequest,
-    options?: RequestOptions,
-  ): Promise<Array<operations.ResponseBody | null>> {
-    return unwrapAsync(autoModerationListRules(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a new rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Create Gateway event.
-   */
-  async createRule(
-    request: operations.CreateAutoModerationRuleRequest,
-    options?: RequestOptions,
-  ): Promise<operations.CreateAutoModerationRuleResponseBody> {
-    return unwrapAsync(autoModerationCreateRule(
       this,
       request,
       options,

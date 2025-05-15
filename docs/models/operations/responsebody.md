@@ -3,113 +3,27 @@
 
 ## Supported Types
 
-### `components.DefaultKeywordRuleResponse`
+### `components.FriendInviteResponse`
 
 ```typescript
-const value: components.DefaultKeywordRuleResponse = {
-  id: "<value>",
-  guildId: "<value>",
-  creatorId: "<value>",
-  name: "<value>",
-  actions: [
-    {
-      metadata: {
-        durationSeconds: 220121,
-      },
-    },
-  ],
-  triggerMetadata: {
-    allowList: [
-      "<value>",
-    ],
-    presets: [
-      473754,
-    ],
-  },
+const value: components.FriendInviteResponse = {
+  code: "<value>",
 };
 ```
 
-### `components.KeywordRuleResponse`
+### `components.GroupDMInviteResponse`
 
 ```typescript
-const value: components.KeywordRuleResponse = {
-  id: "<value>",
-  guildId: "<value>",
-  creatorId: "<value>",
-  name: "<value>",
-  actions: [
-    {
-      metadata: {
-        channelId: "<value>",
-      },
-    },
-  ],
-  triggerMetadata: {
-    keywordFilter: [
-      "<value>",
-    ],
-    regexPatterns: [
-      "<value>",
-    ],
-    allowList: [
-      "<value>",
-    ],
-  },
+const value: components.GroupDMInviteResponse = {
+  code: "<value>",
 };
 ```
 
-### `components.MLSpamRuleResponse`
+### `components.GuildInviteResponse`
 
 ```typescript
-const value: components.MLSpamRuleResponse = {
-  id: "<value>",
-  guildId: "<value>",
-  creatorId: "<value>",
-  name: "<value>",
-  actions: [
-    {
-      metadata: {},
-    },
-  ],
-  triggerMetadata: {},
-};
-```
-
-### `components.MentionSpamRuleResponse`
-
-```typescript
-const value: components.MentionSpamRuleResponse = {
-  id: "<value>",
-  guildId: "<value>",
-  creatorId: "<value>",
-  name: "<value>",
-  actions: [
-    {
-      metadata: {
-        channelId: "<value>",
-      },
-    },
-  ],
-  triggerMetadata: {
-    mentionTotalLimit: 409323,
-  },
-};
-```
-
-### `components.SpamLinkRuleResponse`
-
-```typescript
-const value: components.SpamLinkRuleResponse = {
-  id: "<value>",
-  guildId: "<value>",
-  creatorId: "<value>",
-  name: "<value>",
-  actions: [
-    {
-      metadata: {},
-    },
-  ],
-  triggerMetadata: {},
+const value: components.GuildInviteResponse = {
+  code: "<value>",
 };
 ```
 

@@ -17,15 +17,29 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Stickers extends ClientSDK {
   /**
-   * Returns a list of available sticker packs.
+   * Returns an array of sticker objects for the given guild. Includes user fields if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
    */
-  async listPacks(
-    security?: operations.ListStickerPacksSecurity | undefined,
+  async listGuildStickers(
+    request: operations.ListGuildStickersRequest,
     options?: RequestOptions,
-  ): Promise<components.StickerPackCollectionResponse> {
-    return unwrapAsync(stickersListPacks(
+  ): Promise<Array<components.GuildStickerResponse>> {
+    return unwrapAsync(stickersListGuildStickers(
       this,
-      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a new sticker for the guild. Send a multipart/form-data body. Requires the CREATE_GUILD_EXPRESSIONS permission. Returns the new sticker object on success. Fires a Guild Stickers Update Gateway event.
+   */
+  async createGuildSticker(
+    request: operations.CreateGuildStickerRequest,
+    options?: RequestOptions,
+  ): Promise<components.GuildStickerResponse> {
+    return unwrapAsync(stickersCreateGuildSticker(
+      this,
+      request,
       options,
     ));
   }
@@ -73,29 +87,15 @@ export class Stickers extends ClientSDK {
   }
 
   /**
-   * Returns an array of sticker objects for the given guild. Includes user fields if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
+   * Returns a list of available sticker packs.
    */
-  async listGuildStickers(
-    request: operations.ListGuildStickersRequest,
+  async listPacks(
+    security?: operations.ListStickerPacksSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<Array<components.GuildStickerResponse>> {
-    return unwrapAsync(stickersListGuildStickers(
+  ): Promise<components.StickerPackCollectionResponse> {
+    return unwrapAsync(stickersListPacks(
       this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a new sticker for the guild. Send a multipart/form-data body. Requires the CREATE_GUILD_EXPRESSIONS permission. Returns the new sticker object on success. Fires a Guild Stickers Update Gateway event.
-   */
-  async createGuildSticker(
-    request: operations.CreateGuildStickerRequest,
-    options?: RequestOptions,
-  ): Promise<components.GuildStickerResponse> {
-    return unwrapAsync(stickersCreateGuildSticker(
-      this,
-      request,
+      security,
       options,
     ));
   }

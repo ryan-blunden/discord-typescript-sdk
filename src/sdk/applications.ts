@@ -23,36 +23,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Applications extends ClientSDK {
   /**
-   * Unmerges a provisional account.
-   */
-  async partnerSDKUnmergeProvisionalAccount(
-    request: operations.PartnerSDKUnmergeProvisionalAccountRequestBody,
-    security?:
-      | operations.PartnerSDKUnmergeProvisionalAccountSecurity
-      | undefined,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(applicationsPartnerSDKUnmergeProvisionalAccount(
-      this,
-      request,
-      security,
-      options,
-    ));
-  }
-
-  /**
-   * Returns the OAuth2 application object associated with the requesting bot user.
-   */
-  async getOAuth2Me(
-    options?: RequestOptions,
-  ): Promise<components.PrivateApplicationResponse> {
-    return unwrapAsync(applicationsGetOAuth2Me(
-      this,
-      options,
-    ));
-  }
-
-  /**
    * Returns the application object associated with the requesting bot user.
    */
   async getMe(
@@ -79,85 +49,29 @@ export class Applications extends ClientSDK {
   }
 
   /**
-   * Gets a token for the partner SDK.
+   * Returns information about a specific application.
    */
-  async partnerSDKToken(
-    request: operations.PartnerSDKTokenRequestBody,
-    security?: operations.PartnerSDKTokenSecurity | undefined,
+  async get(
+    request: operations.GetApplicationRequest,
     options?: RequestOptions,
-  ): Promise<components.ProvisionalTokenResponse> {
-    return unwrapAsync(applicationsPartnerSDKToken(
+  ): Promise<components.PrivateApplicationResponse> {
+    return unwrapAsync(applicationsGet(
       this,
       request,
-      security,
       options,
     ));
   }
 
   /**
-   * Returns an object with the same information as Get Gateway, plus a shards key, containing the recommended number of shards to connect with.
+   * Updates an application. Returns the updated application object on success.
    */
-  async getBotGateway(
+  async update(
+    request: operations.UpdateApplicationRequest,
     options?: RequestOptions,
-  ): Promise<components.GatewayBotResponse> {
-    return unwrapAsync(applicationsGetBotGateway(
+  ): Promise<components.PrivateApplicationResponse> {
+    return unwrapAsync(applicationsUpdate(
       this,
-      options,
-    ));
-  }
-
-  /**
-   * Returns the user info for the current user.
-   */
-  async getOpenIDConnectUserInfo(
-    security: operations.GetOpenidConnectUserinfoSecurity,
-    options?: RequestOptions,
-  ): Promise<components.OAuth2GetOpenIDConnectUserInfoResponse> {
-    return unwrapAsync(applicationsGetOpenIDConnectUserInfo(
-      this,
-      security,
-      options,
-    ));
-  }
-
-  /**
-   * Returns a list of public keys used for verifying signatures.
-   */
-  async getPublicKeys(
-    security?: operations.GetPublicKeysSecurity | undefined,
-    options?: RequestOptions,
-  ): Promise<components.OAuth2GetKeys> {
-    return unwrapAsync(applicationsGetPublicKeys(
-      this,
-      security,
-      options,
-    ));
-  }
-
-  /**
-   * Returns info about the current authorization.
-   */
-  async getOAuth2Authorization(
-    security: operations.GetMyOauth2AuthorizationSecurity,
-    options?: RequestOptions,
-  ): Promise<components.OAuth2GetAuthorizationResponse> {
-    return unwrapAsync(applicationsGetOAuth2Authorization(
-      this,
-      security,
-      options,
-    ));
-  }
-
-  /**
-   * Returns an object with a single valid WSS URL, which the client can use for connecting to Discord.
-   */
-  async getGateway(
-    security?: operations.GetGatewaySecurity | undefined,
-    options?: RequestOptions,
-  ): Promise<components.GatewayResponse> {
-    return unwrapAsync(applicationsGetGateway(
-      this,
-      security,
+      request,
       options,
     ));
   }
@@ -193,29 +107,115 @@ export class Applications extends ClientSDK {
   }
 
   /**
-   * Returns information about a specific application.
+   * Returns an object with a single valid WSS URL, which the client can use for connecting to Discord.
    */
-  async get(
-    request: operations.GetApplicationRequest,
+  async getGateway(
+    security?: operations.GetGatewaySecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.PrivateApplicationResponse> {
-    return unwrapAsync(applicationsGet(
+  ): Promise<components.GatewayResponse> {
+    return unwrapAsync(applicationsGetGateway(
       this,
-      request,
+      security,
       options,
     ));
   }
 
   /**
-   * Updates an application. Returns the updated application object on success.
+   * Returns an object with the same information as Get Gateway, plus a shards key, containing the recommended number of shards to connect with.
    */
-  async update(
-    request: operations.UpdateApplicationRequest,
+  async getBotGateway(
+    options?: RequestOptions,
+  ): Promise<components.GatewayBotResponse> {
+    return unwrapAsync(applicationsGetBotGateway(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * Returns info about the current authorization.
+   */
+  async getOAuth2Authorization(
+    security: operations.GetMyOauth2AuthorizationSecurity,
+    options?: RequestOptions,
+  ): Promise<components.OAuth2GetAuthorizationResponse> {
+    return unwrapAsync(applicationsGetOAuth2Authorization(
+      this,
+      security,
+      options,
+    ));
+  }
+
+  /**
+   * Returns the OAuth2 application object associated with the requesting bot user.
+   */
+  async getOAuth2Me(
     options?: RequestOptions,
   ): Promise<components.PrivateApplicationResponse> {
-    return unwrapAsync(applicationsUpdate(
+    return unwrapAsync(applicationsGetOAuth2Me(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * Returns a list of public keys used for verifying signatures.
+   */
+  async getPublicKeys(
+    security?: operations.GetPublicKeysSecurity | undefined,
+    options?: RequestOptions,
+  ): Promise<components.OAuth2GetKeys> {
+    return unwrapAsync(applicationsGetPublicKeys(
+      this,
+      security,
+      options,
+    ));
+  }
+
+  /**
+   * Returns the user info for the current user.
+   */
+  async getOpenIDConnectUserInfo(
+    security: operations.GetOpenidConnectUserinfoSecurity,
+    options?: RequestOptions,
+  ): Promise<components.OAuth2GetOpenIDConnectUserInfoResponse> {
+    return unwrapAsync(applicationsGetOpenIDConnectUserInfo(
+      this,
+      security,
+      options,
+    ));
+  }
+
+  /**
+   * Unmerges a provisional account.
+   */
+  async partnerSDKUnmergeProvisionalAccount(
+    request: operations.PartnerSDKUnmergeProvisionalAccountRequestBody,
+    security?:
+      | operations.PartnerSDKUnmergeProvisionalAccountSecurity
+      | undefined,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(applicationsPartnerSDKUnmergeProvisionalAccount(
       this,
       request,
+      security,
+      options,
+    ));
+  }
+
+  /**
+   * Gets a token for the partner SDK.
+   */
+  async partnerSDKToken(
+    request: operations.PartnerSDKTokenRequestBody,
+    security?: operations.PartnerSDKTokenSecurity | undefined,
+    options?: RequestOptions,
+  ): Promise<components.ProvisionalTokenResponse> {
+    return unwrapAsync(applicationsPartnerSDKToken(
+      this,
+      request,
+      security,
       options,
     ));
   }

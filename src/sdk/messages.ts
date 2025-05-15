@@ -26,13 +26,13 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Messages extends ClientSDK {
   /**
-   * Create a reaction for the message. This endpoint requires the READ_MESSAGE_HISTORY permission to be present on the current user.
+   * Returns the messages for a channel. If operating on a guild channel, this endpoint requires the VIEW_CHANNEL permission to be present on the current user.
    */
-  async createReaction(
-    request: operations.AddMyMessageReactionRequest,
+  async list(
+    request: operations.ListMessagesRequest,
     options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(messagesCreateReaction(
+  ): Promise<Array<components.MessageResponse>> {
+    return unwrapAsync(messagesList(
       this,
       request,
       options,
@@ -40,13 +40,41 @@ export class Messages extends ClientSDK {
   }
 
   /**
-   * Delete a reaction the current user has made for the message. Returns a 204 empty response on success.
+   * Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
    */
-  async deleteOwnReaction(
-    request: operations.DeleteMyMessageReactionRequest,
+  async createJson(
+    request: operations.CreateMessageJsonRequest,
     options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(messagesDeleteOwnReaction(
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(messagesCreateJson(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+   */
+  async createForm(
+    request: operations.CreateMessageFormRequest,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(messagesCreateForm(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+   */
+  async createMultipart(
+    request: operations.CreateMessageMultipartRequest,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(messagesCreateMultipart(
       this,
       request,
       options,
@@ -61,76 +89,6 @@ export class Messages extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(messagesBulkDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Deletes another user's reaction. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
-   */
-  async deleteUserReaction(
-    request: operations.DeleteUserMessageReactionRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(messagesDeleteUserReaction(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get a list of users that reacted with a specific emoji.
-   */
-  async listReactionsByEmoji(
-    request: operations.ListMessageReactionsByEmojiRequest,
-    options?: RequestOptions,
-  ): Promise<Array<components.UserResponse>> {
-    return unwrapAsync(messagesListReactionsByEmoji(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Deletes all the reactions for a given emoji on a message. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
-   */
-  async deleteAllReactionsForEmoji(
-    request: operations.DeleteAllMessageReactionsByEmojiRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(messagesDeleteAllReactionsForEmoji(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Deletes all reactions on a message. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
-   */
-  async deleteAllReactions(
-    request: operations.DeleteAllMessageReactionsRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(messagesDeleteAllReactions(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Crosspost a message in an Announcement Channel to following channels. This endpoint requires the SEND_MESSAGES permission, if the current user sent the message, or additionally the MANAGE_MESSAGES permission, for all other messages, to be present for the current user.
-   */
-  async crosspost(
-    request: operations.CrosspostMessageRequest,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(messagesCrosspost(
       this,
       request,
       options,
@@ -208,13 +166,13 @@ export class Messages extends ClientSDK {
   }
 
   /**
-   * Returns the messages for a channel. If operating on a guild channel, this endpoint requires the VIEW_CHANNEL permission to be present on the current user.
+   * Crosspost a message in an Announcement Channel to following channels. This endpoint requires the SEND_MESSAGES permission, if the current user sent the message, or additionally the MANAGE_MESSAGES permission, for all other messages, to be present for the current user.
    */
-  async list(
-    request: operations.ListMessagesRequest,
+  async crosspost(
+    request: operations.CrosspostMessageRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.MessageResponse>> {
-    return unwrapAsync(messagesList(
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(messagesCrosspost(
       this,
       request,
       options,
@@ -222,13 +180,13 @@ export class Messages extends ClientSDK {
   }
 
   /**
-   * Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+   * Deletes all reactions on a message. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
    */
-  async createJson(
-    request: operations.CreateMessageJsonRequest,
+  async deleteAllReactions(
+    request: operations.DeleteAllMessageReactionsRequest,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(messagesCreateJson(
+  ): Promise<void> {
+    return unwrapAsync(messagesDeleteAllReactions(
       this,
       request,
       options,
@@ -236,13 +194,13 @@ export class Messages extends ClientSDK {
   }
 
   /**
-   * Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+   * Get a list of users that reacted with a specific emoji.
    */
-  async createForm(
-    request: operations.CreateMessageFormRequest,
+  async listReactionsByEmoji(
+    request: operations.ListMessageReactionsByEmojiRequest,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(messagesCreateForm(
+  ): Promise<Array<components.UserResponse>> {
+    return unwrapAsync(messagesListReactionsByEmoji(
       this,
       request,
       options,
@@ -250,13 +208,55 @@ export class Messages extends ClientSDK {
   }
 
   /**
-   * Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+   * Deletes all the reactions for a given emoji on a message. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
    */
-  async createMultipart(
-    request: operations.CreateMessageMultipartRequest,
+  async deleteAllReactionsForEmoji(
+    request: operations.DeleteAllMessageReactionsByEmojiRequest,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(messagesCreateMultipart(
+  ): Promise<void> {
+    return unwrapAsync(messagesDeleteAllReactionsForEmoji(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a reaction for the message. This endpoint requires the READ_MESSAGE_HISTORY permission to be present on the current user.
+   */
+  async createReaction(
+    request: operations.AddMyMessageReactionRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(messagesCreateReaction(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a reaction the current user has made for the message. Returns a 204 empty response on success.
+   */
+  async deleteOwnReaction(
+    request: operations.DeleteMyMessageReactionRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(messagesDeleteOwnReaction(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Deletes another user's reaction. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+   */
+  async deleteUserReaction(
+    request: operations.DeleteUserMessageReactionRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(messagesDeleteUserReaction(
       this,
       request,
       options,

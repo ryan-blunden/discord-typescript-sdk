@@ -31,46 +31,6 @@ export class Discord extends ClientSDK {
     return (this._applications ??= new Applications(this._options));
   }
 
-  private _users?: Users;
-  get users(): Users {
-    return (this._users ??= new Users(this._options));
-  }
-
-  private _voice?: Voice;
-  get voice(): Voice {
-    return (this._voice ??= new Voice(this._options));
-  }
-
-  private _soundboards?: Soundboards;
-  get soundboards(): Soundboards {
-    return (this._soundboards ??= new Soundboards(this._options));
-  }
-
-  private _stageInstances?: StageInstances;
-  get stageInstances(): StageInstances {
-    return (this._stageInstances ??= new StageInstances(this._options));
-  }
-
-  private _stickers?: Stickers;
-  get stickers(): Stickers {
-    return (this._stickers ??= new Stickers(this._options));
-  }
-
-  private _lobbies?: Lobbies;
-  get lobbies(): Lobbies {
-    return (this._lobbies ??= new Lobbies(this._options));
-  }
-
-  private _guilds?: Guilds;
-  get guilds(): Guilds {
-    return (this._guilds ??= new Guilds(this._options));
-  }
-
-  private _channels?: Channels;
-  get channels(): Channels {
-    return (this._channels ??= new Channels(this._options));
-  }
-
   private _applicationCommands?: ApplicationCommands;
   get applicationCommands(): ApplicationCommands {
     return (this._applicationCommands ??= new ApplicationCommands(
@@ -78,9 +38,14 @@ export class Discord extends ClientSDK {
     ));
   }
 
-  private _messages?: Messages;
-  get messages(): Messages {
-    return (this._messages ??= new Messages(this._options));
+  private _emoji?: Emoji;
+  get emoji(): Emoji {
+    return (this._emoji ??= new Emoji(this._options));
+  }
+
+  private _entitlements?: Entitlements;
+  get entitlements(): Entitlements {
+    return (this._entitlements ??= new Entitlements(this._options));
   }
 
   private _applicationRoleConnectionMetadata?:
@@ -90,9 +55,14 @@ export class Discord extends ClientSDK {
       new ApplicationRoleConnectionMetadata(this._options));
   }
 
-  private _entitlements?: Entitlements;
-  get entitlements(): Entitlements {
-    return (this._entitlements ??= new Entitlements(this._options));
+  private _channels?: Channels;
+  get channels(): Channels {
+    return (this._channels ??= new Channels(this._options));
+  }
+
+  private _messages?: Messages;
+  get messages(): Messages {
+    return (this._messages ??= new Messages(this._options));
   }
 
   private _polls?: Polls;
@@ -100,26 +70,19 @@ export class Discord extends ClientSDK {
     return (this._polls ??= new Polls(this._options));
   }
 
+  private _soundboards?: Soundboards;
+  get soundboards(): Soundboards {
+    return (this._soundboards ??= new Soundboards(this._options));
+  }
+
   private _webhooks?: Webhooks;
   get webhooks(): Webhooks {
     return (this._webhooks ??= new Webhooks(this._options));
   }
 
-  private _guildScheduledEvents?: GuildScheduledEvents;
-  get guildScheduledEvents(): GuildScheduledEvents {
-    return (this._guildScheduledEvents ??= new GuildScheduledEvents(
-      this._options,
-    ));
-  }
-
-  private _autoModeration?: AutoModeration;
-  get autoModeration(): AutoModeration {
-    return (this._autoModeration ??= new AutoModeration(this._options));
-  }
-
-  private _emoji?: Emoji;
-  get emoji(): Emoji {
-    return (this._emoji ??= new Emoji(this._options));
+  private _guilds?: Guilds;
+  get guilds(): Guilds {
+    return (this._guilds ??= new Guilds(this._options));
   }
 
   private _guildTemplates?: GuildTemplates;
@@ -132,8 +95,45 @@ export class Discord extends ClientSDK {
     return (this._auditLogs ??= new AuditLogs(this._options));
   }
 
+  private _autoModeration?: AutoModeration;
+  get autoModeration(): AutoModeration {
+    return (this._autoModeration ??= new AutoModeration(this._options));
+  }
+
+  private _guildScheduledEvents?: GuildScheduledEvents;
+  get guildScheduledEvents(): GuildScheduledEvents {
+    return (this._guildScheduledEvents ??= new GuildScheduledEvents(
+      this._options,
+    ));
+  }
+
+  private _stickers?: Stickers;
+  get stickers(): Stickers {
+    return (this._stickers ??= new Stickers(this._options));
+  }
+
+  private _voice?: Voice;
+  get voice(): Voice {
+    return (this._voice ??= new Voice(this._options));
+  }
+
   private _invites?: Invites;
   get invites(): Invites {
     return (this._invites ??= new Invites(this._options));
+  }
+
+  private _lobbies?: Lobbies;
+  get lobbies(): Lobbies {
+    return (this._lobbies ??= new Lobbies(this._options));
+  }
+
+  private _stageInstances?: StageInstances;
+  get stageInstances(): StageInstances {
+    return (this._stageInstances ??= new StageInstances(this._options));
+  }
+
+  private _users?: Users;
+  get users(): Users {
+    return (this._users ??= new Users(this._options));
   }
 }

@@ -34,7 +34,7 @@ export function channelsListInvites(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    Array<operations.ListChannelInvitesResponseBody>,
+    Array<operations.ResponseBody>,
     | errors.ErrorResponse
     | APIError
     | SDKValidationError
@@ -59,7 +59,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      Array<operations.ListChannelInvitesResponseBody>,
+      Array<operations.ResponseBody>,
       | errors.ErrorResponse
       | APIError
       | SDKValidationError
@@ -144,7 +144,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    Array<operations.ListChannelInvitesResponseBody>,
+    Array<operations.ResponseBody>,
     | errors.ErrorResponse
     | APIError
     | SDKValidationError
@@ -154,10 +154,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      z.array(operations.ListChannelInvitesResponseBody$inboundSchema),
-    ),
+    M.json(200, z.array(operations.ResponseBody$inboundSchema)),
     M.jsonErr("4XX", errors.ErrorResponse$inboundSchema),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

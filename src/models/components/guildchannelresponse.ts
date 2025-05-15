@@ -30,7 +30,7 @@ import {
 /**
  * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
  */
-export const GuildChannelResponseType = {
+export const Type = {
   Zero: 0,
   One: 1,
   Two: 2,
@@ -48,13 +48,11 @@ export const GuildChannelResponseType = {
 /**
  * Channel types (1: DM, 3: GROUP_DM, 0: GUILD_TEXT, 2: GUILD_VOICE, 4: GUILD_CATEGORY, 5: GUILD_ANNOUNCEMENT, 7: UNKNOWN, 10: ANNOUNCEMENT_THREAD, 11: PUBLIC_THREAD, 12: PRIVATE_THREAD, 13: GUILD_STAGE_VOICE, 14: GUILD_DIRECTORY, 15: GUILD_FORUM)
  */
-export type GuildChannelResponseType = ClosedEnum<
-  typeof GuildChannelResponseType
->;
+export type Type = ClosedEnum<typeof Type>;
 
 export type GuildChannelResponse = {
   id: string;
-  type: GuildChannelResponseType;
+  type: Type;
   lastMessageId?: string | null | undefined;
   flags: number;
   lastPinTimestamp?: Date | null | undefined;
@@ -86,24 +84,23 @@ export type GuildChannelResponse = {
 };
 
 /** @internal */
-export const GuildChannelResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof GuildChannelResponseType
-> = z.nativeEnum(GuildChannelResponseType);
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
+  Type,
+);
 
 /** @internal */
-export const GuildChannelResponseType$outboundSchema: z.ZodNativeEnum<
-  typeof GuildChannelResponseType
-> = GuildChannelResponseType$inboundSchema;
+export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
+  Type$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GuildChannelResponseType$ {
-  /** @deprecated use `GuildChannelResponseType$inboundSchema` instead. */
-  export const inboundSchema = GuildChannelResponseType$inboundSchema;
-  /** @deprecated use `GuildChannelResponseType$outboundSchema` instead. */
-  export const outboundSchema = GuildChannelResponseType$outboundSchema;
+export namespace Type$ {
+  /** @deprecated use `Type$inboundSchema` instead. */
+  export const inboundSchema = Type$inboundSchema;
+  /** @deprecated use `Type$outboundSchema` instead. */
+  export const outboundSchema = Type$outboundSchema;
 }
 
 /** @internal */
@@ -113,7 +110,7 @@ export const GuildChannelResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  type: GuildChannelResponseType$inboundSchema,
+  type: Type$inboundSchema,
   last_message_id: z.nullable(z.string()).optional(),
   flags: z.number().int(),
   last_pin_timestamp: z.nullable(
@@ -214,7 +211,7 @@ export const GuildChannelResponse$outboundSchema: z.ZodType<
   GuildChannelResponse
 > = z.object({
   id: z.string(),
-  type: GuildChannelResponseType$outboundSchema,
+  type: Type$outboundSchema,
   lastMessageId: z.nullable(z.string()).optional(),
   flags: z.number().int(),
   lastPinTimestamp: z.nullable(z.date().transform(v => v.toISOString()))
