@@ -80,8 +80,6 @@ yarn add @ryan.blunden/discord-sdk zod
 This SDK is also an installable MCP server where the various SDK methods are
 exposed as tools that can be invoked by AI applications.
 
-For a full list of tools, see [MCP_SERVER_TOOLS.md](./docs/mcp/MCP_SERVER_TOOLS.md).
-
 > Node.js v20 or greater is required to run the MCP server from npm.
 
 <details>
@@ -159,7 +157,6 @@ For a full list of server arguments, run:
 ```sh
 npx -y --package @ryan.blunden/discord-sdk -- mcp start --help
 ```
-
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->
@@ -307,6 +304,7 @@ run();
 * [updateRule](docs/sdks/automoderation/README.md#updaterule) - Modify an existing rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Update Gateway event.
 
 ### [channels](docs/sdks/channels/README.md)
+
 * [get](docs/sdks/channels/README.md#get) - Returns a channel object for the given channel ID.
 * [delete](docs/sdks/channels/README.md#delete) - Delete a channel, or close a private message. Requires the MANAGE_CHANNELS permission for the guild, or MANAGE_THREADS if the channel is a thread. Returns a channel object on success. Fires a Channel Delete Gateway event (or Thread Delete if the channel was a thread).
 * [update](docs/sdks/channels/README.md#update) - Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.

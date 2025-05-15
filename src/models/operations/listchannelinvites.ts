@@ -13,7 +13,7 @@ export type ListChannelInvitesRequest = {
   channelId: string;
 };
 
-export type ListChannelInvitesResponseBody =
+export type ResponseBody =
   | components.GroupDMInviteResponse
   | components.FriendInviteResponse
   | components.GuildInviteResponse;
@@ -81,8 +81,8 @@ export function listChannelInvitesRequestFromJSON(
 }
 
 /** @internal */
-export const ListChannelInvitesResponseBody$inboundSchema: z.ZodType<
-  ListChannelInvitesResponseBody,
+export const ResponseBody$inboundSchema: z.ZodType<
+  ResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -92,16 +92,16 @@ export const ListChannelInvitesResponseBody$inboundSchema: z.ZodType<
 ]);
 
 /** @internal */
-export type ListChannelInvitesResponseBody$Outbound =
+export type ResponseBody$Outbound =
   | components.GroupDMInviteResponse$Outbound
   | components.FriendInviteResponse$Outbound
   | components.GuildInviteResponse$Outbound;
 
 /** @internal */
-export const ListChannelInvitesResponseBody$outboundSchema: z.ZodType<
-  ListChannelInvitesResponseBody$Outbound,
+export const ResponseBody$outboundSchema: z.ZodType<
+  ResponseBody$Outbound,
   z.ZodTypeDef,
-  ListChannelInvitesResponseBody
+  ResponseBody
 > = z.union([
   components.GroupDMInviteResponse$outboundSchema,
   components.FriendInviteResponse$outboundSchema,
@@ -112,31 +112,25 @@ export const ListChannelInvitesResponseBody$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ListChannelInvitesResponseBody$ {
-  /** @deprecated use `ListChannelInvitesResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ListChannelInvitesResponseBody$inboundSchema;
-  /** @deprecated use `ListChannelInvitesResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ListChannelInvitesResponseBody$outboundSchema;
-  /** @deprecated use `ListChannelInvitesResponseBody$Outbound` instead. */
-  export type Outbound = ListChannelInvitesResponseBody$Outbound;
+export namespace ResponseBody$ {
+  /** @deprecated use `ResponseBody$inboundSchema` instead. */
+  export const inboundSchema = ResponseBody$inboundSchema;
+  /** @deprecated use `ResponseBody$outboundSchema` instead. */
+  export const outboundSchema = ResponseBody$outboundSchema;
+  /** @deprecated use `ResponseBody$Outbound` instead. */
+  export type Outbound = ResponseBody$Outbound;
 }
 
-export function listChannelInvitesResponseBodyToJSON(
-  listChannelInvitesResponseBody: ListChannelInvitesResponseBody,
-): string {
-  return JSON.stringify(
-    ListChannelInvitesResponseBody$outboundSchema.parse(
-      listChannelInvitesResponseBody,
-    ),
-  );
+export function responseBodyToJSON(responseBody: ResponseBody): string {
+  return JSON.stringify(ResponseBody$outboundSchema.parse(responseBody));
 }
 
-export function listChannelInvitesResponseBodyFromJSON(
+export function responseBodyFromJSON(
   jsonString: string,
-): SafeParseResult<ListChannelInvitesResponseBody, SDKValidationError> {
+): SafeParseResult<ResponseBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListChannelInvitesResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListChannelInvitesResponseBody' from JSON`,
+    (x) => ResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody' from JSON`,
   );
 }

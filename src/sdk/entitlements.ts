@@ -14,16 +14,30 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Entitlements extends ClientSDK {
   /**
-   * For One-Time Purchase consumable SKUs, marks a given entitlement for the user as consumed. The entitlement will have consumed: true when using List Entitlements. Returns a 204 No Content on success.
+   * Returns all entitlements for a given app, active and expired.
    */
-  async consume(
-    security: operations.ConsumeEntitlementSecurity,
-    request: operations.ConsumeEntitlementRequest,
+  async list(
+    security: operations.GetEntitlementsSecurity,
+    request: operations.GetEntitlementsRequest,
     options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(entitlementsConsume(
+  ): Promise<Array<components.EntitlementResponse | null>> {
+    return unwrapAsync(entitlementsList(
       this,
       security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Creates a test entitlement to a given SKU for a given guild or user. Discord will act as though that user or guild has entitlement to your premium offering. This endpoint returns a partial entitlement object.
+   */
+  async createTest(
+    request: operations.CreateEntitlementRequest,
+    options?: RequestOptions,
+  ): Promise<components.EntitlementResponse> {
+    return unwrapAsync(entitlementsCreateTest(
+      this,
       request,
       options,
     ));
@@ -62,30 +76,16 @@ export class Entitlements extends ClientSDK {
   }
 
   /**
-   * Returns all entitlements for a given app, active and expired.
+   * For One-Time Purchase consumable SKUs, marks a given entitlement for the user as consumed. The entitlement will have consumed: true when using List Entitlements. Returns a 204 No Content on success.
    */
-  async list(
-    security: operations.GetEntitlementsSecurity,
-    request: operations.GetEntitlementsRequest,
+  async consume(
+    security: operations.ConsumeEntitlementSecurity,
+    request: operations.ConsumeEntitlementRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.EntitlementResponse | null>> {
-    return unwrapAsync(entitlementsList(
+  ): Promise<void> {
+    return unwrapAsync(entitlementsConsume(
       this,
       security,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Creates a test entitlement to a given SKU for a given guild or user. Discord will act as though that user or guild has entitlement to your premium offering. This endpoint returns a partial entitlement object.
-   */
-  async createTest(
-    request: operations.CreateEntitlementRequest,
-    options?: RequestOptions,
-  ): Promise<components.EntitlementResponse> {
-    return unwrapAsync(entitlementsCreateTest(
-      this,
       request,
       options,
     ));

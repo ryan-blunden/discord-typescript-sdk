@@ -15,13 +15,27 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class GuildScheduledEvents extends ClientSDK {
   /**
-   * Get a list of guild scheduled event users subscribed to a guild scheduled event. Returns a list of guild scheduled event user objects on success. Guild member data, if it exists, is included if the with_member query parameter is set.
+   * Returns a list of guild scheduled event objects for the given guild.
    */
-  async getUsers(
-    request: operations.ListGuildScheduledEventUsersRequest,
+  async list(
+    request: operations.ListGuildScheduledEventsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.ScheduledEventUserResponse>> {
-    return unwrapAsync(guildScheduledEventsGetUsers(
+  ): Promise<Array<operations.ListGuildScheduledEventsResponseBody>> {
+    return unwrapAsync(guildScheduledEventsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a guild scheduled event in the guild. Returns a guild scheduled event object on success. Fires a Guild Scheduled Event Create Gateway event.
+   */
+  async create(
+    request: operations.CreateGuildScheduledEventRequest,
+    options?: RequestOptions,
+  ): Promise<operations.CreateGuildScheduledEventResponseBody> {
+    return unwrapAsync(guildScheduledEventsCreate(
       this,
       request,
       options,
@@ -71,27 +85,13 @@ export class GuildScheduledEvents extends ClientSDK {
   }
 
   /**
-   * Returns a list of guild scheduled event objects for the given guild.
+   * Get a list of guild scheduled event users subscribed to a guild scheduled event. Returns a list of guild scheduled event user objects on success. Guild member data, if it exists, is included if the with_member query parameter is set.
    */
-  async list(
-    request: operations.ListGuildScheduledEventsRequest,
+  async getUsers(
+    request: operations.ListGuildScheduledEventUsersRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.ListGuildScheduledEventsResponseBody>> {
-    return unwrapAsync(guildScheduledEventsList(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a guild scheduled event in the guild. Returns a guild scheduled event object on success. Fires a Guild Scheduled Event Create Gateway event.
-   */
-  async create(
-    request: operations.CreateGuildScheduledEventRequest,
-    options?: RequestOptions,
-  ): Promise<operations.CreateGuildScheduledEventResponseBody> {
-    return unwrapAsync(guildScheduledEventsCreate(
+  ): Promise<Array<components.ScheduledEventUserResponse>> {
+    return unwrapAsync(guildScheduledEventsGetUsers(
       this,
       request,
       options,

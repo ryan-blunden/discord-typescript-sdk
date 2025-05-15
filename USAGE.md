@@ -2,13 +2,15 @@
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
-  await discord.applications.partnerSDKUnmergeProvisionalAccount({
-    clientId: "<value>",
-    externalAuthToken: "<value>",
-  });
+  const result = await discord.applications.getMe();
+
+  // Handle the result
+  console.log(result);
 }
 
 run();

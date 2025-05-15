@@ -16,18 +16,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Soundboards extends ClientSDK {
   /**
-   * Returns a list of the default sounds available in the soundboard.
-   */
-  async getSoundboardDefaultSounds(
-    options?: RequestOptions,
-  ): Promise<Array<components.SoundboardSoundResponse>> {
-    return unwrapAsync(soundboardsGetSoundboardDefaultSounds(
-      this,
-      options,
-    ));
-  }
-
-  /**
    * Sends a soundboard sound to a channel.
    */
   async sendSoundboardSound(
@@ -35,6 +23,34 @@ export class Soundboards extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(soundboardsSendSoundboardSound(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns a list of soundboard sound objects for the given guild.
+   */
+  async listGuildSoundboardSounds(
+    request: operations.ListGuildSoundboardSoundsRequest,
+    options?: RequestOptions,
+  ): Promise<components.ListGuildSoundboardSoundsResponse> {
+    return unwrapAsync(soundboardsListGuildSoundboardSounds(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a new soundboard sound for the guild. Returns the new soundboard sound object on success.
+   */
+  async createGuildSoundboardSound(
+    request: operations.CreateGuildSoundboardSoundRequest,
+    options?: RequestOptions,
+  ): Promise<components.SoundboardSoundResponse> {
+    return unwrapAsync(soundboardsCreateGuildSoundboardSound(
       this,
       request,
       options,
@@ -84,29 +100,13 @@ export class Soundboards extends ClientSDK {
   }
 
   /**
-   * Returns a list of soundboard sound objects for the given guild.
+   * Returns a list of the default sounds available in the soundboard.
    */
-  async listGuildSoundboardSounds(
-    request: operations.ListGuildSoundboardSoundsRequest,
+  async getSoundboardDefaultSounds(
     options?: RequestOptions,
-  ): Promise<components.ListGuildSoundboardSoundsResponse> {
-    return unwrapAsync(soundboardsListGuildSoundboardSounds(
+  ): Promise<Array<components.SoundboardSoundResponse>> {
+    return unwrapAsync(soundboardsGetSoundboardDefaultSounds(
       this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a new soundboard sound for the guild. Returns the new soundboard sound object on success.
-   */
-  async createGuildSoundboardSound(
-    request: operations.CreateGuildSoundboardSoundRequest,
-    options?: RequestOptions,
-  ): Promise<components.SoundboardSoundResponse> {
-    return unwrapAsync(soundboardsCreateGuildSoundboardSound(
-      this,
-      request,
       options,
     ));
   }
