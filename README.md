@@ -159,6 +159,8 @@ npx -y --package @ryan.blunden/discord-sdk -- mcp start --help
 ```
 <!-- End SDK Installation [installation] -->
 
+For a full list of tools, see [MCP_SERVER_TOOLS.md](./docs/mcp/MCP_SERVER_TOOLS.md).
+
 <!-- Start Requirements [requirements] -->
 ## Requirements
 
