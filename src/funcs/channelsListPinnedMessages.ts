@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  */
 export function channelsListPinnedMessages(
   client: DiscordCore,
-  request: operations.ListPinnedMessagesRequest,
+  request: operations.DeprecatedListPinsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -55,7 +55,7 @@ export function channelsListPinnedMessages(
 
 async function $do(
   client: DiscordCore,
-  request: operations.ListPinnedMessagesRequest,
+  request: operations.DeprecatedListPinsRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -75,7 +75,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.ListPinnedMessagesRequest$outboundSchema.parse(value),
+    (value) => operations.DeprecatedListPinsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -103,7 +103,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "list_pinned_messages",
+    operationID: "deprecated_list_pins",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,

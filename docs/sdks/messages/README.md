@@ -355,8 +355,7 @@ async function run() {
     channelId: "<value>",
     requestBody: {
       messages: [
-        "<value>",
-        "<value>",
+        "<value 1>",
       ],
     },
   });
@@ -386,8 +385,7 @@ async function run() {
     channelId: "<value>",
     requestBody: {
       messages: [
-        "<value>",
-        "<value>",
+        "<value 1>",
       ],
     },
   });

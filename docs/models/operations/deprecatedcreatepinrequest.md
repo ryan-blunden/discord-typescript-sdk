@@ -1,11 +1,11 @@
-# PinMessageRequest
+# DeprecatedCreatePinRequest
 
 ## Example Usage
 
 ```typescript
-import { PinMessageRequest } from "@ryan.blunden/discord-sdk/models/operations";
+import { DeprecatedCreatePinRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
-let value: PinMessageRequest = {
+let value: DeprecatedCreatePinRequest = {
   channelId: "<value>",
   messageId: "<value>",
 };

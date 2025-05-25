@@ -195,7 +195,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Discord",
-    version: "0.3.6",
+    version: "0.3.7",
   });
 
   const client = new DiscordCore({

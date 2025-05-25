@@ -107,7 +107,10 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
-      scheduledStartTime: new Date("2024-11-30T17:06:07.804Z"),
+      scheduledStartTime: new Date("2024-03-28T07:26:43.121Z"),
+      entityMetadata: {
+        location: "<value>",
+      },
     },
   });
 
@@ -137,7 +140,7 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
-      scheduledStartTime: new Date("2025-05-22T22:27:14.379Z"),
+      scheduledStartTime: new Date("2024-03-28T07:26:43.121Z"),
       entityMetadata: {
         location: "<value>",
       },

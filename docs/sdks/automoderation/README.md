@@ -106,6 +106,7 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
+      triggerMetadata: {},
     },
   });
 

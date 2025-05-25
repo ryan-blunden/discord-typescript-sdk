@@ -27,7 +27,11 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
-    skuIds: "<value>",
+    skuIds: [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
   });
 
   // Handle the result
@@ -54,7 +58,11 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
-    skuIds: "<value>",
+    skuIds: [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
   });
 
   if (!res.ok) {
@@ -110,7 +118,7 @@ async function run() {
     createEntitlementRequestData: {
       skuId: "<value>",
       ownerId: "<value>",
-      ownerType: 617153,
+      ownerType: 815729,
     },
   });
 
@@ -141,7 +149,7 @@ async function run() {
     createEntitlementRequestData: {
       skuId: "<value>",
       ownerId: "<value>",
-      ownerType: 617153,
+      ownerType: 815729,
     },
   });
 

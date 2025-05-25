@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  */
 export function channelsUnpinMessage(
   client: DiscordCore,
-  request: operations.UnpinMessageRequest,
+  request: operations.DeprecatedDeletePinRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -54,7 +54,7 @@ export function channelsUnpinMessage(
 
 async function $do(
   client: DiscordCore,
-  request: operations.UnpinMessageRequest,
+  request: operations.DeprecatedDeletePinRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -74,7 +74,8 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.UnpinMessageRequest$outboundSchema.parse(value),
+    (value) =>
+      operations.DeprecatedDeletePinRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -108,7 +109,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "unpin_message",
+    operationID: "deprecated_delete_pin",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
