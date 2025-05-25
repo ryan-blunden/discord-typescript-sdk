@@ -115,7 +115,7 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
-    requestBody: [],
+    requestBody: null,
   });
 
   // Handle the result
@@ -142,7 +142,7 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
-    requestBody: [],
+    requestBody: null,
   });
 
   if (!res.ok) {
@@ -600,11 +600,7 @@ async function run() {
   }, {
     applicationId: "<value>",
     guildId: "<value>",
-    requestBody: [
-      {
-        name: "<value>",
-      },
-    ],
+    requestBody: null,
   });
 
   // Handle the result
@@ -632,11 +628,7 @@ async function run() {
   }, {
     applicationId: "<value>",
     guildId: "<value>",
-    requestBody: [
-      {
-        name: "<value>",
-      },
-    ],
+    requestBody: null,
   });
 
   if (!res.ok) {

@@ -7,7 +7,7 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: operations.ListPinnedMessagesRequest$inboundSchema,
+  request: operations.DeprecatedListPinsRequest$inboundSchema,
 };
 
 export const tool$channelsListPinnedMessages: ToolDefinition<typeof args> = {

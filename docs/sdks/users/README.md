@@ -104,7 +104,7 @@ const discord = new Discord({
 
 async function run() {
   const result = await discord.users.updateCurrent({
-    username: "Neva.West",
+    username: "Sandy.Sipes87",
   });
 
   // Handle the result
@@ -130,7 +130,7 @@ const discord = new DiscordCore({
 
 async function run() {
   const res = await usersUpdateCurrent(discord, {
-    username: "Neva.West",
+    username: "Sandy.Sipes87",
   });
 
   if (!res.ok) {

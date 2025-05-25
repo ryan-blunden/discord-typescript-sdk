@@ -740,10 +740,10 @@ async function run() {
     webhookToken: "<value>",
     githubWebhook: {
       sender: {
-        id: 842501,
-        login: "Willa.Kirlin37",
-        htmlUrl: "https://aching-tennis.biz",
-        avatarUrl: "https://expensive-yin.org/",
+        id: 456901,
+        login: "Elisha44",
+        htmlUrl: "https://sardonic-translation.org/",
+        avatarUrl: "https://small-mouser.biz/",
       },
     },
   });
@@ -772,10 +772,10 @@ async function run() {
     webhookToken: "<value>",
     githubWebhook: {
       sender: {
-        id: 842501,
-        login: "Willa.Kirlin37",
-        htmlUrl: "https://aching-tennis.biz",
-        avatarUrl: "https://expensive-yin.org/",
+        id: 456901,
+        login: "Elisha44",
+        htmlUrl: "https://sardonic-translation.org/",
+        avatarUrl: "https://small-mouser.biz/",
       },
     },
   });
