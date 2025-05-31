@@ -111,7 +111,7 @@ async function run() {
     applicationId: "<value>",
     requestBody: {
       name: "<value>",
-      image: "https://loremflickr.com/1946/2554?lock=1210253251537993",
+      image: "https://loremflickr.com/927/1911?lock=6880432909269008",
     },
   });
 
@@ -141,7 +141,7 @@ async function run() {
     applicationId: "<value>",
     requestBody: {
       name: "<value>",
-      image: "https://loremflickr.com/1946/2554?lock=1210253251537993",
+      image: "https://loremflickr.com/927/1911?lock=6880432909269008",
     },
   });
 
@@ -510,7 +510,7 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
-      image: "https://loremflickr.com/2512/1139?lock=1643596044790752",
+      image: "https://picsum.photos/seed/HFFTXbJg/390/3498",
     },
   });
 
@@ -540,7 +540,7 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
-      image: "https://loremflickr.com/2512/1139?lock=1643596044790752",
+      image: "https://picsum.photos/seed/HFFTXbJg/390/3498",
     },
   });
 

@@ -25,7 +25,7 @@ async function run() {
   const result = await discord.polls.getAnswerVoters({
     channelId: "<value>",
     messageId: "<value>",
-    answerId: 11670,
+    answerId: 157894,
   });
 
   // Handle the result
@@ -53,7 +53,7 @@ async function run() {
   const res = await pollsGetAnswerVoters(discord, {
     channelId: "<value>",
     messageId: "<value>",
-    answerId: 11670,
+    answerId: 157894,
   });
 
   if (!res.ok) {
