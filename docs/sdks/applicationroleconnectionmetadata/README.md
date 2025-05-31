@@ -102,13 +102,7 @@ const discord = new Discord({
 async function run() {
   const result = await discord.applicationRoleConnectionMetadata.update({
     applicationId: "<value>",
-    requestBody: [
-      {
-        key: "<key>",
-        name: "<value>",
-        description: "overcharge popularity willfully scamper headline soon than",
-      },
-    ],
+    requestBody: [],
   });
 
   // Handle the result
@@ -135,13 +129,7 @@ const discord = new DiscordCore({
 async function run() {
   const res = await applicationRoleConnectionMetadataUpdate(discord, {
     applicationId: "<value>",
-    requestBody: [
-      {
-        key: "<key>",
-        name: "<value>",
-        description: "overcharge popularity willfully scamper headline soon than",
-      },
-    ],
+    requestBody: [],
   });
 
   if (!res.ok) {
