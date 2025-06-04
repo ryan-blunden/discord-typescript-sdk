@@ -7,7 +7,6 @@ import { CreateChannelInviteRequest } from "@ryan.blunden/discord-sdk/models/ope
 
 let value: CreateChannelInviteRequest = {
   channelId: "<value>",
-  requestBody: {},
 };
 ```
 

@@ -11,11 +11,10 @@ const value: components.DiscordIntegrationResponse = {
   application: {
     id: "<value>",
     name: "<value>",
-    description:
-      "despite pfft finally oxidize spirited eventually overburden observe following tepid",
+    description: "meh scrape while solace why busily wherever",
   },
   scopes: [
-    "<value>",
+    "<value 1>",
   ],
 };
 ```
@@ -27,10 +26,10 @@ const value: components.ExternalConnectionIntegrationResponse = {
   id: "<id>",
   user: {
     id: "<value>",
-    username: "Tressa_Watsica96",
+    username: "Braulio60",
     discriminator: "<value>",
-    publicFlags: 302219,
-    flags: 157998,
+    publicFlags: 484824,
+    flags: 238527,
   },
 };
 ```

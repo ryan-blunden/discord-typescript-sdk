@@ -6,13 +6,7 @@
 import { ContainerComponentForMessageRequest } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ContainerComponentForMessageRequest = {
-  components: [
-    {
-      file: {
-        url: "https://close-accountability.com",
-      },
-    },
-  ],
+  components: [],
 };
 ```
 

@@ -7,7 +7,6 @@ import { SetGuildMfaLevelRequest } from "@ryan.blunden/discord-sdk/models/operat
 
 let value: SetGuildMfaLevelRequest = {
   guildId: "<value>",
-  requestBody: {},
 };
 ```
 

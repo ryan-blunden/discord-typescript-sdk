@@ -6,10 +6,10 @@
 import { VoiceStateResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: VoiceStateResponse = {
-  deaf: false,
+  deaf: true,
   mute: false,
   suppress: false,
-  selfDeaf: false,
+  selfDeaf: true,
   selfMute: false,
   selfVideo: false,
   sessionId: "<id>",

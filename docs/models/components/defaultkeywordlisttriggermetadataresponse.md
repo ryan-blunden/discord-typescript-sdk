@@ -7,10 +7,14 @@ import { DefaultKeywordListTriggerMetadataResponse } from "@ryan.blunden/discord
 
 let value: DefaultKeywordListTriggerMetadataResponse = {
   allowList: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
   presets: [
-    899672,
+    941578,
+    933614,
+    428692,
   ],
 };
 ```

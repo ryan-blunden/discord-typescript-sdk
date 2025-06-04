@@ -9,6 +9,8 @@ let value: ApplicationCommandInteractionMetadataResponse = {
   id: "<value>",
   authorizingIntegrationOwners: {
     "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
   },
 };
 ```

@@ -10,15 +10,15 @@
 ```typescript
 const value: components.PrivateChannelResponse = {
   id: "<value>",
-  type: 10,
-  flags: 533007,
+  type: 13,
+  flags: 251055,
   recipients: [
     {
       id: "<value>",
-      username: "Verona.Stroman",
+      username: "Bennie93",
       discriminator: "<value>",
-      publicFlags: 599322,
-      flags: 948718,
+      publicFlags: 175853,
+      flags: 411991,
     },
   ],
 };
@@ -30,14 +30,14 @@ const value: components.PrivateChannelResponse = {
 const value: components.PrivateGroupChannelResponse = {
   id: "<value>",
   type: 0,
-  flags: 385842,
+  flags: 29105,
   recipients: [
     {
       id: "<value>",
-      username: "Anita_Smith",
+      username: "Bennie93",
       discriminator: "<value>",
-      publicFlags: 133736,
-      flags: 827777,
+      publicFlags: 175853,
+      flags: 411991,
     },
   ],
 };

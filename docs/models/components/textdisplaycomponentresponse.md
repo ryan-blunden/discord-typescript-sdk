@@ -6,7 +6,7 @@
 import { TextDisplayComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: TextDisplayComponentResponse = {
-  id: 453594,
+  id: 121571,
   content: "<value>",
 };
 ```

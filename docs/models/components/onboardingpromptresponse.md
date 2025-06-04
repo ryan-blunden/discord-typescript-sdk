@@ -12,20 +12,22 @@ let value: OnboardingPromptResponse = {
     {
       id: "<value>",
       title: "<value>",
-      description:
-        "amidst excluding innovate polyester finally redound clone yawningly",
+      description: "silent forsaken reckon",
       emoji: {},
       roleIds: [
-        "<value>",
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
       ],
       channelIds: [
-        "<value>",
+        "<value 1>",
+        "<value 2>",
       ],
     },
   ],
   singleSelect: false,
-  required: false,
-  inOnboarding: false,
+  required: true,
+  inOnboarding: true,
 };
 ```
 

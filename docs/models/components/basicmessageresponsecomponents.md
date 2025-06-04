@@ -16,21 +16,7 @@ const value: components.ActionRowComponentResponse = {
 ```typescript
 const value: components.ContainerComponentResponse = {
   id: 963943,
-  components: [
-    {
-      id: 765183,
-      items: [
-        {
-          media: {
-            id: "<value>",
-            url: "https://pretty-produce.biz/",
-            proxyUrl: "https://rusty-council.name/",
-          },
-          spoiler: false,
-        },
-      ],
-    },
-  ],
+  components: [],
   spoiler: false,
 };
 ```
@@ -45,7 +31,7 @@ const value: components.FileComponentResponse = {
     url: "https://actual-testimonial.com/",
     proxyUrl: "https://poor-toothpick.org/",
   },
-  spoiler: false,
+  spoiler: true,
 };
 ```
 
@@ -54,16 +40,7 @@ const value: components.FileComponentResponse = {
 ```typescript
 const value: components.MediaGalleryComponentResponse = {
   id: 467586,
-  items: [
-    {
-      media: {
-        id: "<value>",
-        url: "https://waterlogged-railway.biz/",
-        proxyUrl: "https://defenseless-essence.biz",
-      },
-      spoiler: false,
-    },
-  ],
+  items: [],
 };
 ```
 
@@ -74,18 +51,18 @@ const value: components.SectionComponentResponse = {
   id: 664036,
   components: [
     {
-      id: 713017,
+      id: 822824,
       content: "<value>",
     },
   ],
   accessory: {
-    id: 934481,
+    id: 849900,
     media: {
       id: "<value>",
-      url: "https://tasty-wriggler.net",
-      proxyUrl: "https://remarkable-kielbasa.info",
+      url: "https://yellow-repeat.org",
+      proxyUrl: "https://major-gastropod.name",
     },
-    spoiler: false,
+    spoiler: true,
   },
 };
 ```

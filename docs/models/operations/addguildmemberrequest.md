@@ -8,9 +8,6 @@ import { AddGuildMemberRequest } from "@ryan.blunden/discord-sdk/models/operatio
 let value: AddGuildMemberRequest = {
   guildId: "<value>",
   userId: "<value>",
-  requestBody: {
-    accessToken: "<value>",
-  },
 };
 ```
 

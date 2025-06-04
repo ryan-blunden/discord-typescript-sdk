@@ -17,10 +17,12 @@ let value: DefaultKeywordRuleResponse = {
   ],
   triggerMetadata: {
     allowList: [
-      "<value>",
+      "<value 1>",
     ],
     presets: [
-      92255,
+      944120,
+      737731,
+      917279,
     ],
   },
 };

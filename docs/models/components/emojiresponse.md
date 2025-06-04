@@ -9,12 +9,13 @@ let value: EmojiResponse = {
   id: "<value>",
   name: "<value>",
   roles: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
   requireColons: false,
-  managed: false,
+  managed: true,
   animated: false,
-  available: false,
+  available: true,
 };
 ```
 

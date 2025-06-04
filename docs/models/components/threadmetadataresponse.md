@@ -7,7 +7,7 @@ import { ThreadMetadataResponse } from "@ryan.blunden/discord-sdk/models/compone
 
 let value: ThreadMetadataResponse = {
   archived: false,
-  locked: false,
+  locked: true,
 };
 ```
 

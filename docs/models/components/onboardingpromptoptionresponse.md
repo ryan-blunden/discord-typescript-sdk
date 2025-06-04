@@ -12,10 +12,13 @@ let value: OnboardingPromptOptionResponse = {
     "tepid rival once lean wise psst poorly uselessly wonderful outside",
   emoji: {},
   roleIds: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
   channelIds: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
 };
 ```

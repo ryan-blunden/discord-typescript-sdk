@@ -7,7 +7,8 @@ import { ApplicationCommandSubcommandGroupOptionResponse } from "@ryan.blunden/d
 
 let value: ApplicationCommandSubcommandGroupOptionResponse = {
   name: "<value>",
-  description: "for vacantly ordinary without",
+  description:
+    "gadzooks terribly improbable source ack miscalculate hm though stylish hm",
 };
 ```
 

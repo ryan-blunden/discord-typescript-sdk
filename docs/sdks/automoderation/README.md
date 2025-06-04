@@ -29,7 +29,6 @@ async function run() {
     guildId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -54,15 +53,12 @@ async function run() {
   const res = await autoModerationListRules(discord, {
     guildId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("autoModerationListRules failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -106,10 +102,10 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
+      triggerMetadata: {},
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -138,15 +134,12 @@ async function run() {
       triggerMetadata: {},
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("autoModerationCreateRule failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -191,7 +184,6 @@ async function run() {
     ruleId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -217,15 +209,12 @@ async function run() {
     guildId: "<value>",
     ruleId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("autoModerationGetRule failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -295,14 +284,12 @@ async function run() {
     guildId: "<value>",
     ruleId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("autoModerationDeleteRule failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -348,7 +335,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -375,15 +361,12 @@ async function run() {
     ruleId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("autoModerationUpdateRule failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

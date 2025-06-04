@@ -8,11 +8,6 @@ import { BulkSetGuildApplicationCommandsRequest } from "@ryan.blunden/discord-sd
 let value: BulkSetGuildApplicationCommandsRequest = {
   applicationId: "<value>",
   guildId: "<value>",
-  requestBody: [
-    {
-      name: "<value>",
-    },
-  ],
 };
 ```
 

@@ -6,51 +6,26 @@
 import { GuildAuditLogResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GuildAuditLogResponse = {
-  auditLogEntries: [
-    {
-      id: "<value>",
-    },
-  ],
-  users: [
-    {
-      id: "<value>",
-      username: "Emmett_Pfannerstill14",
-      discriminator: "<value>",
-      publicFlags: 744114,
-      flags: 803960,
-    },
-  ],
+  auditLogEntries: [],
+  users: [],
   integrations: [
     {
       id: "<value>",
-      applicationId: "<value>",
     },
   ],
-  webhooks: [
-    {
-      id: "<value>",
-      name: "<value>",
-    },
-  ],
-  guildScheduledEvents: [
-    {
-      id: "<value>",
-      guildId: "<value>",
-      name: "<value>",
-      scheduledStartTime: new Date("2025-11-15T20:16:48.429Z"),
-    },
-  ],
+  webhooks: [],
+  guildScheduledEvents: [],
   threads: [
     {
       id: "<value>",
-      type: 1,
-      flags: 380981,
+      type: 11,
+      flags: 257651,
       guildId: "<value>",
       name: "<value>",
       ownerId: "<value>",
-      messageCount: 148440,
-      memberCount: 647518,
-      totalMessageSent: 15821,
+      messageCount: 159639,
+      memberCount: 279313,
+      totalMessageSent: 568672,
     },
   ],
   applicationCommands: [
@@ -59,35 +34,10 @@ let value: GuildAuditLogResponse = {
       applicationId: "<value>",
       version: "<value>",
       name: "<value>",
-      description: "uncommon internal indeed",
+      description: "onto midst uh-huh knit",
     },
   ],
-  autoModerationRules: [
-    {
-      id: "<value>",
-      guildId: "<value>",
-      creatorId: "<value>",
-      name: "<value>",
-      actions: [
-        {
-          metadata: {
-            durationSeconds: 580510,
-          },
-        },
-      ],
-      triggerMetadata: {
-        keywordFilter: [
-          "<value>",
-        ],
-        regexPatterns: [
-          "<value>",
-        ],
-        allowList: [
-          "<value>",
-        ],
-      },
-    },
-  ],
+  autoModerationRules: [],
 };
 ```
 

@@ -7,7 +7,7 @@ import { BulkDeleteMessagesRequestBody } from "@ryan.blunden/discord-sdk/models/
 
 let value: BulkDeleteMessagesRequestBody = {
   messages: [
-    "<value>",
+    "<value 1>",
   ],
 };
 ```

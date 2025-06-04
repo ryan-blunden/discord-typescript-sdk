@@ -8,22 +8,16 @@ import { WidgetResponse } from "@ryan.blunden/discord-sdk/models/components";
 let value: WidgetResponse = {
   id: "<value>",
   name: "<value>",
-  channels: [
-    {
-      id: "<value>",
-      name: "<value>",
-      position: 155002,
-    },
-  ],
+  channels: [],
   members: [
     {
       id: "<id>",
-      username: "Scotty.Dickinson",
+      username: "Jamel34",
       status: "<value>",
-      avatarUrl: "https://impolite-soybean.org",
+      avatarUrl: "https://tame-vol.com/",
     },
   ],
-  presenceCount: 130960,
+  presenceCount: 333813,
 };
 ```
 

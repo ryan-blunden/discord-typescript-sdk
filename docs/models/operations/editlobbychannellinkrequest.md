@@ -7,7 +7,6 @@ import { EditLobbyChannelLinkRequest } from "@ryan.blunden/discord-sdk/models/op
 
 let value: EditLobbyChannelLinkRequest = {
   lobbyId: "<value>",
-  requestBody: {},
 };
 ```
 

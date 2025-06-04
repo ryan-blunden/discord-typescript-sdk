@@ -11,7 +11,7 @@ let value: GuildRoleResponse = {
   permissions: "<value>",
   position: 93768,
   color: 203650,
-  hoist: false,
+  hoist: true,
   managed: false,
   mentionable: false,
 };

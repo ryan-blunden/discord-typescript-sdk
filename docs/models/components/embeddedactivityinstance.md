@@ -9,9 +9,7 @@ let value: EmbeddedActivityInstance = {
   applicationId: "<value>",
   instanceId: "<id>",
   launchId: "<id>",
-  users: [
-    "<value>",
-  ],
+  users: [],
 };
 ```
 

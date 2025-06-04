@@ -6,7 +6,7 @@
 import { SeparatorComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: SeparatorComponentResponse = {
-  id: 874629,
+  id: 171711,
   divider: false,
 };
 ```

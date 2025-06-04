@@ -6,22 +6,7 @@
 import { StickerPackCollectionResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: StickerPackCollectionResponse = {
-  stickerPacks: [
-    {
-      id: "<value>",
-      skuId: "<value>",
-      name: "<value>",
-      stickers: [
-        {
-          id: "<value>",
-          name: "<value>",
-          tags: "<value>",
-          packId: "<value>",
-          sortValue: 24081,
-        },
-      ],
-    },
-  ],
+  stickerPacks: [],
 };
 ```
 

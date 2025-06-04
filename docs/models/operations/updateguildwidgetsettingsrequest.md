@@ -7,7 +7,6 @@ import { UpdateGuildWidgetSettingsRequest } from "@ryan.blunden/discord-sdk/mode
 
 let value: UpdateGuildWidgetSettingsRequest = {
   guildId: "<value>",
-  requestBody: {},
 };
 ```
 

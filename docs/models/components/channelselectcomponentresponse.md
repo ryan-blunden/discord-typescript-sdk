@@ -6,7 +6,7 @@
 import { ChannelSelectComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ChannelSelectComponentResponse = {
-  id: 368352,
+  id: 834531,
   customId: "<id>",
 };
 ```

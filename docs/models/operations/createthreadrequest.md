@@ -7,9 +7,6 @@ import { CreateThreadRequest } from "@ryan.blunden/discord-sdk/models/operations
 
 let value: CreateThreadRequest = {
   channelId: "<value>",
-  requestBody: {
-    name: "<value>",
-  },
 };
 ```
 

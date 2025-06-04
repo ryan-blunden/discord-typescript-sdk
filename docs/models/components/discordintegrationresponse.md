@@ -13,7 +13,7 @@ let value: DiscordIntegrationResponse = {
     description: "meh scrape while solace why busily wherever",
   },
   scopes: [
-    "<value>",
+    "<value 1>",
   ],
 };
 ```

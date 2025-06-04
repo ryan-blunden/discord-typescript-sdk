@@ -8,7 +8,7 @@ import { ForumTagResponse } from "@ryan.blunden/discord-sdk/models/components";
 let value: ForumTagResponse = {
   id: "<value>",
   name: "<value>",
-  moderated: false,
+  moderated: true,
 };
 ```
 

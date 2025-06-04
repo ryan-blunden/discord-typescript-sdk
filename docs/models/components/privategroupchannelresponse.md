@@ -12,10 +12,10 @@ let value: PrivateGroupChannelResponse = {
   recipients: [
     {
       id: "<value>",
-      username: "Laurine40",
+      username: "Bennie93",
       discriminator: "<value>",
-      publicFlags: 891412,
-      flags: 475506,
+      publicFlags: 175853,
+      flags: 411991,
     },
   ],
 };

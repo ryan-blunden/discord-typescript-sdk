@@ -39,7 +39,6 @@ async function run() {
     applicationId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -64,15 +63,12 @@ async function run() {
   }, {
     applicationId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationCommandsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -115,10 +111,9 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
-    requestBody: [],
+    requestBody: null,
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -142,17 +137,14 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
-    requestBody: [],
+    requestBody: null,
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationCommandsBulkSet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -200,7 +192,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -228,15 +219,12 @@ async function run() {
       name: "<value>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationCommandsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -282,7 +270,6 @@ async function run() {
     commandId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -308,15 +295,12 @@ async function run() {
     applicationId: "<value>",
     commandId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationCommandsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -387,14 +371,12 @@ async function run() {
     applicationId: "<value>",
     commandId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("applicationCommandsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -441,7 +423,6 @@ async function run() {
     applicationCommandPatchRequestPartial: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -468,15 +449,12 @@ async function run() {
     commandId: "<value>",
     applicationCommandPatchRequestPartial: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationCommandsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -522,7 +500,6 @@ async function run() {
     guildId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -548,15 +525,12 @@ async function run() {
     applicationId: "<value>",
     guildId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationCommandsListGuild failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -600,14 +574,9 @@ async function run() {
   }, {
     applicationId: "<value>",
     guildId: "<value>",
-    requestBody: [
-      {
-        name: "<value>",
-      },
-    ],
+    requestBody: null,
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -632,21 +601,14 @@ async function run() {
   }, {
     applicationId: "<value>",
     guildId: "<value>",
-    requestBody: [
-      {
-        name: "<value>",
-      },
-    ],
+    requestBody: null,
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationCommandsBulkSetGuild failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -695,7 +657,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -724,15 +685,12 @@ async function run() {
       name: "<value>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationCommandsCreateGuild failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -778,7 +736,6 @@ async function run() {
     guildId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -804,15 +761,12 @@ async function run() {
     applicationId: "<value>",
     guildId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationCommandsListGuildPermissions failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -859,7 +813,6 @@ async function run() {
     commandId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -886,15 +839,12 @@ async function run() {
     guildId: "<value>",
     commandId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationCommandsGetGuild failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -967,14 +917,12 @@ async function run() {
     guildId: "<value>",
     commandId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("applicationCommandsDeleteGuild failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -1022,7 +970,6 @@ async function run() {
     applicationCommandPatchRequestPartial: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1050,15 +997,12 @@ async function run() {
     commandId: "<value>",
     applicationCommandPatchRequestPartial: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationCommandsUpdateGuild failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1105,7 +1049,6 @@ async function run() {
     commandId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1132,15 +1075,12 @@ async function run() {
     guildId: "<value>",
     commandId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationCommandsGetGuildPermissions failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1188,7 +1128,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1216,15 +1155,12 @@ async function run() {
     commandId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationCommandsSetGuildPermissions failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

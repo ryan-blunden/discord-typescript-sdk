@@ -7,11 +7,6 @@ import { BulkBanUsersFromGuildRequest } from "@ryan.blunden/discord-sdk/models/o
 
 let value: BulkBanUsersFromGuildRequest = {
   guildId: "<value>",
-  requestBody: {
-    userIds: [
-      "<value>",
-    ],
-  },
 };
 ```
 

@@ -7,10 +7,13 @@ import { BulkBanUsersResponse } from "@ryan.blunden/discord-sdk/models/component
 
 let value: BulkBanUsersResponse = {
   bannedUsers: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
   failedUsers: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
 };
 ```

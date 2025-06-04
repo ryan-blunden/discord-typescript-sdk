@@ -7,7 +7,6 @@ import { UpdateApplicationUserRoleConnectionRequest } from "@ryan.blunden/discor
 
 let value: UpdateApplicationUserRoleConnectionRequest = {
   applicationId: "<value>",
-  requestBody: {},
 };
 ```
 

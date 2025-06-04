@@ -13,6 +13,7 @@ export type MessageEmbedVideoResponse = {
   proxyUrl?: string | null | undefined;
   width?: number | null | undefined;
   height?: number | null | undefined;
+  contentType?: string | null | undefined;
   placeholder?: string | null | undefined;
   placeholderVersion?: number | null | undefined;
   description?: string | null | undefined;
@@ -29,6 +30,7 @@ export const MessageEmbedVideoResponse$inboundSchema: z.ZodType<
   proxy_url: z.nullable(z.string()).optional(),
   width: z.nullable(z.number().int()).optional(),
   height: z.nullable(z.number().int()).optional(),
+  content_type: z.nullable(z.string()).optional(),
   placeholder: z.nullable(z.string()).optional(),
   placeholder_version: z.nullable(z.number().int()).optional(),
   description: z.nullable(z.string()).optional(),
@@ -36,6 +38,7 @@ export const MessageEmbedVideoResponse$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "proxy_url": "proxyUrl",
+    "content_type": "contentType",
     "placeholder_version": "placeholderVersion",
   });
 });
@@ -46,6 +49,7 @@ export type MessageEmbedVideoResponse$Outbound = {
   proxy_url?: string | null | undefined;
   width?: number | null | undefined;
   height?: number | null | undefined;
+  content_type?: string | null | undefined;
   placeholder?: string | null | undefined;
   placeholder_version?: number | null | undefined;
   description?: string | null | undefined;
@@ -62,6 +66,7 @@ export const MessageEmbedVideoResponse$outboundSchema: z.ZodType<
   proxyUrl: z.nullable(z.string()).optional(),
   width: z.nullable(z.number().int()).optional(),
   height: z.nullable(z.number().int()).optional(),
+  contentType: z.nullable(z.string()).optional(),
   placeholder: z.nullable(z.string()).optional(),
   placeholderVersion: z.nullable(z.number().int()).optional(),
   description: z.nullable(z.string()).optional(),
@@ -69,6 +74,7 @@ export const MessageEmbedVideoResponse$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     proxyUrl: "proxy_url",
+    contentType: "content_type",
     placeholderVersion: "placeholder_version",
   });
 });

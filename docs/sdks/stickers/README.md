@@ -32,7 +32,6 @@ async function run() {
     guildId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -57,15 +56,12 @@ async function run() {
   const res = await stickersListGuildStickers(discord, {
     guildId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("stickersListGuildStickers failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -114,7 +110,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -144,15 +139,12 @@ async function run() {
       file: "<value>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("stickersCreateGuildSticker failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -197,7 +189,6 @@ async function run() {
     stickerId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -223,15 +214,12 @@ async function run() {
     guildId: "<value>",
     stickerId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("stickersGetGuildSticker failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -301,14 +289,12 @@ async function run() {
     guildId: "<value>",
     stickerId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("stickersDeleteGuildSticker failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -354,7 +340,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -381,15 +366,12 @@ async function run() {
     stickerId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("stickersUpdateGuildSticker failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -429,7 +411,6 @@ const discord = new Discord();
 async function run() {
   const result = await discord.stickers.listPacks();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -450,15 +431,12 @@ const discord = new DiscordCore();
 
 async function run() {
   const res = await stickersListPacks(discord);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("stickersListPacks failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -502,7 +480,6 @@ async function run() {
     packId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -527,15 +504,12 @@ async function run() {
   const res = await stickersGetPack(discord, {
     packId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("stickersGetPack failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -579,7 +553,6 @@ async function run() {
     stickerId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -604,15 +577,12 @@ async function run() {
   const res = await stickersGet(discord, {
     stickerId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("stickersGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

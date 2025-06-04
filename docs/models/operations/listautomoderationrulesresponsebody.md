@@ -13,17 +13,17 @@ const value: components.DefaultKeywordRuleResponse = {
   name: "<value>",
   actions: [
     {
-      metadata: {
-        durationSeconds: 220121,
-      },
+      metadata: {},
     },
   ],
   triggerMetadata: {
     allowList: [
-      "<value>",
+      "<value 1>",
     ],
     presets: [
-      473754,
+      944120,
+      737731,
+      917279,
     ],
   },
 };
@@ -37,23 +37,18 @@ const value: components.KeywordRuleResponse = {
   guildId: "<value>",
   creatorId: "<value>",
   name: "<value>",
-  actions: [
-    {
-      metadata: {
-        channelId: "<value>",
-      },
-    },
-  ],
+  actions: [],
   triggerMetadata: {
     keywordFilter: [
-      "<value>",
+      "<value 1>",
+      "<value 2>",
     ],
     regexPatterns: [
-      "<value>",
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
     ],
-    allowList: [
-      "<value>",
-    ],
+    allowList: [],
   },
 };
 ```
@@ -83,13 +78,7 @@ const value: components.MentionSpamRuleResponse = {
   guildId: "<value>",
   creatorId: "<value>",
   name: "<value>",
-  actions: [
-    {
-      metadata: {
-        channelId: "<value>",
-      },
-    },
-  ],
+  actions: [],
   triggerMetadata: {
     mentionTotalLimit: 409323,
   },

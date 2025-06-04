@@ -7,25 +7,17 @@ import { MessageResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: MessageResponse = {
   content: "<value>",
-  mentions: [
-    {
-      id: "<value>",
-      username: "Elias_Mohr",
-      discriminator: "<value>",
-      publicFlags: 785074,
-      flags: 554294,
-    },
-  ],
+  mentions: [],
   mentionRoles: [
-    "<value>",
+    "<value 1>",
   ],
   attachments: [
     {
       id: "<value>",
       filename: "example.file",
-      size: 36171,
-      url: "https://sarcastic-encouragement.name/",
-      proxyUrl: "https://outrageous-pinstripe.org/",
+      size: 569291,
+      url: "https://married-schnitzel.name/",
+      proxyUrl: "https://gorgeous-printer.biz/",
     },
   ],
   embeds: [
@@ -33,34 +25,26 @@ let value: MessageResponse = {
       type: "<value>",
     },
   ],
-  timestamp: new Date("2025-09-15T22:23:16.663Z"),
-  flags: 645636,
+  timestamp: new Date("2023-08-21T23:25:11.984Z"),
+  flags: 586750,
   components: [
     {
-      id: 598440,
-      components: [
-        {
-          id: 501270,
-          content: "<value>",
-        },
-      ],
-      accessory: {
-        id: 770437,
-      },
+      id: 822824,
+      content: "<value>",
     },
   ],
   id: "<value>",
   channelId: "<value>",
   author: {
     id: "<value>",
-    username: "Ryleigh55",
+    username: "Sterling_Quitzon50",
     discriminator: "<value>",
-    publicFlags: 162451,
-    flags: 657448,
+    publicFlags: 770437,
+    flags: 859724,
   },
-  pinned: false,
+  pinned: true,
   mentionEveryone: false,
-  tts: false,
+  tts: true,
 };
 ```
 

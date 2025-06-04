@@ -7,7 +7,7 @@ import { ApplicationCommandIntegerOption } from "@ryan.blunden/discord-sdk/model
 
 let value: ApplicationCommandIntegerOption = {
   name: "<value>",
-  description: "monster modulo instead",
+  description: "adviser monasticism hence elevation discourse",
 };
 ```
 

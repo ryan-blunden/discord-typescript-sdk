@@ -6,15 +6,21 @@
 import { SectionComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: SectionComponentResponse = {
-  id: 89081,
+  id: 664036,
   components: [
     {
-      id: 844630,
+      id: 822824,
       content: "<value>",
     },
   ],
   accessory: {
-    id: 238874,
+    id: 849900,
+    media: {
+      id: "<value>",
+      url: "https://yellow-repeat.org",
+      proxyUrl: "https://major-gastropod.name",
+    },
+    spoiler: true,
   },
 };
 ```

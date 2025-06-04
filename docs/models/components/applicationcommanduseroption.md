@@ -7,7 +7,7 @@ import { ApplicationCommandUserOption } from "@ryan.blunden/discord-sdk/models/c
 
 let value: ApplicationCommandUserOption = {
   name: "<value>",
-  description: "inasmuch so always",
+  description: "small serve via sticky what obligation alert barring bravely",
 };
 ```
 

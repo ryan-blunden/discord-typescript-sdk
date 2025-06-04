@@ -27,7 +27,6 @@ async function run() {
     applicationId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -52,15 +51,12 @@ async function run() {
   const res = await applicationRoleConnectionMetadataList(discord, {
     applicationId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationRoleConnectionMetadataList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -102,16 +98,9 @@ const discord = new Discord({
 async function run() {
   const result = await discord.applicationRoleConnectionMetadata.update({
     applicationId: "<value>",
-    requestBody: [
-      {
-        key: "<key>",
-        name: "<value>",
-        description: "overcharge popularity willfully scamper headline soon than",
-      },
-    ],
+    requestBody: [],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -135,23 +124,14 @@ const discord = new DiscordCore({
 async function run() {
   const res = await applicationRoleConnectionMetadataUpdate(discord, {
     applicationId: "<value>",
-    requestBody: [
-      {
-        key: "<key>",
-        name: "<value>",
-        description: "overcharge popularity willfully scamper headline soon than",
-      },
-    ],
+    requestBody: [],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationRoleConnectionMetadataUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -219,14 +199,12 @@ async function run() {
   const res = await applicationRoleConnectionMetadataDeleteUserConnection(discord, {
     applicationId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("applicationRoleConnectionMetadataDeleteUserConnection failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();

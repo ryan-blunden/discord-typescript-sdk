@@ -7,9 +7,7 @@ import { MessageComponentInteractionMetadataResponse } from "@ryan.blunden/disco
 
 let value: MessageComponentInteractionMetadataResponse = {
   id: "<value>",
-  authorizingIntegrationOwners: {
-    "key": "<value>",
-  },
+  authorizingIntegrationOwners: {},
   interactedMessageId: "<value>",
 };
 ```

@@ -7,7 +7,7 @@ import { ApplicationCommandRoleOption } from "@ryan.blunden/discord-sdk/models/c
 
 let value: ApplicationCommandRoleOption = {
   name: "<value>",
-  description: "really tighten conceptualize peninsula",
+  description: "swine slump honestly till normal amongst",
 };
 ```
 

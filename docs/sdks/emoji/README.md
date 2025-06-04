@@ -34,7 +34,6 @@ async function run() {
     applicationId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -59,15 +58,12 @@ async function run() {
   const res = await emojiListApplicationEmojis(discord, {
     applicationId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("emojiListApplicationEmojis failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -111,11 +107,10 @@ async function run() {
     applicationId: "<value>",
     requestBody: {
       name: "<value>",
-      image: "https://loremflickr.com/1946/2554?lock=1210253251537993",
+      image: "https://loremflickr.com/927/1911?lock=6880432909269008",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -141,18 +136,15 @@ async function run() {
     applicationId: "<value>",
     requestBody: {
       name: "<value>",
-      image: "https://loremflickr.com/1946/2554?lock=1210253251537993",
+      image: "https://loremflickr.com/927/1911?lock=6880432909269008",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("emojiCreateApplicationEmoji failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -197,7 +189,6 @@ async function run() {
     emojiId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -223,15 +214,12 @@ async function run() {
     applicationId: "<value>",
     emojiId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("emojiGetApplicationEmoji failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -301,14 +289,12 @@ async function run() {
     applicationId: "<value>",
     emojiId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("emojiDeleteApplicationEmoji failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -354,7 +340,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -381,15 +366,12 @@ async function run() {
     emojiId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("emojiUpdateApplicationEmoji failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -433,7 +415,6 @@ async function run() {
     guildId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -458,15 +439,12 @@ async function run() {
   const res = await emojiListGuildEmojis(discord, {
     guildId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("emojiListGuildEmojis failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -510,11 +488,10 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
-      image: "https://loremflickr.com/2512/1139?lock=1643596044790752",
+      image: "https://picsum.photos/seed/HFFTXbJg/390/3498",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -540,18 +517,15 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
-      image: "https://loremflickr.com/2512/1139?lock=1643596044790752",
+      image: "https://picsum.photos/seed/HFFTXbJg/390/3498",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("emojiCreateGuildEmoji failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -596,7 +570,6 @@ async function run() {
     emojiId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -622,15 +595,12 @@ async function run() {
     guildId: "<value>",
     emojiId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("emojiGetGuildEmoji failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -700,14 +670,12 @@ async function run() {
     guildId: "<value>",
     emojiId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("emojiDeleteGuildEmoji failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -753,7 +721,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -780,15 +747,12 @@ async function run() {
     emojiId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("emojiUpdateGuildEmoji failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

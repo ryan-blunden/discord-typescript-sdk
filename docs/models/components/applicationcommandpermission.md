@@ -7,7 +7,7 @@ import { ApplicationCommandPermission } from "@ryan.blunden/discord-sdk/models/c
 
 let value: ApplicationCommandPermission = {
   id: "<value>",
-  permission: false,
+  permission: true,
 };
 ```
 

@@ -7,13 +7,6 @@ import { UpdateApplicationRoleConnectionsMetadataRequest } from "@ryan.blunden/d
 
 let value: UpdateApplicationRoleConnectionsMetadataRequest = {
   applicationId: "<value>",
-  requestBody: [
-    {
-      key: "<key>",
-      name: "<value>",
-      description: "rejigger guest form jut whoa ha yahoo sonnet afore like",
-    },
-  ],
 };
 ```
 

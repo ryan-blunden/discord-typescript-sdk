@@ -7,13 +7,13 @@ import { KeywordTriggerMetadataResponse } from "@ryan.blunden/discord-sdk/models
 
 let value: KeywordTriggerMetadataResponse = {
   keywordFilter: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
-  regexPatterns: [
-    "<value>",
-  ],
+  regexPatterns: [],
   allowList: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
 };
 ```

@@ -7,7 +7,6 @@ import { PutGuildsOnboardingRequest } from "@ryan.blunden/discord-sdk/models/ope
 
 let value: PutGuildsOnboardingRequest = {
   guildId: "<value>",
-  updateGuildOnboardingRequest: {},
 };
 ```
 

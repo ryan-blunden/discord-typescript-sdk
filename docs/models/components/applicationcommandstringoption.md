@@ -7,7 +7,8 @@ import { ApplicationCommandStringOption } from "@ryan.blunden/discord-sdk/models
 
 let value: ApplicationCommandStringOption = {
   name: "<value>",
-  description: "aha hmph statement gray kick industrialize drat connect",
+  description:
+    "zowie well-to-do furthermore gallery ravage rebuke fairly oh when each",
 };
 ```
 

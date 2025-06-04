@@ -9,7 +9,6 @@ const discord = new Discord({
 async function run() {
   const result = await discord.applications.getMe();
 
-  // Handle the result
   console.log(result);
 }
 

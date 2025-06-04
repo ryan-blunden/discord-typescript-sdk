@@ -7,9 +7,6 @@ import { FollowChannelRequest } from "@ryan.blunden/discord-sdk/models/operation
 
 let value: FollowChannelRequest = {
   channelId: "<value>",
-  requestBody: {
-    webhookChannelId: "<value>",
-  },
 };
 ```
 

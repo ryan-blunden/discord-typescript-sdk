@@ -10,6 +10,8 @@ const value: components.ApplicationCommandInteractionMetadataResponse = {
   id: "<value>",
   authorizingIntegrationOwners: {
     "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
   },
 };
 ```
@@ -19,9 +21,7 @@ const value: components.ApplicationCommandInteractionMetadataResponse = {
 ```typescript
 const value: components.MessageComponentInteractionMetadataResponse = {
   id: "<value>",
-  authorizingIntegrationOwners: {
-    "key": "<value>",
-  },
+  authorizingIntegrationOwners: {},
   interactedMessageId: "<value>",
 };
 ```

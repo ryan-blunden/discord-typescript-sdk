@@ -7,10 +7,6 @@ import { CreateGuildSoundboardSoundRequest } from "@ryan.blunden/discord-sdk/mod
 
 let value: CreateGuildSoundboardSoundRequest = {
   guildId: "<value>",
-  soundboardCreateRequest: {
-    name: "<value>",
-    sound: "<value>",
-  },
 };
 ```
 

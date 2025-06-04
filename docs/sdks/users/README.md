@@ -32,7 +32,6 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -55,15 +54,12 @@ async function run() {
   const res = await usersGetCurrent(discord, {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("usersGetCurrent failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -104,10 +100,9 @@ const discord = new Discord({
 
 async function run() {
   const result = await discord.users.updateCurrent({
-    username: "Neva.West",
+    username: "Sandy.Sipes87",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -130,17 +125,14 @@ const discord = new DiscordCore({
 
 async function run() {
   const res = await usersUpdateCurrent(discord, {
-    username: "Neva.West",
+    username: "Sandy.Sipes87",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("usersUpdateCurrent failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -184,7 +176,6 @@ async function run() {
     applicationId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -209,15 +200,12 @@ async function run() {
   const res = await usersGetApplicationRoleConnection(discord, {
     applicationId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("usersGetApplicationRoleConnection failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -262,7 +250,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -288,15 +275,12 @@ async function run() {
     applicationId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("usersUpdateApplicationRoleConnection failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -338,7 +322,6 @@ const discord = new Discord({
 async function run() {
   const result = await discord.users.createDM({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -361,15 +344,12 @@ const discord = new DiscordCore({
 
 async function run() {
   const res = await usersCreateDM(discord, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("usersCreateDM failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -411,7 +391,6 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -434,15 +413,12 @@ async function run() {
   const res = await usersListConnections(discord, {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("usersListConnections failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -484,7 +460,6 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -507,15 +482,12 @@ async function run() {
   const res = await usersListGuilds(discord, {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("usersListGuilds failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -584,14 +556,12 @@ async function run() {
   const res = await usersLeaveGuild(discord, {
     guildId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("usersLeaveGuild failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -635,7 +605,6 @@ async function run() {
     guildId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -660,15 +629,12 @@ async function run() {
   const res = await usersGetGuildMember(discord, {
     guildId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("usersGetGuildMember failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -712,7 +678,6 @@ async function run() {
     userId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -737,15 +702,12 @@ async function run() {
   const res = await usersGet(discord, {
     userId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("usersGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

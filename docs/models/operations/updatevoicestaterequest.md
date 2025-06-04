@@ -8,7 +8,6 @@ import { UpdateVoiceStateRequest } from "@ryan.blunden/discord-sdk/models/operat
 let value: UpdateVoiceStateRequest = {
   guildId: "<value>",
   userId: "<value>",
-  requestBody: {},
 };
 ```
 

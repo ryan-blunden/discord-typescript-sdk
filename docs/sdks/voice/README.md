@@ -29,7 +29,6 @@ async function run() {
     guildId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -54,15 +53,12 @@ async function run() {
   const res = await voiceGetCurrentUserState(discord, {
     guildId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("voiceGetCurrentUserState failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -132,14 +128,12 @@ async function run() {
     guildId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("voiceUpdateCurrentUserState failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -184,7 +178,6 @@ async function run() {
     userId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -210,15 +203,12 @@ async function run() {
     guildId: "<value>",
     userId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("voiceGetUserState failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -290,14 +280,12 @@ async function run() {
     userId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("voiceUpdateUserState failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -339,7 +327,6 @@ const discord = new Discord({
 async function run() {
   const result = await discord.voice.listRegions();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -362,15 +349,12 @@ const discord = new DiscordCore({
 
 async function run() {
   const res = await voiceListRegions(discord);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("voiceListRegions failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

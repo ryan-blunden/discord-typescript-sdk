@@ -30,7 +30,6 @@ async function run() {
     guildId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -55,15 +54,12 @@ async function run() {
   const res = await guildScheduledEventsList(discord, {
     guildId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("guildScheduledEventsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -107,11 +103,13 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
-      scheduledStartTime: new Date("2024-11-30T17:06:07.804Z"),
+      scheduledStartTime: new Date("2024-03-28T07:26:43.121Z"),
+      entityMetadata: {
+        location: "<value>",
+      },
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -137,21 +135,18 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
-      scheduledStartTime: new Date("2025-05-22T22:27:14.379Z"),
+      scheduledStartTime: new Date("2024-03-28T07:26:43.121Z"),
       entityMetadata: {
         location: "<value>",
       },
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("guildScheduledEventsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -196,7 +191,6 @@ async function run() {
     guildScheduledEventId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -222,15 +216,12 @@ async function run() {
     guildId: "<value>",
     guildScheduledEventId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("guildScheduledEventsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -300,14 +291,12 @@ async function run() {
     guildId: "<value>",
     guildScheduledEventId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("guildScheduledEventsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -353,7 +342,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -380,15 +368,12 @@ async function run() {
     guildScheduledEventId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("guildScheduledEventsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -433,7 +418,6 @@ async function run() {
     guildScheduledEventId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -459,15 +443,12 @@ async function run() {
     guildId: "<value>",
     guildScheduledEventId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("guildScheduledEventsGetUsers failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

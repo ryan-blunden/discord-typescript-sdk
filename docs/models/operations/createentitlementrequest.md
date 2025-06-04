@@ -7,11 +7,6 @@ import { CreateEntitlementRequest } from "@ryan.blunden/discord-sdk/models/opera
 
 let value: CreateEntitlementRequest = {
   applicationId: "<value>",
-  createEntitlementRequestData: {
-    skuId: "<value>",
-    ownerId: "<value>",
-    ownerType: 179717,
-  },
 };
 ```
 

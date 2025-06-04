@@ -13,10 +13,10 @@ let value: MessageReactionResponse = {
     normal: 108844,
   },
   burstColors: [
-    "<value>",
+    "<value 1>",
   ],
   meBurst: false,
-  me: false,
+  me: true,
 };
 ```
 

@@ -8,9 +8,9 @@ import { VoiceRegionResponse } from "@ryan.blunden/discord-sdk/models/components
 let value: VoiceRegionResponse = {
   id: "<id>",
   name: "<value>",
-  custom: false,
+  custom: true,
   deprecated: false,
-  optimal: false,
+  optimal: true,
 };
 ```
 

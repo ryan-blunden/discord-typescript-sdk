@@ -16,6 +16,7 @@ let value: MessageEmbedImageResponse = {};
 | `proxyUrl`           | *string*             | :heavy_minus_sign:   | N/A                  |
 | `width`              | *number*             | :heavy_minus_sign:   | N/A                  |
 | `height`             | *number*             | :heavy_minus_sign:   | N/A                  |
+| `contentType`        | *string*             | :heavy_minus_sign:   | N/A                  |
 | `placeholder`        | *string*             | :heavy_minus_sign:   | N/A                  |
 | `placeholderVersion` | *number*             | :heavy_minus_sign:   | N/A                  |
 | `description`        | *string*             | :heavy_minus_sign:   | N/A                  |

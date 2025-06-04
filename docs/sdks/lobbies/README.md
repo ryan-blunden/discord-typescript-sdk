@@ -33,7 +33,6 @@ async function run() {
     secret: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -58,15 +57,12 @@ async function run() {
   }, {
     secret: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("lobbiesCreateOrJoin failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -109,7 +105,6 @@ const discord = new Discord({
 async function run() {
   const result = await discord.lobbies.create({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -132,15 +127,12 @@ const discord = new DiscordCore({
 
 async function run() {
   const res = await lobbiesCreate(discord, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("lobbiesCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -184,7 +176,6 @@ async function run() {
     lobbyId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -209,15 +200,12 @@ async function run() {
   const res = await lobbiesGet(discord, {
     lobbyId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("lobbiesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -262,7 +250,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -288,15 +275,12 @@ async function run() {
     lobbyId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("lobbiesUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -341,7 +325,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -367,15 +350,12 @@ async function run() {
     lobbyId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("lobbiesConnectToChannel failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -444,14 +424,12 @@ async function run() {
   }, {
     lobbyId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("lobbiesLeave failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -498,7 +476,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -525,15 +502,12 @@ async function run() {
     userId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("lobbiesAddMember failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -603,14 +577,12 @@ async function run() {
     lobbyId: "<value>",
     userId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("lobbiesRemoveMember failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -655,7 +627,6 @@ async function run() {
     sdkMessageRequest: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -681,15 +652,12 @@ async function run() {
     lobbyId: "<value>",
     sdkMessageRequest: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("lobbiesSendMessage failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

@@ -8,10 +8,10 @@ import { TeamMemberResponse } from "@ryan.blunden/discord-sdk/models/components"
 let value: TeamMemberResponse = {
   user: {
     id: "<value>",
-    username: "Hilda.Littel26",
+    username: "Braulio60",
     discriminator: "<value>",
-    publicFlags: 582584,
-    flags: 601086,
+    publicFlags: 484824,
+    flags: 238527,
   },
   teamId: "<value>",
 };

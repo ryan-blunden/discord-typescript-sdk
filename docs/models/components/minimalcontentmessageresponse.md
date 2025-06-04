@@ -7,45 +7,21 @@ import { MinimalContentMessageResponse } from "@ryan.blunden/discord-sdk/models/
 
 let value: MinimalContentMessageResponse = {
   content: "<value>",
-  mentions: [
-    {
-      id: "<value>",
-      username: "Christop.Prosacco",
-      discriminator: "<value>",
-      publicFlags: 407811,
-      flags: 213636,
-    },
-  ],
-  mentionRoles: [
-    "<value>",
-  ],
+  mentions: [],
+  mentionRoles: [],
   attachments: [
     {
       id: "<value>",
       filename: "example.file",
-      size: 975053,
-      url: "https://well-documented-seafood.name/",
-      proxyUrl: "https://colorless-coliseum.biz/",
+      size: 569291,
+      url: "https://married-schnitzel.name/",
+      proxyUrl: "https://gorgeous-printer.biz/",
     },
   ],
-  embeds: [
-    {
-      type: "<value>",
-    },
-  ],
-  timestamp: new Date("2024-11-02T02:20:05.902Z"),
-  flags: 624013,
-  components: [
-    {
-      id: 525257,
-      file: {
-        id: "<value>",
-        url: "https://unrealistic-bran.net/",
-        proxyUrl: "https://haunting-chapel.com",
-      },
-      spoiler: false,
-    },
-  ],
+  embeds: [],
+  timestamp: new Date("2023-09-02T06:13:10.987Z"),
+  flags: 428219,
+  components: [],
 };
 ```
 

@@ -24,7 +24,6 @@ async function run() {
     code: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -47,15 +46,12 @@ async function run() {
   const res = await invitesGet(discord, {
     code: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("invitesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -100,7 +96,6 @@ async function run() {
     code: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -125,15 +120,12 @@ async function run() {
   const res = await invitesDelete(discord, {
     code: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("invitesDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

@@ -36,7 +36,6 @@ const discord = new Discord({
 async function run() {
   const result = await discord.applications.getMe();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -59,15 +58,12 @@ const discord = new DiscordCore({
 
 async function run() {
   const res = await applicationsGetMe(discord);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationsGetMe failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -108,7 +104,6 @@ const discord = new Discord({
 async function run() {
   const result = await discord.applications.updateSelf({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -131,15 +126,12 @@ const discord = new DiscordCore({
 
 async function run() {
   const res = await applicationsUpdateSelf(discord, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationsUpdateSelf failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -183,7 +175,6 @@ async function run() {
     applicationId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -208,15 +199,12 @@ async function run() {
   const res = await applicationsGet(discord, {
     applicationId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -261,7 +249,6 @@ async function run() {
     applicationFormPartial: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -287,15 +274,12 @@ async function run() {
     applicationId: "<value>",
     applicationFormPartial: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -340,7 +324,6 @@ async function run() {
     instanceId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -366,15 +349,12 @@ async function run() {
     applicationId: "<value>",
     instanceId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationsGetActivityInstance failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -421,7 +401,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -449,15 +428,12 @@ async function run() {
       file: "<value>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationsUploadAttachment failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -498,7 +474,6 @@ const discord = new Discord();
 async function run() {
   const result = await discord.applications.getGateway();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -519,15 +494,12 @@ const discord = new DiscordCore();
 
 async function run() {
   const res = await applicationsGetGateway(discord);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationsGetGateway failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -569,7 +541,6 @@ const discord = new Discord({
 async function run() {
   const result = await discord.applications.getBotGateway();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -592,15 +563,12 @@ const discord = new DiscordCore({
 
 async function run() {
   const res = await applicationsGetBotGateway(discord);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationsGetBotGateway failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -641,7 +609,6 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -664,15 +631,12 @@ async function run() {
   const res = await applicationsGetOAuth2Authorization(discord, {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationsGetOAuth2Authorization failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -714,7 +678,6 @@ const discord = new Discord({
 async function run() {
   const result = await discord.applications.getOAuth2Me();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -737,15 +700,12 @@ const discord = new DiscordCore({
 
 async function run() {
   const res = await applicationsGetOAuth2Me(discord);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationsGetOAuth2Me failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -784,7 +744,6 @@ const discord = new Discord();
 async function run() {
   const result = await discord.applications.getPublicKeys();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -805,15 +764,12 @@ const discord = new DiscordCore();
 
 async function run() {
   const res = await applicationsGetPublicKeys(discord);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationsGetPublicKeys failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -855,7 +811,6 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -878,15 +833,12 @@ async function run() {
   const res = await applicationsGetOpenIDConnectUserInfo(discord, {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationsGetOpenIDConnectUserInfo failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -952,14 +904,12 @@ async function run() {
     clientId: "<value>",
     externalAuthToken: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("applicationsPartnerSDKUnmergeProvisionalAccount failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -1003,7 +953,6 @@ async function run() {
     externalAuthToken: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1027,15 +976,12 @@ async function run() {
     clientId: "<value>",
     externalAuthToken: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("applicationsPartnerSDKToken failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

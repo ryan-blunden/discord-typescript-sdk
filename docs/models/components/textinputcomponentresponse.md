@@ -6,7 +6,7 @@
 import { TextInputComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: TextInputComponentResponse = {
-  id: 769962,
+  id: 383138,
   customId: "<id>",
 };
 ```

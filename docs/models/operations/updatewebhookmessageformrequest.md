@@ -9,7 +9,6 @@ let value: UpdateWebhookMessageFormRequest = {
   webhookId: "<value>",
   webhookToken: "<value>",
   messageId: "<value>",
-  incomingWebhookUpdateRequestPartial: {},
 };
 ```
 

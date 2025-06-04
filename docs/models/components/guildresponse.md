@@ -9,40 +9,17 @@ let value: GuildResponse = {
   id: "<value>",
   name: "<value>",
   features: [
-    "<value>",
+    "<value 1>",
   ],
   ownerId: "<value>",
   region: "<value>",
-  systemChannelFlags: 431534,
-  widgetEnabled: false,
-  roles: [
-    {
-      id: "<value>",
-      name: "<value>",
-      permissions: "<value>",
-      position: 53360,
-      color: 376735,
-      hoist: false,
-      managed: false,
-      mentionable: false,
-    },
-  ],
-  premiumSubscriptionCount: 318268,
-  premiumProgressBarEnabled: false,
-  nsfw: false,
-  emojis: [
-    {
-      id: "<value>",
-      name: "<value>",
-      roles: [
-        "<value>",
-      ],
-      requireColons: false,
-      managed: false,
-      animated: false,
-      available: false,
-    },
-  ],
+  systemChannelFlags: 53360,
+  widgetEnabled: true,
+  roles: [],
+  premiumSubscriptionCount: 776278,
+  premiumProgressBarEnabled: true,
+  nsfw: true,
+  emojis: [],
   stickers: [
     {
       id: "<value>",

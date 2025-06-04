@@ -7,8 +7,7 @@ import { ApplicationCommandChannelOption } from "@ryan.blunden/discord-sdk/model
 
 let value: ApplicationCommandChannelOption = {
   name: "<value>",
-  description:
-    "emphasize unlike decision whenever anenst pish under inure blushing",
+  description: "fortunately within at improbable yahoo founder over coast",
 };
 ```
 

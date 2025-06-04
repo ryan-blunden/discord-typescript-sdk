@@ -1,11 +1,11 @@
-# ListPinnedMessagesRequest
+# DeprecatedListPinsRequest
 
 ## Example Usage
 
 ```typescript
-import { ListPinnedMessagesRequest } from "@ryan.blunden/discord-sdk/models/operations";
+import { DeprecatedListPinsRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
-let value: ListPinnedMessagesRequest = {
+let value: DeprecatedListPinsRequest = {
   channelId: "<value>",
 };
 ```

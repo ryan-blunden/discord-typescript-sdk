@@ -12,9 +12,7 @@ let value: MLSpamRuleResponse = {
   name: "<value>",
   actions: [
     {
-      metadata: {
-        durationSeconds: 323330,
-      },
+      metadata: {},
     },
   ],
   triggerMetadata: {},

@@ -14,9 +14,7 @@ let value: OAuth2GetAuthorizationResponse = {
     flags: 101619,
   },
   expires: new Date("2025-07-13T16:37:19.918Z"),
-  scopes: [
-    "<value>",
-  ],
+  scopes: [],
 };
 ```
 

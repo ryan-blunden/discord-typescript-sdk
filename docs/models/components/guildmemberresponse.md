@@ -10,17 +10,17 @@ let value: GuildMemberResponse = {
   joinedAt: new Date("2024-08-21T22:42:35.639Z"),
   pending: false,
   roles: [
-    "<value>",
+    "<value 1>",
   ],
   user: {
     id: "<value>",
-    username: "Phoebe17",
+    username: "Braulio60",
     discriminator: "<value>",
-    publicFlags: 736741,
-    flags: 50433,
+    publicFlags: 484824,
+    flags: 238527,
   },
-  mute: false,
-  deaf: false,
+  mute: true,
+  deaf: true,
 };
 ```
 

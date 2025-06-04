@@ -10,10 +10,10 @@ let value: GithubDiscussion = {
   number: 600943,
   htmlUrl: "https://empty-term.net",
   user: {
-    id: 978276,
-    login: "Sydney_Leannon",
-    htmlUrl: "https://rich-goat.name",
-    avatarUrl: "https://stunning-gastropod.com/",
+    id: 971760,
+    login: "Ruthie_Kertzmann",
+    htmlUrl: "https://intent-produce.biz/",
+    avatarUrl: "https://unfinished-lox.com",
   },
 };
 ```

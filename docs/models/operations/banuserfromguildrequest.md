@@ -8,7 +8,6 @@ import { BanUserFromGuildRequest } from "@ryan.blunden/discord-sdk/models/operat
 let value: BanUserFromGuildRequest = {
   guildId: "<value>",
   userId: "<value>",
-  requestBody: {},
 };
 ```
 

@@ -7,32 +7,8 @@ import { GuildOnboardingResponse } from "@ryan.blunden/discord-sdk/models/compon
 
 let value: GuildOnboardingResponse = {
   guildId: "<value>",
-  prompts: [
-    {
-      id: "<value>",
-      title: "<value>",
-      options: [
-        {
-          id: "<value>",
-          title: "<value>",
-          description: "duh shoulder scent pfft whoa",
-          emoji: {},
-          roleIds: [
-            "<value>",
-          ],
-          channelIds: [
-            "<value>",
-          ],
-        },
-      ],
-      singleSelect: false,
-      required: false,
-      inOnboarding: false,
-    },
-  ],
-  defaultChannelIds: [
-    "<value>",
-  ],
+  prompts: [],
+  defaultChannelIds: [],
   enabled: false,
 };
 ```

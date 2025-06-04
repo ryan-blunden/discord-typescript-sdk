@@ -11,7 +11,8 @@ let value: MyGuildResponse = {
   owner: false,
   permissions: "<value>",
   features: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
 };
 ```

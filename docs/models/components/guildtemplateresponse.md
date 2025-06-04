@@ -18,31 +18,15 @@ let value: GuildTemplateResponse = {
     systemChannelFlags: 699478,
     roles: [
       {
-        id: 672160,
+        id: 192696,
         name: "<value>",
         permissions: "<value>",
-        color: 192696,
+        color: 869107,
         hoist: false,
         mentionable: false,
       },
     ],
-    channels: [
-      {
-        type: 14,
-        bitrate: 781664,
-        userLimit: 886207,
-        nsfw: false,
-        rateLimitPerUser: 473536,
-        permissionOverwrites: [
-          {
-            id: "<value>",
-            allow: "<value>",
-            deny: "<value>",
-          },
-        ],
-        template: "<value>",
-      },
-    ],
+    channels: [],
   },
 };
 ```
