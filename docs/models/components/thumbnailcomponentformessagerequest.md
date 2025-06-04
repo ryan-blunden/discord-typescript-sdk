@@ -7,7 +7,7 @@ import { ThumbnailComponentForMessageRequest } from "@ryan.blunden/discord-sdk/m
 
 let value: ThumbnailComponentForMessageRequest = {
   media: {
-    url: "https://purple-morning.name",
+    url: "https://square-fishery.net/",
   },
 };
 ```

@@ -6,62 +6,22 @@
 import { ResolvedObjectsResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ResolvedObjectsResponse = {
-  users: {
-    "key": {
-      id: "<value>",
-      username: "Eudora_Sipes43",
-      discriminator: "<value>",
-      publicFlags: 778761,
-      flags: 416268,
-    },
-  },
-  members: {
-    "key": {
-      flags: 5404,
-      joinedAt: new Date("2024-05-05T18:02:05.430Z"),
-      pending: false,
-      roles: [
-        "<value>",
-      ],
-      user: {
-        id: "<value>",
-        username: "Simeon50",
-        discriminator: "<value>",
-        publicFlags: 483308,
-        flags: 600547,
-      },
-      mute: false,
-      deaf: false,
-    },
-  },
+  users: {},
+  members: {},
   channels: {
     "key": {
       id: "<value>",
-      type: 7,
-      flags: 352317,
-      recipients: [
-        {
-          id: "<value>",
-          username: "Orville.Windler",
-          discriminator: "<value>",
-          publicFlags: 136423,
-          flags: 162030,
-        },
-      ],
-    },
-  },
-  roles: {
-    "key": {
-      id: "<value>",
+      type: 5,
+      flags: 191215,
+      guildId: "<value>",
       name: "<value>",
-      permissions: "<value>",
-      position: 996856,
-      color: 288975,
-      hoist: false,
-      managed: false,
-      mentionable: false,
+      ownerId: "<value>",
+      messageCount: 778761,
+      memberCount: 416268,
+      totalMessageSent: 5404,
     },
   },
+  roles: {},
 };
 ```
 

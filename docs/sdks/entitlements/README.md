@@ -27,10 +27,13 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
-    skuIds: "<value>",
+    skuIds: [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -54,17 +57,18 @@ async function run() {
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
-    skuIds: "<value>",
+    skuIds: [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("entitlementsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -110,11 +114,10 @@ async function run() {
     createEntitlementRequestData: {
       skuId: "<value>",
       ownerId: "<value>",
-      ownerType: 617153,
+      ownerType: 815729,
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -141,18 +144,15 @@ async function run() {
     createEntitlementRequestData: {
       skuId: "<value>",
       ownerId: "<value>",
-      ownerType: 617153,
+      ownerType: 815729,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("entitlementsCreateTest failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -197,7 +197,6 @@ async function run() {
     entitlementId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -223,15 +222,12 @@ async function run() {
     applicationId: "<value>",
     entitlementId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("entitlementsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -302,14 +298,12 @@ async function run() {
     applicationId: "<value>",
     entitlementId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("entitlementsDeleteTest failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -380,14 +374,12 @@ async function run() {
     applicationId: "<value>",
     entitlementId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("entitlementsConsume failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();

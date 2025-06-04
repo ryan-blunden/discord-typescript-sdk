@@ -14,7 +14,7 @@ const value: components.ButtonComponentForMessageRequest = {};
 ```typescript
 const value: components.ThumbnailComponentForMessageRequest = {
   media: {
-    url: "https://carefree-unibody.org/",
+    url: "https://square-fishery.net/",
   },
 };
 ```

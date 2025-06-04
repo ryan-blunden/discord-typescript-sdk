@@ -12,16 +12,16 @@ let value: PrivateApplicationResponse = {
   verifyKey: "<value>",
   flags: 474983,
   redirectUris: [
-    "https://busy-wallaby.com/",
+    "https://wobbly-chops.biz/",
   ],
   owner: {
     id: "<value>",
-    username: "Dino_Schroeder",
+    username: "Haley_Wilderman33",
     discriminator: "<value>",
-    publicFlags: 289702,
-    flags: 474116,
+    publicFlags: 474116,
+    flags: 122610,
   },
-  approximateUserInstallCount: 122610,
+  approximateUserInstallCount: 740777,
 };
 ```
 

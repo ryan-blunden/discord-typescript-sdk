@@ -8,8 +8,8 @@ import { MediaGalleryItemResponse } from "@ryan.blunden/discord-sdk/models/compo
 let value: MediaGalleryItemResponse = {
   media: {
     id: "<value>",
-    url: "https://pretty-spring.biz",
-    proxyUrl: "https://clear-overcoat.org/",
+    url: "https://yellow-repeat.org",
+    proxyUrl: "https://major-gastropod.name",
   },
   spoiler: false,
 };

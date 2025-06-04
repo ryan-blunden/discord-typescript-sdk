@@ -45,7 +45,6 @@ async function run() {
     channelId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -70,15 +69,12 @@ async function run() {
   const res = await webhooksListForChannel(discord, {
     channelId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksListForChannel failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -125,7 +121,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -153,15 +148,12 @@ async function run() {
       name: "<value>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -205,7 +197,6 @@ async function run() {
     guildId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -230,15 +221,12 @@ async function run() {
   const res = await webhooksListForGuild(discord, {
     guildId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksListForGuild failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -282,7 +270,6 @@ async function run() {
     webhookId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -307,15 +294,12 @@ async function run() {
   const res = await webhooksGet(discord, {
     webhookId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -383,14 +367,12 @@ async function run() {
   const res = await webhooksDelete(discord, {
     webhookId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("webhooksDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -435,7 +417,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -461,15 +442,12 @@ async function run() {
     webhookId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -512,7 +490,6 @@ async function run() {
     webhookToken: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -536,15 +513,12 @@ async function run() {
     webhookId: "<value>",
     webhookToken: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksGetWithToken failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -611,14 +585,12 @@ async function run() {
     webhookId: "<value>",
     webhookToken: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("webhooksDeleteWithToken failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -663,7 +635,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -688,15 +659,12 @@ async function run() {
     webhookToken: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksUpdateWithToken failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -740,10 +708,10 @@ async function run() {
     webhookToken: "<value>",
     githubWebhook: {
       sender: {
-        id: 842501,
-        login: "Willa.Kirlin37",
-        htmlUrl: "https://aching-tennis.biz",
-        avatarUrl: "https://expensive-yin.org/",
+        id: 456901,
+        login: "Elisha44",
+        htmlUrl: "https://sardonic-translation.org/",
+        avatarUrl: "https://small-mouser.biz/",
       },
     },
   });
@@ -772,21 +740,19 @@ async function run() {
     webhookToken: "<value>",
     githubWebhook: {
       sender: {
-        id: 842501,
-        login: "Willa.Kirlin37",
-        htmlUrl: "https://aching-tennis.biz",
-        avatarUrl: "https://expensive-yin.org/",
+        id: 456901,
+        login: "Elisha44",
+        htmlUrl: "https://sardonic-translation.org/",
+        avatarUrl: "https://small-mouser.biz/",
       },
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("webhooksExecuteGithub failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -830,7 +796,6 @@ async function run() {
     webhookToken: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -854,15 +819,12 @@ async function run() {
     webhookId: "<value>",
     webhookToken: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksGetOriginalMessage failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -929,14 +891,12 @@ async function run() {
     webhookId: "<value>",
     webhookToken: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("webhooksDeleteOriginalMessage failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -981,7 +941,6 @@ async function run() {
     incomingWebhookUpdateRequestPartial: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1006,15 +965,12 @@ async function run() {
     webhookToken: "<value>",
     incomingWebhookUpdateRequestPartial: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksUpdateOriginalMessageJson failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1059,7 +1015,6 @@ async function run() {
     incomingWebhookUpdateRequestPartial: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1084,15 +1039,12 @@ async function run() {
     webhookToken: "<value>",
     incomingWebhookUpdateRequestPartial: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksUpdateOriginalMessageForm failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1137,7 +1089,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1162,15 +1113,12 @@ async function run() {
     webhookToken: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksUpdateOriginalMessageMultipart failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1215,7 +1163,6 @@ async function run() {
     messageId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1240,15 +1187,12 @@ async function run() {
     webhookToken: "<value>",
     messageId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksGetMessage failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1317,14 +1261,12 @@ async function run() {
     webhookToken: "<value>",
     messageId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("webhooksDeleteMessage failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -1370,7 +1312,6 @@ async function run() {
     incomingWebhookUpdateRequestPartial: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1396,15 +1337,12 @@ async function run() {
     messageId: "<value>",
     incomingWebhookUpdateRequestPartial: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksUpdateMessageJson failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1450,7 +1388,6 @@ async function run() {
     incomingWebhookUpdateRequestPartial: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1476,15 +1413,12 @@ async function run() {
     messageId: "<value>",
     incomingWebhookUpdateRequestPartial: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksUpdateMessageForm failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1530,7 +1464,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1556,15 +1489,12 @@ async function run() {
     messageId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksUpdateMessageMultipart failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1609,7 +1539,6 @@ async function run() {
     slackWebhook: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1634,15 +1563,12 @@ async function run() {
     webhookToken: "<value>",
     slackWebhook: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksExecuteSlack failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

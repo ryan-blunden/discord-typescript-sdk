@@ -12,12 +12,12 @@ let value: LobbyMessageResponse = {
   channelId: "<value>",
   author: {
     id: "<value>",
-    username: "Jalon93",
+    username: "Sterling_Quitzon50",
     discriminator: "<value>",
-    publicFlags: 577906,
-    flags: 274868,
+    publicFlags: 770437,
+    flags: 859724,
   },
-  flags: 242477,
+  flags: 462906,
 };
 ```
 

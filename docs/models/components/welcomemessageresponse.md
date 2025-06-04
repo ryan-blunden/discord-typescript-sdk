@@ -7,7 +7,7 @@ import { WelcomeMessageResponse } from "@ryan.blunden/discord-sdk/models/compone
 
 let value: WelcomeMessageResponse = {
   authorIds: [
-    "<value>",
+    "<value 1>",
   ],
   message: "<value>",
 };

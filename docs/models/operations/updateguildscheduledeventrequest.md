@@ -8,7 +8,6 @@ import { UpdateGuildScheduledEventRequest } from "@ryan.blunden/discord-sdk/mode
 let value: UpdateGuildScheduledEventRequest = {
   guildId: "<value>",
   guildScheduledEventId: "<value>",
-  requestBody: {},
 };
 ```
 

@@ -7,7 +7,8 @@ import { ApplicationOAuth2InstallParamsResponse } from "@ryan.blunden/discord-sd
 
 let value: ApplicationOAuth2InstallParamsResponse = {
   scopes: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
   permissions: "<value>",
 };

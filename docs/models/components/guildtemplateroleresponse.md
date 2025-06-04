@@ -10,8 +10,8 @@ let value: GuildTemplateRoleResponse = {
   name: "<value>",
   permissions: "<value>",
   color: 913066,
-  hoist: false,
-  mentionable: false,
+  hoist: true,
+  mentionable: true,
 };
 ```
 

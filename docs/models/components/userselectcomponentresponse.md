@@ -6,7 +6,7 @@
 import { UserSelectComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: UserSelectComponentResponse = {
-  id: 565954,
+  id: 552290,
   customId: "<id>",
 };
 ```

@@ -8,7 +8,6 @@ import { UpdateGuildSoundboardSoundRequest } from "@ryan.blunden/discord-sdk/mod
 let value: UpdateGuildSoundboardSoundRequest = {
   guildId: "<value>",
   soundId: "<value>",
-  soundboardPatchRequestPartial: {},
 };
 ```
 

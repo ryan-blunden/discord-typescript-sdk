@@ -7,7 +7,7 @@ import { GuildHomeSettingsResponse } from "@ryan.blunden/discord-sdk/models/comp
 
 let value: GuildHomeSettingsResponse = {
   guildId: "<value>",
-  enabled: false,
+  enabled: true,
 };
 ```
 

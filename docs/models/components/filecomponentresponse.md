@@ -6,13 +6,13 @@
 import { FileComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: FileComponentResponse = {
-  id: 133486,
+  id: 601142,
   file: {
     id: "<value>",
-    url: "https://impossible-waterspout.net/",
-    proxyUrl: "https://likable-import.net/",
+    url: "https://actual-testimonial.com/",
+    proxyUrl: "https://poor-toothpick.org/",
   },
-  spoiler: false,
+  spoiler: true,
 };
 ```
 

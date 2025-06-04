@@ -8,7 +8,6 @@ import { UpdateGuildTemplateRequest } from "@ryan.blunden/discord-sdk/models/ope
 let value: UpdateGuildTemplateRequest = {
   guildId: "<value>",
   code: "<value>",
-  requestBody: {},
 };
 ```
 

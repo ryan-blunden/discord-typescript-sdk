@@ -164,7 +164,7 @@ export class Channels extends ClientSDK {
    * Returns all pinned messages in the channel as an array of message objects.
    */
   async listPinnedMessages(
-    request: operations.ListPinnedMessagesRequest,
+    request: operations.DeprecatedListPinsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.MessageResponse>> {
     return unwrapAsync(channelsListPinnedMessages(
@@ -178,7 +178,7 @@ export class Channels extends ClientSDK {
    * Pin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
    */
   async pinMessage(
-    request: operations.PinMessageRequest,
+    request: operations.DeprecatedCreatePinRequest,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(channelsPinMessage(
@@ -192,7 +192,7 @@ export class Channels extends ClientSDK {
    * Unpin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
    */
   async unpinMessage(
-    request: operations.UnpinMessageRequest,
+    request: operations.DeprecatedDeletePinRequest,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(channelsUnpinMessage(

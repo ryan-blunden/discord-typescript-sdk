@@ -7,9 +7,6 @@ import { BulkUpdateGuildRolesRequest } from "@ryan.blunden/discord-sdk/models/op
 
 let value: BulkUpdateGuildRolesRequest = {
   guildId: "<value>",
-  requestBody: [
-    {},
-  ],
 };
 ```
 

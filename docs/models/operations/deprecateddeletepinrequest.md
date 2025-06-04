@@ -1,11 +1,11 @@
-# UnpinMessageRequest
+# DeprecatedDeletePinRequest
 
 ## Example Usage
 
 ```typescript
-import { UnpinMessageRequest } from "@ryan.blunden/discord-sdk/models/operations";
+import { DeprecatedDeletePinRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
-let value: UnpinMessageRequest = {
+let value: DeprecatedDeletePinRequest = {
   channelId: "<value>",
   messageId: "<value>",
 };

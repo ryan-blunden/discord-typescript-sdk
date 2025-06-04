@@ -8,9 +8,9 @@ import { ConnectedAccountResponse } from "@ryan.blunden/discord-sdk/models/compo
 let value: ConnectedAccountResponse = {
   id: "<id>",
   friendSync: false,
-  showActivity: false,
+  showActivity: true,
   twoWayLink: false,
-  verified: false,
+  verified: true,
 };
 ```
 

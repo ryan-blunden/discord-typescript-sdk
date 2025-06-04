@@ -7,8 +7,7 @@ import { ApplicationCommandIntegerOptionResponse } from "@ryan.blunden/discord-s
 
 let value: ApplicationCommandIntegerOptionResponse = {
   name: "<value>",
-  description:
-    "knavishly for release oh when cassava tectonics through gust furthermore",
+  description: "phew voluminous royal however into inasmuch muffled pick",
 };
 ```
 

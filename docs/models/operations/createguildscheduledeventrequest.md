@@ -7,10 +7,6 @@ import { CreateGuildScheduledEventRequest } from "@ryan.blunden/discord-sdk/mode
 
 let value: CreateGuildScheduledEventRequest = {
   guildId: "<value>",
-  requestBody: {
-    name: "<value>",
-    scheduledStartTime: new Date("2023-02-18T10:48:21.076Z"),
-  },
 };
 ```
 

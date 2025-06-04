@@ -6,12 +6,7 @@
 import { GuildWelcomeScreenResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GuildWelcomeScreenResponse = {
-  welcomeChannels: [
-    {
-      channelId: "<value>",
-      description: "pish likewise miserably inasmuch mid",
-    },
-  ],
+  welcomeChannels: [],
 };
 ```
 

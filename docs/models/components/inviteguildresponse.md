@@ -9,7 +9,8 @@ let value: InviteGuildResponse = {
   id: "<value>",
   name: "<value>",
   features: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
 };
 ```

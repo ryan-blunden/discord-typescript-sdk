@@ -7,11 +7,6 @@ import { BulkDeleteMessagesRequest } from "@ryan.blunden/discord-sdk/models/oper
 
 let value: BulkDeleteMessagesRequest = {
   channelId: "<value>",
-  requestBody: {
-    messages: [
-      "<value>",
-    ],
-  },
 };
 ```
 

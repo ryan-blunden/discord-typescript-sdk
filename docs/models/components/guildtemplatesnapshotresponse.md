@@ -10,10 +10,10 @@ let value: GuildTemplateSnapshotResponse = {
   systemChannelFlags: 522019,
   roles: [
     {
-      id: 662350,
+      id: 192696,
       name: "<value>",
       permissions: "<value>",
-      color: 744566,
+      color: 869107,
       hoist: false,
       mentionable: false,
     },
@@ -23,8 +23,8 @@ let value: GuildTemplateSnapshotResponse = {
       type: 14,
       bitrate: 180148,
       userLimit: 850075,
-      nsfw: false,
-      rateLimitPerUser: 346879,
+      nsfw: true,
+      rateLimitPerUser: 333398,
       permissionOverwrites: [
         {
           id: "<value>",

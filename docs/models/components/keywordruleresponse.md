@@ -10,23 +10,18 @@ let value: KeywordRuleResponse = {
   guildId: "<value>",
   creatorId: "<value>",
   name: "<value>",
-  actions: [
-    {
-      metadata: {
-        durationSeconds: 974890,
-      },
-    },
-  ],
+  actions: [],
   triggerMetadata: {
     keywordFilter: [
-      "<value>",
+      "<value 1>",
+      "<value 2>",
     ],
     regexPatterns: [
-      "<value>",
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
     ],
-    allowList: [
-      "<value>",
-    ],
+    allowList: [],
   },
 };
 ```

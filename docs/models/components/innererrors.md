@@ -6,12 +6,7 @@
 import { InnerErrors } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: InnerErrors = {
-  errors: [
-    {
-      code: 567277,
-      message: "<value>",
-    },
-  ],
+  errors: [],
 };
 ```
 

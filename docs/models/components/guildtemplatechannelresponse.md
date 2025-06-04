@@ -10,7 +10,7 @@ let value: GuildTemplateChannelResponse = {
   bitrate: 418129,
   userLimit: 550885,
   nsfw: false,
-  rateLimitPerUser: 656507,
+  rateLimitPerUser: 885866,
   permissionOverwrites: [
     {
       id: "<value>",

@@ -7,7 +7,6 @@ import { CreateGuildRoleRequest } from "@ryan.blunden/discord-sdk/models/operati
 
 let value: CreateGuildRoleRequest = {
   guildId: "<value>",
-  requestBody: {},
 };
 ```
 

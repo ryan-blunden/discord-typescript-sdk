@@ -7,7 +7,6 @@ import { PruneGuildRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: PruneGuildRequest = {
   guildId: "<value>",
-  requestBody: {},
 };
 ```
 

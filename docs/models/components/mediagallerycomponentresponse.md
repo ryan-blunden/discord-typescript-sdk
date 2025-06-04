@@ -6,17 +6,8 @@
 import { MediaGalleryComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: MediaGalleryComponentResponse = {
-  id: 223081,
-  items: [
-    {
-      media: {
-        id: "<value>",
-        url: "https://chilly-cruelty.name",
-        proxyUrl: "https://eminent-utilization.org",
-      },
-      spoiler: false,
-    },
-  ],
+  id: 467586,
+  items: [],
 };
 ```
 

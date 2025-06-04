@@ -25,10 +25,9 @@ async function run() {
   const result = await discord.polls.getAnswerVoters({
     channelId: "<value>",
     messageId: "<value>",
-    answerId: 11670,
+    answerId: 157894,
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -53,17 +52,14 @@ async function run() {
   const res = await pollsGetAnswerVoters(discord, {
     channelId: "<value>",
     messageId: "<value>",
-    answerId: 11670,
+    answerId: 157894,
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("pollsGetAnswerVoters failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -108,7 +104,6 @@ async function run() {
     messageId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -134,15 +129,12 @@ async function run() {
     channelId: "<value>",
     messageId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("pollsExpire failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

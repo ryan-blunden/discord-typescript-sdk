@@ -7,7 +7,6 @@ import { UpdateMyGuildMemberRequest } from "@ryan.blunden/discord-sdk/models/ope
 
 let value: UpdateMyGuildMemberRequest = {
   guildId: "<value>",
-  requestBody: {},
 };
 ```
 

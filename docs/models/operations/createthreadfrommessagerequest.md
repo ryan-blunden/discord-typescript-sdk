@@ -8,9 +8,6 @@ import { CreateThreadFromMessageRequest } from "@ryan.blunden/discord-sdk/models
 let value: CreateThreadFromMessageRequest = {
   channelId: "<value>",
   messageId: "<value>",
-  createTextThreadWithMessageRequest: {
-    name: "<value>",
-  },
 };
 ```
 

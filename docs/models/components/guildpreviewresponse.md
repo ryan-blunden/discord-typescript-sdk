@@ -9,32 +9,12 @@ let value: GuildPreviewResponse = {
   id: "<value>",
   name: "<value>",
   features: [
-    "<value>",
+    "<value 1>",
   ],
-  approximateMemberCount: 459786,
-  approximatePresenceCount: 692705,
-  emojis: [
-    {
-      id: "<value>",
-      name: "<value>",
-      roles: [
-        "<value>",
-      ],
-      requireColons: false,
-      managed: false,
-      animated: false,
-      available: false,
-    },
-  ],
-  stickers: [
-    {
-      id: "<value>",
-      name: "<value>",
-      tags: "<value>",
-      available: false,
-      guildId: "<value>",
-    },
-  ],
+  approximateMemberCount: 692705,
+  approximatePresenceCount: 627503,
+  emojis: [],
+  stickers: [],
 };
 ```
 

@@ -8,7 +8,6 @@ import { UpdateMessageMultipartRequest } from "@ryan.blunden/discord-sdk/models/
 let value: UpdateMessageMultipartRequest = {
   channelId: "<value>",
   messageId: "<value>",
-  requestBody: {},
 };
 ```
 

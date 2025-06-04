@@ -6,13 +6,13 @@
 import { ThumbnailComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ThumbnailComponentResponse = {
-  id: 539992,
+  id: 720891,
   media: {
     id: "<value>",
-    url: "https://potable-premium.name/",
-    proxyUrl: "https://straight-eternity.info",
+    url: "https://yellow-repeat.org",
+    proxyUrl: "https://major-gastropod.name",
   },
-  spoiler: false,
+  spoiler: true,
 };
 ```
 

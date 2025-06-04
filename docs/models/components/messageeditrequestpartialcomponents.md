@@ -10,6 +10,7 @@ const value: components.ActionRowComponentForMessageRequest = {
   components: [
     {
       customId: "<id>",
+      options: [],
     },
   ],
 };
@@ -19,17 +20,7 @@ const value: components.ActionRowComponentForMessageRequest = {
 
 ```typescript
 const value: components.ContainerComponentForMessageRequest = {
-  components: [
-    {
-      items: [
-        {
-          media: {
-            url: "https://bogus-tenement.name",
-          },
-        },
-      ],
-    },
-  ],
+  components: [],
 };
 ```
 
@@ -47,13 +38,7 @@ const value: components.FileComponentForMessageRequest = {
 
 ```typescript
 const value: components.MediaGalleryComponentForMessageRequest = {
-  items: [
-    {
-      media: {
-        url: "https://superficial-morning.name/",
-      },
-    },
-  ],
+  items: [],
 };
 ```
 
@@ -66,11 +51,7 @@ const value: components.SectionComponentForMessageRequest = {
       content: "<value>",
     },
   ],
-  accessory: {
-    media: {
-      url: "https://vengeful-quinoa.info/",
-    },
-  },
+  accessory: {},
 };
 ```
 

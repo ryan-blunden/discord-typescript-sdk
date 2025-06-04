@@ -7,11 +7,7 @@ import { PollCreateRequest } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: PollCreateRequest = {
   question: {},
-  answers: [
-    {
-      pollMedia: {},
-    },
-  ],
+  answers: [],
 };
 ```
 

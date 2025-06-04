@@ -15,26 +15,30 @@ let value: UserGuildOnboardingResponse = {
         {
           id: "<value>",
           title: "<value>",
-          description:
-            "since magnificent silent up vamoose microblog because lest kaleidoscopic to",
+          description: "silent forsaken reckon",
           emoji: {},
           roleIds: [
-            "<value>",
+            "<value 1>",
+            "<value 2>",
+            "<value 3>",
           ],
           channelIds: [
-            "<value>",
+            "<value 1>",
+            "<value 2>",
           ],
         },
       ],
-      singleSelect: false,
-      required: false,
+      singleSelect: true,
+      required: true,
       inOnboarding: false,
     },
   ],
   defaultChannelIds: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
-  enabled: false,
+  enabled: true,
 };
 ```
 

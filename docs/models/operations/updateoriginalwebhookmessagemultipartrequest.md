@@ -8,7 +8,6 @@ import { UpdateOriginalWebhookMessageMultipartRequest } from "@ryan.blunden/disc
 let value: UpdateOriginalWebhookMessageMultipartRequest = {
   webhookId: "<value>",
   webhookToken: "<value>",
-  requestBody: {},
 };
 ```
 

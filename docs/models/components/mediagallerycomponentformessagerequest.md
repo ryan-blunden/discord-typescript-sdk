@@ -6,13 +6,7 @@
 import { MediaGalleryComponentForMessageRequest } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: MediaGalleryComponentForMessageRequest = {
-  items: [
-    {
-      media: {
-        url: "https://hungry-sonar.info/",
-      },
-    },
-  ],
+  items: [],
 };
 ```
 

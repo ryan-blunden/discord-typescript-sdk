@@ -7,7 +7,6 @@ import { CreateMessageMultipartRequest } from "@ryan.blunden/discord-sdk/models/
 
 let value: CreateMessageMultipartRequest = {
   channelId: "<value>",
-  requestBody: {},
 };
 ```
 

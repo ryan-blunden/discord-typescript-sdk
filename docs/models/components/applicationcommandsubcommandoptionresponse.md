@@ -7,7 +7,7 @@ import { ApplicationCommandSubcommandOptionResponse } from "@ryan.blunden/discor
 
 let value: ApplicationCommandSubcommandOptionResponse = {
   name: "<value>",
-  description: "prioritize including helpfully lest loudly plait matter till",
+  description: "even lest zowie",
 };
 ```
 

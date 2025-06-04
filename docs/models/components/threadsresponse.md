@@ -6,27 +6,8 @@
 import { ThreadsResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ThreadsResponse = {
-  threads: [
-    {
-      id: "<value>",
-      type: 0,
-      flags: 150638,
-      guildId: "<value>",
-      name: "<value>",
-      ownerId: "<value>",
-      messageCount: 322990,
-      memberCount: 920643,
-      totalMessageSent: 335288,
-    },
-  ],
-  members: [
-    {
-      id: "<value>",
-      userId: "<value>",
-      joinTimestamp: new Date("2025-02-17T20:54:18.290Z"),
-      flags: 398092,
-    },
-  ],
+  threads: [],
+  members: [],
 };
 ```
 

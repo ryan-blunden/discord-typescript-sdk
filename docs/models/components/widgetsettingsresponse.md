@@ -6,7 +6,7 @@
 import { WidgetSettingsResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: WidgetSettingsResponse = {
-  enabled: false,
+  enabled: true,
 };
 ```
 

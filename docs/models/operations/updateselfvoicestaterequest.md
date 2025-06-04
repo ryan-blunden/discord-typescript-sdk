@@ -7,7 +7,6 @@ import { UpdateSelfVoiceStateRequest } from "@ryan.blunden/discord-sdk/models/op
 
 let value: UpdateSelfVoiceStateRequest = {
   guildId: "<value>",
-  requestBody: {},
 };
 ```
 

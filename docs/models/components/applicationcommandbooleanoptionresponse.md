@@ -7,7 +7,8 @@ import { ApplicationCommandBooleanOptionResponse } from "@ryan.blunden/discord-s
 
 let value: ApplicationCommandBooleanOptionResponse = {
   name: "<value>",
-  description: "gruesome lest scornful upward",
+  description:
+    "indeed after whether acidly round huzzah fluctuate per whenever",
 };
 ```
 

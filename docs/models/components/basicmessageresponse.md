@@ -7,51 +7,36 @@ import { BasicMessageResponse } from "@ryan.blunden/discord-sdk/models/component
 
 let value: BasicMessageResponse = {
   content: "<value>",
-  mentions: [
-    {
-      id: "<value>",
-      username: "Francisca65",
-      discriminator: "<value>",
-      publicFlags: 560179,
-      flags: 30904,
-    },
-  ],
-  mentionRoles: [
-    "<value>",
-  ],
+  mentions: [],
+  mentionRoles: [],
   attachments: [
     {
       id: "<value>",
       filename: "example.file",
-      size: 166143,
-      url: "https://infinite-video.name/",
-      proxyUrl: "https://white-pomelo.net",
+      size: 569291,
+      url: "https://married-schnitzel.name/",
+      proxyUrl: "https://gorgeous-printer.biz/",
     },
   ],
-  embeds: [
-    {
-      type: "<value>",
-    },
-  ],
-  timestamp: new Date("2025-09-18T09:55:33.600Z"),
-  flags: 561206,
+  embeds: [],
+  timestamp: new Date("2024-12-15T16:01:03.780Z"),
+  flags: 787551,
   components: [
     {
-      id: 34635,
-      divider: false,
+      id: 166143,
     },
   ],
   id: "<value>",
   channelId: "<value>",
   author: {
     id: "<value>",
-    username: "Britney.Hayes",
+    username: "Sterling_Quitzon50",
     discriminator: "<value>",
-    publicFlags: 100888,
-    flags: 771199,
+    publicFlags: 770437,
+    flags: 859724,
   },
-  pinned: false,
-  mentionEveryone: false,
+  pinned: true,
+  mentionEveryone: true,
   tts: false,
 };
 ```

@@ -8,7 +8,6 @@ import { UpdateMessageFormRequest } from "@ryan.blunden/discord-sdk/models/opera
 let value: UpdateMessageFormRequest = {
   channelId: "<value>",
   messageId: "<value>",
-  messageEditRequestPartial: {},
 };
 ```
 

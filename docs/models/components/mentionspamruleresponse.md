@@ -10,13 +10,9 @@ let value: MentionSpamRuleResponse = {
   guildId: "<value>",
   creatorId: "<value>",
   name: "<value>",
-  actions: [
-    {
-      metadata: {},
-    },
-  ],
+  actions: [],
   triggerMetadata: {
-    mentionTotalLimit: 993323,
+    mentionTotalLimit: 409323,
   },
 };
 ```

@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  */
 export function channelsPinMessage(
   client: DiscordCore,
-  request: operations.PinMessageRequest,
+  request: operations.DeprecatedCreatePinRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -54,7 +54,7 @@ export function channelsPinMessage(
 
 async function $do(
   client: DiscordCore,
-  request: operations.PinMessageRequest,
+  request: operations.DeprecatedCreatePinRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -74,7 +74,8 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.PinMessageRequest$outboundSchema.parse(value),
+    (value) =>
+      operations.DeprecatedCreatePinRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -107,8 +108,9 @@ async function $do(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "pin_message",
+    operationID: "deprecated_create_pin",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -127,6 +129,7 @@ async function $do(
     path: path,
     headers: headers,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {

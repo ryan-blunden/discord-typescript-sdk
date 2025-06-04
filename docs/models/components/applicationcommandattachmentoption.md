@@ -7,7 +7,7 @@ import { ApplicationCommandAttachmentOption } from "@ryan.blunden/discord-sdk/mo
 
 let value: ApplicationCommandAttachmentOption = {
   name: "<value>",
-  description: "midst whoever cannon though",
+  description: "violin provided qua ick twist stoop scheme cappelletti",
 };
 ```
 

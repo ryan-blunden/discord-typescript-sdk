@@ -11,11 +11,7 @@ let value: SectionComponentForMessageRequest = {
       content: "<value>",
     },
   ],
-  accessory: {
-    media: {
-      url: "https://grown-jury.com",
-    },
-  },
+  accessory: {},
 };
 ```
 

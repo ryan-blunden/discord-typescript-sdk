@@ -61,14 +61,12 @@ async function run() {
       soundId: "<value>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("soundboardsSendSoundboardSound failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -112,7 +110,6 @@ async function run() {
     guildId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -137,15 +134,12 @@ async function run() {
   const res = await soundboardsListGuildSoundboardSounds(discord, {
     guildId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("soundboardsListGuildSoundboardSounds failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -193,7 +187,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -222,15 +215,12 @@ async function run() {
       sound: "<value>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("soundboardsCreateGuildSoundboardSound failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -275,7 +265,6 @@ async function run() {
     soundId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -301,15 +290,12 @@ async function run() {
     guildId: "<value>",
     soundId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("soundboardsGetGuildSoundboardSound failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -379,14 +365,12 @@ async function run() {
     guildId: "<value>",
     soundId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("soundboardsDeleteGuildSoundboardSound failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -432,7 +416,6 @@ async function run() {
     soundboardPatchRequestPartial: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -459,15 +442,12 @@ async function run() {
     soundId: "<value>",
     soundboardPatchRequestPartial: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("soundboardsUpdateGuildSoundboardSound failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -509,7 +489,6 @@ const discord = new Discord({
 async function run() {
   const result = await discord.soundboards.getSoundboardDefaultSounds();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -532,15 +511,12 @@ const discord = new DiscordCore({
 
 async function run() {
   const res = await soundboardsGetSoundboardDefaultSounds(discord);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("soundboardsGetSoundboardDefaultSounds failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

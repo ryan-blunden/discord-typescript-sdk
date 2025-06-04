@@ -10,10 +10,10 @@ let value: GithubIssue = {
   number: 691854,
   htmlUrl: "https://severe-phrase.com",
   user: {
-    id: 893452,
-    login: "Haley.Kirlin",
-    htmlUrl: "https://kaleidoscopic-milestone.info",
-    avatarUrl: "https://gummy-illusion.org/",
+    id: 971760,
+    login: "Ruthie_Kertzmann",
+    htmlUrl: "https://intent-produce.biz/",
+    avatarUrl: "https://unfinished-lox.com",
   },
   title: "<value>",
 };

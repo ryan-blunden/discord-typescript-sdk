@@ -8,50 +8,28 @@ import { GuildWithCountsResponse } from "@ryan.blunden/discord-sdk/models/compon
 let value: GuildWithCountsResponse = {
   id: "<value>",
   name: "<value>",
-  features: [
-    "<value>",
-  ],
+  features: [],
   ownerId: "<value>",
   region: "<value>",
-  systemChannelFlags: 69311,
-  widgetEnabled: false,
+  systemChannelFlags: 243269,
+  widgetEnabled: true,
   roles: [
     {
       id: "<value>",
       name: "<value>",
       permissions: "<value>",
-      position: 243269,
-      color: 486620,
+      position: 592634,
+      color: 9002,
       hoist: false,
-      managed: false,
-      mentionable: false,
+      managed: true,
+      mentionable: true,
     },
   ],
-  premiumSubscriptionCount: 610340,
+  premiumSubscriptionCount: 7257,
   premiumProgressBarEnabled: false,
   nsfw: false,
-  emojis: [
-    {
-      id: "<value>",
-      name: "<value>",
-      roles: [
-        "<value>",
-      ],
-      requireColons: false,
-      managed: false,
-      animated: false,
-      available: false,
-    },
-  ],
-  stickers: [
-    {
-      id: "<value>",
-      name: "<value>",
-      tags: "<value>",
-      available: false,
-      guildId: "<value>",
-    },
-  ],
+  emojis: [],
+  stickers: [],
 };
 ```
 

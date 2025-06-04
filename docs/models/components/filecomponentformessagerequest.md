@@ -7,7 +7,7 @@ import { FileComponentForMessageRequest } from "@ryan.blunden/discord-sdk/models
 
 let value: FileComponentForMessageRequest = {
   file: {
-    url: "https://naughty-defendant.info/",
+    url: "https://enchanted-pneumonia.info",
   },
 };
 ```

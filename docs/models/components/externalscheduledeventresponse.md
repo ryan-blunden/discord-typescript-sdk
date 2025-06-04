@@ -9,7 +9,7 @@ let value: ExternalScheduledEventResponse = {
   id: "<value>",
   guildId: "<value>",
   name: "<value>",
-  scheduledStartTime: new Date("2024-09-02T02:59:41.215Z"),
+  scheduledStartTime: new Date("2023-05-04T04:11:52.562Z"),
   entityMetadata: {
     location: "<value>",
   },

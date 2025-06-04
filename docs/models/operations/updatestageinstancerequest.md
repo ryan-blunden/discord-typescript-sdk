@@ -7,7 +7,6 @@ import { UpdateStageInstanceRequest } from "@ryan.blunden/discord-sdk/models/ope
 
 let value: UpdateStageInstanceRequest = {
   channelId: "<value>",
-  requestBody: {},
 };
 ```
 

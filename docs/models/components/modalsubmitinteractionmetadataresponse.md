@@ -9,6 +9,7 @@ let value: ModalSubmitInteractionMetadataResponse = {
   id: "<value>",
   authorizingIntegrationOwners: {
     "key": "<value>",
+    "key1": "<value>",
   },
   triggeringInteractionMetadata: {
     id: "<value>",

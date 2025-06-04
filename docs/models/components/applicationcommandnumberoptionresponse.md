@@ -7,7 +7,7 @@ import { ApplicationCommandNumberOptionResponse } from "@ryan.blunden/discord-sd
 
 let value: ApplicationCommandNumberOptionResponse = {
   name: "<value>",
-  description: "boulevard railway if oof phew yowza by upon",
+  description: "winged inside dim queasily store insignificant cone pro",
 };
 ```
 

@@ -7,7 +7,9 @@ import { MessageCallResponse } from "@ryan.blunden/discord-sdk/models/components
 
 let value: MessageCallResponse = {
   participants: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
 };
 ```

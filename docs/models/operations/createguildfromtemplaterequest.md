@@ -7,9 +7,6 @@ import { CreateGuildFromTemplateRequest } from "@ryan.blunden/discord-sdk/models
 
 let value: CreateGuildFromTemplateRequest = {
   code: "<value>",
-  requestBody: {
-    name: "<value>",
-  },
 };
 ```
 

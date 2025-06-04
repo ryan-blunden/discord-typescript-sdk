@@ -7,10 +7,6 @@ import { CreateAutoModerationRuleRequest } from "@ryan.blunden/discord-sdk/model
 
 let value: CreateAutoModerationRuleRequest = {
   guildId: "<value>",
-  requestBody: {
-    name: "<value>",
-    triggerMetadata: {},
-  },
 };
 ```
 

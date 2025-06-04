@@ -41,7 +41,6 @@ async function run() {
     channelId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -66,15 +65,12 @@ async function run() {
   const res = await messagesList(discord, {
     channelId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("messagesList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -119,7 +115,6 @@ async function run() {
     messageCreateRequest: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -145,15 +140,12 @@ async function run() {
     channelId: "<value>",
     messageCreateRequest: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("messagesCreateJson failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -198,7 +190,6 @@ async function run() {
     messageCreateRequest: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -224,15 +215,12 @@ async function run() {
     channelId: "<value>",
     messageCreateRequest: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("messagesCreateForm failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -277,7 +265,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -303,15 +290,12 @@ async function run() {
     channelId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("messagesCreateMultipart failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -355,8 +339,7 @@ async function run() {
     channelId: "<value>",
     requestBody: {
       messages: [
-        "<value>",
-        "<value>",
+        "<value 1>",
       ],
     },
   });
@@ -386,19 +369,16 @@ async function run() {
     channelId: "<value>",
     requestBody: {
       messages: [
-        "<value>",
-        "<value>",
+        "<value 1>",
       ],
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("messagesBulkDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -443,7 +423,6 @@ async function run() {
     messageId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -469,15 +448,12 @@ async function run() {
     channelId: "<value>",
     messageId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("messagesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -547,14 +523,12 @@ async function run() {
     channelId: "<value>",
     messageId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("messagesDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -600,7 +574,6 @@ async function run() {
     messageEditRequestPartial: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -627,15 +600,12 @@ async function run() {
     messageId: "<value>",
     messageEditRequestPartial: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("messagesUpdateJson failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -681,7 +651,6 @@ async function run() {
     messageEditRequestPartial: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -708,15 +677,12 @@ async function run() {
     messageId: "<value>",
     messageEditRequestPartial: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("messagesUpdateForm failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -762,7 +728,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -789,15 +754,12 @@ async function run() {
     messageId: "<value>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("messagesUpdateMultipart failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -842,7 +804,6 @@ async function run() {
     messageId: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -868,15 +829,12 @@ async function run() {
     channelId: "<value>",
     messageId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("messagesCrosspost failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -946,14 +904,12 @@ async function run() {
     channelId: "<value>",
     messageId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("messagesDeleteAllReactions failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -999,7 +955,6 @@ async function run() {
     emojiName: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1026,15 +981,12 @@ async function run() {
     messageId: "<value>",
     emojiName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("messagesListReactionsByEmoji failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1106,14 +1058,12 @@ async function run() {
     messageId: "<value>",
     emojiName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("messagesDeleteAllReactionsForEmoji failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -1185,14 +1135,12 @@ async function run() {
     messageId: "<value>",
     emojiName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("messagesCreateReaction failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -1264,14 +1212,12 @@ async function run() {
     messageId: "<value>",
     emojiName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("messagesDeleteOwnReaction failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -1345,14 +1291,12 @@ async function run() {
     emojiName: "<value>",
     userId: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("messagesDeleteUserReaction failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();

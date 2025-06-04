@@ -8,7 +8,6 @@ import { UpdateGuildRoleRequest } from "@ryan.blunden/discord-sdk/models/operati
 let value: UpdateGuildRoleRequest = {
   guildId: "<value>",
   roleId: "<value>",
-  requestBody: {},
 };
 ```
 

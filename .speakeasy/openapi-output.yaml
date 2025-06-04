@@ -1722,10 +1722,10 @@ paths:
         schema: {"$ref": "#/components/schemas/SnowflakeType"}
         required: true
     get:
-      operationId: "list_pinned_messages"
+      operationId: "deprecated_list_pins"
       responses:
         "200":
-          description: "200 response for list_pinned_messages"
+          description: "200 response for deprecated_list_pins"
           content:
             "application/json":
               schema:
@@ -1754,10 +1754,10 @@ paths:
         schema: {"$ref": "#/components/schemas/SnowflakeType"}
         required: true
     put:
-      operationId: "pin_message"
+      operationId: "deprecated_create_pin"
       responses:
         "204":
-          description: "204 response for pin_message"
+          description: "204 response for deprecated_create_pin"
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
@@ -1769,10 +1769,10 @@ paths:
           - channels
           - write
     delete:
-      operationId: "unpin_message"
+      operationId: "deprecated_delete_pin"
       responses:
         "204":
-          description: "204 response for unpin_message"
+          description: "204 response for deprecated_delete_pin"
         "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
       security:
         - BotToken: []
@@ -15561,6 +15561,10 @@ components:
           oneOf:
             - type: "null"
             - {"$ref": "#/components/schemas/UInt32Type"}
+        "content_type":
+          type:
+            - "string"
+            - "null"
         "placeholder":
           type:
             - "string"
@@ -15668,6 +15672,10 @@ components:
           oneOf:
             - type: "null"
             - {"$ref": "#/components/schemas/UInt32Type"}
+        "content_type":
+          type:
+            - "string"
+            - "null"
         "placeholder":
           type:
             - "string"

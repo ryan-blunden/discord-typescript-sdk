@@ -8,7 +8,6 @@ import { ExecuteSlackCompatibleWebhookRequest } from "@ryan.blunden/discord-sdk/
 let value: ExecuteSlackCompatibleWebhookRequest = {
   webhookId: "<value>",
   webhookToken: "<value>",
-  slackWebhook: {},
 };
 ```
 

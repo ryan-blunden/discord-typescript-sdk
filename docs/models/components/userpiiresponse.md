@@ -11,7 +11,7 @@ let value: UserPIIResponse = {
   discriminator: "<value>",
   publicFlags: 754271,
   flags: 549422,
-  mfaEnabled: false,
+  mfaEnabled: true,
 };
 ```
 

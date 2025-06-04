@@ -9,12 +9,7 @@ let value: CommandPermissionsResponse = {
   id: "<value>",
   applicationId: "<value>",
   guildId: "<value>",
-  permissions: [
-    {
-      id: "<value>",
-      permission: false,
-    },
-  ],
+  permissions: [],
 };
 ```
 

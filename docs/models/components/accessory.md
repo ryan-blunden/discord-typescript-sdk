@@ -18,10 +18,10 @@ const value: components.ThumbnailComponentResponse = {
   id: 720891,
   media: {
     id: "<value>",
-    url: "https://lighthearted-fireplace.net/",
-    proxyUrl: "https://black-shore.biz",
+    url: "https://yellow-repeat.org",
+    proxyUrl: "https://major-gastropod.name",
   },
-  spoiler: false,
+  spoiler: true,
 };
 ```
 
