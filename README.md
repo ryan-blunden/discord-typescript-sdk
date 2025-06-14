@@ -180,7 +180,14 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.applications.getMe();
+  const result = await discord.bulkUpdateLobbyMembers({
+    lobbyId: "<value>",
+    requestBody: [
+      {
+        id: "<value>",
+      },
+    ],
+  });
 
   console.log(result);
 }
@@ -210,7 +217,14 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.applications.getMe();
+  const result = await discord.bulkUpdateLobbyMembers({
+    lobbyId: "<value>",
+    requestBody: [
+      {
+        id: "<value>",
+      },
+    ],
+  });
 
   console.log(result);
 }
@@ -228,11 +242,8 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  const result = await discord.applications.uploadAttachment({}, {
-    applicationId: "<value>",
-    requestBody: {
-      file: "<value>",
-    },
+  const result = await discord.getLobbyMessages({}, {
+    lobbyId: "<value>",
   });
 
   console.log(result);
@@ -331,6 +342,10 @@ run();
 * [triggerTypingIndicator](docs/sdks/channels/README.md#triggertypingindicator) - Post a typing indicator for the specified channel, which expires after 10 seconds. Returns a 204 empty response on success. Fires a Typing Start Gateway event.
 * [listJoinedPrivateArchivedThreads](docs/sdks/channels/README.md#listjoinedprivatearchivedthreads) - Returns archived threads in the channel that are of type PRIVATE_THREAD, and the user has joined. Threads are ordered by their id, in descending order. Requires the READ_MESSAGE_HISTORY permission.
 
+### [Discord SDK](docs/sdks/discord/README.md)
+
+* [bulkUpdateLobbyMembers](docs/sdks/discord/README.md#bulkupdatelobbymembers)
+* [getLobbyMessages](docs/sdks/discord/README.md#getlobbymessages)
 
 ### [emoji](docs/sdks/emoji/README.md)
 
@@ -592,6 +607,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`autoModerationGetRule`](docs/sdks/automoderation/README.md#getrule) - Get a single rule. Returns an auto moderation rule object. This endpoint requires the MANAGE_GUILD permission.
 - [`autoModerationListRules`](docs/sdks/automoderation/README.md#listrules) - Get a list of all rules currently configured for the guild. Returns a list of auto moderation rule objects for the given guild. This endpoint requires the MANAGE_GUILD permission.
 - [`autoModerationUpdateRule`](docs/sdks/automoderation/README.md#updaterule) - Modify an existing rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Update Gateway event.
+- [`bulkUpdateLobbyMembers`](docs/sdks/discord/README.md#bulkupdatelobbymembers)
 - [`channelsAddGroupDMRecipient`](docs/sdks/channels/README.md#addgroupdmrecipient) - Adds a recipient to a Group DM using their access token.
 - [`channelsAddThreadMember`](docs/sdks/channels/README.md#addthreadmember) - Adds another member to a thread. Requires the ability to send messages in the thread. Also requires the thread is not archived. Returns a 204 empty response if the member is successfully added or was already a member of the thread. Fires a Thread Members Update Gateway event.
 - [`channelsCreateInvite`](docs/sdks/channels/README.md#createinvite) - Create a new invite object for the channel.
@@ -633,6 +649,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`entitlementsDeleteTest`](docs/sdks/entitlements/README.md#deletetest) - Deletes a currently-active test entitlement. Discord will act as though that user or guild no longer has entitlement to your premium offering. Returns 204 No Content on success.
 - [`entitlementsGet`](docs/sdks/entitlements/README.md#get) - Returns an entitlement.
 - [`entitlementsList`](docs/sdks/entitlements/README.md#list) - Returns all entitlements for a given app, active and expired.
+- [`getLobbyMessages`](docs/sdks/discord/README.md#getlobbymessages)
 - [`guildsAddMember`](docs/sdks/guilds/README.md#addmember) - Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. Returns a 201 Created with the guild member as the body, or 204 No Content if the user is already a member of the guild. Fires a Guild Member Add Gateway event.
 - [`guildsAddMemberRole`](docs/sdks/guilds/README.md#addmemberrole) - Adds a role to a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
 - [`guildsBulkBan`](docs/sdks/guilds/README.md#bulkban) - Ban up to 200 users from a guild, and optionally delete previous messages sent by the banned users. Requires both the BAN_MEMBERS and MANAGE_GUILD permissions. Returns a 200 response on success, including the fields banned_users with the IDs of the banned users and failed_users with IDs that could not be banned or were already banned.
@@ -795,7 +812,14 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.applications.getMe({
+  const result = await discord.bulkUpdateLobbyMembers({
+    lobbyId: "<value>",
+    requestBody: [
+      {
+        id: "<value>",
+      },
+    ],
+  }, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -834,7 +858,14 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.applications.getMe();
+  const result = await discord.bulkUpdateLobbyMembers({
+    lobbyId: "<value>",
+    requestBody: [
+      {
+        id: "<value>",
+      },
+    ],
+  });
 
   console.log(result);
 }
@@ -847,16 +878,15 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-This table shows properties which are common on error classes. For full details see [error classes](#error-classes).
+[`DiscordError`](./src/models/errors/discorderror.ts) is the base class for all HTTP error responses. It has the following properties:
 
 | Property            | Type       | Description                                                                             |
 | ------------------- | ---------- | --------------------------------------------------------------------------------------- |
-| `error.name`        | `string`   | Error class name eg `APIError`                                                          |
 | `error.message`     | `string`   | Error message                                                                           |
-| `error.statusCode`  | `number`   | HTTP status code eg `404`                                                               |
-| `error.contentType` | `string`   | HTTP content type eg `application/json`                                                 |
+| `error.statusCode`  | `number`   | HTTP response status code eg `404`                                                      |
+| `error.headers`     | `Headers`  | HTTP response headers                                                                   |
 | `error.body`        | `string`   | HTTP body. Can be empty string if no body is returned.                                  |
-| `error.rawResponse` | `Response` | Raw HTTP response. Access to headers and more.                                          |
+| `error.rawResponse` | `Response` | Raw HTTP response                                                                       |
 | `error.data$`       |            | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
 ### Example
@@ -870,24 +900,30 @@ const discord = new Discord({
 
 async function run() {
   try {
-    const result = await discord.applications.getMe();
+    const result = await discord.bulkUpdateLobbyMembers({
+      lobbyId: "<value>",
+      requestBody: [
+        {
+          id: "<value>",
+        },
+      ],
+    });
 
     console.log(result);
   } catch (error) {
-    // Depending on the method different errors may be thrown
-    if (error instanceof errors.ErrorResponse) {
-      console.log(error.message);
-      console.log(error.data$.code); // number
-      console.log(error.data$.message); // string
-      console.log(error.data$.errors); // components.ErrorDetails
-    }
-
-    // Fallback error class, if no other more specific error class is matched
-    if (error instanceof errors.APIError) {
+    // The base class for HTTP error responses
+    if (error instanceof errors.DiscordError) {
       console.log(error.message);
       console.log(error.statusCode);
       console.log(error.body);
-      console.log(error.rawResponse.headers);
+      console.log(error.headers);
+
+      // Depending on the method different errors may be thrown
+      if (error instanceof errors.ErrorResponse) {
+        console.log(error.data$.code); // number
+        console.log(error.data$.message); // string
+        console.log(error.data$.errors); // components.ErrorDetails
+      }
     }
   }
 }
@@ -897,15 +933,26 @@ run();
 ```
 
 ### Error Classes
-* [`ErrorResponse`](docs/models/errors/errorresponse.md): Errors object returned by the Discord API. Status code `4XX`.
-* `APIError`: The fallback error class, if no other more specific error class is matched.
-* `SDKValidationError`: Type mismatch between the data returned from the server and the structure expected by the SDK. This can also be thrown for invalid method arguments. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
-* Network errors:
-    * `ConnectionError`: HTTP client was unable to make a request to a server.
-    * `RequestTimeoutError`: HTTP request timed out due to an AbortSignal signal.
-    * `RequestAbortedError`: HTTP request was aborted by the client.
-    * `InvalidRequestError`: Any input used to create a request is invalid.
-    * `UnexpectedClientError`: Unrecognised or unexpected error.
+**Primary errors:**
+* [`DiscordError`](./src/models/errors/discorderror.ts): The base class for HTTP error responses.
+  * [`ErrorResponse`](docs/models/errors/errorresponse.md): Errors object returned by the Discord API. Status code `4XX`.
+
+<details><summary>Less common errors (6)</summary>
+
+<br />
+
+**Network errors:**
+* [`ConnectionError`](./src/models/errors/httpclienterrors.ts): HTTP client was unable to make a request to a server.
+* [`RequestTimeoutError`](./src/models/errors/httpclienterrors.ts): HTTP request timed out due to an AbortSignal signal.
+* [`RequestAbortedError`](./src/models/errors/httpclienterrors.ts): HTTP request was aborted by the client.
+* [`InvalidRequestError`](./src/models/errors/httpclienterrors.ts): Any input used to create a request is invalid.
+* [`UnexpectedClientError`](./src/models/errors/httpclienterrors.ts): Unrecognised or unexpected error.
+
+
+**Inherit from [`DiscordError`](./src/models/errors/discorderror.ts)**:
+* [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
+
+</details>
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
@@ -923,7 +970,14 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.applications.getMe();
+  const result = await discord.bulkUpdateLobbyMembers({
+    lobbyId: "<value>",
+    requestBody: [
+      {
+        id: "<value>",
+      },
+    ],
+  });
 
   console.log(result);
 }

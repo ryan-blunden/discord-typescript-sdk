@@ -64,6 +64,7 @@ export type PrivateApplicationResponse = {
   owner: UserResponse;
   approximateGuildCount?: number | null | undefined;
   approximateUserInstallCount: number;
+  approximateUserAuthorizationCount: number;
   explicitContentFilter?: 0 | undefined;
   team?: TeamResponse | null | undefined;
 };
@@ -106,6 +107,7 @@ export const PrivateApplicationResponse$inboundSchema: z.ZodType<
   owner: UserResponse$inboundSchema,
   approximate_guild_count: z.nullable(z.number().int()).optional(),
   approximate_user_install_count: z.number().int(),
+  approximate_user_authorization_count: z.number().int(),
   explicit_content_filter: z.literal(0).optional(),
   team: z.nullable(TeamResponse$inboundSchema).optional(),
 }).transform((v) => {
@@ -128,6 +130,7 @@ export const PrivateApplicationResponse$inboundSchema: z.ZodType<
     "role_connections_verification_url": "roleConnectionsVerificationUrl",
     "approximate_guild_count": "approximateGuildCount",
     "approximate_user_install_count": "approximateUserInstallCount",
+    "approximate_user_authorization_count": "approximateUserAuthorizationCount",
     "explicit_content_filter": "explicitContentFilter",
   });
 });
@@ -168,6 +171,7 @@ export type PrivateApplicationResponse$Outbound = {
   owner: UserResponse$Outbound;
   approximate_guild_count?: number | null | undefined;
   approximate_user_install_count: number;
+  approximate_user_authorization_count: number;
   explicit_content_filter: 0;
   team?: TeamResponse$Outbound | null | undefined;
 };
@@ -210,6 +214,7 @@ export const PrivateApplicationResponse$outboundSchema: z.ZodType<
   owner: UserResponse$outboundSchema,
   approximateGuildCount: z.nullable(z.number().int()).optional(),
   approximateUserInstallCount: z.number().int(),
+  approximateUserAuthorizationCount: z.number().int(),
   explicitContentFilter: z.literal(0).default(0 as const),
   team: z.nullable(TeamResponse$outboundSchema).optional(),
 }).transform((v) => {
@@ -232,6 +237,7 @@ export const PrivateApplicationResponse$outboundSchema: z.ZodType<
     roleConnectionsVerificationUrl: "role_connections_verification_url",
     approximateGuildCount: "approximate_guild_count",
     approximateUserInstallCount: "approximate_user_install_count",
+    approximateUserAuthorizationCount: "approximate_user_authorization_count",
     explicitContentFilter: "explicit_content_filter",
   });
 });
