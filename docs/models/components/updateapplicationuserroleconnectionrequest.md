@@ -1,11 +1,11 @@
-# UpdateApplicationUserRoleConnectionRequestBody
+# UpdateApplicationUserRoleConnectionRequest
 
 ## Example Usage
 
 ```typescript
-import { UpdateApplicationUserRoleConnectionRequestBody } from "@ryan.blunden/discord-sdk/models/operations";
+import { UpdateApplicationUserRoleConnectionRequest } from "@ryan.blunden/discord-sdk/models/components";
 
-let value: UpdateApplicationUserRoleConnectionRequestBody = {};
+let value: UpdateApplicationUserRoleConnectionRequest = {};
 ```
 
 ## Fields

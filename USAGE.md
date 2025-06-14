@@ -7,7 +7,14 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.applications.getMe();
+  const result = await discord.bulkUpdateLobbyMembers({
+    lobbyId: "<value>",
+    requestBody: [
+      {
+        id: "<value>",
+      },
+    ],
+  });
 
   console.log(result);
 }
