@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d6760420-c0f7-476a-a38c-38dd82de2cc6
 management:
-  docChecksum: eae2cf1ec01cbb998a3e42d3fd9966ba
+  docChecksum: eac1617e24240b001a6930ccc46a74c4
   docVersion: "10"
-  speakeasyVersion: 1.555.2
-  generationVersion: 2.620.2
-  releaseVersion: 0.4.0
-  configChecksum: e7dd693071d5fe562286cad7a62ba51c
+  speakeasyVersion: 1.563.1
+  generationVersion: 2.629.1
+  releaseVersion: 0.4.1
+  configChecksum: d8152b419545ced414d473378e2b79bd
   repoURL: https://github.com/ryan-blunden/discord-typescript-sdk.git
   installationURL: https://github.com/ryan-blunden/discord-typescript-sdk
   published: true
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.21.10
+    core: 3.21.11
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
@@ -31,7 +31,7 @@ features:
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.3.0
-    unions: 2.85.8
+    unions: 2.85.9
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -116,6 +116,8 @@ generatedFiles:
   - docs/models/components/blockmessageactionresponse.md
   - docs/models/components/botaccountpatchrequest.md
   - docs/models/components/bulkbanusersresponse.md
+  - docs/models/components/bulklobbymemberrequest.md
+  - docs/models/components/bulklobbymemberrequestflags.md
   - docs/models/components/buttoncomponentformessagerequest.md
   - docs/models/components/buttoncomponentresponse.md
   - docs/models/components/channelfollowerresponse.md
@@ -429,6 +431,7 @@ generatedFiles:
   - docs/models/components/unfurledmediarequest.md
   - docs/models/components/unfurledmediarequestwithattachmentreferencerequired.md
   - docs/models/components/unfurledmediaresponse.md
+  - docs/models/components/updateapplicationuserroleconnectionrequest.md
   - docs/models/components/updatedefaultreactionemojirequest.md
   - docs/models/components/updatedmrequestpartial.md
   - docs/models/components/updategroupdmrequestpartial.md
@@ -497,6 +500,7 @@ generatedFiles:
   - docs/models/operations/bulkupdateguildchannelsrequest.md
   - docs/models/operations/bulkupdateguildrolesrequest.md
   - docs/models/operations/bulkupdateguildrolesrequestbody.md
+  - docs/models/operations/bulkupdatelobbymembersrequest.md
   - docs/models/operations/components.md
   - docs/models/operations/consumeentitlementrequest.md
   - docs/models/operations/consumeentitlementsecurity.md
@@ -642,6 +646,8 @@ generatedFiles:
   - docs/models/operations/getguildwidgetrequest.md
   - docs/models/operations/getguildwidgetsecurity.md
   - docs/models/operations/getguildwidgetsettingsrequest.md
+  - docs/models/operations/getlobbymessagesrequest.md
+  - docs/models/operations/getlobbymessagessecurity.md
   - docs/models/operations/getlobbyrequest.md
   - docs/models/operations/getmessagerequest.md
   - docs/models/operations/getmyguildmemberrequest.md
@@ -753,7 +759,6 @@ generatedFiles:
   - docs/models/operations/updateapplicationrequest.md
   - docs/models/operations/updateapplicationroleconnectionsmetadatarequest.md
   - docs/models/operations/updateapplicationuserroleconnectionrequest.md
-  - docs/models/operations/updateapplicationuserroleconnectionrequestbody.md
   - docs/models/operations/updateautomoderationrulerequest.md
   - docs/models/operations/updateautomoderationrulerequestbody.md
   - docs/models/operations/updateautomoderationruleresponsebody.md
@@ -883,6 +888,7 @@ generatedFiles:
   - src/funcs/autoModerationGetRule.ts
   - src/funcs/autoModerationListRules.ts
   - src/funcs/autoModerationUpdateRule.ts
+  - src/funcs/bulkUpdateLobbyMembers.ts
   - src/funcs/channelsAddGroupDMRecipient.ts
   - src/funcs/channelsAddThreadMember.ts
   - src/funcs/channelsCreateInvite.ts
@@ -924,6 +930,7 @@ generatedFiles:
   - src/funcs/entitlementsDeleteTest.ts
   - src/funcs/entitlementsGet.ts
   - src/funcs/entitlementsList.ts
+  - src/funcs/getLobbyMessages.ts
   - src/funcs/guildScheduledEventsCreate.ts
   - src/funcs/guildScheduledEventsDelete.ts
   - src/funcs/guildScheduledEventsGet.ts
@@ -1117,6 +1124,7 @@ generatedFiles:
   - src/mcp-server/tools/autoModerationGetRule.ts
   - src/mcp-server/tools/autoModerationListRules.ts
   - src/mcp-server/tools/autoModerationUpdateRule.ts
+  - src/mcp-server/tools/bulkUpdateLobbyMembers.ts
   - src/mcp-server/tools/channelsAddGroupDMRecipient.ts
   - src/mcp-server/tools/channelsAddThreadMember.ts
   - src/mcp-server/tools/channelsCreateInvite.ts
@@ -1330,6 +1338,7 @@ generatedFiles:
   - src/models/components/blockmessageactionresponse.ts
   - src/models/components/botaccountpatchrequest.ts
   - src/models/components/bulkbanusersresponse.ts
+  - src/models/components/bulklobbymemberrequest.ts
   - src/models/components/buttoncomponentformessagerequest.ts
   - src/models/components/buttoncomponentresponse.ts
   - src/models/components/channelfollowerresponse.ts
@@ -1597,6 +1606,7 @@ generatedFiles:
   - src/models/components/unfurledmediarequest.ts
   - src/models/components/unfurledmediarequestwithattachmentreferencerequired.ts
   - src/models/components/unfurledmediaresponse.ts
+  - src/models/components/updateapplicationuserroleconnectionrequest.ts
   - src/models/components/updatedefaultreactionemojirequest.ts
   - src/models/components/updatedmrequestpartial.ts
   - src/models/components/updategroupdmrequestpartial.ts
@@ -1639,9 +1649,11 @@ generatedFiles:
   - src/models/components/widgetresponse.ts
   - src/models/components/widgetsettingsresponse.ts
   - src/models/errors/apierror.ts
+  - src/models/errors/discorderror.ts
   - src/models/errors/errorresponse.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/index.ts
+  - src/models/errors/responsevalidationerror.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/models/operations/addgroupdmuser.ts
   - src/models/operations/addguildmember.ts
@@ -1657,6 +1669,7 @@ generatedFiles:
   - src/models/operations/bulksetguildapplicationcommands.ts
   - src/models/operations/bulkupdateguildchannels.ts
   - src/models/operations/bulkupdateguildroles.ts
+  - src/models/operations/bulkupdatelobbymembers.ts
   - src/models/operations/consumeentitlement.ts
   - src/models/operations/createapplicationcommand.ts
   - src/models/operations/createapplicationemoji.ts
@@ -1756,6 +1769,7 @@ generatedFiles:
   - src/models/operations/getguildwidgetpng.ts
   - src/models/operations/getguildwidgetsettings.ts
   - src/models/operations/getlobby.ts
+  - src/models/operations/getlobbymessages.ts
   - src/models/operations/getmessage.ts
   - src/models/operations/getmyguildmember.ts
   - src/models/operations/getmyoauth2authorization.ts
@@ -1897,7 +1911,7 @@ examples:
     speakeasy-default-get-my-application:
       responses:
         "200":
-          application/json: {"id": "<value>", "name": "<value>", "description": "sandbar swine how phew doubtfully slimy ah unbearably", "type": 4, "verify_key": "<value>", "flags": 336948, "redirect_uris": [], "owner": {"id": "<value>", "username": "Guido94", "discriminator": "<value>", "public_flags": 216499, "flags": 47520}, "approximate_user_install_count": 264963, "explicit_content_filter": 0}
+          application/json: {"id": "<value>", "name": "<value>", "description": "sandbar swine how phew doubtfully slimy ah unbearably", "type": 4, "verify_key": "<value>", "flags": 336948, "redirect_uris": [], "owner": {"id": "<value>", "username": "Guido94", "discriminator": "<value>", "public_flags": 216499, "flags": 47520}, "approximate_user_install_count": 264963, "approximate_user_authorization_count": 643715, "explicit_content_filter": 0}
         4XX:
           application/json: {"code": 826231, "message": "<value>"}
   update_my_application:
@@ -1906,7 +1920,7 @@ examples:
         application/json: {"explicit_content_filter": 0, "type": 4}
       responses:
         "200":
-          application/json: {"id": "<value>", "name": "<value>", "description": "except zowie scram vaguely", "type": 4, "verify_key": "<value>", "flags": 918725, "redirect_uris": ["https://alert-noon.name/", "https://outstanding-wear.net/"], "owner": {"id": "<value>", "username": "April.Bednar96", "discriminator": "<value>", "public_flags": 977162, "flags": 569608}, "approximate_user_install_count": 849319, "explicit_content_filter": 0}
+          application/json: {"id": "<value>", "name": "<value>", "description": "except zowie scram vaguely", "type": 4, "verify_key": "<value>", "flags": 918725, "redirect_uris": ["https://alert-noon.name/", "https://outstanding-wear.net/"], "owner": {"id": "<value>", "username": "April.Bednar96", "discriminator": "<value>", "public_flags": 977162, "flags": 569608}, "approximate_user_install_count": 849319, "approximate_user_authorization_count": 127987, "explicit_content_filter": 0}
         4XX:
           application/json: {"code": 818675, "message": "<value>"}
   get_application:
@@ -1916,7 +1930,7 @@ examples:
           application_id: "<value>"
       responses:
         "200":
-          application/json: {"id": "<value>", "name": "<value>", "description": "mostly pillbox beneath near out labourer gestate waterlogged", "type": 4, "verify_key": "<value>", "flags": 431231, "redirect_uris": ["https://helpless-haircut.biz/", "https://multicolored-forage.org/", "https://flawless-zen.name"], "owner": {"id": "<value>", "username": "Sadie2", "discriminator": "<value>", "public_flags": 491611, "flags": 876246}, "approximate_user_install_count": 530330, "explicit_content_filter": 0}
+          application/json: {"id": "<value>", "name": "<value>", "description": "mostly pillbox beneath near out labourer gestate waterlogged", "type": 4, "verify_key": "<value>", "flags": 431231, "redirect_uris": ["https://helpless-haircut.biz/", "https://multicolored-forage.org/", "https://flawless-zen.name"], "owner": {"id": "<value>", "username": "Sadie2", "discriminator": "<value>", "public_flags": 491611, "flags": 876246}, "approximate_user_install_count": 530330, "approximate_user_authorization_count": 659861, "explicit_content_filter": 0}
         4XX:
           application/json: {"code": 531827, "message": "<value>"}
   update_application:
@@ -1928,7 +1942,7 @@ examples:
         application/json: {"explicit_content_filter": 0, "type": 4}
       responses:
         "200":
-          application/json: {"id": "<value>", "name": "<value>", "description": "whenever pause energetic row meh blah consequently upbeat minister", "type": 4, "verify_key": "<value>", "flags": 166137, "redirect_uris": ["https://unwelcome-fledgling.biz"], "owner": {"id": "<value>", "username": "Marcellus_Leuschke", "discriminator": "<value>", "public_flags": 294863, "flags": 500422}, "approximate_user_install_count": 314042, "explicit_content_filter": 0}
+          application/json: {"id": "<value>", "name": "<value>", "description": "whenever pause energetic row meh blah consequently upbeat minister", "type": 4, "verify_key": "<value>", "flags": 166137, "redirect_uris": ["https://unwelcome-fledgling.biz"], "owner": {"id": "<value>", "username": "Marcellus_Leuschke", "discriminator": "<value>", "public_flags": 294863, "flags": 500422}, "approximate_user_install_count": 314042, "approximate_user_authorization_count": 838418, "explicit_content_filter": 0}
         4XX:
           application/json: {"code": 367496, "message": "<value>"}
   applications_get_activity_instance:
@@ -1979,7 +1993,7 @@ examples:
     speakeasy-default-get-my-oauth2-application:
       responses:
         "200":
-          application/json: {"id": "<value>", "name": "<value>", "description": "paintwork that if make serenade anenst up coagulate boldly", "type": 4, "verify_key": "<value>", "flags": 146694, "redirect_uris": [], "owner": {"id": "<value>", "username": "Malcolm_Upton64", "discriminator": "<value>", "public_flags": 51696, "flags": 112119}, "approximate_user_install_count": 811166, "explicit_content_filter": 0}
+          application/json: {"id": "<value>", "name": "<value>", "description": "paintwork that if make serenade anenst up coagulate boldly", "type": 4, "verify_key": "<value>", "flags": 146694, "redirect_uris": [], "owner": {"id": "<value>", "username": "Malcolm_Upton64", "discriminator": "<value>", "public_flags": 51696, "flags": 112119}, "approximate_user_install_count": 811166, "approximate_user_authorization_count": 866720, "explicit_content_filter": 0}
         4XX:
           application/json: {"code": 520028, "message": "<value>"}
   get_public_keys:
@@ -4252,5 +4266,27 @@ examples:
           application/json: {"id": "<value>", "username": "Enos13", "discriminator": "<value>", "public_flags": 211990, "flags": 93418}
         4XX:
           application/json: {"code": 293972, "message": "<value>"}
+  bulk_update_lobby_members:
+    speakeasy-default-bulk-update-lobby-members:
+      parameters:
+        path:
+          lobby_id: "<value>"
+      requestBody:
+        application/json: [{"id": "<value>"}]
+      responses:
+        "200":
+          application/json: [{"id": "<value>", "flags": 686483}]
+        4XX:
+          application/json: {"code": 323839, "message": "<value>"}
+  get_lobby_messages:
+    speakeasy-default-get-lobby-messages:
+      parameters:
+        path:
+          lobby_id: "<value>"
+      responses:
+        "200":
+          application/json: [{"id": "<value>", "type": 0, "content": "<value>", "lobby_id": "<value>", "channel_id": "<value>", "author": {"id": "<value>", "username": "Johnnie.Bins", "discriminator": "<value>", "public_flags": 618507, "flags": 771857}, "flags": 439449}]
+        4XX:
+          application/json: {"code": 151033, "message": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}

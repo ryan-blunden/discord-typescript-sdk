@@ -5414,6 +5414,38 @@ paths:
         scopes:
           - lobby
           - write
+  "/lobbies/{lobby_id}/members/bulk":
+    parameters:
+      - name: "lobby_id"
+        in: "path"
+        schema: {"$ref": "#/components/schemas/SnowflakeType"}
+        required: true
+    post:
+      operationId: "bulk_update_lobby_members"
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              type:
+                - "array"
+                - "null"
+              items: {"$ref": "#/components/schemas/BulkLobbyMemberRequest"}
+              minItems: 1
+              maxItems: 25
+        required: true
+      responses:
+        "200":
+          description: "200 response for bulk_update_lobby_members"
+          content:
+            "application/json":
+              schema:
+                type:
+                  - "array"
+                  - "null"
+                items: {"$ref": "#/components/schemas/LobbyMemberResponse"}
+        "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
+      security:
+        - BotToken: []
   "/lobbies/{lobby_id}/members/{user_id}":
     parameters:
       - name: "lobby_id"
@@ -5484,6 +5516,29 @@ paths:
         in: "path"
         schema: {"$ref": "#/components/schemas/SnowflakeType"}
         required: true
+    get:
+      operationId: "get_lobby_messages"
+      parameters:
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            minimum: 1
+            maximum: 200
+      responses:
+        "200":
+          description: "200 response for get_lobby_messages"
+          content:
+            "application/json":
+              schema:
+                type:
+                  - "array"
+                  - "null"
+                items: {"$ref": "#/components/schemas/LobbyMessageResponse"}
+        "4XX": {"$ref": "#/components/responses/ClientErrorResponse"}
+      security:
+        - BotToken: []
+        - OAuth2: []
     post:
       operationId: "create_lobby_message"
       requestBody:
@@ -5986,28 +6041,7 @@ paths:
       requestBody:
         content:
           "application/json":
-            schema:
-              type: "object"
-              properties:
-                "platform_name":
-                  type:
-                    - "string"
-                    - "null"
-                  maxLength: 50
-                "platform_username":
-                  type:
-                    - "string"
-                    - "null"
-                  maxLength: 100
-                "metadata":
-                  type:
-                    - "object"
-                    - "null"
-                  additionalProperties:
-                    type: "string"
-                    minLength: 1
-                    maxLength: 100
-                  maxProperties: 5
+            schema: {"$ref": "#/components/schemas/UpdateApplicationUserRoleConnectionRequest"}
         required: true
       responses:
         "200":
@@ -9750,6 +9784,30 @@ components:
       required:
         - "banned_users"
         - "failed_users"
+    "BulkLobbyMemberRequest":
+      type: "object"
+      properties:
+        "id": {"$ref": "#/components/schemas/SnowflakeType"}
+        "metadata":
+          type:
+            - "object"
+            - "null"
+          additionalProperties:
+            type: "string"
+            maxLength: 1024
+          maxProperties: 25
+        "flags":
+          oneOf:
+            - type: "null"
+            - type: "integer"
+              enum:
+                - 1
+        "remove_member":
+          type:
+            - "boolean"
+            - "null"
+      required:
+        - "id"
     "ButtonComponentForMessageRequest":
       type: "object"
       properties:
@@ -17021,6 +17079,9 @@ components:
         "approximate_user_install_count":
           type: "integer"
           format: "int32"
+        "approximate_user_authorization_count":
+          type: "integer"
+          format: "int32"
         "explicit_content_filter": {"$ref": "#/components/schemas/ApplicationExplicitContentFilterTypes"}
         "team":
           oneOf:
@@ -17035,6 +17096,7 @@ components:
         - "redirect_uris"
         - "owner"
         - "approximate_user_install_count"
+        - "approximate_user_authorization_count"
         - "explicit_content_filter"
     "PrivateChannelLocation":
       type: "object"
@@ -19043,10 +19105,36 @@ components:
           type:
             - "string"
             - "null"
+        "attachment_id":
+          oneOf:
+            - type: "null"
+            - {"$ref": "#/components/schemas/SnowflakeType"}
       required:
         - "id"
         - "url"
         - "proxy_url"
+    "UpdateApplicationUserRoleConnectionRequest":
+      type: "object"
+      properties:
+        "platform_name":
+          type:
+            - "string"
+            - "null"
+          maxLength: 50
+        "platform_username":
+          type:
+            - "string"
+            - "null"
+          maxLength: 100
+        "metadata":
+          type:
+            - "object"
+            - "null"
+          additionalProperties:
+            type: "string"
+            minLength: 1
+            maxLength: 100
+          maxProperties: 5
     "UpdateDMRequestPartial":
       type: "object"
       properties:

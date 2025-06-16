@@ -15,6 +15,7 @@ export type UnfurledMediaResponse = {
   width?: number | null | undefined;
   height?: number | null | undefined;
   contentType?: string | null | undefined;
+  attachmentId?: string | null | undefined;
 };
 
 /** @internal */
@@ -29,10 +30,12 @@ export const UnfurledMediaResponse$inboundSchema: z.ZodType<
   width: z.nullable(z.number().int()).optional(),
   height: z.nullable(z.number().int()).optional(),
   content_type: z.nullable(z.string()).optional(),
+  attachment_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "proxy_url": "proxyUrl",
     "content_type": "contentType",
+    "attachment_id": "attachmentId",
   });
 });
 
@@ -44,6 +47,7 @@ export type UnfurledMediaResponse$Outbound = {
   width?: number | null | undefined;
   height?: number | null | undefined;
   content_type?: string | null | undefined;
+  attachment_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -58,10 +62,12 @@ export const UnfurledMediaResponse$outboundSchema: z.ZodType<
   width: z.nullable(z.number().int()).optional(),
   height: z.nullable(z.number().int()).optional(),
   contentType: z.nullable(z.string()).optional(),
+  attachmentId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     proxyUrl: "proxy_url",
     contentType: "content_type",
+    attachmentId: "attachment_id",
   });
 });
 
