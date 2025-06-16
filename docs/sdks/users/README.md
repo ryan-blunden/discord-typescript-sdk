@@ -247,7 +247,7 @@ const discord = new Discord({
 async function run() {
   const result = await discord.users.updateApplicationRoleConnection({
     applicationId: "<value>",
-    requestBody: {},
+    updateApplicationUserRoleConnectionRequest: {},
   });
 
   console.log(result);
@@ -273,7 +273,7 @@ const discord = new DiscordCore({
 async function run() {
   const res = await usersUpdateApplicationRoleConnection(discord, {
     applicationId: "<value>",
-    requestBody: {},
+    updateApplicationUserRoleConnectionRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;

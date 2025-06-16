@@ -31,6 +31,7 @@ import { tool$autoModerationDeleteRule } from "./tools/autoModerationDeleteRule.
 import { tool$autoModerationGetRule } from "./tools/autoModerationGetRule.js";
 import { tool$autoModerationListRules } from "./tools/autoModerationListRules.js";
 import { tool$autoModerationUpdateRule } from "./tools/autoModerationUpdateRule.js";
+import { tool$bulkUpdateLobbyMembers } from "./tools/bulkUpdateLobbyMembers.js";
 import { tool$channelsAddGroupDMRecipient } from "./tools/channelsAddGroupDMRecipient.js";
 import { tool$channelsAddThreadMember } from "./tools/channelsAddThreadMember.js";
 import { tool$channelsCreateInvite } from "./tools/channelsCreateInvite.js";
@@ -195,7 +196,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Discord",
-    version: "0.4.0",
+    version: "0.4.1",
   });
 
   const client = new DiscordCore({
@@ -225,6 +226,7 @@ export function createMCPServer(deps: {
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
+  tool(tool$bulkUpdateLobbyMembers);
   tool(tool$applicationsGetMe);
   tool(tool$applicationsUpdateSelf);
   tool(tool$applicationsGet);

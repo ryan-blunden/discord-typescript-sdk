@@ -37,14 +37,14 @@ let value: MessageResponse = {
   channelId: "<value>",
   author: {
     id: "<value>",
-    username: "Sterling_Quitzon50",
+    username: "Jalon93",
     discriminator: "<value>",
-    publicFlags: 770437,
-    flags: 859724,
+    publicFlags: 577906,
+    flags: 274868,
   },
-  pinned: true,
+  pinned: false,
   mentionEveryone: false,
-  tts: true,
+  tts: false,
 };
 ```
 
