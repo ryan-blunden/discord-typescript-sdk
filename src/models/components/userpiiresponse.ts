@@ -33,19 +33,19 @@ export type UserPIIResponse = {
   discriminator: string;
   publicFlags: number;
   flags: number;
-  bot?: boolean | null | undefined;
-  system?: boolean | null | undefined;
+  bot?: boolean | undefined;
+  system?: boolean | undefined;
   banner?: string | null | undefined;
   accentColor?: number | null | undefined;
   globalName?: string | null | undefined;
   avatarDecorationData?: UserAvatarDecorationResponse | null | undefined;
   collectibles?: UserCollectiblesResponse | null | undefined;
-  clan?: UserPrimaryGuildResponse | null | undefined;
+  primaryGuild?: UserPrimaryGuildResponse | null | undefined;
   mfaEnabled: boolean;
   locale?: "ar" | undefined;
-  premiumType?: 0 | null | undefined;
+  premiumType?: 0 | undefined;
   email?: string | null | undefined;
-  verified?: boolean | null | undefined;
+  verified?: boolean | undefined;
 };
 
 /** @internal */
@@ -60,26 +60,27 @@ export const UserPIIResponse$inboundSchema: z.ZodType<
   discriminator: z.string(),
   public_flags: z.number().int(),
   flags: z.number().int(),
-  bot: z.nullable(z.boolean()).optional(),
-  system: z.nullable(z.boolean()).optional(),
+  bot: z.boolean().optional(),
+  system: z.boolean().optional(),
   banner: z.nullable(z.string()).optional(),
   accent_color: z.nullable(z.number().int()).optional(),
   global_name: z.nullable(z.string()).optional(),
   avatar_decoration_data: z.nullable(UserAvatarDecorationResponse$inboundSchema)
     .optional(),
   collectibles: z.nullable(UserCollectiblesResponse$inboundSchema).optional(),
-  clan: z.nullable(UserPrimaryGuildResponse$inboundSchema).optional(),
+  primary_guild: z.nullable(UserPrimaryGuildResponse$inboundSchema).optional(),
   mfa_enabled: z.boolean(),
-  locale: z.literal("ar").optional(),
-  premium_type: z.nullable(z.literal(0)).optional(),
+  locale: z.literal("ar").default("ar").optional(),
+  premium_type: z.literal(0).default(0).optional(),
   email: z.nullable(z.string()).optional(),
-  verified: z.nullable(z.boolean()).optional(),
+  verified: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "public_flags": "publicFlags",
     "accent_color": "accentColor",
     "global_name": "globalName",
     "avatar_decoration_data": "avatarDecorationData",
+    "primary_guild": "primaryGuild",
     "mfa_enabled": "mfaEnabled",
     "premium_type": "premiumType",
   });
@@ -93,8 +94,8 @@ export type UserPIIResponse$Outbound = {
   discriminator: string;
   public_flags: number;
   flags: number;
-  bot?: boolean | null | undefined;
-  system?: boolean | null | undefined;
+  bot?: boolean | undefined;
+  system?: boolean | undefined;
   banner?: string | null | undefined;
   accent_color?: number | null | undefined;
   global_name?: string | null | undefined;
@@ -103,12 +104,12 @@ export type UserPIIResponse$Outbound = {
     | null
     | undefined;
   collectibles?: UserCollectiblesResponse$Outbound | null | undefined;
-  clan?: UserPrimaryGuildResponse$Outbound | null | undefined;
+  primary_guild?: UserPrimaryGuildResponse$Outbound | null | undefined;
   mfa_enabled: boolean;
   locale: "ar";
-  premium_type: 0 | null;
+  premium_type: 0;
   email?: string | null | undefined;
-  verified?: boolean | null | undefined;
+  verified?: boolean | undefined;
 };
 
 /** @internal */
@@ -123,26 +124,27 @@ export const UserPIIResponse$outboundSchema: z.ZodType<
   discriminator: z.string(),
   publicFlags: z.number().int(),
   flags: z.number().int(),
-  bot: z.nullable(z.boolean()).optional(),
-  system: z.nullable(z.boolean()).optional(),
+  bot: z.boolean().optional(),
+  system: z.boolean().optional(),
   banner: z.nullable(z.string()).optional(),
   accentColor: z.nullable(z.number().int()).optional(),
   globalName: z.nullable(z.string()).optional(),
   avatarDecorationData: z.nullable(UserAvatarDecorationResponse$outboundSchema)
     .optional(),
   collectibles: z.nullable(UserCollectiblesResponse$outboundSchema).optional(),
-  clan: z.nullable(UserPrimaryGuildResponse$outboundSchema).optional(),
+  primaryGuild: z.nullable(UserPrimaryGuildResponse$outboundSchema).optional(),
   mfaEnabled: z.boolean(),
   locale: z.literal("ar").default("ar" as const),
-  premiumType: z.nullable(z.literal(0).default(0 as const)),
+  premiumType: z.literal(0).default(0 as const),
   email: z.nullable(z.string()).optional(),
-  verified: z.nullable(z.boolean()).optional(),
+  verified: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     publicFlags: "public_flags",
     accentColor: "accent_color",
     globalName: "global_name",
     avatarDecorationData: "avatar_decoration_data",
+    primaryGuild: "primary_guild",
     mfaEnabled: "mfa_enabled",
     premiumType: "premium_type",
   });

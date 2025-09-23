@@ -13,6 +13,10 @@ export type DeleteApplicationEmojiRequest = {
   emojiId: string;
 };
 
+export type DeleteApplicationEmojiResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteApplicationEmojiRequest$inboundSchema: z.ZodType<
   DeleteApplicationEmojiRequest,
@@ -79,5 +83,69 @@ export function deleteApplicationEmojiRequestFromJSON(
     jsonString,
     (x) => DeleteApplicationEmojiRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteApplicationEmojiRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteApplicationEmojiResponse$inboundSchema: z.ZodType<
+  DeleteApplicationEmojiResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteApplicationEmojiResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteApplicationEmojiResponse$outboundSchema: z.ZodType<
+  DeleteApplicationEmojiResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteApplicationEmojiResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteApplicationEmojiResponse$ {
+  /** @deprecated use `DeleteApplicationEmojiResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteApplicationEmojiResponse$inboundSchema;
+  /** @deprecated use `DeleteApplicationEmojiResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteApplicationEmojiResponse$outboundSchema;
+  /** @deprecated use `DeleteApplicationEmojiResponse$Outbound` instead. */
+  export type Outbound = DeleteApplicationEmojiResponse$Outbound;
+}
+
+export function deleteApplicationEmojiResponseToJSON(
+  deleteApplicationEmojiResponse: DeleteApplicationEmojiResponse,
+): string {
+  return JSON.stringify(
+    DeleteApplicationEmojiResponse$outboundSchema.parse(
+      deleteApplicationEmojiResponse,
+    ),
+  );
+}
+
+export function deleteApplicationEmojiResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteApplicationEmojiResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteApplicationEmojiResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteApplicationEmojiResponse' from JSON`,
   );
 }

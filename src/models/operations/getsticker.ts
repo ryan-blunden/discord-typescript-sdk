@@ -17,8 +17,13 @@ export type GetStickerRequest = {
  * 200 response for get_sticker
  */
 export type GetStickerResponseBody =
-  | components.StandardStickerResponse
-  | components.GuildStickerResponse;
+  | components.GuildStickerResponse
+  | components.StandardStickerResponse;
+
+export type GetStickerResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildStickerResponse | components.StandardStickerResponse;
+};
 
 /** @internal */
 export const GetStickerRequest$inboundSchema: z.ZodType<
@@ -88,14 +93,14 @@ export const GetStickerResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.StandardStickerResponse$inboundSchema,
   components.GuildStickerResponse$inboundSchema,
+  components.StandardStickerResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type GetStickerResponseBody$Outbound =
-  | components.StandardStickerResponse$Outbound
-  | components.GuildStickerResponse$Outbound;
+  | components.GuildStickerResponse$Outbound
+  | components.StandardStickerResponse$Outbound;
 
 /** @internal */
 export const GetStickerResponseBody$outboundSchema: z.ZodType<
@@ -103,8 +108,8 @@ export const GetStickerResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetStickerResponseBody
 > = z.union([
-  components.StandardStickerResponse$outboundSchema,
   components.GuildStickerResponse$outboundSchema,
+  components.StandardStickerResponse$outboundSchema,
 ]);
 
 /**
@@ -135,5 +140,80 @@ export function getStickerResponseBodyFromJSON(
     jsonString,
     (x) => GetStickerResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetStickerResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetStickerResponse$inboundSchema: z.ZodType<
+  GetStickerResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.GuildStickerResponse$inboundSchema,
+    components.StandardStickerResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetStickerResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.GuildStickerResponse$Outbound
+    | components.StandardStickerResponse$Outbound;
+};
+
+/** @internal */
+export const GetStickerResponse$outboundSchema: z.ZodType<
+  GetStickerResponse$Outbound,
+  z.ZodTypeDef,
+  GetStickerResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.GuildStickerResponse$outboundSchema,
+    components.StandardStickerResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetStickerResponse$ {
+  /** @deprecated use `GetStickerResponse$inboundSchema` instead. */
+  export const inboundSchema = GetStickerResponse$inboundSchema;
+  /** @deprecated use `GetStickerResponse$outboundSchema` instead. */
+  export const outboundSchema = GetStickerResponse$outboundSchema;
+  /** @deprecated use `GetStickerResponse$Outbound` instead. */
+  export type Outbound = GetStickerResponse$Outbound;
+}
+
+export function getStickerResponseToJSON(
+  getStickerResponse: GetStickerResponse,
+): string {
+  return JSON.stringify(
+    GetStickerResponse$outboundSchema.parse(getStickerResponse),
+  );
+}
+
+export function getStickerResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetStickerResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetStickerResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetStickerResponse' from JSON`,
   );
 }

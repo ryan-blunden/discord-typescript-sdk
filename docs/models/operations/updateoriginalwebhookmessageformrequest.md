@@ -8,6 +8,7 @@ import { UpdateOriginalWebhookMessageFormRequest } from "@ryan.blunden/discord-s
 let value: UpdateOriginalWebhookMessageFormRequest = {
   webhookId: "<value>",
   webhookToken: "<value>",
+  incomingWebhookUpdateRequestPartial: {},
 };
 ```
 

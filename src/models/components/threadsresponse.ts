@@ -29,8 +29,8 @@ import {
 export type ThreadsResponse = {
   threads: Array<ThreadResponse>;
   members: Array<ThreadMemberResponse>;
-  hasMore?: boolean | null | undefined;
-  firstMessages?: Array<MessageResponse> | null | undefined;
+  hasMore: boolean;
+  firstMessages?: Array<MessageResponse> | undefined;
 };
 
 /** @internal */
@@ -41,8 +41,8 @@ export const ThreadsResponse$inboundSchema: z.ZodType<
 > = z.object({
   threads: z.array(ThreadResponse$inboundSchema),
   members: z.array(ThreadMemberResponse$inboundSchema),
-  has_more: z.nullable(z.boolean()).optional(),
-  first_messages: z.nullable(z.array(MessageResponse$inboundSchema)).optional(),
+  has_more: z.boolean(),
+  first_messages: z.array(MessageResponse$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",
@@ -54,8 +54,8 @@ export const ThreadsResponse$inboundSchema: z.ZodType<
 export type ThreadsResponse$Outbound = {
   threads: Array<ThreadResponse$Outbound>;
   members: Array<ThreadMemberResponse$Outbound>;
-  has_more?: boolean | null | undefined;
-  first_messages?: Array<MessageResponse$Outbound> | null | undefined;
+  has_more: boolean;
+  first_messages?: Array<MessageResponse$Outbound> | undefined;
 };
 
 /** @internal */
@@ -66,8 +66,8 @@ export const ThreadsResponse$outboundSchema: z.ZodType<
 > = z.object({
   threads: z.array(ThreadResponse$outboundSchema),
   members: z.array(ThreadMemberResponse$outboundSchema),
-  hasMore: z.nullable(z.boolean()).optional(),
-  firstMessages: z.nullable(z.array(MessageResponse$outboundSchema)).optional(),
+  hasMore: z.boolean(),
+  firstMessages: z.array(MessageResponse$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     hasMore: "has_more",

@@ -8,8 +8,7 @@ import { compactMap } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
-import { APIError } from "../models/errors/apierror.js";
+import { DiscordError } from "../models/errors/discorderror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -18,7 +17,9 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -30,15 +31,17 @@ export function applicationsGetBotGateway(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.GatewayBotResponse,
+    operations.GetBotGatewayResponse,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | DiscordError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
@@ -53,15 +56,17 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.GatewayBotResponse,
+      operations.GetBotGatewayResponse,
+      | errors.RatelimitedResponse
       | errors.ErrorResponse
-      | APIError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | DiscordError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -107,7 +112,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["429", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -121,20 +126,26 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.GatewayBotResponse,
+    operations.GetBotGatewayResponse,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | DiscordError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
-    M.json(200, components.GatewayBotResponse$inboundSchema),
-    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema),
+    M.json(200, operations.GetBotGatewayResponse$inboundSchema, {
+      hdrs: true,
+      key: "Result",
+    }),
+    M.jsonErr(429, errors.RatelimitedResponse$inboundSchema, { hdrs: true }),
+    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema, { hdrs: true }),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

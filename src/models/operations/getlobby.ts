@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetLobbyRequest = {
   lobbyId: string;
+};
+
+export type GetLobbyResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.LobbyResponse;
 };
 
 /** @internal */
@@ -69,5 +75,72 @@ export function getLobbyRequestFromJSON(
     jsonString,
     (x) => GetLobbyRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetLobbyRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetLobbyResponse$inboundSchema: z.ZodType<
+  GetLobbyResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.LobbyResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetLobbyResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.LobbyResponse$Outbound;
+};
+
+/** @internal */
+export const GetLobbyResponse$outboundSchema: z.ZodType<
+  GetLobbyResponse$Outbound,
+  z.ZodTypeDef,
+  GetLobbyResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.LobbyResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetLobbyResponse$ {
+  /** @deprecated use `GetLobbyResponse$inboundSchema` instead. */
+  export const inboundSchema = GetLobbyResponse$inboundSchema;
+  /** @deprecated use `GetLobbyResponse$outboundSchema` instead. */
+  export const outboundSchema = GetLobbyResponse$outboundSchema;
+  /** @deprecated use `GetLobbyResponse$Outbound` instead. */
+  export type Outbound = GetLobbyResponse$Outbound;
+}
+
+export function getLobbyResponseToJSON(
+  getLobbyResponse: GetLobbyResponse,
+): string {
+  return JSON.stringify(
+    GetLobbyResponse$outboundSchema.parse(getLobbyResponse),
+  );
+}
+
+export function getLobbyResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetLobbyResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetLobbyResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetLobbyResponse' from JSON`,
   );
 }

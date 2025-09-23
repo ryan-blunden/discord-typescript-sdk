@@ -57,9 +57,9 @@ export type MLSpamRuleResponse = {
     | UserCommunicationDisabledActionResponse
   >;
   triggerType?: 1 | undefined;
-  enabled?: boolean | null | undefined;
-  exemptRoles?: Array<string> | null | undefined;
-  exemptChannels?: Array<string> | null | undefined;
+  enabled: boolean;
+  exemptRoles: Array<string>;
+  exemptChannels: Array<string>;
   triggerMetadata: MLSpamTriggerMetadataResponse;
 };
 
@@ -135,7 +135,7 @@ export const MLSpamRuleResponse$inboundSchema: z.ZodType<
   guild_id: z.string(),
   creator_id: z.string(),
   name: z.string(),
-  event_type: z.literal(1).optional(),
+  event_type: z.literal(1).default(1).optional(),
   actions: z.array(
     z.union([
       BlockMessageActionResponse$inboundSchema,
@@ -144,10 +144,10 @@ export const MLSpamRuleResponse$inboundSchema: z.ZodType<
       UserCommunicationDisabledActionResponse$inboundSchema,
     ]),
   ),
-  trigger_type: z.literal(1).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  exempt_roles: z.nullable(z.array(z.string())).optional(),
-  exempt_channels: z.nullable(z.array(z.string())).optional(),
+  trigger_type: z.literal(1).default(1).optional(),
+  enabled: z.boolean(),
+  exempt_roles: z.array(z.string()),
+  exempt_channels: z.array(z.string()),
   trigger_metadata: MLSpamTriggerMetadataResponse$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
@@ -175,9 +175,9 @@ export type MLSpamRuleResponse$Outbound = {
     | UserCommunicationDisabledActionResponse$Outbound
   >;
   trigger_type: 1;
-  enabled?: boolean | null | undefined;
-  exempt_roles?: Array<string> | null | undefined;
-  exempt_channels?: Array<string> | null | undefined;
+  enabled: boolean;
+  exempt_roles: Array<string>;
+  exempt_channels: Array<string>;
   trigger_metadata: MLSpamTriggerMetadataResponse$Outbound;
 };
 
@@ -201,9 +201,9 @@ export const MLSpamRuleResponse$outboundSchema: z.ZodType<
     ]),
   ),
   triggerType: z.literal(1).default(1 as const),
-  enabled: z.nullable(z.boolean()).optional(),
-  exemptRoles: z.nullable(z.array(z.string())).optional(),
-  exemptChannels: z.nullable(z.array(z.string())).optional(),
+  enabled: z.boolean(),
+  exemptRoles: z.array(z.string()),
+  exemptChannels: z.array(z.string()),
   triggerMetadata: MLSpamTriggerMetadataResponse$outboundSchema,
 }).transform((v) => {
   return remap$(v, {

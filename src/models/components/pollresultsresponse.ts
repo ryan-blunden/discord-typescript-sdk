@@ -15,7 +15,7 @@ import {
 } from "./pollresultsentryresponse.js";
 
 export type PollResultsResponse = {
-  answerCounts?: Array<PollResultsEntryResponse> | null | undefined;
+  answerCounts: Array<PollResultsEntryResponse>;
   isFinalized: boolean;
 };
 
@@ -25,8 +25,7 @@ export const PollResultsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  answer_counts: z.nullable(z.array(PollResultsEntryResponse$inboundSchema))
-    .optional(),
+  answer_counts: z.array(PollResultsEntryResponse$inboundSchema),
   is_finalized: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
@@ -37,7 +36,7 @@ export const PollResultsResponse$inboundSchema: z.ZodType<
 
 /** @internal */
 export type PollResultsResponse$Outbound = {
-  answer_counts?: Array<PollResultsEntryResponse$Outbound> | null | undefined;
+  answer_counts: Array<PollResultsEntryResponse$Outbound>;
   is_finalized: boolean;
 };
 
@@ -47,8 +46,7 @@ export const PollResultsResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PollResultsResponse
 > = z.object({
-  answerCounts: z.nullable(z.array(PollResultsEntryResponse$outboundSchema))
-    .optional(),
+  answerCounts: z.array(PollResultsEntryResponse$outboundSchema),
   isFinalized: z.boolean(),
 }).transform((v) => {
   return remap$(v, {

@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetUserRequest = {
   userId: string;
+};
+
+export type GetUserResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.UserResponse;
 };
 
 /** @internal */
@@ -67,5 +73,70 @@ export function getUserRequestFromJSON(
     jsonString,
     (x) => GetUserRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetUserRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetUserResponse$inboundSchema: z.ZodType<
+  GetUserResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.UserResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetUserResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.UserResponse$Outbound;
+};
+
+/** @internal */
+export const GetUserResponse$outboundSchema: z.ZodType<
+  GetUserResponse$Outbound,
+  z.ZodTypeDef,
+  GetUserResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.UserResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetUserResponse$ {
+  /** @deprecated use `GetUserResponse$inboundSchema` instead. */
+  export const inboundSchema = GetUserResponse$inboundSchema;
+  /** @deprecated use `GetUserResponse$outboundSchema` instead. */
+  export const outboundSchema = GetUserResponse$outboundSchema;
+  /** @deprecated use `GetUserResponse$Outbound` instead. */
+  export type Outbound = GetUserResponse$Outbound;
+}
+
+export function getUserResponseToJSON(
+  getUserResponse: GetUserResponse,
+): string {
+  return JSON.stringify(GetUserResponse$outboundSchema.parse(getUserResponse));
+}
+
+export function getUserResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetUserResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetUserResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetUserResponse' from JSON`,
   );
 }

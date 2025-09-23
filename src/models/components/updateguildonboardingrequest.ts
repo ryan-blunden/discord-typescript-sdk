@@ -31,7 +31,7 @@ export const UpdateGuildOnboardingRequest$inboundSchema: z.ZodType<
     .optional(),
   enabled: z.nullable(z.boolean()).optional(),
   default_channel_ids: z.nullable(z.array(z.string())).optional(),
-  mode: z.nullable(z.literal(0)).optional(),
+  mode: z.nullable(z.literal(0).default(0)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_channel_ids": "defaultChannelIds",

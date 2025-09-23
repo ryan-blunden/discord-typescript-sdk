@@ -14,7 +14,7 @@ import {
 } from "./userresponse.js";
 
 export type PollAnswerDetailsResponse = {
-  users?: Array<UserResponse> | null | undefined;
+  users: Array<UserResponse>;
 };
 
 /** @internal */
@@ -23,12 +23,12 @@ export const PollAnswerDetailsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  users: z.nullable(z.array(UserResponse$inboundSchema)).optional(),
+  users: z.array(UserResponse$inboundSchema),
 });
 
 /** @internal */
 export type PollAnswerDetailsResponse$Outbound = {
-  users?: Array<UserResponse$Outbound> | null | undefined;
+  users: Array<UserResponse$Outbound>;
 };
 
 /** @internal */
@@ -37,7 +37,7 @@ export const PollAnswerDetailsResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PollAnswerDetailsResponse
 > = z.object({
-  users: z.nullable(z.array(UserResponse$outboundSchema)).optional(),
+  users: z.array(UserResponse$outboundSchema),
 });
 
 /**

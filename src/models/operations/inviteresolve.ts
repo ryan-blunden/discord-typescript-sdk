@@ -23,9 +23,17 @@ export type InviteResolveRequest = {
  * 200 response for invite_resolve
  */
 export type InviteResolveResponseBody =
+  | components.GuildInviteResponse
   | components.GroupDMInviteResponse
-  | components.FriendInviteResponse
-  | components.GuildInviteResponse;
+  | components.FriendInviteResponse;
+
+export type InviteResolveResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.GuildInviteResponse
+    | components.GroupDMInviteResponse
+    | components.FriendInviteResponse;
+};
 
 /** @internal */
 export const InviteResolveSecurity$inboundSchema: z.ZodType<
@@ -165,16 +173,16 @@ export const InviteResolveResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  components.GuildInviteResponse$inboundSchema,
   components.GroupDMInviteResponse$inboundSchema,
   components.FriendInviteResponse$inboundSchema,
-  components.GuildInviteResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type InviteResolveResponseBody$Outbound =
+  | components.GuildInviteResponse$Outbound
   | components.GroupDMInviteResponse$Outbound
-  | components.FriendInviteResponse$Outbound
-  | components.GuildInviteResponse$Outbound;
+  | components.FriendInviteResponse$Outbound;
 
 /** @internal */
 export const InviteResolveResponseBody$outboundSchema: z.ZodType<
@@ -182,9 +190,9 @@ export const InviteResolveResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   InviteResolveResponseBody
 > = z.union([
+  components.GuildInviteResponse$outboundSchema,
   components.GroupDMInviteResponse$outboundSchema,
   components.FriendInviteResponse$outboundSchema,
-  components.GuildInviteResponse$outboundSchema,
 ]);
 
 /**
@@ -215,5 +223,83 @@ export function inviteResolveResponseBodyFromJSON(
     jsonString,
     (x) => InviteResolveResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'InviteResolveResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const InviteResolveResponse$inboundSchema: z.ZodType<
+  InviteResolveResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.GuildInviteResponse$inboundSchema,
+    components.GroupDMInviteResponse$inboundSchema,
+    components.FriendInviteResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type InviteResolveResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.GuildInviteResponse$Outbound
+    | components.GroupDMInviteResponse$Outbound
+    | components.FriendInviteResponse$Outbound;
+};
+
+/** @internal */
+export const InviteResolveResponse$outboundSchema: z.ZodType<
+  InviteResolveResponse$Outbound,
+  z.ZodTypeDef,
+  InviteResolveResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.GuildInviteResponse$outboundSchema,
+    components.GroupDMInviteResponse$outboundSchema,
+    components.FriendInviteResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InviteResolveResponse$ {
+  /** @deprecated use `InviteResolveResponse$inboundSchema` instead. */
+  export const inboundSchema = InviteResolveResponse$inboundSchema;
+  /** @deprecated use `InviteResolveResponse$outboundSchema` instead. */
+  export const outboundSchema = InviteResolveResponse$outboundSchema;
+  /** @deprecated use `InviteResolveResponse$Outbound` instead. */
+  export type Outbound = InviteResolveResponse$Outbound;
+}
+
+export function inviteResolveResponseToJSON(
+  inviteResolveResponse: InviteResolveResponse,
+): string {
+  return JSON.stringify(
+    InviteResolveResponse$outboundSchema.parse(inviteResolveResponse),
+  );
+}
+
+export function inviteResolveResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<InviteResolveResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InviteResolveResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InviteResolveResponse' from JSON`,
   );
 }

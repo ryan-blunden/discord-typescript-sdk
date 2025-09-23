@@ -12,13 +12,12 @@ let value: OnboardingPromptResponse = {
     {
       id: "<value>",
       title: "<value>",
-      description: "silent forsaken reckon",
-      emoji: {},
-      roleIds: [
-        "<value 1>",
-        "<value 2>",
-        "<value 3>",
-      ],
+      description:
+        "rapid yum that nautical triangular reward provided cleave tuxedo sheepishly",
+      emoji: {
+        animated: true,
+      },
+      roleIds: [],
       channelIds: [
         "<value 1>",
         "<value 2>",

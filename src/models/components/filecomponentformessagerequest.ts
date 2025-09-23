@@ -15,6 +15,7 @@ import {
 
 export type FileComponentForMessageRequest = {
   type?: 1 | undefined;
+  id?: number | null | undefined;
   spoiler?: boolean | null | undefined;
   file: UnfurledMediaRequestWithAttachmentReferenceRequired;
 };
@@ -25,7 +26,8 @@ export const FileComponentForMessageRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
+  id: z.nullable(z.number().int()).optional(),
   spoiler: z.nullable(z.boolean()).optional(),
   file: UnfurledMediaRequestWithAttachmentReferenceRequired$inboundSchema,
 });
@@ -33,6 +35,7 @@ export const FileComponentForMessageRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type FileComponentForMessageRequest$Outbound = {
   type: 1;
+  id?: number | null | undefined;
   spoiler?: boolean | null | undefined;
   file: UnfurledMediaRequestWithAttachmentReferenceRequired$Outbound;
 };
@@ -44,6 +47,7 @@ export const FileComponentForMessageRequest$outboundSchema: z.ZodType<
   FileComponentForMessageRequest
 > = z.object({
   type: z.literal(1).default(1 as const),
+  id: z.nullable(z.number().int()).optional(),
   spoiler: z.nullable(z.boolean()).optional(),
   file: UnfurledMediaRequestWithAttachmentReferenceRequired$outboundSchema,
 });

@@ -39,20 +39,20 @@ import {
 } from "./usercommunicationdisabledaction.js";
 
 export type KeywordUpsertRequestActions =
-  | BlockMessageAction
   | FlagToChannelAction
-  | QuarantineUserAction
-  | UserCommunicationDisabledAction;
+  | UserCommunicationDisabledAction
+  | BlockMessageAction
+  | QuarantineUserAction;
 
 export type KeywordUpsertRequest = {
   name: string;
   eventType?: 1 | undefined;
   actions?:
     | Array<
-      | BlockMessageAction
       | FlagToChannelAction
-      | QuarantineUserAction
       | UserCommunicationDisabledAction
+      | BlockMessageAction
+      | QuarantineUserAction
     >
     | null
     | undefined;
@@ -69,18 +69,18 @@ export const KeywordUpsertRequestActions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  BlockMessageAction$inboundSchema,
   FlagToChannelAction$inboundSchema,
-  QuarantineUserAction$inboundSchema,
   UserCommunicationDisabledAction$inboundSchema,
+  BlockMessageAction$inboundSchema,
+  QuarantineUserAction$inboundSchema,
 ]);
 
 /** @internal */
 export type KeywordUpsertRequestActions$Outbound =
-  | BlockMessageAction$Outbound
   | FlagToChannelAction$Outbound
-  | QuarantineUserAction$Outbound
-  | UserCommunicationDisabledAction$Outbound;
+  | UserCommunicationDisabledAction$Outbound
+  | BlockMessageAction$Outbound
+  | QuarantineUserAction$Outbound;
 
 /** @internal */
 export const KeywordUpsertRequestActions$outboundSchema: z.ZodType<
@@ -88,10 +88,10 @@ export const KeywordUpsertRequestActions$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   KeywordUpsertRequestActions
 > = z.union([
-  BlockMessageAction$outboundSchema,
   FlagToChannelAction$outboundSchema,
-  QuarantineUserAction$outboundSchema,
   UserCommunicationDisabledAction$outboundSchema,
+  BlockMessageAction$outboundSchema,
+  QuarantineUserAction$outboundSchema,
 ]);
 
 /**
@@ -134,21 +134,21 @@ export const KeywordUpsertRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  event_type: z.literal(1).optional(),
+  event_type: z.literal(1).default(1).optional(),
   actions: z.nullable(
     z.array(
       z.union([
-        BlockMessageAction$inboundSchema,
         FlagToChannelAction$inboundSchema,
-        QuarantineUserAction$inboundSchema,
         UserCommunicationDisabledAction$inboundSchema,
+        BlockMessageAction$inboundSchema,
+        QuarantineUserAction$inboundSchema,
       ]),
     ),
   ).optional(),
   enabled: z.nullable(z.boolean()).optional(),
   exempt_roles: z.nullable(z.array(z.string())).optional(),
   exempt_channels: z.nullable(z.array(z.string())).optional(),
-  trigger_type: z.literal(1).optional(),
+  trigger_type: z.literal(1).default(1).optional(),
   trigger_metadata: z.nullable(KeywordTriggerMetadata$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -166,10 +166,10 @@ export type KeywordUpsertRequest$Outbound = {
   event_type: 1;
   actions?:
     | Array<
-      | BlockMessageAction$Outbound
       | FlagToChannelAction$Outbound
-      | QuarantineUserAction$Outbound
       | UserCommunicationDisabledAction$Outbound
+      | BlockMessageAction$Outbound
+      | QuarantineUserAction$Outbound
     >
     | null
     | undefined;
@@ -191,10 +191,10 @@ export const KeywordUpsertRequest$outboundSchema: z.ZodType<
   actions: z.nullable(
     z.array(
       z.union([
-        BlockMessageAction$outboundSchema,
         FlagToChannelAction$outboundSchema,
-        QuarantineUserAction$outboundSchema,
         UserCommunicationDisabledAction$outboundSchema,
+        BlockMessageAction$outboundSchema,
+        QuarantineUserAction$outboundSchema,
       ]),
     ),
   ).optional(),

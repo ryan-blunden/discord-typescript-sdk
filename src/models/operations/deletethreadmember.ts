@@ -13,6 +13,10 @@ export type DeleteThreadMemberRequest = {
   userId: string;
 };
 
+export type DeleteThreadMemberResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteThreadMemberRequest$inboundSchema: z.ZodType<
   DeleteThreadMemberRequest,
@@ -77,5 +81,67 @@ export function deleteThreadMemberRequestFromJSON(
     jsonString,
     (x) => DeleteThreadMemberRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteThreadMemberRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteThreadMemberResponse$inboundSchema: z.ZodType<
+  DeleteThreadMemberResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteThreadMemberResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteThreadMemberResponse$outboundSchema: z.ZodType<
+  DeleteThreadMemberResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteThreadMemberResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteThreadMemberResponse$ {
+  /** @deprecated use `DeleteThreadMemberResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteThreadMemberResponse$inboundSchema;
+  /** @deprecated use `DeleteThreadMemberResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteThreadMemberResponse$outboundSchema;
+  /** @deprecated use `DeleteThreadMemberResponse$Outbound` instead. */
+  export type Outbound = DeleteThreadMemberResponse$Outbound;
+}
+
+export function deleteThreadMemberResponseToJSON(
+  deleteThreadMemberResponse: DeleteThreadMemberResponse,
+): string {
+  return JSON.stringify(
+    DeleteThreadMemberResponse$outboundSchema.parse(deleteThreadMemberResponse),
+  );
+}
+
+export function deleteThreadMemberResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteThreadMemberResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteThreadMemberResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteThreadMemberResponse' from JSON`,
   );
 }

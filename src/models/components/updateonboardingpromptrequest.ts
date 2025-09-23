@@ -35,7 +35,7 @@ export const UpdateOnboardingPromptRequest$inboundSchema: z.ZodType<
   single_select: z.nullable(z.boolean()).optional(),
   required: z.nullable(z.boolean()).optional(),
   in_onboarding: z.nullable(z.boolean()).optional(),
-  type: z.nullable(z.literal(0)).optional(),
+  type: z.nullable(z.literal(0).default(0)).optional(),
   id: z.string(),
 }).transform((v) => {
   return remap$(v, {

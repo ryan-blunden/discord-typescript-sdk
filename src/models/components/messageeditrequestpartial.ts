@@ -69,13 +69,13 @@ import {
 } from "./textdisplaycomponentformessagerequest.js";
 
 export type MessageEditRequestPartialComponents =
+  | SectionComponentForMessageRequest
   | ActionRowComponentForMessageRequest
+  | ContainerComponentForMessageRequest
+  | FileComponentForMessageRequest
   | MediaGalleryComponentForMessageRequest
   | TextDisplayComponentForMessageRequest
-  | FileComponentForMessageRequest
-  | SectionComponentForMessageRequest
-  | SeparatorComponentForMessageRequest
-  | ContainerComponentForMessageRequest;
+  | SeparatorComponentForMessageRequest;
 
 export type MessageEditRequestPartial = {
   content?: string | null | undefined;
@@ -85,13 +85,13 @@ export type MessageEditRequestPartial = {
   stickerIds?: Array<string> | null | undefined;
   components?:
     | Array<
+      | SectionComponentForMessageRequest
       | ActionRowComponentForMessageRequest
+      | ContainerComponentForMessageRequest
+      | FileComponentForMessageRequest
       | MediaGalleryComponentForMessageRequest
       | TextDisplayComponentForMessageRequest
-      | FileComponentForMessageRequest
-      | SectionComponentForMessageRequest
       | SeparatorComponentForMessageRequest
-      | ContainerComponentForMessageRequest
     >
     | null
     | undefined;
@@ -104,24 +104,24 @@ export const MessageEditRequestPartialComponents$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  SectionComponentForMessageRequest$inboundSchema,
   ActionRowComponentForMessageRequest$inboundSchema,
+  ContainerComponentForMessageRequest$inboundSchema,
+  FileComponentForMessageRequest$inboundSchema,
   MediaGalleryComponentForMessageRequest$inboundSchema,
   TextDisplayComponentForMessageRequest$inboundSchema,
-  FileComponentForMessageRequest$inboundSchema,
-  SectionComponentForMessageRequest$inboundSchema,
   SeparatorComponentForMessageRequest$inboundSchema,
-  ContainerComponentForMessageRequest$inboundSchema,
 ]);
 
 /** @internal */
 export type MessageEditRequestPartialComponents$Outbound =
+  | SectionComponentForMessageRequest$Outbound
   | ActionRowComponentForMessageRequest$Outbound
+  | ContainerComponentForMessageRequest$Outbound
+  | FileComponentForMessageRequest$Outbound
   | MediaGalleryComponentForMessageRequest$Outbound
   | TextDisplayComponentForMessageRequest$Outbound
-  | FileComponentForMessageRequest$Outbound
-  | SectionComponentForMessageRequest$Outbound
-  | SeparatorComponentForMessageRequest$Outbound
-  | ContainerComponentForMessageRequest$Outbound;
+  | SeparatorComponentForMessageRequest$Outbound;
 
 /** @internal */
 export const MessageEditRequestPartialComponents$outboundSchema: z.ZodType<
@@ -129,13 +129,13 @@ export const MessageEditRequestPartialComponents$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MessageEditRequestPartialComponents
 > = z.union([
+  SectionComponentForMessageRequest$outboundSchema,
   ActionRowComponentForMessageRequest$outboundSchema,
+  ContainerComponentForMessageRequest$outboundSchema,
+  FileComponentForMessageRequest$outboundSchema,
   MediaGalleryComponentForMessageRequest$outboundSchema,
   TextDisplayComponentForMessageRequest$outboundSchema,
-  FileComponentForMessageRequest$outboundSchema,
-  SectionComponentForMessageRequest$outboundSchema,
   SeparatorComponentForMessageRequest$outboundSchema,
-  ContainerComponentForMessageRequest$outboundSchema,
 ]);
 
 /**
@@ -189,13 +189,13 @@ export const MessageEditRequestPartial$inboundSchema: z.ZodType<
   components: z.nullable(
     z.array(
       z.union([
+        SectionComponentForMessageRequest$inboundSchema,
         ActionRowComponentForMessageRequest$inboundSchema,
+        ContainerComponentForMessageRequest$inboundSchema,
+        FileComponentForMessageRequest$inboundSchema,
         MediaGalleryComponentForMessageRequest$inboundSchema,
         TextDisplayComponentForMessageRequest$inboundSchema,
-        FileComponentForMessageRequest$inboundSchema,
-        SectionComponentForMessageRequest$inboundSchema,
         SeparatorComponentForMessageRequest$inboundSchema,
-        ContainerComponentForMessageRequest$inboundSchema,
       ]),
     ),
   ).optional(),
@@ -217,13 +217,13 @@ export type MessageEditRequestPartial$Outbound = {
   sticker_ids?: Array<string> | null | undefined;
   components?:
     | Array<
+      | SectionComponentForMessageRequest$Outbound
       | ActionRowComponentForMessageRequest$Outbound
+      | ContainerComponentForMessageRequest$Outbound
+      | FileComponentForMessageRequest$Outbound
       | MediaGalleryComponentForMessageRequest$Outbound
       | TextDisplayComponentForMessageRequest$Outbound
-      | FileComponentForMessageRequest$Outbound
-      | SectionComponentForMessageRequest$Outbound
       | SeparatorComponentForMessageRequest$Outbound
-      | ContainerComponentForMessageRequest$Outbound
     >
     | null
     | undefined;
@@ -245,13 +245,13 @@ export const MessageEditRequestPartial$outboundSchema: z.ZodType<
   components: z.nullable(
     z.array(
       z.union([
+        SectionComponentForMessageRequest$outboundSchema,
         ActionRowComponentForMessageRequest$outboundSchema,
+        ContainerComponentForMessageRequest$outboundSchema,
+        FileComponentForMessageRequest$outboundSchema,
         MediaGalleryComponentForMessageRequest$outboundSchema,
         TextDisplayComponentForMessageRequest$outboundSchema,
-        FileComponentForMessageRequest$outboundSchema,
-        SectionComponentForMessageRequest$outboundSchema,
         SeparatorComponentForMessageRequest$outboundSchema,
-        ContainerComponentForMessageRequest$outboundSchema,
       ]),
     ),
   ).optional(),

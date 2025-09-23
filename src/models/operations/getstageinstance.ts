@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetStageInstanceRequest = {
   channelId: string;
+};
+
+export type GetStageInstanceResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.StageInstanceResponse;
 };
 
 /** @internal */
@@ -71,5 +77,72 @@ export function getStageInstanceRequestFromJSON(
     jsonString,
     (x) => GetStageInstanceRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetStageInstanceRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetStageInstanceResponse$inboundSchema: z.ZodType<
+  GetStageInstanceResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.StageInstanceResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetStageInstanceResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.StageInstanceResponse$Outbound;
+};
+
+/** @internal */
+export const GetStageInstanceResponse$outboundSchema: z.ZodType<
+  GetStageInstanceResponse$Outbound,
+  z.ZodTypeDef,
+  GetStageInstanceResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.StageInstanceResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetStageInstanceResponse$ {
+  /** @deprecated use `GetStageInstanceResponse$inboundSchema` instead. */
+  export const inboundSchema = GetStageInstanceResponse$inboundSchema;
+  /** @deprecated use `GetStageInstanceResponse$outboundSchema` instead. */
+  export const outboundSchema = GetStageInstanceResponse$outboundSchema;
+  /** @deprecated use `GetStageInstanceResponse$Outbound` instead. */
+  export type Outbound = GetStageInstanceResponse$Outbound;
+}
+
+export function getStageInstanceResponseToJSON(
+  getStageInstanceResponse: GetStageInstanceResponse,
+): string {
+  return JSON.stringify(
+    GetStageInstanceResponse$outboundSchema.parse(getStageInstanceResponse),
+  );
+}
+
+export function getStageInstanceResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetStageInstanceResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetStageInstanceResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetStageInstanceResponse' from JSON`,
   );
 }

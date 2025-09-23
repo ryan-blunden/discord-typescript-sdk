@@ -14,6 +14,7 @@ Returns an invite object for the given code.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="invite_resolve" method="get" path="/invites/{code}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -69,14 +70,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.InviteResolveResponseBody](../../models/operations/inviteresolveresponsebody.md)\>**
+**Promise\<[operations.InviteResolveResponse](../../models/operations/inviteresolveresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -84,6 +86,7 @@ Delete an invite. Requires the MANAGE_CHANNELS permission on the channel this in
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="invite_revoke" method="delete" path="/invites/{code}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -142,11 +145,12 @@ run();
 
 ### Response
 
-**Promise\<[operations.InviteRevokeResponseBody](../../models/operations/inviterevokeresponsebody.md)\>**
+**Promise\<[operations.InviteRevokeResponse](../../models/operations/inviterevokeresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

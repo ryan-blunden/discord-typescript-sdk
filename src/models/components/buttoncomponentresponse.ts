@@ -17,13 +17,13 @@ import {
 export type ButtonComponentResponse = {
   type?: 1 | undefined;
   id: number;
-  customId?: string | null | undefined;
+  customId?: string | undefined;
   style?: 1 | undefined;
-  label?: string | null | undefined;
-  disabled?: boolean | null | undefined;
-  emoji?: ComponentEmojiResponse | null | undefined;
+  label?: string | undefined;
+  disabled?: boolean | undefined;
+  emoji?: ComponentEmojiResponse | undefined;
   url?: string | null | undefined;
-  skuId?: string | null | undefined;
+  skuId?: string | undefined;
 };
 
 /** @internal */
@@ -32,15 +32,15 @@ export const ButtonComponentResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
   id: z.number().int(),
-  custom_id: z.nullable(z.string()).optional(),
-  style: z.literal(1).optional(),
-  label: z.nullable(z.string()).optional(),
-  disabled: z.nullable(z.boolean()).optional(),
-  emoji: z.nullable(ComponentEmojiResponse$inboundSchema).optional(),
+  custom_id: z.string().optional(),
+  style: z.literal(1).default(1).optional(),
+  label: z.string().optional(),
+  disabled: z.boolean().optional(),
+  emoji: ComponentEmojiResponse$inboundSchema.optional(),
   url: z.nullable(z.string()).optional(),
-  sku_id: z.nullable(z.string()).optional(),
+  sku_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "custom_id": "customId",
@@ -52,13 +52,13 @@ export const ButtonComponentResponse$inboundSchema: z.ZodType<
 export type ButtonComponentResponse$Outbound = {
   type: 1;
   id: number;
-  custom_id?: string | null | undefined;
+  custom_id?: string | undefined;
   style: 1;
-  label?: string | null | undefined;
-  disabled?: boolean | null | undefined;
-  emoji?: ComponentEmojiResponse$Outbound | null | undefined;
+  label?: string | undefined;
+  disabled?: boolean | undefined;
+  emoji?: ComponentEmojiResponse$Outbound | undefined;
   url?: string | null | undefined;
-  sku_id?: string | null | undefined;
+  sku_id?: string | undefined;
 };
 
 /** @internal */
@@ -69,13 +69,13 @@ export const ButtonComponentResponse$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal(1).default(1 as const),
   id: z.number().int(),
-  customId: z.nullable(z.string()).optional(),
+  customId: z.string().optional(),
   style: z.literal(1).default(1 as const),
-  label: z.nullable(z.string()).optional(),
-  disabled: z.nullable(z.boolean()).optional(),
-  emoji: z.nullable(ComponentEmojiResponse$outboundSchema).optional(),
+  label: z.string().optional(),
+  disabled: z.boolean().optional(),
+  emoji: ComponentEmojiResponse$outboundSchema.optional(),
   url: z.nullable(z.string()).optional(),
-  skuId: z.nullable(z.string()).optional(),
+  skuId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     customId: "custom_id",

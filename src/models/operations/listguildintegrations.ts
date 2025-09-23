@@ -14,9 +14,18 @@ export type ListGuildIntegrationsRequest = {
 };
 
 export type ListGuildIntegrationsResponseBody =
-  | components.GuildSubscriptionIntegrationResponse
   | components.DiscordIntegrationResponse
-  | components.ExternalConnectionIntegrationResponse;
+  | components.ExternalConnectionIntegrationResponse
+  | components.GuildSubscriptionIntegrationResponse;
+
+export type ListGuildIntegrationsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<
+    | components.DiscordIntegrationResponse
+    | components.ExternalConnectionIntegrationResponse
+    | components.GuildSubscriptionIntegrationResponse
+  >;
+};
 
 /** @internal */
 export const ListGuildIntegrationsRequest$inboundSchema: z.ZodType<
@@ -88,16 +97,16 @@ export const ListGuildIntegrationsResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.GuildSubscriptionIntegrationResponse$inboundSchema,
   components.DiscordIntegrationResponse$inboundSchema,
   components.ExternalConnectionIntegrationResponse$inboundSchema,
+  components.GuildSubscriptionIntegrationResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type ListGuildIntegrationsResponseBody$Outbound =
-  | components.GuildSubscriptionIntegrationResponse$Outbound
   | components.DiscordIntegrationResponse$Outbound
-  | components.ExternalConnectionIntegrationResponse$Outbound;
+  | components.ExternalConnectionIntegrationResponse$Outbound
+  | components.GuildSubscriptionIntegrationResponse$Outbound;
 
 /** @internal */
 export const ListGuildIntegrationsResponseBody$outboundSchema: z.ZodType<
@@ -105,9 +114,9 @@ export const ListGuildIntegrationsResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListGuildIntegrationsResponseBody
 > = z.union([
-  components.GuildSubscriptionIntegrationResponse$outboundSchema,
   components.DiscordIntegrationResponse$outboundSchema,
   components.ExternalConnectionIntegrationResponse$outboundSchema,
+  components.GuildSubscriptionIntegrationResponse$outboundSchema,
 ]);
 
 /**
@@ -141,5 +150,90 @@ export function listGuildIntegrationsResponseBodyFromJSON(
     jsonString,
     (x) => ListGuildIntegrationsResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListGuildIntegrationsResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListGuildIntegrationsResponse$inboundSchema: z.ZodType<
+  ListGuildIntegrationsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(
+    z.union([
+      components.DiscordIntegrationResponse$inboundSchema,
+      components.ExternalConnectionIntegrationResponse$inboundSchema,
+      components.GuildSubscriptionIntegrationResponse$inboundSchema,
+    ]),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListGuildIntegrationsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<
+    | components.DiscordIntegrationResponse$Outbound
+    | components.ExternalConnectionIntegrationResponse$Outbound
+    | components.GuildSubscriptionIntegrationResponse$Outbound
+  >;
+};
+
+/** @internal */
+export const ListGuildIntegrationsResponse$outboundSchema: z.ZodType<
+  ListGuildIntegrationsResponse$Outbound,
+  z.ZodTypeDef,
+  ListGuildIntegrationsResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(
+    z.union([
+      components.DiscordIntegrationResponse$outboundSchema,
+      components.ExternalConnectionIntegrationResponse$outboundSchema,
+      components.GuildSubscriptionIntegrationResponse$outboundSchema,
+    ]),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListGuildIntegrationsResponse$ {
+  /** @deprecated use `ListGuildIntegrationsResponse$inboundSchema` instead. */
+  export const inboundSchema = ListGuildIntegrationsResponse$inboundSchema;
+  /** @deprecated use `ListGuildIntegrationsResponse$outboundSchema` instead. */
+  export const outboundSchema = ListGuildIntegrationsResponse$outboundSchema;
+  /** @deprecated use `ListGuildIntegrationsResponse$Outbound` instead. */
+  export type Outbound = ListGuildIntegrationsResponse$Outbound;
+}
+
+export function listGuildIntegrationsResponseToJSON(
+  listGuildIntegrationsResponse: ListGuildIntegrationsResponse,
+): string {
+  return JSON.stringify(
+    ListGuildIntegrationsResponse$outboundSchema.parse(
+      listGuildIntegrationsResponse,
+    ),
+  );
+}
+
+export function listGuildIntegrationsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildIntegrationsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildIntegrationsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildIntegrationsResponse' from JSON`,
   );
 }

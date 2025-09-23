@@ -16,6 +16,11 @@ export type UpdateApplicationRoleConnectionsMetadataRequest = {
     | null;
 };
 
+export type UpdateApplicationRoleConnectionsMetadataResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.ApplicationRoleConnectionsMetadataItemResponse>;
+};
+
 /** @internal */
 export const UpdateApplicationRoleConnectionsMetadataRequest$inboundSchema:
   z.ZodType<
@@ -104,5 +109,92 @@ export function updateApplicationRoleConnectionsMetadataRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'UpdateApplicationRoleConnectionsMetadataRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateApplicationRoleConnectionsMetadataResponse$inboundSchema:
+  z.ZodType<
+    UpdateApplicationRoleConnectionsMetadataResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    Headers: z.record(z.array(z.string())),
+    Result: z.array(
+      components.ApplicationRoleConnectionsMetadataItemResponse$inboundSchema,
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  });
+
+/** @internal */
+export type UpdateApplicationRoleConnectionsMetadataResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<
+    components.ApplicationRoleConnectionsMetadataItemResponse$Outbound
+  >;
+};
+
+/** @internal */
+export const UpdateApplicationRoleConnectionsMetadataResponse$outboundSchema:
+  z.ZodType<
+    UpdateApplicationRoleConnectionsMetadataResponse$Outbound,
+    z.ZodTypeDef,
+    UpdateApplicationRoleConnectionsMetadataResponse
+  > = z.object({
+    headers: z.record(z.array(z.string())),
+    result: z.array(
+      components.ApplicationRoleConnectionsMetadataItemResponse$outboundSchema,
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateApplicationRoleConnectionsMetadataResponse$ {
+  /** @deprecated use `UpdateApplicationRoleConnectionsMetadataResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateApplicationRoleConnectionsMetadataResponse$inboundSchema;
+  /** @deprecated use `UpdateApplicationRoleConnectionsMetadataResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateApplicationRoleConnectionsMetadataResponse$outboundSchema;
+  /** @deprecated use `UpdateApplicationRoleConnectionsMetadataResponse$Outbound` instead. */
+  export type Outbound =
+    UpdateApplicationRoleConnectionsMetadataResponse$Outbound;
+}
+
+export function updateApplicationRoleConnectionsMetadataResponseToJSON(
+  updateApplicationRoleConnectionsMetadataResponse:
+    UpdateApplicationRoleConnectionsMetadataResponse,
+): string {
+  return JSON.stringify(
+    UpdateApplicationRoleConnectionsMetadataResponse$outboundSchema.parse(
+      updateApplicationRoleConnectionsMetadataResponse,
+    ),
+  );
+}
+
+export function updateApplicationRoleConnectionsMetadataResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateApplicationRoleConnectionsMetadataResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateApplicationRoleConnectionsMetadataResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateApplicationRoleConnectionsMetadataResponse' from JSON`,
   );
 }

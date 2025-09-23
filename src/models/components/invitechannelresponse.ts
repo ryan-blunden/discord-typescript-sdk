@@ -25,8 +25,8 @@ export type InviteChannelResponse = {
    */
   type: ChannelTypes;
   name?: string | null | undefined;
-  icon?: string | null | undefined;
-  recipients?: Array<InviteChannelRecipientResponse> | null | undefined;
+  icon?: string | undefined;
+  recipients?: Array<InviteChannelRecipientResponse> | undefined;
 };
 
 /** @internal */
@@ -38,9 +38,8 @@ export const InviteChannelResponse$inboundSchema: z.ZodType<
   id: z.string(),
   type: ChannelTypes$inboundSchema,
   name: z.nullable(z.string()).optional(),
-  icon: z.nullable(z.string()).optional(),
-  recipients: z.nullable(z.array(InviteChannelRecipientResponse$inboundSchema))
-    .optional(),
+  icon: z.string().optional(),
+  recipients: z.array(InviteChannelRecipientResponse$inboundSchema).optional(),
 });
 
 /** @internal */
@@ -48,11 +47,8 @@ export type InviteChannelResponse$Outbound = {
   id: string;
   type: number;
   name?: string | null | undefined;
-  icon?: string | null | undefined;
-  recipients?:
-    | Array<InviteChannelRecipientResponse$Outbound>
-    | null
-    | undefined;
+  icon?: string | undefined;
+  recipients?: Array<InviteChannelRecipientResponse$Outbound> | undefined;
 };
 
 /** @internal */
@@ -64,9 +60,8 @@ export const InviteChannelResponse$outboundSchema: z.ZodType<
   id: z.string(),
   type: ChannelTypes$outboundSchema,
   name: z.nullable(z.string()).optional(),
-  icon: z.nullable(z.string()).optional(),
-  recipients: z.nullable(z.array(InviteChannelRecipientResponse$outboundSchema))
-    .optional(),
+  icon: z.string().optional(),
+  recipients: z.array(InviteChannelRecipientResponse$outboundSchema).optional(),
 });
 
 /**

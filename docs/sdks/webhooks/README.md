@@ -33,6 +33,7 @@ Returns a list of channel webhook objects. Requires the MANAGE_WEBHOOKS permissi
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_channel_webhooks" method="get" path="/channels/{channel_id}/webhooks" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -91,14 +92,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.ListChannelWebhooksResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ListChannelWebhooksResponse](../../models/operations/listchannelwebhooksresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## create
 
@@ -106,6 +108,7 @@ Creates a new webhook and returns a webhook object on success. Requires the MANA
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_webhook" method="post" path="/channels/{channel_id}/webhooks" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -170,14 +173,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildIncomingWebhookResponse](../../models/components/guildincomingwebhookresponse.md)\>**
+**Promise\<[operations.CreateWebhookResponse](../../models/operations/createwebhookresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listForGuild
 
@@ -185,6 +189,7 @@ Returns a list of guild webhook objects. Requires the MANAGE_WEBHOOKS permission
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_webhooks" method="get" path="/guilds/{guild_id}/webhooks" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -243,14 +248,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetGuildWebhooksResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.GetGuildWebhooksResponse](../../models/operations/getguildwebhooksresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -258,6 +264,7 @@ Returns the new webhook object for the given id.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_webhook" method="get" path="/webhooks/{webhook_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -316,14 +323,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetWebhookResponseBody](../../models/operations/getwebhookresponsebody.md)\>**
+**Promise\<[operations.GetWebhookResponse](../../models/operations/getwebhookresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -331,6 +339,7 @@ Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. Returns a
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_webhook" method="delete" path="/webhooks/{webhook_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -339,11 +348,11 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.webhooks.delete({
+  const result = await discord.webhooks.delete({
     webhookId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -369,7 +378,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("webhooksDelete failed:", res.error);
   }
@@ -389,14 +398,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteWebhookResponse](../../models/operations/deletewebhookresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -404,6 +414,7 @@ Modify a webhook. Requires the MANAGE_WEBHOOKS permission. Returns the updated w
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_webhook" method="patch" path="/webhooks/{webhook_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -464,14 +475,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.UpdateWebhookResponseBody](../../models/operations/updatewebhookresponsebody.md)\>**
+**Promise\<[operations.UpdateWebhookResponse](../../models/operations/updatewebhookresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getWithToken
 
@@ -479,6 +491,7 @@ Same as above, except this call does not require authentication and returns no u
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_webhook_by_token" method="get" path="/webhooks/{webhook_id}/{webhook_token}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -536,14 +549,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetWebhookByTokenResponseBody](../../models/operations/getwebhookbytokenresponsebody.md)\>**
+**Promise\<[operations.GetWebhookByTokenResponse](../../models/operations/getwebhookbytokenresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteWithToken
 
@@ -551,18 +565,19 @@ Same as above, except this call does not require authentication.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_webhook_by_token" method="delete" path="/webhooks/{webhook_id}/{webhook_token}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
 const discord = new Discord();
 
 async function run() {
-  await discord.webhooks.deleteWithToken({
+  const result = await discord.webhooks.deleteWithToken({
     webhookId: "<value>",
     webhookToken: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -587,7 +602,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("webhooksDeleteWithToken failed:", res.error);
   }
@@ -608,14 +623,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteWebhookByTokenResponse](../../models/operations/deletewebhookbytokenresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateWithToken
 
@@ -623,6 +639,7 @@ Same as above, except this call does not require authentication, does not accept
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_webhook_by_token" method="patch" path="/webhooks/{webhook_id}/{webhook_token}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -682,14 +699,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.UpdateWebhookByTokenResponseBody](../../models/operations/updatewebhookbytokenresponsebody.md)\>**
+**Promise\<[operations.UpdateWebhookByTokenResponse](../../models/operations/updatewebhookbytokenresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## executeGithub
 
@@ -697,13 +715,14 @@ Add a new webhook to your GitHub repo (in the repo's settings), and use this end
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="execute_github_compatible_webhook" method="post" path="/webhooks/{webhook_id}/{webhook_token}/github" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
 const discord = new Discord();
 
 async function run() {
-  await discord.webhooks.executeGithub({
+  const result = await discord.webhooks.executeGithub({
     webhookId: "<value>",
     webhookToken: "<value>",
     githubWebhook: {
@@ -716,7 +735,7 @@ async function run() {
     },
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -749,7 +768,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("webhooksExecuteGithub failed:", res.error);
   }
@@ -770,14 +789,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.ExecuteGithubCompatibleWebhookResponse](../../models/operations/executegithubcompatiblewebhookresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getOriginalMessage
 
@@ -785,6 +805,7 @@ Returns the initial webhook message.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_original_webhook_message" method="get" path="/webhooks/{webhook_id}/{webhook_token}/messages/@original" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -842,14 +863,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.GetOriginalWebhookMessageResponse](../../models/operations/getoriginalwebhookmessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteOriginalMessage
 
@@ -857,18 +879,19 @@ Deletes the initial webhook message.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_original_webhook_message" method="delete" path="/webhooks/{webhook_id}/{webhook_token}/messages/@original" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
 const discord = new Discord();
 
 async function run() {
-  await discord.webhooks.deleteOriginalMessage({
+  const result = await discord.webhooks.deleteOriginalMessage({
     webhookId: "<value>",
     webhookToken: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -893,7 +916,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("webhooksDeleteOriginalMessage failed:", res.error);
   }
@@ -914,14 +937,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteOriginalWebhookMessageResponse](../../models/operations/deleteoriginalwebhookmessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateOriginalMessageJson
 
@@ -929,6 +953,7 @@ Edits the initial webhook message.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_original_webhook_message_json" method="patch" path="/webhooks/{webhook_id}/{webhook_token}/messages/@original" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -988,14 +1013,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateOriginalWebhookMessageJsonResponse](../../models/operations/updateoriginalwebhookmessagejsonresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateOriginalMessageForm
 
@@ -1003,6 +1029,7 @@ Edits the initial webhook message.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_original_webhook_message_form" method="patch" path="/webhooks/{webhook_id}/{webhook_token}/messages/@original" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1062,14 +1089,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateOriginalWebhookMessageFormResponse](../../models/operations/updateoriginalwebhookmessageformresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateOriginalMessageMultipart
 
@@ -1077,6 +1105,7 @@ Edits the initial webhook message.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_original_webhook_message_multipart" method="patch" path="/webhooks/{webhook_id}/{webhook_token}/messages/@original" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1136,14 +1165,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateOriginalWebhookMessageMultipartResponse](../../models/operations/updateoriginalwebhookmessagemultipartresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getMessage
 
@@ -1151,6 +1181,7 @@ Returns a previously-sent webhook message from the same token. Returns a message
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_webhook_message" method="get" path="/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1210,14 +1241,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.GetWebhookMessageResponse](../../models/operations/getwebhookmessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteMessage
 
@@ -1225,19 +1257,20 @@ Deletes a message that was created by the webhook. Returns a 204 No Content resp
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_webhook_message" method="delete" path="/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
 const discord = new Discord();
 
 async function run() {
-  await discord.webhooks.deleteMessage({
+  const result = await discord.webhooks.deleteMessage({
     webhookId: "<value>",
     webhookToken: "<value>",
     messageId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1263,7 +1296,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("webhooksDeleteMessage failed:", res.error);
   }
@@ -1284,14 +1317,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteWebhookMessageResponse](../../models/operations/deletewebhookmessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateMessageJson
 
@@ -1299,6 +1333,7 @@ Edits a previously-sent webhook message from the same token. Returns a message o
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_webhook_message_json" method="patch" path="/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1360,14 +1395,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateWebhookMessageJsonResponse](../../models/operations/updatewebhookmessagejsonresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateMessageForm
 
@@ -1375,6 +1411,7 @@ Edits a previously-sent webhook message from the same token. Returns a message o
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_webhook_message_form" method="patch" path="/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1436,14 +1473,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateWebhookMessageFormResponse](../../models/operations/updatewebhookmessageformresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateMessageMultipart
 
@@ -1451,6 +1489,7 @@ Edits a previously-sent webhook message from the same token. Returns a message o
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_webhook_message_multipart" method="patch" path="/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1512,14 +1551,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateWebhookMessageMultipartResponse](../../models/operations/updatewebhookmessagemultipartresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## executeSlack
 
@@ -1527,6 +1567,7 @@ Refer to Slack's documentation for more information. We do not support Slack's c
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="execute_slack_compatible_webhook" method="post" path="/webhooks/{webhook_id}/{webhook_token}/slack" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1586,11 +1627,12 @@ run();
 
 ### Response
 
-**Promise\<[string](../../models/.md)\>**
+**Promise\<[operations.ExecuteSlackCompatibleWebhookResponse](../../models/operations/executeslackcompatiblewebhookresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

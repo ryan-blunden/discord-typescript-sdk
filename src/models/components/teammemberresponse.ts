@@ -28,7 +28,7 @@ export const TeamMemberResponse$inboundSchema: z.ZodType<
 > = z.object({
   user: UserResponse$inboundSchema,
   team_id: z.string(),
-  membership_state: z.literal(1).optional(),
+  membership_state: z.literal(1).default(1).optional(),
 }).transform((v) => {
   return remap$(v, {
     "team_id": "teamId",

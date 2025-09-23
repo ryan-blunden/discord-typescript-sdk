@@ -34,9 +34,9 @@ export type ChannelFollowerWebhookResponse = {
   id: string;
   name: string;
   type?: 1 | undefined;
-  user?: UserResponse | null | undefined;
-  sourceGuild?: WebhookSourceGuildResponse | null | undefined;
-  sourceChannel?: WebhookSourceChannelResponse | null | undefined;
+  user?: UserResponse | undefined;
+  sourceGuild?: WebhookSourceGuildResponse | undefined;
+  sourceChannel?: WebhookSourceChannelResponse | undefined;
 };
 
 /** @internal */
@@ -51,11 +51,10 @@ export const ChannelFollowerWebhookResponse$inboundSchema: z.ZodType<
   guild_id: z.nullable(z.string()).optional(),
   id: z.string(),
   name: z.string(),
-  type: z.literal(1).optional(),
-  user: z.nullable(UserResponse$inboundSchema).optional(),
-  source_guild: z.nullable(WebhookSourceGuildResponse$inboundSchema).optional(),
-  source_channel: z.nullable(WebhookSourceChannelResponse$inboundSchema)
-    .optional(),
+  type: z.literal(1).default(1).optional(),
+  user: UserResponse$inboundSchema.optional(),
+  source_guild: WebhookSourceGuildResponse$inboundSchema.optional(),
+  source_channel: WebhookSourceChannelResponse$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "application_id": "applicationId",
@@ -75,9 +74,9 @@ export type ChannelFollowerWebhookResponse$Outbound = {
   id: string;
   name: string;
   type: 1;
-  user?: UserResponse$Outbound | null | undefined;
-  source_guild?: WebhookSourceGuildResponse$Outbound | null | undefined;
-  source_channel?: WebhookSourceChannelResponse$Outbound | null | undefined;
+  user?: UserResponse$Outbound | undefined;
+  source_guild?: WebhookSourceGuildResponse$Outbound | undefined;
+  source_channel?: WebhookSourceChannelResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -93,10 +92,9 @@ export const ChannelFollowerWebhookResponse$outboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   type: z.literal(1).default(1 as const),
-  user: z.nullable(UserResponse$outboundSchema).optional(),
-  sourceGuild: z.nullable(WebhookSourceGuildResponse$outboundSchema).optional(),
-  sourceChannel: z.nullable(WebhookSourceChannelResponse$outboundSchema)
-    .optional(),
+  user: UserResponse$outboundSchema.optional(),
+  sourceGuild: WebhookSourceGuildResponse$outboundSchema.optional(),
+  sourceChannel: WebhookSourceChannelResponse$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     applicationId: "application_id",

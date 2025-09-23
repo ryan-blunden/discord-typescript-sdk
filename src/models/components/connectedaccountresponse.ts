@@ -19,12 +19,12 @@ export type ConnectedAccountResponse = {
   name?: string | null | undefined;
   type?: "battlenet" | undefined;
   friendSync: boolean;
-  integrations?: Array<ConnectedAccountIntegrationResponse> | null | undefined;
+  integrations?: Array<ConnectedAccountIntegrationResponse> | undefined;
   showActivity: boolean;
   twoWayLink: boolean;
   verified: boolean;
   visibility?: 0 | undefined;
-  revoked?: boolean | null | undefined;
+  revoked?: boolean | undefined;
 };
 
 /** @internal */
@@ -35,16 +35,15 @@ export const ConnectedAccountResponse$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.nullable(z.string()).optional(),
-  type: z.literal("battlenet").optional(),
+  type: z.literal("battlenet").default("battlenet").optional(),
   friend_sync: z.boolean(),
-  integrations: z.nullable(
-    z.array(ConnectedAccountIntegrationResponse$inboundSchema),
-  ).optional(),
+  integrations: z.array(ConnectedAccountIntegrationResponse$inboundSchema)
+    .optional(),
   show_activity: z.boolean(),
   two_way_link: z.boolean(),
   verified: z.boolean(),
-  visibility: z.literal(0).optional(),
-  revoked: z.nullable(z.boolean()).optional(),
+  visibility: z.literal(0).default(0).optional(),
+  revoked: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "friend_sync": "friendSync",
@@ -61,13 +60,12 @@ export type ConnectedAccountResponse$Outbound = {
   friend_sync: boolean;
   integrations?:
     | Array<ConnectedAccountIntegrationResponse$Outbound>
-    | null
     | undefined;
   show_activity: boolean;
   two_way_link: boolean;
   verified: boolean;
   visibility: 0;
-  revoked?: boolean | null | undefined;
+  revoked?: boolean | undefined;
 };
 
 /** @internal */
@@ -80,14 +78,13 @@ export const ConnectedAccountResponse$outboundSchema: z.ZodType<
   name: z.nullable(z.string()).optional(),
   type: z.literal("battlenet").default("battlenet" as const),
   friendSync: z.boolean(),
-  integrations: z.nullable(
-    z.array(ConnectedAccountIntegrationResponse$outboundSchema),
-  ).optional(),
+  integrations: z.array(ConnectedAccountIntegrationResponse$outboundSchema)
+    .optional(),
   showActivity: z.boolean(),
   twoWayLink: z.boolean(),
   verified: z.boolean(),
   visibility: z.literal(0).default(0 as const),
-  revoked: z.nullable(z.boolean()).optional(),
+  revoked: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     friendSync: "friend_sync",

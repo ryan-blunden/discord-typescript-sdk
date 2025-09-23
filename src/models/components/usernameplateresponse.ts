@@ -10,9 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UserNameplateResponse = {
   skuId?: string | null | undefined;
-  asset?: string | null | undefined;
-  label?: string | null | undefined;
-  palette?: string | null | undefined;
+  asset: string;
+  label: string;
+  palette: string;
 };
 
 /** @internal */
@@ -22,9 +22,9 @@ export const UserNameplateResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   sku_id: z.nullable(z.string()).optional(),
-  asset: z.nullable(z.string()).optional(),
-  label: z.nullable(z.string()).optional(),
-  palette: z.nullable(z.string()).optional(),
+  asset: z.string(),
+  label: z.string(),
+  palette: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "sku_id": "skuId",
@@ -34,9 +34,9 @@ export const UserNameplateResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type UserNameplateResponse$Outbound = {
   sku_id?: string | null | undefined;
-  asset?: string | null | undefined;
-  label?: string | null | undefined;
-  palette?: string | null | undefined;
+  asset: string;
+  label: string;
+  palette: string;
 };
 
 /** @internal */
@@ -46,9 +46,9 @@ export const UserNameplateResponse$outboundSchema: z.ZodType<
   UserNameplateResponse
 > = z.object({
   skuId: z.nullable(z.string()).optional(),
-  asset: z.nullable(z.string()).optional(),
-  label: z.nullable(z.string()).optional(),
-  palette: z.nullable(z.string()).optional(),
+  asset: z.string(),
+  label: z.string(),
+  palette: z.string(),
 }).transform((v) => {
   return remap$(v, {
     skuId: "sku_id",

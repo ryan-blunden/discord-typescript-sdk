@@ -23,11 +23,11 @@ import {
 export type GroupDMInviteResponse = {
   type?: 0 | undefined;
   code: string;
-  inviter?: UserResponse | null | undefined;
-  maxAge?: number | null | undefined;
-  createdAt?: Date | null | undefined;
+  inviter?: UserResponse | undefined;
+  maxAge?: number | undefined;
+  createdAt?: Date | undefined;
   expiresAt?: Date | null | undefined;
-  channel?: InviteChannelResponse | null | undefined;
+  channel: InviteChannelResponse;
   approximateMemberCount?: number | null | undefined;
 };
 
@@ -37,17 +37,16 @@ export const GroupDMInviteResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(0).optional(),
+  type: z.literal(0).default(0).optional(),
   code: z.string(),
-  inviter: z.nullable(UserResponse$inboundSchema).optional(),
-  max_age: z.nullable(z.number().int()).optional(),
-  created_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
+  inviter: UserResponse$inboundSchema.optional(),
+  max_age: z.number().int().optional(),
+  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
   expires_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  channel: z.nullable(InviteChannelResponse$inboundSchema).optional(),
+  channel: InviteChannelResponse$inboundSchema,
   approximate_member_count: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -62,11 +61,11 @@ export const GroupDMInviteResponse$inboundSchema: z.ZodType<
 export type GroupDMInviteResponse$Outbound = {
   type: 0;
   code: string;
-  inviter?: UserResponse$Outbound | null | undefined;
-  max_age?: number | null | undefined;
-  created_at?: string | null | undefined;
+  inviter?: UserResponse$Outbound | undefined;
+  max_age?: number | undefined;
+  created_at?: string | undefined;
   expires_at?: string | null | undefined;
-  channel?: InviteChannelResponse$Outbound | null | undefined;
+  channel: InviteChannelResponse$Outbound;
   approximate_member_count?: number | null | undefined;
 };
 
@@ -78,11 +77,11 @@ export const GroupDMInviteResponse$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal(0).default(0 as const),
   code: z.string(),
-  inviter: z.nullable(UserResponse$outboundSchema).optional(),
-  maxAge: z.nullable(z.number().int()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  inviter: UserResponse$outboundSchema.optional(),
+  maxAge: z.number().int().optional(),
+  createdAt: z.date().transform(v => v.toISOString()).optional(),
   expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  channel: z.nullable(InviteChannelResponse$outboundSchema).optional(),
+  channel: InviteChannelResponse$outboundSchema,
   approximateMemberCount: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -11,11 +11,11 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type OAuth2GetOpenIDConnectUserInfoResponse = {
   sub: string;
   email?: string | null | undefined;
-  emailVerified?: boolean | null | undefined;
-  preferredUsername?: string | null | undefined;
+  emailVerified?: boolean | undefined;
+  preferredUsername?: string | undefined;
   nickname?: string | null | undefined;
-  picture?: string | null | undefined;
-  locale?: string | null | undefined;
+  picture?: string | undefined;
+  locale?: string | undefined;
 };
 
 /** @internal */
@@ -26,11 +26,11 @@ export const OAuth2GetOpenIDConnectUserInfoResponse$inboundSchema: z.ZodType<
 > = z.object({
   sub: z.string(),
   email: z.nullable(z.string()).optional(),
-  email_verified: z.nullable(z.boolean()).optional(),
-  preferred_username: z.nullable(z.string()).optional(),
+  email_verified: z.boolean().optional(),
+  preferred_username: z.string().optional(),
   nickname: z.nullable(z.string()).optional(),
-  picture: z.nullable(z.string()).optional(),
-  locale: z.nullable(z.string()).optional(),
+  picture: z.string().optional(),
+  locale: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "email_verified": "emailVerified",
@@ -42,11 +42,11 @@ export const OAuth2GetOpenIDConnectUserInfoResponse$inboundSchema: z.ZodType<
 export type OAuth2GetOpenIDConnectUserInfoResponse$Outbound = {
   sub: string;
   email?: string | null | undefined;
-  email_verified?: boolean | null | undefined;
-  preferred_username?: string | null | undefined;
+  email_verified?: boolean | undefined;
+  preferred_username?: string | undefined;
   nickname?: string | null | undefined;
-  picture?: string | null | undefined;
-  locale?: string | null | undefined;
+  picture?: string | undefined;
+  locale?: string | undefined;
 };
 
 /** @internal */
@@ -57,11 +57,11 @@ export const OAuth2GetOpenIDConnectUserInfoResponse$outboundSchema: z.ZodType<
 > = z.object({
   sub: z.string(),
   email: z.nullable(z.string()).optional(),
-  emailVerified: z.nullable(z.boolean()).optional(),
-  preferredUsername: z.nullable(z.string()).optional(),
+  emailVerified: z.boolean().optional(),
+  preferredUsername: z.string().optional(),
   nickname: z.nullable(z.string()).optional(),
-  picture: z.nullable(z.string()).optional(),
-  locale: z.nullable(z.string()).optional(),
+  picture: z.string().optional(),
+  locale: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     emailVerified: "email_verified",

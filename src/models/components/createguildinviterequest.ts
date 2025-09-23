@@ -30,7 +30,7 @@ export const CreateGuildInviteRequest$inboundSchema: z.ZodType<
   unique: z.nullable(z.boolean()).optional(),
   target_user_id: z.nullable(z.string()).optional(),
   target_application_id: z.nullable(z.string()).optional(),
-  target_type: z.literal(1).optional(),
+  target_type: z.literal(1).default(1).optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_age": "maxAge",

@@ -21,7 +21,7 @@ export const PrivateChannelLocation$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  kind: z.literal("gc").optional(),
+  kind: z.literal("gc").default("gc").optional(),
   channel_id: z.string(),
 }).transform((v) => {
   return remap$(v, {

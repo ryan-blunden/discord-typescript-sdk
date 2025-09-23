@@ -14,8 +14,8 @@ import {
 } from "./messagereactionemojiresponse.js";
 
 export type PollMediaResponse = {
-  text?: string | null | undefined;
-  emoji?: MessageReactionEmojiResponse | null | undefined;
+  text?: string | undefined;
+  emoji?: MessageReactionEmojiResponse | undefined;
 };
 
 /** @internal */
@@ -24,14 +24,14 @@ export const PollMediaResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  text: z.nullable(z.string()).optional(),
-  emoji: z.nullable(MessageReactionEmojiResponse$inboundSchema).optional(),
+  text: z.string().optional(),
+  emoji: MessageReactionEmojiResponse$inboundSchema.optional(),
 });
 
 /** @internal */
 export type PollMediaResponse$Outbound = {
-  text?: string | null | undefined;
-  emoji?: MessageReactionEmojiResponse$Outbound | null | undefined;
+  text?: string | undefined;
+  emoji?: MessageReactionEmojiResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -40,8 +40,8 @@ export const PollMediaResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PollMediaResponse
 > = z.object({
-  text: z.nullable(z.string()).optional(),
-  emoji: z.nullable(MessageReactionEmojiResponse$outboundSchema).optional(),
+  text: z.string().optional(),
+  emoji: MessageReactionEmojiResponse$outboundSchema.optional(),
 });
 
 /**

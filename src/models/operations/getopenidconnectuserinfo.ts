@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetOpenidConnectUserinfoSecurity = {
   botToken?: string | undefined;
+};
+
+export type GetOpenidConnectUserinfoResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.OAuth2GetOpenIDConnectUserInfoResponse;
 };
 
 /** @internal */
@@ -73,5 +79,74 @@ export function getOpenidConnectUserinfoSecurityFromJSON(
     jsonString,
     (x) => GetOpenidConnectUserinfoSecurity$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetOpenidConnectUserinfoSecurity' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOpenidConnectUserinfoResponse$inboundSchema: z.ZodType<
+  GetOpenidConnectUserinfoResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.OAuth2GetOpenIDConnectUserInfoResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetOpenidConnectUserinfoResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.OAuth2GetOpenIDConnectUserInfoResponse$Outbound;
+};
+
+/** @internal */
+export const GetOpenidConnectUserinfoResponse$outboundSchema: z.ZodType<
+  GetOpenidConnectUserinfoResponse$Outbound,
+  z.ZodTypeDef,
+  GetOpenidConnectUserinfoResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.OAuth2GetOpenIDConnectUserInfoResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOpenidConnectUserinfoResponse$ {
+  /** @deprecated use `GetOpenidConnectUserinfoResponse$inboundSchema` instead. */
+  export const inboundSchema = GetOpenidConnectUserinfoResponse$inboundSchema;
+  /** @deprecated use `GetOpenidConnectUserinfoResponse$outboundSchema` instead. */
+  export const outboundSchema = GetOpenidConnectUserinfoResponse$outboundSchema;
+  /** @deprecated use `GetOpenidConnectUserinfoResponse$Outbound` instead. */
+  export type Outbound = GetOpenidConnectUserinfoResponse$Outbound;
+}
+
+export function getOpenidConnectUserinfoResponseToJSON(
+  getOpenidConnectUserinfoResponse: GetOpenidConnectUserinfoResponse,
+): string {
+  return JSON.stringify(
+    GetOpenidConnectUserinfoResponse$outboundSchema.parse(
+      getOpenidConnectUserinfoResponse,
+    ),
+  );
+}
+
+export function getOpenidConnectUserinfoResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOpenidConnectUserinfoResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOpenidConnectUserinfoResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOpenidConnectUserinfoResponse' from JSON`,
   );
 }

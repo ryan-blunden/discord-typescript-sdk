@@ -51,9 +51,9 @@ export type GuildWithCountsResponse = {
   mfaLevel?: 0 | undefined;
   explicitContentFilter?: 0 | undefined;
   maxPresences?: number | null | undefined;
-  maxMembers?: number | null | undefined;
-  maxStageVideoChannelUsers?: number | null | undefined;
-  maxVideoChannelUsers?: number | null | undefined;
+  maxMembers: number;
+  maxStageVideoChannelUsers: number;
+  maxVideoChannelUsers: number;
   vanityUrlCode?: string | null | undefined;
   premiumTier?: 0 | undefined;
   premiumSubscriptionCount: number;
@@ -89,30 +89,30 @@ export const GuildWithCountsResponse$inboundSchema: z.ZodType<
   application_id: z.nullable(z.string()).optional(),
   region: z.string(),
   afk_channel_id: z.nullable(z.string()).optional(),
-  afk_timeout: z.literal(60).optional(),
+  afk_timeout: z.literal(60).default(60).optional(),
   system_channel_id: z.nullable(z.string()).optional(),
   system_channel_flags: z.number().int(),
   widget_enabled: z.boolean(),
   widget_channel_id: z.nullable(z.string()).optional(),
-  verification_level: z.literal(0).optional(),
+  verification_level: z.literal(0).default(0).optional(),
   roles: z.array(GuildRoleResponse$inboundSchema),
-  default_message_notifications: z.literal(0).optional(),
-  mfa_level: z.literal(0).optional(),
-  explicit_content_filter: z.literal(0).optional(),
+  default_message_notifications: z.literal(0).default(0).optional(),
+  mfa_level: z.literal(0).default(0).optional(),
+  explicit_content_filter: z.literal(0).default(0).optional(),
   max_presences: z.nullable(z.number().int()).optional(),
-  max_members: z.nullable(z.number().int()).optional(),
-  max_stage_video_channel_users: z.nullable(z.number().int()).optional(),
-  max_video_channel_users: z.nullable(z.number().int()).optional(),
+  max_members: z.number().int(),
+  max_stage_video_channel_users: z.number().int(),
+  max_video_channel_users: z.number().int(),
   vanity_url_code: z.nullable(z.string()).optional(),
-  premium_tier: z.literal(0).optional(),
+  premium_tier: z.literal(0).default(0).optional(),
   premium_subscription_count: z.number().int(),
-  preferred_locale: z.literal("ar").optional(),
+  preferred_locale: z.literal("ar").default("ar").optional(),
   rules_channel_id: z.nullable(z.string()).optional(),
   safety_alerts_channel_id: z.nullable(z.string()).optional(),
   public_updates_channel_id: z.nullable(z.string()).optional(),
   premium_progress_bar_enabled: z.boolean(),
   nsfw: z.boolean(),
-  nsfw_level: z.literal(0).optional(),
+  nsfw_level: z.literal(0).default(0).optional(),
   emojis: z.array(EmojiResponse$inboundSchema),
   stickers: z.array(GuildStickerResponse$inboundSchema),
   approximate_member_count: z.nullable(z.number().int()).optional(),
@@ -177,9 +177,9 @@ export type GuildWithCountsResponse$Outbound = {
   mfa_level: 0;
   explicit_content_filter: 0;
   max_presences?: number | null | undefined;
-  max_members?: number | null | undefined;
-  max_stage_video_channel_users?: number | null | undefined;
-  max_video_channel_users?: number | null | undefined;
+  max_members: number;
+  max_stage_video_channel_users: number;
+  max_video_channel_users: number;
   vanity_url_code?: string | null | undefined;
   premium_tier: 0;
   premium_subscription_count: number;
@@ -226,9 +226,9 @@ export const GuildWithCountsResponse$outboundSchema: z.ZodType<
   mfaLevel: z.literal(0).default(0 as const),
   explicitContentFilter: z.literal(0).default(0 as const),
   maxPresences: z.nullable(z.number().int()).optional(),
-  maxMembers: z.nullable(z.number().int()).optional(),
-  maxStageVideoChannelUsers: z.nullable(z.number().int()).optional(),
-  maxVideoChannelUsers: z.nullable(z.number().int()).optional(),
+  maxMembers: z.number().int(),
+  maxStageVideoChannelUsers: z.number().int(),
+  maxVideoChannelUsers: z.number().int(),
   vanityUrlCode: z.nullable(z.string()).optional(),
   premiumTier: z.literal(0).default(0 as const),
   premiumSubscriptionCount: z.number().int(),

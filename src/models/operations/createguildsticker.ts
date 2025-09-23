@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateGuildStickerRequestBody = {
@@ -18,6 +19,11 @@ export type CreateGuildStickerRequestBody = {
 export type CreateGuildStickerRequest = {
   guildId: string;
   requestBody: CreateGuildStickerRequestBody;
+};
+
+export type CreateGuildStickerResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildStickerResponse;
 };
 
 /** @internal */
@@ -149,5 +155,72 @@ export function createGuildStickerRequestFromJSON(
     jsonString,
     (x) => CreateGuildStickerRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateGuildStickerRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateGuildStickerResponse$inboundSchema: z.ZodType<
+  CreateGuildStickerResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildStickerResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateGuildStickerResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildStickerResponse$Outbound;
+};
+
+/** @internal */
+export const CreateGuildStickerResponse$outboundSchema: z.ZodType<
+  CreateGuildStickerResponse$Outbound,
+  z.ZodTypeDef,
+  CreateGuildStickerResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildStickerResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateGuildStickerResponse$ {
+  /** @deprecated use `CreateGuildStickerResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateGuildStickerResponse$inboundSchema;
+  /** @deprecated use `CreateGuildStickerResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateGuildStickerResponse$outboundSchema;
+  /** @deprecated use `CreateGuildStickerResponse$Outbound` instead. */
+  export type Outbound = CreateGuildStickerResponse$Outbound;
+}
+
+export function createGuildStickerResponseToJSON(
+  createGuildStickerResponse: CreateGuildStickerResponse,
+): string {
+  return JSON.stringify(
+    CreateGuildStickerResponse$outboundSchema.parse(createGuildStickerResponse),
+  );
+}
+
+export function createGuildStickerResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildStickerResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildStickerResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildStickerResponse' from JSON`,
   );
 }

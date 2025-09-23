@@ -13,6 +13,10 @@ export type AddThreadMemberRequest = {
   userId: string;
 };
 
+export type AddThreadMemberResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const AddThreadMemberRequest$inboundSchema: z.ZodType<
   AddThreadMemberRequest,
@@ -77,5 +81,67 @@ export function addThreadMemberRequestFromJSON(
     jsonString,
     (x) => AddThreadMemberRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'AddThreadMemberRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const AddThreadMemberResponse$inboundSchema: z.ZodType<
+  AddThreadMemberResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type AddThreadMemberResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const AddThreadMemberResponse$outboundSchema: z.ZodType<
+  AddThreadMemberResponse$Outbound,
+  z.ZodTypeDef,
+  AddThreadMemberResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AddThreadMemberResponse$ {
+  /** @deprecated use `AddThreadMemberResponse$inboundSchema` instead. */
+  export const inboundSchema = AddThreadMemberResponse$inboundSchema;
+  /** @deprecated use `AddThreadMemberResponse$outboundSchema` instead. */
+  export const outboundSchema = AddThreadMemberResponse$outboundSchema;
+  /** @deprecated use `AddThreadMemberResponse$Outbound` instead. */
+  export type Outbound = AddThreadMemberResponse$Outbound;
+}
+
+export function addThreadMemberResponseToJSON(
+  addThreadMemberResponse: AddThreadMemberResponse,
+): string {
+  return JSON.stringify(
+    AddThreadMemberResponse$outboundSchema.parse(addThreadMemberResponse),
+  );
+}
+
+export function addThreadMemberResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<AddThreadMemberResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddThreadMemberResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddThreadMemberResponse' from JSON`,
   );
 }

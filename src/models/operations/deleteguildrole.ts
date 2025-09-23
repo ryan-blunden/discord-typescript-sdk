@@ -13,6 +13,10 @@ export type DeleteGuildRoleRequest = {
   roleId: string;
 };
 
+export type DeleteGuildRoleResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteGuildRoleRequest$inboundSchema: z.ZodType<
   DeleteGuildRoleRequest,
@@ -77,5 +81,67 @@ export function deleteGuildRoleRequestFromJSON(
     jsonString,
     (x) => DeleteGuildRoleRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteGuildRoleRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteGuildRoleResponse$inboundSchema: z.ZodType<
+  DeleteGuildRoleResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteGuildRoleResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteGuildRoleResponse$outboundSchema: z.ZodType<
+  DeleteGuildRoleResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteGuildRoleResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteGuildRoleResponse$ {
+  /** @deprecated use `DeleteGuildRoleResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteGuildRoleResponse$inboundSchema;
+  /** @deprecated use `DeleteGuildRoleResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteGuildRoleResponse$outboundSchema;
+  /** @deprecated use `DeleteGuildRoleResponse$Outbound` instead. */
+  export type Outbound = DeleteGuildRoleResponse$Outbound;
+}
+
+export function deleteGuildRoleResponseToJSON(
+  deleteGuildRoleResponse: DeleteGuildRoleResponse,
+): string {
+  return JSON.stringify(
+    DeleteGuildRoleResponse$outboundSchema.parse(deleteGuildRoleResponse),
+  );
+}
+
+export function deleteGuildRoleResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildRoleResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteGuildRoleResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildRoleResponse' from JSON`,
   );
 }

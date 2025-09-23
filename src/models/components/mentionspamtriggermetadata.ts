@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MentionSpamTriggerMetadata = {
-  mentionTotalLimit: number;
+  mentionTotalLimit?: number | null | undefined;
   mentionRaidProtectionEnabled?: boolean | null | undefined;
 };
 
@@ -19,7 +19,7 @@ export const MentionSpamTriggerMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  mention_total_limit: z.number().int(),
+  mention_total_limit: z.nullable(z.number().int()).optional(),
   mention_raid_protection_enabled: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -30,7 +30,7 @@ export const MentionSpamTriggerMetadata$inboundSchema: z.ZodType<
 
 /** @internal */
 export type MentionSpamTriggerMetadata$Outbound = {
-  mention_total_limit: number;
+  mention_total_limit?: number | null | undefined;
   mention_raid_protection_enabled?: boolean | null | undefined;
 };
 
@@ -40,7 +40,7 @@ export const MentionSpamTriggerMetadata$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MentionSpamTriggerMetadata
 > = z.object({
-  mentionTotalLimit: z.number().int(),
+  mentionTotalLimit: z.nullable(z.number().int()).optional(),
   mentionRaidProtectionEnabled: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {

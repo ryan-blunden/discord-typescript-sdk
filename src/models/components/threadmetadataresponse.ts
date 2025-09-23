@@ -13,8 +13,8 @@ export type ThreadMetadataResponse = {
   archiveTimestamp?: Date | null | undefined;
   autoArchiveDuration?: 60 | undefined;
   locked: boolean;
-  createTimestamp?: Date | null | undefined;
-  invitable?: boolean | null | undefined;
+  createTimestamp?: Date | undefined;
+  invitable?: boolean | undefined;
 };
 
 /** @internal */
@@ -27,12 +27,12 @@ export const ThreadMetadataResponse$inboundSchema: z.ZodType<
   archive_timestamp: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  auto_archive_duration: z.literal(60).optional(),
+  auto_archive_duration: z.literal(60).default(60).optional(),
   locked: z.boolean(),
-  create_timestamp: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  create_timestamp: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
   ).optional(),
-  invitable: z.nullable(z.boolean()).optional(),
+  invitable: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "archive_timestamp": "archiveTimestamp",
@@ -47,8 +47,8 @@ export type ThreadMetadataResponse$Outbound = {
   archive_timestamp?: string | null | undefined;
   auto_archive_duration: 60;
   locked: boolean;
-  create_timestamp?: string | null | undefined;
-  invitable?: boolean | null | undefined;
+  create_timestamp?: string | undefined;
+  invitable?: boolean | undefined;
 };
 
 /** @internal */
@@ -62,9 +62,8 @@ export const ThreadMetadataResponse$outboundSchema: z.ZodType<
     .optional(),
   autoArchiveDuration: z.literal(60).default(60 as const),
   locked: z.boolean(),
-  createTimestamp: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  invitable: z.nullable(z.boolean()).optional(),
+  createTimestamp: z.date().transform(v => v.toISOString()).optional(),
+  invitable: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     archiveTimestamp: "archive_timestamp",

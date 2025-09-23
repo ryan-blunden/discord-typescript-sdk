@@ -12,6 +12,10 @@ export type LeaveGuildRequest = {
   guildId: string;
 };
 
+export type LeaveGuildResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const LeaveGuildRequest$inboundSchema: z.ZodType<
   LeaveGuildRequest,
@@ -71,5 +75,67 @@ export function leaveGuildRequestFromJSON(
     jsonString,
     (x) => LeaveGuildRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'LeaveGuildRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const LeaveGuildResponse$inboundSchema: z.ZodType<
+  LeaveGuildResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type LeaveGuildResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const LeaveGuildResponse$outboundSchema: z.ZodType<
+  LeaveGuildResponse$Outbound,
+  z.ZodTypeDef,
+  LeaveGuildResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace LeaveGuildResponse$ {
+  /** @deprecated use `LeaveGuildResponse$inboundSchema` instead. */
+  export const inboundSchema = LeaveGuildResponse$inboundSchema;
+  /** @deprecated use `LeaveGuildResponse$outboundSchema` instead. */
+  export const outboundSchema = LeaveGuildResponse$outboundSchema;
+  /** @deprecated use `LeaveGuildResponse$Outbound` instead. */
+  export type Outbound = LeaveGuildResponse$Outbound;
+}
+
+export function leaveGuildResponseToJSON(
+  leaveGuildResponse: LeaveGuildResponse,
+): string {
+  return JSON.stringify(
+    LeaveGuildResponse$outboundSchema.parse(leaveGuildResponse),
+  );
+}
+
+export function leaveGuildResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<LeaveGuildResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => LeaveGuildResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'LeaveGuildResponse' from JSON`,
   );
 }

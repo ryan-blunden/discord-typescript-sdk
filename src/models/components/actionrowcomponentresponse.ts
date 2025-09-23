@@ -50,29 +50,26 @@ import {
 } from "./userselectcomponentresponse.js";
 
 export type Components =
-  | MentionableSelectComponentResponse
-  | RoleSelectComponentResponse
   | StringSelectComponentResponse
-  | UserSelectComponentResponse
+  | TextInputComponentResponse
   | ButtonComponentResponse
   | ChannelSelectComponentResponse
-  | TextInputComponentResponse;
+  | MentionableSelectComponentResponse
+  | RoleSelectComponentResponse
+  | UserSelectComponentResponse;
 
 export type ActionRowComponentResponse = {
   type?: 1 | undefined;
   id: number;
-  components?:
-    | Array<
-      | MentionableSelectComponentResponse
-      | RoleSelectComponentResponse
-      | StringSelectComponentResponse
-      | UserSelectComponentResponse
-      | ButtonComponentResponse
-      | ChannelSelectComponentResponse
-      | TextInputComponentResponse
-    >
-    | null
-    | undefined;
+  components: Array<
+    | StringSelectComponentResponse
+    | TextInputComponentResponse
+    | ButtonComponentResponse
+    | ChannelSelectComponentResponse
+    | MentionableSelectComponentResponse
+    | RoleSelectComponentResponse
+    | UserSelectComponentResponse
+  >;
 };
 
 /** @internal */
@@ -81,24 +78,24 @@ export const Components$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  MentionableSelectComponentResponse$inboundSchema,
-  RoleSelectComponentResponse$inboundSchema,
   StringSelectComponentResponse$inboundSchema,
-  UserSelectComponentResponse$inboundSchema,
+  TextInputComponentResponse$inboundSchema,
   ButtonComponentResponse$inboundSchema,
   ChannelSelectComponentResponse$inboundSchema,
-  TextInputComponentResponse$inboundSchema,
+  MentionableSelectComponentResponse$inboundSchema,
+  RoleSelectComponentResponse$inboundSchema,
+  UserSelectComponentResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type Components$Outbound =
-  | MentionableSelectComponentResponse$Outbound
-  | RoleSelectComponentResponse$Outbound
   | StringSelectComponentResponse$Outbound
-  | UserSelectComponentResponse$Outbound
+  | TextInputComponentResponse$Outbound
   | ButtonComponentResponse$Outbound
   | ChannelSelectComponentResponse$Outbound
-  | TextInputComponentResponse$Outbound;
+  | MentionableSelectComponentResponse$Outbound
+  | RoleSelectComponentResponse$Outbound
+  | UserSelectComponentResponse$Outbound;
 
 /** @internal */
 export const Components$outboundSchema: z.ZodType<
@@ -106,13 +103,13 @@ export const Components$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Components
 > = z.union([
-  MentionableSelectComponentResponse$outboundSchema,
-  RoleSelectComponentResponse$outboundSchema,
   StringSelectComponentResponse$outboundSchema,
-  UserSelectComponentResponse$outboundSchema,
+  TextInputComponentResponse$outboundSchema,
   ButtonComponentResponse$outboundSchema,
   ChannelSelectComponentResponse$outboundSchema,
-  TextInputComponentResponse$outboundSchema,
+  MentionableSelectComponentResponse$outboundSchema,
+  RoleSelectComponentResponse$outboundSchema,
+  UserSelectComponentResponse$outboundSchema,
 ]);
 
 /**
@@ -148,39 +145,34 @@ export const ActionRowComponentResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
   id: z.number().int(),
-  components: z.nullable(
-    z.array(
-      z.union([
-        MentionableSelectComponentResponse$inboundSchema,
-        RoleSelectComponentResponse$inboundSchema,
-        StringSelectComponentResponse$inboundSchema,
-        UserSelectComponentResponse$inboundSchema,
-        ButtonComponentResponse$inboundSchema,
-        ChannelSelectComponentResponse$inboundSchema,
-        TextInputComponentResponse$inboundSchema,
-      ]),
-    ),
-  ).optional(),
+  components: z.array(
+    z.union([
+      StringSelectComponentResponse$inboundSchema,
+      TextInputComponentResponse$inboundSchema,
+      ButtonComponentResponse$inboundSchema,
+      ChannelSelectComponentResponse$inboundSchema,
+      MentionableSelectComponentResponse$inboundSchema,
+      RoleSelectComponentResponse$inboundSchema,
+      UserSelectComponentResponse$inboundSchema,
+    ]),
+  ),
 });
 
 /** @internal */
 export type ActionRowComponentResponse$Outbound = {
   type: 1;
   id: number;
-  components?:
-    | Array<
-      | MentionableSelectComponentResponse$Outbound
-      | RoleSelectComponentResponse$Outbound
-      | StringSelectComponentResponse$Outbound
-      | UserSelectComponentResponse$Outbound
-      | ButtonComponentResponse$Outbound
-      | ChannelSelectComponentResponse$Outbound
-      | TextInputComponentResponse$Outbound
-    >
-    | null
-    | undefined;
+  components: Array<
+    | StringSelectComponentResponse$Outbound
+    | TextInputComponentResponse$Outbound
+    | ButtonComponentResponse$Outbound
+    | ChannelSelectComponentResponse$Outbound
+    | MentionableSelectComponentResponse$Outbound
+    | RoleSelectComponentResponse$Outbound
+    | UserSelectComponentResponse$Outbound
+  >;
 };
 
 /** @internal */
@@ -191,19 +183,17 @@ export const ActionRowComponentResponse$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal(1).default(1 as const),
   id: z.number().int(),
-  components: z.nullable(
-    z.array(
-      z.union([
-        MentionableSelectComponentResponse$outboundSchema,
-        RoleSelectComponentResponse$outboundSchema,
-        StringSelectComponentResponse$outboundSchema,
-        UserSelectComponentResponse$outboundSchema,
-        ButtonComponentResponse$outboundSchema,
-        ChannelSelectComponentResponse$outboundSchema,
-        TextInputComponentResponse$outboundSchema,
-      ]),
-    ),
-  ).optional(),
+  components: z.array(
+    z.union([
+      StringSelectComponentResponse$outboundSchema,
+      TextInputComponentResponse$outboundSchema,
+      ButtonComponentResponse$outboundSchema,
+      ChannelSelectComponentResponse$outboundSchema,
+      MentionableSelectComponentResponse$outboundSchema,
+      RoleSelectComponentResponse$outboundSchema,
+      UserSelectComponentResponse$outboundSchema,
+    ]),
+  ),
 });
 
 /**

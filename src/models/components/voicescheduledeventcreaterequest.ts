@@ -41,8 +41,8 @@ export const VoiceScheduledEventCreateRequest$inboundSchema: z.ZodType<
   scheduled_end_time: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  privacy_level: z.literal(2).optional(),
-  entity_type: z.literal(0).optional(),
+  privacy_level: z.literal(2).default(2).optional(),
+  entity_type: z.literal(0).default(0).optional(),
   channel_id: z.nullable(z.string()).optional(),
   entity_metadata: z.nullable(EntityMetadataVoice$inboundSchema).optional(),
 }).transform((v) => {

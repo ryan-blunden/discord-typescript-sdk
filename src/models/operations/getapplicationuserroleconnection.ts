@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetApplicationUserRoleConnectionRequest = {
   applicationId: string;
+};
+
+export type GetApplicationUserRoleConnectionResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ApplicationUserRoleConnectionResponse;
 };
 
 /** @internal */
@@ -82,5 +88,83 @@ export function getApplicationUserRoleConnectionRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetApplicationUserRoleConnectionRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetApplicationUserRoleConnectionResponse$inboundSchema: z.ZodType<
+  GetApplicationUserRoleConnectionResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ApplicationUserRoleConnectionResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetApplicationUserRoleConnectionResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ApplicationUserRoleConnectionResponse$Outbound;
+};
+
+/** @internal */
+export const GetApplicationUserRoleConnectionResponse$outboundSchema: z.ZodType<
+  GetApplicationUserRoleConnectionResponse$Outbound,
+  z.ZodTypeDef,
+  GetApplicationUserRoleConnectionResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ApplicationUserRoleConnectionResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetApplicationUserRoleConnectionResponse$ {
+  /** @deprecated use `GetApplicationUserRoleConnectionResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetApplicationUserRoleConnectionResponse$inboundSchema;
+  /** @deprecated use `GetApplicationUserRoleConnectionResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetApplicationUserRoleConnectionResponse$outboundSchema;
+  /** @deprecated use `GetApplicationUserRoleConnectionResponse$Outbound` instead. */
+  export type Outbound = GetApplicationUserRoleConnectionResponse$Outbound;
+}
+
+export function getApplicationUserRoleConnectionResponseToJSON(
+  getApplicationUserRoleConnectionResponse:
+    GetApplicationUserRoleConnectionResponse,
+): string {
+  return JSON.stringify(
+    GetApplicationUserRoleConnectionResponse$outboundSchema.parse(
+      getApplicationUserRoleConnectionResponse,
+    ),
+  );
+}
+
+export function getApplicationUserRoleConnectionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetApplicationUserRoleConnectionResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetApplicationUserRoleConnectionResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetApplicationUserRoleConnectionResponse' from JSON`,
   );
 }

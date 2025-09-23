@@ -18,7 +18,7 @@ export const ChannelSelectDefaultValueResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("user").optional(),
+  type: z.literal("user").default("user").optional(),
   id: z.string(),
 });
 

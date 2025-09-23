@@ -20,13 +20,17 @@ export type SetChannelPermissionOverwriteRequest = {
   requestBody: SetChannelPermissionOverwriteRequestBody;
 };
 
+export type SetChannelPermissionOverwriteResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const SetChannelPermissionOverwriteRequestBody$inboundSchema: z.ZodType<
   SetChannelPermissionOverwriteRequestBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.nullable(z.literal(0)).optional(),
+  type: z.nullable(z.literal(0).default(0)).optional(),
   allow: z.nullable(z.number().int()).optional(),
   deny: z.nullable(z.number().int()).optional(),
 });
@@ -169,5 +173,72 @@ export function setChannelPermissionOverwriteRequestFromJSON(
     (x) =>
       SetChannelPermissionOverwriteRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'SetChannelPermissionOverwriteRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const SetChannelPermissionOverwriteResponse$inboundSchema: z.ZodType<
+  SetChannelPermissionOverwriteResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type SetChannelPermissionOverwriteResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const SetChannelPermissionOverwriteResponse$outboundSchema: z.ZodType<
+  SetChannelPermissionOverwriteResponse$Outbound,
+  z.ZodTypeDef,
+  SetChannelPermissionOverwriteResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SetChannelPermissionOverwriteResponse$ {
+  /** @deprecated use `SetChannelPermissionOverwriteResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    SetChannelPermissionOverwriteResponse$inboundSchema;
+  /** @deprecated use `SetChannelPermissionOverwriteResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    SetChannelPermissionOverwriteResponse$outboundSchema;
+  /** @deprecated use `SetChannelPermissionOverwriteResponse$Outbound` instead. */
+  export type Outbound = SetChannelPermissionOverwriteResponse$Outbound;
+}
+
+export function setChannelPermissionOverwriteResponseToJSON(
+  setChannelPermissionOverwriteResponse: SetChannelPermissionOverwriteResponse,
+): string {
+  return JSON.stringify(
+    SetChannelPermissionOverwriteResponse$outboundSchema.parse(
+      setChannelPermissionOverwriteResponse,
+    ),
+  );
+}
+
+export function setChannelPermissionOverwriteResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<SetChannelPermissionOverwriteResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      SetChannelPermissionOverwriteResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SetChannelPermissionOverwriteResponse' from JSON`,
   );
 }

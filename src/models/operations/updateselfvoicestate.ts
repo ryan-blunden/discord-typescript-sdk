@@ -6,93 +6,18 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type UpdateSelfVoiceStateRequestBody = {
-  requestToSpeakTimestamp?: Date | null | undefined;
-  suppress?: boolean | null | undefined;
-  channelId?: string | null | undefined;
-};
 
 export type UpdateSelfVoiceStateRequest = {
   guildId: string;
-  requestBody: UpdateSelfVoiceStateRequestBody;
+  updateSelfVoiceStateRequestPartial:
+    components.UpdateSelfVoiceStateRequestPartial;
 };
 
-/** @internal */
-export const UpdateSelfVoiceStateRequestBody$inboundSchema: z.ZodType<
-  UpdateSelfVoiceStateRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  request_to_speak_timestamp: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  suppress: z.nullable(z.boolean()).optional(),
-  channel_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "request_to_speak_timestamp": "requestToSpeakTimestamp",
-    "channel_id": "channelId",
-  });
-});
-
-/** @internal */
-export type UpdateSelfVoiceStateRequestBody$Outbound = {
-  request_to_speak_timestamp?: string | null | undefined;
-  suppress?: boolean | null | undefined;
-  channel_id?: string | null | undefined;
+export type UpdateSelfVoiceStateResponse = {
+  headers: { [k: string]: Array<string> };
 };
-
-/** @internal */
-export const UpdateSelfVoiceStateRequestBody$outboundSchema: z.ZodType<
-  UpdateSelfVoiceStateRequestBody$Outbound,
-  z.ZodTypeDef,
-  UpdateSelfVoiceStateRequestBody
-> = z.object({
-  requestToSpeakTimestamp: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  suppress: z.nullable(z.boolean()).optional(),
-  channelId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requestToSpeakTimestamp: "request_to_speak_timestamp",
-    channelId: "channel_id",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateSelfVoiceStateRequestBody$ {
-  /** @deprecated use `UpdateSelfVoiceStateRequestBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateSelfVoiceStateRequestBody$inboundSchema;
-  /** @deprecated use `UpdateSelfVoiceStateRequestBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateSelfVoiceStateRequestBody$outboundSchema;
-  /** @deprecated use `UpdateSelfVoiceStateRequestBody$Outbound` instead. */
-  export type Outbound = UpdateSelfVoiceStateRequestBody$Outbound;
-}
-
-export function updateSelfVoiceStateRequestBodyToJSON(
-  updateSelfVoiceStateRequestBody: UpdateSelfVoiceStateRequestBody,
-): string {
-  return JSON.stringify(
-    UpdateSelfVoiceStateRequestBody$outboundSchema.parse(
-      updateSelfVoiceStateRequestBody,
-    ),
-  );
-}
-
-export function updateSelfVoiceStateRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateSelfVoiceStateRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateSelfVoiceStateRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateSelfVoiceStateRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateSelfVoiceStateRequest$inboundSchema: z.ZodType<
@@ -101,18 +26,20 @@ export const UpdateSelfVoiceStateRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   guild_id: z.string(),
-  RequestBody: z.lazy(() => UpdateSelfVoiceStateRequestBody$inboundSchema),
+  UpdateSelfVoiceStateRequestPartial:
+    components.UpdateSelfVoiceStateRequestPartial$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",
-    "RequestBody": "requestBody",
+    "UpdateSelfVoiceStateRequestPartial": "updateSelfVoiceStateRequestPartial",
   });
 });
 
 /** @internal */
 export type UpdateSelfVoiceStateRequest$Outbound = {
   guild_id: string;
-  RequestBody: UpdateSelfVoiceStateRequestBody$Outbound;
+  UpdateSelfVoiceStateRequestPartial:
+    components.UpdateSelfVoiceStateRequestPartial$Outbound;
 };
 
 /** @internal */
@@ -122,11 +49,12 @@ export const UpdateSelfVoiceStateRequest$outboundSchema: z.ZodType<
   UpdateSelfVoiceStateRequest
 > = z.object({
   guildId: z.string(),
-  requestBody: z.lazy(() => UpdateSelfVoiceStateRequestBody$outboundSchema),
+  updateSelfVoiceStateRequestPartial:
+    components.UpdateSelfVoiceStateRequestPartial$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     guildId: "guild_id",
-    requestBody: "RequestBody",
+    updateSelfVoiceStateRequestPartial: "UpdateSelfVoiceStateRequestPartial",
   });
 });
 
@@ -160,5 +88,69 @@ export function updateSelfVoiceStateRequestFromJSON(
     jsonString,
     (x) => UpdateSelfVoiceStateRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateSelfVoiceStateRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateSelfVoiceStateResponse$inboundSchema: z.ZodType<
+  UpdateSelfVoiceStateResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type UpdateSelfVoiceStateResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const UpdateSelfVoiceStateResponse$outboundSchema: z.ZodType<
+  UpdateSelfVoiceStateResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateSelfVoiceStateResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateSelfVoiceStateResponse$ {
+  /** @deprecated use `UpdateSelfVoiceStateResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateSelfVoiceStateResponse$inboundSchema;
+  /** @deprecated use `UpdateSelfVoiceStateResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateSelfVoiceStateResponse$outboundSchema;
+  /** @deprecated use `UpdateSelfVoiceStateResponse$Outbound` instead. */
+  export type Outbound = UpdateSelfVoiceStateResponse$Outbound;
+}
+
+export function updateSelfVoiceStateResponseToJSON(
+  updateSelfVoiceStateResponse: UpdateSelfVoiceStateResponse,
+): string {
+  return JSON.stringify(
+    UpdateSelfVoiceStateResponse$outboundSchema.parse(
+      updateSelfVoiceStateResponse,
+    ),
+  );
+}
+
+export function updateSelfVoiceStateResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateSelfVoiceStateResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateSelfVoiceStateResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateSelfVoiceStateResponse' from JSON`,
   );
 }

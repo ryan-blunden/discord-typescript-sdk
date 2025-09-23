@@ -22,6 +22,7 @@ Returns the user object of the requester's account. For OAuth2, this requires th
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_my_user" method="get" path="/users/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -76,14 +77,15 @@ run();
 
 ### Response
 
-**Promise\<[components.UserPIIResponse](../../models/components/userpiiresponse.md)\>**
+**Promise\<[operations.GetMyUserResponse](../../models/operations/getmyuserresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateCurrent
 
@@ -91,6 +93,7 @@ Modify the requester's user account settings. Returns a user object on success. 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_my_user" method="patch" path="/users/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -149,14 +152,15 @@ run();
 
 ### Response
 
-**Promise\<[components.UserPIIResponse](../../models/components/userpiiresponse.md)\>**
+**Promise\<[operations.UpdateMyUserResponse](../../models/operations/updatemyuserresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getApplicationRoleConnection
 
@@ -164,6 +168,7 @@ Returns the application role connection for the user. Requires an OAuth2 access 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_application_user_role_connection" method="get" path="/users/@me/applications/{application_id}/role-connection" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -222,14 +227,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationUserRoleConnectionResponse](../../models/components/applicationuserroleconnectionresponse.md)\>**
+**Promise\<[operations.GetApplicationUserRoleConnectionResponse](../../models/operations/getapplicationuserroleconnectionresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateApplicationRoleConnection
 
@@ -237,6 +243,7 @@ Updates and returns the application role connection for the user. Requires an OA
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_application_user_role_connection" method="put" path="/users/@me/applications/{application_id}/role-connection" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -247,7 +254,7 @@ const discord = new Discord({
 async function run() {
   const result = await discord.users.updateApplicationRoleConnection({
     applicationId: "<value>",
-    requestBody: {},
+    updateApplicationUserRoleConnectionRequest: {},
   });
 
   console.log(result);
@@ -273,7 +280,7 @@ const discord = new DiscordCore({
 async function run() {
   const res = await usersUpdateApplicationRoleConnection(discord, {
     applicationId: "<value>",
-    requestBody: {},
+    updateApplicationUserRoleConnectionRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -297,14 +304,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationUserRoleConnectionResponse](../../models/components/applicationuserroleconnectionresponse.md)\>**
+**Promise\<[operations.UpdateApplicationUserRoleConnectionResponse](../../models/operations/updateapplicationuserroleconnectionresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createDM
 
@@ -312,6 +320,7 @@ Create a new DM channel with a user. Returns a DM channel object (if one already
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_dm" method="post" path="/users/@me/channels" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -366,14 +375,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateDmResponseBody](../../models/operations/createdmresponsebody.md)\>**
+**Promise\<[operations.CreateDmResponse](../../models/operations/createdmresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listConnections
 
@@ -381,6 +391,7 @@ Returns a list of connection objects. Requires the connections OAuth2 scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_my_connections" method="get" path="/users/@me/connections" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -435,14 +446,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ConnectedAccountResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListMyConnectionsResponse](../../models/operations/listmyconnectionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listGuilds
 
@@ -450,6 +462,7 @@ Returns a list of partial guild objects the current user is a member of. For OAu
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_my_guilds" method="get" path="/users/@me/guilds" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -505,14 +518,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MyGuildResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListMyGuildsResponse](../../models/operations/listmyguildsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## leaveGuild
 
@@ -520,6 +534,7 @@ Leave a guild. Returns a 204 empty response on success. Fires a Guild Delete Gat
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="leave_guild" method="delete" path="/users/@me/guilds/{guild_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -528,11 +543,11 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.users.leaveGuild({
+  const result = await discord.users.leaveGuild({
     guildId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -558,7 +573,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("usersLeaveGuild failed:", res.error);
   }
@@ -578,14 +593,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.LeaveGuildResponse](../../models/operations/leaveguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGuildMember
 
@@ -593,6 +609,7 @@ Returns a guild member object for the current user. Requires the guilds.members.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_my_guild_member" method="get" path="/users/@me/guilds/{guild_id}/member" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -651,14 +668,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateGuildMemberResponse](../../models/components/privateguildmemberresponse.md)\>**
+**Promise\<[operations.GetMyGuildMemberResponse](../../models/operations/getmyguildmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -666,6 +684,7 @@ Returns a user object for a given user ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_user" method="get" path="/users/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -724,11 +743,12 @@ run();
 
 ### Response
 
-**Promise\<[components.UserResponse](../../models/components/userresponse.md)\>**
+**Promise\<[operations.GetUserResponse](../../models/operations/getuserresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

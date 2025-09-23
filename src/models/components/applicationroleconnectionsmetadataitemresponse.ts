@@ -24,7 +24,7 @@ export const ApplicationRoleConnectionsMetadataItemResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type: z.literal(1).optional(),
+    type: z.literal(1).default(1).optional(),
     key: z.string(),
     name: z.string(),
     name_localizations: z.nullable(z.record(z.string())).optional(),

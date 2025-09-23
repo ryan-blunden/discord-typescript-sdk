@@ -17,6 +17,10 @@ export type BulkDeleteMessagesRequest = {
   requestBody: BulkDeleteMessagesRequestBody;
 };
 
+export type BulkDeleteMessagesResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const BulkDeleteMessagesRequestBody$inboundSchema: z.ZodType<
   BulkDeleteMessagesRequestBody,
@@ -137,5 +141,67 @@ export function bulkDeleteMessagesRequestFromJSON(
     jsonString,
     (x) => BulkDeleteMessagesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'BulkDeleteMessagesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const BulkDeleteMessagesResponse$inboundSchema: z.ZodType<
+  BulkDeleteMessagesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type BulkDeleteMessagesResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const BulkDeleteMessagesResponse$outboundSchema: z.ZodType<
+  BulkDeleteMessagesResponse$Outbound,
+  z.ZodTypeDef,
+  BulkDeleteMessagesResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BulkDeleteMessagesResponse$ {
+  /** @deprecated use `BulkDeleteMessagesResponse$inboundSchema` instead. */
+  export const inboundSchema = BulkDeleteMessagesResponse$inboundSchema;
+  /** @deprecated use `BulkDeleteMessagesResponse$outboundSchema` instead. */
+  export const outboundSchema = BulkDeleteMessagesResponse$outboundSchema;
+  /** @deprecated use `BulkDeleteMessagesResponse$Outbound` instead. */
+  export type Outbound = BulkDeleteMessagesResponse$Outbound;
+}
+
+export function bulkDeleteMessagesResponseToJSON(
+  bulkDeleteMessagesResponse: BulkDeleteMessagesResponse,
+): string {
+  return JSON.stringify(
+    BulkDeleteMessagesResponse$outboundSchema.parse(bulkDeleteMessagesResponse),
+  );
+}
+
+export function bulkDeleteMessagesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkDeleteMessagesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkDeleteMessagesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkDeleteMessagesResponse' from JSON`,
   );
 }

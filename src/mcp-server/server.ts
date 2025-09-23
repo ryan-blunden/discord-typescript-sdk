@@ -31,6 +31,8 @@ import { tool$autoModerationDeleteRule } from "./tools/autoModerationDeleteRule.
 import { tool$autoModerationGetRule } from "./tools/autoModerationGetRule.js";
 import { tool$autoModerationListRules } from "./tools/autoModerationListRules.js";
 import { tool$autoModerationUpdateRule } from "./tools/autoModerationUpdateRule.js";
+import { tool$botPartnerSDKToken } from "./tools/botPartnerSDKToken.js";
+import { tool$bulkUpdateLobbyMembers } from "./tools/bulkUpdateLobbyMembers.js";
 import { tool$channelsAddGroupDMRecipient } from "./tools/channelsAddGroupDMRecipient.js";
 import { tool$channelsAddThreadMember } from "./tools/channelsAddThreadMember.js";
 import { tool$channelsCreateInvite } from "./tools/channelsCreateInvite.js";
@@ -57,6 +59,9 @@ import { tool$channelsStartThreadFromMessage } from "./tools/channelsStartThread
 import { tool$channelsTriggerTypingIndicator } from "./tools/channelsTriggerTypingIndicator.js";
 import { tool$channelsUnpinMessage } from "./tools/channelsUnpinMessage.js";
 import { tool$channelsUpdate } from "./tools/channelsUpdate.js";
+import { tool$createLinkedLobbyGuildInviteForUser } from "./tools/createLinkedLobbyGuildInviteForUser.js";
+import { tool$createPin } from "./tools/createPin.js";
+import { tool$deletePin } from "./tools/deletePin.js";
 import { tool$emojiCreateApplicationEmoji } from "./tools/emojiCreateApplicationEmoji.js";
 import { tool$emojiCreateGuildEmoji } from "./tools/emojiCreateGuildEmoji.js";
 import { tool$emojiDeleteApplicationEmoji } from "./tools/emojiDeleteApplicationEmoji.js";
@@ -77,7 +82,6 @@ import { tool$guildScheduledEventsGet } from "./tools/guildScheduledEventsGet.js
 import { tool$guildScheduledEventsGetUsers } from "./tools/guildScheduledEventsGetUsers.js";
 import { tool$guildScheduledEventsList } from "./tools/guildScheduledEventsList.js";
 import { tool$guildScheduledEventsUpdate } from "./tools/guildScheduledEventsUpdate.js";
-import { tool$guildsCreate } from "./tools/guildsCreate.js";
 import { tool$guildsCreateBan } from "./tools/guildsCreateBan.js";
 import { tool$guildsCreateChannel } from "./tools/guildsCreateChannel.js";
 import { tool$guildsCreateRole } from "./tools/guildsCreateRole.js";
@@ -117,13 +121,13 @@ import { tool$guildsUpdateRolePositions } from "./tools/guildsUpdateRolePosition
 import { tool$guildsUpdateWelcomeScreen } from "./tools/guildsUpdateWelcomeScreen.js";
 import { tool$guildsUpdateWidgetSettings } from "./tools/guildsUpdateWidgetSettings.js";
 import { tool$guildTemplatesCreate } from "./tools/guildTemplatesCreate.js";
-import { tool$guildTemplatesCreateGuild } from "./tools/guildTemplatesCreateGuild.js";
 import { tool$guildTemplatesDelete } from "./tools/guildTemplatesDelete.js";
 import { tool$guildTemplatesGetNewMemberWelcome } from "./tools/guildTemplatesGetNewMemberWelcome.js";
 import { tool$guildTemplatesList } from "./tools/guildTemplatesList.js";
 import { tool$guildTemplatesSync } from "./tools/guildTemplatesSync.js";
 import { tool$guildTemplatesUpdate } from "./tools/guildTemplatesUpdate.js";
 import { tool$invitesDelete } from "./tools/invitesDelete.js";
+import { tool$listPins } from "./tools/listPins.js";
 import { tool$lobbiesAddMember } from "./tools/lobbiesAddMember.js";
 import { tool$lobbiesCreate } from "./tools/lobbiesCreate.js";
 import { tool$lobbiesGet } from "./tools/lobbiesGet.js";
@@ -195,7 +199,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Discord",
-    version: "0.4.0",
+    version: "0.4.1",
   });
 
   const client = new DiscordCore({
@@ -225,6 +229,12 @@ export function createMCPServer(deps: {
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
+  tool(tool$listPins);
+  tool(tool$createPin);
+  tool(tool$deletePin);
+  tool(tool$bulkUpdateLobbyMembers);
+  tool(tool$createLinkedLobbyGuildInviteForUser);
+  tool(tool$botPartnerSDKToken);
   tool(tool$applicationsGetMe);
   tool(tool$applicationsUpdateSelf);
   tool(tool$applicationsGet);
@@ -304,7 +314,12 @@ export function createMCPServer(deps: {
   tool(tool$webhooksGet);
   tool(tool$webhooksDelete);
   tool(tool$webhooksUpdate);
-  tool(tool$guildsCreate);
+  tool(tool$guildTemplatesGetNewMemberWelcome);
+  tool(tool$guildTemplatesList);
+  tool(tool$guildTemplatesCreate);
+  tool(tool$guildTemplatesSync);
+  tool(tool$guildTemplatesDelete);
+  tool(tool$guildTemplatesUpdate);
   tool(tool$guildsGet);
   tool(tool$guildsDelete);
   tool(tool$guildsUpdate);
@@ -346,13 +361,6 @@ export function createMCPServer(deps: {
   tool(tool$guildsUpdateWelcomeScreen);
   tool(tool$guildsGetWidgetSettings);
   tool(tool$guildsUpdateWidgetSettings);
-  tool(tool$guildTemplatesCreateGuild);
-  tool(tool$guildTemplatesGetNewMemberWelcome);
-  tool(tool$guildTemplatesList);
-  tool(tool$guildTemplatesCreate);
-  tool(tool$guildTemplatesSync);
-  tool(tool$guildTemplatesDelete);
-  tool(tool$guildTemplatesUpdate);
   tool(tool$auditLogsList);
   tool(tool$autoModerationListRules);
   tool(tool$autoModerationCreateRule);

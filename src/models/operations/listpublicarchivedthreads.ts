@@ -6,12 +6,18 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListPublicArchivedThreadsRequest = {
   channelId: string;
   before?: Date | undefined;
   limit?: number | undefined;
+};
+
+export type ListPublicArchivedThreadsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ThreadsResponse;
 };
 
 /** @internal */
@@ -82,5 +88,75 @@ export function listPublicArchivedThreadsRequestFromJSON(
     jsonString,
     (x) => ListPublicArchivedThreadsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListPublicArchivedThreadsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListPublicArchivedThreadsResponse$inboundSchema: z.ZodType<
+  ListPublicArchivedThreadsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ThreadsResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListPublicArchivedThreadsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ThreadsResponse$Outbound;
+};
+
+/** @internal */
+export const ListPublicArchivedThreadsResponse$outboundSchema: z.ZodType<
+  ListPublicArchivedThreadsResponse$Outbound,
+  z.ZodTypeDef,
+  ListPublicArchivedThreadsResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ThreadsResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListPublicArchivedThreadsResponse$ {
+  /** @deprecated use `ListPublicArchivedThreadsResponse$inboundSchema` instead. */
+  export const inboundSchema = ListPublicArchivedThreadsResponse$inboundSchema;
+  /** @deprecated use `ListPublicArchivedThreadsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    ListPublicArchivedThreadsResponse$outboundSchema;
+  /** @deprecated use `ListPublicArchivedThreadsResponse$Outbound` instead. */
+  export type Outbound = ListPublicArchivedThreadsResponse$Outbound;
+}
+
+export function listPublicArchivedThreadsResponseToJSON(
+  listPublicArchivedThreadsResponse: ListPublicArchivedThreadsResponse,
+): string {
+  return JSON.stringify(
+    ListPublicArchivedThreadsResponse$outboundSchema.parse(
+      listPublicArchivedThreadsResponse,
+    ),
+  );
+}
+
+export function listPublicArchivedThreadsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListPublicArchivedThreadsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListPublicArchivedThreadsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListPublicArchivedThreadsResponse' from JSON`,
   );
 }

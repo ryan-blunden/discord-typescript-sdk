@@ -17,10 +17,19 @@ export type DeleteChannelRequest = {
  * 200 response for delete_channel
  */
 export type DeleteChannelResponseBody =
-  | components.PrivateChannelResponse
-  | components.PrivateGroupChannelResponse
   | components.ThreadResponse
-  | components.GuildChannelResponse;
+  | components.GuildChannelResponse
+  | components.PrivateGroupChannelResponse
+  | components.PrivateChannelResponse;
+
+export type DeleteChannelResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.ThreadResponse
+    | components.GuildChannelResponse
+    | components.PrivateGroupChannelResponse
+    | components.PrivateChannelResponse;
+};
 
 /** @internal */
 export const DeleteChannelRequest$inboundSchema: z.ZodType<
@@ -90,18 +99,18 @@ export const DeleteChannelResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.PrivateChannelResponse$inboundSchema,
-  components.PrivateGroupChannelResponse$inboundSchema,
   components.ThreadResponse$inboundSchema,
   components.GuildChannelResponse$inboundSchema,
+  components.PrivateGroupChannelResponse$inboundSchema,
+  components.PrivateChannelResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type DeleteChannelResponseBody$Outbound =
-  | components.PrivateChannelResponse$Outbound
-  | components.PrivateGroupChannelResponse$Outbound
   | components.ThreadResponse$Outbound
-  | components.GuildChannelResponse$Outbound;
+  | components.GuildChannelResponse$Outbound
+  | components.PrivateGroupChannelResponse$Outbound
+  | components.PrivateChannelResponse$Outbound;
 
 /** @internal */
 export const DeleteChannelResponseBody$outboundSchema: z.ZodType<
@@ -109,10 +118,10 @@ export const DeleteChannelResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteChannelResponseBody
 > = z.union([
-  components.PrivateChannelResponse$outboundSchema,
-  components.PrivateGroupChannelResponse$outboundSchema,
   components.ThreadResponse$outboundSchema,
   components.GuildChannelResponse$outboundSchema,
+  components.PrivateGroupChannelResponse$outboundSchema,
+  components.PrivateChannelResponse$outboundSchema,
 ]);
 
 /**
@@ -143,5 +152,86 @@ export function deleteChannelResponseBodyFromJSON(
     jsonString,
     (x) => DeleteChannelResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteChannelResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteChannelResponse$inboundSchema: z.ZodType<
+  DeleteChannelResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.ThreadResponse$inboundSchema,
+    components.GuildChannelResponse$inboundSchema,
+    components.PrivateGroupChannelResponse$inboundSchema,
+    components.PrivateChannelResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type DeleteChannelResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.ThreadResponse$Outbound
+    | components.GuildChannelResponse$Outbound
+    | components.PrivateGroupChannelResponse$Outbound
+    | components.PrivateChannelResponse$Outbound;
+};
+
+/** @internal */
+export const DeleteChannelResponse$outboundSchema: z.ZodType<
+  DeleteChannelResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteChannelResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.ThreadResponse$outboundSchema,
+    components.GuildChannelResponse$outboundSchema,
+    components.PrivateGroupChannelResponse$outboundSchema,
+    components.PrivateChannelResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteChannelResponse$ {
+  /** @deprecated use `DeleteChannelResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteChannelResponse$inboundSchema;
+  /** @deprecated use `DeleteChannelResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteChannelResponse$outboundSchema;
+  /** @deprecated use `DeleteChannelResponse$Outbound` instead. */
+  export type Outbound = DeleteChannelResponse$Outbound;
+}
+
+export function deleteChannelResponseToJSON(
+  deleteChannelResponse: DeleteChannelResponse,
+): string {
+  return JSON.stringify(
+    DeleteChannelResponse$outboundSchema.parse(deleteChannelResponse),
+  );
+}
+
+export function deleteChannelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteChannelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteChannelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteChannelResponse' from JSON`,
   );
 }

@@ -45,22 +45,23 @@ import {
 } from "./textdisplaycomponentformessagerequest.js";
 
 export type ContainerComponentForMessageRequestComponents =
+  | SectionComponentForMessageRequest
   | ActionRowComponentForMessageRequest
+  | FileComponentForMessageRequest
   | MediaGalleryComponentForMessageRequest
   | TextDisplayComponentForMessageRequest
-  | FileComponentForMessageRequest
-  | SectionComponentForMessageRequest
   | SeparatorComponentForMessageRequest;
 
 export type ContainerComponentForMessageRequest = {
   type?: 1 | undefined;
+  id?: number | null | undefined;
   accentColor?: number | null | undefined;
   components: Array<
+    | SectionComponentForMessageRequest
     | ActionRowComponentForMessageRequest
+    | FileComponentForMessageRequest
     | MediaGalleryComponentForMessageRequest
     | TextDisplayComponentForMessageRequest
-    | FileComponentForMessageRequest
-    | SectionComponentForMessageRequest
     | SeparatorComponentForMessageRequest
   >;
   spoiler?: boolean | null | undefined;
@@ -73,21 +74,21 @@ export const ContainerComponentForMessageRequestComponents$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
+    SectionComponentForMessageRequest$inboundSchema,
     ActionRowComponentForMessageRequest$inboundSchema,
+    FileComponentForMessageRequest$inboundSchema,
     MediaGalleryComponentForMessageRequest$inboundSchema,
     TextDisplayComponentForMessageRequest$inboundSchema,
-    FileComponentForMessageRequest$inboundSchema,
-    SectionComponentForMessageRequest$inboundSchema,
     SeparatorComponentForMessageRequest$inboundSchema,
   ]);
 
 /** @internal */
 export type ContainerComponentForMessageRequestComponents$Outbound =
+  | SectionComponentForMessageRequest$Outbound
   | ActionRowComponentForMessageRequest$Outbound
+  | FileComponentForMessageRequest$Outbound
   | MediaGalleryComponentForMessageRequest$Outbound
   | TextDisplayComponentForMessageRequest$Outbound
-  | FileComponentForMessageRequest$Outbound
-  | SectionComponentForMessageRequest$Outbound
   | SeparatorComponentForMessageRequest$Outbound;
 
 /** @internal */
@@ -97,11 +98,11 @@ export const ContainerComponentForMessageRequestComponents$outboundSchema:
     z.ZodTypeDef,
     ContainerComponentForMessageRequestComponents
   > = z.union([
+    SectionComponentForMessageRequest$outboundSchema,
     ActionRowComponentForMessageRequest$outboundSchema,
+    FileComponentForMessageRequest$outboundSchema,
     MediaGalleryComponentForMessageRequest$outboundSchema,
     TextDisplayComponentForMessageRequest$outboundSchema,
-    FileComponentForMessageRequest$outboundSchema,
-    SectionComponentForMessageRequest$outboundSchema,
     SeparatorComponentForMessageRequest$outboundSchema,
   ]);
 
@@ -153,15 +154,16 @@ export const ContainerComponentForMessageRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
+  id: z.nullable(z.number().int()).optional(),
   accent_color: z.nullable(z.number().int()).optional(),
   components: z.array(
     z.union([
+      SectionComponentForMessageRequest$inboundSchema,
       ActionRowComponentForMessageRequest$inboundSchema,
+      FileComponentForMessageRequest$inboundSchema,
       MediaGalleryComponentForMessageRequest$inboundSchema,
       TextDisplayComponentForMessageRequest$inboundSchema,
-      FileComponentForMessageRequest$inboundSchema,
-      SectionComponentForMessageRequest$inboundSchema,
       SeparatorComponentForMessageRequest$inboundSchema,
     ]),
   ),
@@ -175,13 +177,14 @@ export const ContainerComponentForMessageRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ContainerComponentForMessageRequest$Outbound = {
   type: 1;
+  id?: number | null | undefined;
   accent_color?: number | null | undefined;
   components: Array<
+    | SectionComponentForMessageRequest$Outbound
     | ActionRowComponentForMessageRequest$Outbound
+    | FileComponentForMessageRequest$Outbound
     | MediaGalleryComponentForMessageRequest$Outbound
     | TextDisplayComponentForMessageRequest$Outbound
-    | FileComponentForMessageRequest$Outbound
-    | SectionComponentForMessageRequest$Outbound
     | SeparatorComponentForMessageRequest$Outbound
   >;
   spoiler?: boolean | null | undefined;
@@ -194,14 +197,15 @@ export const ContainerComponentForMessageRequest$outboundSchema: z.ZodType<
   ContainerComponentForMessageRequest
 > = z.object({
   type: z.literal(1).default(1 as const),
+  id: z.nullable(z.number().int()).optional(),
   accentColor: z.nullable(z.number().int()).optional(),
   components: z.array(
     z.union([
+      SectionComponentForMessageRequest$outboundSchema,
       ActionRowComponentForMessageRequest$outboundSchema,
+      FileComponentForMessageRequest$outboundSchema,
       MediaGalleryComponentForMessageRequest$outboundSchema,
       TextDisplayComponentForMessageRequest$outboundSchema,
-      FileComponentForMessageRequest$outboundSchema,
-      SectionComponentForMessageRequest$outboundSchema,
       SeparatorComponentForMessageRequest$outboundSchema,
     ]),
   ),

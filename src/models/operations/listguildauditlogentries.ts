@@ -6,16 +6,22 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListGuildAuditLogEntriesRequest = {
   guildId: string;
   userId?: string | undefined;
   targetId?: string | undefined;
-  actionType?: number | undefined;
+  actionType?: 1 | undefined;
   before?: string | undefined;
   after?: string | undefined;
   limit?: number | undefined;
+};
+
+export type ListGuildAuditLogEntriesResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildAuditLogResponse;
 };
 
 /** @internal */
@@ -27,7 +33,7 @@ export const ListGuildAuditLogEntriesRequest$inboundSchema: z.ZodType<
   guild_id: z.string(),
   user_id: z.string().optional(),
   target_id: z.string().optional(),
-  action_type: z.number().int().optional(),
+  action_type: z.literal(1).default(1).optional(),
   before: z.string().optional(),
   after: z.string().optional(),
   limit: z.number().int().optional(),
@@ -45,7 +51,7 @@ export type ListGuildAuditLogEntriesRequest$Outbound = {
   guild_id: string;
   user_id?: string | undefined;
   target_id?: string | undefined;
-  action_type?: number | undefined;
+  action_type: 1;
   before?: string | undefined;
   after?: string | undefined;
   limit?: number | undefined;
@@ -60,7 +66,7 @@ export const ListGuildAuditLogEntriesRequest$outboundSchema: z.ZodType<
   guildId: z.string(),
   userId: z.string().optional(),
   targetId: z.string().optional(),
-  actionType: z.number().int().optional(),
+  actionType: z.literal(1).default(1 as const),
   before: z.string().optional(),
   after: z.string().optional(),
   limit: z.number().int().optional(),
@@ -103,5 +109,74 @@ export function listGuildAuditLogEntriesRequestFromJSON(
     jsonString,
     (x) => ListGuildAuditLogEntriesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListGuildAuditLogEntriesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListGuildAuditLogEntriesResponse$inboundSchema: z.ZodType<
+  ListGuildAuditLogEntriesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildAuditLogResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListGuildAuditLogEntriesResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildAuditLogResponse$Outbound;
+};
+
+/** @internal */
+export const ListGuildAuditLogEntriesResponse$outboundSchema: z.ZodType<
+  ListGuildAuditLogEntriesResponse$Outbound,
+  z.ZodTypeDef,
+  ListGuildAuditLogEntriesResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildAuditLogResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListGuildAuditLogEntriesResponse$ {
+  /** @deprecated use `ListGuildAuditLogEntriesResponse$inboundSchema` instead. */
+  export const inboundSchema = ListGuildAuditLogEntriesResponse$inboundSchema;
+  /** @deprecated use `ListGuildAuditLogEntriesResponse$outboundSchema` instead. */
+  export const outboundSchema = ListGuildAuditLogEntriesResponse$outboundSchema;
+  /** @deprecated use `ListGuildAuditLogEntriesResponse$Outbound` instead. */
+  export type Outbound = ListGuildAuditLogEntriesResponse$Outbound;
+}
+
+export function listGuildAuditLogEntriesResponseToJSON(
+  listGuildAuditLogEntriesResponse: ListGuildAuditLogEntriesResponse,
+): string {
+  return JSON.stringify(
+    ListGuildAuditLogEntriesResponse$outboundSchema.parse(
+      listGuildAuditLogEntriesResponse,
+    ),
+  );
+}
+
+export function listGuildAuditLogEntriesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildAuditLogEntriesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildAuditLogEntriesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildAuditLogEntriesResponse' from JSON`,
   );
 }

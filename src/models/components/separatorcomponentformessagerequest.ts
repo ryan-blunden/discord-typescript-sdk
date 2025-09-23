@@ -9,6 +9,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SeparatorComponentForMessageRequest = {
   type?: 1 | undefined;
+  id?: number | null | undefined;
   spacing?: 1 | null | undefined;
   divider?: boolean | null | undefined;
 };
@@ -19,14 +20,16 @@ export const SeparatorComponentForMessageRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
-  spacing: z.nullable(z.literal(1)).optional(),
+  type: z.literal(1).default(1).optional(),
+  id: z.nullable(z.number().int()).optional(),
+  spacing: z.nullable(z.literal(1).default(1)).optional(),
   divider: z.nullable(z.boolean()).optional(),
 });
 
 /** @internal */
 export type SeparatorComponentForMessageRequest$Outbound = {
   type: 1;
+  id?: number | null | undefined;
   spacing: 1 | null;
   divider?: boolean | null | undefined;
 };
@@ -38,6 +41,7 @@ export const SeparatorComponentForMessageRequest$outboundSchema: z.ZodType<
   SeparatorComponentForMessageRequest
 > = z.object({
   type: z.literal(1).default(1 as const),
+  id: z.nullable(z.number().int()).optional(),
   spacing: z.nullable(z.literal(1).default(1 as const)),
   divider: z.nullable(z.boolean()).optional(),
 });

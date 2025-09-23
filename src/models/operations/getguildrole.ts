@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildRoleRequest = {
   guildId: string;
   roleId: string;
+};
+
+export type GetGuildRoleResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildRoleResponse;
 };
 
 /** @internal */
@@ -77,5 +83,72 @@ export function getGuildRoleRequestFromJSON(
     jsonString,
     (x) => GetGuildRoleRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGuildRoleRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildRoleResponse$inboundSchema: z.ZodType<
+  GetGuildRoleResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildRoleResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGuildRoleResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildRoleResponse$Outbound;
+};
+
+/** @internal */
+export const GetGuildRoleResponse$outboundSchema: z.ZodType<
+  GetGuildRoleResponse$Outbound,
+  z.ZodTypeDef,
+  GetGuildRoleResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildRoleResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildRoleResponse$ {
+  /** @deprecated use `GetGuildRoleResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGuildRoleResponse$inboundSchema;
+  /** @deprecated use `GetGuildRoleResponse$outboundSchema` instead. */
+  export const outboundSchema = GetGuildRoleResponse$outboundSchema;
+  /** @deprecated use `GetGuildRoleResponse$Outbound` instead. */
+  export type Outbound = GetGuildRoleResponse$Outbound;
+}
+
+export function getGuildRoleResponseToJSON(
+  getGuildRoleResponse: GetGuildRoleResponse,
+): string {
+  return JSON.stringify(
+    GetGuildRoleResponse$outboundSchema.parse(getGuildRoleResponse),
+  );
+}
+
+export function getGuildRoleResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildRoleResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildRoleResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildRoleResponse' from JSON`,
   );
 }

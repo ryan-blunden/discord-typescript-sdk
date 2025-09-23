@@ -25,7 +25,7 @@ export const MediaGalleryComponentResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
   id: z.number().int(),
   items: z.array(MediaGalleryItemResponse$inboundSchema),
 });

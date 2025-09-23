@@ -6,72 +6,18 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type SetGuildMfaLevelRequestBody = {
-  level?: 0 | undefined;
-};
 
 export type SetGuildMfaLevelRequest = {
   guildId: string;
-  requestBody: SetGuildMfaLevelRequestBody;
+  guildMFARequest: components.GuildMFARequest;
 };
 
-/** @internal */
-export const SetGuildMfaLevelRequestBody$inboundSchema: z.ZodType<
-  SetGuildMfaLevelRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  level: z.literal(0).optional(),
-});
-
-/** @internal */
-export type SetGuildMfaLevelRequestBody$Outbound = {
-  level: 0;
+export type SetGuildMfaLevelResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildMFALevelResponse;
 };
-
-/** @internal */
-export const SetGuildMfaLevelRequestBody$outboundSchema: z.ZodType<
-  SetGuildMfaLevelRequestBody$Outbound,
-  z.ZodTypeDef,
-  SetGuildMfaLevelRequestBody
-> = z.object({
-  level: z.literal(0).default(0 as const),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SetGuildMfaLevelRequestBody$ {
-  /** @deprecated use `SetGuildMfaLevelRequestBody$inboundSchema` instead. */
-  export const inboundSchema = SetGuildMfaLevelRequestBody$inboundSchema;
-  /** @deprecated use `SetGuildMfaLevelRequestBody$outboundSchema` instead. */
-  export const outboundSchema = SetGuildMfaLevelRequestBody$outboundSchema;
-  /** @deprecated use `SetGuildMfaLevelRequestBody$Outbound` instead. */
-  export type Outbound = SetGuildMfaLevelRequestBody$Outbound;
-}
-
-export function setGuildMfaLevelRequestBodyToJSON(
-  setGuildMfaLevelRequestBody: SetGuildMfaLevelRequestBody,
-): string {
-  return JSON.stringify(
-    SetGuildMfaLevelRequestBody$outboundSchema.parse(
-      setGuildMfaLevelRequestBody,
-    ),
-  );
-}
-
-export function setGuildMfaLevelRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<SetGuildMfaLevelRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SetGuildMfaLevelRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SetGuildMfaLevelRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const SetGuildMfaLevelRequest$inboundSchema: z.ZodType<
@@ -80,18 +26,18 @@ export const SetGuildMfaLevelRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   guild_id: z.string(),
-  RequestBody: z.lazy(() => SetGuildMfaLevelRequestBody$inboundSchema),
+  GuildMFARequest: components.GuildMFARequest$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",
-    "RequestBody": "requestBody",
+    "GuildMFARequest": "guildMFARequest",
   });
 });
 
 /** @internal */
 export type SetGuildMfaLevelRequest$Outbound = {
   guild_id: string;
-  RequestBody: SetGuildMfaLevelRequestBody$Outbound;
+  GuildMFARequest: components.GuildMFARequest$Outbound;
 };
 
 /** @internal */
@@ -101,11 +47,11 @@ export const SetGuildMfaLevelRequest$outboundSchema: z.ZodType<
   SetGuildMfaLevelRequest
 > = z.object({
   guildId: z.string(),
-  requestBody: z.lazy(() => SetGuildMfaLevelRequestBody$outboundSchema),
+  guildMFARequest: components.GuildMFARequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     guildId: "guild_id",
-    requestBody: "RequestBody",
+    guildMFARequest: "GuildMFARequest",
   });
 });
 
@@ -137,5 +83,72 @@ export function setGuildMfaLevelRequestFromJSON(
     jsonString,
     (x) => SetGuildMfaLevelRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'SetGuildMfaLevelRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const SetGuildMfaLevelResponse$inboundSchema: z.ZodType<
+  SetGuildMfaLevelResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildMFALevelResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type SetGuildMfaLevelResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildMFALevelResponse$Outbound;
+};
+
+/** @internal */
+export const SetGuildMfaLevelResponse$outboundSchema: z.ZodType<
+  SetGuildMfaLevelResponse$Outbound,
+  z.ZodTypeDef,
+  SetGuildMfaLevelResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildMFALevelResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SetGuildMfaLevelResponse$ {
+  /** @deprecated use `SetGuildMfaLevelResponse$inboundSchema` instead. */
+  export const inboundSchema = SetGuildMfaLevelResponse$inboundSchema;
+  /** @deprecated use `SetGuildMfaLevelResponse$outboundSchema` instead. */
+  export const outboundSchema = SetGuildMfaLevelResponse$outboundSchema;
+  /** @deprecated use `SetGuildMfaLevelResponse$Outbound` instead. */
+  export type Outbound = SetGuildMfaLevelResponse$Outbound;
+}
+
+export function setGuildMfaLevelResponseToJSON(
+  setGuildMfaLevelResponse: SetGuildMfaLevelResponse,
+): string {
+  return JSON.stringify(
+    SetGuildMfaLevelResponse$outboundSchema.parse(setGuildMfaLevelResponse),
+  );
+}
+
+export function setGuildMfaLevelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<SetGuildMfaLevelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SetGuildMfaLevelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SetGuildMfaLevelResponse' from JSON`,
   );
 }

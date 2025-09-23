@@ -29,6 +29,7 @@ Returns the messages for a channel. If operating on a guild channel, this endpoi
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_messages" method="get" path="/channels/{channel_id}/messages" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -87,14 +88,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListMessagesResponse](../../models/operations/listmessagesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createJson
 
@@ -102,6 +104,7 @@ Post a message to a guild text or DM channel. If operating on a guild channel, t
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_message_json" method="post" path="/channels/{channel_id}/messages" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -162,14 +165,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.CreateMessageJsonResponse](../../models/operations/createmessagejsonresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createForm
 
@@ -177,6 +181,7 @@ Post a message to a guild text or DM channel. If operating on a guild channel, t
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_message_form" method="post" path="/channels/{channel_id}/messages" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -237,14 +242,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.CreateMessageFormResponse](../../models/operations/createmessageformresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createMultipart
 
@@ -252,6 +258,7 @@ Post a message to a guild text or DM channel. If operating on a guild channel, t
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_message_multipart" method="post" path="/channels/{channel_id}/messages" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -312,14 +319,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.CreateMessageMultipartResponse](../../models/operations/createmessagemultipartresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## bulkDelete
 
@@ -327,6 +335,7 @@ Delete multiple messages in a single request. This endpoint can only be used on 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="bulk_delete_messages" method="post" path="/channels/{channel_id}/messages/bulk-delete" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -335,7 +344,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.bulkDelete({
+  const result = await discord.messages.bulkDelete({
     channelId: "<value>",
     requestBody: {
       messages: [
@@ -344,7 +353,7 @@ async function run() {
     },
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -375,7 +384,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesBulkDelete failed:", res.error);
   }
@@ -395,14 +404,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.BulkDeleteMessagesResponse](../../models/operations/bulkdeletemessagesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -410,6 +420,7 @@ Returns a specific message in the channel. If operating on a guild channel, this
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_message" method="get" path="/channels/{channel_id}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -470,14 +481,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.GetMessageResponse](../../models/operations/getmessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -485,6 +497,7 @@ Delete a message. If operating on a guild channel and trying to delete a message
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_message" method="delete" path="/channels/{channel_id}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -493,12 +506,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.delete({
+  const result = await discord.messages.delete({
     channelId: "<value>",
     messageId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -525,7 +538,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesDelete failed:", res.error);
   }
@@ -545,14 +558,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteMessageResponse](../../models/operations/deletemessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateJson
 
@@ -560,6 +574,7 @@ Edit a previously sent message. The fields content, embeds, and flags can be edi
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_message_json" method="patch" path="/channels/{channel_id}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -622,14 +637,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateMessageJsonResponse](../../models/operations/updatemessagejsonresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateForm
 
@@ -637,6 +653,7 @@ Edit a previously sent message. The fields content, embeds, and flags can be edi
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_message_form" method="patch" path="/channels/{channel_id}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -699,14 +716,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateMessageFormResponse](../../models/operations/updatemessageformresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateMultipart
 
@@ -714,6 +732,7 @@ Edit a previously sent message. The fields content, embeds, and flags can be edi
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_message_multipart" method="patch" path="/channels/{channel_id}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -776,14 +795,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateMessageMultipartResponse](../../models/operations/updatemessagemultipartresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## crosspost
 
@@ -791,6 +811,7 @@ Crosspost a message in an Announcement Channel to following channels. This endpo
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="crosspost_message" method="post" path="/channels/{channel_id}/messages/{message_id}/crosspost" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -851,14 +872,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.CrosspostMessageResponse](../../models/operations/crosspostmessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteAllReactions
 
@@ -866,6 +888,7 @@ Deletes all reactions on a message. This endpoint requires the MANAGE_MESSAGES p
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_all_message_reactions" method="delete" path="/channels/{channel_id}/messages/{message_id}/reactions" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -874,12 +897,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.deleteAllReactions({
+  const result = await discord.messages.deleteAllReactions({
     channelId: "<value>",
     messageId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -906,7 +929,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesDeleteAllReactions failed:", res.error);
   }
@@ -926,14 +949,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteAllMessageReactionsResponse](../../models/operations/deleteallmessagereactionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listReactionsByEmoji
 
@@ -941,6 +965,7 @@ Get a list of users that reacted with a specific emoji.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_message_reactions_by_emoji" method="get" path="/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1003,14 +1028,15 @@ run();
 
 ### Response
 
-**Promise\<[components.UserResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListMessageReactionsByEmojiResponse](../../models/operations/listmessagereactionsbyemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteAllReactionsForEmoji
 
@@ -1018,6 +1044,7 @@ Deletes all the reactions for a given emoji on a message. This endpoint requires
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_all_message_reactions_by_emoji" method="delete" path="/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1026,13 +1053,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.deleteAllReactionsForEmoji({
+  const result = await discord.messages.deleteAllReactionsForEmoji({
     channelId: "<value>",
     messageId: "<value>",
     emojiName: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1060,7 +1087,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesDeleteAllReactionsForEmoji failed:", res.error);
   }
@@ -1080,14 +1107,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteAllMessageReactionsByEmojiResponse](../../models/operations/deleteallmessagereactionsbyemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createReaction
 
@@ -1095,6 +1123,7 @@ Create a reaction for the message. This endpoint requires the READ_MESSAGE_HISTO
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="add_my_message_reaction" method="put" path="/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1103,13 +1132,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.createReaction({
+  const result = await discord.messages.createReaction({
     channelId: "<value>",
     messageId: "<value>",
     emojiName: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1137,7 +1166,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesCreateReaction failed:", res.error);
   }
@@ -1157,14 +1186,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.AddMyMessageReactionResponse](../../models/operations/addmymessagereactionresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteOwnReaction
 
@@ -1172,6 +1202,7 @@ Delete a reaction the current user has made for the message. Returns a 204 empty
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_my_message_reaction" method="delete" path="/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1180,13 +1211,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.deleteOwnReaction({
+  const result = await discord.messages.deleteOwnReaction({
     channelId: "<value>",
     messageId: "<value>",
     emojiName: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1214,7 +1245,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesDeleteOwnReaction failed:", res.error);
   }
@@ -1234,14 +1265,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteMyMessageReactionResponse](../../models/operations/deletemymessagereactionresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteUserReaction
 
@@ -1249,6 +1281,7 @@ Deletes another user's reaction. This endpoint requires the MANAGE_MESSAGES perm
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_user_message_reaction" method="delete" path="/channels/{channel_id}/messages/{message_id}/reactions/{emoji_name}/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1257,14 +1290,14 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.deleteUserReaction({
+  const result = await discord.messages.deleteUserReaction({
     channelId: "<value>",
     messageId: "<value>",
     emojiName: "<value>",
     userId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1293,7 +1326,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesDeleteUserReaction failed:", res.error);
   }
@@ -1313,11 +1346,12 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteUserMessageReactionResponse](../../models/operations/deleteusermessagereactionresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

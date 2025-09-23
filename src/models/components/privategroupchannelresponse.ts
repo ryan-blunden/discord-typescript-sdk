@@ -49,9 +49,9 @@ export type PrivateGroupChannelResponse = {
   recipients: Array<UserResponse>;
   name?: string | null | undefined;
   icon?: string | null | undefined;
-  ownerId?: string | null | undefined;
-  managed?: boolean | null | undefined;
-  applicationId?: string | null | undefined;
+  ownerId: string;
+  managed?: boolean | undefined;
+  applicationId?: string | undefined;
 };
 
 /** @internal */
@@ -91,9 +91,9 @@ export const PrivateGroupChannelResponse$inboundSchema: z.ZodType<
   recipients: z.array(UserResponse$inboundSchema),
   name: z.nullable(z.string()).optional(),
   icon: z.nullable(z.string()).optional(),
-  owner_id: z.nullable(z.string()).optional(),
-  managed: z.nullable(z.boolean()).optional(),
-  application_id: z.nullable(z.string()).optional(),
+  owner_id: z.string(),
+  managed: z.boolean().optional(),
+  application_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "last_message_id": "lastMessageId",
@@ -113,9 +113,9 @@ export type PrivateGroupChannelResponse$Outbound = {
   recipients: Array<UserResponse$Outbound>;
   name?: string | null | undefined;
   icon?: string | null | undefined;
-  owner_id?: string | null | undefined;
-  managed?: boolean | null | undefined;
-  application_id?: string | null | undefined;
+  owner_id: string;
+  managed?: boolean | undefined;
+  application_id?: string | undefined;
 };
 
 /** @internal */
@@ -133,9 +133,9 @@ export const PrivateGroupChannelResponse$outboundSchema: z.ZodType<
   recipients: z.array(UserResponse$outboundSchema),
   name: z.nullable(z.string()).optional(),
   icon: z.nullable(z.string()).optional(),
-  ownerId: z.nullable(z.string()).optional(),
-  managed: z.nullable(z.boolean()).optional(),
-  applicationId: z.nullable(z.string()).optional(),
+  ownerId: z.string(),
+  managed: z.boolean().optional(),
+  applicationId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     lastMessageId: "last_message_id",

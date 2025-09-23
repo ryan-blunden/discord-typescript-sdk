@@ -26,6 +26,12 @@ import {
   ContainerComponentForMessageRequest$outboundSchema,
 } from "./containercomponentformessagerequest.js";
 import {
+  CustomClientThemeShareRequest,
+  CustomClientThemeShareRequest$inboundSchema,
+  CustomClientThemeShareRequest$Outbound,
+  CustomClientThemeShareRequest$outboundSchema,
+} from "./customclientthemesharerequest.js";
+import {
   FileComponentForMessageRequest,
   FileComponentForMessageRequest$inboundSchema,
   FileComponentForMessageRequest$Outbound,
@@ -81,13 +87,13 @@ import {
 } from "./textdisplaycomponentformessagerequest.js";
 
 export type BaseCreateMessageCreateRequestComponents =
+  | SectionComponentForMessageRequest
   | ActionRowComponentForMessageRequest
+  | ContainerComponentForMessageRequest
+  | FileComponentForMessageRequest
   | MediaGalleryComponentForMessageRequest
   | TextDisplayComponentForMessageRequest
-  | FileComponentForMessageRequest
-  | SectionComponentForMessageRequest
-  | SeparatorComponentForMessageRequest
-  | ContainerComponentForMessageRequest;
+  | SeparatorComponentForMessageRequest;
 
 export type BaseCreateMessageCreateRequest = {
   content?: string | null | undefined;
@@ -96,19 +102,20 @@ export type BaseCreateMessageCreateRequest = {
   stickerIds?: Array<string> | null | undefined;
   components?:
     | Array<
+      | SectionComponentForMessageRequest
       | ActionRowComponentForMessageRequest
+      | ContainerComponentForMessageRequest
+      | FileComponentForMessageRequest
       | MediaGalleryComponentForMessageRequest
       | TextDisplayComponentForMessageRequest
-      | FileComponentForMessageRequest
-      | SectionComponentForMessageRequest
       | SeparatorComponentForMessageRequest
-      | ContainerComponentForMessageRequest
     >
     | null
     | undefined;
   flags?: number | null | undefined;
   attachments?: Array<MessageAttachmentRequest> | null | undefined;
   poll?: PollCreateRequest | null | undefined;
+  sharedClientTheme?: CustomClientThemeShareRequest | null | undefined;
   confettiPotion?: ConfettiPotionCreateRequest | null | undefined;
 };
 
@@ -118,24 +125,24 @@ export const BaseCreateMessageCreateRequestComponents$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  SectionComponentForMessageRequest$inboundSchema,
   ActionRowComponentForMessageRequest$inboundSchema,
+  ContainerComponentForMessageRequest$inboundSchema,
+  FileComponentForMessageRequest$inboundSchema,
   MediaGalleryComponentForMessageRequest$inboundSchema,
   TextDisplayComponentForMessageRequest$inboundSchema,
-  FileComponentForMessageRequest$inboundSchema,
-  SectionComponentForMessageRequest$inboundSchema,
   SeparatorComponentForMessageRequest$inboundSchema,
-  ContainerComponentForMessageRequest$inboundSchema,
 ]);
 
 /** @internal */
 export type BaseCreateMessageCreateRequestComponents$Outbound =
+  | SectionComponentForMessageRequest$Outbound
   | ActionRowComponentForMessageRequest$Outbound
+  | ContainerComponentForMessageRequest$Outbound
+  | FileComponentForMessageRequest$Outbound
   | MediaGalleryComponentForMessageRequest$Outbound
   | TextDisplayComponentForMessageRequest$Outbound
-  | FileComponentForMessageRequest$Outbound
-  | SectionComponentForMessageRequest$Outbound
-  | SeparatorComponentForMessageRequest$Outbound
-  | ContainerComponentForMessageRequest$Outbound;
+  | SeparatorComponentForMessageRequest$Outbound;
 
 /** @internal */
 export const BaseCreateMessageCreateRequestComponents$outboundSchema: z.ZodType<
@@ -143,13 +150,13 @@ export const BaseCreateMessageCreateRequestComponents$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BaseCreateMessageCreateRequestComponents
 > = z.union([
+  SectionComponentForMessageRequest$outboundSchema,
   ActionRowComponentForMessageRequest$outboundSchema,
+  ContainerComponentForMessageRequest$outboundSchema,
+  FileComponentForMessageRequest$outboundSchema,
   MediaGalleryComponentForMessageRequest$outboundSchema,
   TextDisplayComponentForMessageRequest$outboundSchema,
-  FileComponentForMessageRequest$outboundSchema,
-  SectionComponentForMessageRequest$outboundSchema,
   SeparatorComponentForMessageRequest$outboundSchema,
-  ContainerComponentForMessageRequest$outboundSchema,
 ]);
 
 /**
@@ -208,13 +215,13 @@ export const BaseCreateMessageCreateRequest$inboundSchema: z.ZodType<
   components: z.nullable(
     z.array(
       z.union([
+        SectionComponentForMessageRequest$inboundSchema,
         ActionRowComponentForMessageRequest$inboundSchema,
+        ContainerComponentForMessageRequest$inboundSchema,
+        FileComponentForMessageRequest$inboundSchema,
         MediaGalleryComponentForMessageRequest$inboundSchema,
         TextDisplayComponentForMessageRequest$inboundSchema,
-        FileComponentForMessageRequest$inboundSchema,
-        SectionComponentForMessageRequest$inboundSchema,
         SeparatorComponentForMessageRequest$inboundSchema,
-        ContainerComponentForMessageRequest$inboundSchema,
       ]),
     ),
   ).optional(),
@@ -222,12 +229,15 @@ export const BaseCreateMessageCreateRequest$inboundSchema: z.ZodType<
   attachments: z.nullable(z.array(MessageAttachmentRequest$inboundSchema))
     .optional(),
   poll: z.nullable(PollCreateRequest$inboundSchema).optional(),
+  shared_client_theme: z.nullable(CustomClientThemeShareRequest$inboundSchema)
+    .optional(),
   confetti_potion: z.nullable(ConfettiPotionCreateRequest$inboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     "allowed_mentions": "allowedMentions",
     "sticker_ids": "stickerIds",
+    "shared_client_theme": "sharedClientTheme",
     "confetti_potion": "confettiPotion",
   });
 });
@@ -240,19 +250,23 @@ export type BaseCreateMessageCreateRequest$Outbound = {
   sticker_ids?: Array<string> | null | undefined;
   components?:
     | Array<
+      | SectionComponentForMessageRequest$Outbound
       | ActionRowComponentForMessageRequest$Outbound
+      | ContainerComponentForMessageRequest$Outbound
+      | FileComponentForMessageRequest$Outbound
       | MediaGalleryComponentForMessageRequest$Outbound
       | TextDisplayComponentForMessageRequest$Outbound
-      | FileComponentForMessageRequest$Outbound
-      | SectionComponentForMessageRequest$Outbound
       | SeparatorComponentForMessageRequest$Outbound
-      | ContainerComponentForMessageRequest$Outbound
     >
     | null
     | undefined;
   flags?: number | null | undefined;
   attachments?: Array<MessageAttachmentRequest$Outbound> | null | undefined;
   poll?: PollCreateRequest$Outbound | null | undefined;
+  shared_client_theme?:
+    | CustomClientThemeShareRequest$Outbound
+    | null
+    | undefined;
   confetti_potion?: ConfettiPotionCreateRequest$Outbound | null | undefined;
 };
 
@@ -270,13 +284,13 @@ export const BaseCreateMessageCreateRequest$outboundSchema: z.ZodType<
   components: z.nullable(
     z.array(
       z.union([
+        SectionComponentForMessageRequest$outboundSchema,
         ActionRowComponentForMessageRequest$outboundSchema,
+        ContainerComponentForMessageRequest$outboundSchema,
+        FileComponentForMessageRequest$outboundSchema,
         MediaGalleryComponentForMessageRequest$outboundSchema,
         TextDisplayComponentForMessageRequest$outboundSchema,
-        FileComponentForMessageRequest$outboundSchema,
-        SectionComponentForMessageRequest$outboundSchema,
         SeparatorComponentForMessageRequest$outboundSchema,
-        ContainerComponentForMessageRequest$outboundSchema,
       ]),
     ),
   ).optional(),
@@ -284,12 +298,15 @@ export const BaseCreateMessageCreateRequest$outboundSchema: z.ZodType<
   attachments: z.nullable(z.array(MessageAttachmentRequest$outboundSchema))
     .optional(),
   poll: z.nullable(PollCreateRequest$outboundSchema).optional(),
+  sharedClientTheme: z.nullable(CustomClientThemeShareRequest$outboundSchema)
+    .optional(),
   confettiPotion: z.nullable(ConfettiPotionCreateRequest$outboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     allowedMentions: "allowed_mentions",
     stickerIds: "sticker_ids",
+    sharedClientTheme: "shared_client_theme",
     confettiPotion: "confetti_potion",
   });
 });

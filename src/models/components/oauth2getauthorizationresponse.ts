@@ -23,7 +23,7 @@ export type OAuth2GetAuthorizationResponse = {
   application: ApplicationResponse;
   expires: Date;
   scopes: Array<string>;
-  user?: UserResponse | null | undefined;
+  user?: UserResponse | undefined;
 };
 
 /** @internal */
@@ -35,7 +35,7 @@ export const OAuth2GetAuthorizationResponse$inboundSchema: z.ZodType<
   application: ApplicationResponse$inboundSchema,
   expires: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   scopes: z.array(z.string()),
-  user: z.nullable(UserResponse$inboundSchema).optional(),
+  user: UserResponse$inboundSchema.optional(),
 });
 
 /** @internal */
@@ -43,7 +43,7 @@ export type OAuth2GetAuthorizationResponse$Outbound = {
   application: ApplicationResponse$Outbound;
   expires: string;
   scopes: Array<string>;
-  user?: UserResponse$Outbound | null | undefined;
+  user?: UserResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -55,7 +55,7 @@ export const OAuth2GetAuthorizationResponse$outboundSchema: z.ZodType<
   application: ApplicationResponse$outboundSchema,
   expires: z.date().transform(v => v.toISOString()),
   scopes: z.array(z.string()),
-  user: z.nullable(UserResponse$outboundSchema).optional(),
+  user: UserResponse$outboundSchema.optional(),
 });
 
 /**

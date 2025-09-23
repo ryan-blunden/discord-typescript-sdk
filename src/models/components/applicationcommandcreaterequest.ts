@@ -77,15 +77,15 @@ import {
 export type ApplicationCommandCreateRequestOptions =
   | ApplicationCommandAttachmentOption
   | ApplicationCommandBooleanOption
-  | ApplicationCommandMentionableOption
-  | ApplicationCommandRoleOption
-  | ApplicationCommandUserOption
   | ApplicationCommandChannelOption
+  | ApplicationCommandIntegerOption
+  | ApplicationCommandMentionableOption
+  | ApplicationCommandNumberOption
+  | ApplicationCommandRoleOption
+  | ApplicationCommandStringOption
   | ApplicationCommandSubcommandGroupOption
   | ApplicationCommandSubcommandOption
-  | ApplicationCommandIntegerOption
-  | ApplicationCommandNumberOption
-  | ApplicationCommandStringOption;
+  | ApplicationCommandUserOption;
 
 export type ApplicationCommandCreateRequest = {
   name: string;
@@ -96,15 +96,15 @@ export type ApplicationCommandCreateRequest = {
     | Array<
       | ApplicationCommandAttachmentOption
       | ApplicationCommandBooleanOption
-      | ApplicationCommandMentionableOption
-      | ApplicationCommandRoleOption
-      | ApplicationCommandUserOption
       | ApplicationCommandChannelOption
+      | ApplicationCommandIntegerOption
+      | ApplicationCommandMentionableOption
+      | ApplicationCommandNumberOption
+      | ApplicationCommandRoleOption
+      | ApplicationCommandStringOption
       | ApplicationCommandSubcommandGroupOption
       | ApplicationCommandSubcommandOption
-      | ApplicationCommandIntegerOption
-      | ApplicationCommandNumberOption
-      | ApplicationCommandStringOption
+      | ApplicationCommandUserOption
     >
     | null
     | undefined;
@@ -124,30 +124,30 @@ export const ApplicationCommandCreateRequestOptions$inboundSchema: z.ZodType<
 > = z.union([
   ApplicationCommandAttachmentOption$inboundSchema,
   ApplicationCommandBooleanOption$inboundSchema,
-  ApplicationCommandMentionableOption$inboundSchema,
-  ApplicationCommandRoleOption$inboundSchema,
-  ApplicationCommandUserOption$inboundSchema,
   ApplicationCommandChannelOption$inboundSchema,
+  ApplicationCommandIntegerOption$inboundSchema,
+  ApplicationCommandMentionableOption$inboundSchema,
+  ApplicationCommandNumberOption$inboundSchema,
+  ApplicationCommandRoleOption$inboundSchema,
+  ApplicationCommandStringOption$inboundSchema,
   ApplicationCommandSubcommandGroupOption$inboundSchema,
   ApplicationCommandSubcommandOption$inboundSchema,
-  ApplicationCommandIntegerOption$inboundSchema,
-  ApplicationCommandNumberOption$inboundSchema,
-  ApplicationCommandStringOption$inboundSchema,
+  ApplicationCommandUserOption$inboundSchema,
 ]);
 
 /** @internal */
 export type ApplicationCommandCreateRequestOptions$Outbound =
   | ApplicationCommandAttachmentOption$Outbound
   | ApplicationCommandBooleanOption$Outbound
-  | ApplicationCommandMentionableOption$Outbound
-  | ApplicationCommandRoleOption$Outbound
-  | ApplicationCommandUserOption$Outbound
   | ApplicationCommandChannelOption$Outbound
+  | ApplicationCommandIntegerOption$Outbound
+  | ApplicationCommandMentionableOption$Outbound
+  | ApplicationCommandNumberOption$Outbound
+  | ApplicationCommandRoleOption$Outbound
+  | ApplicationCommandStringOption$Outbound
   | ApplicationCommandSubcommandGroupOption$Outbound
   | ApplicationCommandSubcommandOption$Outbound
-  | ApplicationCommandIntegerOption$Outbound
-  | ApplicationCommandNumberOption$Outbound
-  | ApplicationCommandStringOption$Outbound;
+  | ApplicationCommandUserOption$Outbound;
 
 /** @internal */
 export const ApplicationCommandCreateRequestOptions$outboundSchema: z.ZodType<
@@ -157,15 +157,15 @@ export const ApplicationCommandCreateRequestOptions$outboundSchema: z.ZodType<
 > = z.union([
   ApplicationCommandAttachmentOption$outboundSchema,
   ApplicationCommandBooleanOption$outboundSchema,
-  ApplicationCommandMentionableOption$outboundSchema,
-  ApplicationCommandRoleOption$outboundSchema,
-  ApplicationCommandUserOption$outboundSchema,
   ApplicationCommandChannelOption$outboundSchema,
+  ApplicationCommandIntegerOption$outboundSchema,
+  ApplicationCommandMentionableOption$outboundSchema,
+  ApplicationCommandNumberOption$outboundSchema,
+  ApplicationCommandRoleOption$outboundSchema,
+  ApplicationCommandStringOption$outboundSchema,
   ApplicationCommandSubcommandGroupOption$outboundSchema,
   ApplicationCommandSubcommandOption$outboundSchema,
-  ApplicationCommandIntegerOption$outboundSchema,
-  ApplicationCommandNumberOption$outboundSchema,
-  ApplicationCommandStringOption$outboundSchema,
+  ApplicationCommandUserOption$outboundSchema,
 ]);
 
 /**
@@ -220,15 +220,15 @@ export const ApplicationCommandCreateRequest$inboundSchema: z.ZodType<
       z.union([
         ApplicationCommandAttachmentOption$inboundSchema,
         ApplicationCommandBooleanOption$inboundSchema,
-        ApplicationCommandMentionableOption$inboundSchema,
-        ApplicationCommandRoleOption$inboundSchema,
-        ApplicationCommandUserOption$inboundSchema,
         ApplicationCommandChannelOption$inboundSchema,
+        ApplicationCommandIntegerOption$inboundSchema,
+        ApplicationCommandMentionableOption$inboundSchema,
+        ApplicationCommandNumberOption$inboundSchema,
+        ApplicationCommandRoleOption$inboundSchema,
+        ApplicationCommandStringOption$inboundSchema,
         ApplicationCommandSubcommandGroupOption$inboundSchema,
         ApplicationCommandSubcommandOption$inboundSchema,
-        ApplicationCommandIntegerOption$inboundSchema,
-        ApplicationCommandNumberOption$inboundSchema,
-        ApplicationCommandStringOption$inboundSchema,
+        ApplicationCommandUserOption$inboundSchema,
       ]),
     ),
   ).optional(),
@@ -237,7 +237,7 @@ export const ApplicationCommandCreateRequest$inboundSchema: z.ZodType<
   contexts: z.nullable(z.array(z.number().int())).optional(),
   integration_types: z.nullable(z.array(z.number().int())).optional(),
   handler: z.nullable(z.number().int()).optional(),
-  type: z.nullable(z.literal(1)).optional(),
+  type: z.nullable(z.literal(1).default(1)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "name_localizations": "nameLocalizations",
@@ -258,15 +258,15 @@ export type ApplicationCommandCreateRequest$Outbound = {
     | Array<
       | ApplicationCommandAttachmentOption$Outbound
       | ApplicationCommandBooleanOption$Outbound
-      | ApplicationCommandMentionableOption$Outbound
-      | ApplicationCommandRoleOption$Outbound
-      | ApplicationCommandUserOption$Outbound
       | ApplicationCommandChannelOption$Outbound
+      | ApplicationCommandIntegerOption$Outbound
+      | ApplicationCommandMentionableOption$Outbound
+      | ApplicationCommandNumberOption$Outbound
+      | ApplicationCommandRoleOption$Outbound
+      | ApplicationCommandStringOption$Outbound
       | ApplicationCommandSubcommandGroupOption$Outbound
       | ApplicationCommandSubcommandOption$Outbound
-      | ApplicationCommandIntegerOption$Outbound
-      | ApplicationCommandNumberOption$Outbound
-      | ApplicationCommandStringOption$Outbound
+      | ApplicationCommandUserOption$Outbound
     >
     | null
     | undefined;
@@ -293,15 +293,15 @@ export const ApplicationCommandCreateRequest$outboundSchema: z.ZodType<
       z.union([
         ApplicationCommandAttachmentOption$outboundSchema,
         ApplicationCommandBooleanOption$outboundSchema,
-        ApplicationCommandMentionableOption$outboundSchema,
-        ApplicationCommandRoleOption$outboundSchema,
-        ApplicationCommandUserOption$outboundSchema,
         ApplicationCommandChannelOption$outboundSchema,
+        ApplicationCommandIntegerOption$outboundSchema,
+        ApplicationCommandMentionableOption$outboundSchema,
+        ApplicationCommandNumberOption$outboundSchema,
+        ApplicationCommandRoleOption$outboundSchema,
+        ApplicationCommandStringOption$outboundSchema,
         ApplicationCommandSubcommandGroupOption$outboundSchema,
         ApplicationCommandSubcommandOption$outboundSchema,
-        ApplicationCommandIntegerOption$outboundSchema,
-        ApplicationCommandNumberOption$outboundSchema,
-        ApplicationCommandStringOption$outboundSchema,
+        ApplicationCommandUserOption$outboundSchema,
       ]),
     ),
   ).optional(),

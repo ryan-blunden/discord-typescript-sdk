@@ -23,12 +23,12 @@ export type ChannelSelectComponentResponse = {
   type?: 1 | undefined;
   id: number;
   customId: string;
-  placeholder?: string | null | undefined;
+  placeholder?: string | undefined;
   minValues?: number | null | undefined;
   maxValues?: number | null | undefined;
-  disabled?: boolean | null | undefined;
-  channelTypes?: Array<ChannelTypes> | null | undefined;
-  defaultValues?: Array<ChannelSelectDefaultValueResponse> | null | undefined;
+  disabled?: boolean | undefined;
+  channelTypes?: Array<ChannelTypes> | undefined;
+  defaultValues?: Array<ChannelSelectDefaultValueResponse> | undefined;
 };
 
 /** @internal */
@@ -37,17 +37,16 @@ export const ChannelSelectComponentResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
   id: z.number().int(),
   custom_id: z.string(),
-  placeholder: z.nullable(z.string()).optional(),
+  placeholder: z.string().optional(),
   min_values: z.nullable(z.number().int()).optional(),
   max_values: z.nullable(z.number().int()).optional(),
-  disabled: z.nullable(z.boolean()).optional(),
-  channel_types: z.nullable(z.array(ChannelTypes$inboundSchema)).optional(),
-  default_values: z.nullable(
-    z.array(ChannelSelectDefaultValueResponse$inboundSchema),
-  ).optional(),
+  disabled: z.boolean().optional(),
+  channel_types: z.array(ChannelTypes$inboundSchema).optional(),
+  default_values: z.array(ChannelSelectDefaultValueResponse$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "custom_id": "customId",
@@ -63,14 +62,13 @@ export type ChannelSelectComponentResponse$Outbound = {
   type: 1;
   id: number;
   custom_id: string;
-  placeholder?: string | null | undefined;
+  placeholder?: string | undefined;
   min_values?: number | null | undefined;
   max_values?: number | null | undefined;
-  disabled?: boolean | null | undefined;
-  channel_types?: Array<number> | null | undefined;
+  disabled?: boolean | undefined;
+  channel_types?: Array<number> | undefined;
   default_values?:
     | Array<ChannelSelectDefaultValueResponse$Outbound>
-    | null
     | undefined;
 };
 
@@ -83,14 +81,13 @@ export const ChannelSelectComponentResponse$outboundSchema: z.ZodType<
   type: z.literal(1).default(1 as const),
   id: z.number().int(),
   customId: z.string(),
-  placeholder: z.nullable(z.string()).optional(),
+  placeholder: z.string().optional(),
   minValues: z.nullable(z.number().int()).optional(),
   maxValues: z.nullable(z.number().int()).optional(),
-  disabled: z.nullable(z.boolean()).optional(),
-  channelTypes: z.nullable(z.array(ChannelTypes$outboundSchema)).optional(),
-  defaultValues: z.nullable(
-    z.array(ChannelSelectDefaultValueResponse$outboundSchema),
-  ).optional(),
+  disabled: z.boolean().optional(),
+  channelTypes: z.array(ChannelTypes$outboundSchema).optional(),
+  defaultValues: z.array(ChannelSelectDefaultValueResponse$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     customId: "custom_id",

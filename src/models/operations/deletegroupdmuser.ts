@@ -13,6 +13,10 @@ export type DeleteGroupDmUserRequest = {
   userId: string;
 };
 
+export type DeleteGroupDmUserResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteGroupDmUserRequest$inboundSchema: z.ZodType<
   DeleteGroupDmUserRequest,
@@ -77,5 +81,67 @@ export function deleteGroupDmUserRequestFromJSON(
     jsonString,
     (x) => DeleteGroupDmUserRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteGroupDmUserRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteGroupDmUserResponse$inboundSchema: z.ZodType<
+  DeleteGroupDmUserResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteGroupDmUserResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteGroupDmUserResponse$outboundSchema: z.ZodType<
+  DeleteGroupDmUserResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteGroupDmUserResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteGroupDmUserResponse$ {
+  /** @deprecated use `DeleteGroupDmUserResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteGroupDmUserResponse$inboundSchema;
+  /** @deprecated use `DeleteGroupDmUserResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteGroupDmUserResponse$outboundSchema;
+  /** @deprecated use `DeleteGroupDmUserResponse$Outbound` instead. */
+  export type Outbound = DeleteGroupDmUserResponse$Outbound;
+}
+
+export function deleteGroupDmUserResponseToJSON(
+  deleteGroupDmUserResponse: DeleteGroupDmUserResponse,
+): string {
+  return JSON.stringify(
+    DeleteGroupDmUserResponse$outboundSchema.parse(deleteGroupDmUserResponse),
+  );
+}
+
+export function deleteGroupDmUserResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGroupDmUserResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteGroupDmUserResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGroupDmUserResponse' from JSON`,
   );
 }

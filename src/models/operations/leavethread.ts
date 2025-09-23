@@ -12,6 +12,10 @@ export type LeaveThreadRequest = {
   channelId: string;
 };
 
+export type LeaveThreadResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const LeaveThreadRequest$inboundSchema: z.ZodType<
   LeaveThreadRequest,
@@ -71,5 +75,67 @@ export function leaveThreadRequestFromJSON(
     jsonString,
     (x) => LeaveThreadRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'LeaveThreadRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const LeaveThreadResponse$inboundSchema: z.ZodType<
+  LeaveThreadResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type LeaveThreadResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const LeaveThreadResponse$outboundSchema: z.ZodType<
+  LeaveThreadResponse$Outbound,
+  z.ZodTypeDef,
+  LeaveThreadResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace LeaveThreadResponse$ {
+  /** @deprecated use `LeaveThreadResponse$inboundSchema` instead. */
+  export const inboundSchema = LeaveThreadResponse$inboundSchema;
+  /** @deprecated use `LeaveThreadResponse$outboundSchema` instead. */
+  export const outboundSchema = LeaveThreadResponse$outboundSchema;
+  /** @deprecated use `LeaveThreadResponse$Outbound` instead. */
+  export type Outbound = LeaveThreadResponse$Outbound;
+}
+
+export function leaveThreadResponseToJSON(
+  leaveThreadResponse: LeaveThreadResponse,
+): string {
+  return JSON.stringify(
+    LeaveThreadResponse$outboundSchema.parse(leaveThreadResponse),
+  );
+}
+
+export function leaveThreadResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<LeaveThreadResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => LeaveThreadResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'LeaveThreadResponse' from JSON`,
   );
 }

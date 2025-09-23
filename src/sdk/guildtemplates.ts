@@ -3,7 +3,6 @@
  */
 
 import { guildTemplatesCreate } from "../funcs/guildTemplatesCreate.js";
-import { guildTemplatesCreateGuild } from "../funcs/guildTemplatesCreateGuild.js";
 import { guildTemplatesDelete } from "../funcs/guildTemplatesDelete.js";
 import { guildTemplatesGet } from "../funcs/guildTemplatesGet.js";
 import { guildTemplatesGetNewMemberWelcome } from "../funcs/guildTemplatesGetNewMemberWelcome.js";
@@ -11,7 +10,6 @@ import { guildTemplatesList } from "../funcs/guildTemplatesList.js";
 import { guildTemplatesSync } from "../funcs/guildTemplatesSync.js";
 import { guildTemplatesUpdate } from "../funcs/guildTemplatesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -23,25 +21,11 @@ export class GuildTemplates extends ClientSDK {
     request: operations.GetGuildTemplateRequest,
     security?: operations.GetGuildTemplateSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.GuildTemplateResponse> {
+  ): Promise<operations.GetGuildTemplateResponse> {
     return unwrapAsync(guildTemplatesGet(
       this,
       request,
       security,
-      options,
-    ));
-  }
-
-  /**
-   * Create a new guild based on a template. Returns a guild object on success. Fires a Guild Create Gateway event.
-   */
-  async createGuild(
-    request: operations.CreateGuildFromTemplateRequest,
-    options?: RequestOptions,
-  ): Promise<components.GuildResponse> {
-    return unwrapAsync(guildTemplatesCreateGuild(
-      this,
-      request,
       options,
     ));
   }
@@ -52,7 +36,7 @@ export class GuildTemplates extends ClientSDK {
   async getNewMemberWelcome(
     request: operations.GetGuildNewMemberWelcomeRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildHomeSettingsResponse | undefined> {
+  ): Promise<operations.GetGuildNewMemberWelcomeResponse | undefined> {
     return unwrapAsync(guildTemplatesGetNewMemberWelcome(
       this,
       request,
@@ -66,7 +50,7 @@ export class GuildTemplates extends ClientSDK {
   async list(
     request: operations.ListGuildTemplatesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.GuildTemplateResponse>> {
+  ): Promise<operations.ListGuildTemplatesResponse> {
     return unwrapAsync(guildTemplatesList(
       this,
       request,
@@ -80,7 +64,7 @@ export class GuildTemplates extends ClientSDK {
   async create(
     request: operations.CreateGuildTemplateRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildTemplateResponse> {
+  ): Promise<operations.CreateGuildTemplateResponse> {
     return unwrapAsync(guildTemplatesCreate(
       this,
       request,
@@ -94,7 +78,7 @@ export class GuildTemplates extends ClientSDK {
   async sync(
     request: operations.SyncGuildTemplateRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildTemplateResponse> {
+  ): Promise<operations.SyncGuildTemplateResponse> {
     return unwrapAsync(guildTemplatesSync(
       this,
       request,
@@ -108,7 +92,7 @@ export class GuildTemplates extends ClientSDK {
   async delete(
     request: operations.DeleteGuildTemplateRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildTemplateResponse> {
+  ): Promise<operations.DeleteGuildTemplateResponse> {
     return unwrapAsync(guildTemplatesDelete(
       this,
       request,
@@ -122,7 +106,7 @@ export class GuildTemplates extends ClientSDK {
   async update(
     request: operations.UpdateGuildTemplateRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildTemplateResponse> {
+  ): Promise<operations.UpdateGuildTemplateResponse> {
     return unwrapAsync(guildTemplatesUpdate(
       this,
       request,

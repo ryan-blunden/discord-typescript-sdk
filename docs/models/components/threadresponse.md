@@ -7,14 +7,18 @@ import { ThreadResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ThreadResponse = {
   id: "<value>",
-  type: 14,
-  flags: 767761,
+  type: 5,
+  flags: 385033,
   guildId: "<value>",
   name: "<value>",
   ownerId: "<value>",
-  messageCount: 973464,
-  memberCount: 499430,
-  totalMessageSent: 246379,
+  threadMetadata: {
+    archived: true,
+    locked: false,
+  },
+  messageCount: 967008,
+  memberCount: 730303,
+  totalMessageSent: 1151,
 };
 ```
 
@@ -37,7 +41,7 @@ let value: ThreadResponse = {
 | `videoQualityMode`                                                                            | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `permissions`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `ownerId`                                                                                     | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `threadMetadata`                                                                              | [components.ThreadMetadataResponse](../../models/components/threadmetadataresponse.md)        | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `threadMetadata`                                                                              | [components.ThreadMetadataResponse](../../models/components/threadmetadataresponse.md)        | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `messageCount`                                                                                | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `memberCount`                                                                                 | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `totalMessageSent`                                                                            | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

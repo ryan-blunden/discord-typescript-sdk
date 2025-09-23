@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateGuildEmojiRequestBody = {
@@ -17,6 +18,11 @@ export type UpdateGuildEmojiRequest = {
   guildId: string;
   emojiId: string;
   requestBody: UpdateGuildEmojiRequestBody;
+};
+
+export type UpdateGuildEmojiResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.EmojiResponse;
 };
 
 /** @internal */
@@ -147,5 +153,72 @@ export function updateGuildEmojiRequestFromJSON(
     jsonString,
     (x) => UpdateGuildEmojiRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateGuildEmojiRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateGuildEmojiResponse$inboundSchema: z.ZodType<
+  UpdateGuildEmojiResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.EmojiResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateGuildEmojiResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.EmojiResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateGuildEmojiResponse$outboundSchema: z.ZodType<
+  UpdateGuildEmojiResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateGuildEmojiResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.EmojiResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateGuildEmojiResponse$ {
+  /** @deprecated use `UpdateGuildEmojiResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateGuildEmojiResponse$inboundSchema;
+  /** @deprecated use `UpdateGuildEmojiResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateGuildEmojiResponse$outboundSchema;
+  /** @deprecated use `UpdateGuildEmojiResponse$Outbound` instead. */
+  export type Outbound = UpdateGuildEmojiResponse$Outbound;
+}
+
+export function updateGuildEmojiResponseToJSON(
+  updateGuildEmojiResponse: UpdateGuildEmojiResponse,
+): string {
+  return JSON.stringify(
+    UpdateGuildEmojiResponse$outboundSchema.parse(updateGuildEmojiResponse),
+  );
+}
+
+export function updateGuildEmojiResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildEmojiResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildEmojiResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildEmojiResponse' from JSON`,
   );
 }

@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildStickerRequest = {
   guildId: string;
   stickerId: string;
+};
+
+export type GetGuildStickerResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildStickerResponse;
 };
 
 /** @internal */
@@ -77,5 +83,72 @@ export function getGuildStickerRequestFromJSON(
     jsonString,
     (x) => GetGuildStickerRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGuildStickerRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildStickerResponse$inboundSchema: z.ZodType<
+  GetGuildStickerResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildStickerResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGuildStickerResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildStickerResponse$Outbound;
+};
+
+/** @internal */
+export const GetGuildStickerResponse$outboundSchema: z.ZodType<
+  GetGuildStickerResponse$Outbound,
+  z.ZodTypeDef,
+  GetGuildStickerResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildStickerResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildStickerResponse$ {
+  /** @deprecated use `GetGuildStickerResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGuildStickerResponse$inboundSchema;
+  /** @deprecated use `GetGuildStickerResponse$outboundSchema` instead. */
+  export const outboundSchema = GetGuildStickerResponse$outboundSchema;
+  /** @deprecated use `GetGuildStickerResponse$Outbound` instead. */
+  export type Outbound = GetGuildStickerResponse$Outbound;
+}
+
+export function getGuildStickerResponseToJSON(
+  getGuildStickerResponse: GetGuildStickerResponse,
+): string {
+  return JSON.stringify(
+    GetGuildStickerResponse$outboundSchema.parse(getGuildStickerResponse),
+  );
+}
+
+export function getGuildStickerResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildStickerResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildStickerResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildStickerResponse' from JSON`,
   );
 }

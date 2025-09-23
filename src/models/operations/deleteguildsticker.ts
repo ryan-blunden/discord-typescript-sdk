@@ -13,6 +13,10 @@ export type DeleteGuildStickerRequest = {
   stickerId: string;
 };
 
+export type DeleteGuildStickerResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteGuildStickerRequest$inboundSchema: z.ZodType<
   DeleteGuildStickerRequest,
@@ -77,5 +81,67 @@ export function deleteGuildStickerRequestFromJSON(
     jsonString,
     (x) => DeleteGuildStickerRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteGuildStickerRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteGuildStickerResponse$inboundSchema: z.ZodType<
+  DeleteGuildStickerResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteGuildStickerResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteGuildStickerResponse$outboundSchema: z.ZodType<
+  DeleteGuildStickerResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteGuildStickerResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteGuildStickerResponse$ {
+  /** @deprecated use `DeleteGuildStickerResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteGuildStickerResponse$inboundSchema;
+  /** @deprecated use `DeleteGuildStickerResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteGuildStickerResponse$outboundSchema;
+  /** @deprecated use `DeleteGuildStickerResponse$Outbound` instead. */
+  export type Outbound = DeleteGuildStickerResponse$Outbound;
+}
+
+export function deleteGuildStickerResponseToJSON(
+  deleteGuildStickerResponse: DeleteGuildStickerResponse,
+): string {
+  return JSON.stringify(
+    DeleteGuildStickerResponse$outboundSchema.parse(deleteGuildStickerResponse),
+  );
+}
+
+export function deleteGuildStickerResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildStickerResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteGuildStickerResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildStickerResponse' from JSON`,
   );
 }

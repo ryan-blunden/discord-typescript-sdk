@@ -24,7 +24,7 @@ export const BlockMessageAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
   metadata: z.nullable(BlockMessageActionMetadata$inboundSchema).optional(),
 });
 

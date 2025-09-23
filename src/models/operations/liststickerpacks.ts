@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListStickerPacksSecurity = {
   botToken?: string | undefined;
+};
+
+export type ListStickerPacksResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.StickerPackCollectionResponse;
 };
 
 /** @internal */
@@ -71,5 +77,72 @@ export function listStickerPacksSecurityFromJSON(
     jsonString,
     (x) => ListStickerPacksSecurity$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListStickerPacksSecurity' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListStickerPacksResponse$inboundSchema: z.ZodType<
+  ListStickerPacksResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.StickerPackCollectionResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListStickerPacksResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.StickerPackCollectionResponse$Outbound;
+};
+
+/** @internal */
+export const ListStickerPacksResponse$outboundSchema: z.ZodType<
+  ListStickerPacksResponse$Outbound,
+  z.ZodTypeDef,
+  ListStickerPacksResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.StickerPackCollectionResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListStickerPacksResponse$ {
+  /** @deprecated use `ListStickerPacksResponse$inboundSchema` instead. */
+  export const inboundSchema = ListStickerPacksResponse$inboundSchema;
+  /** @deprecated use `ListStickerPacksResponse$outboundSchema` instead. */
+  export const outboundSchema = ListStickerPacksResponse$outboundSchema;
+  /** @deprecated use `ListStickerPacksResponse$Outbound` instead. */
+  export type Outbound = ListStickerPacksResponse$Outbound;
+}
+
+export function listStickerPacksResponseToJSON(
+  listStickerPacksResponse: ListStickerPacksResponse,
+): string {
+  return JSON.stringify(
+    ListStickerPacksResponse$outboundSchema.parse(listStickerPacksResponse),
+  );
+}
+
+export function listStickerPacksResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListStickerPacksResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListStickerPacksResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListStickerPacksResponse' from JSON`,
   );
 }

@@ -36,7 +36,7 @@ export const OnboardingPromptResponse$inboundSchema: z.ZodType<
   single_select: z.boolean(),
   required: z.boolean(),
   in_onboarding: z.boolean(),
-  type: z.literal(0).optional(),
+  type: z.literal(0).default(0).optional(),
 }).transform((v) => {
   return remap$(v, {
     "single_select": "singleSelect",

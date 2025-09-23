@@ -26,29 +26,30 @@ import {
 } from "./thumbnailcomponentformessagerequest.js";
 
 export type SectionComponentForMessageRequestAccessory =
-  | ThumbnailComponentForMessageRequest
-  | ButtonComponentForMessageRequest;
+  | ButtonComponentForMessageRequest
+  | ThumbnailComponentForMessageRequest;
 
 export type SectionComponentForMessageRequest = {
   type?: 1 | undefined;
+  id?: number | null | undefined;
   components: Array<TextDisplayComponentForMessageRequest>;
   accessory:
-    | ThumbnailComponentForMessageRequest
-    | ButtonComponentForMessageRequest;
+    | ButtonComponentForMessageRequest
+    | ThumbnailComponentForMessageRequest;
 };
 
 /** @internal */
 export const SectionComponentForMessageRequestAccessory$inboundSchema:
   z.ZodType<SectionComponentForMessageRequestAccessory, z.ZodTypeDef, unknown> =
     z.union([
-      ThumbnailComponentForMessageRequest$inboundSchema,
       ButtonComponentForMessageRequest$inboundSchema,
+      ThumbnailComponentForMessageRequest$inboundSchema,
     ]);
 
 /** @internal */
 export type SectionComponentForMessageRequestAccessory$Outbound =
-  | ThumbnailComponentForMessageRequest$Outbound
-  | ButtonComponentForMessageRequest$Outbound;
+  | ButtonComponentForMessageRequest$Outbound
+  | ThumbnailComponentForMessageRequest$Outbound;
 
 /** @internal */
 export const SectionComponentForMessageRequestAccessory$outboundSchema:
@@ -57,8 +58,8 @@ export const SectionComponentForMessageRequestAccessory$outboundSchema:
     z.ZodTypeDef,
     SectionComponentForMessageRequestAccessory
   > = z.union([
-    ThumbnailComponentForMessageRequest$outboundSchema,
     ButtonComponentForMessageRequest$outboundSchema,
+    ThumbnailComponentForMessageRequest$outboundSchema,
   ]);
 
 /**
@@ -109,21 +110,23 @@ export const SectionComponentForMessageRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
+  id: z.nullable(z.number().int()).optional(),
   components: z.array(TextDisplayComponentForMessageRequest$inboundSchema),
   accessory: z.union([
-    ThumbnailComponentForMessageRequest$inboundSchema,
     ButtonComponentForMessageRequest$inboundSchema,
+    ThumbnailComponentForMessageRequest$inboundSchema,
   ]),
 });
 
 /** @internal */
 export type SectionComponentForMessageRequest$Outbound = {
   type: 1;
+  id?: number | null | undefined;
   components: Array<TextDisplayComponentForMessageRequest$Outbound>;
   accessory:
-    | ThumbnailComponentForMessageRequest$Outbound
-    | ButtonComponentForMessageRequest$Outbound;
+    | ButtonComponentForMessageRequest$Outbound
+    | ThumbnailComponentForMessageRequest$Outbound;
 };
 
 /** @internal */
@@ -133,10 +136,11 @@ export const SectionComponentForMessageRequest$outboundSchema: z.ZodType<
   SectionComponentForMessageRequest
 > = z.object({
   type: z.literal(1).default(1 as const),
+  id: z.nullable(z.number().int()).optional(),
   components: z.array(TextDisplayComponentForMessageRequest$outboundSchema),
   accessory: z.union([
-    ThumbnailComponentForMessageRequest$outboundSchema,
     ButtonComponentForMessageRequest$outboundSchema,
+    ThumbnailComponentForMessageRequest$outboundSchema,
   ]),
 });
 

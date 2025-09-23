@@ -18,11 +18,11 @@ export type UserSelectComponentResponse = {
   type?: 1 | undefined;
   id: number;
   customId: string;
-  placeholder?: string | null | undefined;
+  placeholder?: string | undefined;
   minValues?: number | null | undefined;
   maxValues?: number | null | undefined;
-  disabled?: boolean | null | undefined;
-  defaultValues?: Array<UserSelectDefaultValueResponse> | null | undefined;
+  disabled?: boolean | undefined;
+  defaultValues?: Array<UserSelectDefaultValueResponse> | undefined;
 };
 
 /** @internal */
@@ -31,16 +31,15 @@ export const UserSelectComponentResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
   id: z.number().int(),
   custom_id: z.string(),
-  placeholder: z.nullable(z.string()).optional(),
+  placeholder: z.string().optional(),
   min_values: z.nullable(z.number().int()).optional(),
   max_values: z.nullable(z.number().int()).optional(),
-  disabled: z.nullable(z.boolean()).optional(),
-  default_values: z.nullable(
-    z.array(UserSelectDefaultValueResponse$inboundSchema),
-  ).optional(),
+  disabled: z.boolean().optional(),
+  default_values: z.array(UserSelectDefaultValueResponse$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "custom_id": "customId",
@@ -55,14 +54,11 @@ export type UserSelectComponentResponse$Outbound = {
   type: 1;
   id: number;
   custom_id: string;
-  placeholder?: string | null | undefined;
+  placeholder?: string | undefined;
   min_values?: number | null | undefined;
   max_values?: number | null | undefined;
-  disabled?: boolean | null | undefined;
-  default_values?:
-    | Array<UserSelectDefaultValueResponse$Outbound>
-    | null
-    | undefined;
+  disabled?: boolean | undefined;
+  default_values?: Array<UserSelectDefaultValueResponse$Outbound> | undefined;
 };
 
 /** @internal */
@@ -74,13 +70,12 @@ export const UserSelectComponentResponse$outboundSchema: z.ZodType<
   type: z.literal(1).default(1 as const),
   id: z.number().int(),
   customId: z.string(),
-  placeholder: z.nullable(z.string()).optional(),
+  placeholder: z.string().optional(),
   minValues: z.nullable(z.number().int()).optional(),
   maxValues: z.nullable(z.number().int()).optional(),
-  disabled: z.nullable(z.boolean()).optional(),
-  defaultValues: z.nullable(
-    z.array(UserSelectDefaultValueResponse$outboundSchema),
-  ).optional(),
+  disabled: z.boolean().optional(),
+  defaultValues: z.array(UserSelectDefaultValueResponse$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     customId: "custom_id",

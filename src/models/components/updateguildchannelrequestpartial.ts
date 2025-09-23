@@ -73,7 +73,7 @@ export type UpdateGuildChannelRequestPartial = {
   defaultThreadRateLimitPerUser?: number | null | undefined;
   defaultSortOrder?: 0 | null | undefined;
   defaultForumLayout?: 0 | null | undefined;
-  defaultTagSetting?: string | null | undefined;
+  defaultTagSetting?: "match_all" | null | undefined;
   flags?: number | null | undefined;
   availableTags?: Array<UpdateThreadTagRequest> | null | undefined;
 };
@@ -121,15 +121,17 @@ export const UpdateGuildChannelRequestPartial$inboundSchema: z.ZodType<
     z.array(ChannelPermissionOverwriteRequest$inboundSchema),
   ).optional(),
   rtc_region: z.nullable(z.string()).optional(),
-  video_quality_mode: z.nullable(z.literal(1)).optional(),
-  default_auto_archive_duration: z.nullable(z.literal(60)).optional(),
+  video_quality_mode: z.nullable(z.literal(1).default(1)).optional(),
+  default_auto_archive_duration: z.nullable(z.literal(60).default(60))
+    .optional(),
   default_reaction_emoji: z.nullable(
     UpdateDefaultReactionEmojiRequest$inboundSchema,
   ).optional(),
   default_thread_rate_limit_per_user: z.nullable(z.number().int()).optional(),
-  default_sort_order: z.nullable(z.literal(0)).optional(),
-  default_forum_layout: z.nullable(z.literal(0)).optional(),
-  default_tag_setting: z.nullable(z.string()).optional(),
+  default_sort_order: z.nullable(z.literal(0).default(0)).optional(),
+  default_forum_layout: z.nullable(z.literal(0).default(0)).optional(),
+  default_tag_setting: z.nullable(z.literal("match_all").default("match_all"))
+    .optional(),
   flags: z.nullable(z.number().int()).optional(),
   available_tags: z.nullable(z.array(UpdateThreadTagRequest$inboundSchema))
     .optional(),
@@ -176,7 +178,7 @@ export type UpdateGuildChannelRequestPartial$Outbound = {
   default_thread_rate_limit_per_user?: number | null | undefined;
   default_sort_order: 0 | null;
   default_forum_layout: 0 | null;
-  default_tag_setting?: string | null | undefined;
+  default_tag_setting: "match_all" | null;
   flags?: number | null | undefined;
   available_tags?: Array<UpdateThreadTagRequest$Outbound> | null | undefined;
 };
@@ -208,7 +210,9 @@ export const UpdateGuildChannelRequestPartial$outboundSchema: z.ZodType<
   defaultThreadRateLimitPerUser: z.nullable(z.number().int()).optional(),
   defaultSortOrder: z.nullable(z.literal(0).default(0 as const)),
   defaultForumLayout: z.nullable(z.literal(0).default(0 as const)),
-  defaultTagSetting: z.nullable(z.string()).optional(),
+  defaultTagSetting: z.nullable(
+    z.literal("match_all").default("match_all" as const),
+  ),
   flags: z.nullable(z.number().int()).optional(),
   availableTags: z.nullable(z.array(UpdateThreadTagRequest$outboundSchema))
     .optional(),

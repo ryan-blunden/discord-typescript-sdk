@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UploadApplicationAttachmentSecurity = {
@@ -19,6 +20,11 @@ export type UploadApplicationAttachmentRequestBody = {
 export type UploadApplicationAttachmentRequest = {
   applicationId: string;
   requestBody: UploadApplicationAttachmentRequestBody;
+};
+
+export type UploadApplicationAttachmentResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ActivitiesAttachmentResponse;
 };
 
 /** @internal */
@@ -220,5 +226,77 @@ export function uploadApplicationAttachmentRequestFromJSON(
     (x) =>
       UploadApplicationAttachmentRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UploadApplicationAttachmentRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UploadApplicationAttachmentResponse$inboundSchema: z.ZodType<
+  UploadApplicationAttachmentResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ActivitiesAttachmentResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UploadApplicationAttachmentResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ActivitiesAttachmentResponse$Outbound;
+};
+
+/** @internal */
+export const UploadApplicationAttachmentResponse$outboundSchema: z.ZodType<
+  UploadApplicationAttachmentResponse$Outbound,
+  z.ZodTypeDef,
+  UploadApplicationAttachmentResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ActivitiesAttachmentResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UploadApplicationAttachmentResponse$ {
+  /** @deprecated use `UploadApplicationAttachmentResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    UploadApplicationAttachmentResponse$inboundSchema;
+  /** @deprecated use `UploadApplicationAttachmentResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    UploadApplicationAttachmentResponse$outboundSchema;
+  /** @deprecated use `UploadApplicationAttachmentResponse$Outbound` instead. */
+  export type Outbound = UploadApplicationAttachmentResponse$Outbound;
+}
+
+export function uploadApplicationAttachmentResponseToJSON(
+  uploadApplicationAttachmentResponse: UploadApplicationAttachmentResponse,
+): string {
+  return JSON.stringify(
+    UploadApplicationAttachmentResponse$outboundSchema.parse(
+      uploadApplicationAttachmentResponse,
+    ),
+  );
+}
+
+export function uploadApplicationAttachmentResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UploadApplicationAttachmentResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UploadApplicationAttachmentResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UploadApplicationAttachmentResponse' from JSON`,
   );
 }

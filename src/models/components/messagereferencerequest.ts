@@ -26,7 +26,7 @@ export const MessageReferenceRequest$inboundSchema: z.ZodType<
   channel_id: z.nullable(z.string()).optional(),
   message_id: z.string(),
   fail_if_not_exists: z.nullable(z.boolean()).optional(),
-  type: z.nullable(z.literal(0)).optional(),
+  type: z.nullable(z.literal(0).default(0)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",

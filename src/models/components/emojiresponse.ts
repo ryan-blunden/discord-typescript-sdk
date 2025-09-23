@@ -17,7 +17,7 @@ import {
 export type EmojiResponse = {
   id: string;
   name: string;
-  user?: UserResponse | null | undefined;
+  user?: UserResponse | undefined;
   roles: Array<string>;
   requireColons: boolean;
   managed: boolean;
@@ -33,7 +33,7 @@ export const EmojiResponse$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
-  user: z.nullable(UserResponse$inboundSchema).optional(),
+  user: UserResponse$inboundSchema.optional(),
   roles: z.array(z.string()),
   require_colons: z.boolean(),
   managed: z.boolean(),
@@ -49,7 +49,7 @@ export const EmojiResponse$inboundSchema: z.ZodType<
 export type EmojiResponse$Outbound = {
   id: string;
   name: string;
-  user?: UserResponse$Outbound | null | undefined;
+  user?: UserResponse$Outbound | undefined;
   roles: Array<string>;
   require_colons: boolean;
   managed: boolean;
@@ -65,7 +65,7 @@ export const EmojiResponse$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
-  user: z.nullable(UserResponse$outboundSchema).optional(),
+  user: UserResponse$outboundSchema.optional(),
   roles: z.array(z.string()),
   requireColons: z.boolean(),
   managed: z.boolean(),

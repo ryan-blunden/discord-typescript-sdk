@@ -17,16 +17,13 @@ import {
 export type ApplicationCommandSubcommandGroupOptionResponse = {
   type?: 1 | undefined;
   name: string;
-  nameLocalized?: string | null | undefined;
+  nameLocalized?: string | undefined;
   nameLocalizations?: { [k: string]: string } | null | undefined;
   description: string;
-  descriptionLocalized?: string | null | undefined;
+  descriptionLocalized?: string | undefined;
   descriptionLocalizations?: { [k: string]: string } | null | undefined;
-  required?: boolean | null | undefined;
-  options?:
-    | Array<ApplicationCommandSubcommandOptionResponse>
-    | null
-    | undefined;
+  required?: boolean | undefined;
+  options?: Array<ApplicationCommandSubcommandOptionResponse> | undefined;
 };
 
 /** @internal */
@@ -36,17 +33,16 @@ export const ApplicationCommandSubcommandGroupOptionResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    type: z.literal(1).optional(),
+    type: z.literal(1).default(1).optional(),
     name: z.string(),
-    name_localized: z.nullable(z.string()).optional(),
+    name_localized: z.string().optional(),
     name_localizations: z.nullable(z.record(z.string())).optional(),
     description: z.string(),
-    description_localized: z.nullable(z.string()).optional(),
+    description_localized: z.string().optional(),
     description_localizations: z.nullable(z.record(z.string())).optional(),
-    required: z.nullable(z.boolean()).optional(),
-    options: z.nullable(
-      z.array(ApplicationCommandSubcommandOptionResponse$inboundSchema),
-    ).optional(),
+    required: z.boolean().optional(),
+    options: z.array(ApplicationCommandSubcommandOptionResponse$inboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "name_localized": "nameLocalized",
@@ -60,15 +56,14 @@ export const ApplicationCommandSubcommandGroupOptionResponse$inboundSchema:
 export type ApplicationCommandSubcommandGroupOptionResponse$Outbound = {
   type: 1;
   name: string;
-  name_localized?: string | null | undefined;
+  name_localized?: string | undefined;
   name_localizations?: { [k: string]: string } | null | undefined;
   description: string;
-  description_localized?: string | null | undefined;
+  description_localized?: string | undefined;
   description_localizations?: { [k: string]: string } | null | undefined;
-  required?: boolean | null | undefined;
+  required?: boolean | undefined;
   options?:
     | Array<ApplicationCommandSubcommandOptionResponse$Outbound>
-    | null
     | undefined;
 };
 
@@ -81,15 +76,14 @@ export const ApplicationCommandSubcommandGroupOptionResponse$outboundSchema:
   > = z.object({
     type: z.literal(1).default(1 as const),
     name: z.string(),
-    nameLocalized: z.nullable(z.string()).optional(),
+    nameLocalized: z.string().optional(),
     nameLocalizations: z.nullable(z.record(z.string())).optional(),
     description: z.string(),
-    descriptionLocalized: z.nullable(z.string()).optional(),
+    descriptionLocalized: z.string().optional(),
     descriptionLocalizations: z.nullable(z.record(z.string())).optional(),
-    required: z.nullable(z.boolean()).optional(),
-    options: z.nullable(
-      z.array(ApplicationCommandSubcommandOptionResponse$outboundSchema),
-    ).optional(),
+    required: z.boolean().optional(),
+    options: z.array(ApplicationCommandSubcommandOptionResponse$outboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       nameLocalized: "name_localized",

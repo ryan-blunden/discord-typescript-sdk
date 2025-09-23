@@ -15,6 +15,14 @@ let value: MLSpamRuleResponse = {
       metadata: {},
     },
   ],
+  enabled: true,
+  exemptRoles: [
+    "<value 1>",
+    "<value 2>",
+  ],
+  exemptChannels: [
+    "<value 1>",
+  ],
   triggerMetadata: {},
 };
 ```
@@ -30,7 +38,7 @@ let value: MLSpamRuleResponse = {
 | `eventType`                                                                                          | *number*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
 | `actions`                                                                                            | *components.MLSpamRuleResponseActions*[]                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
 | `triggerType`                                                                                        | *number*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `enabled`                                                                                            | *boolean*                                                                                            | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
-| `exemptRoles`                                                                                        | *string*[]                                                                                           | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
-| `exemptChannels`                                                                                     | *string*[]                                                                                           | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `enabled`                                                                                            | *boolean*                                                                                            | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `exemptRoles`                                                                                        | *string*[]                                                                                           | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `exemptChannels`                                                                                     | *string*[]                                                                                           | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
 | `triggerMetadata`                                                                                    | [components.MLSpamTriggerMetadataResponse](../../models/components/mlspamtriggermetadataresponse.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

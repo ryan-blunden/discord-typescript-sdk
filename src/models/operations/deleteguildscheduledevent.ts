@@ -13,6 +13,10 @@ export type DeleteGuildScheduledEventRequest = {
   guildScheduledEventId: string;
 };
 
+export type DeleteGuildScheduledEventResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteGuildScheduledEventRequest$inboundSchema: z.ZodType<
   DeleteGuildScheduledEventRequest,
@@ -79,5 +83,70 @@ export function deleteGuildScheduledEventRequestFromJSON(
     jsonString,
     (x) => DeleteGuildScheduledEventRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteGuildScheduledEventRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteGuildScheduledEventResponse$inboundSchema: z.ZodType<
+  DeleteGuildScheduledEventResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteGuildScheduledEventResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteGuildScheduledEventResponse$outboundSchema: z.ZodType<
+  DeleteGuildScheduledEventResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteGuildScheduledEventResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteGuildScheduledEventResponse$ {
+  /** @deprecated use `DeleteGuildScheduledEventResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteGuildScheduledEventResponse$inboundSchema;
+  /** @deprecated use `DeleteGuildScheduledEventResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteGuildScheduledEventResponse$outboundSchema;
+  /** @deprecated use `DeleteGuildScheduledEventResponse$Outbound` instead. */
+  export type Outbound = DeleteGuildScheduledEventResponse$Outbound;
+}
+
+export function deleteGuildScheduledEventResponseToJSON(
+  deleteGuildScheduledEventResponse: DeleteGuildScheduledEventResponse,
+): string {
+  return JSON.stringify(
+    DeleteGuildScheduledEventResponse$outboundSchema.parse(
+      deleteGuildScheduledEventResponse,
+    ),
+  );
+}
+
+export function deleteGuildScheduledEventResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildScheduledEventResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteGuildScheduledEventResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildScheduledEventResponse' from JSON`,
   );
 }

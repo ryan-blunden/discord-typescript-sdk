@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListApplicationEmojisRequest = {
   applicationId: string;
+};
+
+export type ListApplicationEmojisResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ListApplicationEmojisResponse;
 };
 
 /** @internal */
@@ -73,5 +79,74 @@ export function listApplicationEmojisRequestFromJSON(
     jsonString,
     (x) => ListApplicationEmojisRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListApplicationEmojisRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListApplicationEmojisResponse$inboundSchema: z.ZodType<
+  ListApplicationEmojisResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ListApplicationEmojisResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListApplicationEmojisResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ListApplicationEmojisResponse$Outbound;
+};
+
+/** @internal */
+export const ListApplicationEmojisResponse$outboundSchema: z.ZodType<
+  ListApplicationEmojisResponse$Outbound,
+  z.ZodTypeDef,
+  ListApplicationEmojisResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ListApplicationEmojisResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListApplicationEmojisResponse$ {
+  /** @deprecated use `ListApplicationEmojisResponse$inboundSchema` instead. */
+  export const inboundSchema = ListApplicationEmojisResponse$inboundSchema;
+  /** @deprecated use `ListApplicationEmojisResponse$outboundSchema` instead. */
+  export const outboundSchema = ListApplicationEmojisResponse$outboundSchema;
+  /** @deprecated use `ListApplicationEmojisResponse$Outbound` instead. */
+  export type Outbound = ListApplicationEmojisResponse$Outbound;
+}
+
+export function listApplicationEmojisResponseToJSON(
+  listApplicationEmojisResponse: ListApplicationEmojisResponse,
+): string {
+  return JSON.stringify(
+    ListApplicationEmojisResponse$outboundSchema.parse(
+      listApplicationEmojisResponse,
+    ),
+  );
+}
+
+export function listApplicationEmojisResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListApplicationEmojisResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListApplicationEmojisResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListApplicationEmojisResponse' from JSON`,
   );
 }

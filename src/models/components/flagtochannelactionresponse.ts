@@ -24,7 +24,7 @@ export const FlagToChannelActionResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
   metadata: FlagToChannelActionMetadataResponse$inboundSchema,
 });
 

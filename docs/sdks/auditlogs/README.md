@@ -13,6 +13,7 @@ Returns an audit log object for the guild. Requires the VIEW_AUDIT_LOG permissio
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_audit_log_entries" method="get" path="/guilds/{guild_id}/audit-logs" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -71,11 +72,12 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildAuditLogResponse](../../models/components/guildauditlogresponse.md)\>**
+**Promise\<[operations.ListGuildAuditLogEntriesResponse](../../models/operations/listguildauditlogentriesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

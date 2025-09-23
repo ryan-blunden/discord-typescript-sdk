@@ -39,20 +39,20 @@ import {
 } from "./usercommunicationdisabledaction.js";
 
 export type DefaultKeywordListUpsertRequestPartialActions =
-  | BlockMessageAction
   | FlagToChannelAction
-  | QuarantineUserAction
-  | UserCommunicationDisabledAction;
+  | UserCommunicationDisabledAction
+  | BlockMessageAction
+  | QuarantineUserAction;
 
 export type DefaultKeywordListUpsertRequestPartial = {
   name?: string | undefined;
   eventType?: 1 | undefined;
   actions?:
     | Array<
-      | BlockMessageAction
       | FlagToChannelAction
-      | QuarantineUserAction
       | UserCommunicationDisabledAction
+      | BlockMessageAction
+      | QuarantineUserAction
     >
     | null
     | undefined;
@@ -70,18 +70,18 @@ export const DefaultKeywordListUpsertRequestPartialActions$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    BlockMessageAction$inboundSchema,
     FlagToChannelAction$inboundSchema,
-    QuarantineUserAction$inboundSchema,
     UserCommunicationDisabledAction$inboundSchema,
+    BlockMessageAction$inboundSchema,
+    QuarantineUserAction$inboundSchema,
   ]);
 
 /** @internal */
 export type DefaultKeywordListUpsertRequestPartialActions$Outbound =
-  | BlockMessageAction$Outbound
   | FlagToChannelAction$Outbound
-  | QuarantineUserAction$Outbound
-  | UserCommunicationDisabledAction$Outbound;
+  | UserCommunicationDisabledAction$Outbound
+  | BlockMessageAction$Outbound
+  | QuarantineUserAction$Outbound;
 
 /** @internal */
 export const DefaultKeywordListUpsertRequestPartialActions$outboundSchema:
@@ -90,10 +90,10 @@ export const DefaultKeywordListUpsertRequestPartialActions$outboundSchema:
     z.ZodTypeDef,
     DefaultKeywordListUpsertRequestPartialActions
   > = z.union([
-    BlockMessageAction$outboundSchema,
     FlagToChannelAction$outboundSchema,
-    QuarantineUserAction$outboundSchema,
     UserCommunicationDisabledAction$outboundSchema,
+    BlockMessageAction$outboundSchema,
+    QuarantineUserAction$outboundSchema,
   ]);
 
 /**
@@ -145,21 +145,21 @@ export const DefaultKeywordListUpsertRequestPartial$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  event_type: z.literal(1).optional(),
+  event_type: z.literal(1).default(1).optional(),
   actions: z.nullable(
     z.array(
       z.union([
-        BlockMessageAction$inboundSchema,
         FlagToChannelAction$inboundSchema,
-        QuarantineUserAction$inboundSchema,
         UserCommunicationDisabledAction$inboundSchema,
+        BlockMessageAction$inboundSchema,
+        QuarantineUserAction$inboundSchema,
       ]),
     ),
   ).optional(),
   enabled: z.nullable(z.boolean()).optional(),
   exempt_roles: z.nullable(z.array(z.string())).optional(),
   exempt_channels: z.nullable(z.array(z.string())).optional(),
-  trigger_type: z.literal(1).optional(),
+  trigger_type: z.literal(1).default(1).optional(),
   trigger_metadata: DefaultKeywordListTriggerMetadata$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -177,10 +177,10 @@ export type DefaultKeywordListUpsertRequestPartial$Outbound = {
   event_type: 1;
   actions?:
     | Array<
-      | BlockMessageAction$Outbound
       | FlagToChannelAction$Outbound
-      | QuarantineUserAction$Outbound
       | UserCommunicationDisabledAction$Outbound
+      | BlockMessageAction$Outbound
+      | QuarantineUserAction$Outbound
     >
     | null
     | undefined;
@@ -202,10 +202,10 @@ export const DefaultKeywordListUpsertRequestPartial$outboundSchema: z.ZodType<
   actions: z.nullable(
     z.array(
       z.union([
-        BlockMessageAction$outboundSchema,
         FlagToChannelAction$outboundSchema,
-        QuarantineUserAction$outboundSchema,
         UserCommunicationDisabledAction$outboundSchema,
+        BlockMessageAction$outboundSchema,
+        QuarantineUserAction$outboundSchema,
       ]),
     ),
   ).optional(),

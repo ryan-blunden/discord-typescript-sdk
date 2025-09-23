@@ -24,9 +24,17 @@ export type CreateChannelInviteRequest = {
  * 200 response for create_channel_invite
  */
 export type CreateChannelInviteResponseBody =
+  | components.GuildInviteResponse
   | components.GroupDMInviteResponse
-  | components.FriendInviteResponse
-  | components.GuildInviteResponse;
+  | components.FriendInviteResponse;
+
+export type CreateChannelInviteResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.GuildInviteResponse
+    | components.GroupDMInviteResponse
+    | components.FriendInviteResponse;
+};
 
 /** @internal */
 export const CreateChannelInviteRequestBody$inboundSchema: z.ZodType<
@@ -167,16 +175,16 @@ export const CreateChannelInviteResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  components.GuildInviteResponse$inboundSchema,
   components.GroupDMInviteResponse$inboundSchema,
   components.FriendInviteResponse$inboundSchema,
-  components.GuildInviteResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type CreateChannelInviteResponseBody$Outbound =
+  | components.GuildInviteResponse$Outbound
   | components.GroupDMInviteResponse$Outbound
-  | components.FriendInviteResponse$Outbound
-  | components.GuildInviteResponse$Outbound;
+  | components.FriendInviteResponse$Outbound;
 
 /** @internal */
 export const CreateChannelInviteResponseBody$outboundSchema: z.ZodType<
@@ -184,9 +192,9 @@ export const CreateChannelInviteResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateChannelInviteResponseBody
 > = z.union([
+  components.GuildInviteResponse$outboundSchema,
   components.GroupDMInviteResponse$outboundSchema,
   components.FriendInviteResponse$outboundSchema,
-  components.GuildInviteResponse$outboundSchema,
 ]);
 
 /**
@@ -219,5 +227,85 @@ export function createChannelInviteResponseBodyFromJSON(
     jsonString,
     (x) => CreateChannelInviteResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateChannelInviteResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateChannelInviteResponse$inboundSchema: z.ZodType<
+  CreateChannelInviteResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.GuildInviteResponse$inboundSchema,
+    components.GroupDMInviteResponse$inboundSchema,
+    components.FriendInviteResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateChannelInviteResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.GuildInviteResponse$Outbound
+    | components.GroupDMInviteResponse$Outbound
+    | components.FriendInviteResponse$Outbound;
+};
+
+/** @internal */
+export const CreateChannelInviteResponse$outboundSchema: z.ZodType<
+  CreateChannelInviteResponse$Outbound,
+  z.ZodTypeDef,
+  CreateChannelInviteResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.GuildInviteResponse$outboundSchema,
+    components.GroupDMInviteResponse$outboundSchema,
+    components.FriendInviteResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateChannelInviteResponse$ {
+  /** @deprecated use `CreateChannelInviteResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateChannelInviteResponse$inboundSchema;
+  /** @deprecated use `CreateChannelInviteResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateChannelInviteResponse$outboundSchema;
+  /** @deprecated use `CreateChannelInviteResponse$Outbound` instead. */
+  export type Outbound = CreateChannelInviteResponse$Outbound;
+}
+
+export function createChannelInviteResponseToJSON(
+  createChannelInviteResponse: CreateChannelInviteResponse,
+): string {
+  return JSON.stringify(
+    CreateChannelInviteResponse$outboundSchema.parse(
+      createChannelInviteResponse,
+    ),
+  );
+}
+
+export function createChannelInviteResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateChannelInviteResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateChannelInviteResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateChannelInviteResponse' from JSON`,
   );
 }

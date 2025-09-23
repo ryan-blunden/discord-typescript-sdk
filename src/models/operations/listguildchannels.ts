@@ -18,10 +18,20 @@ export type ListGuildChannelsRequest = {
 };
 
 export type ListGuildChannelsResponseBody =
-  | components.PrivateChannelResponse
-  | components.PrivateGroupChannelResponse
   | components.ThreadResponse
-  | components.GuildChannelResponse;
+  | components.GuildChannelResponse
+  | components.PrivateGroupChannelResponse
+  | components.PrivateChannelResponse;
+
+export type ListGuildChannelsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<
+    | components.ThreadResponse
+    | components.GuildChannelResponse
+    | components.PrivateGroupChannelResponse
+    | components.PrivateChannelResponse
+  >;
+};
 
 /** @internal */
 export const ListGuildChannelsSecurity$inboundSchema: z.ZodType<
@@ -153,18 +163,18 @@ export const ListGuildChannelsResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.PrivateChannelResponse$inboundSchema,
-  components.PrivateGroupChannelResponse$inboundSchema,
   components.ThreadResponse$inboundSchema,
   components.GuildChannelResponse$inboundSchema,
+  components.PrivateGroupChannelResponse$inboundSchema,
+  components.PrivateChannelResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type ListGuildChannelsResponseBody$Outbound =
-  | components.PrivateChannelResponse$Outbound
-  | components.PrivateGroupChannelResponse$Outbound
   | components.ThreadResponse$Outbound
-  | components.GuildChannelResponse$Outbound;
+  | components.GuildChannelResponse$Outbound
+  | components.PrivateGroupChannelResponse$Outbound
+  | components.PrivateChannelResponse$Outbound;
 
 /** @internal */
 export const ListGuildChannelsResponseBody$outboundSchema: z.ZodType<
@@ -172,10 +182,10 @@ export const ListGuildChannelsResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListGuildChannelsResponseBody
 > = z.union([
-  components.PrivateChannelResponse$outboundSchema,
-  components.PrivateGroupChannelResponse$outboundSchema,
   components.ThreadResponse$outboundSchema,
   components.GuildChannelResponse$outboundSchema,
+  components.PrivateGroupChannelResponse$outboundSchema,
+  components.PrivateChannelResponse$outboundSchema,
 ]);
 
 /**
@@ -208,5 +218,91 @@ export function listGuildChannelsResponseBodyFromJSON(
     jsonString,
     (x) => ListGuildChannelsResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListGuildChannelsResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListGuildChannelsResponse$inboundSchema: z.ZodType<
+  ListGuildChannelsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(
+    z.union([
+      components.ThreadResponse$inboundSchema,
+      components.GuildChannelResponse$inboundSchema,
+      components.PrivateGroupChannelResponse$inboundSchema,
+      components.PrivateChannelResponse$inboundSchema,
+    ]),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListGuildChannelsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<
+    | components.ThreadResponse$Outbound
+    | components.GuildChannelResponse$Outbound
+    | components.PrivateGroupChannelResponse$Outbound
+    | components.PrivateChannelResponse$Outbound
+  >;
+};
+
+/** @internal */
+export const ListGuildChannelsResponse$outboundSchema: z.ZodType<
+  ListGuildChannelsResponse$Outbound,
+  z.ZodTypeDef,
+  ListGuildChannelsResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(
+    z.union([
+      components.ThreadResponse$outboundSchema,
+      components.GuildChannelResponse$outboundSchema,
+      components.PrivateGroupChannelResponse$outboundSchema,
+      components.PrivateChannelResponse$outboundSchema,
+    ]),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListGuildChannelsResponse$ {
+  /** @deprecated use `ListGuildChannelsResponse$inboundSchema` instead. */
+  export const inboundSchema = ListGuildChannelsResponse$inboundSchema;
+  /** @deprecated use `ListGuildChannelsResponse$outboundSchema` instead. */
+  export const outboundSchema = ListGuildChannelsResponse$outboundSchema;
+  /** @deprecated use `ListGuildChannelsResponse$Outbound` instead. */
+  export type Outbound = ListGuildChannelsResponse$Outbound;
+}
+
+export function listGuildChannelsResponseToJSON(
+  listGuildChannelsResponse: ListGuildChannelsResponse,
+): string {
+  return JSON.stringify(
+    ListGuildChannelsResponse$outboundSchema.parse(listGuildChannelsResponse),
+  );
+}
+
+export function listGuildChannelsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildChannelsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildChannelsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildChannelsResponse' from JSON`,
   );
 }

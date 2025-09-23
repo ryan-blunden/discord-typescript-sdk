@@ -15,14 +15,14 @@ let value: GuildTemplateResponse = {
   sourceGuildId: "<value>",
   serializedSourceGuild: {
     name: "<value>",
-    systemChannelFlags: 699478,
+    systemChannelFlags: 157535,
     roles: [
       {
-        id: 192696,
+        id: 260014,
         name: "<value>",
         permissions: "<value>",
-        color: 869107,
-        hoist: false,
+        color: 247266,
+        hoist: true,
         mentionable: false,
       },
     ],

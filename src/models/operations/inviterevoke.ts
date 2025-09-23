@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -16,9 +17,17 @@ export type InviteRevokeRequest = {
  * 200 response for invite_revoke
  */
 export type InviteRevokeResponseBody =
+  | components.GuildInviteResponse
   | components.GroupDMInviteResponse
-  | components.FriendInviteResponse
-  | components.GuildInviteResponse;
+  | components.FriendInviteResponse;
+
+export type InviteRevokeResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.GuildInviteResponse
+    | components.GroupDMInviteResponse
+    | components.FriendInviteResponse;
+};
 
 /** @internal */
 export const InviteRevokeRequest$inboundSchema: z.ZodType<
@@ -80,16 +89,16 @@ export const InviteRevokeResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  components.GuildInviteResponse$inboundSchema,
   components.GroupDMInviteResponse$inboundSchema,
   components.FriendInviteResponse$inboundSchema,
-  components.GuildInviteResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type InviteRevokeResponseBody$Outbound =
+  | components.GuildInviteResponse$Outbound
   | components.GroupDMInviteResponse$Outbound
-  | components.FriendInviteResponse$Outbound
-  | components.GuildInviteResponse$Outbound;
+  | components.FriendInviteResponse$Outbound;
 
 /** @internal */
 export const InviteRevokeResponseBody$outboundSchema: z.ZodType<
@@ -97,9 +106,9 @@ export const InviteRevokeResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   InviteRevokeResponseBody
 > = z.union([
+  components.GuildInviteResponse$outboundSchema,
   components.GroupDMInviteResponse$outboundSchema,
   components.FriendInviteResponse$outboundSchema,
-  components.GuildInviteResponse$outboundSchema,
 ]);
 
 /**
@@ -130,5 +139,83 @@ export function inviteRevokeResponseBodyFromJSON(
     jsonString,
     (x) => InviteRevokeResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'InviteRevokeResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const InviteRevokeResponse$inboundSchema: z.ZodType<
+  InviteRevokeResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.GuildInviteResponse$inboundSchema,
+    components.GroupDMInviteResponse$inboundSchema,
+    components.FriendInviteResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type InviteRevokeResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.GuildInviteResponse$Outbound
+    | components.GroupDMInviteResponse$Outbound
+    | components.FriendInviteResponse$Outbound;
+};
+
+/** @internal */
+export const InviteRevokeResponse$outboundSchema: z.ZodType<
+  InviteRevokeResponse$Outbound,
+  z.ZodTypeDef,
+  InviteRevokeResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.GuildInviteResponse$outboundSchema,
+    components.GroupDMInviteResponse$outboundSchema,
+    components.FriendInviteResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InviteRevokeResponse$ {
+  /** @deprecated use `InviteRevokeResponse$inboundSchema` instead. */
+  export const inboundSchema = InviteRevokeResponse$inboundSchema;
+  /** @deprecated use `InviteRevokeResponse$outboundSchema` instead. */
+  export const outboundSchema = InviteRevokeResponse$outboundSchema;
+  /** @deprecated use `InviteRevokeResponse$Outbound` instead. */
+  export type Outbound = InviteRevokeResponse$Outbound;
+}
+
+export function inviteRevokeResponseToJSON(
+  inviteRevokeResponse: InviteRevokeResponse,
+): string {
+  return JSON.stringify(
+    InviteRevokeResponse$outboundSchema.parse(inviteRevokeResponse),
+  );
+}
+
+export function inviteRevokeResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<InviteRevokeResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InviteRevokeResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InviteRevokeResponse' from JSON`,
   );
 }

@@ -29,9 +29,9 @@ import {
 export type GuildHomeSettingsResponse = {
   guildId: string;
   enabled: boolean;
-  welcomeMessage?: WelcomeMessageResponse | null | undefined;
-  newMemberActions?: Array<NewMemberActionResponse | null> | null | undefined;
-  resourceChannels?: Array<ResourceChannelResponse | null> | null | undefined;
+  welcomeMessage?: WelcomeMessageResponse | undefined;
+  newMemberActions: Array<NewMemberActionResponse | null>;
+  resourceChannels: Array<ResourceChannelResponse | null>;
 };
 
 /** @internal */
@@ -42,13 +42,11 @@ export const GuildHomeSettingsResponse$inboundSchema: z.ZodType<
 > = z.object({
   guild_id: z.string(),
   enabled: z.boolean(),
-  welcome_message: z.nullable(WelcomeMessageResponse$inboundSchema).optional(),
-  new_member_actions: z.nullable(
-    z.array(z.nullable(NewMemberActionResponse$inboundSchema)),
-  ).optional(),
-  resource_channels: z.nullable(
-    z.array(z.nullable(ResourceChannelResponse$inboundSchema)),
-  ).optional(),
+  welcome_message: WelcomeMessageResponse$inboundSchema.optional(),
+  new_member_actions: z.array(
+    z.nullable(NewMemberActionResponse$inboundSchema),
+  ),
+  resource_channels: z.array(z.nullable(ResourceChannelResponse$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",
@@ -62,15 +60,9 @@ export const GuildHomeSettingsResponse$inboundSchema: z.ZodType<
 export type GuildHomeSettingsResponse$Outbound = {
   guild_id: string;
   enabled: boolean;
-  welcome_message?: WelcomeMessageResponse$Outbound | null | undefined;
-  new_member_actions?:
-    | Array<NewMemberActionResponse$Outbound | null>
-    | null
-    | undefined;
-  resource_channels?:
-    | Array<ResourceChannelResponse$Outbound | null>
-    | null
-    | undefined;
+  welcome_message?: WelcomeMessageResponse$Outbound | undefined;
+  new_member_actions: Array<NewMemberActionResponse$Outbound | null>;
+  resource_channels: Array<ResourceChannelResponse$Outbound | null>;
 };
 
 /** @internal */
@@ -81,13 +73,9 @@ export const GuildHomeSettingsResponse$outboundSchema: z.ZodType<
 > = z.object({
   guildId: z.string(),
   enabled: z.boolean(),
-  welcomeMessage: z.nullable(WelcomeMessageResponse$outboundSchema).optional(),
-  newMemberActions: z.nullable(
-    z.array(z.nullable(NewMemberActionResponse$outboundSchema)),
-  ).optional(),
-  resourceChannels: z.nullable(
-    z.array(z.nullable(ResourceChannelResponse$outboundSchema)),
-  ).optional(),
+  welcomeMessage: WelcomeMessageResponse$outboundSchema.optional(),
+  newMemberActions: z.array(z.nullable(NewMemberActionResponse$outboundSchema)),
+  resourceChannels: z.array(z.nullable(ResourceChannelResponse$outboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     guildId: "guild_id",

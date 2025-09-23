@@ -24,8 +24,15 @@ export type AddGroupDmUserRequest = {
  * 201 response for add_group_dm_user
  */
 export type AddGroupDmUserResponseBody =
-  | components.PrivateChannelResponse
-  | components.PrivateGroupChannelResponse;
+  | components.PrivateGroupChannelResponse
+  | components.PrivateChannelResponse;
+
+export type AddGroupDmUserResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.PrivateGroupChannelResponse
+    | components.PrivateChannelResponse;
+};
 
 /** @internal */
 export const AddGroupDmUserRequestBody$inboundSchema: z.ZodType<
@@ -170,14 +177,14 @@ export const AddGroupDmUserResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.PrivateChannelResponse$inboundSchema,
   components.PrivateGroupChannelResponse$inboundSchema,
+  components.PrivateChannelResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type AddGroupDmUserResponseBody$Outbound =
-  | components.PrivateChannelResponse$Outbound
-  | components.PrivateGroupChannelResponse$Outbound;
+  | components.PrivateGroupChannelResponse$Outbound
+  | components.PrivateChannelResponse$Outbound;
 
 /** @internal */
 export const AddGroupDmUserResponseBody$outboundSchema: z.ZodType<
@@ -185,8 +192,8 @@ export const AddGroupDmUserResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AddGroupDmUserResponseBody
 > = z.union([
-  components.PrivateChannelResponse$outboundSchema,
   components.PrivateGroupChannelResponse$outboundSchema,
+  components.PrivateChannelResponse$outboundSchema,
 ]);
 
 /**
@@ -217,5 +224,80 @@ export function addGroupDmUserResponseBodyFromJSON(
     jsonString,
     (x) => AddGroupDmUserResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'AddGroupDmUserResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const AddGroupDmUserResponse$inboundSchema: z.ZodType<
+  AddGroupDmUserResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.PrivateGroupChannelResponse$inboundSchema,
+    components.PrivateChannelResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type AddGroupDmUserResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.PrivateGroupChannelResponse$Outbound
+    | components.PrivateChannelResponse$Outbound;
+};
+
+/** @internal */
+export const AddGroupDmUserResponse$outboundSchema: z.ZodType<
+  AddGroupDmUserResponse$Outbound,
+  z.ZodTypeDef,
+  AddGroupDmUserResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.PrivateGroupChannelResponse$outboundSchema,
+    components.PrivateChannelResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AddGroupDmUserResponse$ {
+  /** @deprecated use `AddGroupDmUserResponse$inboundSchema` instead. */
+  export const inboundSchema = AddGroupDmUserResponse$inboundSchema;
+  /** @deprecated use `AddGroupDmUserResponse$outboundSchema` instead. */
+  export const outboundSchema = AddGroupDmUserResponse$outboundSchema;
+  /** @deprecated use `AddGroupDmUserResponse$Outbound` instead. */
+  export type Outbound = AddGroupDmUserResponse$Outbound;
+}
+
+export function addGroupDmUserResponseToJSON(
+  addGroupDmUserResponse: AddGroupDmUserResponse,
+): string {
+  return JSON.stringify(
+    AddGroupDmUserResponse$outboundSchema.parse(addGroupDmUserResponse),
+  );
+}
+
+export function addGroupDmUserResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<AddGroupDmUserResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddGroupDmUserResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddGroupDmUserResponse' from JSON`,
   );
 }

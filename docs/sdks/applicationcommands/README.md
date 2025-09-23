@@ -27,6 +27,7 @@ Fetch all global commands for your application.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_application_commands" method="get" path="/applications/{application_id}/commands" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -86,14 +87,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListApplicationCommandsResponse](../../models/operations/listapplicationcommandsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## bulkSet
 
@@ -101,6 +103,7 @@ Takes a list of application commands, overwriting the existing global command li
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="bulk_set_application_commands" method="put" path="/applications/{application_id}/commands" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -162,14 +165,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse[]](../../models/.md)\>**
+**Promise\<[operations.BulkSetApplicationCommandsResponse](../../models/operations/bulksetapplicationcommandsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## create
 
@@ -177,6 +181,7 @@ Create a new global command. New global commands will be available in all guilds
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_application_command" method="post" path="/applications/{application_id}/commands" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -242,14 +247,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
+**Promise\<[operations.CreateApplicationCommandResponse](../../models/operations/createapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -257,6 +263,7 @@ Fetch a global command for your application.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_application_command" method="get" path="/applications/{application_id}/commands/{command_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -318,14 +325,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
+**Promise\<[operations.GetApplicationCommandResponse](../../models/operations/getapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -333,20 +341,21 @@ Delete a global command.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_application_command" method="delete" path="/applications/{application_id}/commands/{command_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
 const discord = new Discord();
 
 async function run() {
-  await discord.applicationCommands.delete({
+  const result = await discord.applicationCommands.delete({
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
     commandId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -373,7 +382,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("applicationCommandsDelete failed:", res.error);
   }
@@ -394,14 +403,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteApplicationCommandResponse](../../models/operations/deleteapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -409,6 +419,7 @@ Edit a global command. Updates will be available in all guilds after 1 hour.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_application_command" method="patch" path="/applications/{application_id}/commands/{command_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -472,14 +483,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
+**Promise\<[operations.UpdateApplicationCommandResponse](../../models/operations/updateapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listGuild
 
@@ -487,6 +499,7 @@ Fetch all guild commands for your application for a specific guild.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_application_commands" method="get" path="/applications/{application_id}/guilds/{guild_id}/commands" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -548,14 +561,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildApplicationCommandsResponse](../../models/operations/listguildapplicationcommandsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## bulkSetGuild
 
@@ -563,6 +577,7 @@ Takes a list of application commands, overwriting the existing command list for 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="bulk_set_guild_application_commands" method="put" path="/applications/{application_id}/guilds/{guild_id}/commands" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -626,14 +641,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse[]](../../models/.md)\>**
+**Promise\<[operations.BulkSetGuildApplicationCommandsResponse](../../models/operations/bulksetguildapplicationcommandsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createGuild
 
@@ -641,6 +657,7 @@ Create a new guild command. New guild commands will be available in the guild im
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_guild_application_command" method="post" path="/applications/{application_id}/guilds/{guild_id}/commands" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -708,14 +725,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
+**Promise\<[operations.CreateGuildApplicationCommandResponse](../../models/operations/createguildapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listGuildPermissions
 
@@ -723,6 +741,7 @@ Fetches command permissions for all commands for your application in a guild.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_application_command_permissions" method="get" path="/applications/{application_id}/guilds/{guild_id}/commands/permissions" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -784,14 +803,15 @@ run();
 
 ### Response
 
-**Promise\<[components.CommandPermissionsResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildApplicationCommandPermissionsResponse](../../models/operations/listguildapplicationcommandpermissionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGuild
 
@@ -799,6 +819,7 @@ Fetch a guild command for your application.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_application_command" method="get" path="/applications/{application_id}/guilds/{guild_id}/commands/{command_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -862,14 +883,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
+**Promise\<[operations.GetGuildApplicationCommandResponse](../../models/operations/getguildapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteGuild
 
@@ -877,13 +899,14 @@ Delete a guild command.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_guild_application_command" method="delete" path="/applications/{application_id}/guilds/{guild_id}/commands/{command_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
 const discord = new Discord();
 
 async function run() {
-  await discord.applicationCommands.deleteGuild({
+  const result = await discord.applicationCommands.deleteGuild({
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
@@ -891,7 +914,7 @@ async function run() {
     commandId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -919,7 +942,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("applicationCommandsDeleteGuild failed:", res.error);
   }
@@ -940,14 +963,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildApplicationCommandResponse](../../models/operations/deleteguildapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateGuild
 
@@ -955,6 +979,7 @@ Edit a guild command. Updates for guild commands will be available immediately.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_guild_application_command" method="patch" path="/applications/{application_id}/guilds/{guild_id}/commands/{command_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1020,14 +1045,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
+**Promise\<[operations.UpdateGuildApplicationCommandResponse](../../models/operations/updateguildapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGuildPermissions
 
@@ -1035,6 +1061,7 @@ Fetches command permissions for a specific command for your application in a gui
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_application_command_permissions" method="get" path="/applications/{application_id}/guilds/{guild_id}/commands/{command_id}/permissions" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1098,14 +1125,15 @@ run();
 
 ### Response
 
-**Promise\<[components.CommandPermissionsResponse](../../models/components/commandpermissionsresponse.md)\>**
+**Promise\<[operations.GetGuildApplicationCommandPermissionsResponse](../../models/operations/getguildapplicationcommandpermissionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## setGuildPermissions
 
@@ -1113,6 +1141,7 @@ Edits command permissions for a specific command for your application in a guild
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="set_guild_application_command_permissions" method="put" path="/applications/{application_id}/guilds/{guild_id}/commands/{command_id}/permissions" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1178,11 +1207,12 @@ run();
 
 ### Response
 
-**Promise\<[components.CommandPermissionsResponse](../../models/components/commandpermissionsresponse.md)\>**
+**Promise\<[operations.SetGuildApplicationCommandPermissionsResponse](../../models/operations/setguildapplicationcommandpermissionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

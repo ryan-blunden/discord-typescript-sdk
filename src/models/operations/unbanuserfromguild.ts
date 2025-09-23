@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UnbanUserFromGuildRequest = {
   guildId: string;
   userId: string;
+  unbanUserFromGuildRequest: components.UnbanUserFromGuildRequest;
+};
+
+export type UnbanUserFromGuildResponse = {
+  headers: { [k: string]: Array<string> };
 };
 
 /** @internal */
@@ -21,10 +27,12 @@ export const UnbanUserFromGuildRequest$inboundSchema: z.ZodType<
 > = z.object({
   guild_id: z.string(),
   user_id: z.string(),
+  UnbanUserFromGuildRequest: components.UnbanUserFromGuildRequest$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",
     "user_id": "userId",
+    "UnbanUserFromGuildRequest": "unbanUserFromGuildRequest",
   });
 });
 
@@ -32,6 +40,7 @@ export const UnbanUserFromGuildRequest$inboundSchema: z.ZodType<
 export type UnbanUserFromGuildRequest$Outbound = {
   guild_id: string;
   user_id: string;
+  UnbanUserFromGuildRequest: components.UnbanUserFromGuildRequest$Outbound;
 };
 
 /** @internal */
@@ -42,10 +51,13 @@ export const UnbanUserFromGuildRequest$outboundSchema: z.ZodType<
 > = z.object({
   guildId: z.string(),
   userId: z.string(),
+  unbanUserFromGuildRequest:
+    components.UnbanUserFromGuildRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     guildId: "guild_id",
     userId: "user_id",
+    unbanUserFromGuildRequest: "UnbanUserFromGuildRequest",
   });
 });
 
@@ -77,5 +89,67 @@ export function unbanUserFromGuildRequestFromJSON(
     jsonString,
     (x) => UnbanUserFromGuildRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UnbanUserFromGuildRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UnbanUserFromGuildResponse$inboundSchema: z.ZodType<
+  UnbanUserFromGuildResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type UnbanUserFromGuildResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const UnbanUserFromGuildResponse$outboundSchema: z.ZodType<
+  UnbanUserFromGuildResponse$Outbound,
+  z.ZodTypeDef,
+  UnbanUserFromGuildResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UnbanUserFromGuildResponse$ {
+  /** @deprecated use `UnbanUserFromGuildResponse$inboundSchema` instead. */
+  export const inboundSchema = UnbanUserFromGuildResponse$inboundSchema;
+  /** @deprecated use `UnbanUserFromGuildResponse$outboundSchema` instead. */
+  export const outboundSchema = UnbanUserFromGuildResponse$outboundSchema;
+  /** @deprecated use `UnbanUserFromGuildResponse$Outbound` instead. */
+  export type Outbound = UnbanUserFromGuildResponse$Outbound;
+}
+
+export function unbanUserFromGuildResponseToJSON(
+  unbanUserFromGuildResponse: UnbanUserFromGuildResponse,
+): string {
+  return JSON.stringify(
+    UnbanUserFromGuildResponse$outboundSchema.parse(unbanUserFromGuildResponse),
+  );
+}
+
+export function unbanUserFromGuildResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UnbanUserFromGuildResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UnbanUserFromGuildResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UnbanUserFromGuildResponse' from JSON`,
   );
 }

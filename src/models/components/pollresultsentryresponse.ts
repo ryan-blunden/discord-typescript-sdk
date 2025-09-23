@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type PollResultsEntryResponse = {
   id: number;
   count: number;
-  meVoted?: boolean | null | undefined;
+  meVoted: boolean;
 };
 
 /** @internal */
@@ -22,7 +22,7 @@ export const PollResultsEntryResponse$inboundSchema: z.ZodType<
 > = z.object({
   id: z.number().int(),
   count: z.number().int(),
-  me_voted: z.nullable(z.boolean()).optional(),
+  me_voted: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "me_voted": "meVoted",
@@ -33,7 +33,7 @@ export const PollResultsEntryResponse$inboundSchema: z.ZodType<
 export type PollResultsEntryResponse$Outbound = {
   id: number;
   count: number;
-  me_voted?: boolean | null | undefined;
+  me_voted: boolean;
 };
 
 /** @internal */
@@ -44,7 +44,7 @@ export const PollResultsEntryResponse$outboundSchema: z.ZodType<
 > = z.object({
   id: z.number().int(),
   count: z.number().int(),
-  meVoted: z.nullable(z.boolean()).optional(),
+  meVoted: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     meVoted: "me_voted",

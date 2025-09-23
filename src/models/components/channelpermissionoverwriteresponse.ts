@@ -21,7 +21,7 @@ export const ChannelPermissionOverwriteResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  type: z.literal(0).optional(),
+  type: z.literal(0).default(0).optional(),
   allow: z.string(),
   deny: z.string(),
 });

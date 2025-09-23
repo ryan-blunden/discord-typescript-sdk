@@ -12,26 +12,35 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type UpdateChannelRequestBody =
   | components.UpdateDMRequestPartial
   | components.UpdateGroupDMRequestPartial
-  | components.UpdateThreadRequestPartial
-  | components.UpdateGuildChannelRequestPartial;
+  | components.UpdateGuildChannelRequestPartial
+  | components.UpdateThreadRequestPartial;
 
 export type UpdateChannelRequest = {
   channelId: string;
   requestBody:
     | components.UpdateDMRequestPartial
     | components.UpdateGroupDMRequestPartial
-    | components.UpdateThreadRequestPartial
-    | components.UpdateGuildChannelRequestPartial;
+    | components.UpdateGuildChannelRequestPartial
+    | components.UpdateThreadRequestPartial;
 };
 
 /**
  * 200 response for update_channel
  */
 export type UpdateChannelResponseBody =
-  | components.PrivateChannelResponse
-  | components.PrivateGroupChannelResponse
   | components.ThreadResponse
-  | components.GuildChannelResponse;
+  | components.GuildChannelResponse
+  | components.PrivateGroupChannelResponse
+  | components.PrivateChannelResponse;
+
+export type UpdateChannelResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.ThreadResponse
+    | components.GuildChannelResponse
+    | components.PrivateGroupChannelResponse
+    | components.PrivateChannelResponse;
+};
 
 /** @internal */
 export const UpdateChannelRequestBody$inboundSchema: z.ZodType<
@@ -41,16 +50,16 @@ export const UpdateChannelRequestBody$inboundSchema: z.ZodType<
 > = z.union([
   components.UpdateDMRequestPartial$inboundSchema,
   components.UpdateGroupDMRequestPartial$inboundSchema,
-  components.UpdateThreadRequestPartial$inboundSchema,
   components.UpdateGuildChannelRequestPartial$inboundSchema,
+  components.UpdateThreadRequestPartial$inboundSchema,
 ]);
 
 /** @internal */
 export type UpdateChannelRequestBody$Outbound =
   | components.UpdateDMRequestPartial$Outbound
   | components.UpdateGroupDMRequestPartial$Outbound
-  | components.UpdateThreadRequestPartial$Outbound
-  | components.UpdateGuildChannelRequestPartial$Outbound;
+  | components.UpdateGuildChannelRequestPartial$Outbound
+  | components.UpdateThreadRequestPartial$Outbound;
 
 /** @internal */
 export const UpdateChannelRequestBody$outboundSchema: z.ZodType<
@@ -60,8 +69,8 @@ export const UpdateChannelRequestBody$outboundSchema: z.ZodType<
 > = z.union([
   components.UpdateDMRequestPartial$outboundSchema,
   components.UpdateGroupDMRequestPartial$outboundSchema,
-  components.UpdateThreadRequestPartial$outboundSchema,
   components.UpdateGuildChannelRequestPartial$outboundSchema,
+  components.UpdateThreadRequestPartial$outboundSchema,
 ]);
 
 /**
@@ -105,8 +114,8 @@ export const UpdateChannelRequest$inboundSchema: z.ZodType<
   RequestBody: z.union([
     components.UpdateDMRequestPartial$inboundSchema,
     components.UpdateGroupDMRequestPartial$inboundSchema,
-    components.UpdateThreadRequestPartial$inboundSchema,
     components.UpdateGuildChannelRequestPartial$inboundSchema,
+    components.UpdateThreadRequestPartial$inboundSchema,
   ]),
 }).transform((v) => {
   return remap$(v, {
@@ -121,8 +130,8 @@ export type UpdateChannelRequest$Outbound = {
   RequestBody:
     | components.UpdateDMRequestPartial$Outbound
     | components.UpdateGroupDMRequestPartial$Outbound
-    | components.UpdateThreadRequestPartial$Outbound
-    | components.UpdateGuildChannelRequestPartial$Outbound;
+    | components.UpdateGuildChannelRequestPartial$Outbound
+    | components.UpdateThreadRequestPartial$Outbound;
 };
 
 /** @internal */
@@ -135,8 +144,8 @@ export const UpdateChannelRequest$outboundSchema: z.ZodType<
   requestBody: z.union([
     components.UpdateDMRequestPartial$outboundSchema,
     components.UpdateGroupDMRequestPartial$outboundSchema,
-    components.UpdateThreadRequestPartial$outboundSchema,
     components.UpdateGuildChannelRequestPartial$outboundSchema,
+    components.UpdateThreadRequestPartial$outboundSchema,
   ]),
 }).transform((v) => {
   return remap$(v, {
@@ -182,18 +191,18 @@ export const UpdateChannelResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.PrivateChannelResponse$inboundSchema,
-  components.PrivateGroupChannelResponse$inboundSchema,
   components.ThreadResponse$inboundSchema,
   components.GuildChannelResponse$inboundSchema,
+  components.PrivateGroupChannelResponse$inboundSchema,
+  components.PrivateChannelResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type UpdateChannelResponseBody$Outbound =
-  | components.PrivateChannelResponse$Outbound
-  | components.PrivateGroupChannelResponse$Outbound
   | components.ThreadResponse$Outbound
-  | components.GuildChannelResponse$Outbound;
+  | components.GuildChannelResponse$Outbound
+  | components.PrivateGroupChannelResponse$Outbound
+  | components.PrivateChannelResponse$Outbound;
 
 /** @internal */
 export const UpdateChannelResponseBody$outboundSchema: z.ZodType<
@@ -201,10 +210,10 @@ export const UpdateChannelResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateChannelResponseBody
 > = z.union([
-  components.PrivateChannelResponse$outboundSchema,
-  components.PrivateGroupChannelResponse$outboundSchema,
   components.ThreadResponse$outboundSchema,
   components.GuildChannelResponse$outboundSchema,
+  components.PrivateGroupChannelResponse$outboundSchema,
+  components.PrivateChannelResponse$outboundSchema,
 ]);
 
 /**
@@ -235,5 +244,86 @@ export function updateChannelResponseBodyFromJSON(
     jsonString,
     (x) => UpdateChannelResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateChannelResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateChannelResponse$inboundSchema: z.ZodType<
+  UpdateChannelResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.ThreadResponse$inboundSchema,
+    components.GuildChannelResponse$inboundSchema,
+    components.PrivateGroupChannelResponse$inboundSchema,
+    components.PrivateChannelResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateChannelResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.ThreadResponse$Outbound
+    | components.GuildChannelResponse$Outbound
+    | components.PrivateGroupChannelResponse$Outbound
+    | components.PrivateChannelResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateChannelResponse$outboundSchema: z.ZodType<
+  UpdateChannelResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateChannelResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.ThreadResponse$outboundSchema,
+    components.GuildChannelResponse$outboundSchema,
+    components.PrivateGroupChannelResponse$outboundSchema,
+    components.PrivateChannelResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateChannelResponse$ {
+  /** @deprecated use `UpdateChannelResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateChannelResponse$inboundSchema;
+  /** @deprecated use `UpdateChannelResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateChannelResponse$outboundSchema;
+  /** @deprecated use `UpdateChannelResponse$Outbound` instead. */
+  export type Outbound = UpdateChannelResponse$Outbound;
+}
+
+export function updateChannelResponseToJSON(
+  updateChannelResponse: UpdateChannelResponse,
+): string {
+  return JSON.stringify(
+    UpdateChannelResponse$outboundSchema.parse(updateChannelResponse),
+  );
+}
+
+export function updateChannelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateChannelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateChannelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateChannelResponse' from JSON`,
   );
 }

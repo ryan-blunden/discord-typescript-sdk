@@ -33,7 +33,7 @@ export const VoiceScheduledEventPatchRequestPartial$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: z.nullable(z.literal(1)).optional(),
+  status: z.nullable(z.literal(1).default(1)).optional(),
   name: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   image: z.nullable(z.string()).optional(),
@@ -43,8 +43,8 @@ export const VoiceScheduledEventPatchRequestPartial$inboundSchema: z.ZodType<
   scheduled_end_time: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  entity_type: z.literal(0).optional(),
-  privacy_level: z.literal(2).optional(),
+  entity_type: z.literal(0).default(0).optional(),
+  privacy_level: z.literal(2).default(2).optional(),
   channel_id: z.nullable(z.string()).optional(),
   entity_metadata: z.nullable(EntityMetadataVoice$inboundSchema).optional(),
 }).transform((v) => {

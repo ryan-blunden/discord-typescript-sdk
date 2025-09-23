@@ -20,7 +20,7 @@ export const ApplicationCommandPermission$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
   permission: z.boolean(),
 });
 

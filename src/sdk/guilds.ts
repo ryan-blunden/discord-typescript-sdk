@@ -5,7 +5,6 @@
 import { guildsAddMember } from "../funcs/guildsAddMember.js";
 import { guildsAddMemberRole } from "../funcs/guildsAddMemberRole.js";
 import { guildsBulkBan } from "../funcs/guildsBulkBan.js";
-import { guildsCreate } from "../funcs/guildsCreate.js";
 import { guildsCreateBan } from "../funcs/guildsCreateBan.js";
 import { guildsCreateChannel } from "../funcs/guildsCreateChannel.js";
 import { guildsCreateRole } from "../funcs/guildsCreateRole.js";
@@ -48,32 +47,17 @@ import { guildsUpdateRolePositions } from "../funcs/guildsUpdateRolePositions.js
 import { guildsUpdateWelcomeScreen } from "../funcs/guildsUpdateWelcomeScreen.js";
 import { guildsUpdateWidgetSettings } from "../funcs/guildsUpdateWidgetSettings.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Guilds extends ClientSDK {
-  /**
-   * Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.
-   */
-  async create(
-    request: components.GuildCreateRequest,
-    options?: RequestOptions,
-  ): Promise<components.GuildResponse> {
-    return unwrapAsync(guildsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
   /**
    * Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.
    */
   async get(
     request: operations.GetGuildRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildWithCountsResponse> {
+  ): Promise<operations.GetGuildResponse> {
     return unwrapAsync(guildsGet(
       this,
       request,
@@ -87,7 +71,7 @@ export class Guilds extends ClientSDK {
   async delete(
     request: operations.DeleteGuildRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteGuildResponse | undefined> {
     return unwrapAsync(guildsDelete(
       this,
       request,
@@ -101,7 +85,7 @@ export class Guilds extends ClientSDK {
   async update(
     request: operations.UpdateGuildRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildResponse> {
+  ): Promise<operations.UpdateGuildResponse> {
     return unwrapAsync(guildsUpdate(
       this,
       request,
@@ -115,7 +99,7 @@ export class Guilds extends ClientSDK {
   async listBans(
     request: operations.ListGuildBansRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.GuildBanResponse>> {
+  ): Promise<operations.ListGuildBansResponse> {
     return unwrapAsync(guildsListBans(
       this,
       request,
@@ -129,7 +113,7 @@ export class Guilds extends ClientSDK {
   async getBan(
     request: operations.GetGuildBanRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildBanResponse> {
+  ): Promise<operations.GetGuildBanResponse> {
     return unwrapAsync(guildsGetBan(
       this,
       request,
@@ -143,7 +127,7 @@ export class Guilds extends ClientSDK {
   async createBan(
     request: operations.BanUserFromGuildRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.BanUserFromGuildResponse | undefined> {
     return unwrapAsync(guildsCreateBan(
       this,
       request,
@@ -157,7 +141,7 @@ export class Guilds extends ClientSDK {
   async removeBan(
     request: operations.UnbanUserFromGuildRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.UnbanUserFromGuildResponse | undefined> {
     return unwrapAsync(guildsRemoveBan(
       this,
       request,
@@ -171,7 +155,7 @@ export class Guilds extends ClientSDK {
   async bulkBan(
     request: operations.BulkBanUsersFromGuildRequest,
     options?: RequestOptions,
-  ): Promise<components.BulkBanUsersResponse> {
+  ): Promise<operations.BulkBanUsersFromGuildResponse> {
     return unwrapAsync(guildsBulkBan(
       this,
       request,
@@ -186,7 +170,7 @@ export class Guilds extends ClientSDK {
     security: operations.ListGuildChannelsSecurity,
     request: operations.ListGuildChannelsRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.ListGuildChannelsResponseBody>> {
+  ): Promise<operations.ListGuildChannelsResponse> {
     return unwrapAsync(guildsListChannels(
       this,
       security,
@@ -201,7 +185,7 @@ export class Guilds extends ClientSDK {
   async createChannel(
     request: operations.CreateGuildChannelRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildChannelResponse> {
+  ): Promise<operations.CreateGuildChannelResponse> {
     return unwrapAsync(guildsCreateChannel(
       this,
       request,
@@ -215,7 +199,7 @@ export class Guilds extends ClientSDK {
   async updateChannelPositions(
     request: operations.BulkUpdateGuildChannelsRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.BulkUpdateGuildChannelsResponse | undefined> {
     return unwrapAsync(guildsUpdateChannelPositions(
       this,
       request,
@@ -229,7 +213,7 @@ export class Guilds extends ClientSDK {
   async listIntegrations(
     request: operations.ListGuildIntegrationsRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.ListGuildIntegrationsResponseBody>> {
+  ): Promise<operations.ListGuildIntegrationsResponse> {
     return unwrapAsync(guildsListIntegrations(
       this,
       request,
@@ -243,7 +227,7 @@ export class Guilds extends ClientSDK {
   async deleteIntegration(
     request: operations.DeleteGuildIntegrationRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteGuildIntegrationResponse | undefined> {
     return unwrapAsync(guildsDeleteIntegration(
       this,
       request,
@@ -257,7 +241,7 @@ export class Guilds extends ClientSDK {
   async listInvites(
     request: operations.ListGuildInvitesRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.ListGuildInvitesResponseBody>> {
+  ): Promise<operations.ListGuildInvitesResponse> {
     return unwrapAsync(guildsListInvites(
       this,
       request,
@@ -271,7 +255,7 @@ export class Guilds extends ClientSDK {
   async listMembers(
     request: operations.ListGuildMembersRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.GuildMemberResponse>> {
+  ): Promise<operations.ListGuildMembersResponse> {
     return unwrapAsync(guildsListMembers(
       this,
       request,
@@ -285,7 +269,7 @@ export class Guilds extends ClientSDK {
   async updateCurrentMember(
     request: operations.UpdateMyGuildMemberRequest,
     options?: RequestOptions,
-  ): Promise<components.PrivateGuildMemberResponse> {
+  ): Promise<operations.UpdateMyGuildMemberResponse> {
     return unwrapAsync(guildsUpdateCurrentMember(
       this,
       request,
@@ -299,7 +283,7 @@ export class Guilds extends ClientSDK {
   async searchMembers(
     request: operations.SearchGuildMembersRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.GuildMemberResponse>> {
+  ): Promise<operations.SearchGuildMembersResponse> {
     return unwrapAsync(guildsSearchMembers(
       this,
       request,
@@ -313,7 +297,7 @@ export class Guilds extends ClientSDK {
   async getMember(
     request: operations.GetGuildMemberRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildMemberResponse> {
+  ): Promise<operations.GetGuildMemberResponse> {
     return unwrapAsync(guildsGetMember(
       this,
       request,
@@ -327,7 +311,7 @@ export class Guilds extends ClientSDK {
   async addMember(
     request: operations.AddGuildMemberRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildMemberResponse | undefined> {
+  ): Promise<operations.AddGuildMemberResponse | undefined> {
     return unwrapAsync(guildsAddMember(
       this,
       request,
@@ -341,7 +325,7 @@ export class Guilds extends ClientSDK {
   async removeMember(
     request: operations.DeleteGuildMemberRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteGuildMemberResponse | undefined> {
     return unwrapAsync(guildsRemoveMember(
       this,
       request,
@@ -355,7 +339,7 @@ export class Guilds extends ClientSDK {
   async updateMember(
     request: operations.UpdateGuildMemberRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildMemberResponse | undefined> {
+  ): Promise<operations.UpdateGuildMemberResponse | undefined> {
     return unwrapAsync(guildsUpdateMember(
       this,
       request,
@@ -369,7 +353,7 @@ export class Guilds extends ClientSDK {
   async addMemberRole(
     request: operations.AddGuildMemberRoleRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.AddGuildMemberRoleResponse | undefined> {
     return unwrapAsync(guildsAddMemberRole(
       this,
       request,
@@ -383,7 +367,7 @@ export class Guilds extends ClientSDK {
   async removeMemberRole(
     request: operations.DeleteGuildMemberRoleRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteGuildMemberRoleResponse | undefined> {
     return unwrapAsync(guildsRemoveMemberRole(
       this,
       request,
@@ -397,7 +381,7 @@ export class Guilds extends ClientSDK {
   async setMfaLevel(
     request: operations.SetGuildMfaLevelRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildMFALevelResponse> {
+  ): Promise<operations.SetGuildMfaLevelResponse> {
     return unwrapAsync(guildsSetMfaLevel(
       this,
       request,
@@ -411,7 +395,7 @@ export class Guilds extends ClientSDK {
   async getOnboarding(
     request: operations.GetGuildsOnboardingRequest,
     options?: RequestOptions,
-  ): Promise<components.UserGuildOnboardingResponse> {
+  ): Promise<operations.GetGuildsOnboardingResponse> {
     return unwrapAsync(guildsGetOnboarding(
       this,
       request,
@@ -425,7 +409,7 @@ export class Guilds extends ClientSDK {
   async updateOnboarding(
     request: operations.PutGuildsOnboardingRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildOnboardingResponse> {
+  ): Promise<operations.PutGuildsOnboardingResponse> {
     return unwrapAsync(guildsUpdateOnboarding(
       this,
       request,
@@ -439,7 +423,7 @@ export class Guilds extends ClientSDK {
   async getPreview(
     request: operations.GetGuildPreviewRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildPreviewResponse> {
+  ): Promise<operations.GetGuildPreviewResponse> {
     return unwrapAsync(guildsGetPreview(
       this,
       request,
@@ -453,7 +437,7 @@ export class Guilds extends ClientSDK {
   async previewPrune(
     request: operations.PreviewPruneGuildRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildPruneResponse> {
+  ): Promise<operations.PreviewPruneGuildResponse> {
     return unwrapAsync(guildsPreviewPrune(
       this,
       request,
@@ -467,7 +451,7 @@ export class Guilds extends ClientSDK {
   async prune(
     request: operations.PruneGuildRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildPruneResponse> {
+  ): Promise<operations.PruneGuildResponse> {
     return unwrapAsync(guildsPrune(
       this,
       request,
@@ -481,7 +465,7 @@ export class Guilds extends ClientSDK {
   async listVoiceRegions(
     request: operations.ListGuildVoiceRegionsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.VoiceRegionResponse>> {
+  ): Promise<operations.ListGuildVoiceRegionsResponse> {
     return unwrapAsync(guildsListVoiceRegions(
       this,
       request,
@@ -495,7 +479,7 @@ export class Guilds extends ClientSDK {
   async listRoles(
     request: operations.ListGuildRolesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.GuildRoleResponse>> {
+  ): Promise<operations.ListGuildRolesResponse> {
     return unwrapAsync(guildsListRoles(
       this,
       request,
@@ -509,7 +493,7 @@ export class Guilds extends ClientSDK {
   async createRole(
     request: operations.CreateGuildRoleRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildRoleResponse> {
+  ): Promise<operations.CreateGuildRoleResponse> {
     return unwrapAsync(guildsCreateRole(
       this,
       request,
@@ -523,7 +507,7 @@ export class Guilds extends ClientSDK {
   async updateRolePositions(
     request: operations.BulkUpdateGuildRolesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.GuildRoleResponse>> {
+  ): Promise<operations.BulkUpdateGuildRolesResponse> {
     return unwrapAsync(guildsUpdateRolePositions(
       this,
       request,
@@ -537,7 +521,7 @@ export class Guilds extends ClientSDK {
   async getRole(
     request: operations.GetGuildRoleRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildRoleResponse> {
+  ): Promise<operations.GetGuildRoleResponse> {
     return unwrapAsync(guildsGetRole(
       this,
       request,
@@ -551,7 +535,7 @@ export class Guilds extends ClientSDK {
   async deleteRole(
     request: operations.DeleteGuildRoleRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteGuildRoleResponse | undefined> {
     return unwrapAsync(guildsDeleteRole(
       this,
       request,
@@ -565,7 +549,7 @@ export class Guilds extends ClientSDK {
   async updateRole(
     request: operations.UpdateGuildRoleRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildRoleResponse> {
+  ): Promise<operations.UpdateGuildRoleResponse> {
     return unwrapAsync(guildsUpdateRole(
       this,
       request,
@@ -579,7 +563,7 @@ export class Guilds extends ClientSDK {
   async listActiveThreads(
     request: operations.GetActiveGuildThreadsRequest,
     options?: RequestOptions,
-  ): Promise<components.ThreadsResponse> {
+  ): Promise<operations.GetActiveGuildThreadsResponse> {
     return unwrapAsync(guildsListActiveThreads(
       this,
       request,
@@ -593,7 +577,7 @@ export class Guilds extends ClientSDK {
   async getVanityUrl(
     request: operations.GetGuildVanityUrlRequest,
     options?: RequestOptions,
-  ): Promise<components.VanityURLResponse> {
+  ): Promise<operations.GetGuildVanityUrlResponse> {
     return unwrapAsync(guildsGetVanityUrl(
       this,
       request,
@@ -607,7 +591,7 @@ export class Guilds extends ClientSDK {
   async getWelcomeScreen(
     request: operations.GetGuildWelcomeScreenRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildWelcomeScreenResponse> {
+  ): Promise<operations.GetGuildWelcomeScreenResponse> {
     return unwrapAsync(guildsGetWelcomeScreen(
       this,
       request,
@@ -621,7 +605,7 @@ export class Guilds extends ClientSDK {
   async updateWelcomeScreen(
     request: operations.UpdateGuildWelcomeScreenRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildWelcomeScreenResponse> {
+  ): Promise<operations.UpdateGuildWelcomeScreenResponse> {
     return unwrapAsync(guildsUpdateWelcomeScreen(
       this,
       request,
@@ -635,7 +619,7 @@ export class Guilds extends ClientSDK {
   async getWidgetSettings(
     request: operations.GetGuildWidgetSettingsRequest,
     options?: RequestOptions,
-  ): Promise<components.WidgetSettingsResponse> {
+  ): Promise<operations.GetGuildWidgetSettingsResponse> {
     return unwrapAsync(guildsGetWidgetSettings(
       this,
       request,
@@ -649,7 +633,7 @@ export class Guilds extends ClientSDK {
   async updateWidgetSettings(
     request: operations.UpdateGuildWidgetSettingsRequest,
     options?: RequestOptions,
-  ): Promise<components.WidgetSettingsResponse> {
+  ): Promise<operations.UpdateGuildWidgetSettingsResponse> {
     return unwrapAsync(guildsUpdateWidgetSettings(
       this,
       request,
@@ -664,7 +648,7 @@ export class Guilds extends ClientSDK {
     request: operations.GetGuildWidgetRequest,
     security?: operations.GetGuildWidgetSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.WidgetResponse> {
+  ): Promise<operations.GetGuildWidgetResponse> {
     return unwrapAsync(guildsGetWidget(
       this,
       request,
@@ -680,7 +664,7 @@ export class Guilds extends ClientSDK {
     request: operations.GetGuildWidgetPngRequest,
     security?: operations.GetGuildWidgetPngSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<string> {
+  ): Promise<operations.GetGuildWidgetPngResponse> {
     return unwrapAsync(guildsGetWidgetPng(
       this,
       request,

@@ -27,7 +27,7 @@ export const ThumbnailComponentResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
   id: z.number().int(),
   media: UnfurledMediaResponse$inboundSchema,
   description: z.nullable(z.string()).optional(),

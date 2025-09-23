@@ -19,8 +19,8 @@ export type NewMemberActionResponse = {
   actionType?: 0 | undefined;
   title: string;
   description: string;
-  emoji?: SettingsEmojiResponse | null | undefined;
-  icon?: string | null | undefined;
+  emoji?: SettingsEmojiResponse | undefined;
+  icon?: string | undefined;
 };
 
 /** @internal */
@@ -30,11 +30,11 @@ export const NewMemberActionResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   channel_id: z.string(),
-  action_type: z.literal(0).optional(),
+  action_type: z.literal(0).default(0).optional(),
   title: z.string(),
   description: z.string(),
-  emoji: z.nullable(SettingsEmojiResponse$inboundSchema).optional(),
-  icon: z.nullable(z.string()).optional(),
+  emoji: SettingsEmojiResponse$inboundSchema.optional(),
+  icon: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "channel_id": "channelId",
@@ -48,8 +48,8 @@ export type NewMemberActionResponse$Outbound = {
   action_type: 0;
   title: string;
   description: string;
-  emoji?: SettingsEmojiResponse$Outbound | null | undefined;
-  icon?: string | null | undefined;
+  emoji?: SettingsEmojiResponse$Outbound | undefined;
+  icon?: string | undefined;
 };
 
 /** @internal */
@@ -62,8 +62,8 @@ export const NewMemberActionResponse$outboundSchema: z.ZodType<
   actionType: z.literal(0).default(0 as const),
   title: z.string(),
   description: z.string(),
-  emoji: z.nullable(SettingsEmojiResponse$outboundSchema).optional(),
-  icon: z.nullable(z.string()).optional(),
+  emoji: SettingsEmojiResponse$outboundSchema.optional(),
+  icon: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     channelId: "channel_id",

@@ -33,14 +33,14 @@ export const UpdateThreadRequestPartial$inboundSchema: z.ZodType<
   archived: z.nullable(z.boolean()).optional(),
   locked: z.nullable(z.boolean()).optional(),
   invitable: z.nullable(z.boolean()).optional(),
-  auto_archive_duration: z.nullable(z.literal(60)).optional(),
+  auto_archive_duration: z.nullable(z.literal(60).default(60)).optional(),
   rate_limit_per_user: z.nullable(z.number().int()).optional(),
   flags: z.nullable(z.number().int()).optional(),
   applied_tags: z.nullable(z.array(z.string())).optional(),
   bitrate: z.nullable(z.number().int()).optional(),
   user_limit: z.nullable(z.number().int()).optional(),
   rtc_region: z.nullable(z.string()).optional(),
-  video_quality_mode: z.nullable(z.literal(1)).optional(),
+  video_quality_mode: z.nullable(z.literal(1).default(1)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "auto_archive_duration": "autoArchiveDuration",

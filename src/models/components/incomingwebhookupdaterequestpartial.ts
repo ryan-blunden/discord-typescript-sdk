@@ -75,13 +75,13 @@ import {
 } from "./textdisplaycomponentformessagerequest.js";
 
 export type IncomingWebhookUpdateRequestPartialComponents =
+  | SectionComponentForMessageRequest
   | ActionRowComponentForMessageRequest
+  | ContainerComponentForMessageRequest
+  | FileComponentForMessageRequest
   | MediaGalleryComponentForMessageRequest
   | TextDisplayComponentForMessageRequest
-  | FileComponentForMessageRequest
-  | SectionComponentForMessageRequest
-  | SeparatorComponentForMessageRequest
-  | ContainerComponentForMessageRequest;
+  | SeparatorComponentForMessageRequest;
 
 export type IncomingWebhookUpdateRequestPartial = {
   content?: string | null | undefined;
@@ -89,13 +89,13 @@ export type IncomingWebhookUpdateRequestPartial = {
   allowedMentions?: MessageAllowedMentionsRequest | null | undefined;
   components?:
     | Array<
+      | SectionComponentForMessageRequest
       | ActionRowComponentForMessageRequest
+      | ContainerComponentForMessageRequest
+      | FileComponentForMessageRequest
       | MediaGalleryComponentForMessageRequest
       | TextDisplayComponentForMessageRequest
-      | FileComponentForMessageRequest
-      | SectionComponentForMessageRequest
       | SeparatorComponentForMessageRequest
-      | ContainerComponentForMessageRequest
     >
     | null
     | undefined;
@@ -111,24 +111,24 @@ export const IncomingWebhookUpdateRequestPartialComponents$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
+    SectionComponentForMessageRequest$inboundSchema,
     ActionRowComponentForMessageRequest$inboundSchema,
+    ContainerComponentForMessageRequest$inboundSchema,
+    FileComponentForMessageRequest$inboundSchema,
     MediaGalleryComponentForMessageRequest$inboundSchema,
     TextDisplayComponentForMessageRequest$inboundSchema,
-    FileComponentForMessageRequest$inboundSchema,
-    SectionComponentForMessageRequest$inboundSchema,
     SeparatorComponentForMessageRequest$inboundSchema,
-    ContainerComponentForMessageRequest$inboundSchema,
   ]);
 
 /** @internal */
 export type IncomingWebhookUpdateRequestPartialComponents$Outbound =
+  | SectionComponentForMessageRequest$Outbound
   | ActionRowComponentForMessageRequest$Outbound
+  | ContainerComponentForMessageRequest$Outbound
+  | FileComponentForMessageRequest$Outbound
   | MediaGalleryComponentForMessageRequest$Outbound
   | TextDisplayComponentForMessageRequest$Outbound
-  | FileComponentForMessageRequest$Outbound
-  | SectionComponentForMessageRequest$Outbound
-  | SeparatorComponentForMessageRequest$Outbound
-  | ContainerComponentForMessageRequest$Outbound;
+  | SeparatorComponentForMessageRequest$Outbound;
 
 /** @internal */
 export const IncomingWebhookUpdateRequestPartialComponents$outboundSchema:
@@ -137,13 +137,13 @@ export const IncomingWebhookUpdateRequestPartialComponents$outboundSchema:
     z.ZodTypeDef,
     IncomingWebhookUpdateRequestPartialComponents
   > = z.union([
+    SectionComponentForMessageRequest$outboundSchema,
     ActionRowComponentForMessageRequest$outboundSchema,
+    ContainerComponentForMessageRequest$outboundSchema,
+    FileComponentForMessageRequest$outboundSchema,
     MediaGalleryComponentForMessageRequest$outboundSchema,
     TextDisplayComponentForMessageRequest$outboundSchema,
-    FileComponentForMessageRequest$outboundSchema,
-    SectionComponentForMessageRequest$outboundSchema,
     SeparatorComponentForMessageRequest$outboundSchema,
-    ContainerComponentForMessageRequest$outboundSchema,
   ]);
 
 /**
@@ -201,13 +201,13 @@ export const IncomingWebhookUpdateRequestPartial$inboundSchema: z.ZodType<
   components: z.nullable(
     z.array(
       z.union([
+        SectionComponentForMessageRequest$inboundSchema,
         ActionRowComponentForMessageRequest$inboundSchema,
+        ContainerComponentForMessageRequest$inboundSchema,
+        FileComponentForMessageRequest$inboundSchema,
         MediaGalleryComponentForMessageRequest$inboundSchema,
         TextDisplayComponentForMessageRequest$inboundSchema,
-        FileComponentForMessageRequest$inboundSchema,
-        SectionComponentForMessageRequest$inboundSchema,
         SeparatorComponentForMessageRequest$inboundSchema,
-        ContainerComponentForMessageRequest$inboundSchema,
       ]),
     ),
   ).optional(),
@@ -228,13 +228,13 @@ export type IncomingWebhookUpdateRequestPartial$Outbound = {
   allowed_mentions?: MessageAllowedMentionsRequest$Outbound | null | undefined;
   components?:
     | Array<
+      | SectionComponentForMessageRequest$Outbound
       | ActionRowComponentForMessageRequest$Outbound
+      | ContainerComponentForMessageRequest$Outbound
+      | FileComponentForMessageRequest$Outbound
       | MediaGalleryComponentForMessageRequest$Outbound
       | TextDisplayComponentForMessageRequest$Outbound
-      | FileComponentForMessageRequest$Outbound
-      | SectionComponentForMessageRequest$Outbound
       | SeparatorComponentForMessageRequest$Outbound
-      | ContainerComponentForMessageRequest$Outbound
     >
     | null
     | undefined;
@@ -256,13 +256,13 @@ export const IncomingWebhookUpdateRequestPartial$outboundSchema: z.ZodType<
   components: z.nullable(
     z.array(
       z.union([
+        SectionComponentForMessageRequest$outboundSchema,
         ActionRowComponentForMessageRequest$outboundSchema,
+        ContainerComponentForMessageRequest$outboundSchema,
+        FileComponentForMessageRequest$outboundSchema,
         MediaGalleryComponentForMessageRequest$outboundSchema,
         TextDisplayComponentForMessageRequest$outboundSchema,
-        FileComponentForMessageRequest$outboundSchema,
-        SectionComponentForMessageRequest$outboundSchema,
         SeparatorComponentForMessageRequest$outboundSchema,
-        ContainerComponentForMessageRequest$outboundSchema,
       ]),
     ),
   ).optional(),

@@ -14,6 +14,10 @@ export type DeleteAllMessageReactionsByEmojiRequest = {
   emojiName: string;
 };
 
+export type DeleteAllMessageReactionsByEmojiResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteAllMessageReactionsByEmojiRequest$inboundSchema: z.ZodType<
   DeleteAllMessageReactionsByEmojiRequest,
@@ -94,5 +98,78 @@ export function deleteAllMessageReactionsByEmojiRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'DeleteAllMessageReactionsByEmojiRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteAllMessageReactionsByEmojiResponse$inboundSchema: z.ZodType<
+  DeleteAllMessageReactionsByEmojiResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteAllMessageReactionsByEmojiResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteAllMessageReactionsByEmojiResponse$outboundSchema: z.ZodType<
+  DeleteAllMessageReactionsByEmojiResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteAllMessageReactionsByEmojiResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteAllMessageReactionsByEmojiResponse$ {
+  /** @deprecated use `DeleteAllMessageReactionsByEmojiResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteAllMessageReactionsByEmojiResponse$inboundSchema;
+  /** @deprecated use `DeleteAllMessageReactionsByEmojiResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteAllMessageReactionsByEmojiResponse$outboundSchema;
+  /** @deprecated use `DeleteAllMessageReactionsByEmojiResponse$Outbound` instead. */
+  export type Outbound = DeleteAllMessageReactionsByEmojiResponse$Outbound;
+}
+
+export function deleteAllMessageReactionsByEmojiResponseToJSON(
+  deleteAllMessageReactionsByEmojiResponse:
+    DeleteAllMessageReactionsByEmojiResponse,
+): string {
+  return JSON.stringify(
+    DeleteAllMessageReactionsByEmojiResponse$outboundSchema.parse(
+      deleteAllMessageReactionsByEmojiResponse,
+    ),
+  );
+}
+
+export function deleteAllMessageReactionsByEmojiResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteAllMessageReactionsByEmojiResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteAllMessageReactionsByEmojiResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeleteAllMessageReactionsByEmojiResponse' from JSON`,
   );
 }

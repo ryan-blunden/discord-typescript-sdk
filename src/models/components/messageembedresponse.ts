@@ -45,18 +45,18 @@ import {
 
 export type MessageEmbedResponse = {
   type: string;
-  url?: string | null | undefined;
-  title?: string | null | undefined;
-  description?: string | null | undefined;
-  color?: number | null | undefined;
-  timestamp?: Date | null | undefined;
-  fields?: Array<MessageEmbedFieldResponse> | null | undefined;
-  author?: MessageEmbedAuthorResponse | null | undefined;
-  provider?: MessageEmbedProviderResponse | null | undefined;
-  image?: MessageEmbedImageResponse | null | undefined;
-  thumbnail?: MessageEmbedImageResponse | null | undefined;
-  video?: MessageEmbedVideoResponse | null | undefined;
-  footer?: MessageEmbedFooterResponse | null | undefined;
+  url?: string | undefined;
+  title?: string | undefined;
+  description?: string | undefined;
+  color?: number | undefined;
+  timestamp?: Date | undefined;
+  fields?: Array<MessageEmbedFieldResponse> | undefined;
+  author?: MessageEmbedAuthorResponse | undefined;
+  provider?: MessageEmbedProviderResponse | undefined;
+  image?: MessageEmbedImageResponse | undefined;
+  thumbnail?: MessageEmbedImageResponse | undefined;
+  video?: MessageEmbedVideoResponse | undefined;
+  footer?: MessageEmbedFooterResponse | undefined;
 };
 
 /** @internal */
@@ -66,38 +66,36 @@ export const MessageEmbedResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.string(),
-  url: z.nullable(z.string()).optional(),
-  title: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.nullable(z.number().int()).optional(),
-  timestamp: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  fields: z.nullable(z.array(MessageEmbedFieldResponse$inboundSchema))
+  url: z.string().optional(),
+  title: z.string().optional(),
+  description: z.string().optional(),
+  color: z.number().int().optional(),
+  timestamp: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
-  author: z.nullable(MessageEmbedAuthorResponse$inboundSchema).optional(),
-  provider: z.nullable(MessageEmbedProviderResponse$inboundSchema).optional(),
-  image: z.nullable(MessageEmbedImageResponse$inboundSchema).optional(),
-  thumbnail: z.nullable(MessageEmbedImageResponse$inboundSchema).optional(),
-  video: z.nullable(MessageEmbedVideoResponse$inboundSchema).optional(),
-  footer: z.nullable(MessageEmbedFooterResponse$inboundSchema).optional(),
+  fields: z.array(MessageEmbedFieldResponse$inboundSchema).optional(),
+  author: MessageEmbedAuthorResponse$inboundSchema.optional(),
+  provider: MessageEmbedProviderResponse$inboundSchema.optional(),
+  image: MessageEmbedImageResponse$inboundSchema.optional(),
+  thumbnail: MessageEmbedImageResponse$inboundSchema.optional(),
+  video: MessageEmbedVideoResponse$inboundSchema.optional(),
+  footer: MessageEmbedFooterResponse$inboundSchema.optional(),
 });
 
 /** @internal */
 export type MessageEmbedResponse$Outbound = {
   type: string;
-  url?: string | null | undefined;
-  title?: string | null | undefined;
-  description?: string | null | undefined;
-  color?: number | null | undefined;
-  timestamp?: string | null | undefined;
-  fields?: Array<MessageEmbedFieldResponse$Outbound> | null | undefined;
-  author?: MessageEmbedAuthorResponse$Outbound | null | undefined;
-  provider?: MessageEmbedProviderResponse$Outbound | null | undefined;
-  image?: MessageEmbedImageResponse$Outbound | null | undefined;
-  thumbnail?: MessageEmbedImageResponse$Outbound | null | undefined;
-  video?: MessageEmbedVideoResponse$Outbound | null | undefined;
-  footer?: MessageEmbedFooterResponse$Outbound | null | undefined;
+  url?: string | undefined;
+  title?: string | undefined;
+  description?: string | undefined;
+  color?: number | undefined;
+  timestamp?: string | undefined;
+  fields?: Array<MessageEmbedFieldResponse$Outbound> | undefined;
+  author?: MessageEmbedAuthorResponse$Outbound | undefined;
+  provider?: MessageEmbedProviderResponse$Outbound | undefined;
+  image?: MessageEmbedImageResponse$Outbound | undefined;
+  thumbnail?: MessageEmbedImageResponse$Outbound | undefined;
+  video?: MessageEmbedVideoResponse$Outbound | undefined;
+  footer?: MessageEmbedFooterResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -107,19 +105,18 @@ export const MessageEmbedResponse$outboundSchema: z.ZodType<
   MessageEmbedResponse
 > = z.object({
   type: z.string(),
-  url: z.nullable(z.string()).optional(),
-  title: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.nullable(z.number().int()).optional(),
-  timestamp: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  fields: z.nullable(z.array(MessageEmbedFieldResponse$outboundSchema))
-    .optional(),
-  author: z.nullable(MessageEmbedAuthorResponse$outboundSchema).optional(),
-  provider: z.nullable(MessageEmbedProviderResponse$outboundSchema).optional(),
-  image: z.nullable(MessageEmbedImageResponse$outboundSchema).optional(),
-  thumbnail: z.nullable(MessageEmbedImageResponse$outboundSchema).optional(),
-  video: z.nullable(MessageEmbedVideoResponse$outboundSchema).optional(),
-  footer: z.nullable(MessageEmbedFooterResponse$outboundSchema).optional(),
+  url: z.string().optional(),
+  title: z.string().optional(),
+  description: z.string().optional(),
+  color: z.number().int().optional(),
+  timestamp: z.date().transform(v => v.toISOString()).optional(),
+  fields: z.array(MessageEmbedFieldResponse$outboundSchema).optional(),
+  author: MessageEmbedAuthorResponse$outboundSchema.optional(),
+  provider: MessageEmbedProviderResponse$outboundSchema.optional(),
+  image: MessageEmbedImageResponse$outboundSchema.optional(),
+  thumbnail: MessageEmbedImageResponse$outboundSchema.optional(),
+  video: MessageEmbedVideoResponse$outboundSchema.optional(),
+  footer: MessageEmbedFooterResponse$outboundSchema.optional(),
 });
 
 /**

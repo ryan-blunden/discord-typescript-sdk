@@ -20,7 +20,7 @@ export type InviteGuildResponse = {
   vanityUrlCode?: string | null | undefined;
   nsfwLevel?: 0 | null | undefined;
   nsfw?: boolean | null | undefined;
-  premiumSubscriptionCount?: number | null | undefined;
+  premiumSubscriptionCount: number;
 };
 
 /** @internal */
@@ -36,11 +36,11 @@ export const InviteGuildResponse$inboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   icon: z.nullable(z.string()).optional(),
   features: z.array(z.string()),
-  verification_level: z.nullable(z.literal(0)).optional(),
+  verification_level: z.nullable(z.literal(0).default(0)).optional(),
   vanity_url_code: z.nullable(z.string()).optional(),
-  nsfw_level: z.nullable(z.literal(0)).optional(),
+  nsfw_level: z.nullable(z.literal(0).default(0)).optional(),
   nsfw: z.nullable(z.boolean()).optional(),
-  premium_subscription_count: z.nullable(z.number().int()).optional(),
+  premium_subscription_count: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     "verification_level": "verificationLevel",
@@ -63,7 +63,7 @@ export type InviteGuildResponse$Outbound = {
   vanity_url_code?: string | null | undefined;
   nsfw_level: 0 | null;
   nsfw?: boolean | null | undefined;
-  premium_subscription_count?: number | null | undefined;
+  premium_subscription_count: number;
 };
 
 /** @internal */
@@ -83,7 +83,7 @@ export const InviteGuildResponse$outboundSchema: z.ZodType<
   vanityUrlCode: z.nullable(z.string()).optional(),
   nsfwLevel: z.nullable(z.literal(0).default(0 as const)),
   nsfw: z.nullable(z.boolean()).optional(),
-  premiumSubscriptionCount: z.nullable(z.number().int()).optional(),
+  premiumSubscriptionCount: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     verificationLevel: "verification_level",

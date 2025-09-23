@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildApplicationCommandPermissionsSecurity = {
@@ -16,6 +17,11 @@ export type GetGuildApplicationCommandPermissionsRequest = {
   applicationId: string;
   guildId: string;
   commandId: string;
+};
+
+export type GetGuildApplicationCommandPermissionsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.CommandPermissionsResponse;
 };
 
 /** @internal */
@@ -175,5 +181,85 @@ export function getGuildApplicationCommandPermissionsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetGuildApplicationCommandPermissionsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildApplicationCommandPermissionsResponse$inboundSchema:
+  z.ZodType<
+    GetGuildApplicationCommandPermissionsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    Headers: z.record(z.array(z.string())),
+    Result: components.CommandPermissionsResponse$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  });
+
+/** @internal */
+export type GetGuildApplicationCommandPermissionsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.CommandPermissionsResponse$Outbound;
+};
+
+/** @internal */
+export const GetGuildApplicationCommandPermissionsResponse$outboundSchema:
+  z.ZodType<
+    GetGuildApplicationCommandPermissionsResponse$Outbound,
+    z.ZodTypeDef,
+    GetGuildApplicationCommandPermissionsResponse
+  > = z.object({
+    headers: z.record(z.array(z.string())),
+    result: components.CommandPermissionsResponse$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildApplicationCommandPermissionsResponse$ {
+  /** @deprecated use `GetGuildApplicationCommandPermissionsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetGuildApplicationCommandPermissionsResponse$inboundSchema;
+  /** @deprecated use `GetGuildApplicationCommandPermissionsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetGuildApplicationCommandPermissionsResponse$outboundSchema;
+  /** @deprecated use `GetGuildApplicationCommandPermissionsResponse$Outbound` instead. */
+  export type Outbound = GetGuildApplicationCommandPermissionsResponse$Outbound;
+}
+
+export function getGuildApplicationCommandPermissionsResponseToJSON(
+  getGuildApplicationCommandPermissionsResponse:
+    GetGuildApplicationCommandPermissionsResponse,
+): string {
+  return JSON.stringify(
+    GetGuildApplicationCommandPermissionsResponse$outboundSchema.parse(
+      getGuildApplicationCommandPermissionsResponse,
+    ),
+  );
+}
+
+export function getGuildApplicationCommandPermissionsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetGuildApplicationCommandPermissionsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetGuildApplicationCommandPermissionsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetGuildApplicationCommandPermissionsResponse' from JSON`,
   );
 }

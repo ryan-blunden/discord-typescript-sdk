@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TriggerTypingIndicatorRequest = {
   channelId: string;
+};
+
+export type TriggerTypingIndicatorResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.TypingIndicatorResponse;
 };
 
 /** @internal */
@@ -73,5 +79,74 @@ export function triggerTypingIndicatorRequestFromJSON(
     jsonString,
     (x) => TriggerTypingIndicatorRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'TriggerTypingIndicatorRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const TriggerTypingIndicatorResponse$inboundSchema: z.ZodType<
+  TriggerTypingIndicatorResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.TypingIndicatorResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type TriggerTypingIndicatorResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.TypingIndicatorResponse$Outbound;
+};
+
+/** @internal */
+export const TriggerTypingIndicatorResponse$outboundSchema: z.ZodType<
+  TriggerTypingIndicatorResponse$Outbound,
+  z.ZodTypeDef,
+  TriggerTypingIndicatorResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.TypingIndicatorResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TriggerTypingIndicatorResponse$ {
+  /** @deprecated use `TriggerTypingIndicatorResponse$inboundSchema` instead. */
+  export const inboundSchema = TriggerTypingIndicatorResponse$inboundSchema;
+  /** @deprecated use `TriggerTypingIndicatorResponse$outboundSchema` instead. */
+  export const outboundSchema = TriggerTypingIndicatorResponse$outboundSchema;
+  /** @deprecated use `TriggerTypingIndicatorResponse$Outbound` instead. */
+  export type Outbound = TriggerTypingIndicatorResponse$Outbound;
+}
+
+export function triggerTypingIndicatorResponseToJSON(
+  triggerTypingIndicatorResponse: TriggerTypingIndicatorResponse,
+): string {
+  return JSON.stringify(
+    TriggerTypingIndicatorResponse$outboundSchema.parse(
+      triggerTypingIndicatorResponse,
+    ),
+  );
+}
+
+export function triggerTypingIndicatorResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<TriggerTypingIndicatorResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TriggerTypingIndicatorResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TriggerTypingIndicatorResponse' from JSON`,
   );
 }

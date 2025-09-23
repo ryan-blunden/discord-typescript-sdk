@@ -22,6 +22,7 @@ Returns an object containing a list of emoji objects for the given application u
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_application_emojis" method="get" path="/applications/{application_id}/emojis" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -80,14 +81,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ListApplicationEmojisResponse](../../models/components/listapplicationemojisresponse.md)\>**
+**Promise\<[operations.ListApplicationEmojisResponse](../../models/operations/listapplicationemojisresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createApplicationEmoji
 
@@ -95,6 +97,7 @@ Create a new emoji for the application. Returns the new emoji object on success.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_application_emoji" method="post" path="/applications/{application_id}/emojis" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -161,14 +164,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
+**Promise\<[operations.CreateApplicationEmojiResponse](../../models/operations/createapplicationemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getApplicationEmoji
 
@@ -176,6 +180,7 @@ Returns an emoji object for the given application and emoji IDs. Includes the us
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_application_emoji" method="get" path="/applications/{application_id}/emojis/{emoji_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -236,14 +241,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
+**Promise\<[operations.GetApplicationEmojiResponse](../../models/operations/getapplicationemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteApplicationEmoji
 
@@ -251,6 +257,7 @@ Delete the given emoji. Returns 204 No Content on success.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_application_emoji" method="delete" path="/applications/{application_id}/emojis/{emoji_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -259,12 +266,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.emoji.deleteApplicationEmoji({
+  const result = await discord.emoji.deleteApplicationEmoji({
     applicationId: "<value>",
     emojiId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -291,7 +298,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("emojiDeleteApplicationEmoji failed:", res.error);
   }
@@ -311,14 +318,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteApplicationEmojiResponse](../../models/operations/deleteapplicationemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateApplicationEmoji
 
@@ -326,6 +334,7 @@ Modify the given emoji. Returns the updated emoji object on success.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_application_emoji" method="patch" path="/applications/{application_id}/emojis/{emoji_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -388,14 +397,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
+**Promise\<[operations.UpdateApplicationEmojiResponse](../../models/operations/updateapplicationemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listGuildEmojis
 
@@ -403,6 +413,7 @@ Returns a list of emoji objects for the given guild. Includes user fields if the
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_emojis" method="get" path="/guilds/{guild_id}/emojis" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -461,14 +472,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildEmojisResponse](../../models/operations/listguildemojisresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createGuildEmoji
 
@@ -476,6 +488,7 @@ Create a new emoji for the guild. Requires the CREATE_GUILD_EXPRESSIONS permissi
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_guild_emoji" method="post" path="/guilds/{guild_id}/emojis" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -542,14 +555,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
+**Promise\<[operations.CreateGuildEmojiResponse](../../models/operations/createguildemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGuildEmoji
 
@@ -557,6 +571,7 @@ Returns an emoji object for the given guild and emoji IDs. Includes the user fie
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_emoji" method="get" path="/guilds/{guild_id}/emojis/{emoji_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -617,14 +632,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
+**Promise\<[operations.GetGuildEmojiResponse](../../models/operations/getguildemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteGuildEmoji
 
@@ -632,6 +648,7 @@ Delete the given emoji. For emojis created by the current user, requires either 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_guild_emoji" method="delete" path="/guilds/{guild_id}/emojis/{emoji_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -640,12 +657,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.emoji.deleteGuildEmoji({
+  const result = await discord.emoji.deleteGuildEmoji({
     guildId: "<value>",
     emojiId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -672,7 +689,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("emojiDeleteGuildEmoji failed:", res.error);
   }
@@ -692,14 +709,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildEmojiResponse](../../models/operations/deleteguildemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateGuildEmoji
 
@@ -707,6 +725,7 @@ Modify the given emoji. For emojis created by the current user, requires either 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_guild_emoji" method="patch" path="/guilds/{guild_id}/emojis/{emoji_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -769,11 +788,12 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
+**Promise\<[operations.UpdateGuildEmojiResponse](../../models/operations/updateguildemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

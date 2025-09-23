@@ -16,8 +16,8 @@ import {
 export type GuildSubscriptionIntegrationResponse = {
   type?: "discord" | undefined;
   name?: string | null | undefined;
-  account?: AccountResponse | null | undefined;
-  enabled?: boolean | null | undefined;
+  account: AccountResponse;
+  enabled: boolean;
   id: string;
 };
 
@@ -27,10 +27,10 @@ export const GuildSubscriptionIntegrationResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("discord").optional(),
+  type: z.literal("discord").default("discord").optional(),
   name: z.nullable(z.string()).optional(),
-  account: z.nullable(AccountResponse$inboundSchema).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
+  account: AccountResponse$inboundSchema,
+  enabled: z.boolean(),
   id: z.string(),
 });
 
@@ -38,8 +38,8 @@ export const GuildSubscriptionIntegrationResponse$inboundSchema: z.ZodType<
 export type GuildSubscriptionIntegrationResponse$Outbound = {
   type: "discord";
   name?: string | null | undefined;
-  account?: AccountResponse$Outbound | null | undefined;
-  enabled?: boolean | null | undefined;
+  account: AccountResponse$Outbound;
+  enabled: boolean;
   id: string;
 };
 
@@ -51,8 +51,8 @@ export const GuildSubscriptionIntegrationResponse$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("discord").default("discord" as const),
   name: z.nullable(z.string()).optional(),
-  account: z.nullable(AccountResponse$outboundSchema).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
+  account: AccountResponse$outboundSchema,
+  enabled: z.boolean(),
   id: z.string(),
 });
 

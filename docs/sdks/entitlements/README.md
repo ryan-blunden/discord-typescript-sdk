@@ -17,6 +17,7 @@ Returns all entitlements for a given app, active and expired.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_entitlements" method="get" path="/applications/{application_id}/entitlements" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -86,14 +87,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EntitlementResponse[]](../../models/.md)\>**
+**Promise\<[operations.GetEntitlementsResponse](../../models/operations/getentitlementsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createTest
 
@@ -101,6 +103,7 @@ Creates a test entitlement to a given SKU for a given guild or user. Discord wil
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_entitlement" method="post" path="/applications/{application_id}/entitlements" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -169,14 +172,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EntitlementResponse](../../models/components/entitlementresponse.md)\>**
+**Promise\<[operations.CreateEntitlementResponse](../../models/operations/createentitlementresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -184,6 +188,7 @@ Returns an entitlement.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_entitlement" method="get" path="/applications/{application_id}/entitlements/{entitlement_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -245,14 +250,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EntitlementResponse](../../models/components/entitlementresponse.md)\>**
+**Promise\<[operations.GetEntitlementResponse](../../models/operations/getentitlementresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteTest
 
@@ -260,20 +266,21 @@ Deletes a currently-active test entitlement. Discord will act as though that use
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_entitlement" method="delete" path="/applications/{application_id}/entitlements/{entitlement_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
 const discord = new Discord();
 
 async function run() {
-  await discord.entitlements.deleteTest({
+  const result = await discord.entitlements.deleteTest({
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
     entitlementId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -300,7 +307,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("entitlementsDeleteTest failed:", res.error);
   }
@@ -321,14 +328,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteEntitlementResponse](../../models/operations/deleteentitlementresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## consume
 
@@ -336,20 +344,21 @@ For One-Time Purchase consumable SKUs, marks a given entitlement for the user as
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="consume_entitlement" method="post" path="/applications/{application_id}/entitlements/{entitlement_id}/consume" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
 const discord = new Discord();
 
 async function run() {
-  await discord.entitlements.consume({
+  const result = await discord.entitlements.consume({
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
     entitlementId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -376,7 +385,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("entitlementsConsume failed:", res.error);
   }
@@ -397,11 +406,12 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.ConsumeEntitlementResponse](../../models/operations/consumeentitlementresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

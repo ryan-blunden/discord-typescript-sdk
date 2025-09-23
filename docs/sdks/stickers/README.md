@@ -20,6 +20,7 @@ Returns an array of sticker objects for the given guild. Includes user fields if
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_stickers" method="get" path="/guilds/{guild_id}/stickers" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -78,14 +79,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildStickerResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildStickersResponse](../../models/operations/listguildstickersresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createGuildSticker
 
@@ -93,6 +95,7 @@ Create a new sticker for the guild. Send a multipart/form-data body. Requires th
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_guild_sticker" method="post" path="/guilds/{guild_id}/stickers" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -161,14 +164,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildStickerResponse](../../models/components/guildstickerresponse.md)\>**
+**Promise\<[operations.CreateGuildStickerResponse](../../models/operations/createguildstickerresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGuildSticker
 
@@ -176,6 +180,7 @@ Returns a sticker object for the given guild and sticker IDs. Includes the user 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_sticker" method="get" path="/guilds/{guild_id}/stickers/{sticker_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -236,14 +241,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildStickerResponse](../../models/components/guildstickerresponse.md)\>**
+**Promise\<[operations.GetGuildStickerResponse](../../models/operations/getguildstickerresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteGuildSticker
 
@@ -251,6 +257,7 @@ Delete the given sticker. For stickers created by the current user, requires eit
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_guild_sticker" method="delete" path="/guilds/{guild_id}/stickers/{sticker_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -259,12 +266,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.stickers.deleteGuildSticker({
+  const result = await discord.stickers.deleteGuildSticker({
     guildId: "<value>",
     stickerId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -291,7 +298,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("stickersDeleteGuildSticker failed:", res.error);
   }
@@ -311,14 +318,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildStickerResponse](../../models/operations/deleteguildstickerresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateGuildSticker
 
@@ -326,6 +334,7 @@ Modify the given sticker. For stickers created by the current user, requires eit
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_guild_sticker" method="patch" path="/guilds/{guild_id}/stickers/{sticker_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -388,14 +397,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildStickerResponse](../../models/components/guildstickerresponse.md)\>**
+**Promise\<[operations.UpdateGuildStickerResponse](../../models/operations/updateguildstickerresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listPacks
 
@@ -403,6 +413,7 @@ Returns a list of available sticker packs.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_sticker_packs" method="get" path="/sticker-packs" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -453,14 +464,15 @@ run();
 
 ### Response
 
-**Promise\<[components.StickerPackCollectionResponse](../../models/components/stickerpackcollectionresponse.md)\>**
+**Promise\<[operations.ListStickerPacksResponse](../../models/operations/liststickerpacksresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getPack
 
@@ -468,6 +480,7 @@ Returns a sticker pack object for the given sticker pack ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_sticker_pack" method="get" path="/sticker-packs/{pack_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -526,14 +539,15 @@ run();
 
 ### Response
 
-**Promise\<[components.StickerPackResponse](../../models/components/stickerpackresponse.md)\>**
+**Promise\<[operations.GetStickerPackResponse](../../models/operations/getstickerpackresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -541,6 +555,7 @@ Returns a sticker object for the given sticker ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_sticker" method="get" path="/stickers/{sticker_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -599,11 +614,12 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetStickerResponseBody](../../models/operations/getstickerresponsebody.md)\>**
+**Promise\<[operations.GetStickerResponse](../../models/operations/getstickerresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

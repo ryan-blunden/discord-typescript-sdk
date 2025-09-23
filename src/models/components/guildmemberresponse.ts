@@ -14,6 +14,12 @@ import {
   UserAvatarDecorationResponse$outboundSchema,
 } from "./useravatardecorationresponse.js";
 import {
+  UserCollectiblesResponse,
+  UserCollectiblesResponse$inboundSchema,
+  UserCollectiblesResponse$Outbound,
+  UserCollectiblesResponse$outboundSchema,
+} from "./usercollectiblesresponse.js";
+import {
   UserResponse,
   UserResponse$inboundSchema,
   UserResponse$Outbound,
@@ -31,6 +37,7 @@ export type GuildMemberResponse = {
   pending: boolean;
   premiumSince?: Date | null | undefined;
   roles: Array<string>;
+  collectibles?: UserCollectiblesResponse | null | undefined;
   user: UserResponse;
   mute: boolean;
   deaf: boolean;
@@ -57,6 +64,7 @@ export const GuildMemberResponse$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   roles: z.array(z.string()),
+  collectibles: z.nullable(UserCollectiblesResponse$inboundSchema).optional(),
   user: UserResponse$inboundSchema,
   mute: z.boolean(),
   deaf: z.boolean(),
@@ -84,6 +92,7 @@ export type GuildMemberResponse$Outbound = {
   pending: boolean;
   premium_since?: string | null | undefined;
   roles: Array<string>;
+  collectibles?: UserCollectiblesResponse$Outbound | null | undefined;
   user: UserResponse$Outbound;
   mute: boolean;
   deaf: boolean;
@@ -108,6 +117,7 @@ export const GuildMemberResponse$outboundSchema: z.ZodType<
   pending: z.boolean(),
   premiumSince: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   roles: z.array(z.string()),
+  collectibles: z.nullable(UserCollectiblesResponse$outboundSchema).optional(),
   user: UserResponse$outboundSchema,
   mute: z.boolean(),
   deaf: z.boolean(),

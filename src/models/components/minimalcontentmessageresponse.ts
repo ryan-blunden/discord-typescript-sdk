@@ -56,12 +56,6 @@ import {
   MessageStickerItemResponse$outboundSchema,
 } from "./messagestickeritemresponse.js";
 import {
-  ResolvedObjectsResponse,
-  ResolvedObjectsResponse$inboundSchema,
-  ResolvedObjectsResponse$Outbound,
-  ResolvedObjectsResponse$outboundSchema,
-} from "./resolvedobjectsresponse.js";
-import {
   SectionComponentResponse,
   SectionComponentResponse$inboundSchema,
   SectionComponentResponse$Outbound,
@@ -93,17 +87,17 @@ import {
 } from "./userresponse.js";
 
 export type MinimalContentMessageResponseComponents =
-  | ActionRowComponentResponse
-  | MediaGalleryComponentResponse
-  | TextDisplayComponentResponse
+  | ContainerComponentResponse
+  | FileComponentResponse
   | SectionComponentResponse
   | SeparatorComponentResponse
-  | ContainerComponentResponse
-  | FileComponentResponse;
+  | ActionRowComponentResponse
+  | MediaGalleryComponentResponse
+  | TextDisplayComponentResponse;
 
 export type MinimalContentMessageResponseStickers =
-  | StandardStickerResponse
-  | GuildStickerResponse;
+  | GuildStickerResponse
+  | StandardStickerResponse;
 
 export type MinimalContentMessageResponse = {
   type?: 0 | undefined;
@@ -116,20 +110,16 @@ export type MinimalContentMessageResponse = {
   editedTimestamp?: Date | null | undefined;
   flags: number;
   components: Array<
+    | ContainerComponentResponse
+    | FileComponentResponse
+    | SectionComponentResponse
+    | SeparatorComponentResponse
     | ActionRowComponentResponse
     | MediaGalleryComponentResponse
     | TextDisplayComponentResponse
-    | SectionComponentResponse
-    | SeparatorComponentResponse
-    | ContainerComponentResponse
-    | FileComponentResponse
   >;
-  resolved?: ResolvedObjectsResponse | null | undefined;
-  stickers?:
-    | Array<StandardStickerResponse | GuildStickerResponse>
-    | null
-    | undefined;
-  stickerItems?: Array<MessageStickerItemResponse> | null | undefined;
+  stickers?: Array<GuildStickerResponse | StandardStickerResponse> | undefined;
+  stickerItems?: Array<MessageStickerItemResponse> | undefined;
 };
 
 /** @internal */
@@ -138,24 +128,24 @@ export const MinimalContentMessageResponseComponents$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  ContainerComponentResponse$inboundSchema,
+  FileComponentResponse$inboundSchema,
+  SectionComponentResponse$inboundSchema,
+  SeparatorComponentResponse$inboundSchema,
   ActionRowComponentResponse$inboundSchema,
   MediaGalleryComponentResponse$inboundSchema,
   TextDisplayComponentResponse$inboundSchema,
-  SectionComponentResponse$inboundSchema,
-  SeparatorComponentResponse$inboundSchema,
-  ContainerComponentResponse$inboundSchema,
-  FileComponentResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type MinimalContentMessageResponseComponents$Outbound =
-  | ActionRowComponentResponse$Outbound
-  | MediaGalleryComponentResponse$Outbound
-  | TextDisplayComponentResponse$Outbound
+  | ContainerComponentResponse$Outbound
+  | FileComponentResponse$Outbound
   | SectionComponentResponse$Outbound
   | SeparatorComponentResponse$Outbound
-  | ContainerComponentResponse$Outbound
-  | FileComponentResponse$Outbound;
+  | ActionRowComponentResponse$Outbound
+  | MediaGalleryComponentResponse$Outbound
+  | TextDisplayComponentResponse$Outbound;
 
 /** @internal */
 export const MinimalContentMessageResponseComponents$outboundSchema: z.ZodType<
@@ -163,13 +153,13 @@ export const MinimalContentMessageResponseComponents$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MinimalContentMessageResponseComponents
 > = z.union([
+  ContainerComponentResponse$outboundSchema,
+  FileComponentResponse$outboundSchema,
+  SectionComponentResponse$outboundSchema,
+  SeparatorComponentResponse$outboundSchema,
   ActionRowComponentResponse$outboundSchema,
   MediaGalleryComponentResponse$outboundSchema,
   TextDisplayComponentResponse$outboundSchema,
-  SectionComponentResponse$outboundSchema,
-  SeparatorComponentResponse$outboundSchema,
-  ContainerComponentResponse$outboundSchema,
-  FileComponentResponse$outboundSchema,
 ]);
 
 /**
@@ -220,14 +210,14 @@ export const MinimalContentMessageResponseStickers$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  StandardStickerResponse$inboundSchema,
   GuildStickerResponse$inboundSchema,
+  StandardStickerResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type MinimalContentMessageResponseStickers$Outbound =
-  | StandardStickerResponse$Outbound
-  | GuildStickerResponse$Outbound;
+  | GuildStickerResponse$Outbound
+  | StandardStickerResponse$Outbound;
 
 /** @internal */
 export const MinimalContentMessageResponseStickers$outboundSchema: z.ZodType<
@@ -235,8 +225,8 @@ export const MinimalContentMessageResponseStickers$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MinimalContentMessageResponseStickers
 > = z.union([
-  StandardStickerResponse$outboundSchema,
   GuildStickerResponse$outboundSchema,
+  StandardStickerResponse$outboundSchema,
 ]);
 
 /**
@@ -281,7 +271,7 @@ export const MinimalContentMessageResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(0).optional(),
+  type: z.literal(0).default(0).optional(),
   content: z.string(),
   mentions: z.array(UserResponse$inboundSchema),
   mention_roles: z.array(z.string()),
@@ -294,26 +284,22 @@ export const MinimalContentMessageResponse$inboundSchema: z.ZodType<
   flags: z.number().int(),
   components: z.array(
     z.union([
+      ContainerComponentResponse$inboundSchema,
+      FileComponentResponse$inboundSchema,
+      SectionComponentResponse$inboundSchema,
+      SeparatorComponentResponse$inboundSchema,
       ActionRowComponentResponse$inboundSchema,
       MediaGalleryComponentResponse$inboundSchema,
       TextDisplayComponentResponse$inboundSchema,
-      SectionComponentResponse$inboundSchema,
-      SeparatorComponentResponse$inboundSchema,
-      ContainerComponentResponse$inboundSchema,
-      FileComponentResponse$inboundSchema,
     ]),
   ),
-  resolved: z.nullable(ResolvedObjectsResponse$inboundSchema).optional(),
-  stickers: z.nullable(
-    z.array(
-      z.union([
-        StandardStickerResponse$inboundSchema,
-        GuildStickerResponse$inboundSchema,
-      ]),
-    ),
+  stickers: z.array(
+    z.union([
+      GuildStickerResponse$inboundSchema,
+      StandardStickerResponse$inboundSchema,
+    ]),
   ).optional(),
-  sticker_items: z.nullable(z.array(MessageStickerItemResponse$inboundSchema))
-    .optional(),
+  sticker_items: z.array(MessageStickerItemResponse$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "mention_roles": "mentionRoles",
@@ -334,20 +320,18 @@ export type MinimalContentMessageResponse$Outbound = {
   edited_timestamp?: string | null | undefined;
   flags: number;
   components: Array<
+    | ContainerComponentResponse$Outbound
+    | FileComponentResponse$Outbound
+    | SectionComponentResponse$Outbound
+    | SeparatorComponentResponse$Outbound
     | ActionRowComponentResponse$Outbound
     | MediaGalleryComponentResponse$Outbound
     | TextDisplayComponentResponse$Outbound
-    | SectionComponentResponse$Outbound
-    | SeparatorComponentResponse$Outbound
-    | ContainerComponentResponse$Outbound
-    | FileComponentResponse$Outbound
   >;
-  resolved?: ResolvedObjectsResponse$Outbound | null | undefined;
   stickers?:
-    | Array<StandardStickerResponse$Outbound | GuildStickerResponse$Outbound>
-    | null
+    | Array<GuildStickerResponse$Outbound | StandardStickerResponse$Outbound>
     | undefined;
-  sticker_items?: Array<MessageStickerItemResponse$Outbound> | null | undefined;
+  sticker_items?: Array<MessageStickerItemResponse$Outbound> | undefined;
 };
 
 /** @internal */
@@ -368,26 +352,22 @@ export const MinimalContentMessageResponse$outboundSchema: z.ZodType<
   flags: z.number().int(),
   components: z.array(
     z.union([
+      ContainerComponentResponse$outboundSchema,
+      FileComponentResponse$outboundSchema,
+      SectionComponentResponse$outboundSchema,
+      SeparatorComponentResponse$outboundSchema,
       ActionRowComponentResponse$outboundSchema,
       MediaGalleryComponentResponse$outboundSchema,
       TextDisplayComponentResponse$outboundSchema,
-      SectionComponentResponse$outboundSchema,
-      SeparatorComponentResponse$outboundSchema,
-      ContainerComponentResponse$outboundSchema,
-      FileComponentResponse$outboundSchema,
     ]),
   ),
-  resolved: z.nullable(ResolvedObjectsResponse$outboundSchema).optional(),
-  stickers: z.nullable(
-    z.array(
-      z.union([
-        StandardStickerResponse$outboundSchema,
-        GuildStickerResponse$outboundSchema,
-      ]),
-    ),
+  stickers: z.array(
+    z.union([
+      GuildStickerResponse$outboundSchema,
+      StandardStickerResponse$outboundSchema,
+    ]),
   ).optional(),
-  stickerItems: z.nullable(z.array(MessageStickerItemResponse$outboundSchema))
-    .optional(),
+  stickerItems: z.array(MessageStickerItemResponse$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     mentionRoles: "mention_roles",

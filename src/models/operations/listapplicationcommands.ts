@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListApplicationCommandsSecurity = {
@@ -15,6 +16,11 @@ export type ListApplicationCommandsSecurity = {
 export type ListApplicationCommandsRequest = {
   applicationId: string;
   withLocalizations?: boolean | undefined;
+};
+
+export type ListApplicationCommandsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.ApplicationCommandResponse>;
 };
 
 /** @internal */
@@ -147,5 +153,74 @@ export function listApplicationCommandsRequestFromJSON(
     jsonString,
     (x) => ListApplicationCommandsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListApplicationCommandsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListApplicationCommandsResponse$inboundSchema: z.ZodType<
+  ListApplicationCommandsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(components.ApplicationCommandResponse$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListApplicationCommandsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<components.ApplicationCommandResponse$Outbound>;
+};
+
+/** @internal */
+export const ListApplicationCommandsResponse$outboundSchema: z.ZodType<
+  ListApplicationCommandsResponse$Outbound,
+  z.ZodTypeDef,
+  ListApplicationCommandsResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(components.ApplicationCommandResponse$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListApplicationCommandsResponse$ {
+  /** @deprecated use `ListApplicationCommandsResponse$inboundSchema` instead. */
+  export const inboundSchema = ListApplicationCommandsResponse$inboundSchema;
+  /** @deprecated use `ListApplicationCommandsResponse$outboundSchema` instead. */
+  export const outboundSchema = ListApplicationCommandsResponse$outboundSchema;
+  /** @deprecated use `ListApplicationCommandsResponse$Outbound` instead. */
+  export type Outbound = ListApplicationCommandsResponse$Outbound;
+}
+
+export function listApplicationCommandsResponseToJSON(
+  listApplicationCommandsResponse: ListApplicationCommandsResponse,
+): string {
+  return JSON.stringify(
+    ListApplicationCommandsResponse$outboundSchema.parse(
+      listApplicationCommandsResponse,
+    ),
+  );
+}
+
+export function listApplicationCommandsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListApplicationCommandsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListApplicationCommandsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListApplicationCommandsResponse' from JSON`,
   );
 }

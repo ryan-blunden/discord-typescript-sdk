@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetPublicKeysSecurity = {
   botToken?: string | undefined;
+};
+
+export type GetPublicKeysResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.OAuth2GetKeys;
 };
 
 /** @internal */
@@ -71,5 +77,72 @@ export function getPublicKeysSecurityFromJSON(
     jsonString,
     (x) => GetPublicKeysSecurity$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetPublicKeysSecurity' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPublicKeysResponse$inboundSchema: z.ZodType<
+  GetPublicKeysResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.OAuth2GetKeys$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetPublicKeysResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.OAuth2GetKeys$Outbound;
+};
+
+/** @internal */
+export const GetPublicKeysResponse$outboundSchema: z.ZodType<
+  GetPublicKeysResponse$Outbound,
+  z.ZodTypeDef,
+  GetPublicKeysResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.OAuth2GetKeys$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetPublicKeysResponse$ {
+  /** @deprecated use `GetPublicKeysResponse$inboundSchema` instead. */
+  export const inboundSchema = GetPublicKeysResponse$inboundSchema;
+  /** @deprecated use `GetPublicKeysResponse$outboundSchema` instead. */
+  export const outboundSchema = GetPublicKeysResponse$outboundSchema;
+  /** @deprecated use `GetPublicKeysResponse$Outbound` instead. */
+  export type Outbound = GetPublicKeysResponse$Outbound;
+}
+
+export function getPublicKeysResponseToJSON(
+  getPublicKeysResponse: GetPublicKeysResponse,
+): string {
+  return JSON.stringify(
+    GetPublicKeysResponse$outboundSchema.parse(getPublicKeysResponse),
+  );
+}
+
+export function getPublicKeysResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPublicKeysResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPublicKeysResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPublicKeysResponse' from JSON`,
   );
 }

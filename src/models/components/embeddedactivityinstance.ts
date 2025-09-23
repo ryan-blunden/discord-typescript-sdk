@@ -20,13 +20,13 @@ import {
   PrivateChannelLocation$outboundSchema,
 } from "./privatechannellocation.js";
 
-export type Location = PrivateChannelLocation | GuildChannelLocation;
+export type Location = GuildChannelLocation | PrivateChannelLocation;
 
 export type EmbeddedActivityInstance = {
   applicationId: string;
   instanceId: string;
   launchId: string;
-  location?: PrivateChannelLocation | GuildChannelLocation | null | undefined;
+  location: GuildChannelLocation | PrivateChannelLocation;
   users: Array<string>;
 };
 
@@ -36,14 +36,14 @@ export const Location$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  PrivateChannelLocation$inboundSchema,
   GuildChannelLocation$inboundSchema,
+  PrivateChannelLocation$inboundSchema,
 ]);
 
 /** @internal */
 export type Location$Outbound =
-  | PrivateChannelLocation$Outbound
-  | GuildChannelLocation$Outbound;
+  | GuildChannelLocation$Outbound
+  | PrivateChannelLocation$Outbound;
 
 /** @internal */
 export const Location$outboundSchema: z.ZodType<
@@ -51,8 +51,8 @@ export const Location$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Location
 > = z.union([
-  PrivateChannelLocation$outboundSchema,
   GuildChannelLocation$outboundSchema,
+  PrivateChannelLocation$outboundSchema,
 ]);
 
 /**
@@ -91,12 +91,10 @@ export const EmbeddedActivityInstance$inboundSchema: z.ZodType<
   application_id: z.string(),
   instance_id: z.string(),
   launch_id: z.string(),
-  location: z.nullable(
-    z.union([
-      PrivateChannelLocation$inboundSchema,
-      GuildChannelLocation$inboundSchema,
-    ]),
-  ).optional(),
+  location: z.union([
+    GuildChannelLocation$inboundSchema,
+    PrivateChannelLocation$inboundSchema,
+  ]),
   users: z.array(z.string()),
 }).transform((v) => {
   return remap$(v, {
@@ -111,11 +109,7 @@ export type EmbeddedActivityInstance$Outbound = {
   application_id: string;
   instance_id: string;
   launch_id: string;
-  location?:
-    | PrivateChannelLocation$Outbound
-    | GuildChannelLocation$Outbound
-    | null
-    | undefined;
+  location: GuildChannelLocation$Outbound | PrivateChannelLocation$Outbound;
   users: Array<string>;
 };
 
@@ -128,12 +122,10 @@ export const EmbeddedActivityInstance$outboundSchema: z.ZodType<
   applicationId: z.string(),
   instanceId: z.string(),
   launchId: z.string(),
-  location: z.nullable(
-    z.union([
-      PrivateChannelLocation$outboundSchema,
-      GuildChannelLocation$outboundSchema,
-    ]),
-  ).optional(),
+  location: z.union([
+    GuildChannelLocation$outboundSchema,
+    PrivateChannelLocation$outboundSchema,
+  ]),
   users: z.array(z.string()),
 }).transform((v) => {
   return remap$(v, {

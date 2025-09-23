@@ -5,7 +5,6 @@
 
 ### Available Operations
 
-* [create](#create) - Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.
 * [get](#get) - Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.
 * [delete](#delete) - Delete a guild permanently. User must be owner. Returns 204 No Content on success. Fires a Guild Delete Gateway event.
 * [update](#update) - Modify a guild's settings. Requires the MANAGE_GUILD permission. Returns the updated guild object on success. Fires a Guild Update Gateway event.
@@ -51,85 +50,13 @@
 * [getWidget](#getwidget) - Returns the widget for the guild. Fires an Invite Create Gateway event when an invite channel is defined and a new Invite is generated.
 * [getWidgetPng](#getwidgetpng) - Returns a PNG image widget for the guild. Requires no permissions or authentication.
 
-## create
-
-Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.create({
-    name: "<value>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsCreate } from "@ryan.blunden/discord-sdk/funcs/guildsCreate.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsCreate(discord, {
-    name: "<value>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("guildsCreate failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.GuildCreateRequest](../../models/components/guildcreaterequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.GuildResponse](../../models/components/guildresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
 ## get
 
 Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild" method="get" path="/guilds/{guild_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -188,14 +115,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildWithCountsResponse](../../models/components/guildwithcountsresponse.md)\>**
+**Promise\<[operations.GetGuildResponse](../../models/operations/getguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -203,6 +131,7 @@ Delete a guild permanently. User must be owner. Returns 204 No Content on succes
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_guild" method="delete" path="/guilds/{guild_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -211,11 +140,11 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.delete({
+  const result = await discord.guilds.delete({
     guildId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -241,7 +170,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsDelete failed:", res.error);
   }
@@ -261,14 +190,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildResponse](../../models/operations/deleteguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -276,6 +206,7 @@ Modify a guild's settings. Requires the MANAGE_GUILD permission. Returns the upd
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_guild" method="patch" path="/guilds/{guild_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -336,14 +267,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildResponse](../../models/components/guildresponse.md)\>**
+**Promise\<[operations.UpdateGuildResponse](../../models/operations/updateguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listBans
 
@@ -351,6 +283,7 @@ Returns a list of ban objects for the users banned from this guild. Requires the
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_bans" method="get" path="/guilds/{guild_id}/bans" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -409,14 +342,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildBanResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildBansResponse](../../models/operations/listguildbansresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getBan
 
@@ -424,6 +358,7 @@ Returns a ban object for the given user or a 404 not found if the ban cannot be 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_ban" method="get" path="/guilds/{guild_id}/bans/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -484,14 +419,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildBanResponse](../../models/components/guildbanresponse.md)\>**
+**Promise\<[operations.GetGuildBanResponse](../../models/operations/getguildbanresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createBan
 
@@ -499,6 +435,7 @@ Create a guild ban, and optionally delete previous messages sent by the banned u
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ban_user_from_guild" method="put" path="/guilds/{guild_id}/bans/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -507,13 +444,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.createBan({
+  const result = await discord.guilds.createBan({
     guildId: "<value>",
     userId: "<value>",
-    requestBody: {},
+    banUserFromGuildRequest: {},
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -537,11 +474,11 @@ async function run() {
   const res = await guildsCreateBan(discord, {
     guildId: "<value>",
     userId: "<value>",
-    requestBody: {},
+    banUserFromGuildRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsCreateBan failed:", res.error);
   }
@@ -561,14 +498,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.BanUserFromGuildResponse](../../models/operations/banuserfromguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## removeBan
 
@@ -576,6 +514,7 @@ Remove the ban for a user. Requires the BAN_MEMBERS permissions. Returns a 204 e
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="unban_user_from_guild" method="delete" path="/guilds/{guild_id}/bans/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -584,12 +523,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.removeBan({
+  const result = await discord.guilds.removeBan({
     guildId: "<value>",
     userId: "<value>",
+    unbanUserFromGuildRequest: {},
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -613,10 +553,11 @@ async function run() {
   const res = await guildsRemoveBan(discord, {
     guildId: "<value>",
     userId: "<value>",
+    unbanUserFromGuildRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsRemoveBan failed:", res.error);
   }
@@ -636,14 +577,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.UnbanUserFromGuildResponse](../../models/operations/unbanuserfromguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## bulkBan
 
@@ -651,6 +593,7 @@ Ban up to 200 users from a guild, and optionally delete previous messages sent b
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="bulk_ban_users_from_guild" method="post" path="/guilds/{guild_id}/bulk-ban" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -661,7 +604,7 @@ const discord = new Discord({
 async function run() {
   const result = await discord.guilds.bulkBan({
     guildId: "<value>",
-    requestBody: {
+    bulkBanUsersRequest: {
       userIds: [
         "<value 1>",
       ],
@@ -691,7 +634,7 @@ const discord = new DiscordCore({
 async function run() {
   const res = await guildsBulkBan(discord, {
     guildId: "<value>",
-    requestBody: {
+    bulkBanUsersRequest: {
       userIds: [
         "<value 1>",
       ],
@@ -719,14 +662,15 @@ run();
 
 ### Response
 
-**Promise\<[components.BulkBanUsersResponse](../../models/components/bulkbanusersresponse.md)\>**
+**Promise\<[operations.BulkBanUsersFromGuildResponse](../../models/operations/bulkbanusersfromguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listChannels
 
@@ -734,6 +678,7 @@ Returns a list of guild channel objects. Does not include threads.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_channels" method="get" path="/guilds/{guild_id}/channels" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -793,14 +738,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.ListGuildChannelsResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildChannelsResponse](../../models/operations/listguildchannelsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createChannel
 
@@ -808,6 +754,7 @@ Create a new channel object for the guild. Requires the MANAGE_CHANNELS permissi
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_guild_channel" method="post" path="/guilds/{guild_id}/channels" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -872,14 +819,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildChannelResponse](../../models/components/guildchannelresponse.md)\>**
+**Promise\<[operations.CreateGuildChannelResponse](../../models/operations/createguildchannelresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateChannelPositions
 
@@ -887,6 +835,7 @@ Modify the positions of a set of channel objects for the guild. Requires MANAGE_
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="bulk_update_guild_channels" method="patch" path="/guilds/{guild_id}/channels" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -895,14 +844,14 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.updateChannelPositions({
+  const result = await discord.guilds.updateChannelPositions({
     guildId: "<value>",
     requestBody: [
       {},
     ],
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -931,7 +880,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsUpdateChannelPositions failed:", res.error);
   }
@@ -951,14 +900,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.BulkUpdateGuildChannelsResponse](../../models/operations/bulkupdateguildchannelsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listIntegrations
 
@@ -966,6 +916,7 @@ Returns a list of integration objects for the guild. Requires the MANAGE_GUILD p
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_integrations" method="get" path="/guilds/{guild_id}/integrations" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1024,14 +975,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.ListGuildIntegrationsResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildIntegrationsResponse](../../models/operations/listguildintegrationsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteIntegration
 
@@ -1039,6 +991,7 @@ Delete the attached integration object for the guild. Deletes any associated web
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_guild_integration" method="delete" path="/guilds/{guild_id}/integrations/{integration_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1047,12 +1000,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.deleteIntegration({
+  const result = await discord.guilds.deleteIntegration({
     guildId: "<value>",
     integrationId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1079,7 +1032,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsDeleteIntegration failed:", res.error);
   }
@@ -1099,14 +1052,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildIntegrationResponse](../../models/operations/deleteguildintegrationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listInvites
 
@@ -1114,6 +1068,7 @@ Returns a list of invite objects (with invite metadata) for the guild. Requires 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_invites" method="get" path="/guilds/{guild_id}/invites" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1172,14 +1127,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.ListGuildInvitesResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildInvitesResponse](../../models/operations/listguildinvitesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listMembers
 
@@ -1187,6 +1143,7 @@ Returns a list of guild member objects that are members of the guild.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_members" method="get" path="/guilds/{guild_id}/members" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1245,14 +1202,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildMemberResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildMembersResponse](../../models/operations/listguildmembersresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateCurrentMember
 
@@ -1260,6 +1218,7 @@ Modifies the current member in a guild. Returns a 200 with the updated member ob
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_my_guild_member" method="patch" path="/guilds/{guild_id}/members/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1320,14 +1279,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateGuildMemberResponse](../../models/components/privateguildmemberresponse.md)\>**
+**Promise\<[operations.UpdateMyGuildMemberResponse](../../models/operations/updatemyguildmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## searchMembers
 
@@ -1335,6 +1295,7 @@ Returns a list of guild member objects whose username or nickname starts with a 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="search_guild_members" method="get" path="/guilds/{guild_id}/members/search" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1397,14 +1358,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildMemberResponse[]](../../models/.md)\>**
+**Promise\<[operations.SearchGuildMembersResponse](../../models/operations/searchguildmembersresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getMember
 
@@ -1412,6 +1374,7 @@ Returns a guild member object for the specified user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_member" method="get" path="/guilds/{guild_id}/members/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1472,14 +1435,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildMemberResponse](../../models/components/guildmemberresponse.md)\>**
+**Promise\<[operations.GetGuildMemberResponse](../../models/operations/getguildmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## addMember
 
@@ -1487,6 +1451,7 @@ Adds a user to the guild, provided you have a valid oauth2 access token for the 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="add_guild_member" method="put" path="/guilds/{guild_id}/members/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1498,7 +1463,7 @@ async function run() {
   const result = await discord.guilds.addMember({
     guildId: "<value>",
     userId: "<value>",
-    requestBody: {
+    botAddGuildMemberRequest: {
       accessToken: "<value>",
     },
   });
@@ -1527,7 +1492,7 @@ async function run() {
   const res = await guildsAddMember(discord, {
     guildId: "<value>",
     userId: "<value>",
-    requestBody: {
+    botAddGuildMemberRequest: {
       accessToken: "<value>",
     },
   });
@@ -1553,14 +1518,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildMemberResponse](../../models/components/guildmemberresponse.md)\>**
+**Promise\<[operations.AddGuildMemberResponse](../../models/operations/addguildmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## removeMember
 
@@ -1568,6 +1534,7 @@ Remove a member from a guild. Requires KICK_MEMBERS permission. Returns a 204 em
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_guild_member" method="delete" path="/guilds/{guild_id}/members/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1576,12 +1543,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.removeMember({
+  const result = await discord.guilds.removeMember({
     guildId: "<value>",
     userId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1608,7 +1575,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsRemoveMember failed:", res.error);
   }
@@ -1628,14 +1595,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildMemberResponse](../../models/operations/deleteguildmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateMember
 
@@ -1643,6 +1611,7 @@ Modify attributes of a guild member. Returns a 200 OK with the guild member as t
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_guild_member" method="patch" path="/guilds/{guild_id}/members/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1705,14 +1674,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildMemberResponse](../../models/components/guildmemberresponse.md)\>**
+**Promise\<[operations.UpdateGuildMemberResponse](../../models/operations/updateguildmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## addMemberRole
 
@@ -1720,6 +1690,7 @@ Adds a role to a guild member. Requires the MANAGE_ROLES permission. Returns a 2
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="add_guild_member_role" method="put" path="/guilds/{guild_id}/members/{user_id}/roles/{role_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1728,13 +1699,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.addMemberRole({
+  const result = await discord.guilds.addMemberRole({
     guildId: "<value>",
     userId: "<value>",
     roleId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1762,7 +1733,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsAddMemberRole failed:", res.error);
   }
@@ -1782,14 +1753,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.AddGuildMemberRoleResponse](../../models/operations/addguildmemberroleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## removeMemberRole
 
@@ -1797,6 +1769,7 @@ Removes a role from a guild member. Requires the MANAGE_ROLES permission. Return
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_guild_member_role" method="delete" path="/guilds/{guild_id}/members/{user_id}/roles/{role_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1805,13 +1778,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.removeMemberRole({
+  const result = await discord.guilds.removeMemberRole({
     guildId: "<value>",
     userId: "<value>",
     roleId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1839,7 +1812,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsRemoveMemberRole failed:", res.error);
   }
@@ -1859,14 +1832,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildMemberRoleResponse](../../models/operations/deleteguildmemberroleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## setMfaLevel
 
@@ -1874,6 +1848,7 @@ Modify a guild's MFA level. Requires guild ownership. Returns the updated level 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="set_guild_mfa_level" method="post" path="/guilds/{guild_id}/mfa" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1884,7 +1859,7 @@ const discord = new Discord({
 async function run() {
   const result = await discord.guilds.setMfaLevel({
     guildId: "<value>",
-    requestBody: {},
+    guildMFARequest: {},
   });
 
   console.log(result);
@@ -1910,7 +1885,7 @@ const discord = new DiscordCore({
 async function run() {
   const res = await guildsSetMfaLevel(discord, {
     guildId: "<value>",
-    requestBody: {},
+    guildMFARequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1934,14 +1909,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildMFALevelResponse](../../models/components/guildmfalevelresponse.md)\>**
+**Promise\<[operations.SetGuildMfaLevelResponse](../../models/operations/setguildmfalevelresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getOnboarding
 
@@ -1949,6 +1925,7 @@ Returns the Onboarding object for the guild.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guilds_onboarding" method="get" path="/guilds/{guild_id}/onboarding" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2007,14 +1984,15 @@ run();
 
 ### Response
 
-**Promise\<[components.UserGuildOnboardingResponse](../../models/components/userguildonboardingresponse.md)\>**
+**Promise\<[operations.GetGuildsOnboardingResponse](../../models/operations/getguildsonboardingresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateOnboarding
 
@@ -2022,6 +2000,7 @@ Modifies the onboarding configuration of the guild. Returns a 200 with the Onboa
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put_guilds_onboarding" method="put" path="/guilds/{guild_id}/onboarding" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2082,14 +2061,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildOnboardingResponse](../../models/components/guildonboardingresponse.md)\>**
+**Promise\<[operations.PutGuildsOnboardingResponse](../../models/operations/putguildsonboardingresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getPreview
 
@@ -2097,6 +2077,7 @@ Returns the guild preview object for the given id. If the user is not in the gui
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_preview" method="get" path="/guilds/{guild_id}/preview" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2155,14 +2136,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildPreviewResponse](../../models/components/guildpreviewresponse.md)\>**
+**Promise\<[operations.GetGuildPreviewResponse](../../models/operations/getguildpreviewresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## previewPrune
 
@@ -2170,6 +2152,7 @@ Returns an object with one pruned key indicating the number of members that woul
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="preview_prune_guild" method="get" path="/guilds/{guild_id}/prune" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2228,14 +2211,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildPruneResponse](../../models/components/guildpruneresponse.md)\>**
+**Promise\<[operations.PreviewPruneGuildResponse](../../models/operations/previewpruneguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## prune
 
@@ -2243,6 +2227,7 @@ Begin a prune operation. Requires the MANAGE_GUILD and KICK_MEMBERS permissions.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="prune_guild" method="post" path="/guilds/{guild_id}/prune" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2253,7 +2238,7 @@ const discord = new Discord({
 async function run() {
   const result = await discord.guilds.prune({
     guildId: "<value>",
-    requestBody: {},
+    pruneGuildRequest: {},
   });
 
   console.log(result);
@@ -2279,7 +2264,7 @@ const discord = new DiscordCore({
 async function run() {
   const res = await guildsPrune(discord, {
     guildId: "<value>",
-    requestBody: {},
+    pruneGuildRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -2303,14 +2288,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildPruneResponse](../../models/components/guildpruneresponse.md)\>**
+**Promise\<[operations.PruneGuildResponse](../../models/operations/pruneguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listVoiceRegions
 
@@ -2318,6 +2304,7 @@ Returns a list of voice region objects for the guild. Unlike the similar /voice 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_voice_regions" method="get" path="/guilds/{guild_id}/regions" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2376,14 +2363,15 @@ run();
 
 ### Response
 
-**Promise\<[components.VoiceRegionResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildVoiceRegionsResponse](../../models/operations/listguildvoiceregionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listRoles
 
@@ -2391,6 +2379,7 @@ Returns a list of role objects for the guild.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_roles" method="get" path="/guilds/{guild_id}/roles" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2449,14 +2438,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildRoleResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildRolesResponse](../../models/operations/listguildrolesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createRole
 
@@ -2464,6 +2454,7 @@ Create a new role for the guild. Requires the MANAGE_ROLES permission. Returns t
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_guild_role" method="post" path="/guilds/{guild_id}/roles" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2474,7 +2465,7 @@ const discord = new Discord({
 async function run() {
   const result = await discord.guilds.createRole({
     guildId: "<value>",
-    requestBody: {},
+    createRoleRequest: {},
   });
 
   console.log(result);
@@ -2500,7 +2491,7 @@ const discord = new DiscordCore({
 async function run() {
   const res = await guildsCreateRole(discord, {
     guildId: "<value>",
-    requestBody: {},
+    createRoleRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -2524,14 +2515,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildRoleResponse](../../models/components/guildroleresponse.md)\>**
+**Promise\<[operations.CreateGuildRoleResponse](../../models/operations/createguildroleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateRolePositions
 
@@ -2539,6 +2531,7 @@ Modify the positions of a set of role objects for the guild. Requires the MANAGE
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="bulk_update_guild_roles" method="patch" path="/guilds/{guild_id}/roles" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2599,14 +2592,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildRoleResponse[]](../../models/.md)\>**
+**Promise\<[operations.BulkUpdateGuildRolesResponse](../../models/operations/bulkupdateguildrolesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getRole
 
@@ -2614,6 +2608,7 @@ Returns a role object for the specified role.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_role" method="get" path="/guilds/{guild_id}/roles/{role_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2674,14 +2669,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildRoleResponse](../../models/components/guildroleresponse.md)\>**
+**Promise\<[operations.GetGuildRoleResponse](../../models/operations/getguildroleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteRole
 
@@ -2689,6 +2685,7 @@ Delete a guild role. Requires the MANAGE_ROLES permission. Returns a 204 empty r
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_guild_role" method="delete" path="/guilds/{guild_id}/roles/{role_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2697,12 +2694,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.deleteRole({
+  const result = await discord.guilds.deleteRole({
     guildId: "<value>",
     roleId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -2729,7 +2726,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsDeleteRole failed:", res.error);
   }
@@ -2749,14 +2746,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildRoleResponse](../../models/operations/deleteguildroleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateRole
 
@@ -2764,6 +2762,7 @@ Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated r
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_guild_role" method="patch" path="/guilds/{guild_id}/roles/{role_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2775,7 +2774,7 @@ async function run() {
   const result = await discord.guilds.updateRole({
     guildId: "<value>",
     roleId: "<value>",
-    requestBody: {},
+    updateRoleRequestPartial: {},
   });
 
   console.log(result);
@@ -2802,7 +2801,7 @@ async function run() {
   const res = await guildsUpdateRole(discord, {
     guildId: "<value>",
     roleId: "<value>",
-    requestBody: {},
+    updateRoleRequestPartial: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -2826,14 +2825,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildRoleResponse](../../models/components/guildroleresponse.md)\>**
+**Promise\<[operations.UpdateGuildRoleResponse](../../models/operations/updateguildroleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listActiveThreads
 
@@ -2841,6 +2841,7 @@ Returns all active threads in the guild, including public and private threads. T
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_active_guild_threads" method="get" path="/guilds/{guild_id}/threads/active" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2899,14 +2900,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ThreadsResponse](../../models/components/threadsresponse.md)\>**
+**Promise\<[operations.GetActiveGuildThreadsResponse](../../models/operations/getactiveguildthreadsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getVanityUrl
 
@@ -2914,6 +2916,7 @@ Returns a partial invite object for guilds with that feature enabled. Requires t
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_vanity_url" method="get" path="/guilds/{guild_id}/vanity-url" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -2972,14 +2975,15 @@ run();
 
 ### Response
 
-**Promise\<[components.VanityURLResponse](../../models/components/vanityurlresponse.md)\>**
+**Promise\<[operations.GetGuildVanityUrlResponse](../../models/operations/getguildvanityurlresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getWelcomeScreen
 
@@ -2987,6 +2991,7 @@ Returns the Welcome Screen object for the guild. If the welcome screen is not en
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_welcome_screen" method="get" path="/guilds/{guild_id}/welcome-screen" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -3045,14 +3050,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildWelcomeScreenResponse](../../models/components/guildwelcomescreenresponse.md)\>**
+**Promise\<[operations.GetGuildWelcomeScreenResponse](../../models/operations/getguildwelcomescreenresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateWelcomeScreen
 
@@ -3060,6 +3066,7 @@ Modify the guild's Welcome Screen. Requires the MANAGE_GUILD permission. Returns
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_guild_welcome_screen" method="patch" path="/guilds/{guild_id}/welcome-screen" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -3120,14 +3127,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildWelcomeScreenResponse](../../models/components/guildwelcomescreenresponse.md)\>**
+**Promise\<[operations.UpdateGuildWelcomeScreenResponse](../../models/operations/updateguildwelcomescreenresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getWidgetSettings
 
@@ -3135,6 +3143,7 @@ Returns a guild widget settings object. Requires the MANAGE_GUILD permission.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_widget_settings" method="get" path="/guilds/{guild_id}/widget" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -3193,14 +3202,15 @@ run();
 
 ### Response
 
-**Promise\<[components.WidgetSettingsResponse](../../models/components/widgetsettingsresponse.md)\>**
+**Promise\<[operations.GetGuildWidgetSettingsResponse](../../models/operations/getguildwidgetsettingsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateWidgetSettings
 
@@ -3208,6 +3218,7 @@ Modify a guild widget settings object for the guild. All attributes may be passe
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_guild_widget_settings" method="patch" path="/guilds/{guild_id}/widget" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -3268,14 +3279,15 @@ run();
 
 ### Response
 
-**Promise\<[components.WidgetSettingsResponse](../../models/components/widgetsettingsresponse.md)\>**
+**Promise\<[operations.UpdateGuildWidgetSettingsResponse](../../models/operations/updateguildwidgetsettingsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getWidget
 
@@ -3283,6 +3295,7 @@ Returns the widget for the guild. Fires an Invite Create Gateway event when an i
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_widget" method="get" path="/guilds/{guild_id}/widget.json" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -3338,14 +3351,15 @@ run();
 
 ### Response
 
-**Promise\<[components.WidgetResponse](../../models/components/widgetresponse.md)\>**
+**Promise\<[operations.GetGuildWidgetResponse](../../models/operations/getguildwidgetresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getWidgetPng
 
@@ -3353,6 +3367,7 @@ Returns a PNG image widget for the guild. Requires no permissions or authenticat
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_widget_png" method="get" path="/guilds/{guild_id}/widget.png" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -3408,11 +3423,12 @@ run();
 
 ### Response
 
-**Promise\<[string](../../models/.md)\>**
+**Promise\<[operations.GetGuildWidgetPngResponse](../../models/operations/getguildwidgetpngresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

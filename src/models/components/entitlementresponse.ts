@@ -41,11 +41,11 @@ export const EntitlementResponse$inboundSchema: z.ZodType<
   ends_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  type: z.literal(8).optional(),
+  type: z.literal(8).default(8).optional(),
   fulfilled_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  fulfillment_status: z.nullable(z.literal(0)).optional(),
+  fulfillment_status: z.nullable(z.literal(0).default(0)).optional(),
   consumed: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {

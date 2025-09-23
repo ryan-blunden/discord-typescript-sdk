@@ -77,15 +77,15 @@ import {
 export type ApplicationCommandPatchRequestPartialOptions =
   | ApplicationCommandAttachmentOption
   | ApplicationCommandBooleanOption
-  | ApplicationCommandMentionableOption
-  | ApplicationCommandRoleOption
-  | ApplicationCommandUserOption
   | ApplicationCommandChannelOption
+  | ApplicationCommandIntegerOption
+  | ApplicationCommandMentionableOption
+  | ApplicationCommandNumberOption
+  | ApplicationCommandRoleOption
+  | ApplicationCommandStringOption
   | ApplicationCommandSubcommandGroupOption
   | ApplicationCommandSubcommandOption
-  | ApplicationCommandIntegerOption
-  | ApplicationCommandNumberOption
-  | ApplicationCommandStringOption;
+  | ApplicationCommandUserOption;
 
 export type ApplicationCommandPatchRequestPartial = {
   name?: string | undefined;
@@ -96,15 +96,15 @@ export type ApplicationCommandPatchRequestPartial = {
     | Array<
       | ApplicationCommandAttachmentOption
       | ApplicationCommandBooleanOption
-      | ApplicationCommandMentionableOption
-      | ApplicationCommandRoleOption
-      | ApplicationCommandUserOption
       | ApplicationCommandChannelOption
+      | ApplicationCommandIntegerOption
+      | ApplicationCommandMentionableOption
+      | ApplicationCommandNumberOption
+      | ApplicationCommandRoleOption
+      | ApplicationCommandStringOption
       | ApplicationCommandSubcommandGroupOption
       | ApplicationCommandSubcommandOption
-      | ApplicationCommandIntegerOption
-      | ApplicationCommandNumberOption
-      | ApplicationCommandStringOption
+      | ApplicationCommandUserOption
     >
     | null
     | undefined;
@@ -124,30 +124,30 @@ export const ApplicationCommandPatchRequestPartialOptions$inboundSchema:
   > = z.union([
     ApplicationCommandAttachmentOption$inboundSchema,
     ApplicationCommandBooleanOption$inboundSchema,
-    ApplicationCommandMentionableOption$inboundSchema,
-    ApplicationCommandRoleOption$inboundSchema,
-    ApplicationCommandUserOption$inboundSchema,
     ApplicationCommandChannelOption$inboundSchema,
+    ApplicationCommandIntegerOption$inboundSchema,
+    ApplicationCommandMentionableOption$inboundSchema,
+    ApplicationCommandNumberOption$inboundSchema,
+    ApplicationCommandRoleOption$inboundSchema,
+    ApplicationCommandStringOption$inboundSchema,
     ApplicationCommandSubcommandGroupOption$inboundSchema,
     ApplicationCommandSubcommandOption$inboundSchema,
-    ApplicationCommandIntegerOption$inboundSchema,
-    ApplicationCommandNumberOption$inboundSchema,
-    ApplicationCommandStringOption$inboundSchema,
+    ApplicationCommandUserOption$inboundSchema,
   ]);
 
 /** @internal */
 export type ApplicationCommandPatchRequestPartialOptions$Outbound =
   | ApplicationCommandAttachmentOption$Outbound
   | ApplicationCommandBooleanOption$Outbound
-  | ApplicationCommandMentionableOption$Outbound
-  | ApplicationCommandRoleOption$Outbound
-  | ApplicationCommandUserOption$Outbound
   | ApplicationCommandChannelOption$Outbound
+  | ApplicationCommandIntegerOption$Outbound
+  | ApplicationCommandMentionableOption$Outbound
+  | ApplicationCommandNumberOption$Outbound
+  | ApplicationCommandRoleOption$Outbound
+  | ApplicationCommandStringOption$Outbound
   | ApplicationCommandSubcommandGroupOption$Outbound
   | ApplicationCommandSubcommandOption$Outbound
-  | ApplicationCommandIntegerOption$Outbound
-  | ApplicationCommandNumberOption$Outbound
-  | ApplicationCommandStringOption$Outbound;
+  | ApplicationCommandUserOption$Outbound;
 
 /** @internal */
 export const ApplicationCommandPatchRequestPartialOptions$outboundSchema:
@@ -158,15 +158,15 @@ export const ApplicationCommandPatchRequestPartialOptions$outboundSchema:
   > = z.union([
     ApplicationCommandAttachmentOption$outboundSchema,
     ApplicationCommandBooleanOption$outboundSchema,
-    ApplicationCommandMentionableOption$outboundSchema,
-    ApplicationCommandRoleOption$outboundSchema,
-    ApplicationCommandUserOption$outboundSchema,
     ApplicationCommandChannelOption$outboundSchema,
+    ApplicationCommandIntegerOption$outboundSchema,
+    ApplicationCommandMentionableOption$outboundSchema,
+    ApplicationCommandNumberOption$outboundSchema,
+    ApplicationCommandRoleOption$outboundSchema,
+    ApplicationCommandStringOption$outboundSchema,
     ApplicationCommandSubcommandGroupOption$outboundSchema,
     ApplicationCommandSubcommandOption$outboundSchema,
-    ApplicationCommandIntegerOption$outboundSchema,
-    ApplicationCommandNumberOption$outboundSchema,
-    ApplicationCommandStringOption$outboundSchema,
+    ApplicationCommandUserOption$outboundSchema,
   ]);
 
 /**
@@ -226,15 +226,15 @@ export const ApplicationCommandPatchRequestPartial$inboundSchema: z.ZodType<
       z.union([
         ApplicationCommandAttachmentOption$inboundSchema,
         ApplicationCommandBooleanOption$inboundSchema,
-        ApplicationCommandMentionableOption$inboundSchema,
-        ApplicationCommandRoleOption$inboundSchema,
-        ApplicationCommandUserOption$inboundSchema,
         ApplicationCommandChannelOption$inboundSchema,
+        ApplicationCommandIntegerOption$inboundSchema,
+        ApplicationCommandMentionableOption$inboundSchema,
+        ApplicationCommandNumberOption$inboundSchema,
+        ApplicationCommandRoleOption$inboundSchema,
+        ApplicationCommandStringOption$inboundSchema,
         ApplicationCommandSubcommandGroupOption$inboundSchema,
         ApplicationCommandSubcommandOption$inboundSchema,
-        ApplicationCommandIntegerOption$inboundSchema,
-        ApplicationCommandNumberOption$inboundSchema,
-        ApplicationCommandStringOption$inboundSchema,
+        ApplicationCommandUserOption$inboundSchema,
       ]),
     ),
   ).optional(),
@@ -263,15 +263,15 @@ export type ApplicationCommandPatchRequestPartial$Outbound = {
     | Array<
       | ApplicationCommandAttachmentOption$Outbound
       | ApplicationCommandBooleanOption$Outbound
-      | ApplicationCommandMentionableOption$Outbound
-      | ApplicationCommandRoleOption$Outbound
-      | ApplicationCommandUserOption$Outbound
       | ApplicationCommandChannelOption$Outbound
+      | ApplicationCommandIntegerOption$Outbound
+      | ApplicationCommandMentionableOption$Outbound
+      | ApplicationCommandNumberOption$Outbound
+      | ApplicationCommandRoleOption$Outbound
+      | ApplicationCommandStringOption$Outbound
       | ApplicationCommandSubcommandGroupOption$Outbound
       | ApplicationCommandSubcommandOption$Outbound
-      | ApplicationCommandIntegerOption$Outbound
-      | ApplicationCommandNumberOption$Outbound
-      | ApplicationCommandStringOption$Outbound
+      | ApplicationCommandUserOption$Outbound
     >
     | null
     | undefined;
@@ -297,15 +297,15 @@ export const ApplicationCommandPatchRequestPartial$outboundSchema: z.ZodType<
       z.union([
         ApplicationCommandAttachmentOption$outboundSchema,
         ApplicationCommandBooleanOption$outboundSchema,
-        ApplicationCommandMentionableOption$outboundSchema,
-        ApplicationCommandRoleOption$outboundSchema,
-        ApplicationCommandUserOption$outboundSchema,
         ApplicationCommandChannelOption$outboundSchema,
+        ApplicationCommandIntegerOption$outboundSchema,
+        ApplicationCommandMentionableOption$outboundSchema,
+        ApplicationCommandNumberOption$outboundSchema,
+        ApplicationCommandRoleOption$outboundSchema,
+        ApplicationCommandStringOption$outboundSchema,
         ApplicationCommandSubcommandGroupOption$outboundSchema,
         ApplicationCommandSubcommandOption$outboundSchema,
-        ApplicationCommandIntegerOption$outboundSchema,
-        ApplicationCommandNumberOption$outboundSchema,
-        ApplicationCommandStringOption$outboundSchema,
+        ApplicationCommandUserOption$outboundSchema,
       ]),
     ),
   ).optional(),

@@ -10,6 +10,7 @@ let value: StageInstanceResponse = {
   channelId: "<value>",
   topic: "<value>",
   id: "<value>",
+  discoverableDisabled: false,
 };
 ```
 
@@ -22,5 +23,5 @@ let value: StageInstanceResponse = {
 | `topic`                 | *string*                | :heavy_check_mark:      | N/A                     |
 | `privacyLevel`          | *number*                | :heavy_check_mark:      | N/A                     |
 | `id`                    | *string*                | :heavy_check_mark:      | N/A                     |
-| `discoverableDisabled`  | *boolean*               | :heavy_minus_sign:      | N/A                     |
+| `discoverableDisabled`  | *boolean*               | :heavy_check_mark:      | N/A                     |
 | `guildScheduledEventId` | *string*                | :heavy_minus_sign:      | N/A                     |

@@ -33,7 +33,7 @@ export const ConnectedAccountIntegrationResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  type: z.literal("discord").optional(),
+  type: z.literal("discord").default("discord").optional(),
   account: AccountResponse$inboundSchema,
   guild: ConnectedAccountGuildResponse$inboundSchema,
 });

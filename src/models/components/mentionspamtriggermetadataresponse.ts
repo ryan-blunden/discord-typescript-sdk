@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MentionSpamTriggerMetadataResponse = {
   mentionTotalLimit: number;
-  mentionRaidProtectionEnabled?: boolean | null | undefined;
+  mentionRaidProtectionEnabled: boolean;
 };
 
 /** @internal */
@@ -20,7 +20,7 @@ export const MentionSpamTriggerMetadataResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   mention_total_limit: z.number().int(),
-  mention_raid_protection_enabled: z.nullable(z.boolean()).optional(),
+  mention_raid_protection_enabled: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "mention_total_limit": "mentionTotalLimit",
@@ -31,7 +31,7 @@ export const MentionSpamTriggerMetadataResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type MentionSpamTriggerMetadataResponse$Outbound = {
   mention_total_limit: number;
-  mention_raid_protection_enabled?: boolean | null | undefined;
+  mention_raid_protection_enabled: boolean;
 };
 
 /** @internal */
@@ -41,7 +41,7 @@ export const MentionSpamTriggerMetadataResponse$outboundSchema: z.ZodType<
   MentionSpamTriggerMetadataResponse
 > = z.object({
   mentionTotalLimit: z.number().int(),
-  mentionRaidProtectionEnabled: z.nullable(z.boolean()).optional(),
+  mentionRaidProtectionEnabled: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     mentionTotalLimit: "mention_total_limit",

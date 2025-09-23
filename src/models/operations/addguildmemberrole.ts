@@ -14,6 +14,10 @@ export type AddGuildMemberRoleRequest = {
   roleId: string;
 };
 
+export type AddGuildMemberRoleResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const AddGuildMemberRoleRequest$inboundSchema: z.ZodType<
   AddGuildMemberRoleRequest,
@@ -83,5 +87,67 @@ export function addGuildMemberRoleRequestFromJSON(
     jsonString,
     (x) => AddGuildMemberRoleRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'AddGuildMemberRoleRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const AddGuildMemberRoleResponse$inboundSchema: z.ZodType<
+  AddGuildMemberRoleResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type AddGuildMemberRoleResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const AddGuildMemberRoleResponse$outboundSchema: z.ZodType<
+  AddGuildMemberRoleResponse$Outbound,
+  z.ZodTypeDef,
+  AddGuildMemberRoleResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AddGuildMemberRoleResponse$ {
+  /** @deprecated use `AddGuildMemberRoleResponse$inboundSchema` instead. */
+  export const inboundSchema = AddGuildMemberRoleResponse$inboundSchema;
+  /** @deprecated use `AddGuildMemberRoleResponse$outboundSchema` instead. */
+  export const outboundSchema = AddGuildMemberRoleResponse$outboundSchema;
+  /** @deprecated use `AddGuildMemberRoleResponse$Outbound` instead. */
+  export type Outbound = AddGuildMemberRoleResponse$Outbound;
+}
+
+export function addGuildMemberRoleResponseToJSON(
+  addGuildMemberRoleResponse: AddGuildMemberRoleResponse,
+): string {
+  return JSON.stringify(
+    AddGuildMemberRoleResponse$outboundSchema.parse(addGuildMemberRoleResponse),
+  );
+}
+
+export function addGuildMemberRoleResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<AddGuildMemberRoleResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddGuildMemberRoleResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddGuildMemberRoleResponse' from JSON`,
   );
 }

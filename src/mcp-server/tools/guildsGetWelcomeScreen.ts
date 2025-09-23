@@ -30,7 +30,7 @@ export const tool$guildsGetWelcomeScreen: ToolDefinition<typeof args> = {
       };
     }
 
-    const value = result.value;
+    const value = result.value.result;
 
     return formatResult(value, apiCall);
   },

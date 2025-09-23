@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetAnswerVotersRequest = {
@@ -14,6 +15,11 @@ export type GetAnswerVotersRequest = {
   answerId: number;
   after?: string | undefined;
   limit?: number | undefined;
+};
+
+export type GetAnswerVotersResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.PollAnswerDetailsResponse;
 };
 
 /** @internal */
@@ -91,5 +97,72 @@ export function getAnswerVotersRequestFromJSON(
     jsonString,
     (x) => GetAnswerVotersRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetAnswerVotersRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAnswerVotersResponse$inboundSchema: z.ZodType<
+  GetAnswerVotersResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.PollAnswerDetailsResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetAnswerVotersResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.PollAnswerDetailsResponse$Outbound;
+};
+
+/** @internal */
+export const GetAnswerVotersResponse$outboundSchema: z.ZodType<
+  GetAnswerVotersResponse$Outbound,
+  z.ZodTypeDef,
+  GetAnswerVotersResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.PollAnswerDetailsResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAnswerVotersResponse$ {
+  /** @deprecated use `GetAnswerVotersResponse$inboundSchema` instead. */
+  export const inboundSchema = GetAnswerVotersResponse$inboundSchema;
+  /** @deprecated use `GetAnswerVotersResponse$outboundSchema` instead. */
+  export const outboundSchema = GetAnswerVotersResponse$outboundSchema;
+  /** @deprecated use `GetAnswerVotersResponse$Outbound` instead. */
+  export type Outbound = GetAnswerVotersResponse$Outbound;
+}
+
+export function getAnswerVotersResponseToJSON(
+  getAnswerVotersResponse: GetAnswerVotersResponse,
+): string {
+  return JSON.stringify(
+    GetAnswerVotersResponse$outboundSchema.parse(getAnswerVotersResponse),
+  );
+}
+
+export function getAnswerVotersResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAnswerVotersResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAnswerVotersResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAnswerVotersResponse' from JSON`,
   );
 }

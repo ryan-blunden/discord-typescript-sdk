@@ -21,11 +21,13 @@ import {
 
 export type ChannelSelectComponentForMessageRequest = {
   type?: 1 | undefined;
+  id?: number | null | undefined;
   customId: string;
   placeholder?: string | null | undefined;
   minValues?: number | null | undefined;
   maxValues?: number | null | undefined;
   disabled?: boolean | null | undefined;
+  required?: boolean | null | undefined;
   defaultValues?: Array<ChannelSelectDefaultValue> | null | undefined;
   channelTypes?: Array<ChannelTypes> | null | undefined;
 };
@@ -36,12 +38,14 @@ export const ChannelSelectComponentForMessageRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
+  id: z.nullable(z.number().int()).optional(),
   custom_id: z.string(),
   placeholder: z.nullable(z.string()).optional(),
   min_values: z.nullable(z.number().int()).optional(),
   max_values: z.nullable(z.number().int()).optional(),
   disabled: z.nullable(z.boolean()).optional(),
+  required: z.nullable(z.boolean()).optional(),
   default_values: z.nullable(z.array(ChannelSelectDefaultValue$inboundSchema))
     .optional(),
   channel_types: z.nullable(z.array(ChannelTypes$inboundSchema)).optional(),
@@ -58,11 +62,13 @@ export const ChannelSelectComponentForMessageRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ChannelSelectComponentForMessageRequest$Outbound = {
   type: 1;
+  id?: number | null | undefined;
   custom_id: string;
   placeholder?: string | null | undefined;
   min_values?: number | null | undefined;
   max_values?: number | null | undefined;
   disabled?: boolean | null | undefined;
+  required?: boolean | null | undefined;
   default_values?: Array<ChannelSelectDefaultValue$Outbound> | null | undefined;
   channel_types?: Array<number> | null | undefined;
 };
@@ -74,11 +80,13 @@ export const ChannelSelectComponentForMessageRequest$outboundSchema: z.ZodType<
   ChannelSelectComponentForMessageRequest
 > = z.object({
   type: z.literal(1).default(1 as const),
+  id: z.nullable(z.number().int()).optional(),
   customId: z.string(),
   placeholder: z.nullable(z.string()).optional(),
   minValues: z.nullable(z.number().int()).optional(),
   maxValues: z.nullable(z.number().int()).optional(),
   disabled: z.nullable(z.boolean()).optional(),
+  required: z.nullable(z.boolean()).optional(),
   defaultValues: z.nullable(z.array(ChannelSelectDefaultValue$outboundSchema))
     .optional(),
   channelTypes: z.nullable(z.array(ChannelTypes$outboundSchema)).optional(),

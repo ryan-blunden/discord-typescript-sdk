@@ -26,6 +26,12 @@ import {
   ContainerComponentForMessageRequest$outboundSchema,
 } from "./containercomponentformessagerequest.js";
 import {
+  CustomClientThemeShareRequest,
+  CustomClientThemeShareRequest$inboundSchema,
+  CustomClientThemeShareRequest$Outbound,
+  CustomClientThemeShareRequest$outboundSchema,
+} from "./customclientthemesharerequest.js";
+import {
   FileComponentForMessageRequest,
   FileComponentForMessageRequest$inboundSchema,
   FileComponentForMessageRequest$Outbound,
@@ -87,13 +93,13 @@ import {
 } from "./textdisplaycomponentformessagerequest.js";
 
 export type SDKMessageRequestComponents =
+  | SectionComponentForMessageRequest
   | ActionRowComponentForMessageRequest
+  | ContainerComponentForMessageRequest
+  | FileComponentForMessageRequest
   | MediaGalleryComponentForMessageRequest
   | TextDisplayComponentForMessageRequest
-  | FileComponentForMessageRequest
-  | SectionComponentForMessageRequest
-  | SeparatorComponentForMessageRequest
-  | ContainerComponentForMessageRequest;
+  | SeparatorComponentForMessageRequest;
 
 export type SDKMessageRequestNonce = number | string;
 
@@ -104,19 +110,20 @@ export type SDKMessageRequest = {
   stickerIds?: Array<string> | null | undefined;
   components?:
     | Array<
+      | SectionComponentForMessageRequest
       | ActionRowComponentForMessageRequest
+      | ContainerComponentForMessageRequest
+      | FileComponentForMessageRequest
       | MediaGalleryComponentForMessageRequest
       | TextDisplayComponentForMessageRequest
-      | FileComponentForMessageRequest
-      | SectionComponentForMessageRequest
       | SeparatorComponentForMessageRequest
-      | ContainerComponentForMessageRequest
     >
     | null
     | undefined;
   flags?: number | null | undefined;
   attachments?: Array<MessageAttachmentRequest> | null | undefined;
   poll?: PollCreateRequest | null | undefined;
+  sharedClientTheme?: CustomClientThemeShareRequest | null | undefined;
   confettiPotion?: ConfettiPotionCreateRequest | null | undefined;
   messageReference?: MessageReferenceRequest | null | undefined;
   nonce?: number | string | null | undefined;
@@ -130,24 +137,24 @@ export const SDKMessageRequestComponents$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  SectionComponentForMessageRequest$inboundSchema,
   ActionRowComponentForMessageRequest$inboundSchema,
+  ContainerComponentForMessageRequest$inboundSchema,
+  FileComponentForMessageRequest$inboundSchema,
   MediaGalleryComponentForMessageRequest$inboundSchema,
   TextDisplayComponentForMessageRequest$inboundSchema,
-  FileComponentForMessageRequest$inboundSchema,
-  SectionComponentForMessageRequest$inboundSchema,
   SeparatorComponentForMessageRequest$inboundSchema,
-  ContainerComponentForMessageRequest$inboundSchema,
 ]);
 
 /** @internal */
 export type SDKMessageRequestComponents$Outbound =
+  | SectionComponentForMessageRequest$Outbound
   | ActionRowComponentForMessageRequest$Outbound
+  | ContainerComponentForMessageRequest$Outbound
+  | FileComponentForMessageRequest$Outbound
   | MediaGalleryComponentForMessageRequest$Outbound
   | TextDisplayComponentForMessageRequest$Outbound
-  | FileComponentForMessageRequest$Outbound
-  | SectionComponentForMessageRequest$Outbound
-  | SeparatorComponentForMessageRequest$Outbound
-  | ContainerComponentForMessageRequest$Outbound;
+  | SeparatorComponentForMessageRequest$Outbound;
 
 /** @internal */
 export const SDKMessageRequestComponents$outboundSchema: z.ZodType<
@@ -155,13 +162,13 @@ export const SDKMessageRequestComponents$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SDKMessageRequestComponents
 > = z.union([
+  SectionComponentForMessageRequest$outboundSchema,
   ActionRowComponentForMessageRequest$outboundSchema,
+  ContainerComponentForMessageRequest$outboundSchema,
+  FileComponentForMessageRequest$outboundSchema,
   MediaGalleryComponentForMessageRequest$outboundSchema,
   TextDisplayComponentForMessageRequest$outboundSchema,
-  FileComponentForMessageRequest$outboundSchema,
-  SectionComponentForMessageRequest$outboundSchema,
   SeparatorComponentForMessageRequest$outboundSchema,
-  ContainerComponentForMessageRequest$outboundSchema,
 ]);
 
 /**
@@ -259,13 +266,13 @@ export const SDKMessageRequest$inboundSchema: z.ZodType<
   components: z.nullable(
     z.array(
       z.union([
+        SectionComponentForMessageRequest$inboundSchema,
         ActionRowComponentForMessageRequest$inboundSchema,
+        ContainerComponentForMessageRequest$inboundSchema,
+        FileComponentForMessageRequest$inboundSchema,
         MediaGalleryComponentForMessageRequest$inboundSchema,
         TextDisplayComponentForMessageRequest$inboundSchema,
-        FileComponentForMessageRequest$inboundSchema,
-        SectionComponentForMessageRequest$inboundSchema,
         SeparatorComponentForMessageRequest$inboundSchema,
-        ContainerComponentForMessageRequest$inboundSchema,
       ]),
     ),
   ).optional(),
@@ -273,6 +280,8 @@ export const SDKMessageRequest$inboundSchema: z.ZodType<
   attachments: z.nullable(z.array(MessageAttachmentRequest$inboundSchema))
     .optional(),
   poll: z.nullable(PollCreateRequest$inboundSchema).optional(),
+  shared_client_theme: z.nullable(CustomClientThemeShareRequest$inboundSchema)
+    .optional(),
   confetti_potion: z.nullable(ConfettiPotionCreateRequest$inboundSchema)
     .optional(),
   message_reference: z.nullable(MessageReferenceRequest$inboundSchema)
@@ -284,6 +293,7 @@ export const SDKMessageRequest$inboundSchema: z.ZodType<
   return remap$(v, {
     "allowed_mentions": "allowedMentions",
     "sticker_ids": "stickerIds",
+    "shared_client_theme": "sharedClientTheme",
     "confetti_potion": "confettiPotion",
     "message_reference": "messageReference",
     "enforce_nonce": "enforceNonce",
@@ -298,19 +308,23 @@ export type SDKMessageRequest$Outbound = {
   sticker_ids?: Array<string> | null | undefined;
   components?:
     | Array<
+      | SectionComponentForMessageRequest$Outbound
       | ActionRowComponentForMessageRequest$Outbound
+      | ContainerComponentForMessageRequest$Outbound
+      | FileComponentForMessageRequest$Outbound
       | MediaGalleryComponentForMessageRequest$Outbound
       | TextDisplayComponentForMessageRequest$Outbound
-      | FileComponentForMessageRequest$Outbound
-      | SectionComponentForMessageRequest$Outbound
       | SeparatorComponentForMessageRequest$Outbound
-      | ContainerComponentForMessageRequest$Outbound
     >
     | null
     | undefined;
   flags?: number | null | undefined;
   attachments?: Array<MessageAttachmentRequest$Outbound> | null | undefined;
   poll?: PollCreateRequest$Outbound | null | undefined;
+  shared_client_theme?:
+    | CustomClientThemeShareRequest$Outbound
+    | null
+    | undefined;
   confetti_potion?: ConfettiPotionCreateRequest$Outbound | null | undefined;
   message_reference?: MessageReferenceRequest$Outbound | null | undefined;
   nonce?: number | string | null | undefined;
@@ -332,13 +346,13 @@ export const SDKMessageRequest$outboundSchema: z.ZodType<
   components: z.nullable(
     z.array(
       z.union([
+        SectionComponentForMessageRequest$outboundSchema,
         ActionRowComponentForMessageRequest$outboundSchema,
+        ContainerComponentForMessageRequest$outboundSchema,
+        FileComponentForMessageRequest$outboundSchema,
         MediaGalleryComponentForMessageRequest$outboundSchema,
         TextDisplayComponentForMessageRequest$outboundSchema,
-        FileComponentForMessageRequest$outboundSchema,
-        SectionComponentForMessageRequest$outboundSchema,
         SeparatorComponentForMessageRequest$outboundSchema,
-        ContainerComponentForMessageRequest$outboundSchema,
       ]),
     ),
   ).optional(),
@@ -346,6 +360,8 @@ export const SDKMessageRequest$outboundSchema: z.ZodType<
   attachments: z.nullable(z.array(MessageAttachmentRequest$outboundSchema))
     .optional(),
   poll: z.nullable(PollCreateRequest$outboundSchema).optional(),
+  sharedClientTheme: z.nullable(CustomClientThemeShareRequest$outboundSchema)
+    .optional(),
   confettiPotion: z.nullable(ConfettiPotionCreateRequest$outboundSchema)
     .optional(),
   messageReference: z.nullable(MessageReferenceRequest$outboundSchema)
@@ -357,6 +373,7 @@ export const SDKMessageRequest$outboundSchema: z.ZodType<
   return remap$(v, {
     allowedMentions: "allowed_mentions",
     stickerIds: "sticker_ids",
+    sharedClientTheme: "shared_client_theme",
     confettiPotion: "confetti_potion",
     messageReference: "message_reference",
     enforceNonce: "enforce_nonce",

@@ -29,7 +29,7 @@ export const CreateForumThreadRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  auto_archive_duration: z.nullable(z.literal(60)).optional(),
+  auto_archive_duration: z.nullable(z.literal(60).default(60)).optional(),
   rate_limit_per_user: z.nullable(z.number().int()).optional(),
   applied_tags: z.nullable(z.array(z.string())).optional(),
   message: BaseCreateMessageCreateRequest$inboundSchema,

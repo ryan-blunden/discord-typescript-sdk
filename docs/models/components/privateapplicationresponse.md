@@ -16,12 +16,13 @@ let value: PrivateApplicationResponse = {
   ],
   owner: {
     id: "<value>",
-    username: "Haley_Wilderman33",
+    username: "Mercedes92",
     discriminator: "<value>",
-    publicFlags: 474116,
-    flags: 122610,
+    publicFlags: 973280,
+    flags: 637876,
   },
-  approximateUserInstallCount: 740777,
+  approximateUserInstallCount: 409587,
+  approximateUserAuthorizationCount: 811668,
 };
 ```
 
@@ -57,5 +58,6 @@ let value: PrivateApplicationResponse = {
 | `owner`                                                                                                                                                  | [components.UserResponse](../../models/components/userresponse.md)                                                                                       | :heavy_check_mark:                                                                                                                                       | N/A                                                                                                                                                      |
 | `approximateGuildCount`                                                                                                                                  | *number*                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                       | N/A                                                                                                                                                      |
 | `approximateUserInstallCount`                                                                                                                            | *number*                                                                                                                                                 | :heavy_check_mark:                                                                                                                                       | N/A                                                                                                                                                      |
+| `approximateUserAuthorizationCount`                                                                                                                      | *number*                                                                                                                                                 | :heavy_check_mark:                                                                                                                                       | N/A                                                                                                                                                      |
 | `explicitContentFilter`                                                                                                                                  | *number*                                                                                                                                                 | :heavy_check_mark:                                                                                                                                       | N/A                                                                                                                                                      |
 | `team`                                                                                                                                                   | [components.TeamResponse](../../models/components/teamresponse.md)                                                                                       | :heavy_minus_sign:                                                                                                                                       | N/A                                                                                                                                                      |

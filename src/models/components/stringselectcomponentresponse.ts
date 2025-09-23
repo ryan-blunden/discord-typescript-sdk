@@ -18,10 +18,10 @@ export type StringSelectComponentResponse = {
   type?: 1 | undefined;
   id: number;
   customId: string;
-  placeholder?: string | null | undefined;
+  placeholder?: string | undefined;
   minValues?: number | null | undefined;
   maxValues?: number | null | undefined;
-  disabled?: boolean | null | undefined;
+  disabled?: boolean | undefined;
   options: Array<StringSelectOptionResponse>;
 };
 
@@ -31,13 +31,13 @@ export const StringSelectComponentResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
   id: z.number().int(),
   custom_id: z.string(),
-  placeholder: z.nullable(z.string()).optional(),
+  placeholder: z.string().optional(),
   min_values: z.nullable(z.number().int()).optional(),
   max_values: z.nullable(z.number().int()).optional(),
-  disabled: z.nullable(z.boolean()).optional(),
+  disabled: z.boolean().optional(),
   options: z.array(StringSelectOptionResponse$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -52,10 +52,10 @@ export type StringSelectComponentResponse$Outbound = {
   type: 1;
   id: number;
   custom_id: string;
-  placeholder?: string | null | undefined;
+  placeholder?: string | undefined;
   min_values?: number | null | undefined;
   max_values?: number | null | undefined;
-  disabled?: boolean | null | undefined;
+  disabled?: boolean | undefined;
   options: Array<StringSelectOptionResponse$Outbound>;
 };
 
@@ -68,10 +68,10 @@ export const StringSelectComponentResponse$outboundSchema: z.ZodType<
   type: z.literal(1).default(1 as const),
   id: z.number().int(),
   customId: z.string(),
-  placeholder: z.nullable(z.string()).optional(),
+  placeholder: z.string().optional(),
   minValues: z.nullable(z.number().int()).optional(),
   maxValues: z.nullable(z.number().int()).optional(),
-  disabled: z.nullable(z.boolean()).optional(),
+  disabled: z.boolean().optional(),
   options: z.array(StringSelectOptionResponse$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

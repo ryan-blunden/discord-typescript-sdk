@@ -17,6 +17,11 @@ export type GetGuildWidgetPngRequest = {
   style?: "shield" | undefined;
 };
 
+export type GetGuildWidgetPngResponse = {
+  headers: { [k: string]: Array<string> };
+  result: string;
+};
+
 /** @internal */
 export const GetGuildWidgetPngSecurity$inboundSchema: z.ZodType<
   GetGuildWidgetPngSecurity,
@@ -86,7 +91,7 @@ export const GetGuildWidgetPngRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   guild_id: z.string(),
-  style: z.literal("shield").optional(),
+  style: z.literal("shield").default("shield").optional(),
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",
@@ -141,5 +146,72 @@ export function getGuildWidgetPngRequestFromJSON(
     jsonString,
     (x) => GetGuildWidgetPngRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGuildWidgetPngRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildWidgetPngResponse$inboundSchema: z.ZodType<
+  GetGuildWidgetPngResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGuildWidgetPngResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: string;
+};
+
+/** @internal */
+export const GetGuildWidgetPngResponse$outboundSchema: z.ZodType<
+  GetGuildWidgetPngResponse$Outbound,
+  z.ZodTypeDef,
+  GetGuildWidgetPngResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildWidgetPngResponse$ {
+  /** @deprecated use `GetGuildWidgetPngResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGuildWidgetPngResponse$inboundSchema;
+  /** @deprecated use `GetGuildWidgetPngResponse$outboundSchema` instead. */
+  export const outboundSchema = GetGuildWidgetPngResponse$outboundSchema;
+  /** @deprecated use `GetGuildWidgetPngResponse$Outbound` instead. */
+  export type Outbound = GetGuildWidgetPngResponse$Outbound;
+}
+
+export function getGuildWidgetPngResponseToJSON(
+  getGuildWidgetPngResponse: GetGuildWidgetPngResponse,
+): string {
+  return JSON.stringify(
+    GetGuildWidgetPngResponse$outboundSchema.parse(getGuildWidgetPngResponse),
+  );
+}
+
+export function getGuildWidgetPngResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildWidgetPngResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildWidgetPngResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildWidgetPngResponse' from JSON`,
   );
 }

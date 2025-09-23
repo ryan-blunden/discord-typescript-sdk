@@ -19,15 +19,22 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
+    hoistGlobalSecurity: true
+  tests:
+    generateTests: true
+    generateNewTests: false
+    skipResponseBodyAssertions: false
 typescript:
-  version: 0.4.0
+  version: 0.4.1
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
   additionalPackageJSON: {}
   author: Speakeasy
+  baseErrorName: DiscordError
   clientServerStatusCodesAsErrors: true
+  constFieldsAlwaysOptional: true
   defaultErrorName: APIError
   enableCustomCodeRegions: false
   enableMCPServer: true
@@ -36,6 +43,7 @@ typescript:
   envVarPrefix: DISCORD
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
+  generateExamples: true
   imports:
     option: openapi
     paths:
@@ -48,9 +56,12 @@ typescript:
   jsonpath: legacy
   maxMethodParams: 0
   methodArguments: require-security-and-request
+  modelPropertyCasing: camel
   moduleFormat: commonjs
   outputModelSuffix: output
   packageName: '@ryan.blunden/discord-sdk'
   responseFormat: flat
+  sseFlatResponse: false
   templateVersion: v2
+  usageSDKInitImports: []
   useIndexModules: true

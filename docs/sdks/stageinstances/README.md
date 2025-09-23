@@ -16,6 +16,7 @@ Creates a new Stage instance associated to a Stage channel. Returns that Stage i
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_stage_instance" method="post" path="/stage-instances" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -76,14 +77,15 @@ run();
 
 ### Response
 
-**Promise\<[components.StageInstanceResponse](../../models/components/stageinstanceresponse.md)\>**
+**Promise\<[operations.CreateStageInstanceResponse](../../models/operations/createstageinstanceresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -91,6 +93,7 @@ Gets the stage instance associated with the Stage channel, if it exists.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_stage_instance" method="get" path="/stage-instances/{channel_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -149,14 +152,15 @@ run();
 
 ### Response
 
-**Promise\<[components.StageInstanceResponse](../../models/components/stageinstanceresponse.md)\>**
+**Promise\<[operations.GetStageInstanceResponse](../../models/operations/getstageinstanceresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -164,6 +168,7 @@ Deletes the Stage instance. Returns 204 No Content. Fires a Stage Instance Delet
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_stage_instance" method="delete" path="/stage-instances/{channel_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -172,11 +177,11 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.stageInstances.delete({
+  const result = await discord.stageInstances.delete({
     channelId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -202,7 +207,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("stageInstancesDelete failed:", res.error);
   }
@@ -222,14 +227,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteStageInstanceResponse](../../models/operations/deletestageinstanceresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -237,6 +243,7 @@ Updates fields of an existing Stage instance. Returns the updated Stage instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_stage_instance" method="patch" path="/stage-instances/{channel_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -297,11 +304,12 @@ run();
 
 ### Response
 
-**Promise\<[components.StageInstanceResponse](../../models/components/stageinstanceresponse.md)\>**
+**Promise\<[operations.UpdateStageInstanceResponse](../../models/operations/updatestageinstanceresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

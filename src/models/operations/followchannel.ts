@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FollowChannelRequestBody = {
@@ -15,6 +16,11 @@ export type FollowChannelRequestBody = {
 export type FollowChannelRequest = {
   channelId: string;
   requestBody: FollowChannelRequestBody;
+};
+
+export type FollowChannelResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ChannelFollowerResponse;
 };
 
 /** @internal */
@@ -143,5 +149,72 @@ export function followChannelRequestFromJSON(
     jsonString,
     (x) => FollowChannelRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'FollowChannelRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const FollowChannelResponse$inboundSchema: z.ZodType<
+  FollowChannelResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ChannelFollowerResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type FollowChannelResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ChannelFollowerResponse$Outbound;
+};
+
+/** @internal */
+export const FollowChannelResponse$outboundSchema: z.ZodType<
+  FollowChannelResponse$Outbound,
+  z.ZodTypeDef,
+  FollowChannelResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ChannelFollowerResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FollowChannelResponse$ {
+  /** @deprecated use `FollowChannelResponse$inboundSchema` instead. */
+  export const inboundSchema = FollowChannelResponse$inboundSchema;
+  /** @deprecated use `FollowChannelResponse$outboundSchema` instead. */
+  export const outboundSchema = FollowChannelResponse$outboundSchema;
+  /** @deprecated use `FollowChannelResponse$Outbound` instead. */
+  export type Outbound = FollowChannelResponse$Outbound;
+}
+
+export function followChannelResponseToJSON(
+  followChannelResponse: FollowChannelResponse,
+): string {
+  return JSON.stringify(
+    FollowChannelResponse$outboundSchema.parse(followChannelResponse),
+  );
+}
+
+export function followChannelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<FollowChannelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FollowChannelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FollowChannelResponse' from JSON`,
   );
 }

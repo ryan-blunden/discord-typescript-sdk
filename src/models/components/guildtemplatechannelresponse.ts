@@ -77,7 +77,7 @@ export type GuildTemplateChannelResponse = {
   defaultThreadRateLimitPerUser?: number | null | undefined;
   defaultSortOrder?: 0 | null | undefined;
   defaultForumLayout?: 0 | null | undefined;
-  defaultTagSetting?: string | null | undefined;
+  defaultTagSetting?: "match_all" | null | undefined;
   iconEmoji?: IconEmojiResponse | null | undefined;
   themeColor?: number | null | undefined;
 };
@@ -119,7 +119,8 @@ export const GuildTemplateChannelResponse$inboundSchema: z.ZodType<
   nsfw: z.boolean(),
   rate_limit_per_user: z.number().int(),
   parent_id: z.nullable(z.string()).optional(),
-  default_auto_archive_duration: z.nullable(z.literal(60)).optional(),
+  default_auto_archive_duration: z.nullable(z.literal(60).default(60))
+    .optional(),
   permission_overwrites: z.array(
     z.nullable(ChannelPermissionOverwriteResponse$inboundSchema),
   ),
@@ -129,9 +130,10 @@ export const GuildTemplateChannelResponse$inboundSchema: z.ZodType<
   default_reaction_emoji: z.nullable(DefaultReactionEmojiResponse$inboundSchema)
     .optional(),
   default_thread_rate_limit_per_user: z.nullable(z.number().int()).optional(),
-  default_sort_order: z.nullable(z.literal(0)).optional(),
-  default_forum_layout: z.nullable(z.literal(0)).optional(),
-  default_tag_setting: z.nullable(z.string()).optional(),
+  default_sort_order: z.nullable(z.literal(0).default(0)).optional(),
+  default_forum_layout: z.nullable(z.literal(0).default(0)).optional(),
+  default_tag_setting: z.nullable(z.literal("match_all").default("match_all"))
+    .optional(),
   icon_emoji: z.nullable(IconEmojiResponse$inboundSchema).optional(),
   theme_color: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
@@ -177,7 +179,7 @@ export type GuildTemplateChannelResponse$Outbound = {
   default_thread_rate_limit_per_user?: number | null | undefined;
   default_sort_order: 0 | null;
   default_forum_layout: 0 | null;
-  default_tag_setting?: string | null | undefined;
+  default_tag_setting: "match_all" | null;
   icon_emoji?: IconEmojiResponse$Outbound | null | undefined;
   theme_color?: number | null | undefined;
 };
@@ -210,7 +212,9 @@ export const GuildTemplateChannelResponse$outboundSchema: z.ZodType<
   defaultThreadRateLimitPerUser: z.nullable(z.number().int()).optional(),
   defaultSortOrder: z.nullable(z.literal(0).default(0 as const)),
   defaultForumLayout: z.nullable(z.literal(0).default(0 as const)),
-  defaultTagSetting: z.nullable(z.string()).optional(),
+  defaultTagSetting: z.nullable(
+    z.literal("match_all").default("match_all" as const),
+  ),
   iconEmoji: z.nullable(IconEmojiResponse$outboundSchema).optional(),
   themeColor: z.nullable(z.number().int()).optional(),
 }).transform((v) => {

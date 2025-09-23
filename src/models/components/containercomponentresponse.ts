@@ -45,24 +45,24 @@ import {
 } from "./textdisplaycomponentresponse.js";
 
 export type ContainerComponentResponseComponents =
-  | ActionRowComponentResponse
-  | MediaGalleryComponentResponse
-  | TextDisplayComponentResponse
+  | FileComponentResponse
   | SectionComponentResponse
   | SeparatorComponentResponse
-  | FileComponentResponse;
+  | ActionRowComponentResponse
+  | MediaGalleryComponentResponse
+  | TextDisplayComponentResponse;
 
 export type ContainerComponentResponse = {
   type?: 1 | undefined;
   id: number;
   accentColor?: number | null | undefined;
   components: Array<
+    | FileComponentResponse
+    | SectionComponentResponse
+    | SeparatorComponentResponse
     | ActionRowComponentResponse
     | MediaGalleryComponentResponse
     | TextDisplayComponentResponse
-    | SectionComponentResponse
-    | SeparatorComponentResponse
-    | FileComponentResponse
   >;
   spoiler: boolean;
 };
@@ -73,22 +73,22 @@ export const ContainerComponentResponseComponents$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  FileComponentResponse$inboundSchema,
+  SectionComponentResponse$inboundSchema,
+  SeparatorComponentResponse$inboundSchema,
   ActionRowComponentResponse$inboundSchema,
   MediaGalleryComponentResponse$inboundSchema,
   TextDisplayComponentResponse$inboundSchema,
-  SectionComponentResponse$inboundSchema,
-  SeparatorComponentResponse$inboundSchema,
-  FileComponentResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type ContainerComponentResponseComponents$Outbound =
-  | ActionRowComponentResponse$Outbound
-  | MediaGalleryComponentResponse$Outbound
-  | TextDisplayComponentResponse$Outbound
+  | FileComponentResponse$Outbound
   | SectionComponentResponse$Outbound
   | SeparatorComponentResponse$Outbound
-  | FileComponentResponse$Outbound;
+  | ActionRowComponentResponse$Outbound
+  | MediaGalleryComponentResponse$Outbound
+  | TextDisplayComponentResponse$Outbound;
 
 /** @internal */
 export const ContainerComponentResponseComponents$outboundSchema: z.ZodType<
@@ -96,12 +96,12 @@ export const ContainerComponentResponseComponents$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ContainerComponentResponseComponents
 > = z.union([
+  FileComponentResponse$outboundSchema,
+  SectionComponentResponse$outboundSchema,
+  SeparatorComponentResponse$outboundSchema,
   ActionRowComponentResponse$outboundSchema,
   MediaGalleryComponentResponse$outboundSchema,
   TextDisplayComponentResponse$outboundSchema,
-  SectionComponentResponse$outboundSchema,
-  SeparatorComponentResponse$outboundSchema,
-  FileComponentResponse$outboundSchema,
 ]);
 
 /**
@@ -146,17 +146,17 @@ export const ContainerComponentResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
   id: z.number().int(),
   accent_color: z.nullable(z.number().int()).optional(),
   components: z.array(
     z.union([
+      FileComponentResponse$inboundSchema,
+      SectionComponentResponse$inboundSchema,
+      SeparatorComponentResponse$inboundSchema,
       ActionRowComponentResponse$inboundSchema,
       MediaGalleryComponentResponse$inboundSchema,
       TextDisplayComponentResponse$inboundSchema,
-      SectionComponentResponse$inboundSchema,
-      SeparatorComponentResponse$inboundSchema,
-      FileComponentResponse$inboundSchema,
     ]),
   ),
   spoiler: z.boolean(),
@@ -172,12 +172,12 @@ export type ContainerComponentResponse$Outbound = {
   id: number;
   accent_color?: number | null | undefined;
   components: Array<
+    | FileComponentResponse$Outbound
+    | SectionComponentResponse$Outbound
+    | SeparatorComponentResponse$Outbound
     | ActionRowComponentResponse$Outbound
     | MediaGalleryComponentResponse$Outbound
     | TextDisplayComponentResponse$Outbound
-    | SectionComponentResponse$Outbound
-    | SeparatorComponentResponse$Outbound
-    | FileComponentResponse$Outbound
   >;
   spoiler: boolean;
 };
@@ -193,12 +193,12 @@ export const ContainerComponentResponse$outboundSchema: z.ZodType<
   accentColor: z.nullable(z.number().int()).optional(),
   components: z.array(
     z.union([
+      FileComponentResponse$outboundSchema,
+      SectionComponentResponse$outboundSchema,
+      SeparatorComponentResponse$outboundSchema,
       ActionRowComponentResponse$outboundSchema,
       MediaGalleryComponentResponse$outboundSchema,
       TextDisplayComponentResponse$outboundSchema,
-      SectionComponentResponse$outboundSchema,
-      SeparatorComponentResponse$outboundSchema,
-      FileComponentResponse$outboundSchema,
     ]),
   ),
   spoiler: z.boolean(),

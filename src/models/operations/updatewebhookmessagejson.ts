@@ -23,6 +23,11 @@ export type UpdateWebhookMessageJsonRequest = {
     components.IncomingWebhookUpdateRequestPartial;
 };
 
+export type UpdateWebhookMessageJsonResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.MessageResponse;
+};
+
 /** @internal */
 export const UpdateWebhookMessageJsonSecurity$inboundSchema: z.ZodType<
   UpdateWebhookMessageJsonSecurity,
@@ -177,5 +182,74 @@ export function updateWebhookMessageJsonRequestFromJSON(
     jsonString,
     (x) => UpdateWebhookMessageJsonRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateWebhookMessageJsonRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateWebhookMessageJsonResponse$inboundSchema: z.ZodType<
+  UpdateWebhookMessageJsonResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.MessageResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateWebhookMessageJsonResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.MessageResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateWebhookMessageJsonResponse$outboundSchema: z.ZodType<
+  UpdateWebhookMessageJsonResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateWebhookMessageJsonResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.MessageResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateWebhookMessageJsonResponse$ {
+  /** @deprecated use `UpdateWebhookMessageJsonResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateWebhookMessageJsonResponse$inboundSchema;
+  /** @deprecated use `UpdateWebhookMessageJsonResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateWebhookMessageJsonResponse$outboundSchema;
+  /** @deprecated use `UpdateWebhookMessageJsonResponse$Outbound` instead. */
+  export type Outbound = UpdateWebhookMessageJsonResponse$Outbound;
+}
+
+export function updateWebhookMessageJsonResponseToJSON(
+  updateWebhookMessageJsonResponse: UpdateWebhookMessageJsonResponse,
+): string {
+  return JSON.stringify(
+    UpdateWebhookMessageJsonResponse$outboundSchema.parse(
+      updateWebhookMessageJsonResponse,
+    ),
+  );
+}
+
+export function updateWebhookMessageJsonResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateWebhookMessageJsonResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateWebhookMessageJsonResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateWebhookMessageJsonResponse' from JSON`,
   );
 }

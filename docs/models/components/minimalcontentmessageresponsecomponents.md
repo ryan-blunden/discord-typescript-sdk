@@ -8,6 +8,12 @@
 ```typescript
 const value: components.ActionRowComponentResponse = {
   id: 158862,
+  components: [
+    {
+      id: 142067,
+      customId: "<id>",
+    },
+  ],
 };
 ```
 
@@ -28,8 +34,8 @@ const value: components.FileComponentResponse = {
   id: 601142,
   file: {
     id: "<value>",
-    url: "https://actual-testimonial.com/",
-    proxyUrl: "https://poor-toothpick.org/",
+    url: "https://authentic-juggernaut.org",
+    proxyUrl: "https://each-vista.net",
   },
   spoiler: true,
 };

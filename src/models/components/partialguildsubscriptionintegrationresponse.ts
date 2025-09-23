@@ -17,7 +17,7 @@ export type PartialGuildSubscriptionIntegrationResponse = {
   id: string;
   type?: "discord" | undefined;
   name?: string | null | undefined;
-  account?: AccountResponse | null | undefined;
+  account: AccountResponse;
 };
 
 /** @internal */
@@ -28,9 +28,9 @@ export const PartialGuildSubscriptionIntegrationResponse$inboundSchema:
     unknown
   > = z.object({
     id: z.string(),
-    type: z.literal("discord").optional(),
+    type: z.literal("discord").default("discord").optional(),
     name: z.nullable(z.string()).optional(),
-    account: z.nullable(AccountResponse$inboundSchema).optional(),
+    account: AccountResponse$inboundSchema,
   });
 
 /** @internal */
@@ -38,7 +38,7 @@ export type PartialGuildSubscriptionIntegrationResponse$Outbound = {
   id: string;
   type: "discord";
   name?: string | null | undefined;
-  account?: AccountResponse$Outbound | null | undefined;
+  account: AccountResponse$Outbound;
 };
 
 /** @internal */
@@ -51,7 +51,7 @@ export const PartialGuildSubscriptionIntegrationResponse$outboundSchema:
     id: z.string(),
     type: z.literal("discord").default("discord" as const),
     name: z.nullable(z.string()).optional(),
-    account: z.nullable(AccountResponse$outboundSchema).optional(),
+    account: AccountResponse$outboundSchema,
   });
 
 /**

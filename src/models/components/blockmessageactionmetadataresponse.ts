@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BlockMessageActionMetadataResponse = {
-  customMessage?: string | null | undefined;
+  customMessage?: string | undefined;
 };
 
 /** @internal */
@@ -18,7 +18,7 @@ export const BlockMessageActionMetadataResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  custom_message: z.nullable(z.string()).optional(),
+  custom_message: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "custom_message": "customMessage",
@@ -27,7 +27,7 @@ export const BlockMessageActionMetadataResponse$inboundSchema: z.ZodType<
 
 /** @internal */
 export type BlockMessageActionMetadataResponse$Outbound = {
-  custom_message?: string | null | undefined;
+  custom_message?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const BlockMessageActionMetadataResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BlockMessageActionMetadataResponse
 > = z.object({
-  customMessage: z.nullable(z.string()).optional(),
+  customMessage: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     customMessage: "custom_message",

@@ -21,7 +21,7 @@ export const CreateTextThreadWithMessageRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  auto_archive_duration: z.nullable(z.literal(60)).optional(),
+  auto_archive_duration: z.nullable(z.literal(60).default(60)).optional(),
   rate_limit_per_user: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {

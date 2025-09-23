@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -12,8 +13,15 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * 200 response for create_dm
  */
 export type CreateDmResponseBody =
-  | components.PrivateChannelResponse
-  | components.PrivateGroupChannelResponse;
+  | components.PrivateGroupChannelResponse
+  | components.PrivateChannelResponse;
+
+export type CreateDmResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.PrivateGroupChannelResponse
+    | components.PrivateChannelResponse;
+};
 
 /** @internal */
 export const CreateDmResponseBody$inboundSchema: z.ZodType<
@@ -21,14 +29,14 @@ export const CreateDmResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.PrivateChannelResponse$inboundSchema,
   components.PrivateGroupChannelResponse$inboundSchema,
+  components.PrivateChannelResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type CreateDmResponseBody$Outbound =
-  | components.PrivateChannelResponse$Outbound
-  | components.PrivateGroupChannelResponse$Outbound;
+  | components.PrivateGroupChannelResponse$Outbound
+  | components.PrivateChannelResponse$Outbound;
 
 /** @internal */
 export const CreateDmResponseBody$outboundSchema: z.ZodType<
@@ -36,8 +44,8 @@ export const CreateDmResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateDmResponseBody
 > = z.union([
-  components.PrivateChannelResponse$outboundSchema,
   components.PrivateGroupChannelResponse$outboundSchema,
+  components.PrivateChannelResponse$outboundSchema,
 ]);
 
 /**
@@ -68,5 +76,80 @@ export function createDmResponseBodyFromJSON(
     jsonString,
     (x) => CreateDmResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateDmResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDmResponse$inboundSchema: z.ZodType<
+  CreateDmResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.PrivateGroupChannelResponse$inboundSchema,
+    components.PrivateChannelResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateDmResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.PrivateGroupChannelResponse$Outbound
+    | components.PrivateChannelResponse$Outbound;
+};
+
+/** @internal */
+export const CreateDmResponse$outboundSchema: z.ZodType<
+  CreateDmResponse$Outbound,
+  z.ZodTypeDef,
+  CreateDmResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.PrivateGroupChannelResponse$outboundSchema,
+    components.PrivateChannelResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDmResponse$ {
+  /** @deprecated use `CreateDmResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateDmResponse$inboundSchema;
+  /** @deprecated use `CreateDmResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateDmResponse$outboundSchema;
+  /** @deprecated use `CreateDmResponse$Outbound` instead. */
+  export type Outbound = CreateDmResponse$Outbound;
+}
+
+export function createDmResponseToJSON(
+  createDmResponse: CreateDmResponse,
+): string {
+  return JSON.stringify(
+    CreateDmResponse$outboundSchema.parse(createDmResponse),
+  );
+}
+
+export function createDmResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDmResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateDmResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDmResponse' from JSON`,
   );
 }

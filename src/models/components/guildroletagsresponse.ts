@@ -10,9 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GuildRoleTagsResponse = {
   premiumSubscriber?: any | null | undefined;
-  botId?: string | null | undefined;
-  integrationId?: string | null | undefined;
-  subscriptionListingId?: string | null | undefined;
+  botId?: string | undefined;
+  integrationId?: string | undefined;
+  subscriptionListingId?: string | undefined;
   availableForPurchase?: any | null | undefined;
   guildConnections?: any | null | undefined;
 };
@@ -24,9 +24,9 @@ export const GuildRoleTagsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   premium_subscriber: z.nullable(z.any()).optional(),
-  bot_id: z.nullable(z.string()).optional(),
-  integration_id: z.nullable(z.string()).optional(),
-  subscription_listing_id: z.nullable(z.string()).optional(),
+  bot_id: z.string().optional(),
+  integration_id: z.string().optional(),
+  subscription_listing_id: z.string().optional(),
   available_for_purchase: z.nullable(z.any()).optional(),
   guild_connections: z.nullable(z.any()).optional(),
 }).transform((v) => {
@@ -43,9 +43,9 @@ export const GuildRoleTagsResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type GuildRoleTagsResponse$Outbound = {
   premium_subscriber?: any | null | undefined;
-  bot_id?: string | null | undefined;
-  integration_id?: string | null | undefined;
-  subscription_listing_id?: string | null | undefined;
+  bot_id?: string | undefined;
+  integration_id?: string | undefined;
+  subscription_listing_id?: string | undefined;
   available_for_purchase?: any | null | undefined;
   guild_connections?: any | null | undefined;
 };
@@ -57,9 +57,9 @@ export const GuildRoleTagsResponse$outboundSchema: z.ZodType<
   GuildRoleTagsResponse
 > = z.object({
   premiumSubscriber: z.nullable(z.any()).optional(),
-  botId: z.nullable(z.string()).optional(),
-  integrationId: z.nullable(z.string()).optional(),
-  subscriptionListingId: z.nullable(z.string()).optional(),
+  botId: z.string().optional(),
+  integrationId: z.string().optional(),
+  subscriptionListingId: z.string().optional(),
   availableForPurchase: z.nullable(z.any()).optional(),
   guildConnections: z.nullable(z.any()).optional(),
 }).transform((v) => {

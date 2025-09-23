@@ -15,10 +15,7 @@ import {
 } from "./applicationoauth2installparamsresponse.js";
 
 export type ApplicationIntegrationTypeConfigurationResponse = {
-  oauth2InstallParams?:
-    | ApplicationOAuth2InstallParamsResponse
-    | null
-    | undefined;
+  oauth2InstallParams?: ApplicationOAuth2InstallParamsResponse | undefined;
 };
 
 /** @internal */
@@ -28,9 +25,8 @@ export const ApplicationIntegrationTypeConfigurationResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    oauth2_install_params: z.nullable(
-      ApplicationOAuth2InstallParamsResponse$inboundSchema,
-    ).optional(),
+    oauth2_install_params: ApplicationOAuth2InstallParamsResponse$inboundSchema
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "oauth2_install_params": "oauth2InstallParams",
@@ -41,7 +37,6 @@ export const ApplicationIntegrationTypeConfigurationResponse$inboundSchema:
 export type ApplicationIntegrationTypeConfigurationResponse$Outbound = {
   oauth2_install_params?:
     | ApplicationOAuth2InstallParamsResponse$Outbound
-    | null
     | undefined;
 };
 
@@ -52,9 +47,8 @@ export const ApplicationIntegrationTypeConfigurationResponse$outboundSchema:
     z.ZodTypeDef,
     ApplicationIntegrationTypeConfigurationResponse
   > = z.object({
-    oauth2InstallParams: z.nullable(
-      ApplicationOAuth2InstallParamsResponse$outboundSchema,
-    ).optional(),
+    oauth2InstallParams: ApplicationOAuth2InstallParamsResponse$outboundSchema
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       oauth2InstallParams: "oauth2_install_params",

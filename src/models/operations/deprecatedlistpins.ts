@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeprecatedListPinsRequest = {
   channelId: string;
+};
+
+export type DeprecatedListPinsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.MessageResponse>;
 };
 
 /** @internal */
@@ -71,5 +77,72 @@ export function deprecatedListPinsRequestFromJSON(
     jsonString,
     (x) => DeprecatedListPinsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeprecatedListPinsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeprecatedListPinsResponse$inboundSchema: z.ZodType<
+  DeprecatedListPinsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(components.MessageResponse$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type DeprecatedListPinsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<components.MessageResponse$Outbound>;
+};
+
+/** @internal */
+export const DeprecatedListPinsResponse$outboundSchema: z.ZodType<
+  DeprecatedListPinsResponse$Outbound,
+  z.ZodTypeDef,
+  DeprecatedListPinsResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(components.MessageResponse$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeprecatedListPinsResponse$ {
+  /** @deprecated use `DeprecatedListPinsResponse$inboundSchema` instead. */
+  export const inboundSchema = DeprecatedListPinsResponse$inboundSchema;
+  /** @deprecated use `DeprecatedListPinsResponse$outboundSchema` instead. */
+  export const outboundSchema = DeprecatedListPinsResponse$outboundSchema;
+  /** @deprecated use `DeprecatedListPinsResponse$Outbound` instead. */
+  export type Outbound = DeprecatedListPinsResponse$Outbound;
+}
+
+export function deprecatedListPinsResponseToJSON(
+  deprecatedListPinsResponse: DeprecatedListPinsResponse,
+): string {
+  return JSON.stringify(
+    DeprecatedListPinsResponse$outboundSchema.parse(deprecatedListPinsResponse),
+  );
+}
+
+export function deprecatedListPinsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeprecatedListPinsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeprecatedListPinsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeprecatedListPinsResponse' from JSON`,
   );
 }

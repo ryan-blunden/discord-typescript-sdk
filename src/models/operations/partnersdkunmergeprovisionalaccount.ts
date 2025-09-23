@@ -19,6 +19,10 @@ export type PartnerSDKUnmergeProvisionalAccountRequestBody = {
   externalAuthType?: "OIDC" | undefined;
 };
 
+export type PartnerSDKUnmergeProvisionalAccountResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const PartnerSDKUnmergeProvisionalAccountSecurity$inboundSchema:
   z.ZodType<
@@ -104,7 +108,7 @@ export const PartnerSDKUnmergeProvisionalAccountRequestBody$inboundSchema:
     client_id: z.string(),
     client_secret: z.nullable(z.string()).optional(),
     external_auth_token: z.string(),
-    external_auth_type: z.literal("OIDC").optional(),
+    external_auth_type: z.literal("OIDC").default("OIDC").optional(),
   }).transform((v) => {
     return remap$(v, {
       "client_id": "clientId",
@@ -182,5 +186,80 @@ export function partnerSDKUnmergeProvisionalAccountRequestBodyFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PartnerSDKUnmergeProvisionalAccountRequestBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const PartnerSDKUnmergeProvisionalAccountResponse$inboundSchema:
+  z.ZodType<
+    PartnerSDKUnmergeProvisionalAccountResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    Headers: z.record(z.array(z.string())),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+    });
+  });
+
+/** @internal */
+export type PartnerSDKUnmergeProvisionalAccountResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const PartnerSDKUnmergeProvisionalAccountResponse$outboundSchema:
+  z.ZodType<
+    PartnerSDKUnmergeProvisionalAccountResponse$Outbound,
+    z.ZodTypeDef,
+    PartnerSDKUnmergeProvisionalAccountResponse
+  > = z.object({
+    headers: z.record(z.array(z.string())),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PartnerSDKUnmergeProvisionalAccountResponse$ {
+  /** @deprecated use `PartnerSDKUnmergeProvisionalAccountResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PartnerSDKUnmergeProvisionalAccountResponse$inboundSchema;
+  /** @deprecated use `PartnerSDKUnmergeProvisionalAccountResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PartnerSDKUnmergeProvisionalAccountResponse$outboundSchema;
+  /** @deprecated use `PartnerSDKUnmergeProvisionalAccountResponse$Outbound` instead. */
+  export type Outbound = PartnerSDKUnmergeProvisionalAccountResponse$Outbound;
+}
+
+export function partnerSDKUnmergeProvisionalAccountResponseToJSON(
+  partnerSDKUnmergeProvisionalAccountResponse:
+    PartnerSDKUnmergeProvisionalAccountResponse,
+): string {
+  return JSON.stringify(
+    PartnerSDKUnmergeProvisionalAccountResponse$outboundSchema.parse(
+      partnerSDKUnmergeProvisionalAccountResponse,
+    ),
+  );
+}
+
+export function partnerSDKUnmergeProvisionalAccountResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PartnerSDKUnmergeProvisionalAccountResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PartnerSDKUnmergeProvisionalAccountResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PartnerSDKUnmergeProvisionalAccountResponse' from JSON`,
   );
 }

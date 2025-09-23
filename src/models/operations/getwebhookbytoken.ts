@@ -26,6 +26,14 @@ export type GetWebhookByTokenResponseBody =
   | components.ChannelFollowerWebhookResponse
   | components.GuildIncomingWebhookResponse;
 
+export type GetWebhookByTokenResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.ApplicationIncomingWebhookResponse
+    | components.ChannelFollowerWebhookResponse
+    | components.GuildIncomingWebhookResponse;
+};
+
 /** @internal */
 export const GetWebhookByTokenSecurity$inboundSchema: z.ZodType<
   GetWebhookByTokenSecurity,
@@ -213,5 +221,83 @@ export function getWebhookByTokenResponseBodyFromJSON(
     jsonString,
     (x) => GetWebhookByTokenResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetWebhookByTokenResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetWebhookByTokenResponse$inboundSchema: z.ZodType<
+  GetWebhookByTokenResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.ApplicationIncomingWebhookResponse$inboundSchema,
+    components.ChannelFollowerWebhookResponse$inboundSchema,
+    components.GuildIncomingWebhookResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetWebhookByTokenResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.ApplicationIncomingWebhookResponse$Outbound
+    | components.ChannelFollowerWebhookResponse$Outbound
+    | components.GuildIncomingWebhookResponse$Outbound;
+};
+
+/** @internal */
+export const GetWebhookByTokenResponse$outboundSchema: z.ZodType<
+  GetWebhookByTokenResponse$Outbound,
+  z.ZodTypeDef,
+  GetWebhookByTokenResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.ApplicationIncomingWebhookResponse$outboundSchema,
+    components.ChannelFollowerWebhookResponse$outboundSchema,
+    components.GuildIncomingWebhookResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetWebhookByTokenResponse$ {
+  /** @deprecated use `GetWebhookByTokenResponse$inboundSchema` instead. */
+  export const inboundSchema = GetWebhookByTokenResponse$inboundSchema;
+  /** @deprecated use `GetWebhookByTokenResponse$outboundSchema` instead. */
+  export const outboundSchema = GetWebhookByTokenResponse$outboundSchema;
+  /** @deprecated use `GetWebhookByTokenResponse$Outbound` instead. */
+  export type Outbound = GetWebhookByTokenResponse$Outbound;
+}
+
+export function getWebhookByTokenResponseToJSON(
+  getWebhookByTokenResponse: GetWebhookByTokenResponse,
+): string {
+  return JSON.stringify(
+    GetWebhookByTokenResponse$outboundSchema.parse(getWebhookByTokenResponse),
+  );
+}
+
+export function getWebhookByTokenResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWebhookByTokenResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWebhookByTokenResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWebhookByTokenResponse' from JSON`,
   );
 }

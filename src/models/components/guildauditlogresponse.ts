@@ -117,9 +117,9 @@ import {
 } from "./voicescheduledeventresponse.js";
 
 export type Integrations =
+  | PartialDiscordIntegrationResponse
   | PartialExternalConnectionIntegrationResponse
-  | PartialGuildSubscriptionIntegrationResponse
-  | PartialDiscordIntegrationResponse;
+  | PartialGuildSubscriptionIntegrationResponse;
 
 export type Webhooks =
   | ApplicationIncomingWebhookResponse
@@ -142,9 +142,9 @@ export type GuildAuditLogResponse = {
   auditLogEntries: Array<AuditLogEntryResponse>;
   users: Array<UserResponse>;
   integrations: Array<
+    | PartialDiscordIntegrationResponse
     | PartialExternalConnectionIntegrationResponse
     | PartialGuildSubscriptionIntegrationResponse
-    | PartialDiscordIntegrationResponse
   >;
   webhooks: Array<
     | ApplicationIncomingWebhookResponse
@@ -174,16 +174,16 @@ export const Integrations$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  PartialDiscordIntegrationResponse$inboundSchema,
   PartialExternalConnectionIntegrationResponse$inboundSchema,
   PartialGuildSubscriptionIntegrationResponse$inboundSchema,
-  PartialDiscordIntegrationResponse$inboundSchema,
 ]);
 
 /** @internal */
 export type Integrations$Outbound =
+  | PartialDiscordIntegrationResponse$Outbound
   | PartialExternalConnectionIntegrationResponse$Outbound
-  | PartialGuildSubscriptionIntegrationResponse$Outbound
-  | PartialDiscordIntegrationResponse$Outbound;
+  | PartialGuildSubscriptionIntegrationResponse$Outbound;
 
 /** @internal */
 export const Integrations$outboundSchema: z.ZodType<
@@ -191,9 +191,9 @@ export const Integrations$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Integrations
 > = z.union([
+  PartialDiscordIntegrationResponse$outboundSchema,
   PartialExternalConnectionIntegrationResponse$outboundSchema,
   PartialGuildSubscriptionIntegrationResponse$outboundSchema,
-  PartialDiscordIntegrationResponse$outboundSchema,
 ]);
 
 /**
@@ -412,9 +412,9 @@ export const GuildAuditLogResponse$inboundSchema: z.ZodType<
   users: z.array(UserResponse$inboundSchema),
   integrations: z.array(
     z.union([
+      PartialDiscordIntegrationResponse$inboundSchema,
       PartialExternalConnectionIntegrationResponse$inboundSchema,
       PartialGuildSubscriptionIntegrationResponse$inboundSchema,
-      PartialDiscordIntegrationResponse$inboundSchema,
     ]),
   ),
   webhooks: z.array(
@@ -458,9 +458,9 @@ export type GuildAuditLogResponse$Outbound = {
   audit_log_entries: Array<AuditLogEntryResponse$Outbound>;
   users: Array<UserResponse$Outbound>;
   integrations: Array<
+    | PartialDiscordIntegrationResponse$Outbound
     | PartialExternalConnectionIntegrationResponse$Outbound
     | PartialGuildSubscriptionIntegrationResponse$Outbound
-    | PartialDiscordIntegrationResponse$Outbound
   >;
   webhooks: Array<
     | ApplicationIncomingWebhookResponse$Outbound
@@ -494,9 +494,9 @@ export const GuildAuditLogResponse$outboundSchema: z.ZodType<
   users: z.array(UserResponse$outboundSchema),
   integrations: z.array(
     z.union([
+      PartialDiscordIntegrationResponse$outboundSchema,
       PartialExternalConnectionIntegrationResponse$outboundSchema,
       PartialGuildSubscriptionIntegrationResponse$outboundSchema,
-      PartialDiscordIntegrationResponse$outboundSchema,
     ]),
   ),
   webhooks: z.array(

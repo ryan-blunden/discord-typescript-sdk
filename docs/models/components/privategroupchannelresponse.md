@@ -8,16 +8,9 @@ import { PrivateGroupChannelResponse } from "@ryan.blunden/discord-sdk/models/co
 let value: PrivateGroupChannelResponse = {
   id: "<value>",
   type: 0,
-  flags: 29105,
-  recipients: [
-    {
-      id: "<value>",
-      username: "Bennie93",
-      discriminator: "<value>",
-      publicFlags: 175853,
-      flags: 411991,
-    },
-  ],
+  flags: 385842,
+  recipients: [],
+  ownerId: "<value>",
 };
 ```
 
@@ -33,6 +26,6 @@ let value: PrivateGroupChannelResponse = {
 | `recipients`                                                                                             | [components.UserResponse](../../models/components/userresponse.md)[]                                     | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `name`                                                                                                   | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
 | `icon`                                                                                                   | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
-| `ownerId`                                                                                                | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
+| `ownerId`                                                                                                | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `managed`                                                                                                | *boolean*                                                                                                | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
 | `applicationId`                                                                                          | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |

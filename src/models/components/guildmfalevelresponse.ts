@@ -17,7 +17,7 @@ export const GuildMFALevelResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  level: z.literal(0).optional(),
+  level: z.literal(0).default(0).optional(),
 });
 
 /** @internal */

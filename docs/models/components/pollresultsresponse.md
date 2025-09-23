@@ -6,7 +6,14 @@
 import { PollResultsResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: PollResultsResponse = {
-  isFinalized: false,
+  answerCounts: [
+    {
+      id: 664207,
+      count: 691381,
+      meVoted: false,
+    },
+  ],
+  isFinalized: true,
 };
 ```
 
@@ -14,5 +21,5 @@ let value: PollResultsResponse = {
 
 | Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
 | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `answerCounts`                                                                               | [components.PollResultsEntryResponse](../../models/components/pollresultsentryresponse.md)[] | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `answerCounts`                                                                               | [components.PollResultsEntryResponse](../../models/components/pollresultsentryresponse.md)[] | :heavy_check_mark:                                                                           | N/A                                                                                          |
 | `isFinalized`                                                                                | *boolean*                                                                                    | :heavy_check_mark:                                                                           | N/A                                                                                          |

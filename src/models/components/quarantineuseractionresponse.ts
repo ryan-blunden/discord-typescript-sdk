@@ -24,7 +24,7 @@ export const QuarantineUserActionResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
   metadata: QuarantineUserActionMetadataResponse$inboundSchema,
 });
 

@@ -12,6 +12,10 @@ export type DeleteStageInstanceRequest = {
   channelId: string;
 };
 
+export type DeleteStageInstanceResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteStageInstanceRequest$inboundSchema: z.ZodType<
   DeleteStageInstanceRequest,
@@ -71,5 +75,69 @@ export function deleteStageInstanceRequestFromJSON(
     jsonString,
     (x) => DeleteStageInstanceRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteStageInstanceRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteStageInstanceResponse$inboundSchema: z.ZodType<
+  DeleteStageInstanceResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteStageInstanceResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteStageInstanceResponse$outboundSchema: z.ZodType<
+  DeleteStageInstanceResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteStageInstanceResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteStageInstanceResponse$ {
+  /** @deprecated use `DeleteStageInstanceResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteStageInstanceResponse$inboundSchema;
+  /** @deprecated use `DeleteStageInstanceResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteStageInstanceResponse$outboundSchema;
+  /** @deprecated use `DeleteStageInstanceResponse$Outbound` instead. */
+  export type Outbound = DeleteStageInstanceResponse$Outbound;
+}
+
+export function deleteStageInstanceResponseToJSON(
+  deleteStageInstanceResponse: DeleteStageInstanceResponse,
+): string {
+  return JSON.stringify(
+    DeleteStageInstanceResponse$outboundSchema.parse(
+      deleteStageInstanceResponse,
+    ),
+  );
+}
+
+export function deleteStageInstanceResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteStageInstanceResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteStageInstanceResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteStageInstanceResponse' from JSON`,
   );
 }

@@ -22,7 +22,7 @@ export const MessageStickerItemResponse$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
-  format_type: z.literal(1).optional(),
+  format_type: z.literal(1).default(1).optional(),
 }).transform((v) => {
   return remap$(v, {
     "format_type": "formatType",

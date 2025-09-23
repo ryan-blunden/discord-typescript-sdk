@@ -28,7 +28,7 @@ export const FileComponentResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal(1).optional(),
+  type: z.literal(1).default(1).optional(),
   id: z.number().int(),
   file: UnfurledMediaResponse$inboundSchema,
   name: z.nullable(z.string()).optional(),

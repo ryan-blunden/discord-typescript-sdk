@@ -26,17 +26,17 @@ export type AttachmentResponse = {
   size: number;
   url: string;
   proxyUrl: string;
-  width?: number | null | undefined;
-  height?: number | null | undefined;
-  durationSecs?: number | null | undefined;
-  waveform?: string | null | undefined;
-  description?: string | null | undefined;
-  contentType?: string | null | undefined;
-  ephemeral?: boolean | null | undefined;
+  width?: number | undefined;
+  height?: number | undefined;
+  durationSecs?: number | undefined;
+  waveform?: string | undefined;
+  description?: string | undefined;
+  contentType?: string | undefined;
+  ephemeral?: boolean | undefined;
   title?: string | null | undefined;
-  application?: ApplicationResponse | null | undefined;
-  clipCreatedAt?: Date | null | undefined;
-  clipParticipants?: Array<UserResponse> | null | undefined;
+  application?: ApplicationResponse | undefined;
+  clipCreatedAt?: Date | undefined;
+  clipParticipants?: Array<UserResponse> | undefined;
 };
 
 /** @internal */
@@ -50,19 +50,19 @@ export const AttachmentResponse$inboundSchema: z.ZodType<
   size: z.number().int(),
   url: z.string(),
   proxy_url: z.string(),
-  width: z.nullable(z.number().int()).optional(),
-  height: z.nullable(z.number().int()).optional(),
-  duration_secs: z.nullable(z.number()).optional(),
-  waveform: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  content_type: z.nullable(z.string()).optional(),
-  ephemeral: z.nullable(z.boolean()).optional(),
+  width: z.number().int().optional(),
+  height: z.number().int().optional(),
+  duration_secs: z.number().optional(),
+  waveform: z.string().optional(),
+  description: z.string().optional(),
+  content_type: z.string().optional(),
+  ephemeral: z.boolean().optional(),
   title: z.nullable(z.string()).optional(),
-  application: z.nullable(ApplicationResponse$inboundSchema).optional(),
-  clip_created_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  application: ApplicationResponse$inboundSchema.optional(),
+  clip_created_at: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
   ).optional(),
-  clip_participants: z.nullable(z.array(UserResponse$inboundSchema)).optional(),
+  clip_participants: z.array(UserResponse$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "proxy_url": "proxyUrl",
@@ -80,17 +80,17 @@ export type AttachmentResponse$Outbound = {
   size: number;
   url: string;
   proxy_url: string;
-  width?: number | null | undefined;
-  height?: number | null | undefined;
-  duration_secs?: number | null | undefined;
-  waveform?: string | null | undefined;
-  description?: string | null | undefined;
-  content_type?: string | null | undefined;
-  ephemeral?: boolean | null | undefined;
+  width?: number | undefined;
+  height?: number | undefined;
+  duration_secs?: number | undefined;
+  waveform?: string | undefined;
+  description?: string | undefined;
+  content_type?: string | undefined;
+  ephemeral?: boolean | undefined;
   title?: string | null | undefined;
-  application?: ApplicationResponse$Outbound | null | undefined;
-  clip_created_at?: string | null | undefined;
-  clip_participants?: Array<UserResponse$Outbound> | null | undefined;
+  application?: ApplicationResponse$Outbound | undefined;
+  clip_created_at?: string | undefined;
+  clip_participants?: Array<UserResponse$Outbound> | undefined;
 };
 
 /** @internal */
@@ -104,18 +104,17 @@ export const AttachmentResponse$outboundSchema: z.ZodType<
   size: z.number().int(),
   url: z.string(),
   proxyUrl: z.string(),
-  width: z.nullable(z.number().int()).optional(),
-  height: z.nullable(z.number().int()).optional(),
-  durationSecs: z.nullable(z.number()).optional(),
-  waveform: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  contentType: z.nullable(z.string()).optional(),
-  ephemeral: z.nullable(z.boolean()).optional(),
+  width: z.number().int().optional(),
+  height: z.number().int().optional(),
+  durationSecs: z.number().optional(),
+  waveform: z.string().optional(),
+  description: z.string().optional(),
+  contentType: z.string().optional(),
+  ephemeral: z.boolean().optional(),
   title: z.nullable(z.string()).optional(),
-  application: z.nullable(ApplicationResponse$outboundSchema).optional(),
-  clipCreatedAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  clipParticipants: z.nullable(z.array(UserResponse$outboundSchema)).optional(),
+  application: ApplicationResponse$outboundSchema.optional(),
+  clipCreatedAt: z.date().transform(v => v.toISOString()).optional(),
+  clipParticipants: z.array(UserResponse$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     proxyUrl: "proxy_url",

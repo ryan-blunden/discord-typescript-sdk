@@ -16,9 +16,9 @@ import {
 export type StringSelectOptionResponse = {
   label: string;
   value: string;
-  description?: string | null | undefined;
-  emoji?: ComponentEmojiResponse | null | undefined;
-  default?: boolean | null | undefined;
+  description?: string | undefined;
+  emoji?: ComponentEmojiResponse | undefined;
+  default?: boolean | undefined;
 };
 
 /** @internal */
@@ -29,18 +29,18 @@ export const StringSelectOptionResponse$inboundSchema: z.ZodType<
 > = z.object({
   label: z.string(),
   value: z.string(),
-  description: z.nullable(z.string()).optional(),
-  emoji: z.nullable(ComponentEmojiResponse$inboundSchema).optional(),
-  default: z.nullable(z.boolean()).optional(),
+  description: z.string().optional(),
+  emoji: ComponentEmojiResponse$inboundSchema.optional(),
+  default: z.boolean().optional(),
 });
 
 /** @internal */
 export type StringSelectOptionResponse$Outbound = {
   label: string;
   value: string;
-  description?: string | null | undefined;
-  emoji?: ComponentEmojiResponse$Outbound | null | undefined;
-  default?: boolean | null | undefined;
+  description?: string | undefined;
+  emoji?: ComponentEmojiResponse$Outbound | undefined;
+  default?: boolean | undefined;
 };
 
 /** @internal */
@@ -51,9 +51,9 @@ export const StringSelectOptionResponse$outboundSchema: z.ZodType<
 > = z.object({
   label: z.string(),
   value: z.string(),
-  description: z.nullable(z.string()).optional(),
-  emoji: z.nullable(ComponentEmojiResponse$outboundSchema).optional(),
-  default: z.nullable(z.boolean()).optional(),
+  description: z.string().optional(),
+  emoji: ComponentEmojiResponse$outboundSchema.optional(),
+  default: z.boolean().optional(),
 });
 
 /**

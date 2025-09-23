@@ -18,6 +18,10 @@ export type DeleteOriginalWebhookMessageRequest = {
   threadId?: string | undefined;
 };
 
+export type DeleteOriginalWebhookMessageResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteOriginalWebhookMessageSecurity$inboundSchema: z.ZodType<
   DeleteOriginalWebhookMessageSecurity,
@@ -159,5 +163,72 @@ export function deleteOriginalWebhookMessageRequestFromJSON(
     (x) =>
       DeleteOriginalWebhookMessageRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteOriginalWebhookMessageRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteOriginalWebhookMessageResponse$inboundSchema: z.ZodType<
+  DeleteOriginalWebhookMessageResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteOriginalWebhookMessageResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteOriginalWebhookMessageResponse$outboundSchema: z.ZodType<
+  DeleteOriginalWebhookMessageResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteOriginalWebhookMessageResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteOriginalWebhookMessageResponse$ {
+  /** @deprecated use `DeleteOriginalWebhookMessageResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteOriginalWebhookMessageResponse$inboundSchema;
+  /** @deprecated use `DeleteOriginalWebhookMessageResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteOriginalWebhookMessageResponse$outboundSchema;
+  /** @deprecated use `DeleteOriginalWebhookMessageResponse$Outbound` instead. */
+  export type Outbound = DeleteOriginalWebhookMessageResponse$Outbound;
+}
+
+export function deleteOriginalWebhookMessageResponseToJSON(
+  deleteOriginalWebhookMessageResponse: DeleteOriginalWebhookMessageResponse,
+): string {
+  return JSON.stringify(
+    DeleteOriginalWebhookMessageResponse$outboundSchema.parse(
+      deleteOriginalWebhookMessageResponse,
+    ),
+  );
+}
+
+export function deleteOriginalWebhookMessageResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteOriginalWebhookMessageResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteOriginalWebhookMessageResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteOriginalWebhookMessageResponse' from JSON`,
   );
 }

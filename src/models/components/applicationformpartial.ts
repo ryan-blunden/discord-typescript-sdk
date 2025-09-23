@@ -110,9 +110,9 @@ export const ApplicationFormPartial$inboundSchema: z.ZodType<
   team_id: z.nullable(z.string()).optional(),
   flags: z.nullable(z.number().int()).optional(),
   interactions_endpoint_url: z.nullable(z.string()).optional(),
-  explicit_content_filter: z.nullable(z.literal(0)).optional(),
+  explicit_content_filter: z.nullable(z.literal(0).default(0)).optional(),
   max_participants: z.nullable(z.number().int()).optional(),
-  type: z.nullable(z.literal(4)).optional(),
+  type: z.nullable(z.literal(4).default(4)).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
   custom_install_url: z.nullable(z.string()).optional(),
   install_params: z.nullable(ApplicationOAuth2InstallParams$inboundSchema)

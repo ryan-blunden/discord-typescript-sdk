@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListGuildTemplatesRequest = {
   guildId: string;
+};
+
+export type ListGuildTemplatesResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.GuildTemplateResponse>;
 };
 
 /** @internal */
@@ -71,5 +77,72 @@ export function listGuildTemplatesRequestFromJSON(
     jsonString,
     (x) => ListGuildTemplatesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListGuildTemplatesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListGuildTemplatesResponse$inboundSchema: z.ZodType<
+  ListGuildTemplatesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(components.GuildTemplateResponse$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListGuildTemplatesResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<components.GuildTemplateResponse$Outbound>;
+};
+
+/** @internal */
+export const ListGuildTemplatesResponse$outboundSchema: z.ZodType<
+  ListGuildTemplatesResponse$Outbound,
+  z.ZodTypeDef,
+  ListGuildTemplatesResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(components.GuildTemplateResponse$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListGuildTemplatesResponse$ {
+  /** @deprecated use `ListGuildTemplatesResponse$inboundSchema` instead. */
+  export const inboundSchema = ListGuildTemplatesResponse$inboundSchema;
+  /** @deprecated use `ListGuildTemplatesResponse$outboundSchema` instead. */
+  export const outboundSchema = ListGuildTemplatesResponse$outboundSchema;
+  /** @deprecated use `ListGuildTemplatesResponse$Outbound` instead. */
+  export type Outbound = ListGuildTemplatesResponse$Outbound;
+}
+
+export function listGuildTemplatesResponseToJSON(
+  listGuildTemplatesResponse: ListGuildTemplatesResponse,
+): string {
+  return JSON.stringify(
+    ListGuildTemplatesResponse$outboundSchema.parse(listGuildTemplatesResponse),
+  );
+}
+
+export function listGuildTemplatesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildTemplatesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildTemplatesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildTemplatesResponse' from JSON`,
   );
 }

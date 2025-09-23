@@ -14,6 +14,10 @@ export type AddMyMessageReactionRequest = {
   emojiName: string;
 };
 
+export type AddMyMessageReactionResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const AddMyMessageReactionRequest$inboundSchema: z.ZodType<
   AddMyMessageReactionRequest,
@@ -85,5 +89,69 @@ export function addMyMessageReactionRequestFromJSON(
     jsonString,
     (x) => AddMyMessageReactionRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'AddMyMessageReactionRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const AddMyMessageReactionResponse$inboundSchema: z.ZodType<
+  AddMyMessageReactionResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type AddMyMessageReactionResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const AddMyMessageReactionResponse$outboundSchema: z.ZodType<
+  AddMyMessageReactionResponse$Outbound,
+  z.ZodTypeDef,
+  AddMyMessageReactionResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AddMyMessageReactionResponse$ {
+  /** @deprecated use `AddMyMessageReactionResponse$inboundSchema` instead. */
+  export const inboundSchema = AddMyMessageReactionResponse$inboundSchema;
+  /** @deprecated use `AddMyMessageReactionResponse$outboundSchema` instead. */
+  export const outboundSchema = AddMyMessageReactionResponse$outboundSchema;
+  /** @deprecated use `AddMyMessageReactionResponse$Outbound` instead. */
+  export type Outbound = AddMyMessageReactionResponse$Outbound;
+}
+
+export function addMyMessageReactionResponseToJSON(
+  addMyMessageReactionResponse: AddMyMessageReactionResponse,
+): string {
+  return JSON.stringify(
+    AddMyMessageReactionResponse$outboundSchema.parse(
+      addMyMessageReactionResponse,
+    ),
+  );
+}
+
+export function addMyMessageReactionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<AddMyMessageReactionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddMyMessageReactionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddMyMessageReactionResponse' from JSON`,
   );
 }

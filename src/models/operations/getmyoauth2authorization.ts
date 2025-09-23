@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetMyOauth2AuthorizationSecurity = {
   botToken?: string | undefined;
+};
+
+export type GetMyOauth2AuthorizationResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.OAuth2GetAuthorizationResponse;
 };
 
 /** @internal */
@@ -73,5 +79,74 @@ export function getMyOauth2AuthorizationSecurityFromJSON(
     jsonString,
     (x) => GetMyOauth2AuthorizationSecurity$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetMyOauth2AuthorizationSecurity' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetMyOauth2AuthorizationResponse$inboundSchema: z.ZodType<
+  GetMyOauth2AuthorizationResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.OAuth2GetAuthorizationResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetMyOauth2AuthorizationResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.OAuth2GetAuthorizationResponse$Outbound;
+};
+
+/** @internal */
+export const GetMyOauth2AuthorizationResponse$outboundSchema: z.ZodType<
+  GetMyOauth2AuthorizationResponse$Outbound,
+  z.ZodTypeDef,
+  GetMyOauth2AuthorizationResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.OAuth2GetAuthorizationResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetMyOauth2AuthorizationResponse$ {
+  /** @deprecated use `GetMyOauth2AuthorizationResponse$inboundSchema` instead. */
+  export const inboundSchema = GetMyOauth2AuthorizationResponse$inboundSchema;
+  /** @deprecated use `GetMyOauth2AuthorizationResponse$outboundSchema` instead. */
+  export const outboundSchema = GetMyOauth2AuthorizationResponse$outboundSchema;
+  /** @deprecated use `GetMyOauth2AuthorizationResponse$Outbound` instead. */
+  export type Outbound = GetMyOauth2AuthorizationResponse$Outbound;
+}
+
+export function getMyOauth2AuthorizationResponseToJSON(
+  getMyOauth2AuthorizationResponse: GetMyOauth2AuthorizationResponse,
+): string {
+  return JSON.stringify(
+    GetMyOauth2AuthorizationResponse$outboundSchema.parse(
+      getMyOauth2AuthorizationResponse,
+    ),
+  );
+}
+
+export function getMyOauth2AuthorizationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetMyOauth2AuthorizationResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetMyOauth2AuthorizationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetMyOauth2AuthorizationResponse' from JSON`,
   );
 }
