@@ -78,14 +78,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildStickerResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildStickersResponse](../../models/operations/listguildstickersresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createGuildSticker
 
@@ -161,14 +162,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildStickerResponse](../../models/components/guildstickerresponse.md)\>**
+**Promise\<[operations.CreateGuildStickerResponse](../../models/operations/createguildstickerresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGuildSticker
 
@@ -236,14 +238,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildStickerResponse](../../models/components/guildstickerresponse.md)\>**
+**Promise\<[operations.GetGuildStickerResponse](../../models/operations/getguildstickerresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteGuildSticker
 
@@ -259,12 +262,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.stickers.deleteGuildSticker({
+  const result = await discord.stickers.deleteGuildSticker({
     guildId: "<value>",
     stickerId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -291,7 +294,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("stickersDeleteGuildSticker failed:", res.error);
   }
@@ -311,14 +314,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildStickerResponse](../../models/operations/deleteguildstickerresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateGuildSticker
 
@@ -388,14 +392,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildStickerResponse](../../models/components/guildstickerresponse.md)\>**
+**Promise\<[operations.UpdateGuildStickerResponse](../../models/operations/updateguildstickerresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listPacks
 
@@ -453,14 +458,15 @@ run();
 
 ### Response
 
-**Promise\<[components.StickerPackCollectionResponse](../../models/components/stickerpackcollectionresponse.md)\>**
+**Promise\<[operations.ListStickerPacksResponse](../../models/operations/liststickerpacksresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getPack
 
@@ -526,14 +532,15 @@ run();
 
 ### Response
 
-**Promise\<[components.StickerPackResponse](../../models/components/stickerpackresponse.md)\>**
+**Promise\<[operations.GetStickerPackResponse](../../models/operations/getstickerpackresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -599,11 +606,12 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetStickerResponseBody](../../models/operations/getstickerresponsebody.md)\>**
+**Promise\<[operations.GetStickerResponse](../../models/operations/getstickerresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

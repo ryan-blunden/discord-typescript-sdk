@@ -18,6 +18,15 @@ export type GetGuildWebhooksResponseBody =
   | components.ChannelFollowerWebhookResponse
   | components.GuildIncomingWebhookResponse;
 
+export type GetGuildWebhooksResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<
+    | components.ApplicationIncomingWebhookResponse
+    | components.ChannelFollowerWebhookResponse
+    | components.GuildIncomingWebhookResponse
+  >;
+};
+
 /** @internal */
 export const GetGuildWebhooksRequest$inboundSchema: z.ZodType<
   GetGuildWebhooksRequest,
@@ -138,5 +147,88 @@ export function getGuildWebhooksResponseBodyFromJSON(
     jsonString,
     (x) => GetGuildWebhooksResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGuildWebhooksResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildWebhooksResponse$inboundSchema: z.ZodType<
+  GetGuildWebhooksResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(
+    z.union([
+      components.ApplicationIncomingWebhookResponse$inboundSchema,
+      components.ChannelFollowerWebhookResponse$inboundSchema,
+      components.GuildIncomingWebhookResponse$inboundSchema,
+    ]),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGuildWebhooksResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<
+    | components.ApplicationIncomingWebhookResponse$Outbound
+    | components.ChannelFollowerWebhookResponse$Outbound
+    | components.GuildIncomingWebhookResponse$Outbound
+  >;
+};
+
+/** @internal */
+export const GetGuildWebhooksResponse$outboundSchema: z.ZodType<
+  GetGuildWebhooksResponse$Outbound,
+  z.ZodTypeDef,
+  GetGuildWebhooksResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(
+    z.union([
+      components.ApplicationIncomingWebhookResponse$outboundSchema,
+      components.ChannelFollowerWebhookResponse$outboundSchema,
+      components.GuildIncomingWebhookResponse$outboundSchema,
+    ]),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildWebhooksResponse$ {
+  /** @deprecated use `GetGuildWebhooksResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGuildWebhooksResponse$inboundSchema;
+  /** @deprecated use `GetGuildWebhooksResponse$outboundSchema` instead. */
+  export const outboundSchema = GetGuildWebhooksResponse$outboundSchema;
+  /** @deprecated use `GetGuildWebhooksResponse$Outbound` instead. */
+  export type Outbound = GetGuildWebhooksResponse$Outbound;
+}
+
+export function getGuildWebhooksResponseToJSON(
+  getGuildWebhooksResponse: GetGuildWebhooksResponse,
+): string {
+  return JSON.stringify(
+    GetGuildWebhooksResponse$outboundSchema.parse(getGuildWebhooksResponse),
+  );
+}
+
+export function getGuildWebhooksResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildWebhooksResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildWebhooksResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildWebhooksResponse' from JSON`,
   );
 }

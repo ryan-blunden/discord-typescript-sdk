@@ -75,14 +75,15 @@ run();
 
 ### Response
 
-**Promise\<[components.VoiceStateResponse](../../models/components/voicestateresponse.md)\>**
+**Promise\<[operations.GetSelfVoiceStateResponse](../../models/operations/getselfvoicestateresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateCurrentUserState
 
@@ -98,12 +99,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.voice.updateCurrentUserState({
+  const result = await discord.voice.updateCurrentUserState({
     guildId: "<value>",
-    requestBody: {},
+    updateSelfVoiceStateRequestPartial: {},
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -126,11 +127,11 @@ const discord = new DiscordCore({
 async function run() {
   const res = await voiceUpdateCurrentUserState(discord, {
     guildId: "<value>",
-    requestBody: {},
+    updateSelfVoiceStateRequestPartial: {},
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("voiceUpdateCurrentUserState failed:", res.error);
   }
@@ -150,14 +151,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.UpdateSelfVoiceStateResponse](../../models/operations/updateselfvoicestateresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getUserState
 
@@ -225,14 +227,15 @@ run();
 
 ### Response
 
-**Promise\<[components.VoiceStateResponse](../../models/components/voicestateresponse.md)\>**
+**Promise\<[operations.GetVoiceStateResponse](../../models/operations/getvoicestateresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateUserState
 
@@ -248,13 +251,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.voice.updateUserState({
+  const result = await discord.voice.updateUserState({
     guildId: "<value>",
     userId: "<value>",
-    requestBody: {},
+    updateVoiceStateRequestPartial: {},
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -278,11 +281,11 @@ async function run() {
   const res = await voiceUpdateUserState(discord, {
     guildId: "<value>",
     userId: "<value>",
-    requestBody: {},
+    updateVoiceStateRequestPartial: {},
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("voiceUpdateUserState failed:", res.error);
   }
@@ -302,14 +305,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.UpdateVoiceStateResponse](../../models/operations/updatevoicestateresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listRegions
 
@@ -370,11 +374,12 @@ run();
 
 ### Response
 
-**Promise\<[components.VoiceRegionResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListVoiceRegionsResponse](../../models/operations/listvoiceregionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

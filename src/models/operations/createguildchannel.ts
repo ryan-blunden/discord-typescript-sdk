@@ -14,6 +14,11 @@ export type CreateGuildChannelRequest = {
   createGuildChannelRequest: components.CreateGuildChannelRequest;
 };
 
+export type CreateGuildChannelResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildChannelResponse;
+};
+
 /** @internal */
 export const CreateGuildChannelRequest$inboundSchema: z.ZodType<
   CreateGuildChannelRequest,
@@ -79,5 +84,72 @@ export function createGuildChannelRequestFromJSON(
     jsonString,
     (x) => CreateGuildChannelRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateGuildChannelRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateGuildChannelResponse$inboundSchema: z.ZodType<
+  CreateGuildChannelResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildChannelResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateGuildChannelResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildChannelResponse$Outbound;
+};
+
+/** @internal */
+export const CreateGuildChannelResponse$outboundSchema: z.ZodType<
+  CreateGuildChannelResponse$Outbound,
+  z.ZodTypeDef,
+  CreateGuildChannelResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildChannelResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateGuildChannelResponse$ {
+  /** @deprecated use `CreateGuildChannelResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateGuildChannelResponse$inboundSchema;
+  /** @deprecated use `CreateGuildChannelResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateGuildChannelResponse$outboundSchema;
+  /** @deprecated use `CreateGuildChannelResponse$Outbound` instead. */
+  export type Outbound = CreateGuildChannelResponse$Outbound;
+}
+
+export function createGuildChannelResponseToJSON(
+  createGuildChannelResponse: CreateGuildChannelResponse,
+): string {
+  return JSON.stringify(
+    CreateGuildChannelResponse$outboundSchema.parse(createGuildChannelResponse),
+  );
+}
+
+export function createGuildChannelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildChannelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildChannelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildChannelResponse' from JSON`,
   );
 }

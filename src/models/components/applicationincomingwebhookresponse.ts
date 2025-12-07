@@ -22,7 +22,7 @@ export type ApplicationIncomingWebhookResponse = {
   id: string;
   name: string;
   type?: 1 | undefined;
-  user?: UserResponse | null | undefined;
+  user?: UserResponse | undefined;
 };
 
 /** @internal */
@@ -38,7 +38,7 @@ export const ApplicationIncomingWebhookResponse$inboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   type: z.literal(1).optional(),
-  user: z.nullable(UserResponse$inboundSchema).optional(),
+  user: UserResponse$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "application_id": "applicationId",
@@ -56,7 +56,7 @@ export type ApplicationIncomingWebhookResponse$Outbound = {
   id: string;
   name: string;
   type: 1;
-  user?: UserResponse$Outbound | null | undefined;
+  user?: UserResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -72,7 +72,7 @@ export const ApplicationIncomingWebhookResponse$outboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   type: z.literal(1).default(1 as const),
-  user: z.nullable(UserResponse$outboundSchema).optional(),
+  user: UserResponse$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     applicationId: "application_id",

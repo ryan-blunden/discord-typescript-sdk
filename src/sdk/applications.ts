@@ -27,7 +27,7 @@ export class Applications extends ClientSDK {
    */
   async getMe(
     options?: RequestOptions,
-  ): Promise<components.PrivateApplicationResponse> {
+  ): Promise<operations.GetMyApplicationResponse> {
     return unwrapAsync(applicationsGetMe(
       this,
       options,
@@ -40,7 +40,7 @@ export class Applications extends ClientSDK {
   async updateSelf(
     request: components.ApplicationFormPartial,
     options?: RequestOptions,
-  ): Promise<components.PrivateApplicationResponse> {
+  ): Promise<operations.UpdateMyApplicationResponse> {
     return unwrapAsync(applicationsUpdateSelf(
       this,
       request,
@@ -54,7 +54,7 @@ export class Applications extends ClientSDK {
   async get(
     request: operations.GetApplicationRequest,
     options?: RequestOptions,
-  ): Promise<components.PrivateApplicationResponse> {
+  ): Promise<operations.GetApplicationResponse> {
     return unwrapAsync(applicationsGet(
       this,
       request,
@@ -68,7 +68,7 @@ export class Applications extends ClientSDK {
   async update(
     request: operations.UpdateApplicationRequest,
     options?: RequestOptions,
-  ): Promise<components.PrivateApplicationResponse> {
+  ): Promise<operations.UpdateApplicationResponse> {
     return unwrapAsync(applicationsUpdate(
       this,
       request,
@@ -82,7 +82,7 @@ export class Applications extends ClientSDK {
   async getActivityInstance(
     request: operations.ApplicationsGetActivityInstanceRequest,
     options?: RequestOptions,
-  ): Promise<components.EmbeddedActivityInstance> {
+  ): Promise<operations.ApplicationsGetActivityInstanceResponse> {
     return unwrapAsync(applicationsGetActivityInstance(
       this,
       request,
@@ -97,7 +97,7 @@ export class Applications extends ClientSDK {
     security: operations.UploadApplicationAttachmentSecurity,
     request: operations.UploadApplicationAttachmentRequest,
     options?: RequestOptions,
-  ): Promise<components.ActivitiesAttachmentResponse> {
+  ): Promise<operations.UploadApplicationAttachmentResponse> {
     return unwrapAsync(applicationsUploadAttachment(
       this,
       security,
@@ -112,7 +112,7 @@ export class Applications extends ClientSDK {
   async getGateway(
     security?: operations.GetGatewaySecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.GatewayResponse> {
+  ): Promise<operations.GetGatewayResponse> {
     return unwrapAsync(applicationsGetGateway(
       this,
       security,
@@ -125,7 +125,7 @@ export class Applications extends ClientSDK {
    */
   async getBotGateway(
     options?: RequestOptions,
-  ): Promise<components.GatewayBotResponse> {
+  ): Promise<operations.GetBotGatewayResponse> {
     return unwrapAsync(applicationsGetBotGateway(
       this,
       options,
@@ -138,7 +138,7 @@ export class Applications extends ClientSDK {
   async getOAuth2Authorization(
     security: operations.GetMyOauth2AuthorizationSecurity,
     options?: RequestOptions,
-  ): Promise<components.OAuth2GetAuthorizationResponse> {
+  ): Promise<operations.GetMyOauth2AuthorizationResponse> {
     return unwrapAsync(applicationsGetOAuth2Authorization(
       this,
       security,
@@ -151,7 +151,7 @@ export class Applications extends ClientSDK {
    */
   async getOAuth2Me(
     options?: RequestOptions,
-  ): Promise<components.PrivateApplicationResponse> {
+  ): Promise<operations.GetMyOauth2ApplicationResponse> {
     return unwrapAsync(applicationsGetOAuth2Me(
       this,
       options,
@@ -164,7 +164,7 @@ export class Applications extends ClientSDK {
   async getPublicKeys(
     security?: operations.GetPublicKeysSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.OAuth2GetKeys> {
+  ): Promise<operations.GetPublicKeysResponse> {
     return unwrapAsync(applicationsGetPublicKeys(
       this,
       security,
@@ -178,7 +178,7 @@ export class Applications extends ClientSDK {
   async getOpenIDConnectUserInfo(
     security: operations.GetOpenidConnectUserinfoSecurity,
     options?: RequestOptions,
-  ): Promise<components.OAuth2GetOpenIDConnectUserInfoResponse> {
+  ): Promise<operations.GetOpenidConnectUserinfoResponse> {
     return unwrapAsync(applicationsGetOpenIDConnectUserInfo(
       this,
       security,
@@ -195,7 +195,9 @@ export class Applications extends ClientSDK {
       | operations.PartnerSDKUnmergeProvisionalAccountSecurity
       | undefined,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<
+    operations.PartnerSDKUnmergeProvisionalAccountResponse | undefined
+  > {
     return unwrapAsync(applicationsPartnerSDKUnmergeProvisionalAccount(
       this,
       request,
@@ -211,7 +213,7 @@ export class Applications extends ClientSDK {
     request: operations.PartnerSDKTokenRequestBody,
     security?: operations.PartnerSDKTokenSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.ProvisionalTokenResponse> {
+  ): Promise<operations.PartnerSDKTokenResponse> {
     return unwrapAsync(applicationsPartnerSDKToken(
       this,
       request,

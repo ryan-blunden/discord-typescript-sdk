@@ -14,6 +14,10 @@ export type SendSoundboardSoundRequest = {
   soundboardSoundSendRequest: components.SoundboardSoundSendRequest;
 };
 
+export type SendSoundboardSoundResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const SendSoundboardSoundRequest$inboundSchema: z.ZodType<
   SendSoundboardSoundRequest,
@@ -80,5 +84,69 @@ export function sendSoundboardSoundRequestFromJSON(
     jsonString,
     (x) => SendSoundboardSoundRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'SendSoundboardSoundRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const SendSoundboardSoundResponse$inboundSchema: z.ZodType<
+  SendSoundboardSoundResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type SendSoundboardSoundResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const SendSoundboardSoundResponse$outboundSchema: z.ZodType<
+  SendSoundboardSoundResponse$Outbound,
+  z.ZodTypeDef,
+  SendSoundboardSoundResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SendSoundboardSoundResponse$ {
+  /** @deprecated use `SendSoundboardSoundResponse$inboundSchema` instead. */
+  export const inboundSchema = SendSoundboardSoundResponse$inboundSchema;
+  /** @deprecated use `SendSoundboardSoundResponse$outboundSchema` instead. */
+  export const outboundSchema = SendSoundboardSoundResponse$outboundSchema;
+  /** @deprecated use `SendSoundboardSoundResponse$Outbound` instead. */
+  export type Outbound = SendSoundboardSoundResponse$Outbound;
+}
+
+export function sendSoundboardSoundResponseToJSON(
+  sendSoundboardSoundResponse: SendSoundboardSoundResponse,
+): string {
+  return JSON.stringify(
+    SendSoundboardSoundResponse$outboundSchema.parse(
+      sendSoundboardSoundResponse,
+    ),
+  );
+}
+
+export function sendSoundboardSoundResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<SendSoundboardSoundResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SendSoundboardSoundResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SendSoundboardSoundResponse' from JSON`,
   );
 }

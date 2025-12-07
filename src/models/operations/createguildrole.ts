@@ -6,102 +6,18 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type CreateGuildRoleRequestBody = {
-  name?: string | null | undefined;
-  permissions?: number | null | undefined;
-  color?: number | null | undefined;
-  hoist?: boolean | null | undefined;
-  mentionable?: boolean | null | undefined;
-  icon?: string | null | undefined;
-  unicodeEmoji?: string | null | undefined;
-};
 
 export type CreateGuildRoleRequest = {
   guildId: string;
-  requestBody: CreateGuildRoleRequestBody;
+  createRoleRequest: components.CreateRoleRequest;
 };
 
-/** @internal */
-export const CreateGuildRoleRequestBody$inboundSchema: z.ZodType<
-  CreateGuildRoleRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  permissions: z.nullable(z.number().int()).optional(),
-  color: z.nullable(z.number().int()).optional(),
-  hoist: z.nullable(z.boolean()).optional(),
-  mentionable: z.nullable(z.boolean()).optional(),
-  icon: z.nullable(z.string()).optional(),
-  unicode_emoji: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "unicode_emoji": "unicodeEmoji",
-  });
-});
-
-/** @internal */
-export type CreateGuildRoleRequestBody$Outbound = {
-  name?: string | null | undefined;
-  permissions?: number | null | undefined;
-  color?: number | null | undefined;
-  hoist?: boolean | null | undefined;
-  mentionable?: boolean | null | undefined;
-  icon?: string | null | undefined;
-  unicode_emoji?: string | null | undefined;
+export type CreateGuildRoleResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildRoleResponse;
 };
-
-/** @internal */
-export const CreateGuildRoleRequestBody$outboundSchema: z.ZodType<
-  CreateGuildRoleRequestBody$Outbound,
-  z.ZodTypeDef,
-  CreateGuildRoleRequestBody
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  permissions: z.nullable(z.number().int()).optional(),
-  color: z.nullable(z.number().int()).optional(),
-  hoist: z.nullable(z.boolean()).optional(),
-  mentionable: z.nullable(z.boolean()).optional(),
-  icon: z.nullable(z.string()).optional(),
-  unicodeEmoji: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    unicodeEmoji: "unicode_emoji",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateGuildRoleRequestBody$ {
-  /** @deprecated use `CreateGuildRoleRequestBody$inboundSchema` instead. */
-  export const inboundSchema = CreateGuildRoleRequestBody$inboundSchema;
-  /** @deprecated use `CreateGuildRoleRequestBody$outboundSchema` instead. */
-  export const outboundSchema = CreateGuildRoleRequestBody$outboundSchema;
-  /** @deprecated use `CreateGuildRoleRequestBody$Outbound` instead. */
-  export type Outbound = CreateGuildRoleRequestBody$Outbound;
-}
-
-export function createGuildRoleRequestBodyToJSON(
-  createGuildRoleRequestBody: CreateGuildRoleRequestBody,
-): string {
-  return JSON.stringify(
-    CreateGuildRoleRequestBody$outboundSchema.parse(createGuildRoleRequestBody),
-  );
-}
-
-export function createGuildRoleRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateGuildRoleRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateGuildRoleRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateGuildRoleRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateGuildRoleRequest$inboundSchema: z.ZodType<
@@ -110,18 +26,18 @@ export const CreateGuildRoleRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   guild_id: z.string(),
-  RequestBody: z.lazy(() => CreateGuildRoleRequestBody$inboundSchema),
+  CreateRoleRequest: components.CreateRoleRequest$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",
-    "RequestBody": "requestBody",
+    "CreateRoleRequest": "createRoleRequest",
   });
 });
 
 /** @internal */
 export type CreateGuildRoleRequest$Outbound = {
   guild_id: string;
-  RequestBody: CreateGuildRoleRequestBody$Outbound;
+  CreateRoleRequest: components.CreateRoleRequest$Outbound;
 };
 
 /** @internal */
@@ -131,11 +47,11 @@ export const CreateGuildRoleRequest$outboundSchema: z.ZodType<
   CreateGuildRoleRequest
 > = z.object({
   guildId: z.string(),
-  requestBody: z.lazy(() => CreateGuildRoleRequestBody$outboundSchema),
+  createRoleRequest: components.CreateRoleRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     guildId: "guild_id",
-    requestBody: "RequestBody",
+    createRoleRequest: "CreateRoleRequest",
   });
 });
 
@@ -167,5 +83,72 @@ export function createGuildRoleRequestFromJSON(
     jsonString,
     (x) => CreateGuildRoleRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateGuildRoleRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateGuildRoleResponse$inboundSchema: z.ZodType<
+  CreateGuildRoleResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildRoleResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateGuildRoleResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildRoleResponse$Outbound;
+};
+
+/** @internal */
+export const CreateGuildRoleResponse$outboundSchema: z.ZodType<
+  CreateGuildRoleResponse$Outbound,
+  z.ZodTypeDef,
+  CreateGuildRoleResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildRoleResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateGuildRoleResponse$ {
+  /** @deprecated use `CreateGuildRoleResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateGuildRoleResponse$inboundSchema;
+  /** @deprecated use `CreateGuildRoleResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateGuildRoleResponse$outboundSchema;
+  /** @deprecated use `CreateGuildRoleResponse$Outbound` instead. */
+  export type Outbound = CreateGuildRoleResponse$Outbound;
+}
+
+export function createGuildRoleResponseToJSON(
+  createGuildRoleResponse: CreateGuildRoleResponse,
+): string {
+  return JSON.stringify(
+    CreateGuildRoleResponse$outboundSchema.parse(createGuildRoleResponse),
+  );
+}
+
+export function createGuildRoleResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildRoleResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildRoleResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildRoleResponse' from JSON`,
   );
 }

@@ -33,7 +33,8 @@ export function guildScheduledEventsGet(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetGuildScheduledEventResponseBody,
+    operations.GetGuildScheduledEventResponse,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
     | APIError
     | SDKValidationError
@@ -58,7 +59,8 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetGuildScheduledEventResponseBody,
+      operations.GetGuildScheduledEventResponse,
+      | errors.RatelimitedResponse
       | errors.ErrorResponse
       | APIError
       | SDKValidationError
@@ -144,7 +146,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["429", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -158,7 +160,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetGuildScheduledEventResponseBody,
+    operations.GetGuildScheduledEventResponse,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
     | APIError
     | SDKValidationError
@@ -168,8 +171,12 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetGuildScheduledEventResponseBody$inboundSchema),
-    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema),
+    M.json(200, operations.GetGuildScheduledEventResponse$inboundSchema, {
+      hdrs: true,
+      key: "Result",
+    }),
+    M.jsonErr(429, errors.RatelimitedResponse$inboundSchema, { hdrs: true }),
+    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema, { hdrs: true }),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {

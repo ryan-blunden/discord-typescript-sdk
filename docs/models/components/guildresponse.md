@@ -16,10 +16,27 @@ let value: GuildResponse = {
   systemChannelFlags: 53360,
   widgetEnabled: true,
   roles: [],
-  premiumSubscriptionCount: 776278,
-  premiumProgressBarEnabled: true,
-  nsfw: true,
-  emojis: [],
+  maxMembers: 776278,
+  maxStageVideoChannelUsers: 227254,
+  maxVideoChannelUsers: 298261,
+  premiumSubscriptionCount: 55207,
+  premiumProgressBarEnabled: false,
+  nsfw: false,
+  emojis: [
+    {
+      id: "<value>",
+      name: "<value>",
+      roles: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
+      requireColons: true,
+      managed: true,
+      animated: false,
+      available: false,
+    },
+  ],
   stickers: [
     {
       id: "<value>",
@@ -60,9 +77,9 @@ let value: GuildResponse = {
 | `mfaLevel`                                                                           | *number*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
 | `explicitContentFilter`                                                              | *number*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
 | `maxPresences`                                                                       | *number*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
-| `maxMembers`                                                                         | *number*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
-| `maxStageVideoChannelUsers`                                                          | *number*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
-| `maxVideoChannelUsers`                                                               | *number*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `maxMembers`                                                                         | *number*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `maxStageVideoChannelUsers`                                                          | *number*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `maxVideoChannelUsers`                                                               | *number*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
 | `vanityUrlCode`                                                                      | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
 | `premiumTier`                                                                        | *number*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
 | `premiumSubscriptionCount`                                                           | *number*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |

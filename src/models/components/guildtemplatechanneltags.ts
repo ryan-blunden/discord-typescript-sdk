@@ -9,6 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GuildTemplateChannelTags = {
+  id?: number | null | undefined;
   name: string;
   emojiId?: string | null | undefined;
   emojiName?: string | null | undefined;
@@ -21,6 +22,7 @@ export const GuildTemplateChannelTags$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  id: z.nullable(z.number().int()).optional(),
   name: z.string(),
   emoji_id: z.nullable(z.string()).optional(),
   emoji_name: z.nullable(z.string()).optional(),
@@ -34,6 +36,7 @@ export const GuildTemplateChannelTags$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GuildTemplateChannelTags$Outbound = {
+  id?: number | null | undefined;
   name: string;
   emoji_id?: string | null | undefined;
   emoji_name?: string | null | undefined;
@@ -46,6 +49,7 @@ export const GuildTemplateChannelTags$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GuildTemplateChannelTags
 > = z.object({
+  id: z.nullable(z.number().int()).optional(),
   name: z.string(),
   emojiId: z.nullable(z.string()).optional(),
   emojiName: z.nullable(z.string()).optional(),

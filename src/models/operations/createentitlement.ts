@@ -14,6 +14,11 @@ export type CreateEntitlementRequest = {
   createEntitlementRequestData: components.CreateEntitlementRequestData;
 };
 
+export type CreateEntitlementResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.EntitlementResponse;
+};
+
 /** @internal */
 export const CreateEntitlementRequest$inboundSchema: z.ZodType<
   CreateEntitlementRequest,
@@ -81,5 +86,72 @@ export function createEntitlementRequestFromJSON(
     jsonString,
     (x) => CreateEntitlementRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateEntitlementRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEntitlementResponse$inboundSchema: z.ZodType<
+  CreateEntitlementResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.EntitlementResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateEntitlementResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.EntitlementResponse$Outbound;
+};
+
+/** @internal */
+export const CreateEntitlementResponse$outboundSchema: z.ZodType<
+  CreateEntitlementResponse$Outbound,
+  z.ZodTypeDef,
+  CreateEntitlementResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.EntitlementResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEntitlementResponse$ {
+  /** @deprecated use `CreateEntitlementResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateEntitlementResponse$inboundSchema;
+  /** @deprecated use `CreateEntitlementResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateEntitlementResponse$outboundSchema;
+  /** @deprecated use `CreateEntitlementResponse$Outbound` instead. */
+  export type Outbound = CreateEntitlementResponse$Outbound;
+}
+
+export function createEntitlementResponseToJSON(
+  createEntitlementResponse: CreateEntitlementResponse,
+): string {
+  return JSON.stringify(
+    CreateEntitlementResponse$outboundSchema.parse(createEntitlementResponse),
+  );
+}
+
+export function createEntitlementResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateEntitlementResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateEntitlementResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateEntitlementResponse' from JSON`,
   );
 }

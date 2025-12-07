@@ -18,8 +18,8 @@ export type MessageInteractionResponse = {
   id: string;
   type?: 1 | undefined;
   name: string;
-  user?: UserResponse | null | undefined;
-  nameLocalized?: string | null | undefined;
+  user?: UserResponse | undefined;
+  nameLocalized?: string | undefined;
 };
 
 /** @internal */
@@ -31,8 +31,8 @@ export const MessageInteractionResponse$inboundSchema: z.ZodType<
   id: z.string(),
   type: z.literal(1).optional(),
   name: z.string(),
-  user: z.nullable(UserResponse$inboundSchema).optional(),
-  name_localized: z.nullable(z.string()).optional(),
+  user: UserResponse$inboundSchema.optional(),
+  name_localized: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "name_localized": "nameLocalized",
@@ -44,8 +44,8 @@ export type MessageInteractionResponse$Outbound = {
   id: string;
   type: 1;
   name: string;
-  user?: UserResponse$Outbound | null | undefined;
-  name_localized?: string | null | undefined;
+  user?: UserResponse$Outbound | undefined;
+  name_localized?: string | undefined;
 };
 
 /** @internal */
@@ -57,8 +57,8 @@ export const MessageInteractionResponse$outboundSchema: z.ZodType<
   id: z.string(),
   type: z.literal(1).default(1 as const),
   name: z.string(),
-  user: z.nullable(UserResponse$outboundSchema).optional(),
-  nameLocalized: z.nullable(z.string()).optional(),
+  user: UserResponse$outboundSchema.optional(),
+  nameLocalized: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     nameLocalized: "name_localized",

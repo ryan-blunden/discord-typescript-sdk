@@ -17,6 +17,10 @@ export type DeleteApplicationCommandRequest = {
   commandId: string;
 };
 
+export type DeleteApplicationCommandResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteApplicationCommandSecurity$inboundSchema: z.ZodType<
   DeleteApplicationCommandSecurity,
@@ -147,5 +151,69 @@ export function deleteApplicationCommandRequestFromJSON(
     jsonString,
     (x) => DeleteApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteApplicationCommandRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteApplicationCommandResponse$inboundSchema: z.ZodType<
+  DeleteApplicationCommandResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteApplicationCommandResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteApplicationCommandResponse$outboundSchema: z.ZodType<
+  DeleteApplicationCommandResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteApplicationCommandResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteApplicationCommandResponse$ {
+  /** @deprecated use `DeleteApplicationCommandResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteApplicationCommandResponse$inboundSchema;
+  /** @deprecated use `DeleteApplicationCommandResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteApplicationCommandResponse$outboundSchema;
+  /** @deprecated use `DeleteApplicationCommandResponse$Outbound` instead. */
+  export type Outbound = DeleteApplicationCommandResponse$Outbound;
+}
+
+export function deleteApplicationCommandResponseToJSON(
+  deleteApplicationCommandResponse: DeleteApplicationCommandResponse,
+): string {
+  return JSON.stringify(
+    DeleteApplicationCommandResponse$outboundSchema.parse(
+      deleteApplicationCommandResponse,
+    ),
+  );
+}
+
+export function deleteApplicationCommandResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteApplicationCommandResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteApplicationCommandResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteApplicationCommandResponse' from JSON`,
   );
 }

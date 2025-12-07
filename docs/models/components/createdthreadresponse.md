@@ -12,6 +12,10 @@ let value: CreatedThreadResponse = {
   guildId: "<value>",
   name: "<value>",
   ownerId: "<value>",
+  threadMetadata: {
+    archived: true,
+    locked: false,
+  },
   messageCount: 600472,
   memberCount: 407532,
   totalMessageSent: 978510,
@@ -37,7 +41,7 @@ let value: CreatedThreadResponse = {
 | `videoQualityMode`                                                                            | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `permissions`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `ownerId`                                                                                     | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `threadMetadata`                                                                              | [components.ThreadMetadataResponse](../../models/components/threadmetadataresponse.md)        | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `threadMetadata`                                                                              | [components.ThreadMetadataResponse](../../models/components/threadmetadataresponse.md)        | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `messageCount`                                                                                | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `memberCount`                                                                                 | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `totalMessageSent`                                                                            | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

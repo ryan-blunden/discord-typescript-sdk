@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListMessagesRequest = {
@@ -14,6 +15,11 @@ export type ListMessagesRequest = {
   before?: string | undefined;
   after?: string | undefined;
   limit?: number | undefined;
+};
+
+export type ListMessagesResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.MessageResponse>;
 };
 
 /** @internal */
@@ -87,5 +93,72 @@ export function listMessagesRequestFromJSON(
     jsonString,
     (x) => ListMessagesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListMessagesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListMessagesResponse$inboundSchema: z.ZodType<
+  ListMessagesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(components.MessageResponse$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListMessagesResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<components.MessageResponse$Outbound>;
+};
+
+/** @internal */
+export const ListMessagesResponse$outboundSchema: z.ZodType<
+  ListMessagesResponse$Outbound,
+  z.ZodTypeDef,
+  ListMessagesResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(components.MessageResponse$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListMessagesResponse$ {
+  /** @deprecated use `ListMessagesResponse$inboundSchema` instead. */
+  export const inboundSchema = ListMessagesResponse$inboundSchema;
+  /** @deprecated use `ListMessagesResponse$outboundSchema` instead. */
+  export const outboundSchema = ListMessagesResponse$outboundSchema;
+  /** @deprecated use `ListMessagesResponse$Outbound` instead. */
+  export type Outbound = ListMessagesResponse$Outbound;
+}
+
+export function listMessagesResponseToJSON(
+  listMessagesResponse: ListMessagesResponse,
+): string {
+  return JSON.stringify(
+    ListMessagesResponse$outboundSchema.parse(listMessagesResponse),
+  );
+}
+
+export function listMessagesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListMessagesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListMessagesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListMessagesResponse' from JSON`,
   );
 }

@@ -18,6 +18,10 @@ export type DeleteGuildApplicationCommandRequest = {
   commandId: string;
 };
 
+export type DeleteGuildApplicationCommandResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteGuildApplicationCommandSecurity$inboundSchema: z.ZodType<
   DeleteGuildApplicationCommandSecurity,
@@ -159,5 +163,72 @@ export function deleteGuildApplicationCommandRequestFromJSON(
     (x) =>
       DeleteGuildApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteGuildApplicationCommandRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteGuildApplicationCommandResponse$inboundSchema: z.ZodType<
+  DeleteGuildApplicationCommandResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteGuildApplicationCommandResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteGuildApplicationCommandResponse$outboundSchema: z.ZodType<
+  DeleteGuildApplicationCommandResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteGuildApplicationCommandResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteGuildApplicationCommandResponse$ {
+  /** @deprecated use `DeleteGuildApplicationCommandResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteGuildApplicationCommandResponse$inboundSchema;
+  /** @deprecated use `DeleteGuildApplicationCommandResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteGuildApplicationCommandResponse$outboundSchema;
+  /** @deprecated use `DeleteGuildApplicationCommandResponse$Outbound` instead. */
+  export type Outbound = DeleteGuildApplicationCommandResponse$Outbound;
+}
+
+export function deleteGuildApplicationCommandResponseToJSON(
+  deleteGuildApplicationCommandResponse: DeleteGuildApplicationCommandResponse,
+): string {
+  return JSON.stringify(
+    DeleteGuildApplicationCommandResponse$outboundSchema.parse(
+      deleteGuildApplicationCommandResponse,
+    ),
+  );
+}
+
+export function deleteGuildApplicationCommandResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildApplicationCommandResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteGuildApplicationCommandResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildApplicationCommandResponse' from JSON`,
   );
 }

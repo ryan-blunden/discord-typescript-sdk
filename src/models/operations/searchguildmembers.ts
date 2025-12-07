@@ -6,12 +6,18 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SearchGuildMembersRequest = {
   guildId: string;
-  limit: number;
+  limit?: number | undefined;
   query: string;
+};
+
+export type SearchGuildMembersResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.GuildMemberResponse>;
 };
 
 /** @internal */
@@ -21,7 +27,7 @@ export const SearchGuildMembersRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   guild_id: z.string(),
-  limit: z.number().int(),
+  limit: z.number().int().optional(),
   query: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -32,7 +38,7 @@ export const SearchGuildMembersRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type SearchGuildMembersRequest$Outbound = {
   guild_id: string;
-  limit: number;
+  limit?: number | undefined;
   query: string;
 };
 
@@ -43,7 +49,7 @@ export const SearchGuildMembersRequest$outboundSchema: z.ZodType<
   SearchGuildMembersRequest
 > = z.object({
   guildId: z.string(),
-  limit: z.number().int(),
+  limit: z.number().int().optional(),
   query: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -79,5 +85,72 @@ export function searchGuildMembersRequestFromJSON(
     jsonString,
     (x) => SearchGuildMembersRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'SearchGuildMembersRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchGuildMembersResponse$inboundSchema: z.ZodType<
+  SearchGuildMembersResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(components.GuildMemberResponse$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type SearchGuildMembersResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<components.GuildMemberResponse$Outbound>;
+};
+
+/** @internal */
+export const SearchGuildMembersResponse$outboundSchema: z.ZodType<
+  SearchGuildMembersResponse$Outbound,
+  z.ZodTypeDef,
+  SearchGuildMembersResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(components.GuildMemberResponse$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchGuildMembersResponse$ {
+  /** @deprecated use `SearchGuildMembersResponse$inboundSchema` instead. */
+  export const inboundSchema = SearchGuildMembersResponse$inboundSchema;
+  /** @deprecated use `SearchGuildMembersResponse$outboundSchema` instead. */
+  export const outboundSchema = SearchGuildMembersResponse$outboundSchema;
+  /** @deprecated use `SearchGuildMembersResponse$Outbound` instead. */
+  export type Outbound = SearchGuildMembersResponse$Outbound;
+}
+
+export function searchGuildMembersResponseToJSON(
+  searchGuildMembersResponse: SearchGuildMembersResponse,
+): string {
+  return JSON.stringify(
+    SearchGuildMembersResponse$outboundSchema.parse(searchGuildMembersResponse),
+  );
+}
+
+export function searchGuildMembersResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchGuildMembersResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchGuildMembersResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchGuildMembersResponse' from JSON`,
   );
 }

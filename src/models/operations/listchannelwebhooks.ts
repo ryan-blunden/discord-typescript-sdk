@@ -18,6 +18,15 @@ export type ListChannelWebhooksResponseBody =
   | components.ChannelFollowerWebhookResponse
   | components.GuildIncomingWebhookResponse;
 
+export type ListChannelWebhooksResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<
+    | components.ApplicationIncomingWebhookResponse
+    | components.ChannelFollowerWebhookResponse
+    | components.GuildIncomingWebhookResponse
+  >;
+};
+
 /** @internal */
 export const ListChannelWebhooksRequest$inboundSchema: z.ZodType<
   ListChannelWebhooksRequest,
@@ -138,5 +147,90 @@ export function listChannelWebhooksResponseBodyFromJSON(
     jsonString,
     (x) => ListChannelWebhooksResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListChannelWebhooksResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListChannelWebhooksResponse$inboundSchema: z.ZodType<
+  ListChannelWebhooksResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(
+    z.union([
+      components.ApplicationIncomingWebhookResponse$inboundSchema,
+      components.ChannelFollowerWebhookResponse$inboundSchema,
+      components.GuildIncomingWebhookResponse$inboundSchema,
+    ]),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListChannelWebhooksResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<
+    | components.ApplicationIncomingWebhookResponse$Outbound
+    | components.ChannelFollowerWebhookResponse$Outbound
+    | components.GuildIncomingWebhookResponse$Outbound
+  >;
+};
+
+/** @internal */
+export const ListChannelWebhooksResponse$outboundSchema: z.ZodType<
+  ListChannelWebhooksResponse$Outbound,
+  z.ZodTypeDef,
+  ListChannelWebhooksResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(
+    z.union([
+      components.ApplicationIncomingWebhookResponse$outboundSchema,
+      components.ChannelFollowerWebhookResponse$outboundSchema,
+      components.GuildIncomingWebhookResponse$outboundSchema,
+    ]),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListChannelWebhooksResponse$ {
+  /** @deprecated use `ListChannelWebhooksResponse$inboundSchema` instead. */
+  export const inboundSchema = ListChannelWebhooksResponse$inboundSchema;
+  /** @deprecated use `ListChannelWebhooksResponse$outboundSchema` instead. */
+  export const outboundSchema = ListChannelWebhooksResponse$outboundSchema;
+  /** @deprecated use `ListChannelWebhooksResponse$Outbound` instead. */
+  export type Outbound = ListChannelWebhooksResponse$Outbound;
+}
+
+export function listChannelWebhooksResponseToJSON(
+  listChannelWebhooksResponse: ListChannelWebhooksResponse,
+): string {
+  return JSON.stringify(
+    ListChannelWebhooksResponse$outboundSchema.parse(
+      listChannelWebhooksResponse,
+    ),
+  );
+}
+
+export function listChannelWebhooksResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListChannelWebhooksResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListChannelWebhooksResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListChannelWebhooksResponse' from JSON`,
   );
 }

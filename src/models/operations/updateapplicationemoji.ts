@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateApplicationEmojiRequestBody = {
@@ -16,6 +17,11 @@ export type UpdateApplicationEmojiRequest = {
   applicationId: string;
   emojiId: string;
   requestBody: UpdateApplicationEmojiRequestBody;
+};
+
+export type UpdateApplicationEmojiResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.EmojiResponse;
 };
 
 /** @internal */
@@ -146,5 +152,74 @@ export function updateApplicationEmojiRequestFromJSON(
     jsonString,
     (x) => UpdateApplicationEmojiRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateApplicationEmojiRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateApplicationEmojiResponse$inboundSchema: z.ZodType<
+  UpdateApplicationEmojiResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.EmojiResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateApplicationEmojiResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.EmojiResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateApplicationEmojiResponse$outboundSchema: z.ZodType<
+  UpdateApplicationEmojiResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateApplicationEmojiResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.EmojiResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateApplicationEmojiResponse$ {
+  /** @deprecated use `UpdateApplicationEmojiResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateApplicationEmojiResponse$inboundSchema;
+  /** @deprecated use `UpdateApplicationEmojiResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateApplicationEmojiResponse$outboundSchema;
+  /** @deprecated use `UpdateApplicationEmojiResponse$Outbound` instead. */
+  export type Outbound = UpdateApplicationEmojiResponse$Outbound;
+}
+
+export function updateApplicationEmojiResponseToJSON(
+  updateApplicationEmojiResponse: UpdateApplicationEmojiResponse,
+): string {
+  return JSON.stringify(
+    UpdateApplicationEmojiResponse$outboundSchema.parse(
+      updateApplicationEmojiResponse,
+    ),
+  );
+}
+
+export function updateApplicationEmojiResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateApplicationEmojiResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateApplicationEmojiResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateApplicationEmojiResponse' from JSON`,
   );
 }

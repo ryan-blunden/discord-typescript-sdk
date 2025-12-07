@@ -73,7 +73,7 @@ export type CreateGuildChannelRequest = {
   defaultThreadRateLimitPerUser?: number | null | undefined;
   defaultSortOrder?: 0 | null | undefined;
   defaultForumLayout?: 0 | null | undefined;
-  defaultTagSetting?: string | null | undefined;
+  defaultTagSetting?: "match_all" | null | undefined;
   availableTags?:
     | Array<CreateOrUpdateThreadTagRequest | null>
     | null
@@ -128,7 +128,7 @@ export const CreateGuildChannelRequest$inboundSchema: z.ZodType<
   default_thread_rate_limit_per_user: z.nullable(z.number().int()).optional(),
   default_sort_order: z.nullable(z.literal(0)).optional(),
   default_forum_layout: z.nullable(z.literal(0)).optional(),
-  default_tag_setting: z.nullable(z.string()).optional(),
+  default_tag_setting: z.nullable(z.literal("match_all")).optional(),
   available_tags: z.nullable(
     z.array(z.nullable(CreateOrUpdateThreadTagRequest$inboundSchema)),
   ).optional(),
@@ -175,7 +175,7 @@ export type CreateGuildChannelRequest$Outbound = {
   default_thread_rate_limit_per_user?: number | null | undefined;
   default_sort_order: 0 | null;
   default_forum_layout: 0 | null;
-  default_tag_setting?: string | null | undefined;
+  default_tag_setting: "match_all" | null;
   available_tags?:
     | Array<CreateOrUpdateThreadTagRequest$Outbound | null>
     | null
@@ -209,7 +209,9 @@ export const CreateGuildChannelRequest$outboundSchema: z.ZodType<
   defaultThreadRateLimitPerUser: z.nullable(z.number().int()).optional(),
   defaultSortOrder: z.nullable(z.literal(0).default(0 as const)),
   defaultForumLayout: z.nullable(z.literal(0).default(0 as const)),
-  defaultTagSetting: z.nullable(z.string()).optional(),
+  defaultTagSetting: z.nullable(
+    z.literal("match_all").default("match_all" as const),
+  ),
   availableTags: z.nullable(
     z.array(z.nullable(CreateOrUpdateThreadTagRequest$outboundSchema)),
   ).optional(),

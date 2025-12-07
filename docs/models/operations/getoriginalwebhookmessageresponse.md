@@ -1,0 +1,16 @@
+# GetOriginalWebhookMessageResponse
+
+## Example Usage
+
+```typescript
+import { GetOriginalWebhookMessageResponse } from "@ryan.blunden/discord-sdk/models/operations";
+
+let value: GetOriginalWebhookMessageResponse = {};
+```
+
+## Fields
+
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `headers`                                                                | Record<string, *string*[]>                                               | :heavy_check_mark:                                                       | N/A                                                                      |
+| `result`                                                                 | [components.MessageResponse](../../models/components/messageresponse.md) | :heavy_check_mark:                                                       | N/A                                                                      |

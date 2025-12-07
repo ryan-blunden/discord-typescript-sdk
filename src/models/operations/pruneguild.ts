@@ -6,138 +6,18 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type IncludeRoles = string | Array<string | null>;
-
-export type PruneGuildRequestBody = {
-  days?: number | null | undefined;
-  computePruneCount?: boolean | null | undefined;
-  includeRoles?: string | Array<string | null> | null | undefined;
-};
 
 export type PruneGuildRequest = {
   guildId: string;
-  requestBody: PruneGuildRequestBody;
+  pruneGuildRequest: components.PruneGuildRequest;
 };
 
-/** @internal */
-export const IncludeRoles$inboundSchema: z.ZodType<
-  IncludeRoles,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.array(z.nullable(z.string()))]);
-
-/** @internal */
-export type IncludeRoles$Outbound = string | Array<string | null>;
-
-/** @internal */
-export const IncludeRoles$outboundSchema: z.ZodType<
-  IncludeRoles$Outbound,
-  z.ZodTypeDef,
-  IncludeRoles
-> = z.union([z.string(), z.array(z.nullable(z.string()))]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace IncludeRoles$ {
-  /** @deprecated use `IncludeRoles$inboundSchema` instead. */
-  export const inboundSchema = IncludeRoles$inboundSchema;
-  /** @deprecated use `IncludeRoles$outboundSchema` instead. */
-  export const outboundSchema = IncludeRoles$outboundSchema;
-  /** @deprecated use `IncludeRoles$Outbound` instead. */
-  export type Outbound = IncludeRoles$Outbound;
-}
-
-export function includeRolesToJSON(includeRoles: IncludeRoles): string {
-  return JSON.stringify(IncludeRoles$outboundSchema.parse(includeRoles));
-}
-
-export function includeRolesFromJSON(
-  jsonString: string,
-): SafeParseResult<IncludeRoles, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => IncludeRoles$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'IncludeRoles' from JSON`,
-  );
-}
-
-/** @internal */
-export const PruneGuildRequestBody$inboundSchema: z.ZodType<
-  PruneGuildRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  days: z.nullable(z.number().int()).optional(),
-  compute_prune_count: z.nullable(z.boolean()).optional(),
-  include_roles: z.nullable(
-    z.union([z.string(), z.array(z.nullable(z.string()))]),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "compute_prune_count": "computePruneCount",
-    "include_roles": "includeRoles",
-  });
-});
-
-/** @internal */
-export type PruneGuildRequestBody$Outbound = {
-  days?: number | null | undefined;
-  compute_prune_count?: boolean | null | undefined;
-  include_roles?: string | Array<string | null> | null | undefined;
+export type PruneGuildResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildPruneResponse;
 };
-
-/** @internal */
-export const PruneGuildRequestBody$outboundSchema: z.ZodType<
-  PruneGuildRequestBody$Outbound,
-  z.ZodTypeDef,
-  PruneGuildRequestBody
-> = z.object({
-  days: z.nullable(z.number().int()).optional(),
-  computePruneCount: z.nullable(z.boolean()).optional(),
-  includeRoles: z.nullable(
-    z.union([z.string(), z.array(z.nullable(z.string()))]),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    computePruneCount: "compute_prune_count",
-    includeRoles: "include_roles",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PruneGuildRequestBody$ {
-  /** @deprecated use `PruneGuildRequestBody$inboundSchema` instead. */
-  export const inboundSchema = PruneGuildRequestBody$inboundSchema;
-  /** @deprecated use `PruneGuildRequestBody$outboundSchema` instead. */
-  export const outboundSchema = PruneGuildRequestBody$outboundSchema;
-  /** @deprecated use `PruneGuildRequestBody$Outbound` instead. */
-  export type Outbound = PruneGuildRequestBody$Outbound;
-}
-
-export function pruneGuildRequestBodyToJSON(
-  pruneGuildRequestBody: PruneGuildRequestBody,
-): string {
-  return JSON.stringify(
-    PruneGuildRequestBody$outboundSchema.parse(pruneGuildRequestBody),
-  );
-}
-
-export function pruneGuildRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PruneGuildRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PruneGuildRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PruneGuildRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const PruneGuildRequest$inboundSchema: z.ZodType<
@@ -146,18 +26,18 @@ export const PruneGuildRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   guild_id: z.string(),
-  RequestBody: z.lazy(() => PruneGuildRequestBody$inboundSchema),
+  PruneGuildRequest: components.PruneGuildRequest$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",
-    "RequestBody": "requestBody",
+    "PruneGuildRequest": "pruneGuildRequest",
   });
 });
 
 /** @internal */
 export type PruneGuildRequest$Outbound = {
   guild_id: string;
-  RequestBody: PruneGuildRequestBody$Outbound;
+  PruneGuildRequest: components.PruneGuildRequest$Outbound;
 };
 
 /** @internal */
@@ -167,11 +47,11 @@ export const PruneGuildRequest$outboundSchema: z.ZodType<
   PruneGuildRequest
 > = z.object({
   guildId: z.string(),
-  requestBody: z.lazy(() => PruneGuildRequestBody$outboundSchema),
+  pruneGuildRequest: components.PruneGuildRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     guildId: "guild_id",
-    requestBody: "RequestBody",
+    pruneGuildRequest: "PruneGuildRequest",
   });
 });
 
@@ -203,5 +83,72 @@ export function pruneGuildRequestFromJSON(
     jsonString,
     (x) => PruneGuildRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PruneGuildRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PruneGuildResponse$inboundSchema: z.ZodType<
+  PruneGuildResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildPruneResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type PruneGuildResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildPruneResponse$Outbound;
+};
+
+/** @internal */
+export const PruneGuildResponse$outboundSchema: z.ZodType<
+  PruneGuildResponse$Outbound,
+  z.ZodTypeDef,
+  PruneGuildResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildPruneResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PruneGuildResponse$ {
+  /** @deprecated use `PruneGuildResponse$inboundSchema` instead. */
+  export const inboundSchema = PruneGuildResponse$inboundSchema;
+  /** @deprecated use `PruneGuildResponse$outboundSchema` instead. */
+  export const outboundSchema = PruneGuildResponse$outboundSchema;
+  /** @deprecated use `PruneGuildResponse$Outbound` instead. */
+  export type Outbound = PruneGuildResponse$Outbound;
+}
+
+export function pruneGuildResponseToJSON(
+  pruneGuildResponse: PruneGuildResponse,
+): string {
+  return JSON.stringify(
+    PruneGuildResponse$outboundSchema.parse(pruneGuildResponse),
+  );
+}
+
+export function pruneGuildResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PruneGuildResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PruneGuildResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PruneGuildResponse' from JSON`,
   );
 }

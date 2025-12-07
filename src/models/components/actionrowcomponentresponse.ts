@@ -61,18 +61,15 @@ export type Components =
 export type ActionRowComponentResponse = {
   type?: 1 | undefined;
   id: number;
-  components?:
-    | Array<
-      | MentionableSelectComponentResponse
-      | RoleSelectComponentResponse
-      | StringSelectComponentResponse
-      | UserSelectComponentResponse
-      | ButtonComponentResponse
-      | ChannelSelectComponentResponse
-      | TextInputComponentResponse
-    >
-    | null
-    | undefined;
+  components: Array<
+    | MentionableSelectComponentResponse
+    | RoleSelectComponentResponse
+    | StringSelectComponentResponse
+    | UserSelectComponentResponse
+    | ButtonComponentResponse
+    | ChannelSelectComponentResponse
+    | TextInputComponentResponse
+  >;
 };
 
 /** @internal */
@@ -150,37 +147,32 @@ export const ActionRowComponentResponse$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal(1).optional(),
   id: z.number().int(),
-  components: z.nullable(
-    z.array(
-      z.union([
-        MentionableSelectComponentResponse$inboundSchema,
-        RoleSelectComponentResponse$inboundSchema,
-        StringSelectComponentResponse$inboundSchema,
-        UserSelectComponentResponse$inboundSchema,
-        ButtonComponentResponse$inboundSchema,
-        ChannelSelectComponentResponse$inboundSchema,
-        TextInputComponentResponse$inboundSchema,
-      ]),
-    ),
-  ).optional(),
+  components: z.array(
+    z.union([
+      MentionableSelectComponentResponse$inboundSchema,
+      RoleSelectComponentResponse$inboundSchema,
+      StringSelectComponentResponse$inboundSchema,
+      UserSelectComponentResponse$inboundSchema,
+      ButtonComponentResponse$inboundSchema,
+      ChannelSelectComponentResponse$inboundSchema,
+      TextInputComponentResponse$inboundSchema,
+    ]),
+  ),
 });
 
 /** @internal */
 export type ActionRowComponentResponse$Outbound = {
   type: 1;
   id: number;
-  components?:
-    | Array<
-      | MentionableSelectComponentResponse$Outbound
-      | RoleSelectComponentResponse$Outbound
-      | StringSelectComponentResponse$Outbound
-      | UserSelectComponentResponse$Outbound
-      | ButtonComponentResponse$Outbound
-      | ChannelSelectComponentResponse$Outbound
-      | TextInputComponentResponse$Outbound
-    >
-    | null
-    | undefined;
+  components: Array<
+    | MentionableSelectComponentResponse$Outbound
+    | RoleSelectComponentResponse$Outbound
+    | StringSelectComponentResponse$Outbound
+    | UserSelectComponentResponse$Outbound
+    | ButtonComponentResponse$Outbound
+    | ChannelSelectComponentResponse$Outbound
+    | TextInputComponentResponse$Outbound
+  >;
 };
 
 /** @internal */
@@ -191,19 +183,17 @@ export const ActionRowComponentResponse$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal(1).default(1 as const),
   id: z.number().int(),
-  components: z.nullable(
-    z.array(
-      z.union([
-        MentionableSelectComponentResponse$outboundSchema,
-        RoleSelectComponentResponse$outboundSchema,
-        StringSelectComponentResponse$outboundSchema,
-        UserSelectComponentResponse$outboundSchema,
-        ButtonComponentResponse$outboundSchema,
-        ChannelSelectComponentResponse$outboundSchema,
-        TextInputComponentResponse$outboundSchema,
-      ]),
-    ),
-  ).optional(),
+  components: z.array(
+    z.union([
+      MentionableSelectComponentResponse$outboundSchema,
+      RoleSelectComponentResponse$outboundSchema,
+      StringSelectComponentResponse$outboundSchema,
+      UserSelectComponentResponse$outboundSchema,
+      ButtonComponentResponse$outboundSchema,
+      ChannelSelectComponentResponse$outboundSchema,
+      TextInputComponentResponse$outboundSchema,
+    ]),
+  ),
 });
 
 /**

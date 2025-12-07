@@ -14,6 +14,10 @@ export type DeleteMyMessageReactionRequest = {
   emojiName: string;
 };
 
+export type DeleteMyMessageReactionResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteMyMessageReactionRequest$inboundSchema: z.ZodType<
   DeleteMyMessageReactionRequest,
@@ -85,5 +89,69 @@ export function deleteMyMessageReactionRequestFromJSON(
     jsonString,
     (x) => DeleteMyMessageReactionRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteMyMessageReactionRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteMyMessageReactionResponse$inboundSchema: z.ZodType<
+  DeleteMyMessageReactionResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteMyMessageReactionResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteMyMessageReactionResponse$outboundSchema: z.ZodType<
+  DeleteMyMessageReactionResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteMyMessageReactionResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteMyMessageReactionResponse$ {
+  /** @deprecated use `DeleteMyMessageReactionResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteMyMessageReactionResponse$inboundSchema;
+  /** @deprecated use `DeleteMyMessageReactionResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteMyMessageReactionResponse$outboundSchema;
+  /** @deprecated use `DeleteMyMessageReactionResponse$Outbound` instead. */
+  export type Outbound = DeleteMyMessageReactionResponse$Outbound;
+}
+
+export function deleteMyMessageReactionResponseToJSON(
+  deleteMyMessageReactionResponse: DeleteMyMessageReactionResponse,
+): string {
+  return JSON.stringify(
+    DeleteMyMessageReactionResponse$outboundSchema.parse(
+      deleteMyMessageReactionResponse,
+    ),
+  );
+}
+
+export function deleteMyMessageReactionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteMyMessageReactionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteMyMessageReactionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteMyMessageReactionResponse' from JSON`,
   );
 }

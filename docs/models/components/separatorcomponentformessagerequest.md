@@ -13,5 +13,6 @@ let value: SeparatorComponentForMessageRequest = {};
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `type`             | *number*           | :heavy_check_mark: | N/A                |
+| `id`               | *number*           | :heavy_minus_sign: | N/A                |
 | `spacing`          | *number*           | :heavy_minus_sign: | N/A                |
 | `divider`          | *boolean*          | :heavy_minus_sign: | N/A                |

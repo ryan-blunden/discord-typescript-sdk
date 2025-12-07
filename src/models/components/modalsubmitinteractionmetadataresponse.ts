@@ -33,9 +33,9 @@ export type TriggeringInteractionMetadata =
 export type ModalSubmitInteractionMetadataResponse = {
   id: string;
   type?: 1 | undefined;
-  user?: UserResponse | null | undefined;
+  user?: UserResponse | undefined;
   authorizingIntegrationOwners: { [k: string]: string };
-  originalResponseMessageId?: string | null | undefined;
+  originalResponseMessageId?: string | undefined;
   triggeringInteractionMetadata:
     | MessageComponentInteractionMetadataResponse
     | ApplicationCommandInteractionMetadataResponse;
@@ -107,9 +107,9 @@ export const ModalSubmitInteractionMetadataResponse$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   type: z.literal(1).optional(),
-  user: z.nullable(UserResponse$inboundSchema).optional(),
+  user: UserResponse$inboundSchema.optional(),
   authorizing_integration_owners: z.record(z.string()),
-  original_response_message_id: z.nullable(z.string()).optional(),
+  original_response_message_id: z.string().optional(),
   triggering_interaction_metadata: z.union([
     MessageComponentInteractionMetadataResponse$inboundSchema,
     ApplicationCommandInteractionMetadataResponse$inboundSchema,
@@ -126,9 +126,9 @@ export const ModalSubmitInteractionMetadataResponse$inboundSchema: z.ZodType<
 export type ModalSubmitInteractionMetadataResponse$Outbound = {
   id: string;
   type: 1;
-  user?: UserResponse$Outbound | null | undefined;
+  user?: UserResponse$Outbound | undefined;
   authorizing_integration_owners: { [k: string]: string };
-  original_response_message_id?: string | null | undefined;
+  original_response_message_id?: string | undefined;
   triggering_interaction_metadata:
     | MessageComponentInteractionMetadataResponse$Outbound
     | ApplicationCommandInteractionMetadataResponse$Outbound;
@@ -142,9 +142,9 @@ export const ModalSubmitInteractionMetadataResponse$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   type: z.literal(1).default(1 as const),
-  user: z.nullable(UserResponse$outboundSchema).optional(),
+  user: UserResponse$outboundSchema.optional(),
   authorizingIntegrationOwners: z.record(z.string()),
-  originalResponseMessageId: z.nullable(z.string()).optional(),
+  originalResponseMessageId: z.string().optional(),
   triggeringInteractionMetadata: z.union([
     MessageComponentInteractionMetadataResponse$outboundSchema,
     ApplicationCommandInteractionMetadataResponse$outboundSchema,

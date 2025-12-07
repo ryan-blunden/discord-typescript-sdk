@@ -19,6 +19,11 @@ export type BulkSetGuildApplicationCommandsRequest = {
   requestBody: Array<components.ApplicationCommandUpdateRequest> | null;
 };
 
+export type BulkSetGuildApplicationCommandsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.ApplicationCommandResponse>;
+};
+
 /** @internal */
 export const BulkSetGuildApplicationCommandsSecurity$inboundSchema: z.ZodType<
   BulkSetGuildApplicationCommandsSecurity,
@@ -173,5 +178,83 @@ export function bulkSetGuildApplicationCommandsRequestFromJSON(
     (x) =>
       BulkSetGuildApplicationCommandsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'BulkSetGuildApplicationCommandsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const BulkSetGuildApplicationCommandsResponse$inboundSchema: z.ZodType<
+  BulkSetGuildApplicationCommandsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(components.ApplicationCommandResponse$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type BulkSetGuildApplicationCommandsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<components.ApplicationCommandResponse$Outbound>;
+};
+
+/** @internal */
+export const BulkSetGuildApplicationCommandsResponse$outboundSchema: z.ZodType<
+  BulkSetGuildApplicationCommandsResponse$Outbound,
+  z.ZodTypeDef,
+  BulkSetGuildApplicationCommandsResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(components.ApplicationCommandResponse$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BulkSetGuildApplicationCommandsResponse$ {
+  /** @deprecated use `BulkSetGuildApplicationCommandsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    BulkSetGuildApplicationCommandsResponse$inboundSchema;
+  /** @deprecated use `BulkSetGuildApplicationCommandsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    BulkSetGuildApplicationCommandsResponse$outboundSchema;
+  /** @deprecated use `BulkSetGuildApplicationCommandsResponse$Outbound` instead. */
+  export type Outbound = BulkSetGuildApplicationCommandsResponse$Outbound;
+}
+
+export function bulkSetGuildApplicationCommandsResponseToJSON(
+  bulkSetGuildApplicationCommandsResponse:
+    BulkSetGuildApplicationCommandsResponse,
+): string {
+  return JSON.stringify(
+    BulkSetGuildApplicationCommandsResponse$outboundSchema.parse(
+      bulkSetGuildApplicationCommandsResponse,
+    ),
+  );
+}
+
+export function bulkSetGuildApplicationCommandsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  BulkSetGuildApplicationCommandsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      BulkSetGuildApplicationCommandsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'BulkSetGuildApplicationCommandsResponse' from JSON`,
   );
 }

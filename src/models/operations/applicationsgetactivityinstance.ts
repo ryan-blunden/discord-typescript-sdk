@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ApplicationsGetActivityInstanceRequest = {
   applicationId: string;
   instanceId: string;
+};
+
+export type ApplicationsGetActivityInstanceResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.EmbeddedActivityInstance;
 };
 
 /** @internal */
@@ -83,5 +89,83 @@ export function applicationsGetActivityInstanceRequestFromJSON(
     (x) =>
       ApplicationsGetActivityInstanceRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ApplicationsGetActivityInstanceRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ApplicationsGetActivityInstanceResponse$inboundSchema: z.ZodType<
+  ApplicationsGetActivityInstanceResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.EmbeddedActivityInstance$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ApplicationsGetActivityInstanceResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.EmbeddedActivityInstance$Outbound;
+};
+
+/** @internal */
+export const ApplicationsGetActivityInstanceResponse$outboundSchema: z.ZodType<
+  ApplicationsGetActivityInstanceResponse$Outbound,
+  z.ZodTypeDef,
+  ApplicationsGetActivityInstanceResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.EmbeddedActivityInstance$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ApplicationsGetActivityInstanceResponse$ {
+  /** @deprecated use `ApplicationsGetActivityInstanceResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    ApplicationsGetActivityInstanceResponse$inboundSchema;
+  /** @deprecated use `ApplicationsGetActivityInstanceResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    ApplicationsGetActivityInstanceResponse$outboundSchema;
+  /** @deprecated use `ApplicationsGetActivityInstanceResponse$Outbound` instead. */
+  export type Outbound = ApplicationsGetActivityInstanceResponse$Outbound;
+}
+
+export function applicationsGetActivityInstanceResponseToJSON(
+  applicationsGetActivityInstanceResponse:
+    ApplicationsGetActivityInstanceResponse,
+): string {
+  return JSON.stringify(
+    ApplicationsGetActivityInstanceResponse$outboundSchema.parse(
+      applicationsGetActivityInstanceResponse,
+    ),
+  );
+}
+
+export function applicationsGetActivityInstanceResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ApplicationsGetActivityInstanceResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ApplicationsGetActivityInstanceResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ApplicationsGetActivityInstanceResponse' from JSON`,
   );
 }

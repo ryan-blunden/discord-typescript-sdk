@@ -6,12 +6,18 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetThreadMemberRequest = {
   channelId: string;
   userId: string;
   withMember?: boolean | undefined;
+};
+
+export type GetThreadMemberResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ThreadMemberResponse;
 };
 
 /** @internal */
@@ -83,5 +89,72 @@ export function getThreadMemberRequestFromJSON(
     jsonString,
     (x) => GetThreadMemberRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetThreadMemberRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetThreadMemberResponse$inboundSchema: z.ZodType<
+  GetThreadMemberResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ThreadMemberResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetThreadMemberResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ThreadMemberResponse$Outbound;
+};
+
+/** @internal */
+export const GetThreadMemberResponse$outboundSchema: z.ZodType<
+  GetThreadMemberResponse$Outbound,
+  z.ZodTypeDef,
+  GetThreadMemberResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ThreadMemberResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetThreadMemberResponse$ {
+  /** @deprecated use `GetThreadMemberResponse$inboundSchema` instead. */
+  export const inboundSchema = GetThreadMemberResponse$inboundSchema;
+  /** @deprecated use `GetThreadMemberResponse$outboundSchema` instead. */
+  export const outboundSchema = GetThreadMemberResponse$outboundSchema;
+  /** @deprecated use `GetThreadMemberResponse$Outbound` instead. */
+  export type Outbound = GetThreadMemberResponse$Outbound;
+}
+
+export function getThreadMemberResponseToJSON(
+  getThreadMemberResponse: GetThreadMemberResponse,
+): string {
+  return JSON.stringify(
+    GetThreadMemberResponse$outboundSchema.parse(getThreadMemberResponse),
+  );
+}
+
+export function getThreadMemberResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetThreadMemberResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetThreadMemberResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetThreadMemberResponse' from JSON`,
   );
 }

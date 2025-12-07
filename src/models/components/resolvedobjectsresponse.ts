@@ -7,17 +7,17 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  BasicGuildMemberResponse,
+  BasicGuildMemberResponse$inboundSchema,
+  BasicGuildMemberResponse$Outbound,
+  BasicGuildMemberResponse$outboundSchema,
+} from "./basicguildmemberresponse.js";
+import {
   GuildChannelResponse,
   GuildChannelResponse$inboundSchema,
   GuildChannelResponse$Outbound,
   GuildChannelResponse$outboundSchema,
 } from "./guildchannelresponse.js";
-import {
-  GuildMemberResponse,
-  GuildMemberResponse$inboundSchema,
-  GuildMemberResponse$Outbound,
-  GuildMemberResponse$outboundSchema,
-} from "./guildmemberresponse.js";
 import {
   GuildRoleResponse,
   GuildRoleResponse$inboundSchema,
@@ -56,16 +56,19 @@ export type Channels =
   | GuildChannelResponse;
 
 export type ResolvedObjectsResponse = {
-  users: { [k: string]: UserResponse };
-  members: { [k: string]: GuildMemberResponse };
-  channels: {
-    [k: string]:
-      | PrivateChannelResponse
-      | PrivateGroupChannelResponse
-      | ThreadResponse
-      | GuildChannelResponse;
-  };
-  roles: { [k: string]: GuildRoleResponse };
+  users?: { [k: string]: UserResponse } | null | undefined;
+  members?: { [k: string]: BasicGuildMemberResponse } | null | undefined;
+  channels?:
+    | {
+      [k: string]:
+        | PrivateChannelResponse
+        | PrivateGroupChannelResponse
+        | ThreadResponse
+        | GuildChannelResponse;
+    }
+    | null
+    | undefined;
+  roles?: { [k: string]: GuildRoleResponse } | null | undefined;
 };
 
 /** @internal */
@@ -132,31 +135,40 @@ export const ResolvedObjectsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  users: z.record(UserResponse$inboundSchema),
-  members: z.record(GuildMemberResponse$inboundSchema),
-  channels: z.record(
-    z.union([
-      PrivateChannelResponse$inboundSchema,
-      PrivateGroupChannelResponse$inboundSchema,
-      ThreadResponse$inboundSchema,
-      GuildChannelResponse$inboundSchema,
-    ]),
-  ),
-  roles: z.record(GuildRoleResponse$inboundSchema),
+  users: z.nullable(z.record(UserResponse$inboundSchema)).optional(),
+  members: z.nullable(z.record(BasicGuildMemberResponse$inboundSchema))
+    .optional(),
+  channels: z.nullable(
+    z.record(
+      z.union([
+        PrivateChannelResponse$inboundSchema,
+        PrivateGroupChannelResponse$inboundSchema,
+        ThreadResponse$inboundSchema,
+        GuildChannelResponse$inboundSchema,
+      ]),
+    ),
+  ).optional(),
+  roles: z.nullable(z.record(GuildRoleResponse$inboundSchema)).optional(),
 });
 
 /** @internal */
 export type ResolvedObjectsResponse$Outbound = {
-  users: { [k: string]: UserResponse$Outbound };
-  members: { [k: string]: GuildMemberResponse$Outbound };
-  channels: {
-    [k: string]:
-      | PrivateChannelResponse$Outbound
-      | PrivateGroupChannelResponse$Outbound
-      | ThreadResponse$Outbound
-      | GuildChannelResponse$Outbound;
-  };
-  roles: { [k: string]: GuildRoleResponse$Outbound };
+  users?: { [k: string]: UserResponse$Outbound } | null | undefined;
+  members?:
+    | { [k: string]: BasicGuildMemberResponse$Outbound }
+    | null
+    | undefined;
+  channels?:
+    | {
+      [k: string]:
+        | PrivateChannelResponse$Outbound
+        | PrivateGroupChannelResponse$Outbound
+        | ThreadResponse$Outbound
+        | GuildChannelResponse$Outbound;
+    }
+    | null
+    | undefined;
+  roles?: { [k: string]: GuildRoleResponse$Outbound } | null | undefined;
 };
 
 /** @internal */
@@ -165,17 +177,20 @@ export const ResolvedObjectsResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResolvedObjectsResponse
 > = z.object({
-  users: z.record(UserResponse$outboundSchema),
-  members: z.record(GuildMemberResponse$outboundSchema),
-  channels: z.record(
-    z.union([
-      PrivateChannelResponse$outboundSchema,
-      PrivateGroupChannelResponse$outboundSchema,
-      ThreadResponse$outboundSchema,
-      GuildChannelResponse$outboundSchema,
-    ]),
-  ),
-  roles: z.record(GuildRoleResponse$outboundSchema),
+  users: z.nullable(z.record(UserResponse$outboundSchema)).optional(),
+  members: z.nullable(z.record(BasicGuildMemberResponse$outboundSchema))
+    .optional(),
+  channels: z.nullable(
+    z.record(
+      z.union([
+        PrivateChannelResponse$outboundSchema,
+        PrivateGroupChannelResponse$outboundSchema,
+        ThreadResponse$outboundSchema,
+        GuildChannelResponse$outboundSchema,
+      ]),
+    ),
+  ).optional(),
+  roles: z.nullable(z.record(GuildRoleResponse$outboundSchema)).optional(),
 });
 
 /**

@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListThreadMembersRequest = {
@@ -13,6 +14,11 @@ export type ListThreadMembersRequest = {
   withMember?: boolean | undefined;
   limit?: number | undefined;
   after?: string | undefined;
+};
+
+export type ListThreadMembersResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.ThreadMemberResponse>;
 };
 
 /** @internal */
@@ -85,5 +91,72 @@ export function listThreadMembersRequestFromJSON(
     jsonString,
     (x) => ListThreadMembersRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListThreadMembersRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListThreadMembersResponse$inboundSchema: z.ZodType<
+  ListThreadMembersResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(components.ThreadMemberResponse$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListThreadMembersResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<components.ThreadMemberResponse$Outbound>;
+};
+
+/** @internal */
+export const ListThreadMembersResponse$outboundSchema: z.ZodType<
+  ListThreadMembersResponse$Outbound,
+  z.ZodTypeDef,
+  ListThreadMembersResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(components.ThreadMemberResponse$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListThreadMembersResponse$ {
+  /** @deprecated use `ListThreadMembersResponse$inboundSchema` instead. */
+  export const inboundSchema = ListThreadMembersResponse$inboundSchema;
+  /** @deprecated use `ListThreadMembersResponse$outboundSchema` instead. */
+  export const outboundSchema = ListThreadMembersResponse$outboundSchema;
+  /** @deprecated use `ListThreadMembersResponse$Outbound` instead. */
+  export type Outbound = ListThreadMembersResponse$Outbound;
+}
+
+export function listThreadMembersResponseToJSON(
+  listThreadMembersResponse: ListThreadMembersResponse,
+): string {
+  return JSON.stringify(
+    ListThreadMembersResponse$outboundSchema.parse(listThreadMembersResponse),
+  );
+}
+
+export function listThreadMembersResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListThreadMembersResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListThreadMembersResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListThreadMembersResponse' from JSON`,
   );
 }

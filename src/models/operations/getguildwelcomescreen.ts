@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildWelcomeScreenRequest = {
   guildId: string;
+};
+
+export type GetGuildWelcomeScreenResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildWelcomeScreenResponse;
 };
 
 /** @internal */
@@ -73,5 +79,74 @@ export function getGuildWelcomeScreenRequestFromJSON(
     jsonString,
     (x) => GetGuildWelcomeScreenRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGuildWelcomeScreenRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildWelcomeScreenResponse$inboundSchema: z.ZodType<
+  GetGuildWelcomeScreenResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildWelcomeScreenResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGuildWelcomeScreenResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildWelcomeScreenResponse$Outbound;
+};
+
+/** @internal */
+export const GetGuildWelcomeScreenResponse$outboundSchema: z.ZodType<
+  GetGuildWelcomeScreenResponse$Outbound,
+  z.ZodTypeDef,
+  GetGuildWelcomeScreenResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildWelcomeScreenResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildWelcomeScreenResponse$ {
+  /** @deprecated use `GetGuildWelcomeScreenResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGuildWelcomeScreenResponse$inboundSchema;
+  /** @deprecated use `GetGuildWelcomeScreenResponse$outboundSchema` instead. */
+  export const outboundSchema = GetGuildWelcomeScreenResponse$outboundSchema;
+  /** @deprecated use `GetGuildWelcomeScreenResponse$Outbound` instead. */
+  export type Outbound = GetGuildWelcomeScreenResponse$Outbound;
+}
+
+export function getGuildWelcomeScreenResponseToJSON(
+  getGuildWelcomeScreenResponse: GetGuildWelcomeScreenResponse,
+): string {
+  return JSON.stringify(
+    GetGuildWelcomeScreenResponse$outboundSchema.parse(
+      getGuildWelcomeScreenResponse,
+    ),
+  );
+}
+
+export function getGuildWelcomeScreenResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildWelcomeScreenResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildWelcomeScreenResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildWelcomeScreenResponse' from JSON`,
   );
 }

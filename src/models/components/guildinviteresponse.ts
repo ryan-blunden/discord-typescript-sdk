@@ -41,25 +41,25 @@ import {
 export type GuildInviteResponse = {
   type?: 0 | undefined;
   code: string;
-  inviter?: UserResponse | null | undefined;
-  maxAge?: number | null | undefined;
-  createdAt?: Date | null | undefined;
+  inviter?: UserResponse | undefined;
+  maxAge?: number | undefined;
+  createdAt?: Date | undefined;
   expiresAt?: Date | null | undefined;
-  isContact?: boolean | null | undefined;
-  flags?: number | null | undefined;
-  guild?: InviteGuildResponse | null | undefined;
-  guildId?: string | null | undefined;
-  channel?: InviteChannelResponse | null | undefined;
-  targetType?: 1 | null | undefined;
-  targetUser?: UserResponse | null | undefined;
-  targetApplication?: InviteApplicationResponse | null | undefined;
-  guildScheduledEvent?: ScheduledEventResponse | null | undefined;
-  uses?: number | null | undefined;
-  maxUses?: number | null | undefined;
-  temporary?: boolean | null | undefined;
+  isContact?: boolean | undefined;
+  flags?: number | undefined;
+  guild: InviteGuildResponse;
+  guildId: string;
+  channel: InviteChannelResponse;
+  targetType?: 1 | undefined;
+  targetUser?: UserResponse | undefined;
+  targetApplication?: InviteApplicationResponse | undefined;
+  guildScheduledEvent?: ScheduledEventResponse | undefined;
+  uses?: number | undefined;
+  maxUses?: number | undefined;
+  temporary?: boolean | undefined;
   approximateMemberCount?: number | null | undefined;
   approximatePresenceCount?: number | null | undefined;
-  isNicknameChangeable?: boolean | null | undefined;
+  isNicknameChangeable?: boolean | undefined;
 };
 
 /** @internal */
@@ -70,31 +70,28 @@ export const GuildInviteResponse$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal(0).optional(),
   code: z.string(),
-  inviter: z.nullable(UserResponse$inboundSchema).optional(),
-  max_age: z.nullable(z.number().int()).optional(),
-  created_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
+  inviter: UserResponse$inboundSchema.optional(),
+  max_age: z.number().int().optional(),
+  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
   expires_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  is_contact: z.nullable(z.boolean()).optional(),
-  flags: z.nullable(z.number().int()).optional(),
-  guild: z.nullable(InviteGuildResponse$inboundSchema).optional(),
-  guild_id: z.nullable(z.string()).optional(),
-  channel: z.nullable(InviteChannelResponse$inboundSchema).optional(),
-  target_type: z.nullable(z.literal(1)).optional(),
-  target_user: z.nullable(UserResponse$inboundSchema).optional(),
-  target_application: z.nullable(InviteApplicationResponse$inboundSchema)
-    .optional(),
-  guild_scheduled_event: z.nullable(ScheduledEventResponse$inboundSchema)
-    .optional(),
-  uses: z.nullable(z.number().int()).optional(),
-  max_uses: z.nullable(z.number().int()).optional(),
-  temporary: z.nullable(z.boolean()).optional(),
+  is_contact: z.boolean().optional(),
+  flags: z.number().int().optional(),
+  guild: InviteGuildResponse$inboundSchema,
+  guild_id: z.string(),
+  channel: InviteChannelResponse$inboundSchema,
+  target_type: z.literal(1).optional(),
+  target_user: UserResponse$inboundSchema.optional(),
+  target_application: InviteApplicationResponse$inboundSchema.optional(),
+  guild_scheduled_event: ScheduledEventResponse$inboundSchema.optional(),
+  uses: z.number().int().optional(),
+  max_uses: z.number().int().optional(),
+  temporary: z.boolean().optional(),
   approximate_member_count: z.nullable(z.number().int()).optional(),
   approximate_presence_count: z.nullable(z.number().int()).optional(),
-  is_nickname_changeable: z.nullable(z.boolean()).optional(),
+  is_nickname_changeable: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_age": "maxAge",
@@ -117,25 +114,25 @@ export const GuildInviteResponse$inboundSchema: z.ZodType<
 export type GuildInviteResponse$Outbound = {
   type: 0;
   code: string;
-  inviter?: UserResponse$Outbound | null | undefined;
-  max_age?: number | null | undefined;
-  created_at?: string | null | undefined;
+  inviter?: UserResponse$Outbound | undefined;
+  max_age?: number | undefined;
+  created_at?: string | undefined;
   expires_at?: string | null | undefined;
-  is_contact?: boolean | null | undefined;
-  flags?: number | null | undefined;
-  guild?: InviteGuildResponse$Outbound | null | undefined;
-  guild_id?: string | null | undefined;
-  channel?: InviteChannelResponse$Outbound | null | undefined;
-  target_type: 1 | null;
-  target_user?: UserResponse$Outbound | null | undefined;
-  target_application?: InviteApplicationResponse$Outbound | null | undefined;
-  guild_scheduled_event?: ScheduledEventResponse$Outbound | null | undefined;
-  uses?: number | null | undefined;
-  max_uses?: number | null | undefined;
-  temporary?: boolean | null | undefined;
+  is_contact?: boolean | undefined;
+  flags?: number | undefined;
+  guild: InviteGuildResponse$Outbound;
+  guild_id: string;
+  channel: InviteChannelResponse$Outbound;
+  target_type: 1;
+  target_user?: UserResponse$Outbound | undefined;
+  target_application?: InviteApplicationResponse$Outbound | undefined;
+  guild_scheduled_event?: ScheduledEventResponse$Outbound | undefined;
+  uses?: number | undefined;
+  max_uses?: number | undefined;
+  temporary?: boolean | undefined;
   approximate_member_count?: number | null | undefined;
   approximate_presence_count?: number | null | undefined;
-  is_nickname_changeable?: boolean | null | undefined;
+  is_nickname_changeable?: boolean | undefined;
 };
 
 /** @internal */
@@ -146,27 +143,25 @@ export const GuildInviteResponse$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal(0).default(0 as const),
   code: z.string(),
-  inviter: z.nullable(UserResponse$outboundSchema).optional(),
-  maxAge: z.nullable(z.number().int()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  inviter: UserResponse$outboundSchema.optional(),
+  maxAge: z.number().int().optional(),
+  createdAt: z.date().transform(v => v.toISOString()).optional(),
   expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  isContact: z.nullable(z.boolean()).optional(),
-  flags: z.nullable(z.number().int()).optional(),
-  guild: z.nullable(InviteGuildResponse$outboundSchema).optional(),
-  guildId: z.nullable(z.string()).optional(),
-  channel: z.nullable(InviteChannelResponse$outboundSchema).optional(),
-  targetType: z.nullable(z.literal(1).default(1 as const)),
-  targetUser: z.nullable(UserResponse$outboundSchema).optional(),
-  targetApplication: z.nullable(InviteApplicationResponse$outboundSchema)
-    .optional(),
-  guildScheduledEvent: z.nullable(ScheduledEventResponse$outboundSchema)
-    .optional(),
-  uses: z.nullable(z.number().int()).optional(),
-  maxUses: z.nullable(z.number().int()).optional(),
-  temporary: z.nullable(z.boolean()).optional(),
+  isContact: z.boolean().optional(),
+  flags: z.number().int().optional(),
+  guild: InviteGuildResponse$outboundSchema,
+  guildId: z.string(),
+  channel: InviteChannelResponse$outboundSchema,
+  targetType: z.literal(1).default(1 as const),
+  targetUser: UserResponse$outboundSchema.optional(),
+  targetApplication: InviteApplicationResponse$outboundSchema.optional(),
+  guildScheduledEvent: ScheduledEventResponse$outboundSchema.optional(),
+  uses: z.number().int().optional(),
+  maxUses: z.number().int().optional(),
+  temporary: z.boolean().optional(),
   approximateMemberCount: z.nullable(z.number().int()).optional(),
   approximatePresenceCount: z.nullable(z.number().int()).optional(),
-  isNicknameChangeable: z.nullable(z.boolean()).optional(),
+  isNicknameChangeable: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     maxAge: "max_age",

@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildEmojiRequest = {
   guildId: string;
   emojiId: string;
+};
+
+export type GetGuildEmojiResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.EmojiResponse;
 };
 
 /** @internal */
@@ -77,5 +83,72 @@ export function getGuildEmojiRequestFromJSON(
     jsonString,
     (x) => GetGuildEmojiRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGuildEmojiRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildEmojiResponse$inboundSchema: z.ZodType<
+  GetGuildEmojiResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.EmojiResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGuildEmojiResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.EmojiResponse$Outbound;
+};
+
+/** @internal */
+export const GetGuildEmojiResponse$outboundSchema: z.ZodType<
+  GetGuildEmojiResponse$Outbound,
+  z.ZodTypeDef,
+  GetGuildEmojiResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.EmojiResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildEmojiResponse$ {
+  /** @deprecated use `GetGuildEmojiResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGuildEmojiResponse$inboundSchema;
+  /** @deprecated use `GetGuildEmojiResponse$outboundSchema` instead. */
+  export const outboundSchema = GetGuildEmojiResponse$outboundSchema;
+  /** @deprecated use `GetGuildEmojiResponse$Outbound` instead. */
+  export type Outbound = GetGuildEmojiResponse$Outbound;
+}
+
+export function getGuildEmojiResponseToJSON(
+  getGuildEmojiResponse: GetGuildEmojiResponse,
+): string {
+  return JSON.stringify(
+    GetGuildEmojiResponse$outboundSchema.parse(getGuildEmojiResponse),
+  );
+}
+
+export function getGuildEmojiResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildEmojiResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildEmojiResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildEmojiResponse' from JSON`,
   );
 }

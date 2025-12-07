@@ -94,15 +94,15 @@ export type ApplicationCommandResponse = {
   defaultMemberPermissions?: string | null | undefined;
   type?: 1 | undefined;
   name: string;
-  nameLocalized?: string | null | undefined;
+  nameLocalized?: string | undefined;
   nameLocalizations?: { [k: string]: string } | null | undefined;
   description: string;
-  descriptionLocalized?: string | null | undefined;
+  descriptionLocalized?: string | undefined;
   descriptionLocalizations?: { [k: string]: string } | null | undefined;
-  guildId?: string | null | undefined;
-  dmPermission?: boolean | null | undefined;
+  guildId?: string | undefined;
+  dmPermission?: boolean | undefined;
   contexts?: Array<number> | null | undefined;
-  integrationTypes?: Array<number> | null | undefined;
+  integrationTypes?: Array<number> | undefined;
   options?:
     | Array<
       | ApplicationCommandAttachmentOptionResponse
@@ -117,9 +117,8 @@ export type ApplicationCommandResponse = {
       | ApplicationCommandNumberOptionResponse
       | ApplicationCommandStringOptionResponse
     >
-    | null
     | undefined;
-  nsfw?: boolean | null | undefined;
+  nsfw?: boolean | undefined;
 };
 
 /** @internal */
@@ -220,33 +219,31 @@ export const ApplicationCommandResponse$inboundSchema: z.ZodType<
   default_member_permissions: z.nullable(z.string()).optional(),
   type: z.literal(1).optional(),
   name: z.string(),
-  name_localized: z.nullable(z.string()).optional(),
+  name_localized: z.string().optional(),
   name_localizations: z.nullable(z.record(z.string())).optional(),
   description: z.string(),
-  description_localized: z.nullable(z.string()).optional(),
+  description_localized: z.string().optional(),
   description_localizations: z.nullable(z.record(z.string())).optional(),
-  guild_id: z.nullable(z.string()).optional(),
-  dm_permission: z.nullable(z.boolean()).optional(),
+  guild_id: z.string().optional(),
+  dm_permission: z.boolean().optional(),
   contexts: z.nullable(z.array(z.number().int())).optional(),
-  integration_types: z.nullable(z.array(z.number().int())).optional(),
-  options: z.nullable(
-    z.array(
-      z.union([
-        ApplicationCommandAttachmentOptionResponse$inboundSchema,
-        ApplicationCommandBooleanOptionResponse$inboundSchema,
-        ApplicationCommandMentionableOptionResponse$inboundSchema,
-        ApplicationCommandRoleOptionResponse$inboundSchema,
-        ApplicationCommandUserOptionResponse$inboundSchema,
-        ApplicationCommandChannelOptionResponse$inboundSchema,
-        ApplicationCommandSubcommandGroupOptionResponse$inboundSchema,
-        ApplicationCommandSubcommandOptionResponse$inboundSchema,
-        ApplicationCommandIntegerOptionResponse$inboundSchema,
-        ApplicationCommandNumberOptionResponse$inboundSchema,
-        ApplicationCommandStringOptionResponse$inboundSchema,
-      ]),
-    ),
+  integration_types: z.array(z.number().int()).optional(),
+  options: z.array(
+    z.union([
+      ApplicationCommandAttachmentOptionResponse$inboundSchema,
+      ApplicationCommandBooleanOptionResponse$inboundSchema,
+      ApplicationCommandMentionableOptionResponse$inboundSchema,
+      ApplicationCommandRoleOptionResponse$inboundSchema,
+      ApplicationCommandUserOptionResponse$inboundSchema,
+      ApplicationCommandChannelOptionResponse$inboundSchema,
+      ApplicationCommandSubcommandGroupOptionResponse$inboundSchema,
+      ApplicationCommandSubcommandOptionResponse$inboundSchema,
+      ApplicationCommandIntegerOptionResponse$inboundSchema,
+      ApplicationCommandNumberOptionResponse$inboundSchema,
+      ApplicationCommandStringOptionResponse$inboundSchema,
+    ]),
   ).optional(),
-  nsfw: z.nullable(z.boolean()).optional(),
+  nsfw: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "application_id": "applicationId",
@@ -269,15 +266,15 @@ export type ApplicationCommandResponse$Outbound = {
   default_member_permissions?: string | null | undefined;
   type: 1;
   name: string;
-  name_localized?: string | null | undefined;
+  name_localized?: string | undefined;
   name_localizations?: { [k: string]: string } | null | undefined;
   description: string;
-  description_localized?: string | null | undefined;
+  description_localized?: string | undefined;
   description_localizations?: { [k: string]: string } | null | undefined;
-  guild_id?: string | null | undefined;
-  dm_permission?: boolean | null | undefined;
+  guild_id?: string | undefined;
+  dm_permission?: boolean | undefined;
   contexts?: Array<number> | null | undefined;
-  integration_types?: Array<number> | null | undefined;
+  integration_types?: Array<number> | undefined;
   options?:
     | Array<
       | ApplicationCommandAttachmentOptionResponse$Outbound
@@ -292,9 +289,8 @@ export type ApplicationCommandResponse$Outbound = {
       | ApplicationCommandNumberOptionResponse$Outbound
       | ApplicationCommandStringOptionResponse$Outbound
     >
-    | null
     | undefined;
-  nsfw?: boolean | null | undefined;
+  nsfw?: boolean | undefined;
 };
 
 /** @internal */
@@ -309,33 +305,31 @@ export const ApplicationCommandResponse$outboundSchema: z.ZodType<
   defaultMemberPermissions: z.nullable(z.string()).optional(),
   type: z.literal(1).default(1 as const),
   name: z.string(),
-  nameLocalized: z.nullable(z.string()).optional(),
+  nameLocalized: z.string().optional(),
   nameLocalizations: z.nullable(z.record(z.string())).optional(),
   description: z.string(),
-  descriptionLocalized: z.nullable(z.string()).optional(),
+  descriptionLocalized: z.string().optional(),
   descriptionLocalizations: z.nullable(z.record(z.string())).optional(),
-  guildId: z.nullable(z.string()).optional(),
-  dmPermission: z.nullable(z.boolean()).optional(),
+  guildId: z.string().optional(),
+  dmPermission: z.boolean().optional(),
   contexts: z.nullable(z.array(z.number().int())).optional(),
-  integrationTypes: z.nullable(z.array(z.number().int())).optional(),
-  options: z.nullable(
-    z.array(
-      z.union([
-        ApplicationCommandAttachmentOptionResponse$outboundSchema,
-        ApplicationCommandBooleanOptionResponse$outboundSchema,
-        ApplicationCommandMentionableOptionResponse$outboundSchema,
-        ApplicationCommandRoleOptionResponse$outboundSchema,
-        ApplicationCommandUserOptionResponse$outboundSchema,
-        ApplicationCommandChannelOptionResponse$outboundSchema,
-        ApplicationCommandSubcommandGroupOptionResponse$outboundSchema,
-        ApplicationCommandSubcommandOptionResponse$outboundSchema,
-        ApplicationCommandIntegerOptionResponse$outboundSchema,
-        ApplicationCommandNumberOptionResponse$outboundSchema,
-        ApplicationCommandStringOptionResponse$outboundSchema,
-      ]),
-    ),
+  integrationTypes: z.array(z.number().int()).optional(),
+  options: z.array(
+    z.union([
+      ApplicationCommandAttachmentOptionResponse$outboundSchema,
+      ApplicationCommandBooleanOptionResponse$outboundSchema,
+      ApplicationCommandMentionableOptionResponse$outboundSchema,
+      ApplicationCommandRoleOptionResponse$outboundSchema,
+      ApplicationCommandUserOptionResponse$outboundSchema,
+      ApplicationCommandChannelOptionResponse$outboundSchema,
+      ApplicationCommandSubcommandGroupOptionResponse$outboundSchema,
+      ApplicationCommandSubcommandOptionResponse$outboundSchema,
+      ApplicationCommandIntegerOptionResponse$outboundSchema,
+      ApplicationCommandNumberOptionResponse$outboundSchema,
+      ApplicationCommandStringOptionResponse$outboundSchema,
+    ]),
   ).optional(),
-  nsfw: z.nullable(z.boolean()).optional(),
+  nsfw: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     applicationId: "application_id",

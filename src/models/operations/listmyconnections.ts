@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListMyConnectionsSecurity = {
   botToken?: string | undefined;
+};
+
+export type ListMyConnectionsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.ConnectedAccountResponse>;
 };
 
 /** @internal */
@@ -71,5 +77,72 @@ export function listMyConnectionsSecurityFromJSON(
     jsonString,
     (x) => ListMyConnectionsSecurity$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListMyConnectionsSecurity' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListMyConnectionsResponse$inboundSchema: z.ZodType<
+  ListMyConnectionsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(components.ConnectedAccountResponse$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListMyConnectionsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<components.ConnectedAccountResponse$Outbound>;
+};
+
+/** @internal */
+export const ListMyConnectionsResponse$outboundSchema: z.ZodType<
+  ListMyConnectionsResponse$Outbound,
+  z.ZodTypeDef,
+  ListMyConnectionsResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(components.ConnectedAccountResponse$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListMyConnectionsResponse$ {
+  /** @deprecated use `ListMyConnectionsResponse$inboundSchema` instead. */
+  export const inboundSchema = ListMyConnectionsResponse$inboundSchema;
+  /** @deprecated use `ListMyConnectionsResponse$outboundSchema` instead. */
+  export const outboundSchema = ListMyConnectionsResponse$outboundSchema;
+  /** @deprecated use `ListMyConnectionsResponse$Outbound` instead. */
+  export type Outbound = ListMyConnectionsResponse$Outbound;
+}
+
+export function listMyConnectionsResponseToJSON(
+  listMyConnectionsResponse: ListMyConnectionsResponse,
+): string {
+  return JSON.stringify(
+    ListMyConnectionsResponse$outboundSchema.parse(listMyConnectionsResponse),
+  );
+}
+
+export function listMyConnectionsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListMyConnectionsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListMyConnectionsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListMyConnectionsResponse' from JSON`,
   );
 }

@@ -73,14 +73,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationRoleConnectionsMetadataItemResponse[]](../../models/.md)\>**
+**Promise\<[operations.GetApplicationRoleConnectionsMetadataResponse](../../models/operations/getapplicationroleconnectionsmetadataresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -148,14 +149,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationRoleConnectionsMetadataItemResponse[]](../../models/.md)\>**
+**Promise\<[operations.UpdateApplicationRoleConnectionsMetadataResponse](../../models/operations/updateapplicationroleconnectionsmetadataresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteUserConnection
 
@@ -171,11 +173,11 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.applicationRoleConnectionMetadata.deleteUserConnection({
+  const result = await discord.applicationRoleConnectionMetadata.deleteUserConnection({
     applicationId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -201,7 +203,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("applicationRoleConnectionMetadataDeleteUserConnection failed:", res.error);
   }
@@ -221,11 +223,12 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteApplicationUserRoleConnectionResponse](../../models/operations/deleteapplicationuserroleconnectionresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetSelfVoiceStateRequest = {
   guildId: string;
+};
+
+export type GetSelfVoiceStateResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.VoiceStateResponse;
 };
 
 /** @internal */
@@ -71,5 +77,72 @@ export function getSelfVoiceStateRequestFromJSON(
     jsonString,
     (x) => GetSelfVoiceStateRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetSelfVoiceStateRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetSelfVoiceStateResponse$inboundSchema: z.ZodType<
+  GetSelfVoiceStateResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.VoiceStateResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetSelfVoiceStateResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.VoiceStateResponse$Outbound;
+};
+
+/** @internal */
+export const GetSelfVoiceStateResponse$outboundSchema: z.ZodType<
+  GetSelfVoiceStateResponse$Outbound,
+  z.ZodTypeDef,
+  GetSelfVoiceStateResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.VoiceStateResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetSelfVoiceStateResponse$ {
+  /** @deprecated use `GetSelfVoiceStateResponse$inboundSchema` instead. */
+  export const inboundSchema = GetSelfVoiceStateResponse$inboundSchema;
+  /** @deprecated use `GetSelfVoiceStateResponse$outboundSchema` instead. */
+  export const outboundSchema = GetSelfVoiceStateResponse$outboundSchema;
+  /** @deprecated use `GetSelfVoiceStateResponse$Outbound` instead. */
+  export type Outbound = GetSelfVoiceStateResponse$Outbound;
+}
+
+export function getSelfVoiceStateResponseToJSON(
+  getSelfVoiceStateResponse: GetSelfVoiceStateResponse,
+): string {
+  return JSON.stringify(
+    GetSelfVoiceStateResponse$outboundSchema.parse(getSelfVoiceStateResponse),
+  );
+}
+
+export function getSelfVoiceStateResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetSelfVoiceStateResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetSelfVoiceStateResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetSelfVoiceStateResponse' from JSON`,
   );
 }

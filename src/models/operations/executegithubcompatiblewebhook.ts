@@ -21,6 +21,10 @@ export type ExecuteGithubCompatibleWebhookRequest = {
   githubWebhook: components.GithubWebhook;
 };
 
+export type ExecuteGithubCompatibleWebhookResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const ExecuteGithubCompatibleWebhookSecurity$inboundSchema: z.ZodType<
   ExecuteGithubCompatibleWebhookSecurity,
@@ -171,5 +175,73 @@ export function executeGithubCompatibleWebhookRequestFromJSON(
     (x) =>
       ExecuteGithubCompatibleWebhookRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ExecuteGithubCompatibleWebhookRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ExecuteGithubCompatibleWebhookResponse$inboundSchema: z.ZodType<
+  ExecuteGithubCompatibleWebhookResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type ExecuteGithubCompatibleWebhookResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const ExecuteGithubCompatibleWebhookResponse$outboundSchema: z.ZodType<
+  ExecuteGithubCompatibleWebhookResponse$Outbound,
+  z.ZodTypeDef,
+  ExecuteGithubCompatibleWebhookResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ExecuteGithubCompatibleWebhookResponse$ {
+  /** @deprecated use `ExecuteGithubCompatibleWebhookResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    ExecuteGithubCompatibleWebhookResponse$inboundSchema;
+  /** @deprecated use `ExecuteGithubCompatibleWebhookResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    ExecuteGithubCompatibleWebhookResponse$outboundSchema;
+  /** @deprecated use `ExecuteGithubCompatibleWebhookResponse$Outbound` instead. */
+  export type Outbound = ExecuteGithubCompatibleWebhookResponse$Outbound;
+}
+
+export function executeGithubCompatibleWebhookResponseToJSON(
+  executeGithubCompatibleWebhookResponse:
+    ExecuteGithubCompatibleWebhookResponse,
+): string {
+  return JSON.stringify(
+    ExecuteGithubCompatibleWebhookResponse$outboundSchema.parse(
+      executeGithubCompatibleWebhookResponse,
+    ),
+  );
+}
+
+export function executeGithubCompatibleWebhookResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ExecuteGithubCompatibleWebhookResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ExecuteGithubCompatibleWebhookResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ExecuteGithubCompatibleWebhookResponse' from JSON`,
   );
 }

@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetVoiceStateRequest = {
   guildId: string;
   userId: string;
+};
+
+export type GetVoiceStateResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.VoiceStateResponse;
 };
 
 /** @internal */
@@ -77,5 +83,72 @@ export function getVoiceStateRequestFromJSON(
     jsonString,
     (x) => GetVoiceStateRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetVoiceStateRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetVoiceStateResponse$inboundSchema: z.ZodType<
+  GetVoiceStateResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.VoiceStateResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetVoiceStateResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.VoiceStateResponse$Outbound;
+};
+
+/** @internal */
+export const GetVoiceStateResponse$outboundSchema: z.ZodType<
+  GetVoiceStateResponse$Outbound,
+  z.ZodTypeDef,
+  GetVoiceStateResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.VoiceStateResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetVoiceStateResponse$ {
+  /** @deprecated use `GetVoiceStateResponse$inboundSchema` instead. */
+  export const inboundSchema = GetVoiceStateResponse$inboundSchema;
+  /** @deprecated use `GetVoiceStateResponse$outboundSchema` instead. */
+  export const outboundSchema = GetVoiceStateResponse$outboundSchema;
+  /** @deprecated use `GetVoiceStateResponse$Outbound` instead. */
+  export type Outbound = GetVoiceStateResponse$Outbound;
+}
+
+export function getVoiceStateResponseToJSON(
+  getVoiceStateResponse: GetVoiceStateResponse,
+): string {
+  return JSON.stringify(
+    GetVoiceStateResponse$outboundSchema.parse(getVoiceStateResponse),
+  );
+}
+
+export function getVoiceStateResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetVoiceStateResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetVoiceStateResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetVoiceStateResponse' from JSON`,
   );
 }

@@ -17,19 +17,16 @@ import {
 export type ApplicationCommandIntegerOptionResponse = {
   type?: 1 | undefined;
   name: string;
-  nameLocalized?: string | null | undefined;
+  nameLocalized?: string | undefined;
   nameLocalizations?: { [k: string]: string } | null | undefined;
   description: string;
-  descriptionLocalized?: string | null | undefined;
+  descriptionLocalized?: string | undefined;
   descriptionLocalizations?: { [k: string]: string } | null | undefined;
-  required?: boolean | null | undefined;
-  autocomplete?: boolean | null | undefined;
-  choices?:
-    | Array<ApplicationCommandOptionIntegerChoiceResponse>
-    | null
-    | undefined;
-  minValue?: number | null | undefined;
-  maxValue?: number | null | undefined;
+  required?: boolean | undefined;
+  autocomplete?: boolean | undefined;
+  choices?: Array<ApplicationCommandOptionIntegerChoiceResponse> | undefined;
+  minValue?: number | undefined;
+  maxValue?: number | undefined;
 };
 
 /** @internal */
@@ -40,18 +37,17 @@ export const ApplicationCommandIntegerOptionResponse$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal(1).optional(),
   name: z.string(),
-  name_localized: z.nullable(z.string()).optional(),
+  name_localized: z.string().optional(),
   name_localizations: z.nullable(z.record(z.string())).optional(),
   description: z.string(),
-  description_localized: z.nullable(z.string()).optional(),
+  description_localized: z.string().optional(),
   description_localizations: z.nullable(z.record(z.string())).optional(),
-  required: z.nullable(z.boolean()).optional(),
-  autocomplete: z.nullable(z.boolean()).optional(),
-  choices: z.nullable(
-    z.array(ApplicationCommandOptionIntegerChoiceResponse$inboundSchema),
-  ).optional(),
-  min_value: z.nullable(z.number().int()).optional(),
-  max_value: z.nullable(z.number().int()).optional(),
+  required: z.boolean().optional(),
+  autocomplete: z.boolean().optional(),
+  choices: z.array(ApplicationCommandOptionIntegerChoiceResponse$inboundSchema)
+    .optional(),
+  min_value: z.number().int().optional(),
+  max_value: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "name_localized": "nameLocalized",
@@ -67,19 +63,18 @@ export const ApplicationCommandIntegerOptionResponse$inboundSchema: z.ZodType<
 export type ApplicationCommandIntegerOptionResponse$Outbound = {
   type: 1;
   name: string;
-  name_localized?: string | null | undefined;
+  name_localized?: string | undefined;
   name_localizations?: { [k: string]: string } | null | undefined;
   description: string;
-  description_localized?: string | null | undefined;
+  description_localized?: string | undefined;
   description_localizations?: { [k: string]: string } | null | undefined;
-  required?: boolean | null | undefined;
-  autocomplete?: boolean | null | undefined;
+  required?: boolean | undefined;
+  autocomplete?: boolean | undefined;
   choices?:
     | Array<ApplicationCommandOptionIntegerChoiceResponse$Outbound>
-    | null
     | undefined;
-  min_value?: number | null | undefined;
-  max_value?: number | null | undefined;
+  min_value?: number | undefined;
+  max_value?: number | undefined;
 };
 
 /** @internal */
@@ -90,18 +85,17 @@ export const ApplicationCommandIntegerOptionResponse$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal(1).default(1 as const),
   name: z.string(),
-  nameLocalized: z.nullable(z.string()).optional(),
+  nameLocalized: z.string().optional(),
   nameLocalizations: z.nullable(z.record(z.string())).optional(),
   description: z.string(),
-  descriptionLocalized: z.nullable(z.string()).optional(),
+  descriptionLocalized: z.string().optional(),
   descriptionLocalizations: z.nullable(z.record(z.string())).optional(),
-  required: z.nullable(z.boolean()).optional(),
-  autocomplete: z.nullable(z.boolean()).optional(),
-  choices: z.nullable(
-    z.array(ApplicationCommandOptionIntegerChoiceResponse$outboundSchema),
-  ).optional(),
-  minValue: z.nullable(z.number().int()).optional(),
-  maxValue: z.nullable(z.number().int()).optional(),
+  required: z.boolean().optional(),
+  autocomplete: z.boolean().optional(),
+  choices: z.array(ApplicationCommandOptionIntegerChoiceResponse$outboundSchema)
+    .optional(),
+  minValue: z.number().int().optional(),
+  maxValue: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     nameLocalized: "name_localized",

@@ -9,10 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageReferenceResponse = {
-  type?: 0 | null | undefined;
+  type?: 0 | undefined;
   channelId: string;
-  messageId?: string | null | undefined;
-  guildId?: string | null | undefined;
+  messageId?: string | undefined;
+  guildId?: string | undefined;
 };
 
 /** @internal */
@@ -21,10 +21,10 @@ export const MessageReferenceResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.nullable(z.literal(0)).optional(),
+  type: z.literal(0).optional(),
   channel_id: z.string(),
-  message_id: z.nullable(z.string()).optional(),
-  guild_id: z.nullable(z.string()).optional(),
+  message_id: z.string().optional(),
+  guild_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "channel_id": "channelId",
@@ -35,10 +35,10 @@ export const MessageReferenceResponse$inboundSchema: z.ZodType<
 
 /** @internal */
 export type MessageReferenceResponse$Outbound = {
-  type: 0 | null;
+  type: 0;
   channel_id: string;
-  message_id?: string | null | undefined;
-  guild_id?: string | null | undefined;
+  message_id?: string | undefined;
+  guild_id?: string | undefined;
 };
 
 /** @internal */
@@ -47,10 +47,10 @@ export const MessageReferenceResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MessageReferenceResponse
 > = z.object({
-  type: z.nullable(z.literal(0).default(0 as const)),
+  type: z.literal(0).default(0 as const),
   channelId: z.string(),
-  messageId: z.nullable(z.string()).optional(),
-  guildId: z.nullable(z.string()).optional(),
+  messageId: z.string().optional(),
+  guildId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     channelId: "channel_id",

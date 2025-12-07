@@ -13,6 +13,10 @@ export type DeleteGuildMemberRequest = {
   userId: string;
 };
 
+export type DeleteGuildMemberResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteGuildMemberRequest$inboundSchema: z.ZodType<
   DeleteGuildMemberRequest,
@@ -77,5 +81,67 @@ export function deleteGuildMemberRequestFromJSON(
     jsonString,
     (x) => DeleteGuildMemberRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteGuildMemberRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteGuildMemberResponse$inboundSchema: z.ZodType<
+  DeleteGuildMemberResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteGuildMemberResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteGuildMemberResponse$outboundSchema: z.ZodType<
+  DeleteGuildMemberResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteGuildMemberResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteGuildMemberResponse$ {
+  /** @deprecated use `DeleteGuildMemberResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteGuildMemberResponse$inboundSchema;
+  /** @deprecated use `DeleteGuildMemberResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteGuildMemberResponse$outboundSchema;
+  /** @deprecated use `DeleteGuildMemberResponse$Outbound` instead. */
+  export type Outbound = DeleteGuildMemberResponse$Outbound;
+}
+
+export function deleteGuildMemberResponseToJSON(
+  deleteGuildMemberResponse: DeleteGuildMemberResponse,
+): string {
+  return JSON.stringify(
+    DeleteGuildMemberResponse$outboundSchema.parse(deleteGuildMemberResponse),
+  );
+}
+
+export function deleteGuildMemberResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildMemberResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteGuildMemberResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildMemberResponse' from JSON`,
   );
 }

@@ -20,6 +20,11 @@ export type CreateThreadRequest = {
     | components.CreateTextThreadWithoutMessageRequest;
 };
 
+export type CreateThreadResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.CreatedThreadResponse;
+};
+
 /** @internal */
 export const CreateThreadChannelsRequestRequestBody$inboundSchema: z.ZodType<
   CreateThreadChannelsRequestRequestBody,
@@ -154,5 +159,72 @@ export function createThreadRequestFromJSON(
     jsonString,
     (x) => CreateThreadRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateThreadRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateThreadResponse$inboundSchema: z.ZodType<
+  CreateThreadResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.CreatedThreadResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateThreadResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.CreatedThreadResponse$Outbound;
+};
+
+/** @internal */
+export const CreateThreadResponse$outboundSchema: z.ZodType<
+  CreateThreadResponse$Outbound,
+  z.ZodTypeDef,
+  CreateThreadResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.CreatedThreadResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateThreadResponse$ {
+  /** @deprecated use `CreateThreadResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateThreadResponse$inboundSchema;
+  /** @deprecated use `CreateThreadResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateThreadResponse$outboundSchema;
+  /** @deprecated use `CreateThreadResponse$Outbound` instead. */
+  export type Outbound = CreateThreadResponse$Outbound;
+}
+
+export function createThreadResponseToJSON(
+  createThreadResponse: CreateThreadResponse,
+): string {
+  return JSON.stringify(
+    CreateThreadResponse$outboundSchema.parse(createThreadResponse),
+  );
+}
+
+export function createThreadResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateThreadResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateThreadResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateThreadResponse' from JSON`,
   );
 }

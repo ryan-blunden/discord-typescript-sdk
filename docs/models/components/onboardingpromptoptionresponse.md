@@ -10,7 +10,9 @@ let value: OnboardingPromptOptionResponse = {
   title: "<value>",
   description:
     "tepid rival once lean wise psst poorly uselessly wonderful outside",
-  emoji: {},
+  emoji: {
+    animated: true,
+  },
   roleIds: [
     "<value 1>",
     "<value 2>",

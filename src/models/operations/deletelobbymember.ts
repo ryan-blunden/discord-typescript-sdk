@@ -13,6 +13,10 @@ export type DeleteLobbyMemberRequest = {
   userId: string;
 };
 
+export type DeleteLobbyMemberResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteLobbyMemberRequest$inboundSchema: z.ZodType<
   DeleteLobbyMemberRequest,
@@ -77,5 +81,67 @@ export function deleteLobbyMemberRequestFromJSON(
     jsonString,
     (x) => DeleteLobbyMemberRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteLobbyMemberRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteLobbyMemberResponse$inboundSchema: z.ZodType<
+  DeleteLobbyMemberResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteLobbyMemberResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteLobbyMemberResponse$outboundSchema: z.ZodType<
+  DeleteLobbyMemberResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteLobbyMemberResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteLobbyMemberResponse$ {
+  /** @deprecated use `DeleteLobbyMemberResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteLobbyMemberResponse$inboundSchema;
+  /** @deprecated use `DeleteLobbyMemberResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteLobbyMemberResponse$outboundSchema;
+  /** @deprecated use `DeleteLobbyMemberResponse$Outbound` instead. */
+  export type Outbound = DeleteLobbyMemberResponse$Outbound;
+}
+
+export function deleteLobbyMemberResponseToJSON(
+  deleteLobbyMemberResponse: DeleteLobbyMemberResponse,
+): string {
+  return JSON.stringify(
+    DeleteLobbyMemberResponse$outboundSchema.parse(deleteLobbyMemberResponse),
+  );
+}
+
+export function deleteLobbyMemberResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteLobbyMemberResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteLobbyMemberResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteLobbyMemberResponse' from JSON`,
   );
 }

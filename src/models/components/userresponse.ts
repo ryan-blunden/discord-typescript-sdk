@@ -33,14 +33,14 @@ export type UserResponse = {
   discriminator: string;
   publicFlags: number;
   flags: number;
-  bot?: boolean | null | undefined;
-  system?: boolean | null | undefined;
+  bot?: boolean | undefined;
+  system?: boolean | undefined;
   banner?: string | null | undefined;
   accentColor?: number | null | undefined;
   globalName?: string | null | undefined;
   avatarDecorationData?: UserAvatarDecorationResponse | null | undefined;
   collectibles?: UserCollectiblesResponse | null | undefined;
-  clan?: UserPrimaryGuildResponse | null | undefined;
+  primaryGuild?: UserPrimaryGuildResponse | null | undefined;
 };
 
 /** @internal */
@@ -55,21 +55,22 @@ export const UserResponse$inboundSchema: z.ZodType<
   discriminator: z.string(),
   public_flags: z.number().int(),
   flags: z.number().int(),
-  bot: z.nullable(z.boolean()).optional(),
-  system: z.nullable(z.boolean()).optional(),
+  bot: z.boolean().optional(),
+  system: z.boolean().optional(),
   banner: z.nullable(z.string()).optional(),
   accent_color: z.nullable(z.number().int()).optional(),
   global_name: z.nullable(z.string()).optional(),
   avatar_decoration_data: z.nullable(UserAvatarDecorationResponse$inboundSchema)
     .optional(),
   collectibles: z.nullable(UserCollectiblesResponse$inboundSchema).optional(),
-  clan: z.nullable(UserPrimaryGuildResponse$inboundSchema).optional(),
+  primary_guild: z.nullable(UserPrimaryGuildResponse$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "public_flags": "publicFlags",
     "accent_color": "accentColor",
     "global_name": "globalName",
     "avatar_decoration_data": "avatarDecorationData",
+    "primary_guild": "primaryGuild",
   });
 });
 
@@ -81,8 +82,8 @@ export type UserResponse$Outbound = {
   discriminator: string;
   public_flags: number;
   flags: number;
-  bot?: boolean | null | undefined;
-  system?: boolean | null | undefined;
+  bot?: boolean | undefined;
+  system?: boolean | undefined;
   banner?: string | null | undefined;
   accent_color?: number | null | undefined;
   global_name?: string | null | undefined;
@@ -91,7 +92,7 @@ export type UserResponse$Outbound = {
     | null
     | undefined;
   collectibles?: UserCollectiblesResponse$Outbound | null | undefined;
-  clan?: UserPrimaryGuildResponse$Outbound | null | undefined;
+  primary_guild?: UserPrimaryGuildResponse$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -106,21 +107,22 @@ export const UserResponse$outboundSchema: z.ZodType<
   discriminator: z.string(),
   publicFlags: z.number().int(),
   flags: z.number().int(),
-  bot: z.nullable(z.boolean()).optional(),
-  system: z.nullable(z.boolean()).optional(),
+  bot: z.boolean().optional(),
+  system: z.boolean().optional(),
   banner: z.nullable(z.string()).optional(),
   accentColor: z.nullable(z.number().int()).optional(),
   globalName: z.nullable(z.string()).optional(),
   avatarDecorationData: z.nullable(UserAvatarDecorationResponse$outboundSchema)
     .optional(),
   collectibles: z.nullable(UserCollectiblesResponse$outboundSchema).optional(),
-  clan: z.nullable(UserPrimaryGuildResponse$outboundSchema).optional(),
+  primaryGuild: z.nullable(UserPrimaryGuildResponse$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     publicFlags: "public_flags",
     accentColor: "accent_color",
     globalName: "global_name",
     avatarDecorationData: "avatar_decoration_data",
+    primaryGuild: "primary_guild",
   });
 });
 

@@ -13,6 +13,10 @@ export type DeprecatedDeletePinRequest = {
   messageId: string;
 };
 
+export type DeprecatedDeletePinResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeprecatedDeletePinRequest$inboundSchema: z.ZodType<
   DeprecatedDeletePinRequest,
@@ -77,5 +81,69 @@ export function deprecatedDeletePinRequestFromJSON(
     jsonString,
     (x) => DeprecatedDeletePinRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeprecatedDeletePinRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeprecatedDeletePinResponse$inboundSchema: z.ZodType<
+  DeprecatedDeletePinResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeprecatedDeletePinResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeprecatedDeletePinResponse$outboundSchema: z.ZodType<
+  DeprecatedDeletePinResponse$Outbound,
+  z.ZodTypeDef,
+  DeprecatedDeletePinResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeprecatedDeletePinResponse$ {
+  /** @deprecated use `DeprecatedDeletePinResponse$inboundSchema` instead. */
+  export const inboundSchema = DeprecatedDeletePinResponse$inboundSchema;
+  /** @deprecated use `DeprecatedDeletePinResponse$outboundSchema` instead. */
+  export const outboundSchema = DeprecatedDeletePinResponse$outboundSchema;
+  /** @deprecated use `DeprecatedDeletePinResponse$Outbound` instead. */
+  export type Outbound = DeprecatedDeletePinResponse$Outbound;
+}
+
+export function deprecatedDeletePinResponseToJSON(
+  deprecatedDeletePinResponse: DeprecatedDeletePinResponse,
+): string {
+  return JSON.stringify(
+    DeprecatedDeletePinResponse$outboundSchema.parse(
+      deprecatedDeletePinResponse,
+    ),
+  );
+}
+
+export function deprecatedDeletePinResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeprecatedDeletePinResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeprecatedDeletePinResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeprecatedDeletePinResponse' from JSON`,
   );
 }

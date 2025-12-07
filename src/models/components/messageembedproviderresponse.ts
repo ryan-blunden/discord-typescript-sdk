@@ -9,7 +9,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageEmbedProviderResponse = {
   name: string;
-  url?: string | null | undefined;
+  url?: string | undefined;
 };
 
 /** @internal */
@@ -19,13 +19,13 @@ export const MessageEmbedProviderResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  url: z.nullable(z.string()).optional(),
+  url: z.string().optional(),
 });
 
 /** @internal */
 export type MessageEmbedProviderResponse$Outbound = {
   name: string;
-  url?: string | null | undefined;
+  url?: string | undefined;
 };
 
 /** @internal */
@@ -35,7 +35,7 @@ export const MessageEmbedProviderResponse$outboundSchema: z.ZodType<
   MessageEmbedProviderResponse
 > = z.object({
   name: z.string(),
-  url: z.nullable(z.string()).optional(),
+  url: z.string().optional(),
 });
 
 /**

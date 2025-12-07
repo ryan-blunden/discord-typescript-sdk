@@ -13,6 +13,10 @@ export type DeleteGuildEmojiRequest = {
   emojiId: string;
 };
 
+export type DeleteGuildEmojiResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteGuildEmojiRequest$inboundSchema: z.ZodType<
   DeleteGuildEmojiRequest,
@@ -77,5 +81,67 @@ export function deleteGuildEmojiRequestFromJSON(
     jsonString,
     (x) => DeleteGuildEmojiRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteGuildEmojiRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteGuildEmojiResponse$inboundSchema: z.ZodType<
+  DeleteGuildEmojiResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteGuildEmojiResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteGuildEmojiResponse$outboundSchema: z.ZodType<
+  DeleteGuildEmojiResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteGuildEmojiResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteGuildEmojiResponse$ {
+  /** @deprecated use `DeleteGuildEmojiResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteGuildEmojiResponse$inboundSchema;
+  /** @deprecated use `DeleteGuildEmojiResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteGuildEmojiResponse$outboundSchema;
+  /** @deprecated use `DeleteGuildEmojiResponse$Outbound` instead. */
+  export type Outbound = DeleteGuildEmojiResponse$Outbound;
+}
+
+export function deleteGuildEmojiResponseToJSON(
+  deleteGuildEmojiResponse: DeleteGuildEmojiResponse,
+): string {
+  return JSON.stringify(
+    DeleteGuildEmojiResponse$outboundSchema.parse(deleteGuildEmojiResponse),
+  );
+}
+
+export function deleteGuildEmojiResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildEmojiResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteGuildEmojiResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildEmojiResponse' from JSON`,
   );
 }

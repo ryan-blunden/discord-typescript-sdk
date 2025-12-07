@@ -5,18 +5,31 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateOrJoinLobbySecurity = {
   botToken?: string | undefined;
 };
 
+export const Flags = {
+  One: 1,
+} as const;
+export type Flags = ClosedEnum<typeof Flags>;
+
 export type CreateOrJoinLobbyRequestBody = {
   idleTimeoutSeconds?: number | null | undefined;
   lobbyMetadata?: { [k: string]: string } | null | undefined;
   memberMetadata?: { [k: string]: string } | null | undefined;
   secret: string;
+  flags?: Flags | null | undefined;
+};
+
+export type CreateOrJoinLobbyResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.LobbyResponse;
 };
 
 /** @internal */
@@ -82,6 +95,26 @@ export function createOrJoinLobbySecurityFromJSON(
 }
 
 /** @internal */
+export const Flags$inboundSchema: z.ZodNativeEnum<typeof Flags> = z.nativeEnum(
+  Flags,
+);
+
+/** @internal */
+export const Flags$outboundSchema: z.ZodNativeEnum<typeof Flags> =
+  Flags$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Flags$ {
+  /** @deprecated use `Flags$inboundSchema` instead. */
+  export const inboundSchema = Flags$inboundSchema;
+  /** @deprecated use `Flags$outboundSchema` instead. */
+  export const outboundSchema = Flags$outboundSchema;
+}
+
+/** @internal */
 export const CreateOrJoinLobbyRequestBody$inboundSchema: z.ZodType<
   CreateOrJoinLobbyRequestBody,
   z.ZodTypeDef,
@@ -91,6 +124,7 @@ export const CreateOrJoinLobbyRequestBody$inboundSchema: z.ZodType<
   lobby_metadata: z.nullable(z.record(z.string())).optional(),
   member_metadata: z.nullable(z.record(z.string())).optional(),
   secret: z.string(),
+  flags: z.nullable(Flags$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "idle_timeout_seconds": "idleTimeoutSeconds",
@@ -105,6 +139,7 @@ export type CreateOrJoinLobbyRequestBody$Outbound = {
   lobby_metadata?: { [k: string]: string } | null | undefined;
   member_metadata?: { [k: string]: string } | null | undefined;
   secret: string;
+  flags?: number | null | undefined;
 };
 
 /** @internal */
@@ -117,6 +152,7 @@ export const CreateOrJoinLobbyRequestBody$outboundSchema: z.ZodType<
   lobbyMetadata: z.nullable(z.record(z.string())).optional(),
   memberMetadata: z.nullable(z.record(z.string())).optional(),
   secret: z.string(),
+  flags: z.nullable(Flags$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     idleTimeoutSeconds: "idle_timeout_seconds",
@@ -155,5 +191,72 @@ export function createOrJoinLobbyRequestBodyFromJSON(
     jsonString,
     (x) => CreateOrJoinLobbyRequestBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateOrJoinLobbyRequestBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateOrJoinLobbyResponse$inboundSchema: z.ZodType<
+  CreateOrJoinLobbyResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.LobbyResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateOrJoinLobbyResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.LobbyResponse$Outbound;
+};
+
+/** @internal */
+export const CreateOrJoinLobbyResponse$outboundSchema: z.ZodType<
+  CreateOrJoinLobbyResponse$Outbound,
+  z.ZodTypeDef,
+  CreateOrJoinLobbyResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.LobbyResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateOrJoinLobbyResponse$ {
+  /** @deprecated use `CreateOrJoinLobbyResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateOrJoinLobbyResponse$inboundSchema;
+  /** @deprecated use `CreateOrJoinLobbyResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateOrJoinLobbyResponse$outboundSchema;
+  /** @deprecated use `CreateOrJoinLobbyResponse$Outbound` instead. */
+  export type Outbound = CreateOrJoinLobbyResponse$Outbound;
+}
+
+export function createOrJoinLobbyResponseToJSON(
+  createOrJoinLobbyResponse: CreateOrJoinLobbyResponse,
+): string {
+  return JSON.stringify(
+    CreateOrJoinLobbyResponse$outboundSchema.parse(createOrJoinLobbyResponse),
+  );
+}
+
+export function createOrJoinLobbyResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateOrJoinLobbyResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateOrJoinLobbyResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateOrJoinLobbyResponse' from JSON`,
   );
 }

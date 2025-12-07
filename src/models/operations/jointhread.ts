@@ -12,6 +12,10 @@ export type JoinThreadRequest = {
   channelId: string;
 };
 
+export type JoinThreadResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const JoinThreadRequest$inboundSchema: z.ZodType<
   JoinThreadRequest,
@@ -71,5 +75,67 @@ export function joinThreadRequestFromJSON(
     jsonString,
     (x) => JoinThreadRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'JoinThreadRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const JoinThreadResponse$inboundSchema: z.ZodType<
+  JoinThreadResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type JoinThreadResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const JoinThreadResponse$outboundSchema: z.ZodType<
+  JoinThreadResponse$Outbound,
+  z.ZodTypeDef,
+  JoinThreadResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace JoinThreadResponse$ {
+  /** @deprecated use `JoinThreadResponse$inboundSchema` instead. */
+  export const inboundSchema = JoinThreadResponse$inboundSchema;
+  /** @deprecated use `JoinThreadResponse$outboundSchema` instead. */
+  export const outboundSchema = JoinThreadResponse$outboundSchema;
+  /** @deprecated use `JoinThreadResponse$Outbound` instead. */
+  export type Outbound = JoinThreadResponse$Outbound;
+}
+
+export function joinThreadResponseToJSON(
+  joinThreadResponse: JoinThreadResponse,
+): string {
+  return JSON.stringify(
+    JoinThreadResponse$outboundSchema.parse(joinThreadResponse),
+  );
+}
+
+export function joinThreadResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<JoinThreadResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => JoinThreadResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JoinThreadResponse' from JSON`,
   );
 }

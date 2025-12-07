@@ -13,6 +13,10 @@ export type DeleteMessageRequest = {
   messageId: string;
 };
 
+export type DeleteMessageResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteMessageRequest$inboundSchema: z.ZodType<
   DeleteMessageRequest,
@@ -77,5 +81,67 @@ export function deleteMessageRequestFromJSON(
     jsonString,
     (x) => DeleteMessageRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteMessageRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteMessageResponse$inboundSchema: z.ZodType<
+  DeleteMessageResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteMessageResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteMessageResponse$outboundSchema: z.ZodType<
+  DeleteMessageResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteMessageResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteMessageResponse$ {
+  /** @deprecated use `DeleteMessageResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteMessageResponse$inboundSchema;
+  /** @deprecated use `DeleteMessageResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteMessageResponse$outboundSchema;
+  /** @deprecated use `DeleteMessageResponse$Outbound` instead. */
+  export type Outbound = DeleteMessageResponse$Outbound;
+}
+
+export function deleteMessageResponseToJSON(
+  deleteMessageResponse: DeleteMessageResponse,
+): string {
+  return JSON.stringify(
+    DeleteMessageResponse$outboundSchema.parse(deleteMessageResponse),
+  );
+}
+
+export function deleteMessageResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteMessageResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteMessageResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteMessageResponse' from JSON`,
   );
 }

@@ -29,9 +29,9 @@ import {
 export type ThreadSearchResponse = {
   threads: Array<ThreadResponse>;
   members: Array<ThreadMemberResponse>;
-  hasMore?: boolean | null | undefined;
-  firstMessages?: Array<MessageResponse> | null | undefined;
-  totalResults?: number | null | undefined;
+  hasMore: boolean;
+  firstMessages?: Array<MessageResponse> | undefined;
+  totalResults: number;
 };
 
 /** @internal */
@@ -42,9 +42,9 @@ export const ThreadSearchResponse$inboundSchema: z.ZodType<
 > = z.object({
   threads: z.array(ThreadResponse$inboundSchema),
   members: z.array(ThreadMemberResponse$inboundSchema),
-  has_more: z.nullable(z.boolean()).optional(),
-  first_messages: z.nullable(z.array(MessageResponse$inboundSchema)).optional(),
-  total_results: z.nullable(z.number().int()).optional(),
+  has_more: z.boolean(),
+  first_messages: z.array(MessageResponse$inboundSchema).optional(),
+  total_results: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",
@@ -57,9 +57,9 @@ export const ThreadSearchResponse$inboundSchema: z.ZodType<
 export type ThreadSearchResponse$Outbound = {
   threads: Array<ThreadResponse$Outbound>;
   members: Array<ThreadMemberResponse$Outbound>;
-  has_more?: boolean | null | undefined;
-  first_messages?: Array<MessageResponse$Outbound> | null | undefined;
-  total_results?: number | null | undefined;
+  has_more: boolean;
+  first_messages?: Array<MessageResponse$Outbound> | undefined;
+  total_results: number;
 };
 
 /** @internal */
@@ -70,9 +70,9 @@ export const ThreadSearchResponse$outboundSchema: z.ZodType<
 > = z.object({
   threads: z.array(ThreadResponse$outboundSchema),
   members: z.array(ThreadMemberResponse$outboundSchema),
-  hasMore: z.nullable(z.boolean()).optional(),
-  firstMessages: z.nullable(z.array(MessageResponse$outboundSchema)).optional(),
-  totalResults: z.nullable(z.number().int()).optional(),
+  hasMore: z.boolean(),
+  firstMessages: z.array(MessageResponse$outboundSchema).optional(),
+  totalResults: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     hasMore: "has_more",

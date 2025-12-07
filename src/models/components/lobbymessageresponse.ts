@@ -21,9 +21,9 @@ export type LobbyMessageResponse = {
   lobbyId: string;
   channelId: string;
   author: UserResponse;
-  metadata?: { [k: string]: string } | null | undefined;
+  metadata?: { [k: string]: string } | undefined;
   flags: number;
-  applicationId?: string | null | undefined;
+  applicationId?: string | undefined;
 };
 
 /** @internal */
@@ -38,9 +38,9 @@ export const LobbyMessageResponse$inboundSchema: z.ZodType<
   lobby_id: z.string(),
   channel_id: z.string(),
   author: UserResponse$inboundSchema,
-  metadata: z.nullable(z.record(z.string())).optional(),
+  metadata: z.record(z.string()).optional(),
   flags: z.number().int(),
-  application_id: z.nullable(z.string()).optional(),
+  application_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "lobby_id": "lobbyId",
@@ -57,9 +57,9 @@ export type LobbyMessageResponse$Outbound = {
   lobby_id: string;
   channel_id: string;
   author: UserResponse$Outbound;
-  metadata?: { [k: string]: string } | null | undefined;
+  metadata?: { [k: string]: string } | undefined;
   flags: number;
-  application_id?: string | null | undefined;
+  application_id?: string | undefined;
 };
 
 /** @internal */
@@ -74,9 +74,9 @@ export const LobbyMessageResponse$outboundSchema: z.ZodType<
   lobbyId: z.string(),
   channelId: z.string(),
   author: UserResponse$outboundSchema,
-  metadata: z.nullable(z.record(z.string())).optional(),
+  metadata: z.record(z.string()).optional(),
   flags: z.number().int(),
-  applicationId: z.nullable(z.string()).optional(),
+  applicationId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     lobbyId: "lobby_id",

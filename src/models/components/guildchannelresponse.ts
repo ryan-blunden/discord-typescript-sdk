@@ -59,28 +59,25 @@ export type GuildChannelResponse = {
   guildId: string;
   name: string;
   parentId?: string | null | undefined;
-  rateLimitPerUser?: number | null | undefined;
-  bitrate?: number | null | undefined;
-  userLimit?: number | null | undefined;
+  rateLimitPerUser?: number | undefined;
+  bitrate?: number | undefined;
+  userLimit?: number | undefined;
   rtcRegion?: string | null | undefined;
-  videoQualityMode?: 1 | null | undefined;
+  videoQualityMode?: 1 | undefined;
   permissions?: string | null | undefined;
   topic?: string | null | undefined;
-  defaultAutoArchiveDuration?: 60 | null | undefined;
-  defaultThreadRateLimitPerUser?: number | null | undefined;
+  defaultAutoArchiveDuration?: 60 | undefined;
+  defaultThreadRateLimitPerUser?: number | undefined;
   position: number;
-  permissionOverwrites?:
-    | Array<ChannelPermissionOverwriteResponse>
-    | null
-    | undefined;
-  nsfw?: boolean | null | undefined;
-  availableTags?: Array<ForumTagResponse> | null | undefined;
+  permissionOverwrites?: Array<ChannelPermissionOverwriteResponse> | undefined;
+  nsfw?: boolean | undefined;
+  availableTags?: Array<ForumTagResponse> | undefined;
   defaultReactionEmoji?: DefaultReactionEmojiResponse | null | undefined;
   defaultSortOrder?: 0 | null | undefined;
   defaultForumLayout?: 0 | null | undefined;
-  defaultTagSetting?: string | null | undefined;
-  hdStreamingUntil?: Date | null | undefined;
-  hdStreamingBuyerId?: string | null | undefined;
+  defaultTagSetting?: "match_all" | null | undefined;
+  hdStreamingUntil?: Date | undefined;
+  hdStreamingBuyerId?: string | undefined;
 };
 
 /** @internal */
@@ -119,31 +116,30 @@ export const GuildChannelResponse$inboundSchema: z.ZodType<
   guild_id: z.string(),
   name: z.string(),
   parent_id: z.nullable(z.string()).optional(),
-  rate_limit_per_user: z.nullable(z.number().int()).optional(),
-  bitrate: z.nullable(z.number().int()).optional(),
-  user_limit: z.nullable(z.number().int()).optional(),
+  rate_limit_per_user: z.number().int().optional(),
+  bitrate: z.number().int().optional(),
+  user_limit: z.number().int().optional(),
   rtc_region: z.nullable(z.string()).optional(),
-  video_quality_mode: z.nullable(z.literal(1)).optional(),
+  video_quality_mode: z.literal(1).optional(),
   permissions: z.nullable(z.string()).optional(),
   topic: z.nullable(z.string()).optional(),
-  default_auto_archive_duration: z.nullable(z.literal(60)).optional(),
-  default_thread_rate_limit_per_user: z.nullable(z.number().int()).optional(),
+  default_auto_archive_duration: z.literal(60).optional(),
+  default_thread_rate_limit_per_user: z.number().int().optional(),
   position: z.number().int(),
-  permission_overwrites: z.nullable(
-    z.array(ChannelPermissionOverwriteResponse$inboundSchema),
+  permission_overwrites: z.array(
+    ChannelPermissionOverwriteResponse$inboundSchema,
   ).optional(),
-  nsfw: z.nullable(z.boolean()).optional(),
-  available_tags: z.nullable(z.array(ForumTagResponse$inboundSchema))
-    .optional(),
+  nsfw: z.boolean().optional(),
+  available_tags: z.array(ForumTagResponse$inboundSchema).optional(),
   default_reaction_emoji: z.nullable(DefaultReactionEmojiResponse$inboundSchema)
     .optional(),
   default_sort_order: z.nullable(z.literal(0)).optional(),
   default_forum_layout: z.nullable(z.literal(0)).optional(),
-  default_tag_setting: z.nullable(z.string()).optional(),
-  hd_streaming_until: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  default_tag_setting: z.nullable(z.literal("match_all")).optional(),
+  hd_streaming_until: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
   ).optional(),
-  hd_streaming_buyer_id: z.nullable(z.string()).optional(),
+  hd_streaming_buyer_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "last_message_id": "lastMessageId",
@@ -177,31 +173,30 @@ export type GuildChannelResponse$Outbound = {
   guild_id: string;
   name: string;
   parent_id?: string | null | undefined;
-  rate_limit_per_user?: number | null | undefined;
-  bitrate?: number | null | undefined;
-  user_limit?: number | null | undefined;
+  rate_limit_per_user?: number | undefined;
+  bitrate?: number | undefined;
+  user_limit?: number | undefined;
   rtc_region?: string | null | undefined;
-  video_quality_mode: 1 | null;
+  video_quality_mode: 1;
   permissions?: string | null | undefined;
   topic?: string | null | undefined;
-  default_auto_archive_duration: 60 | null;
-  default_thread_rate_limit_per_user?: number | null | undefined;
+  default_auto_archive_duration: 60;
+  default_thread_rate_limit_per_user?: number | undefined;
   position: number;
   permission_overwrites?:
     | Array<ChannelPermissionOverwriteResponse$Outbound>
-    | null
     | undefined;
-  nsfw?: boolean | null | undefined;
-  available_tags?: Array<ForumTagResponse$Outbound> | null | undefined;
+  nsfw?: boolean | undefined;
+  available_tags?: Array<ForumTagResponse$Outbound> | undefined;
   default_reaction_emoji?:
     | DefaultReactionEmojiResponse$Outbound
     | null
     | undefined;
   default_sort_order: 0 | null;
   default_forum_layout: 0 | null;
-  default_tag_setting?: string | null | undefined;
-  hd_streaming_until?: string | null | undefined;
-  hd_streaming_buyer_id?: string | null | undefined;
+  default_tag_setting: "match_all" | null;
+  hd_streaming_until?: string | undefined;
+  hd_streaming_buyer_id?: string | undefined;
 };
 
 /** @internal */
@@ -219,30 +214,30 @@ export const GuildChannelResponse$outboundSchema: z.ZodType<
   guildId: z.string(),
   name: z.string(),
   parentId: z.nullable(z.string()).optional(),
-  rateLimitPerUser: z.nullable(z.number().int()).optional(),
-  bitrate: z.nullable(z.number().int()).optional(),
-  userLimit: z.nullable(z.number().int()).optional(),
+  rateLimitPerUser: z.number().int().optional(),
+  bitrate: z.number().int().optional(),
+  userLimit: z.number().int().optional(),
   rtcRegion: z.nullable(z.string()).optional(),
-  videoQualityMode: z.nullable(z.literal(1).default(1 as const)),
+  videoQualityMode: z.literal(1).default(1 as const),
   permissions: z.nullable(z.string()).optional(),
   topic: z.nullable(z.string()).optional(),
-  defaultAutoArchiveDuration: z.nullable(z.literal(60).default(60 as const)),
-  defaultThreadRateLimitPerUser: z.nullable(z.number().int()).optional(),
+  defaultAutoArchiveDuration: z.literal(60).default(60 as const),
+  defaultThreadRateLimitPerUser: z.number().int().optional(),
   position: z.number().int(),
-  permissionOverwrites: z.nullable(
-    z.array(ChannelPermissionOverwriteResponse$outboundSchema),
+  permissionOverwrites: z.array(
+    ChannelPermissionOverwriteResponse$outboundSchema,
   ).optional(),
-  nsfw: z.nullable(z.boolean()).optional(),
-  availableTags: z.nullable(z.array(ForumTagResponse$outboundSchema))
-    .optional(),
+  nsfw: z.boolean().optional(),
+  availableTags: z.array(ForumTagResponse$outboundSchema).optional(),
   defaultReactionEmoji: z.nullable(DefaultReactionEmojiResponse$outboundSchema)
     .optional(),
   defaultSortOrder: z.nullable(z.literal(0).default(0 as const)),
   defaultForumLayout: z.nullable(z.literal(0).default(0 as const)),
-  defaultTagSetting: z.nullable(z.string()).optional(),
-  hdStreamingUntil: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  hdStreamingBuyerId: z.nullable(z.string()).optional(),
+  defaultTagSetting: z.nullable(
+    z.literal("match_all").default("match_all" as const),
+  ),
+  hdStreamingUntil: z.date().transform(v => v.toISOString()).optional(),
+  hdStreamingBuyerId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     lastMessageId: "last_message_id",

@@ -5,20 +5,54 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+export const EditLobbyFlags = {
+  One: 1,
+} as const;
+export type EditLobbyFlags = ClosedEnum<typeof EditLobbyFlags>;
 
 export type EditLobbyRequestBody = {
   idleTimeoutSeconds?: number | null | undefined;
   metadata?: { [k: string]: string } | null | undefined;
   members?: Array<components.LobbyMemberRequest> | null | undefined;
+  flags?: EditLobbyFlags | null | undefined;
+  overrideEventWebhooksUrl?: string | null | undefined;
 };
 
 export type EditLobbyRequest = {
   lobbyId: string;
   requestBody: EditLobbyRequestBody;
 };
+
+export type EditLobbyResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.LobbyResponse;
+};
+
+/** @internal */
+export const EditLobbyFlags$inboundSchema: z.ZodNativeEnum<
+  typeof EditLobbyFlags
+> = z.nativeEnum(EditLobbyFlags);
+
+/** @internal */
+export const EditLobbyFlags$outboundSchema: z.ZodNativeEnum<
+  typeof EditLobbyFlags
+> = EditLobbyFlags$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EditLobbyFlags$ {
+  /** @deprecated use `EditLobbyFlags$inboundSchema` instead. */
+  export const inboundSchema = EditLobbyFlags$inboundSchema;
+  /** @deprecated use `EditLobbyFlags$outboundSchema` instead. */
+  export const outboundSchema = EditLobbyFlags$outboundSchema;
+}
 
 /** @internal */
 export const EditLobbyRequestBody$inboundSchema: z.ZodType<
@@ -30,9 +64,12 @@ export const EditLobbyRequestBody$inboundSchema: z.ZodType<
   metadata: z.nullable(z.record(z.string())).optional(),
   members: z.nullable(z.array(components.LobbyMemberRequest$inboundSchema))
     .optional(),
+  flags: z.nullable(EditLobbyFlags$inboundSchema).optional(),
+  override_event_webhooks_url: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "idle_timeout_seconds": "idleTimeoutSeconds",
+    "override_event_webhooks_url": "overrideEventWebhooksUrl",
   });
 });
 
@@ -41,6 +78,8 @@ export type EditLobbyRequestBody$Outbound = {
   idle_timeout_seconds?: number | null | undefined;
   metadata?: { [k: string]: string } | null | undefined;
   members?: Array<components.LobbyMemberRequest$Outbound> | null | undefined;
+  flags?: number | null | undefined;
+  override_event_webhooks_url?: string | null | undefined;
 };
 
 /** @internal */
@@ -53,9 +92,12 @@ export const EditLobbyRequestBody$outboundSchema: z.ZodType<
   metadata: z.nullable(z.record(z.string())).optional(),
   members: z.nullable(z.array(components.LobbyMemberRequest$outboundSchema))
     .optional(),
+  flags: z.nullable(EditLobbyFlags$outboundSchema).optional(),
+  overrideEventWebhooksUrl: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     idleTimeoutSeconds: "idle_timeout_seconds",
+    overrideEventWebhooksUrl: "override_event_webhooks_url",
   });
 });
 
@@ -154,5 +196,72 @@ export function editLobbyRequestFromJSON(
     jsonString,
     (x) => EditLobbyRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'EditLobbyRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const EditLobbyResponse$inboundSchema: z.ZodType<
+  EditLobbyResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.LobbyResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type EditLobbyResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.LobbyResponse$Outbound;
+};
+
+/** @internal */
+export const EditLobbyResponse$outboundSchema: z.ZodType<
+  EditLobbyResponse$Outbound,
+  z.ZodTypeDef,
+  EditLobbyResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.LobbyResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EditLobbyResponse$ {
+  /** @deprecated use `EditLobbyResponse$inboundSchema` instead. */
+  export const inboundSchema = EditLobbyResponse$inboundSchema;
+  /** @deprecated use `EditLobbyResponse$outboundSchema` instead. */
+  export const outboundSchema = EditLobbyResponse$outboundSchema;
+  /** @deprecated use `EditLobbyResponse$Outbound` instead. */
+  export type Outbound = EditLobbyResponse$Outbound;
+}
+
+export function editLobbyResponseToJSON(
+  editLobbyResponse: EditLobbyResponse,
+): string {
+  return JSON.stringify(
+    EditLobbyResponse$outboundSchema.parse(editLobbyResponse),
+  );
+}
+
+export function editLobbyResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<EditLobbyResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EditLobbyResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EditLobbyResponse' from JSON`,
   );
 }

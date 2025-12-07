@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PollExpireRequest = {
   channelId: string;
   messageId: string;
+};
+
+export type PollExpireResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.MessageResponse;
 };
 
 /** @internal */
@@ -77,5 +83,72 @@ export function pollExpireRequestFromJSON(
     jsonString,
     (x) => PollExpireRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PollExpireRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PollExpireResponse$inboundSchema: z.ZodType<
+  PollExpireResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.MessageResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type PollExpireResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.MessageResponse$Outbound;
+};
+
+/** @internal */
+export const PollExpireResponse$outboundSchema: z.ZodType<
+  PollExpireResponse$Outbound,
+  z.ZodTypeDef,
+  PollExpireResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.MessageResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PollExpireResponse$ {
+  /** @deprecated use `PollExpireResponse$inboundSchema` instead. */
+  export const inboundSchema = PollExpireResponse$inboundSchema;
+  /** @deprecated use `PollExpireResponse$outboundSchema` instead. */
+  export const outboundSchema = PollExpireResponse$outboundSchema;
+  /** @deprecated use `PollExpireResponse$Outbound` instead. */
+  export type Outbound = PollExpireResponse$Outbound;
+}
+
+export function pollExpireResponseToJSON(
+  pollExpireResponse: PollExpireResponse,
+): string {
+  return JSON.stringify(
+    PollExpireResponse$outboundSchema.parse(pollExpireResponse),
+  );
+}
+
+export function pollExpireResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PollExpireResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PollExpireResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PollExpireResponse' from JSON`,
   );
 }

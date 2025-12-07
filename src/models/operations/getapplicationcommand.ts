@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetApplicationCommandSecurity = {
@@ -15,6 +16,11 @@ export type GetApplicationCommandSecurity = {
 export type GetApplicationCommandRequest = {
   applicationId: string;
   commandId: string;
+};
+
+export type GetApplicationCommandResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ApplicationCommandResponse;
 };
 
 /** @internal */
@@ -147,5 +153,74 @@ export function getApplicationCommandRequestFromJSON(
     jsonString,
     (x) => GetApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetApplicationCommandRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetApplicationCommandResponse$inboundSchema: z.ZodType<
+  GetApplicationCommandResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ApplicationCommandResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetApplicationCommandResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ApplicationCommandResponse$Outbound;
+};
+
+/** @internal */
+export const GetApplicationCommandResponse$outboundSchema: z.ZodType<
+  GetApplicationCommandResponse$Outbound,
+  z.ZodTypeDef,
+  GetApplicationCommandResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ApplicationCommandResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetApplicationCommandResponse$ {
+  /** @deprecated use `GetApplicationCommandResponse$inboundSchema` instead. */
+  export const inboundSchema = GetApplicationCommandResponse$inboundSchema;
+  /** @deprecated use `GetApplicationCommandResponse$outboundSchema` instead. */
+  export const outboundSchema = GetApplicationCommandResponse$outboundSchema;
+  /** @deprecated use `GetApplicationCommandResponse$Outbound` instead. */
+  export type Outbound = GetApplicationCommandResponse$Outbound;
+}
+
+export function getApplicationCommandResponseToJSON(
+  getApplicationCommandResponse: GetApplicationCommandResponse,
+): string {
+  return JSON.stringify(
+    GetApplicationCommandResponse$outboundSchema.parse(
+      getApplicationCommandResponse,
+    ),
+  );
+}
+
+export function getApplicationCommandResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetApplicationCommandResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetApplicationCommandResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetApplicationCommandResponse' from JSON`,
   );
 }

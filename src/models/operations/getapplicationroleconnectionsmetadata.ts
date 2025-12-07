@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetApplicationRoleConnectionsMetadataRequest = {
   applicationId: string;
+};
+
+export type GetApplicationRoleConnectionsMetadataResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.ApplicationRoleConnectionsMetadataItemResponse>;
 };
 
 /** @internal */
@@ -84,5 +90,91 @@ export function getApplicationRoleConnectionsMetadataRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetApplicationRoleConnectionsMetadataRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetApplicationRoleConnectionsMetadataResponse$inboundSchema:
+  z.ZodType<
+    GetApplicationRoleConnectionsMetadataResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    Headers: z.record(z.array(z.string())),
+    Result: z.array(
+      components.ApplicationRoleConnectionsMetadataItemResponse$inboundSchema,
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  });
+
+/** @internal */
+export type GetApplicationRoleConnectionsMetadataResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<
+    components.ApplicationRoleConnectionsMetadataItemResponse$Outbound
+  >;
+};
+
+/** @internal */
+export const GetApplicationRoleConnectionsMetadataResponse$outboundSchema:
+  z.ZodType<
+    GetApplicationRoleConnectionsMetadataResponse$Outbound,
+    z.ZodTypeDef,
+    GetApplicationRoleConnectionsMetadataResponse
+  > = z.object({
+    headers: z.record(z.array(z.string())),
+    result: z.array(
+      components.ApplicationRoleConnectionsMetadataItemResponse$outboundSchema,
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetApplicationRoleConnectionsMetadataResponse$ {
+  /** @deprecated use `GetApplicationRoleConnectionsMetadataResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetApplicationRoleConnectionsMetadataResponse$inboundSchema;
+  /** @deprecated use `GetApplicationRoleConnectionsMetadataResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetApplicationRoleConnectionsMetadataResponse$outboundSchema;
+  /** @deprecated use `GetApplicationRoleConnectionsMetadataResponse$Outbound` instead. */
+  export type Outbound = GetApplicationRoleConnectionsMetadataResponse$Outbound;
+}
+
+export function getApplicationRoleConnectionsMetadataResponseToJSON(
+  getApplicationRoleConnectionsMetadataResponse:
+    GetApplicationRoleConnectionsMetadataResponse,
+): string {
+  return JSON.stringify(
+    GetApplicationRoleConnectionsMetadataResponse$outboundSchema.parse(
+      getApplicationRoleConnectionsMetadataResponse,
+    ),
+  );
+}
+
+export function getApplicationRoleConnectionsMetadataResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetApplicationRoleConnectionsMetadataResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetApplicationRoleConnectionsMetadataResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetApplicationRoleConnectionsMetadataResponse' from JSON`,
   );
 }

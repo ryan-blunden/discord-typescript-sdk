@@ -24,8 +24,10 @@ export type LobbyResponse = {
   id: string;
   applicationId: string;
   metadata?: { [k: string]: string } | null | undefined;
-  members?: Array<LobbyMemberResponse> | null | undefined;
-  linkedChannel?: GuildChannelResponse | null | undefined;
+  members: Array<LobbyMemberResponse>;
+  linkedChannel?: GuildChannelResponse | undefined;
+  flags: number;
+  overrideEventWebhooksUrl?: string | null | undefined;
 };
 
 /** @internal */
@@ -37,12 +39,15 @@ export const LobbyResponse$inboundSchema: z.ZodType<
   id: z.string(),
   application_id: z.string(),
   metadata: z.nullable(z.record(z.string())).optional(),
-  members: z.nullable(z.array(LobbyMemberResponse$inboundSchema)).optional(),
-  linked_channel: z.nullable(GuildChannelResponse$inboundSchema).optional(),
+  members: z.array(LobbyMemberResponse$inboundSchema),
+  linked_channel: GuildChannelResponse$inboundSchema.optional(),
+  flags: z.number().int(),
+  override_event_webhooks_url: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "application_id": "applicationId",
     "linked_channel": "linkedChannel",
+    "override_event_webhooks_url": "overrideEventWebhooksUrl",
   });
 });
 
@@ -51,8 +56,10 @@ export type LobbyResponse$Outbound = {
   id: string;
   application_id: string;
   metadata?: { [k: string]: string } | null | undefined;
-  members?: Array<LobbyMemberResponse$Outbound> | null | undefined;
-  linked_channel?: GuildChannelResponse$Outbound | null | undefined;
+  members: Array<LobbyMemberResponse$Outbound>;
+  linked_channel?: GuildChannelResponse$Outbound | undefined;
+  flags: number;
+  override_event_webhooks_url?: string | null | undefined;
 };
 
 /** @internal */
@@ -64,12 +71,15 @@ export const LobbyResponse$outboundSchema: z.ZodType<
   id: z.string(),
   applicationId: z.string(),
   metadata: z.nullable(z.record(z.string())).optional(),
-  members: z.nullable(z.array(LobbyMemberResponse$outboundSchema)).optional(),
-  linkedChannel: z.nullable(GuildChannelResponse$outboundSchema).optional(),
+  members: z.array(LobbyMemberResponse$outboundSchema),
+  linkedChannel: GuildChannelResponse$outboundSchema.optional(),
+  flags: z.number().int(),
+  overrideEventWebhooksUrl: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     applicationId: "application_id",
     linkedChannel: "linked_channel",
+    overrideEventWebhooksUrl: "override_event_webhooks_url",
   });
 });
 

@@ -21,13 +21,13 @@ export type WidgetMember = {
   avatar?: any | null | undefined;
   status: string;
   avatarUrl: string;
-  activity?: WidgetActivity | null | undefined;
-  deaf?: boolean | null | undefined;
-  mute?: boolean | null | undefined;
-  selfDeaf?: boolean | null | undefined;
-  selfMute?: boolean | null | undefined;
-  suppress?: boolean | null | undefined;
-  channelId?: string | null | undefined;
+  activity?: WidgetActivity | undefined;
+  deaf?: boolean | undefined;
+  mute?: boolean | undefined;
+  selfDeaf?: boolean | undefined;
+  selfMute?: boolean | undefined;
+  suppress?: boolean | undefined;
+  channelId?: string | undefined;
 };
 
 /** @internal */
@@ -42,13 +42,13 @@ export const WidgetMember$inboundSchema: z.ZodType<
   avatar: z.nullable(z.any()).optional(),
   status: z.string(),
   avatar_url: z.string(),
-  activity: z.nullable(WidgetActivity$inboundSchema).optional(),
-  deaf: z.nullable(z.boolean()).optional(),
-  mute: z.nullable(z.boolean()).optional(),
-  self_deaf: z.nullable(z.boolean()).optional(),
-  self_mute: z.nullable(z.boolean()).optional(),
-  suppress: z.nullable(z.boolean()).optional(),
-  channel_id: z.nullable(z.string()).optional(),
+  activity: WidgetActivity$inboundSchema.optional(),
+  deaf: z.boolean().optional(),
+  mute: z.boolean().optional(),
+  self_deaf: z.boolean().optional(),
+  self_mute: z.boolean().optional(),
+  suppress: z.boolean().optional(),
+  channel_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "avatar_url": "avatarUrl",
@@ -66,13 +66,13 @@ export type WidgetMember$Outbound = {
   avatar?: any | null | undefined;
   status: string;
   avatar_url: string;
-  activity?: WidgetActivity$Outbound | null | undefined;
-  deaf?: boolean | null | undefined;
-  mute?: boolean | null | undefined;
-  self_deaf?: boolean | null | undefined;
-  self_mute?: boolean | null | undefined;
-  suppress?: boolean | null | undefined;
-  channel_id?: string | null | undefined;
+  activity?: WidgetActivity$Outbound | undefined;
+  deaf?: boolean | undefined;
+  mute?: boolean | undefined;
+  self_deaf?: boolean | undefined;
+  self_mute?: boolean | undefined;
+  suppress?: boolean | undefined;
+  channel_id?: string | undefined;
 };
 
 /** @internal */
@@ -87,13 +87,13 @@ export const WidgetMember$outboundSchema: z.ZodType<
   avatar: z.nullable(z.any()).optional(),
   status: z.string(),
   avatarUrl: z.string(),
-  activity: z.nullable(WidgetActivity$outboundSchema).optional(),
-  deaf: z.nullable(z.boolean()).optional(),
-  mute: z.nullable(z.boolean()).optional(),
-  selfDeaf: z.nullable(z.boolean()).optional(),
-  selfMute: z.nullable(z.boolean()).optional(),
-  suppress: z.nullable(z.boolean()).optional(),
-  channelId: z.nullable(z.string()).optional(),
+  activity: WidgetActivity$outboundSchema.optional(),
+  deaf: z.boolean().optional(),
+  mute: z.boolean().optional(),
+  selfDeaf: z.boolean().optional(),
+  selfMute: z.boolean().optional(),
+  suppress: z.boolean().optional(),
+  channelId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     avatarUrl: "avatar_url",

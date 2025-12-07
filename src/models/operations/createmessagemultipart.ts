@@ -40,6 +40,10 @@ export type CreateMessageMultipartRequestBody = {
   flags?: number | null | undefined;
   attachments?: Array<components.MessageAttachmentRequest> | null | undefined;
   poll?: components.PollCreateRequest | null | undefined;
+  sharedClientTheme?:
+    | components.CustomClientThemeShareRequest
+    | null
+    | undefined;
   confettiPotion?: components.ConfettiPotionCreateRequest | null | undefined;
   messageReference?: components.MessageReferenceRequest | null | undefined;
   nonce?: number | string | null | undefined;
@@ -60,6 +64,11 @@ export type CreateMessageMultipartRequestBody = {
 export type CreateMessageMultipartRequest = {
   channelId: string;
   requestBody: CreateMessageMultipartRequestBody;
+};
+
+export type CreateMessageMultipartResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.MessageResponse;
 };
 
 /** @internal */
@@ -200,6 +209,9 @@ export const CreateMessageMultipartRequestBody$inboundSchema: z.ZodType<
     z.array(components.MessageAttachmentRequest$inboundSchema),
   ).optional(),
   poll: z.nullable(components.PollCreateRequest$inboundSchema).optional(),
+  shared_client_theme: z.nullable(
+    components.CustomClientThemeShareRequest$inboundSchema,
+  ).optional(),
   confetti_potion: z.nullable(
     components.ConfettiPotionCreateRequest$inboundSchema,
   ).optional(),
@@ -223,6 +235,7 @@ export const CreateMessageMultipartRequestBody$inboundSchema: z.ZodType<
   return remap$(v, {
     "allowed_mentions": "allowedMentions",
     "sticker_ids": "stickerIds",
+    "shared_client_theme": "sharedClientTheme",
     "confetti_potion": "confettiPotion",
     "message_reference": "messageReference",
     "enforce_nonce": "enforceNonce",
@@ -266,6 +279,10 @@ export type CreateMessageMultipartRequestBody$Outbound = {
     | null
     | undefined;
   poll?: components.PollCreateRequest$Outbound | null | undefined;
+  shared_client_theme?:
+    | components.CustomClientThemeShareRequest$Outbound
+    | null
+    | undefined;
   confetti_potion?:
     | components.ConfettiPotionCreateRequest$Outbound
     | null
@@ -319,6 +336,9 @@ export const CreateMessageMultipartRequestBody$outboundSchema: z.ZodType<
     z.array(components.MessageAttachmentRequest$outboundSchema),
   ).optional(),
   poll: z.nullable(components.PollCreateRequest$outboundSchema).optional(),
+  sharedClientTheme: z.nullable(
+    components.CustomClientThemeShareRequest$outboundSchema,
+  ).optional(),
   confettiPotion: z.nullable(
     components.ConfettiPotionCreateRequest$outboundSchema,
   ).optional(),
@@ -342,6 +362,7 @@ export const CreateMessageMultipartRequestBody$outboundSchema: z.ZodType<
   return remap$(v, {
     allowedMentions: "allowed_mentions",
     stickerIds: "sticker_ids",
+    sharedClientTheme: "shared_client_theme",
     confettiPotion: "confetti_potion",
     messageReference: "message_reference",
     enforceNonce: "enforce_nonce",
@@ -458,5 +479,74 @@ export function createMessageMultipartRequestFromJSON(
     jsonString,
     (x) => CreateMessageMultipartRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateMessageMultipartRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateMessageMultipartResponse$inboundSchema: z.ZodType<
+  CreateMessageMultipartResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.MessageResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateMessageMultipartResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.MessageResponse$Outbound;
+};
+
+/** @internal */
+export const CreateMessageMultipartResponse$outboundSchema: z.ZodType<
+  CreateMessageMultipartResponse$Outbound,
+  z.ZodTypeDef,
+  CreateMessageMultipartResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.MessageResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateMessageMultipartResponse$ {
+  /** @deprecated use `CreateMessageMultipartResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateMessageMultipartResponse$inboundSchema;
+  /** @deprecated use `CreateMessageMultipartResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateMessageMultipartResponse$outboundSchema;
+  /** @deprecated use `CreateMessageMultipartResponse$Outbound` instead. */
+  export type Outbound = CreateMessageMultipartResponse$Outbound;
+}
+
+export function createMessageMultipartResponseToJSON(
+  createMessageMultipartResponse: CreateMessageMultipartResponse,
+): string {
+  return JSON.stringify(
+    CreateMessageMultipartResponse$outboundSchema.parse(
+      createMessageMultipartResponse,
+    ),
+  );
+}
+
+export function createMessageMultipartResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateMessageMultipartResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateMessageMultipartResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateMessageMultipartResponse' from JSON`,
   );
 }

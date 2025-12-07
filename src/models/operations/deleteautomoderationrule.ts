@@ -13,6 +13,10 @@ export type DeleteAutoModerationRuleRequest = {
   ruleId: string;
 };
 
+export type DeleteAutoModerationRuleResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteAutoModerationRuleRequest$inboundSchema: z.ZodType<
   DeleteAutoModerationRuleRequest,
@@ -79,5 +83,69 @@ export function deleteAutoModerationRuleRequestFromJSON(
     jsonString,
     (x) => DeleteAutoModerationRuleRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteAutoModerationRuleRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteAutoModerationRuleResponse$inboundSchema: z.ZodType<
+  DeleteAutoModerationRuleResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteAutoModerationRuleResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteAutoModerationRuleResponse$outboundSchema: z.ZodType<
+  DeleteAutoModerationRuleResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteAutoModerationRuleResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteAutoModerationRuleResponse$ {
+  /** @deprecated use `DeleteAutoModerationRuleResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteAutoModerationRuleResponse$inboundSchema;
+  /** @deprecated use `DeleteAutoModerationRuleResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteAutoModerationRuleResponse$outboundSchema;
+  /** @deprecated use `DeleteAutoModerationRuleResponse$Outbound` instead. */
+  export type Outbound = DeleteAutoModerationRuleResponse$Outbound;
+}
+
+export function deleteAutoModerationRuleResponseToJSON(
+  deleteAutoModerationRuleResponse: DeleteAutoModerationRuleResponse,
+): string {
+  return JSON.stringify(
+    DeleteAutoModerationRuleResponse$outboundSchema.parse(
+      deleteAutoModerationRuleResponse,
+    ),
+  );
+}
+
+export function deleteAutoModerationRuleResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteAutoModerationRuleResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteAutoModerationRuleResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteAutoModerationRuleResponse' from JSON`,
   );
 }

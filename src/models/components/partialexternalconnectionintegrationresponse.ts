@@ -17,7 +17,7 @@ export type PartialExternalConnectionIntegrationResponse = {
   id: string;
   type?: "discord" | undefined;
   name?: string | null | undefined;
-  account?: AccountResponse | null | undefined;
+  account: AccountResponse;
 };
 
 /** @internal */
@@ -30,7 +30,7 @@ export const PartialExternalConnectionIntegrationResponse$inboundSchema:
     id: z.string(),
     type: z.literal("discord").optional(),
     name: z.nullable(z.string()).optional(),
-    account: z.nullable(AccountResponse$inboundSchema).optional(),
+    account: AccountResponse$inboundSchema,
   });
 
 /** @internal */
@@ -38,7 +38,7 @@ export type PartialExternalConnectionIntegrationResponse$Outbound = {
   id: string;
   type: "discord";
   name?: string | null | undefined;
-  account?: AccountResponse$Outbound | null | undefined;
+  account: AccountResponse$Outbound;
 };
 
 /** @internal */
@@ -51,7 +51,7 @@ export const PartialExternalConnectionIntegrationResponse$outboundSchema:
     id: z.string(),
     type: z.literal("discord").default("discord" as const),
     name: z.nullable(z.string()).optional(),
-    account: z.nullable(AccountResponse$outboundSchema).optional(),
+    account: AccountResponse$outboundSchema,
   });
 
 /**

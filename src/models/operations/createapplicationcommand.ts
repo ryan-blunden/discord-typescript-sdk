@@ -18,6 +18,11 @@ export type CreateApplicationCommandRequest = {
   applicationCommandCreateRequest: components.ApplicationCommandCreateRequest;
 };
 
+export type CreateApplicationCommandResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ApplicationCommandResponse;
+};
+
 /** @internal */
 export const CreateApplicationCommandSecurity$inboundSchema: z.ZodType<
   CreateApplicationCommandSecurity,
@@ -151,5 +156,74 @@ export function createApplicationCommandRequestFromJSON(
     jsonString,
     (x) => CreateApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateApplicationCommandRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateApplicationCommandResponse$inboundSchema: z.ZodType<
+  CreateApplicationCommandResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ApplicationCommandResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateApplicationCommandResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ApplicationCommandResponse$Outbound;
+};
+
+/** @internal */
+export const CreateApplicationCommandResponse$outboundSchema: z.ZodType<
+  CreateApplicationCommandResponse$Outbound,
+  z.ZodTypeDef,
+  CreateApplicationCommandResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ApplicationCommandResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateApplicationCommandResponse$ {
+  /** @deprecated use `CreateApplicationCommandResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateApplicationCommandResponse$inboundSchema;
+  /** @deprecated use `CreateApplicationCommandResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateApplicationCommandResponse$outboundSchema;
+  /** @deprecated use `CreateApplicationCommandResponse$Outbound` instead. */
+  export type Outbound = CreateApplicationCommandResponse$Outbound;
+}
+
+export function createApplicationCommandResponseToJSON(
+  createApplicationCommandResponse: CreateApplicationCommandResponse,
+): string {
+  return JSON.stringify(
+    CreateApplicationCommandResponse$outboundSchema.parse(
+      createApplicationCommandResponse,
+    ),
+  );
+}
+
+export function createApplicationCommandResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateApplicationCommandResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateApplicationCommandResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateApplicationCommandResponse' from JSON`,
   );
 }

@@ -22,9 +22,9 @@ export type GuildIncomingWebhookResponse = {
   id: string;
   name: string;
   type?: 1 | undefined;
-  user?: UserResponse | null | undefined;
-  token?: string | null | undefined;
-  url?: string | null | undefined;
+  user?: UserResponse | undefined;
+  token?: string | undefined;
+  url?: string | undefined;
 };
 
 /** @internal */
@@ -40,9 +40,9 @@ export const GuildIncomingWebhookResponse$inboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   type: z.literal(1).optional(),
-  user: z.nullable(UserResponse$inboundSchema).optional(),
-  token: z.nullable(z.string()).optional(),
-  url: z.nullable(z.string()).optional(),
+  user: UserResponse$inboundSchema.optional(),
+  token: z.string().optional(),
+  url: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "application_id": "applicationId",
@@ -60,9 +60,9 @@ export type GuildIncomingWebhookResponse$Outbound = {
   id: string;
   name: string;
   type: 1;
-  user?: UserResponse$Outbound | null | undefined;
-  token?: string | null | undefined;
-  url?: string | null | undefined;
+  user?: UserResponse$Outbound | undefined;
+  token?: string | undefined;
+  url?: string | undefined;
 };
 
 /** @internal */
@@ -78,9 +78,9 @@ export const GuildIncomingWebhookResponse$outboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   type: z.literal(1).default(1 as const),
-  user: z.nullable(UserResponse$outboundSchema).optional(),
-  token: z.nullable(z.string()).optional(),
-  url: z.nullable(z.string()).optional(),
+  user: UserResponse$outboundSchema.optional(),
+  token: z.string().optional(),
+  url: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     applicationId: "application_id",

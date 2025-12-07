@@ -20,8 +20,8 @@ export type StickerPackResponse = {
   name: string;
   description?: string | null | undefined;
   stickers: Array<StandardStickerResponse>;
-  coverStickerId?: string | null | undefined;
-  bannerAssetId?: string | null | undefined;
+  coverStickerId?: string | undefined;
+  bannerAssetId?: string | undefined;
 };
 
 /** @internal */
@@ -35,8 +35,8 @@ export const StickerPackResponse$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.nullable(z.string()).optional(),
   stickers: z.array(StandardStickerResponse$inboundSchema),
-  cover_sticker_id: z.nullable(z.string()).optional(),
-  banner_asset_id: z.nullable(z.string()).optional(),
+  cover_sticker_id: z.string().optional(),
+  banner_asset_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "sku_id": "skuId",
@@ -52,8 +52,8 @@ export type StickerPackResponse$Outbound = {
   name: string;
   description?: string | null | undefined;
   stickers: Array<StandardStickerResponse$Outbound>;
-  cover_sticker_id?: string | null | undefined;
-  banner_asset_id?: string | null | undefined;
+  cover_sticker_id?: string | undefined;
+  banner_asset_id?: string | undefined;
 };
 
 /** @internal */
@@ -67,8 +67,8 @@ export const StickerPackResponse$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.nullable(z.string()).optional(),
   stickers: z.array(StandardStickerResponse$outboundSchema),
-  coverStickerId: z.nullable(z.string()).optional(),
-  bannerAssetId: z.nullable(z.string()).optional(),
+  coverStickerId: z.string().optional(),
+  bannerAssetId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     skuId: "sku_id",

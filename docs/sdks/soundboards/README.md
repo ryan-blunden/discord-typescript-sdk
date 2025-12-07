@@ -27,14 +27,14 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.soundboards.sendSoundboardSound({
+  const result = await discord.soundboards.sendSoundboardSound({
     channelId: "<value>",
     soundboardSoundSendRequest: {
       soundId: "<value>",
     },
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -63,7 +63,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("soundboardsSendSoundboardSound failed:", res.error);
   }
@@ -83,14 +83,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.SendSoundboardSoundResponse](../../models/operations/sendsoundboardsoundresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listGuildSoundboardSounds
 
@@ -156,14 +157,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ListGuildSoundboardSoundsResponse](../../models/components/listguildsoundboardsoundsresponse.md)\>**
+**Promise\<[operations.ListGuildSoundboardSoundsResponse](../../models/operations/listguildsoundboardsoundsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createGuildSoundboardSound
 
@@ -237,14 +239,15 @@ run();
 
 ### Response
 
-**Promise\<[components.SoundboardSoundResponse](../../models/components/soundboardsoundresponse.md)\>**
+**Promise\<[operations.CreateGuildSoundboardSoundResponse](../../models/operations/createguildsoundboardsoundresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGuildSoundboardSound
 
@@ -312,14 +315,15 @@ run();
 
 ### Response
 
-**Promise\<[components.SoundboardSoundResponse](../../models/components/soundboardsoundresponse.md)\>**
+**Promise\<[operations.GetGuildSoundboardSoundResponse](../../models/operations/getguildsoundboardsoundresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteGuildSoundboardSound
 
@@ -335,12 +339,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.soundboards.deleteGuildSoundboardSound({
+  const result = await discord.soundboards.deleteGuildSoundboardSound({
     guildId: "<value>",
     soundId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -367,7 +371,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("soundboardsDeleteGuildSoundboardSound failed:", res.error);
   }
@@ -387,14 +391,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildSoundboardSoundResponse](../../models/operations/deleteguildsoundboardsoundresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateGuildSoundboardSound
 
@@ -464,14 +469,15 @@ run();
 
 ### Response
 
-**Promise\<[components.SoundboardSoundResponse](../../models/components/soundboardsoundresponse.md)\>**
+**Promise\<[operations.UpdateGuildSoundboardSoundResponse](../../models/operations/updateguildsoundboardsoundresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getSoundboardDefaultSounds
 
@@ -532,11 +538,12 @@ run();
 
 ### Response
 
-**Promise\<[components.SoundboardSoundResponse[]](../../models/.md)\>**
+**Promise\<[operations.GetSoundboardDefaultSoundsResponse](../../models/operations/getsoundboarddefaultsoundsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

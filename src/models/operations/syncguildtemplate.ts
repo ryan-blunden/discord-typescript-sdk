@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SyncGuildTemplateRequest = {
   guildId: string;
   code: string;
+};
+
+export type SyncGuildTemplateResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildTemplateResponse;
 };
 
 /** @internal */
@@ -75,5 +81,72 @@ export function syncGuildTemplateRequestFromJSON(
     jsonString,
     (x) => SyncGuildTemplateRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'SyncGuildTemplateRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const SyncGuildTemplateResponse$inboundSchema: z.ZodType<
+  SyncGuildTemplateResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildTemplateResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type SyncGuildTemplateResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildTemplateResponse$Outbound;
+};
+
+/** @internal */
+export const SyncGuildTemplateResponse$outboundSchema: z.ZodType<
+  SyncGuildTemplateResponse$Outbound,
+  z.ZodTypeDef,
+  SyncGuildTemplateResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildTemplateResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SyncGuildTemplateResponse$ {
+  /** @deprecated use `SyncGuildTemplateResponse$inboundSchema` instead. */
+  export const inboundSchema = SyncGuildTemplateResponse$inboundSchema;
+  /** @deprecated use `SyncGuildTemplateResponse$outboundSchema` instead. */
+  export const outboundSchema = SyncGuildTemplateResponse$outboundSchema;
+  /** @deprecated use `SyncGuildTemplateResponse$Outbound` instead. */
+  export type Outbound = SyncGuildTemplateResponse$Outbound;
+}
+
+export function syncGuildTemplateResponseToJSON(
+  syncGuildTemplateResponse: SyncGuildTemplateResponse,
+): string {
+  return JSON.stringify(
+    SyncGuildTemplateResponse$outboundSchema.parse(syncGuildTemplateResponse),
+  );
+}
+
+export function syncGuildTemplateResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<SyncGuildTemplateResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SyncGuildTemplateResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SyncGuildTemplateResponse' from JSON`,
   );
 }

@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetApplicationRequest = {
   applicationId: string;
+};
+
+export type GetApplicationResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.PrivateApplicationResponse;
 };
 
 /** @internal */
@@ -71,5 +77,72 @@ export function getApplicationRequestFromJSON(
     jsonString,
     (x) => GetApplicationRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetApplicationRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetApplicationResponse$inboundSchema: z.ZodType<
+  GetApplicationResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.PrivateApplicationResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetApplicationResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.PrivateApplicationResponse$Outbound;
+};
+
+/** @internal */
+export const GetApplicationResponse$outboundSchema: z.ZodType<
+  GetApplicationResponse$Outbound,
+  z.ZodTypeDef,
+  GetApplicationResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.PrivateApplicationResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetApplicationResponse$ {
+  /** @deprecated use `GetApplicationResponse$inboundSchema` instead. */
+  export const inboundSchema = GetApplicationResponse$inboundSchema;
+  /** @deprecated use `GetApplicationResponse$outboundSchema` instead. */
+  export const outboundSchema = GetApplicationResponse$outboundSchema;
+  /** @deprecated use `GetApplicationResponse$Outbound` instead. */
+  export type Outbound = GetApplicationResponse$Outbound;
+}
+
+export function getApplicationResponseToJSON(
+  getApplicationResponse: GetApplicationResponse,
+): string {
+  return JSON.stringify(
+    GetApplicationResponse$outboundSchema.parse(getApplicationResponse),
+  );
+}
+
+export function getApplicationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetApplicationResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetApplicationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetApplicationResponse' from JSON`,
   );
 }

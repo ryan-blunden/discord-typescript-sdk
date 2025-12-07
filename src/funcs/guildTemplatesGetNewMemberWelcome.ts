@@ -10,7 +10,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
@@ -34,7 +33,8 @@ export function guildTemplatesGetNewMemberWelcome(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.GuildHomeSettingsResponse | undefined,
+    operations.GetGuildNewMemberWelcomeResponse | undefined,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
     | APIError
     | SDKValidationError
@@ -59,7 +59,8 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.GuildHomeSettingsResponse | undefined,
+      operations.GetGuildNewMemberWelcomeResponse | undefined,
+      | errors.RatelimitedResponse
       | errors.ErrorResponse
       | APIError
       | SDKValidationError
@@ -133,7 +134,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["429", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -147,7 +148,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.GuildHomeSettingsResponse | undefined,
+    operations.GetGuildNewMemberWelcomeResponse | undefined,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
     | APIError
     | SDKValidationError
@@ -157,9 +159,18 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, components.GuildHomeSettingsResponse$inboundSchema.optional()),
-    M.nil(204, components.GuildHomeSettingsResponse$inboundSchema.optional()),
-    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema),
+    M.json(
+      200,
+      operations.GetGuildNewMemberWelcomeResponse$inboundSchema.optional(),
+      { hdrs: true, key: "Result" },
+    ),
+    M.nil(
+      204,
+      operations.GetGuildNewMemberWelcomeResponse$inboundSchema.optional(),
+      { hdrs: true },
+    ),
+    M.jsonErr(429, errors.RatelimitedResponse$inboundSchema, { hdrs: true }),
+    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema, { hdrs: true }),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {

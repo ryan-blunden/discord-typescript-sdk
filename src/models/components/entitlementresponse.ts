@@ -21,6 +21,8 @@ export type EntitlementResponse = {
   fulfilledAt?: Date | null | undefined;
   fulfillmentStatus?: 0 | null | undefined;
   consumed?: boolean | null | undefined;
+  gifterUserId?: string | null | undefined;
+  parentId?: string | null | undefined;
 };
 
 /** @internal */
@@ -47,6 +49,8 @@ export const EntitlementResponse$inboundSchema: z.ZodType<
   ).optional(),
   fulfillment_status: z.nullable(z.literal(0)).optional(),
   consumed: z.nullable(z.boolean()).optional(),
+  gifter_user_id: z.nullable(z.string()).optional(),
+  parent_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "sku_id": "skuId",
@@ -57,6 +61,8 @@ export const EntitlementResponse$inboundSchema: z.ZodType<
     "ends_at": "endsAt",
     "fulfilled_at": "fulfilledAt",
     "fulfillment_status": "fulfillmentStatus",
+    "gifter_user_id": "gifterUserId",
+    "parent_id": "parentId",
   });
 });
 
@@ -74,6 +80,8 @@ export type EntitlementResponse$Outbound = {
   fulfilled_at?: string | null | undefined;
   fulfillment_status: 0 | null;
   consumed?: boolean | null | undefined;
+  gifter_user_id?: string | null | undefined;
+  parent_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -94,6 +102,8 @@ export const EntitlementResponse$outboundSchema: z.ZodType<
   fulfilledAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   fulfillmentStatus: z.nullable(z.literal(0).default(0 as const)),
   consumed: z.nullable(z.boolean()).optional(),
+  gifterUserId: z.nullable(z.string()).optional(),
+  parentId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     skuId: "sku_id",
@@ -104,6 +114,8 @@ export const EntitlementResponse$outboundSchema: z.ZodType<
     endsAt: "ends_at",
     fulfilledAt: "fulfilled_at",
     fulfillmentStatus: "fulfillment_status",
+    gifterUserId: "gifter_user_id",
+    parentId: "parent_id",
   });
 });
 

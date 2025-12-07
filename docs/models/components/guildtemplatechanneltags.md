@@ -14,6 +14,7 @@ let value: GuildTemplateChannelTags = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
+| `id`               | *number*           | :heavy_minus_sign: | N/A                |
 | `name`             | *string*           | :heavy_check_mark: | N/A                |
 | `emojiId`          | *string*           | :heavy_minus_sign: | N/A                |
 | `emojiName`        | *string*           | :heavy_minus_sign: | N/A                |

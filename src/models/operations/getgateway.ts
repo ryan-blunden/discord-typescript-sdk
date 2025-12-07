@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGatewaySecurity = {
   botToken?: string | undefined;
+};
+
+export type GetGatewayResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GatewayResponse;
 };
 
 /** @internal */
@@ -71,5 +77,72 @@ export function getGatewaySecurityFromJSON(
     jsonString,
     (x) => GetGatewaySecurity$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGatewaySecurity' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGatewayResponse$inboundSchema: z.ZodType<
+  GetGatewayResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GatewayResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGatewayResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GatewayResponse$Outbound;
+};
+
+/** @internal */
+export const GetGatewayResponse$outboundSchema: z.ZodType<
+  GetGatewayResponse$Outbound,
+  z.ZodTypeDef,
+  GetGatewayResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GatewayResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGatewayResponse$ {
+  /** @deprecated use `GetGatewayResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGatewayResponse$inboundSchema;
+  /** @deprecated use `GetGatewayResponse$outboundSchema` instead. */
+  export const outboundSchema = GetGatewayResponse$outboundSchema;
+  /** @deprecated use `GetGatewayResponse$Outbound` instead. */
+  export type Outbound = GetGatewayResponse$Outbound;
+}
+
+export function getGatewayResponseToJSON(
+  getGatewayResponse: GetGatewayResponse,
+): string {
+  return JSON.stringify(
+    GetGatewayResponse$outboundSchema.parse(getGatewayResponse),
+  );
+}
+
+export function getGatewayResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGatewayResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGatewayResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGatewayResponse' from JSON`,
   );
 }

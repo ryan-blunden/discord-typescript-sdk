@@ -26,6 +26,12 @@ import {
   ContainerComponentForMessageRequest$outboundSchema,
 } from "./containercomponentformessagerequest.js";
 import {
+  CustomClientThemeShareRequest,
+  CustomClientThemeShareRequest$inboundSchema,
+  CustomClientThemeShareRequest$Outbound,
+  CustomClientThemeShareRequest$outboundSchema,
+} from "./customclientthemesharerequest.js";
+import {
   FileComponentForMessageRequest,
   FileComponentForMessageRequest$inboundSchema,
   FileComponentForMessageRequest$Outbound,
@@ -109,6 +115,7 @@ export type BaseCreateMessageCreateRequest = {
   flags?: number | null | undefined;
   attachments?: Array<MessageAttachmentRequest> | null | undefined;
   poll?: PollCreateRequest | null | undefined;
+  sharedClientTheme?: CustomClientThemeShareRequest | null | undefined;
   confettiPotion?: ConfettiPotionCreateRequest | null | undefined;
 };
 
@@ -222,12 +229,15 @@ export const BaseCreateMessageCreateRequest$inboundSchema: z.ZodType<
   attachments: z.nullable(z.array(MessageAttachmentRequest$inboundSchema))
     .optional(),
   poll: z.nullable(PollCreateRequest$inboundSchema).optional(),
+  shared_client_theme: z.nullable(CustomClientThemeShareRequest$inboundSchema)
+    .optional(),
   confetti_potion: z.nullable(ConfettiPotionCreateRequest$inboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     "allowed_mentions": "allowedMentions",
     "sticker_ids": "stickerIds",
+    "shared_client_theme": "sharedClientTheme",
     "confetti_potion": "confettiPotion",
   });
 });
@@ -253,6 +263,10 @@ export type BaseCreateMessageCreateRequest$Outbound = {
   flags?: number | null | undefined;
   attachments?: Array<MessageAttachmentRequest$Outbound> | null | undefined;
   poll?: PollCreateRequest$Outbound | null | undefined;
+  shared_client_theme?:
+    | CustomClientThemeShareRequest$Outbound
+    | null
+    | undefined;
   confetti_potion?: ConfettiPotionCreateRequest$Outbound | null | undefined;
 };
 
@@ -284,12 +298,15 @@ export const BaseCreateMessageCreateRequest$outboundSchema: z.ZodType<
   attachments: z.nullable(z.array(MessageAttachmentRequest$outboundSchema))
     .optional(),
   poll: z.nullable(PollCreateRequest$outboundSchema).optional(),
+  sharedClientTheme: z.nullable(CustomClientThemeShareRequest$outboundSchema)
+    .optional(),
   confettiPotion: z.nullable(ConfettiPotionCreateRequest$outboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     allowedMentions: "allowed_mentions",
     stickerIds: "sticker_ids",
+    sharedClientTheme: "shared_client_theme",
     confettiPotion: "confetti_potion",
   });
 });

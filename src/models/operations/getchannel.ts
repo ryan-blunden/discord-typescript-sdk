@@ -22,6 +22,15 @@ export type GetChannelResponseBody =
   | components.ThreadResponse
   | components.GuildChannelResponse;
 
+export type GetChannelResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.PrivateChannelResponse
+    | components.PrivateGroupChannelResponse
+    | components.ThreadResponse
+    | components.GuildChannelResponse;
+};
+
 /** @internal */
 export const GetChannelRequest$inboundSchema: z.ZodType<
   GetChannelRequest,
@@ -143,5 +152,86 @@ export function getChannelResponseBodyFromJSON(
     jsonString,
     (x) => GetChannelResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetChannelResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetChannelResponse$inboundSchema: z.ZodType<
+  GetChannelResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.PrivateChannelResponse$inboundSchema,
+    components.PrivateGroupChannelResponse$inboundSchema,
+    components.ThreadResponse$inboundSchema,
+    components.GuildChannelResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetChannelResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.PrivateChannelResponse$Outbound
+    | components.PrivateGroupChannelResponse$Outbound
+    | components.ThreadResponse$Outbound
+    | components.GuildChannelResponse$Outbound;
+};
+
+/** @internal */
+export const GetChannelResponse$outboundSchema: z.ZodType<
+  GetChannelResponse$Outbound,
+  z.ZodTypeDef,
+  GetChannelResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.PrivateChannelResponse$outboundSchema,
+    components.PrivateGroupChannelResponse$outboundSchema,
+    components.ThreadResponse$outboundSchema,
+    components.GuildChannelResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetChannelResponse$ {
+  /** @deprecated use `GetChannelResponse$inboundSchema` instead. */
+  export const inboundSchema = GetChannelResponse$inboundSchema;
+  /** @deprecated use `GetChannelResponse$outboundSchema` instead. */
+  export const outboundSchema = GetChannelResponse$outboundSchema;
+  /** @deprecated use `GetChannelResponse$Outbound` instead. */
+  export type Outbound = GetChannelResponse$Outbound;
+}
+
+export function getChannelResponseToJSON(
+  getChannelResponse: GetChannelResponse,
+): string {
+  return JSON.stringify(
+    GetChannelResponse$outboundSchema.parse(getChannelResponse),
+  );
+}
+
+export function getChannelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetChannelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetChannelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetChannelResponse' from JSON`,
   );
 }

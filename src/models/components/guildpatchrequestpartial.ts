@@ -20,7 +20,6 @@ export type GuildPatchRequestPartial = {
   afkTimeout?: 60 | null | undefined;
   afkChannelId?: string | null | undefined;
   systemChannelId?: string | null | undefined;
-  ownerId?: string | undefined;
   splash?: string | null | undefined;
   banner?: string | null | undefined;
   systemChannelFlags?: number | null | undefined;
@@ -50,7 +49,6 @@ export const GuildPatchRequestPartial$inboundSchema: z.ZodType<
   afk_timeout: z.nullable(z.literal(60)).optional(),
   afk_channel_id: z.nullable(z.string()).optional(),
   system_channel_id: z.nullable(z.string()).optional(),
-  owner_id: z.string().optional(),
   splash: z.nullable(z.string()).optional(),
   banner: z.nullable(z.string()).optional(),
   system_channel_flags: z.nullable(z.number().int()).optional(),
@@ -70,7 +68,6 @@ export const GuildPatchRequestPartial$inboundSchema: z.ZodType<
     "afk_timeout": "afkTimeout",
     "afk_channel_id": "afkChannelId",
     "system_channel_id": "systemChannelId",
-    "owner_id": "ownerId",
     "system_channel_flags": "systemChannelFlags",
     "discovery_splash": "discoverySplash",
     "home_header": "homeHeader",
@@ -94,7 +91,6 @@ export type GuildPatchRequestPartial$Outbound = {
   afk_timeout: 60 | null;
   afk_channel_id?: string | null | undefined;
   system_channel_id?: string | null | undefined;
-  owner_id?: string | undefined;
   splash?: string | null | undefined;
   banner?: string | null | undefined;
   system_channel_flags?: number | null | undefined;
@@ -124,7 +120,6 @@ export const GuildPatchRequestPartial$outboundSchema: z.ZodType<
   afkTimeout: z.nullable(z.literal(60).default(60 as const)),
   afkChannelId: z.nullable(z.string()).optional(),
   systemChannelId: z.nullable(z.string()).optional(),
-  ownerId: z.string().optional(),
   splash: z.nullable(z.string()).optional(),
   banner: z.nullable(z.string()).optional(),
   systemChannelFlags: z.nullable(z.number().int()).optional(),
@@ -144,7 +139,6 @@ export const GuildPatchRequestPartial$outboundSchema: z.ZodType<
     afkTimeout: "afk_timeout",
     afkChannelId: "afk_channel_id",
     systemChannelId: "system_channel_id",
-    ownerId: "owner_id",
     systemChannelFlags: "system_channel_flags",
     discoverySplash: "discovery_splash",
     homeHeader: "home_header",

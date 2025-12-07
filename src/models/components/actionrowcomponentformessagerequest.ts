@@ -44,21 +44,22 @@ import {
 } from "./userselectcomponentformessagerequest.js";
 
 export type ActionRowComponentForMessageRequestComponents =
+  | ButtonComponentForMessageRequest
   | MentionableSelectComponentForMessageRequest
   | RoleSelectComponentForMessageRequest
   | StringSelectComponentForMessageRequest
   | UserSelectComponentForMessageRequest
-  | ButtonComponentForMessageRequest
   | ChannelSelectComponentForMessageRequest;
 
 export type ActionRowComponentForMessageRequest = {
   type?: 1 | undefined;
+  id?: number | null | undefined;
   components: Array<
+    | ButtonComponentForMessageRequest
     | MentionableSelectComponentForMessageRequest
     | RoleSelectComponentForMessageRequest
     | StringSelectComponentForMessageRequest
     | UserSelectComponentForMessageRequest
-    | ButtonComponentForMessageRequest
     | ChannelSelectComponentForMessageRequest
   >;
 };
@@ -70,21 +71,21 @@ export const ActionRowComponentForMessageRequestComponents$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
+    ButtonComponentForMessageRequest$inboundSchema,
     MentionableSelectComponentForMessageRequest$inboundSchema,
     RoleSelectComponentForMessageRequest$inboundSchema,
     StringSelectComponentForMessageRequest$inboundSchema,
     UserSelectComponentForMessageRequest$inboundSchema,
-    ButtonComponentForMessageRequest$inboundSchema,
     ChannelSelectComponentForMessageRequest$inboundSchema,
   ]);
 
 /** @internal */
 export type ActionRowComponentForMessageRequestComponents$Outbound =
+  | ButtonComponentForMessageRequest$Outbound
   | MentionableSelectComponentForMessageRequest$Outbound
   | RoleSelectComponentForMessageRequest$Outbound
   | StringSelectComponentForMessageRequest$Outbound
   | UserSelectComponentForMessageRequest$Outbound
-  | ButtonComponentForMessageRequest$Outbound
   | ChannelSelectComponentForMessageRequest$Outbound;
 
 /** @internal */
@@ -94,11 +95,11 @@ export const ActionRowComponentForMessageRequestComponents$outboundSchema:
     z.ZodTypeDef,
     ActionRowComponentForMessageRequestComponents
   > = z.union([
+    ButtonComponentForMessageRequest$outboundSchema,
     MentionableSelectComponentForMessageRequest$outboundSchema,
     RoleSelectComponentForMessageRequest$outboundSchema,
     StringSelectComponentForMessageRequest$outboundSchema,
     UserSelectComponentForMessageRequest$outboundSchema,
-    ButtonComponentForMessageRequest$outboundSchema,
     ChannelSelectComponentForMessageRequest$outboundSchema,
   ]);
 
@@ -151,13 +152,14 @@ export const ActionRowComponentForMessageRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal(1).optional(),
+  id: z.nullable(z.number().int()).optional(),
   components: z.array(
     z.union([
+      ButtonComponentForMessageRequest$inboundSchema,
       MentionableSelectComponentForMessageRequest$inboundSchema,
       RoleSelectComponentForMessageRequest$inboundSchema,
       StringSelectComponentForMessageRequest$inboundSchema,
       UserSelectComponentForMessageRequest$inboundSchema,
-      ButtonComponentForMessageRequest$inboundSchema,
       ChannelSelectComponentForMessageRequest$inboundSchema,
     ]),
   ),
@@ -166,12 +168,13 @@ export const ActionRowComponentForMessageRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ActionRowComponentForMessageRequest$Outbound = {
   type: 1;
+  id?: number | null | undefined;
   components: Array<
+    | ButtonComponentForMessageRequest$Outbound
     | MentionableSelectComponentForMessageRequest$Outbound
     | RoleSelectComponentForMessageRequest$Outbound
     | StringSelectComponentForMessageRequest$Outbound
     | UserSelectComponentForMessageRequest$Outbound
-    | ButtonComponentForMessageRequest$Outbound
     | ChannelSelectComponentForMessageRequest$Outbound
   >;
 };
@@ -183,13 +186,14 @@ export const ActionRowComponentForMessageRequest$outboundSchema: z.ZodType<
   ActionRowComponentForMessageRequest
 > = z.object({
   type: z.literal(1).default(1 as const),
+  id: z.nullable(z.number().int()).optional(),
   components: z.array(
     z.union([
+      ButtonComponentForMessageRequest$outboundSchema,
       MentionableSelectComponentForMessageRequest$outboundSchema,
       RoleSelectComponentForMessageRequest$outboundSchema,
       StringSelectComponentForMessageRequest$outboundSchema,
       UserSelectComponentForMessageRequest$outboundSchema,
-      ButtonComponentForMessageRequest$outboundSchema,
       ChannelSelectComponentForMessageRequest$outboundSchema,
     ]),
   ),

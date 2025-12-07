@@ -12,6 +12,10 @@ export type DeleteWebhookRequest = {
   webhookId: string;
 };
 
+export type DeleteWebhookResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteWebhookRequest$inboundSchema: z.ZodType<
   DeleteWebhookRequest,
@@ -71,5 +75,67 @@ export function deleteWebhookRequestFromJSON(
     jsonString,
     (x) => DeleteWebhookRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteWebhookRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteWebhookResponse$inboundSchema: z.ZodType<
+  DeleteWebhookResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteWebhookResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteWebhookResponse$outboundSchema: z.ZodType<
+  DeleteWebhookResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteWebhookResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteWebhookResponse$ {
+  /** @deprecated use `DeleteWebhookResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteWebhookResponse$inboundSchema;
+  /** @deprecated use `DeleteWebhookResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteWebhookResponse$outboundSchema;
+  /** @deprecated use `DeleteWebhookResponse$Outbound` instead. */
+  export type Outbound = DeleteWebhookResponse$Outbound;
+}
+
+export function deleteWebhookResponseToJSON(
+  deleteWebhookResponse: DeleteWebhookResponse,
+): string {
+  return JSON.stringify(
+    DeleteWebhookResponse$outboundSchema.parse(deleteWebhookResponse),
+  );
+}
+
+export function deleteWebhookResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteWebhookResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteWebhookResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteWebhookResponse' from JSON`,
   );
 }

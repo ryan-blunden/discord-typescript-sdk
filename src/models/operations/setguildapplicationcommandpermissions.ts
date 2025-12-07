@@ -27,6 +27,11 @@ export type SetGuildApplicationCommandPermissionsRequest = {
   requestBody: SetGuildApplicationCommandPermissionsRequestBody;
 };
 
+export type SetGuildApplicationCommandPermissionsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.CommandPermissionsResponse;
+};
+
 /** @internal */
 export const SetGuildApplicationCommandPermissionsSecurity$inboundSchema:
   z.ZodType<
@@ -268,5 +273,85 @@ export function setGuildApplicationCommandPermissionsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'SetGuildApplicationCommandPermissionsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const SetGuildApplicationCommandPermissionsResponse$inboundSchema:
+  z.ZodType<
+    SetGuildApplicationCommandPermissionsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    Headers: z.record(z.array(z.string())),
+    Result: components.CommandPermissionsResponse$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  });
+
+/** @internal */
+export type SetGuildApplicationCommandPermissionsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.CommandPermissionsResponse$Outbound;
+};
+
+/** @internal */
+export const SetGuildApplicationCommandPermissionsResponse$outboundSchema:
+  z.ZodType<
+    SetGuildApplicationCommandPermissionsResponse$Outbound,
+    z.ZodTypeDef,
+    SetGuildApplicationCommandPermissionsResponse
+  > = z.object({
+    headers: z.record(z.array(z.string())),
+    result: components.CommandPermissionsResponse$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SetGuildApplicationCommandPermissionsResponse$ {
+  /** @deprecated use `SetGuildApplicationCommandPermissionsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    SetGuildApplicationCommandPermissionsResponse$inboundSchema;
+  /** @deprecated use `SetGuildApplicationCommandPermissionsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    SetGuildApplicationCommandPermissionsResponse$outboundSchema;
+  /** @deprecated use `SetGuildApplicationCommandPermissionsResponse$Outbound` instead. */
+  export type Outbound = SetGuildApplicationCommandPermissionsResponse$Outbound;
+}
+
+export function setGuildApplicationCommandPermissionsResponseToJSON(
+  setGuildApplicationCommandPermissionsResponse:
+    SetGuildApplicationCommandPermissionsResponse,
+): string {
+  return JSON.stringify(
+    SetGuildApplicationCommandPermissionsResponse$outboundSchema.parse(
+      setGuildApplicationCommandPermissionsResponse,
+    ),
+  );
+}
+
+export function setGuildApplicationCommandPermissionsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  SetGuildApplicationCommandPermissionsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      SetGuildApplicationCommandPermissionsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'SetGuildApplicationCommandPermissionsResponse' from JSON`,
   );
 }

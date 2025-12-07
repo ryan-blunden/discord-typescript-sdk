@@ -6,76 +6,18 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type BulkUpdateGuildRolesRequestBody = {
-  id?: string | null | undefined;
-  position?: number | null | undefined;
-};
 
 export type BulkUpdateGuildRolesRequest = {
   guildId: string;
-  requestBody: Array<BulkUpdateGuildRolesRequestBody>;
+  requestBody: Array<components.UpdateRolePositionsRequest>;
 };
 
-/** @internal */
-export const BulkUpdateGuildRolesRequestBody$inboundSchema: z.ZodType<
-  BulkUpdateGuildRolesRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-  position: z.nullable(z.number().int()).optional(),
-});
-
-/** @internal */
-export type BulkUpdateGuildRolesRequestBody$Outbound = {
-  id?: string | null | undefined;
-  position?: number | null | undefined;
+export type BulkUpdateGuildRolesResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.GuildRoleResponse>;
 };
-
-/** @internal */
-export const BulkUpdateGuildRolesRequestBody$outboundSchema: z.ZodType<
-  BulkUpdateGuildRolesRequestBody$Outbound,
-  z.ZodTypeDef,
-  BulkUpdateGuildRolesRequestBody
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-  position: z.nullable(z.number().int()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BulkUpdateGuildRolesRequestBody$ {
-  /** @deprecated use `BulkUpdateGuildRolesRequestBody$inboundSchema` instead. */
-  export const inboundSchema = BulkUpdateGuildRolesRequestBody$inboundSchema;
-  /** @deprecated use `BulkUpdateGuildRolesRequestBody$outboundSchema` instead. */
-  export const outboundSchema = BulkUpdateGuildRolesRequestBody$outboundSchema;
-  /** @deprecated use `BulkUpdateGuildRolesRequestBody$Outbound` instead. */
-  export type Outbound = BulkUpdateGuildRolesRequestBody$Outbound;
-}
-
-export function bulkUpdateGuildRolesRequestBodyToJSON(
-  bulkUpdateGuildRolesRequestBody: BulkUpdateGuildRolesRequestBody,
-): string {
-  return JSON.stringify(
-    BulkUpdateGuildRolesRequestBody$outboundSchema.parse(
-      bulkUpdateGuildRolesRequestBody,
-    ),
-  );
-}
-
-export function bulkUpdateGuildRolesRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<BulkUpdateGuildRolesRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => BulkUpdateGuildRolesRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'BulkUpdateGuildRolesRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const BulkUpdateGuildRolesRequest$inboundSchema: z.ZodType<
@@ -84,9 +26,7 @@ export const BulkUpdateGuildRolesRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   guild_id: z.string(),
-  RequestBody: z.array(
-    z.lazy(() => BulkUpdateGuildRolesRequestBody$inboundSchema),
-  ),
+  RequestBody: z.array(components.UpdateRolePositionsRequest$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",
@@ -97,7 +37,7 @@ export const BulkUpdateGuildRolesRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type BulkUpdateGuildRolesRequest$Outbound = {
   guild_id: string;
-  RequestBody: Array<BulkUpdateGuildRolesRequestBody$Outbound>;
+  RequestBody: Array<components.UpdateRolePositionsRequest$Outbound>;
 };
 
 /** @internal */
@@ -107,9 +47,7 @@ export const BulkUpdateGuildRolesRequest$outboundSchema: z.ZodType<
   BulkUpdateGuildRolesRequest
 > = z.object({
   guildId: z.string(),
-  requestBody: z.array(
-    z.lazy(() => BulkUpdateGuildRolesRequestBody$outboundSchema),
-  ),
+  requestBody: z.array(components.UpdateRolePositionsRequest$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     guildId: "guild_id",
@@ -147,5 +85,74 @@ export function bulkUpdateGuildRolesRequestFromJSON(
     jsonString,
     (x) => BulkUpdateGuildRolesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'BulkUpdateGuildRolesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const BulkUpdateGuildRolesResponse$inboundSchema: z.ZodType<
+  BulkUpdateGuildRolesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(components.GuildRoleResponse$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type BulkUpdateGuildRolesResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<components.GuildRoleResponse$Outbound>;
+};
+
+/** @internal */
+export const BulkUpdateGuildRolesResponse$outboundSchema: z.ZodType<
+  BulkUpdateGuildRolesResponse$Outbound,
+  z.ZodTypeDef,
+  BulkUpdateGuildRolesResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(components.GuildRoleResponse$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BulkUpdateGuildRolesResponse$ {
+  /** @deprecated use `BulkUpdateGuildRolesResponse$inboundSchema` instead. */
+  export const inboundSchema = BulkUpdateGuildRolesResponse$inboundSchema;
+  /** @deprecated use `BulkUpdateGuildRolesResponse$outboundSchema` instead. */
+  export const outboundSchema = BulkUpdateGuildRolesResponse$outboundSchema;
+  /** @deprecated use `BulkUpdateGuildRolesResponse$Outbound` instead. */
+  export type Outbound = BulkUpdateGuildRolesResponse$Outbound;
+}
+
+export function bulkUpdateGuildRolesResponseToJSON(
+  bulkUpdateGuildRolesResponse: BulkUpdateGuildRolesResponse,
+): string {
+  return JSON.stringify(
+    BulkUpdateGuildRolesResponse$outboundSchema.parse(
+      bulkUpdateGuildRolesResponse,
+    ),
+  );
+}
+
+export function bulkUpdateGuildRolesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkUpdateGuildRolesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkUpdateGuildRolesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkUpdateGuildRolesResponse' from JSON`,
   );
 }

@@ -12,6 +12,10 @@ export type DeleteApplicationUserRoleConnectionRequest = {
   applicationId: string;
 };
 
+export type DeleteApplicationUserRoleConnectionResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteApplicationUserRoleConnectionRequest$inboundSchema:
   z.ZodType<DeleteApplicationUserRoleConnectionRequest, z.ZodTypeDef, unknown> =
@@ -81,5 +85,80 @@ export function deleteApplicationUserRoleConnectionRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'DeleteApplicationUserRoleConnectionRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteApplicationUserRoleConnectionResponse$inboundSchema:
+  z.ZodType<
+    DeleteApplicationUserRoleConnectionResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    Headers: z.record(z.array(z.string())),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+    });
+  });
+
+/** @internal */
+export type DeleteApplicationUserRoleConnectionResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteApplicationUserRoleConnectionResponse$outboundSchema:
+  z.ZodType<
+    DeleteApplicationUserRoleConnectionResponse$Outbound,
+    z.ZodTypeDef,
+    DeleteApplicationUserRoleConnectionResponse
+  > = z.object({
+    headers: z.record(z.array(z.string())),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteApplicationUserRoleConnectionResponse$ {
+  /** @deprecated use `DeleteApplicationUserRoleConnectionResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteApplicationUserRoleConnectionResponse$inboundSchema;
+  /** @deprecated use `DeleteApplicationUserRoleConnectionResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteApplicationUserRoleConnectionResponse$outboundSchema;
+  /** @deprecated use `DeleteApplicationUserRoleConnectionResponse$Outbound` instead. */
+  export type Outbound = DeleteApplicationUserRoleConnectionResponse$Outbound;
+}
+
+export function deleteApplicationUserRoleConnectionResponseToJSON(
+  deleteApplicationUserRoleConnectionResponse:
+    DeleteApplicationUserRoleConnectionResponse,
+): string {
+  return JSON.stringify(
+    DeleteApplicationUserRoleConnectionResponse$outboundSchema.parse(
+      deleteApplicationUserRoleConnectionResponse,
+    ),
+  );
+}
+
+export function deleteApplicationUserRoleConnectionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteApplicationUserRoleConnectionResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteApplicationUserRoleConnectionResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeleteApplicationUserRoleConnectionResponse' from JSON`,
   );
 }

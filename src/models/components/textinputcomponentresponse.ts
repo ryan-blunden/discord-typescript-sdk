@@ -14,9 +14,9 @@ export type TextInputComponentResponse = {
   customId: string;
   style?: 1 | undefined;
   label?: string | null | undefined;
-  value?: string | null | undefined;
-  placeholder?: string | null | undefined;
-  required?: boolean | null | undefined;
+  value?: string | undefined;
+  placeholder?: string | undefined;
+  required?: boolean | undefined;
   minLength?: number | null | undefined;
   maxLength?: number | null | undefined;
 };
@@ -32,9 +32,9 @@ export const TextInputComponentResponse$inboundSchema: z.ZodType<
   custom_id: z.string(),
   style: z.literal(1).optional(),
   label: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
-  placeholder: z.nullable(z.string()).optional(),
-  required: z.nullable(z.boolean()).optional(),
+  value: z.string().optional(),
+  placeholder: z.string().optional(),
+  required: z.boolean().optional(),
   min_length: z.nullable(z.number().int()).optional(),
   max_length: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
@@ -52,9 +52,9 @@ export type TextInputComponentResponse$Outbound = {
   custom_id: string;
   style: 1;
   label?: string | null | undefined;
-  value?: string | null | undefined;
-  placeholder?: string | null | undefined;
-  required?: boolean | null | undefined;
+  value?: string | undefined;
+  placeholder?: string | undefined;
+  required?: boolean | undefined;
   min_length?: number | null | undefined;
   max_length?: number | null | undefined;
 };
@@ -70,9 +70,9 @@ export const TextInputComponentResponse$outboundSchema: z.ZodType<
   customId: z.string(),
   style: z.literal(1).default(1 as const),
   label: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
-  placeholder: z.nullable(z.string()).optional(),
-  required: z.nullable(z.boolean()).optional(),
+  value: z.string().optional(),
+  placeholder: z.string().optional(),
+  required: z.boolean().optional(),
   minLength: z.nullable(z.number().int()).optional(),
   maxLength: z.nullable(z.number().int()).optional(),
 }).transform((v) => {

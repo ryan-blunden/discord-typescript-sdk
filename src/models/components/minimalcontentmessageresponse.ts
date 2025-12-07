@@ -56,12 +56,6 @@ import {
   MessageStickerItemResponse$outboundSchema,
 } from "./messagestickeritemresponse.js";
 import {
-  ResolvedObjectsResponse,
-  ResolvedObjectsResponse$inboundSchema,
-  ResolvedObjectsResponse$Outbound,
-  ResolvedObjectsResponse$outboundSchema,
-} from "./resolvedobjectsresponse.js";
-import {
   SectionComponentResponse,
   SectionComponentResponse$inboundSchema,
   SectionComponentResponse$Outbound,
@@ -124,12 +118,8 @@ export type MinimalContentMessageResponse = {
     | ContainerComponentResponse
     | FileComponentResponse
   >;
-  resolved?: ResolvedObjectsResponse | null | undefined;
-  stickers?:
-    | Array<StandardStickerResponse | GuildStickerResponse>
-    | null
-    | undefined;
-  stickerItems?: Array<MessageStickerItemResponse> | null | undefined;
+  stickers?: Array<StandardStickerResponse | GuildStickerResponse> | undefined;
+  stickerItems?: Array<MessageStickerItemResponse> | undefined;
 };
 
 /** @internal */
@@ -303,17 +293,13 @@ export const MinimalContentMessageResponse$inboundSchema: z.ZodType<
       FileComponentResponse$inboundSchema,
     ]),
   ),
-  resolved: z.nullable(ResolvedObjectsResponse$inboundSchema).optional(),
-  stickers: z.nullable(
-    z.array(
-      z.union([
-        StandardStickerResponse$inboundSchema,
-        GuildStickerResponse$inboundSchema,
-      ]),
-    ),
+  stickers: z.array(
+    z.union([
+      StandardStickerResponse$inboundSchema,
+      GuildStickerResponse$inboundSchema,
+    ]),
   ).optional(),
-  sticker_items: z.nullable(z.array(MessageStickerItemResponse$inboundSchema))
-    .optional(),
+  sticker_items: z.array(MessageStickerItemResponse$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "mention_roles": "mentionRoles",
@@ -342,12 +328,10 @@ export type MinimalContentMessageResponse$Outbound = {
     | ContainerComponentResponse$Outbound
     | FileComponentResponse$Outbound
   >;
-  resolved?: ResolvedObjectsResponse$Outbound | null | undefined;
   stickers?:
     | Array<StandardStickerResponse$Outbound | GuildStickerResponse$Outbound>
-    | null
     | undefined;
-  sticker_items?: Array<MessageStickerItemResponse$Outbound> | null | undefined;
+  sticker_items?: Array<MessageStickerItemResponse$Outbound> | undefined;
 };
 
 /** @internal */
@@ -377,17 +361,13 @@ export const MinimalContentMessageResponse$outboundSchema: z.ZodType<
       FileComponentResponse$outboundSchema,
     ]),
   ),
-  resolved: z.nullable(ResolvedObjectsResponse$outboundSchema).optional(),
-  stickers: z.nullable(
-    z.array(
-      z.union([
-        StandardStickerResponse$outboundSchema,
-        GuildStickerResponse$outboundSchema,
-      ]),
-    ),
+  stickers: z.array(
+    z.union([
+      StandardStickerResponse$outboundSchema,
+      GuildStickerResponse$outboundSchema,
+    ]),
   ).optional(),
-  stickerItems: z.nullable(z.array(MessageStickerItemResponse$outboundSchema))
-    .optional(),
+  stickerItems: z.array(MessageStickerItemResponse$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     mentionRoles: "mention_roles",

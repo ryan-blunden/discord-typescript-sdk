@@ -14,6 +14,11 @@ export type UpdateGuildRequest = {
   guildPatchRequestPartial: components.GuildPatchRequestPartial;
 };
 
+export type UpdateGuildResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildResponse;
+};
+
 /** @internal */
 export const UpdateGuildRequest$inboundSchema: z.ZodType<
   UpdateGuildRequest,
@@ -78,5 +83,72 @@ export function updateGuildRequestFromJSON(
     jsonString,
     (x) => UpdateGuildRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateGuildRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateGuildResponse$inboundSchema: z.ZodType<
+  UpdateGuildResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateGuildResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateGuildResponse$outboundSchema: z.ZodType<
+  UpdateGuildResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateGuildResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateGuildResponse$ {
+  /** @deprecated use `UpdateGuildResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateGuildResponse$inboundSchema;
+  /** @deprecated use `UpdateGuildResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateGuildResponse$outboundSchema;
+  /** @deprecated use `UpdateGuildResponse$Outbound` instead. */
+  export type Outbound = UpdateGuildResponse$Outbound;
+}
+
+export function updateGuildResponseToJSON(
+  updateGuildResponse: UpdateGuildResponse,
+): string {
+  return JSON.stringify(
+    UpdateGuildResponse$outboundSchema.parse(updateGuildResponse),
+  );
+}
+
+export function updateGuildResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildResponse' from JSON`,
   );
 }

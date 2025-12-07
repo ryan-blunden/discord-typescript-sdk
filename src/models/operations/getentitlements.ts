@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetEntitlementsSecurity = {
@@ -17,7 +18,7 @@ export type SkuIds = string | Array<string | null>;
 export type GetEntitlementsRequest = {
   applicationId: string;
   userId?: string | undefined;
-  skuIds: string | Array<string | null>;
+  skuIds?: string | Array<string | null> | undefined;
   guildId?: string | undefined;
   before?: string | undefined;
   after?: string | undefined;
@@ -25,6 +26,11 @@ export type GetEntitlementsRequest = {
   excludeEnded?: boolean | undefined;
   excludeDeleted?: boolean | undefined;
   onlyActive?: boolean | undefined;
+};
+
+export type GetEntitlementsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.EntitlementResponse | null>;
 };
 
 /** @internal */
@@ -138,7 +144,7 @@ export const GetEntitlementsRequest$inboundSchema: z.ZodType<
 > = z.object({
   application_id: z.string(),
   user_id: z.string().optional(),
-  sku_ids: z.union([z.string(), z.array(z.nullable(z.string()))]),
+  sku_ids: z.union([z.string(), z.array(z.nullable(z.string()))]).optional(),
   guild_id: z.string().optional(),
   before: z.string().optional(),
   after: z.string().optional(),
@@ -162,7 +168,7 @@ export const GetEntitlementsRequest$inboundSchema: z.ZodType<
 export type GetEntitlementsRequest$Outbound = {
   application_id: string;
   user_id?: string | undefined;
-  sku_ids: string | Array<string | null>;
+  sku_ids?: string | Array<string | null> | undefined;
   guild_id?: string | undefined;
   before?: string | undefined;
   after?: string | undefined;
@@ -180,7 +186,7 @@ export const GetEntitlementsRequest$outboundSchema: z.ZodType<
 > = z.object({
   applicationId: z.string(),
   userId: z.string().optional(),
-  skuIds: z.union([z.string(), z.array(z.nullable(z.string()))]),
+  skuIds: z.union([z.string(), z.array(z.nullable(z.string()))]).optional(),
   guildId: z.string().optional(),
   before: z.string().optional(),
   after: z.string().optional(),
@@ -228,5 +234,72 @@ export function getEntitlementsRequestFromJSON(
     jsonString,
     (x) => GetEntitlementsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetEntitlementsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEntitlementsResponse$inboundSchema: z.ZodType<
+  GetEntitlementsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(z.nullable(components.EntitlementResponse$inboundSchema)),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetEntitlementsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<components.EntitlementResponse$Outbound | null>;
+};
+
+/** @internal */
+export const GetEntitlementsResponse$outboundSchema: z.ZodType<
+  GetEntitlementsResponse$Outbound,
+  z.ZodTypeDef,
+  GetEntitlementsResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(z.nullable(components.EntitlementResponse$outboundSchema)),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetEntitlementsResponse$ {
+  /** @deprecated use `GetEntitlementsResponse$inboundSchema` instead. */
+  export const inboundSchema = GetEntitlementsResponse$inboundSchema;
+  /** @deprecated use `GetEntitlementsResponse$outboundSchema` instead. */
+  export const outboundSchema = GetEntitlementsResponse$outboundSchema;
+  /** @deprecated use `GetEntitlementsResponse$Outbound` instead. */
+  export type Outbound = GetEntitlementsResponse$Outbound;
+}
+
+export function getEntitlementsResponseToJSON(
+  getEntitlementsResponse: GetEntitlementsResponse,
+): string {
+  return JSON.stringify(
+    GetEntitlementsResponse$outboundSchema.parse(getEntitlementsResponse),
+  );
+}
+
+export function getEntitlementsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEntitlementsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetEntitlementsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEntitlementsResponse' from JSON`,
   );
 }

@@ -8,20 +8,22 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  StringSelectOptionForMessageRequest,
-  StringSelectOptionForMessageRequest$inboundSchema,
-  StringSelectOptionForMessageRequest$Outbound,
-  StringSelectOptionForMessageRequest$outboundSchema,
-} from "./stringselectoptionformessagerequest.js";
+  StringSelectOptionForRequest,
+  StringSelectOptionForRequest$inboundSchema,
+  StringSelectOptionForRequest$Outbound,
+  StringSelectOptionForRequest$outboundSchema,
+} from "./stringselectoptionforrequest.js";
 
 export type StringSelectComponentForMessageRequest = {
   type?: 1 | undefined;
+  id?: number | null | undefined;
   customId: string;
   placeholder?: string | null | undefined;
   minValues?: number | null | undefined;
   maxValues?: number | null | undefined;
   disabled?: boolean | null | undefined;
-  options: Array<StringSelectOptionForMessageRequest>;
+  required?: boolean | null | undefined;
+  options: Array<StringSelectOptionForRequest>;
 };
 
 /** @internal */
@@ -31,12 +33,14 @@ export const StringSelectComponentForMessageRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal(1).optional(),
+  id: z.nullable(z.number().int()).optional(),
   custom_id: z.string(),
   placeholder: z.nullable(z.string()).optional(),
   min_values: z.nullable(z.number().int()).optional(),
   max_values: z.nullable(z.number().int()).optional(),
   disabled: z.nullable(z.boolean()).optional(),
-  options: z.array(StringSelectOptionForMessageRequest$inboundSchema),
+  required: z.nullable(z.boolean()).optional(),
+  options: z.array(StringSelectOptionForRequest$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "custom_id": "customId",
@@ -48,12 +52,14 @@ export const StringSelectComponentForMessageRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type StringSelectComponentForMessageRequest$Outbound = {
   type: 1;
+  id?: number | null | undefined;
   custom_id: string;
   placeholder?: string | null | undefined;
   min_values?: number | null | undefined;
   max_values?: number | null | undefined;
   disabled?: boolean | null | undefined;
-  options: Array<StringSelectOptionForMessageRequest$Outbound>;
+  required?: boolean | null | undefined;
+  options: Array<StringSelectOptionForRequest$Outbound>;
 };
 
 /** @internal */
@@ -63,12 +69,14 @@ export const StringSelectComponentForMessageRequest$outboundSchema: z.ZodType<
   StringSelectComponentForMessageRequest
 > = z.object({
   type: z.literal(1).default(1 as const),
+  id: z.nullable(z.number().int()).optional(),
   customId: z.string(),
   placeholder: z.nullable(z.string()).optional(),
   minValues: z.nullable(z.number().int()).optional(),
   maxValues: z.nullable(z.number().int()).optional(),
   disabled: z.nullable(z.boolean()).optional(),
-  options: z.array(StringSelectOptionForMessageRequest$outboundSchema),
+  required: z.nullable(z.boolean()).optional(),
+  options: z.array(StringSelectOptionForRequest$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     customId: "custom_id",

@@ -24,7 +24,7 @@ export class Users extends ClientSDK {
   async getCurrent(
     security: operations.GetMyUserSecurity,
     options?: RequestOptions,
-  ): Promise<components.UserPIIResponse> {
+  ): Promise<operations.GetMyUserResponse> {
     return unwrapAsync(usersGetCurrent(
       this,
       security,
@@ -38,7 +38,7 @@ export class Users extends ClientSDK {
   async updateCurrent(
     request: components.BotAccountPatchRequest,
     options?: RequestOptions,
-  ): Promise<components.UserPIIResponse> {
+  ): Promise<operations.UpdateMyUserResponse> {
     return unwrapAsync(usersUpdateCurrent(
       this,
       request,
@@ -52,7 +52,7 @@ export class Users extends ClientSDK {
   async getApplicationRoleConnection(
     request: operations.GetApplicationUserRoleConnectionRequest,
     options?: RequestOptions,
-  ): Promise<components.ApplicationUserRoleConnectionResponse> {
+  ): Promise<operations.GetApplicationUserRoleConnectionResponse> {
     return unwrapAsync(usersGetApplicationRoleConnection(
       this,
       request,
@@ -66,7 +66,7 @@ export class Users extends ClientSDK {
   async updateApplicationRoleConnection(
     request: operations.UpdateApplicationUserRoleConnectionRequest,
     options?: RequestOptions,
-  ): Promise<components.ApplicationUserRoleConnectionResponse> {
+  ): Promise<operations.UpdateApplicationUserRoleConnectionResponse> {
     return unwrapAsync(usersUpdateApplicationRoleConnection(
       this,
       request,
@@ -80,7 +80,7 @@ export class Users extends ClientSDK {
   async createDM(
     request: components.CreatePrivateChannelRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateDmResponseBody> {
+  ): Promise<operations.CreateDmResponse> {
     return unwrapAsync(usersCreateDM(
       this,
       request,
@@ -94,7 +94,7 @@ export class Users extends ClientSDK {
   async listConnections(
     security: operations.ListMyConnectionsSecurity,
     options?: RequestOptions,
-  ): Promise<Array<components.ConnectedAccountResponse>> {
+  ): Promise<operations.ListMyConnectionsResponse> {
     return unwrapAsync(usersListConnections(
       this,
       security,
@@ -109,7 +109,7 @@ export class Users extends ClientSDK {
     security: operations.ListMyGuildsSecurity,
     request: operations.ListMyGuildsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.MyGuildResponse>> {
+  ): Promise<operations.ListMyGuildsResponse> {
     return unwrapAsync(usersListGuilds(
       this,
       security,
@@ -124,7 +124,7 @@ export class Users extends ClientSDK {
   async leaveGuild(
     request: operations.LeaveGuildRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.LeaveGuildResponse | undefined> {
     return unwrapAsync(usersLeaveGuild(
       this,
       request,
@@ -138,7 +138,7 @@ export class Users extends ClientSDK {
   async getGuildMember(
     request: operations.GetMyGuildMemberRequest,
     options?: RequestOptions,
-  ): Promise<components.PrivateGuildMemberResponse> {
+  ): Promise<operations.GetMyGuildMemberResponse> {
     return unwrapAsync(usersGetGuildMember(
       this,
       request,
@@ -152,7 +152,7 @@ export class Users extends ClientSDK {
   async get(
     request: operations.GetUserRequest,
     options?: RequestOptions,
-  ): Promise<components.UserResponse> {
+  ): Promise<operations.GetUserResponse> {
     return unwrapAsync(usersGet(
       this,
       request,

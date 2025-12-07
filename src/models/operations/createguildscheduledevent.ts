@@ -30,6 +30,14 @@ export type CreateGuildScheduledEventResponseBody =
   | components.StageScheduledEventResponse
   | components.VoiceScheduledEventResponse;
 
+export type CreateGuildScheduledEventResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.ExternalScheduledEventResponse
+    | components.StageScheduledEventResponse
+    | components.VoiceScheduledEventResponse;
+};
+
 /** @internal */
 export const CreateGuildScheduledEventRequestBody$inboundSchema: z.ZodType<
   CreateGuildScheduledEventRequestBody,
@@ -235,5 +243,86 @@ export function createGuildScheduledEventResponseBodyFromJSON(
     (x) =>
       CreateGuildScheduledEventResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateGuildScheduledEventResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateGuildScheduledEventResponse$inboundSchema: z.ZodType<
+  CreateGuildScheduledEventResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.ExternalScheduledEventResponse$inboundSchema,
+    components.StageScheduledEventResponse$inboundSchema,
+    components.VoiceScheduledEventResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateGuildScheduledEventResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.ExternalScheduledEventResponse$Outbound
+    | components.StageScheduledEventResponse$Outbound
+    | components.VoiceScheduledEventResponse$Outbound;
+};
+
+/** @internal */
+export const CreateGuildScheduledEventResponse$outboundSchema: z.ZodType<
+  CreateGuildScheduledEventResponse$Outbound,
+  z.ZodTypeDef,
+  CreateGuildScheduledEventResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.ExternalScheduledEventResponse$outboundSchema,
+    components.StageScheduledEventResponse$outboundSchema,
+    components.VoiceScheduledEventResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateGuildScheduledEventResponse$ {
+  /** @deprecated use `CreateGuildScheduledEventResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateGuildScheduledEventResponse$inboundSchema;
+  /** @deprecated use `CreateGuildScheduledEventResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateGuildScheduledEventResponse$outboundSchema;
+  /** @deprecated use `CreateGuildScheduledEventResponse$Outbound` instead. */
+  export type Outbound = CreateGuildScheduledEventResponse$Outbound;
+}
+
+export function createGuildScheduledEventResponseToJSON(
+  createGuildScheduledEventResponse: CreateGuildScheduledEventResponse,
+): string {
+  return JSON.stringify(
+    CreateGuildScheduledEventResponse$outboundSchema.parse(
+      createGuildScheduledEventResponse,
+    ),
+  );
+}
+
+export function createGuildScheduledEventResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildScheduledEventResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateGuildScheduledEventResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildScheduledEventResponse' from JSON`,
   );
 }

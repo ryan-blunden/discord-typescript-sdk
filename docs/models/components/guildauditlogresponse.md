@@ -11,6 +11,9 @@ let value: GuildAuditLogResponse = {
   integrations: [
     {
       id: "<value>",
+      account: {
+        id: "<id>",
+      },
     },
   ],
   webhooks: [],
@@ -18,14 +21,18 @@ let value: GuildAuditLogResponse = {
   threads: [
     {
       id: "<value>",
-      type: 11,
-      flags: 257651,
+      type: 12,
+      flags: 208413,
       guildId: "<value>",
       name: "<value>",
       ownerId: "<value>",
-      messageCount: 159639,
-      memberCount: 279313,
-      totalMessageSent: 568672,
+      threadMetadata: {
+        archived: true,
+        locked: false,
+      },
+      messageCount: 861725,
+      memberCount: 120176,
+      totalMessageSent: 694491,
     },
   ],
   applicationCommands: [

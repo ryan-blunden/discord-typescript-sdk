@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildVanityUrlRequest = {
   guildId: string;
+};
+
+export type GetGuildVanityUrlResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.VanityURLResponse;
 };
 
 /** @internal */
@@ -71,5 +77,72 @@ export function getGuildVanityUrlRequestFromJSON(
     jsonString,
     (x) => GetGuildVanityUrlRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGuildVanityUrlRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildVanityUrlResponse$inboundSchema: z.ZodType<
+  GetGuildVanityUrlResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.VanityURLResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGuildVanityUrlResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.VanityURLResponse$Outbound;
+};
+
+/** @internal */
+export const GetGuildVanityUrlResponse$outboundSchema: z.ZodType<
+  GetGuildVanityUrlResponse$Outbound,
+  z.ZodTypeDef,
+  GetGuildVanityUrlResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.VanityURLResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildVanityUrlResponse$ {
+  /** @deprecated use `GetGuildVanityUrlResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGuildVanityUrlResponse$inboundSchema;
+  /** @deprecated use `GetGuildVanityUrlResponse$outboundSchema` instead. */
+  export const outboundSchema = GetGuildVanityUrlResponse$outboundSchema;
+  /** @deprecated use `GetGuildVanityUrlResponse$Outbound` instead. */
+  export type Outbound = GetGuildVanityUrlResponse$Outbound;
+}
+
+export function getGuildVanityUrlResponseToJSON(
+  getGuildVanityUrlResponse: GetGuildVanityUrlResponse,
+): string {
+  return JSON.stringify(
+    GetGuildVanityUrlResponse$outboundSchema.parse(getGuildVanityUrlResponse),
+  );
+}
+
+export function getGuildVanityUrlResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildVanityUrlResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildVanityUrlResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildVanityUrlResponse' from JSON`,
   );
 }

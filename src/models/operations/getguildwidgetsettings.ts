@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildWidgetSettingsRequest = {
   guildId: string;
+};
+
+export type GetGuildWidgetSettingsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.WidgetSettingsResponse;
 };
 
 /** @internal */
@@ -73,5 +79,74 @@ export function getGuildWidgetSettingsRequestFromJSON(
     jsonString,
     (x) => GetGuildWidgetSettingsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGuildWidgetSettingsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildWidgetSettingsResponse$inboundSchema: z.ZodType<
+  GetGuildWidgetSettingsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.WidgetSettingsResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGuildWidgetSettingsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.WidgetSettingsResponse$Outbound;
+};
+
+/** @internal */
+export const GetGuildWidgetSettingsResponse$outboundSchema: z.ZodType<
+  GetGuildWidgetSettingsResponse$Outbound,
+  z.ZodTypeDef,
+  GetGuildWidgetSettingsResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.WidgetSettingsResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildWidgetSettingsResponse$ {
+  /** @deprecated use `GetGuildWidgetSettingsResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGuildWidgetSettingsResponse$inboundSchema;
+  /** @deprecated use `GetGuildWidgetSettingsResponse$outboundSchema` instead. */
+  export const outboundSchema = GetGuildWidgetSettingsResponse$outboundSchema;
+  /** @deprecated use `GetGuildWidgetSettingsResponse$Outbound` instead. */
+  export type Outbound = GetGuildWidgetSettingsResponse$Outbound;
+}
+
+export function getGuildWidgetSettingsResponseToJSON(
+  getGuildWidgetSettingsResponse: GetGuildWidgetSettingsResponse,
+): string {
+  return JSON.stringify(
+    GetGuildWidgetSettingsResponse$outboundSchema.parse(
+      getGuildWidgetSettingsResponse,
+    ),
+  );
+}
+
+export function getGuildWidgetSettingsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildWidgetSettingsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildWidgetSettingsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildWidgetSettingsResponse' from JSON`,
   );
 }

@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Tag = string | Array<string>;
@@ -17,12 +18,17 @@ export type ThreadSearchRequest = {
   minId?: string | undefined;
   maxId?: string | undefined;
   tag?: string | Array<string> | undefined;
-  tagSetting?: string | undefined;
+  tagSetting?: "match_all" | undefined;
   archived?: boolean | undefined;
   sortBy?: "relevance" | undefined;
   sortOrder?: "asc" | undefined;
   limit?: number | undefined;
   offset?: number | undefined;
+};
+
+export type ThreadSearchResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ThreadSearchResponse;
 };
 
 /** @internal */
@@ -76,7 +82,7 @@ export const ThreadSearchRequest$inboundSchema: z.ZodType<
   min_id: z.string().optional(),
   max_id: z.string().optional(),
   tag: z.union([z.string(), z.array(z.string())]).optional(),
-  tag_setting: z.string().optional(),
+  tag_setting: z.literal("match_all").optional(),
   archived: z.boolean().optional(),
   sort_by: z.literal("relevance").optional(),
   sort_order: z.literal("asc").optional(),
@@ -101,7 +107,7 @@ export type ThreadSearchRequest$Outbound = {
   min_id?: string | undefined;
   max_id?: string | undefined;
   tag?: string | Array<string> | undefined;
-  tag_setting?: string | undefined;
+  tag_setting: "match_all";
   archived?: boolean | undefined;
   sort_by: "relevance";
   sort_order: "asc";
@@ -121,7 +127,7 @@ export const ThreadSearchRequest$outboundSchema: z.ZodType<
   minId: z.string().optional(),
   maxId: z.string().optional(),
   tag: z.union([z.string(), z.array(z.string())]).optional(),
-  tagSetting: z.string().optional(),
+  tagSetting: z.literal("match_all").default("match_all" as const),
   archived: z.boolean().optional(),
   sortBy: z.literal("relevance").default("relevance" as const),
   sortOrder: z.literal("asc").default("asc" as const),
@@ -166,5 +172,72 @@ export function threadSearchRequestFromJSON(
     jsonString,
     (x) => ThreadSearchRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ThreadSearchRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ThreadSearchResponse$inboundSchema: z.ZodType<
+  ThreadSearchResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ThreadSearchResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ThreadSearchResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ThreadSearchResponse$Outbound;
+};
+
+/** @internal */
+export const ThreadSearchResponse$outboundSchema: z.ZodType<
+  ThreadSearchResponse$Outbound,
+  z.ZodTypeDef,
+  ThreadSearchResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ThreadSearchResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ThreadSearchResponse$ {
+  /** @deprecated use `ThreadSearchResponse$inboundSchema` instead. */
+  export const inboundSchema = ThreadSearchResponse$inboundSchema;
+  /** @deprecated use `ThreadSearchResponse$outboundSchema` instead. */
+  export const outboundSchema = ThreadSearchResponse$outboundSchema;
+  /** @deprecated use `ThreadSearchResponse$Outbound` instead. */
+  export type Outbound = ThreadSearchResponse$Outbound;
+}
+
+export function threadSearchResponseToJSON(
+  threadSearchResponse: ThreadSearchResponse,
+): string {
+  return JSON.stringify(
+    ThreadSearchResponse$outboundSchema.parse(threadSearchResponse),
+  );
+}
+
+export function threadSearchResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ThreadSearchResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ThreadSearchResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ThreadSearchResponse' from JSON`,
   );
 }

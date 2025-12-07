@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageEmbedFooterResponse = {
   text: string;
-  iconUrl?: string | null | undefined;
-  proxyIconUrl?: string | null | undefined;
+  iconUrl?: string | undefined;
+  proxyIconUrl?: string | undefined;
 };
 
 /** @internal */
@@ -21,8 +21,8 @@ export const MessageEmbedFooterResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   text: z.string(),
-  icon_url: z.nullable(z.string()).optional(),
-  proxy_icon_url: z.nullable(z.string()).optional(),
+  icon_url: z.string().optional(),
+  proxy_icon_url: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "icon_url": "iconUrl",
@@ -33,8 +33,8 @@ export const MessageEmbedFooterResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type MessageEmbedFooterResponse$Outbound = {
   text: string;
-  icon_url?: string | null | undefined;
-  proxy_icon_url?: string | null | undefined;
+  icon_url?: string | undefined;
+  proxy_icon_url?: string | undefined;
 };
 
 /** @internal */
@@ -44,8 +44,8 @@ export const MessageEmbedFooterResponse$outboundSchema: z.ZodType<
   MessageEmbedFooterResponse
 > = z.object({
   text: z.string(),
-  iconUrl: z.nullable(z.string()).optional(),
-  proxyIconUrl: z.nullable(z.string()).optional(),
+  iconUrl: z.string().optional(),
+  proxyIconUrl: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     iconUrl: "icon_url",

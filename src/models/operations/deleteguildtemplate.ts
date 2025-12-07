@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteGuildTemplateRequest = {
   guildId: string;
   code: string;
+};
+
+export type DeleteGuildTemplateResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildTemplateResponse;
 };
 
 /** @internal */
@@ -75,5 +81,74 @@ export function deleteGuildTemplateRequestFromJSON(
     jsonString,
     (x) => DeleteGuildTemplateRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteGuildTemplateRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteGuildTemplateResponse$inboundSchema: z.ZodType<
+  DeleteGuildTemplateResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildTemplateResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type DeleteGuildTemplateResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildTemplateResponse$Outbound;
+};
+
+/** @internal */
+export const DeleteGuildTemplateResponse$outboundSchema: z.ZodType<
+  DeleteGuildTemplateResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteGuildTemplateResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildTemplateResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteGuildTemplateResponse$ {
+  /** @deprecated use `DeleteGuildTemplateResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteGuildTemplateResponse$inboundSchema;
+  /** @deprecated use `DeleteGuildTemplateResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteGuildTemplateResponse$outboundSchema;
+  /** @deprecated use `DeleteGuildTemplateResponse$Outbound` instead. */
+  export type Outbound = DeleteGuildTemplateResponse$Outbound;
+}
+
+export function deleteGuildTemplateResponseToJSON(
+  deleteGuildTemplateResponse: DeleteGuildTemplateResponse,
+): string {
+  return JSON.stringify(
+    DeleteGuildTemplateResponse$outboundSchema.parse(
+      deleteGuildTemplateResponse,
+    ),
+  );
+}
+
+export function deleteGuildTemplateResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildTemplateResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteGuildTemplateResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildTemplateResponse' from JSON`,
   );
 }

@@ -80,14 +80,15 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyResponse](../../models/components/lobbyresponse.md)\>**
+**Promise\<[operations.CreateOrJoinLobbyResponse](../../models/operations/createorjoinlobbyresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## create
 
@@ -149,14 +150,15 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyResponse](../../models/components/lobbyresponse.md)\>**
+**Promise\<[operations.CreateLobbyResponse](../../models/operations/createlobbyresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -222,14 +224,15 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyResponse](../../models/components/lobbyresponse.md)\>**
+**Promise\<[operations.GetLobbyResponse](../../models/operations/getlobbyresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -297,14 +300,15 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyResponse](../../models/components/lobbyresponse.md)\>**
+**Promise\<[operations.EditLobbyResponse](../../models/operations/editlobbyresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## connectToChannel
 
@@ -373,14 +377,15 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyResponse](../../models/components/lobbyresponse.md)\>**
+**Promise\<[operations.EditLobbyChannelLinkResponse](../../models/operations/editlobbychannellinkresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## leave
 
@@ -394,13 +399,13 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  await discord.lobbies.leave({
+  const result = await discord.lobbies.leave({
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     lobbyId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -426,7 +431,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("lobbiesLeave failed:", res.error);
   }
@@ -447,14 +452,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.LeaveLobbyResponse](../../models/operations/leavelobbyresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## addMember
 
@@ -524,14 +530,15 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyMemberResponse](../../models/components/lobbymemberresponse.md)\>**
+**Promise\<[operations.AddLobbyMemberResponse](../../models/operations/addlobbymemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## removeMember
 
@@ -547,12 +554,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.lobbies.removeMember({
+  const result = await discord.lobbies.removeMember({
     lobbyId: "<value>",
     userId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -579,7 +586,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("lobbiesRemoveMember failed:", res.error);
   }
@@ -599,14 +606,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteLobbyMemberResponse](../../models/operations/deletelobbymemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## sendMessage
 
@@ -675,11 +683,12 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyMessageResponse](../../models/components/lobbymessageresponse.md)\>**
+**Promise\<[operations.CreateLobbyMessageResponse](../../models/operations/createlobbymessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

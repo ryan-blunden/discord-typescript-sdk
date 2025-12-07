@@ -76,14 +76,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.ListGuildScheduledEventsResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildScheduledEventsResponse](../../models/operations/listguildscheduledeventsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## create
 
@@ -163,14 +164,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateGuildScheduledEventResponseBody](../../models/operations/createguildscheduledeventresponsebody.md)\>**
+**Promise\<[operations.CreateGuildScheduledEventResponse](../../models/operations/createguildscheduledeventresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -238,14 +240,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetGuildScheduledEventResponseBody](../../models/operations/getguildscheduledeventresponsebody.md)\>**
+**Promise\<[operations.GetGuildScheduledEventResponse](../../models/operations/getguildscheduledeventresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -261,12 +264,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guildScheduledEvents.delete({
+  const result = await discord.guildScheduledEvents.delete({
     guildId: "<value>",
     guildScheduledEventId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -293,7 +296,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildScheduledEventsDelete failed:", res.error);
   }
@@ -313,14 +316,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildScheduledEventResponse](../../models/operations/deleteguildscheduledeventresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -390,14 +394,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.UpdateGuildScheduledEventResponseBody](../../models/operations/updateguildscheduledeventresponsebody.md)\>**
+**Promise\<[operations.UpdateGuildScheduledEventResponse](../../models/operations/updateguildscheduledeventresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getUsers
 
@@ -465,11 +470,12 @@ run();
 
 ### Response
 
-**Promise\<[components.ScheduledEventUserResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildScheduledEventUsersResponse](../../models/operations/listguildscheduledeventusersresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

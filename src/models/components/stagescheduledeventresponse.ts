@@ -33,14 +33,14 @@ export type StageScheduledEventResponse = {
   description?: string | null | undefined;
   channelId?: string | null | undefined;
   creatorId?: string | null | undefined;
-  creator?: UserResponse | null | undefined;
+  creator?: UserResponse | undefined;
   image?: string | null | undefined;
   scheduledStartTime: Date;
   scheduledEndTime?: Date | null | undefined;
   status?: 1 | undefined;
   entityType?: 0 | undefined;
   entityId?: string | null | undefined;
-  userCount?: number | null | undefined;
+  userCount?: number | undefined;
   privacyLevel?: 2 | undefined;
   userRsvp?: ScheduledEventUserResponse | null | undefined;
   entityMetadata?: EntityMetadataStageInstanceResponse | null | undefined;
@@ -58,7 +58,7 @@ export const StageScheduledEventResponse$inboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   channel_id: z.nullable(z.string()).optional(),
   creator_id: z.nullable(z.string()).optional(),
-  creator: z.nullable(UserResponse$inboundSchema).optional(),
+  creator: UserResponse$inboundSchema.optional(),
   image: z.nullable(z.string()).optional(),
   scheduled_start_time: z.string().datetime({ offset: true }).transform(v =>
     new Date(v)
@@ -69,7 +69,7 @@ export const StageScheduledEventResponse$inboundSchema: z.ZodType<
   status: z.literal(1).optional(),
   entity_type: z.literal(0).optional(),
   entity_id: z.nullable(z.string()).optional(),
-  user_count: z.nullable(z.number().int()).optional(),
+  user_count: z.number().int().optional(),
   privacy_level: z.literal(2).optional(),
   user_rsvp: z.nullable(ScheduledEventUserResponse$inboundSchema).optional(),
   entity_metadata: z.nullable(EntityMetadataStageInstanceResponse$inboundSchema)
@@ -98,14 +98,14 @@ export type StageScheduledEventResponse$Outbound = {
   description?: string | null | undefined;
   channel_id?: string | null | undefined;
   creator_id?: string | null | undefined;
-  creator?: UserResponse$Outbound | null | undefined;
+  creator?: UserResponse$Outbound | undefined;
   image?: string | null | undefined;
   scheduled_start_time: string;
   scheduled_end_time?: string | null | undefined;
   status: 1;
   entity_type: 0;
   entity_id?: string | null | undefined;
-  user_count?: number | null | undefined;
+  user_count?: number | undefined;
   privacy_level: 2;
   user_rsvp?: ScheduledEventUserResponse$Outbound | null | undefined;
   entity_metadata?:
@@ -126,7 +126,7 @@ export const StageScheduledEventResponse$outboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   channelId: z.nullable(z.string()).optional(),
   creatorId: z.nullable(z.string()).optional(),
-  creator: z.nullable(UserResponse$outboundSchema).optional(),
+  creator: UserResponse$outboundSchema.optional(),
   image: z.nullable(z.string()).optional(),
   scheduledStartTime: z.date().transform(v => v.toISOString()),
   scheduledEndTime: z.nullable(z.date().transform(v => v.toISOString()))
@@ -134,7 +134,7 @@ export const StageScheduledEventResponse$outboundSchema: z.ZodType<
   status: z.literal(1).default(1 as const),
   entityType: z.literal(0).default(0 as const),
   entityId: z.nullable(z.string()).optional(),
-  userCount: z.nullable(z.number().int()).optional(),
+  userCount: z.number().int().optional(),
   privacyLevel: z.literal(2).default(2 as const),
   userRsvp: z.nullable(ScheduledEventUserResponse$outboundSchema).optional(),
   entityMetadata: z.nullable(EntityMetadataStageInstanceResponse$outboundSchema)

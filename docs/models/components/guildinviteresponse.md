@@ -7,6 +7,17 @@ import { GuildInviteResponse } from "@ryan.blunden/discord-sdk/models/components
 
 let value: GuildInviteResponse = {
   code: "<value>",
+  guild: {
+    id: "<value>",
+    name: "<value>",
+    features: [],
+    premiumSubscriptionCount: 820218,
+  },
+  guildId: "<value>",
+  channel: {
+    id: "<value>",
+    type: 2,
+  },
 };
 ```
 
@@ -14,7 +25,7 @@ let value: GuildInviteResponse = {
 
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `type`                                                                                        | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `code`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `inviter`                                                                                     | [components.UserResponse](../../models/components/userresponse.md)                            | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `maxAge`                                                                                      | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
@@ -22,9 +33,9 @@ let value: GuildInviteResponse = {
 | `expiresAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `isContact`                                                                                   | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `flags`                                                                                       | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `guild`                                                                                       | [components.InviteGuildResponse](../../models/components/inviteguildresponse.md)              | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `guildId`                                                                                     | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `channel`                                                                                     | [components.InviteChannelResponse](../../models/components/invitechannelresponse.md)          | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `guild`                                                                                       | [components.InviteGuildResponse](../../models/components/inviteguildresponse.md)              | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `guildId`                                                                                     | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `channel`                                                                                     | [components.InviteChannelResponse](../../models/components/invitechannelresponse.md)          | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `targetType`                                                                                  | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `targetUser`                                                                                  | [components.UserResponse](../../models/components/userresponse.md)                            | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `targetApplication`                                                                           | [components.InviteApplicationResponse](../../models/components/inviteapplicationresponse.md)  | :heavy_minus_sign:                                                                            | N/A                                                                                           |

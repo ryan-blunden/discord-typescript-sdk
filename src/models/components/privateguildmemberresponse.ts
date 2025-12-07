@@ -14,6 +14,12 @@ import {
   UserAvatarDecorationResponse$outboundSchema,
 } from "./useravatardecorationresponse.js";
 import {
+  UserCollectiblesResponse,
+  UserCollectiblesResponse$inboundSchema,
+  UserCollectiblesResponse$Outbound,
+  UserCollectiblesResponse$outboundSchema,
+} from "./usercollectiblesresponse.js";
+import {
   UserResponse,
   UserResponse$inboundSchema,
   UserResponse$Outbound,
@@ -31,9 +37,11 @@ export type PrivateGuildMemberResponse = {
   pending: boolean;
   premiumSince?: Date | null | undefined;
   roles: Array<string>;
+  collectibles?: UserCollectiblesResponse | null | undefined;
   user: UserResponse;
   mute: boolean;
   deaf: boolean;
+  permissions?: string | undefined;
 };
 
 /** @internal */
@@ -57,9 +65,11 @@ export const PrivateGuildMemberResponse$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   roles: z.array(z.string()),
+  collectibles: z.nullable(UserCollectiblesResponse$inboundSchema).optional(),
   user: UserResponse$inboundSchema,
   mute: z.boolean(),
   deaf: z.boolean(),
+  permissions: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "avatar_decoration_data": "avatarDecorationData",
@@ -84,9 +94,11 @@ export type PrivateGuildMemberResponse$Outbound = {
   pending: boolean;
   premium_since?: string | null | undefined;
   roles: Array<string>;
+  collectibles?: UserCollectiblesResponse$Outbound | null | undefined;
   user: UserResponse$Outbound;
   mute: boolean;
   deaf: boolean;
+  permissions?: string | undefined;
 };
 
 /** @internal */
@@ -108,9 +120,11 @@ export const PrivateGuildMemberResponse$outboundSchema: z.ZodType<
   pending: z.boolean(),
   premiumSince: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   roles: z.array(z.string()),
+  collectibles: z.nullable(UserCollectiblesResponse$outboundSchema).optional(),
   user: UserResponse$outboundSchema,
   mute: z.boolean(),
   deaf: z.boolean(),
+  permissions: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     avatarDecorationData: "avatar_decoration_data",

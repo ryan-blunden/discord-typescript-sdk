@@ -17,6 +17,10 @@ export type DeleteEntitlementRequest = {
   entitlementId: string;
 };
 
+export type DeleteEntitlementResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteEntitlementSecurity$inboundSchema: z.ZodType<
   DeleteEntitlementSecurity,
@@ -143,5 +147,67 @@ export function deleteEntitlementRequestFromJSON(
     jsonString,
     (x) => DeleteEntitlementRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteEntitlementRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteEntitlementResponse$inboundSchema: z.ZodType<
+  DeleteEntitlementResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteEntitlementResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteEntitlementResponse$outboundSchema: z.ZodType<
+  DeleteEntitlementResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteEntitlementResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteEntitlementResponse$ {
+  /** @deprecated use `DeleteEntitlementResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteEntitlementResponse$inboundSchema;
+  /** @deprecated use `DeleteEntitlementResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteEntitlementResponse$outboundSchema;
+  /** @deprecated use `DeleteEntitlementResponse$Outbound` instead. */
+  export type Outbound = DeleteEntitlementResponse$Outbound;
+}
+
+export function deleteEntitlementResponseToJSON(
+  deleteEntitlementResponse: DeleteEntitlementResponse,
+): string {
+  return JSON.stringify(
+    DeleteEntitlementResponse$outboundSchema.parse(deleteEntitlementResponse),
+  );
+}
+
+export function deleteEntitlementResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteEntitlementResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteEntitlementResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteEntitlementResponse' from JSON`,
   );
 }
