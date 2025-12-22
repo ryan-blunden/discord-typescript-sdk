@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -19,6 +20,14 @@ export type InviteRevokeResponseBody =
   | components.GroupDMInviteResponse
   | components.FriendInviteResponse
   | components.GuildInviteResponse;
+
+export type InviteRevokeResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.GroupDMInviteResponse
+    | components.FriendInviteResponse
+    | components.GuildInviteResponse;
+};
 
 /** @internal */
 export const InviteRevokeRequest$inboundSchema: z.ZodType<
@@ -130,5 +139,83 @@ export function inviteRevokeResponseBodyFromJSON(
     jsonString,
     (x) => InviteRevokeResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'InviteRevokeResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const InviteRevokeResponse$inboundSchema: z.ZodType<
+  InviteRevokeResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.GroupDMInviteResponse$inboundSchema,
+    components.FriendInviteResponse$inboundSchema,
+    components.GuildInviteResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type InviteRevokeResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.GroupDMInviteResponse$Outbound
+    | components.FriendInviteResponse$Outbound
+    | components.GuildInviteResponse$Outbound;
+};
+
+/** @internal */
+export const InviteRevokeResponse$outboundSchema: z.ZodType<
+  InviteRevokeResponse$Outbound,
+  z.ZodTypeDef,
+  InviteRevokeResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.GroupDMInviteResponse$outboundSchema,
+    components.FriendInviteResponse$outboundSchema,
+    components.GuildInviteResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InviteRevokeResponse$ {
+  /** @deprecated use `InviteRevokeResponse$inboundSchema` instead. */
+  export const inboundSchema = InviteRevokeResponse$inboundSchema;
+  /** @deprecated use `InviteRevokeResponse$outboundSchema` instead. */
+  export const outboundSchema = InviteRevokeResponse$outboundSchema;
+  /** @deprecated use `InviteRevokeResponse$Outbound` instead. */
+  export type Outbound = InviteRevokeResponse$Outbound;
+}
+
+export function inviteRevokeResponseToJSON(
+  inviteRevokeResponse: InviteRevokeResponse,
+): string {
+  return JSON.stringify(
+    InviteRevokeResponse$outboundSchema.parse(inviteRevokeResponse),
+  );
+}
+
+export function inviteRevokeResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<InviteRevokeResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InviteRevokeResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InviteRevokeResponse' from JSON`,
   );
 }

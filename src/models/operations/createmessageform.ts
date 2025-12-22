@@ -14,6 +14,11 @@ export type CreateMessageFormRequest = {
   messageCreateRequest: components.MessageCreateRequest;
 };
 
+export type CreateMessageFormResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.MessageResponse;
+};
+
 /** @internal */
 export const CreateMessageFormRequest$inboundSchema: z.ZodType<
   CreateMessageFormRequest,
@@ -78,5 +83,72 @@ export function createMessageFormRequestFromJSON(
     jsonString,
     (x) => CreateMessageFormRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateMessageFormRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateMessageFormResponse$inboundSchema: z.ZodType<
+  CreateMessageFormResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.MessageResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateMessageFormResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.MessageResponse$Outbound;
+};
+
+/** @internal */
+export const CreateMessageFormResponse$outboundSchema: z.ZodType<
+  CreateMessageFormResponse$Outbound,
+  z.ZodTypeDef,
+  CreateMessageFormResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.MessageResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateMessageFormResponse$ {
+  /** @deprecated use `CreateMessageFormResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateMessageFormResponse$inboundSchema;
+  /** @deprecated use `CreateMessageFormResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateMessageFormResponse$outboundSchema;
+  /** @deprecated use `CreateMessageFormResponse$Outbound` instead. */
+  export type Outbound = CreateMessageFormResponse$Outbound;
+}
+
+export function createMessageFormResponseToJSON(
+  createMessageFormResponse: CreateMessageFormResponse,
+): string {
+  return JSON.stringify(
+    CreateMessageFormResponse$outboundSchema.parse(createMessageFormResponse),
+  );
+}
+
+export function createMessageFormResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateMessageFormResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateMessageFormResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateMessageFormResponse' from JSON`,
   );
 }

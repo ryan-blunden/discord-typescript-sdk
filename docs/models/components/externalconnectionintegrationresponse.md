@@ -6,13 +6,17 @@
 import { ExternalConnectionIntegrationResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ExternalConnectionIntegrationResponse = {
+  account: {
+    id: "<id>",
+  },
+  enabled: false,
   id: "<id>",
   user: {
     id: "<value>",
-    username: "Braulio60",
+    username: "Jeffery46",
     discriminator: "<value>",
-    publicFlags: 484824,
-    flags: 238527,
+    publicFlags: 573721,
+    flags: 285972,
   },
 };
 ```
@@ -23,8 +27,8 @@ let value: ExternalConnectionIntegrationResponse = {
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `type`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `name`                                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `account`                                                                                     | [components.AccountResponse](../../models/components/accountresponse.md)                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `enabled`                                                                                     | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `account`                                                                                     | [components.AccountResponse](../../models/components/accountresponse.md)                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `enabled`                                                                                     | *boolean*                                                                                     | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `user`                                                                                        | [components.UserResponse](../../models/components/userresponse.md)                            | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `revoked`                                                                                     | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | N/A                                                                                           |

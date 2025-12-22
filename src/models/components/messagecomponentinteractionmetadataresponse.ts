@@ -17,9 +17,9 @@ import {
 export type MessageComponentInteractionMetadataResponse = {
   id: string;
   type?: 1 | undefined;
-  user?: UserResponse | null | undefined;
+  user?: UserResponse | undefined;
   authorizingIntegrationOwners: { [k: string]: string };
-  originalResponseMessageId?: string | null | undefined;
+  originalResponseMessageId?: string | undefined;
   interactedMessageId: string;
 };
 
@@ -32,9 +32,9 @@ export const MessageComponentInteractionMetadataResponse$inboundSchema:
   > = z.object({
     id: z.string(),
     type: z.literal(1).optional(),
-    user: z.nullable(UserResponse$inboundSchema).optional(),
+    user: UserResponse$inboundSchema.optional(),
     authorizing_integration_owners: z.record(z.string()),
-    original_response_message_id: z.nullable(z.string()).optional(),
+    original_response_message_id: z.string().optional(),
     interacted_message_id: z.string(),
   }).transform((v) => {
     return remap$(v, {
@@ -48,9 +48,9 @@ export const MessageComponentInteractionMetadataResponse$inboundSchema:
 export type MessageComponentInteractionMetadataResponse$Outbound = {
   id: string;
   type: 1;
-  user?: UserResponse$Outbound | null | undefined;
+  user?: UserResponse$Outbound | undefined;
   authorizing_integration_owners: { [k: string]: string };
-  original_response_message_id?: string | null | undefined;
+  original_response_message_id?: string | undefined;
   interacted_message_id: string;
 };
 
@@ -63,9 +63,9 @@ export const MessageComponentInteractionMetadataResponse$outboundSchema:
   > = z.object({
     id: z.string(),
     type: z.literal(1).default(1 as const),
-    user: z.nullable(UserResponse$outboundSchema).optional(),
+    user: UserResponse$outboundSchema.optional(),
     authorizingIntegrationOwners: z.record(z.string()),
-    originalResponseMessageId: z.nullable(z.string()).optional(),
+    originalResponseMessageId: z.string().optional(),
     interactedMessageId: z.string(),
   }).transform((v) => {
     return remap$(v, {

@@ -23,18 +23,18 @@ import {
 export type ExternalConnectionIntegrationResponse = {
   type?: "discord" | undefined;
   name?: string | null | undefined;
-  account?: AccountResponse | null | undefined;
-  enabled?: boolean | null | undefined;
+  account: AccountResponse;
+  enabled: boolean;
   id: string;
   user: UserResponse;
-  revoked?: boolean | null | undefined;
-  expireBehavior?: 0 | null | undefined;
-  expireGracePeriod?: 1 | null | undefined;
-  subscriberCount?: number | null | undefined;
-  syncedAt?: Date | null | undefined;
+  revoked?: boolean | undefined;
+  expireBehavior?: 0 | undefined;
+  expireGracePeriod?: 1 | undefined;
+  subscriberCount?: number | undefined;
+  syncedAt?: Date | undefined;
   roleId?: string | null | undefined;
-  syncing?: boolean | null | undefined;
-  enableEmoticons?: boolean | null | undefined;
+  syncing?: boolean | undefined;
+  enableEmoticons?: boolean | undefined;
 };
 
 /** @internal */
@@ -45,20 +45,19 @@ export const ExternalConnectionIntegrationResponse$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("discord").optional(),
   name: z.nullable(z.string()).optional(),
-  account: z.nullable(AccountResponse$inboundSchema).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
+  account: AccountResponse$inboundSchema,
+  enabled: z.boolean(),
   id: z.string(),
   user: UserResponse$inboundSchema,
-  revoked: z.nullable(z.boolean()).optional(),
-  expire_behavior: z.nullable(z.literal(0)).optional(),
-  expire_grace_period: z.nullable(z.literal(1)).optional(),
-  subscriber_count: z.nullable(z.number().int()).optional(),
-  synced_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
+  revoked: z.boolean().optional(),
+  expire_behavior: z.literal(0).optional(),
+  expire_grace_period: z.literal(1).optional(),
+  subscriber_count: z.number().int().optional(),
+  synced_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
   role_id: z.nullable(z.string()).optional(),
-  syncing: z.nullable(z.boolean()).optional(),
-  enable_emoticons: z.nullable(z.boolean()).optional(),
+  syncing: z.boolean().optional(),
+  enable_emoticons: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "expire_behavior": "expireBehavior",
@@ -74,18 +73,18 @@ export const ExternalConnectionIntegrationResponse$inboundSchema: z.ZodType<
 export type ExternalConnectionIntegrationResponse$Outbound = {
   type: "discord";
   name?: string | null | undefined;
-  account?: AccountResponse$Outbound | null | undefined;
-  enabled?: boolean | null | undefined;
+  account: AccountResponse$Outbound;
+  enabled: boolean;
   id: string;
   user: UserResponse$Outbound;
-  revoked?: boolean | null | undefined;
-  expire_behavior: 0 | null;
-  expire_grace_period: 1 | null;
-  subscriber_count?: number | null | undefined;
-  synced_at?: string | null | undefined;
+  revoked?: boolean | undefined;
+  expire_behavior: 0;
+  expire_grace_period: 1;
+  subscriber_count?: number | undefined;
+  synced_at?: string | undefined;
   role_id?: string | null | undefined;
-  syncing?: boolean | null | undefined;
-  enable_emoticons?: boolean | null | undefined;
+  syncing?: boolean | undefined;
+  enable_emoticons?: boolean | undefined;
 };
 
 /** @internal */
@@ -96,18 +95,18 @@ export const ExternalConnectionIntegrationResponse$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("discord").default("discord" as const),
   name: z.nullable(z.string()).optional(),
-  account: z.nullable(AccountResponse$outboundSchema).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
+  account: AccountResponse$outboundSchema,
+  enabled: z.boolean(),
   id: z.string(),
   user: UserResponse$outboundSchema,
-  revoked: z.nullable(z.boolean()).optional(),
-  expireBehavior: z.nullable(z.literal(0).default(0 as const)),
-  expireGracePeriod: z.nullable(z.literal(1).default(1 as const)),
-  subscriberCount: z.nullable(z.number().int()).optional(),
-  syncedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  revoked: z.boolean().optional(),
+  expireBehavior: z.literal(0).default(0 as const),
+  expireGracePeriod: z.literal(1).default(1 as const),
+  subscriberCount: z.number().int().optional(),
+  syncedAt: z.date().transform(v => v.toISOString()).optional(),
   roleId: z.nullable(z.string()).optional(),
-  syncing: z.nullable(z.boolean()).optional(),
-  enableEmoticons: z.nullable(z.boolean()).optional(),
+  syncing: z.boolean().optional(),
+  enableEmoticons: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     expireBehavior: "expire_behavior",

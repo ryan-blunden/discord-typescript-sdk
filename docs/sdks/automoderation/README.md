@@ -75,14 +75,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.ListAutoModerationRulesResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ListAutoModerationRulesResponse](../../models/operations/listautomoderationrulesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createRule
 
@@ -156,14 +157,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateAutoModerationRuleResponseBody](../../models/operations/createautomoderationruleresponsebody.md)\>**
+**Promise\<[operations.CreateAutoModerationRuleResponse](../../models/operations/createautomoderationruleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getRule
 
@@ -231,14 +233,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetAutoModerationRuleResponseBody](../../models/operations/getautomoderationruleresponsebody.md)\>**
+**Promise\<[operations.GetAutoModerationRuleResponse](../../models/operations/getautomoderationruleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteRule
 
@@ -254,12 +257,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.autoModeration.deleteRule({
+  const result = await discord.autoModeration.deleteRule({
     guildId: "<value>",
     ruleId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -286,7 +289,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("autoModerationDeleteRule failed:", res.error);
   }
@@ -306,14 +309,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteAutoModerationRuleResponse](../../models/operations/deleteautomoderationruleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateRule
 
@@ -383,11 +387,12 @@ run();
 
 ### Response
 
-**Promise\<[operations.UpdateAutoModerationRuleResponseBody](../../models/operations/updateautomoderationruleresponsebody.md)\>**
+**Promise\<[operations.UpdateAutoModerationRuleResponse](../../models/operations/updateautomoderationruleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

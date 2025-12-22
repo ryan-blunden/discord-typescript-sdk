@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RequestBody = {
-  id?: string | undefined;
+  id?: string | null | undefined;
   position?: number | null | undefined;
   parentId?: string | null | undefined;
   lockPermissions?: boolean | null | undefined;
@@ -20,13 +20,17 @@ export type BulkUpdateGuildChannelsRequest = {
   requestBody: Array<RequestBody>;
 };
 
+export type BulkUpdateGuildChannelsResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const RequestBody$inboundSchema: z.ZodType<
   RequestBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
   position: z.nullable(z.number().int()).optional(),
   parent_id: z.nullable(z.string()).optional(),
   lock_permissions: z.nullable(z.boolean()).optional(),
@@ -39,7 +43,7 @@ export const RequestBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type RequestBody$Outbound = {
-  id?: string | undefined;
+  id?: string | null | undefined;
   position?: number | null | undefined;
   parent_id?: string | null | undefined;
   lock_permissions?: boolean | null | undefined;
@@ -51,7 +55,7 @@ export const RequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RequestBody
 > = z.object({
-  id: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
   position: z.nullable(z.number().int()).optional(),
   parentId: z.nullable(z.string()).optional(),
   lockPermissions: z.nullable(z.boolean()).optional(),
@@ -155,5 +159,69 @@ export function bulkUpdateGuildChannelsRequestFromJSON(
     jsonString,
     (x) => BulkUpdateGuildChannelsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'BulkUpdateGuildChannelsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const BulkUpdateGuildChannelsResponse$inboundSchema: z.ZodType<
+  BulkUpdateGuildChannelsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type BulkUpdateGuildChannelsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const BulkUpdateGuildChannelsResponse$outboundSchema: z.ZodType<
+  BulkUpdateGuildChannelsResponse$Outbound,
+  z.ZodTypeDef,
+  BulkUpdateGuildChannelsResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BulkUpdateGuildChannelsResponse$ {
+  /** @deprecated use `BulkUpdateGuildChannelsResponse$inboundSchema` instead. */
+  export const inboundSchema = BulkUpdateGuildChannelsResponse$inboundSchema;
+  /** @deprecated use `BulkUpdateGuildChannelsResponse$outboundSchema` instead. */
+  export const outboundSchema = BulkUpdateGuildChannelsResponse$outboundSchema;
+  /** @deprecated use `BulkUpdateGuildChannelsResponse$Outbound` instead. */
+  export type Outbound = BulkUpdateGuildChannelsResponse$Outbound;
+}
+
+export function bulkUpdateGuildChannelsResponseToJSON(
+  bulkUpdateGuildChannelsResponse: BulkUpdateGuildChannelsResponse,
+): string {
+  return JSON.stringify(
+    BulkUpdateGuildChannelsResponse$outboundSchema.parse(
+      bulkUpdateGuildChannelsResponse,
+    ),
+  );
+}
+
+export function bulkUpdateGuildChannelsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkUpdateGuildChannelsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkUpdateGuildChannelsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkUpdateGuildChannelsResponse' from JSON`,
   );
 }

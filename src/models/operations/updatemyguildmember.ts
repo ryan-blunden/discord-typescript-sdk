@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateMyGuildMemberRequestBody = {
@@ -15,6 +16,11 @@ export type UpdateMyGuildMemberRequestBody = {
 export type UpdateMyGuildMemberRequest = {
   guildId: string;
   requestBody: UpdateMyGuildMemberRequestBody;
+};
+
+export type UpdateMyGuildMemberResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.PrivateGuildMemberResponse;
 };
 
 /** @internal */
@@ -137,5 +143,74 @@ export function updateMyGuildMemberRequestFromJSON(
     jsonString,
     (x) => UpdateMyGuildMemberRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateMyGuildMemberRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateMyGuildMemberResponse$inboundSchema: z.ZodType<
+  UpdateMyGuildMemberResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.PrivateGuildMemberResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateMyGuildMemberResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.PrivateGuildMemberResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateMyGuildMemberResponse$outboundSchema: z.ZodType<
+  UpdateMyGuildMemberResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateMyGuildMemberResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.PrivateGuildMemberResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateMyGuildMemberResponse$ {
+  /** @deprecated use `UpdateMyGuildMemberResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateMyGuildMemberResponse$inboundSchema;
+  /** @deprecated use `UpdateMyGuildMemberResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateMyGuildMemberResponse$outboundSchema;
+  /** @deprecated use `UpdateMyGuildMemberResponse$Outbound` instead. */
+  export type Outbound = UpdateMyGuildMemberResponse$Outbound;
+}
+
+export function updateMyGuildMemberResponseToJSON(
+  updateMyGuildMemberResponse: UpdateMyGuildMemberResponse,
+): string {
+  return JSON.stringify(
+    UpdateMyGuildMemberResponse$outboundSchema.parse(
+      updateMyGuildMemberResponse,
+    ),
+  );
+}
+
+export function updateMyGuildMemberResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateMyGuildMemberResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateMyGuildMemberResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateMyGuildMemberResponse' from JSON`,
   );
 }

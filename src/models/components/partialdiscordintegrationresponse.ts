@@ -18,7 +18,7 @@ export type PartialDiscordIntegrationResponse = {
   id: string;
   type?: "discord" | undefined;
   name?: string | null | undefined;
-  account?: AccountResponse | null | undefined;
+  account: AccountResponse;
   applicationId: string;
 };
 
@@ -31,7 +31,7 @@ export const PartialDiscordIntegrationResponse$inboundSchema: z.ZodType<
   id: z.string(),
   type: z.literal("discord").optional(),
   name: z.nullable(z.string()).optional(),
-  account: z.nullable(AccountResponse$inboundSchema).optional(),
+  account: AccountResponse$inboundSchema,
   application_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -44,7 +44,7 @@ export type PartialDiscordIntegrationResponse$Outbound = {
   id: string;
   type: "discord";
   name?: string | null | undefined;
-  account?: AccountResponse$Outbound | null | undefined;
+  account: AccountResponse$Outbound;
   application_id: string;
 };
 
@@ -57,7 +57,7 @@ export const PartialDiscordIntegrationResponse$outboundSchema: z.ZodType<
   id: z.string(),
   type: z.literal("discord").default("discord" as const),
   name: z.nullable(z.string()).optional(),
-  account: z.nullable(AccountResponse$outboundSchema).optional(),
+  account: AccountResponse$outboundSchema,
   applicationId: z.string(),
 }).transform((v) => {
   return remap$(v, {

@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetOriginalWebhookMessageSecurity = {
@@ -16,6 +17,11 @@ export type GetOriginalWebhookMessageRequest = {
   webhookId: string;
   webhookToken: string;
   threadId?: string | undefined;
+};
+
+export type GetOriginalWebhookMessageResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.MessageResponse;
 };
 
 /** @internal */
@@ -154,5 +160,75 @@ export function getOriginalWebhookMessageRequestFromJSON(
     jsonString,
     (x) => GetOriginalWebhookMessageRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetOriginalWebhookMessageRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOriginalWebhookMessageResponse$inboundSchema: z.ZodType<
+  GetOriginalWebhookMessageResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.MessageResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetOriginalWebhookMessageResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.MessageResponse$Outbound;
+};
+
+/** @internal */
+export const GetOriginalWebhookMessageResponse$outboundSchema: z.ZodType<
+  GetOriginalWebhookMessageResponse$Outbound,
+  z.ZodTypeDef,
+  GetOriginalWebhookMessageResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.MessageResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOriginalWebhookMessageResponse$ {
+  /** @deprecated use `GetOriginalWebhookMessageResponse$inboundSchema` instead. */
+  export const inboundSchema = GetOriginalWebhookMessageResponse$inboundSchema;
+  /** @deprecated use `GetOriginalWebhookMessageResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetOriginalWebhookMessageResponse$outboundSchema;
+  /** @deprecated use `GetOriginalWebhookMessageResponse$Outbound` instead. */
+  export type Outbound = GetOriginalWebhookMessageResponse$Outbound;
+}
+
+export function getOriginalWebhookMessageResponseToJSON(
+  getOriginalWebhookMessageResponse: GetOriginalWebhookMessageResponse,
+): string {
+  return JSON.stringify(
+    GetOriginalWebhookMessageResponse$outboundSchema.parse(
+      getOriginalWebhookMessageResponse,
+    ),
+  );
+}
+
+export function getOriginalWebhookMessageResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOriginalWebhookMessageResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOriginalWebhookMessageResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOriginalWebhookMessageResponse' from JSON`,
   );
 }

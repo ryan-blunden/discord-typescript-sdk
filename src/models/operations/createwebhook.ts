@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateWebhookRequestBody = {
@@ -16,6 +17,11 @@ export type CreateWebhookRequestBody = {
 export type CreateWebhookRequest = {
   channelId: string;
   requestBody: CreateWebhookRequestBody;
+};
+
+export type CreateWebhookResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildIncomingWebhookResponse;
 };
 
 /** @internal */
@@ -139,5 +145,72 @@ export function createWebhookRequestFromJSON(
     jsonString,
     (x) => CreateWebhookRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateWebhookRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateWebhookResponse$inboundSchema: z.ZodType<
+  CreateWebhookResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildIncomingWebhookResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateWebhookResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildIncomingWebhookResponse$Outbound;
+};
+
+/** @internal */
+export const CreateWebhookResponse$outboundSchema: z.ZodType<
+  CreateWebhookResponse$Outbound,
+  z.ZodTypeDef,
+  CreateWebhookResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildIncomingWebhookResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateWebhookResponse$ {
+  /** @deprecated use `CreateWebhookResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateWebhookResponse$inboundSchema;
+  /** @deprecated use `CreateWebhookResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateWebhookResponse$outboundSchema;
+  /** @deprecated use `CreateWebhookResponse$Outbound` instead. */
+  export type Outbound = CreateWebhookResponse$Outbound;
+}
+
+export function createWebhookResponseToJSON(
+  createWebhookResponse: CreateWebhookResponse,
+): string {
+  return JSON.stringify(
+    CreateWebhookResponse$outboundSchema.parse(createWebhookResponse),
+  );
+}
+
+export function createWebhookResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateWebhookResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateWebhookResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateWebhookResponse' from JSON`,
   );
 }

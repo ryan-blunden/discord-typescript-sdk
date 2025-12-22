@@ -9,6 +9,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TextDisplayComponentForMessageRequest = {
   type?: 1 | undefined;
+  id?: number | null | undefined;
   content: string;
 };
 
@@ -19,12 +20,14 @@ export const TextDisplayComponentForMessageRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal(1).optional(),
+  id: z.nullable(z.number().int()).optional(),
   content: z.string(),
 });
 
 /** @internal */
 export type TextDisplayComponentForMessageRequest$Outbound = {
   type: 1;
+  id?: number | null | undefined;
   content: string;
 };
 
@@ -35,6 +38,7 @@ export const TextDisplayComponentForMessageRequest$outboundSchema: z.ZodType<
   TextDisplayComponentForMessageRequest
 > = z.object({
   type: z.literal(1).default(1 as const),
+  id: z.nullable(z.number().int()).optional(),
   content: z.string(),
 });
 

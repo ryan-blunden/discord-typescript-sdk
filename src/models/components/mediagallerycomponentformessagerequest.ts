@@ -15,6 +15,7 @@ import {
 
 export type MediaGalleryComponentForMessageRequest = {
   type?: 1 | undefined;
+  id?: number | null | undefined;
   items: Array<MediaGalleryItemRequest>;
 };
 
@@ -25,12 +26,14 @@ export const MediaGalleryComponentForMessageRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal(1).optional(),
+  id: z.nullable(z.number().int()).optional(),
   items: z.array(MediaGalleryItemRequest$inboundSchema),
 });
 
 /** @internal */
 export type MediaGalleryComponentForMessageRequest$Outbound = {
   type: 1;
+  id?: number | null | undefined;
   items: Array<MediaGalleryItemRequest$Outbound>;
 };
 
@@ -41,6 +44,7 @@ export const MediaGalleryComponentForMessageRequest$outboundSchema: z.ZodType<
   MediaGalleryComponentForMessageRequest
 > = z.object({
   type: z.literal(1).default(1 as const),
+  id: z.nullable(z.number().int()).optional(),
   items: z.array(MediaGalleryItemRequest$outboundSchema),
 });
 

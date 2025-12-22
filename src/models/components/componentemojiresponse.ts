@@ -8,9 +8,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ComponentEmojiResponse = {
-  id?: string | null | undefined;
+  id?: string | undefined;
   name: string;
-  animated?: boolean | null | undefined;
+  animated?: boolean | undefined;
 };
 
 /** @internal */
@@ -19,16 +19,16 @@ export const ComponentEmojiResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
   name: z.string(),
-  animated: z.nullable(z.boolean()).optional(),
+  animated: z.boolean().optional(),
 });
 
 /** @internal */
 export type ComponentEmojiResponse$Outbound = {
-  id?: string | null | undefined;
+  id?: string | undefined;
   name: string;
-  animated?: boolean | null | undefined;
+  animated?: boolean | undefined;
 };
 
 /** @internal */
@@ -37,9 +37,9 @@ export const ComponentEmojiResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ComponentEmojiResponse
 > = z.object({
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
   name: z.string(),
-  animated: z.nullable(z.boolean()).optional(),
+  animated: z.boolean().optional(),
 });
 
 /**

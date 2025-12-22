@@ -8,7 +8,6 @@ import { voiceListRegions } from "../funcs/voiceListRegions.js";
 import { voiceUpdateCurrentUserState } from "../funcs/voiceUpdateCurrentUserState.js";
 import { voiceUpdateUserState } from "../funcs/voiceUpdateUserState.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -19,7 +18,7 @@ export class Voice extends ClientSDK {
   async getCurrentUserState(
     request: operations.GetSelfVoiceStateRequest,
     options?: RequestOptions,
-  ): Promise<components.VoiceStateResponse> {
+  ): Promise<operations.GetSelfVoiceStateResponse> {
     return unwrapAsync(voiceGetCurrentUserState(
       this,
       request,
@@ -33,7 +32,7 @@ export class Voice extends ClientSDK {
   async updateCurrentUserState(
     request: operations.UpdateSelfVoiceStateRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.UpdateSelfVoiceStateResponse | undefined> {
     return unwrapAsync(voiceUpdateCurrentUserState(
       this,
       request,
@@ -47,7 +46,7 @@ export class Voice extends ClientSDK {
   async getUserState(
     request: operations.GetVoiceStateRequest,
     options?: RequestOptions,
-  ): Promise<components.VoiceStateResponse> {
+  ): Promise<operations.GetVoiceStateResponse> {
     return unwrapAsync(voiceGetUserState(
       this,
       request,
@@ -61,7 +60,7 @@ export class Voice extends ClientSDK {
   async updateUserState(
     request: operations.UpdateVoiceStateRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.UpdateVoiceStateResponse | undefined> {
     return unwrapAsync(voiceUpdateUserState(
       this,
       request,
@@ -74,7 +73,7 @@ export class Voice extends ClientSDK {
    */
   async listRegions(
     options?: RequestOptions,
-  ): Promise<Array<components.VoiceRegionResponse>> {
+  ): Promise<operations.ListVoiceRegionsResponse> {
     return unwrapAsync(voiceListRegions(
       this,
       options,

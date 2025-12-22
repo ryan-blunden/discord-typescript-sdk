@@ -20,9 +20,9 @@ export type BasicApplicationResponse = {
   icon?: string | null | undefined;
   description: string;
   type?: 4 | null | undefined;
-  coverImage?: string | null | undefined;
-  primarySkuId?: string | null | undefined;
-  bot?: UserResponse | null | undefined;
+  coverImage?: string | undefined;
+  primarySkuId?: string | undefined;
+  bot?: UserResponse | undefined;
 };
 
 /** @internal */
@@ -36,9 +36,9 @@ export const BasicApplicationResponse$inboundSchema: z.ZodType<
   icon: z.nullable(z.string()).optional(),
   description: z.string(),
   type: z.nullable(z.literal(4)).optional(),
-  cover_image: z.nullable(z.string()).optional(),
-  primary_sku_id: z.nullable(z.string()).optional(),
-  bot: z.nullable(UserResponse$inboundSchema).optional(),
+  cover_image: z.string().optional(),
+  primary_sku_id: z.string().optional(),
+  bot: UserResponse$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "cover_image": "coverImage",
@@ -53,9 +53,9 @@ export type BasicApplicationResponse$Outbound = {
   icon?: string | null | undefined;
   description: string;
   type: 4 | null;
-  cover_image?: string | null | undefined;
-  primary_sku_id?: string | null | undefined;
-  bot?: UserResponse$Outbound | null | undefined;
+  cover_image?: string | undefined;
+  primary_sku_id?: string | undefined;
+  bot?: UserResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -69,9 +69,9 @@ export const BasicApplicationResponse$outboundSchema: z.ZodType<
   icon: z.nullable(z.string()).optional(),
   description: z.string(),
   type: z.nullable(z.literal(4).default(4 as const)),
-  coverImage: z.nullable(z.string()).optional(),
-  primarySkuId: z.nullable(z.string()).optional(),
-  bot: z.nullable(UserResponse$outboundSchema).optional(),
+  coverImage: z.string().optional(),
+  primarySkuId: z.string().optional(),
+  bot: UserResponse$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     coverImage: "cover_image",

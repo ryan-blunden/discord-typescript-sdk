@@ -14,6 +14,11 @@ export type PutGuildsOnboardingRequest = {
   updateGuildOnboardingRequest: components.UpdateGuildOnboardingRequest;
 };
 
+export type PutGuildsOnboardingResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildOnboardingResponse;
+};
+
 /** @internal */
 export const PutGuildsOnboardingRequest$inboundSchema: z.ZodType<
   PutGuildsOnboardingRequest,
@@ -81,5 +86,74 @@ export function putGuildsOnboardingRequestFromJSON(
     jsonString,
     (x) => PutGuildsOnboardingRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutGuildsOnboardingRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutGuildsOnboardingResponse$inboundSchema: z.ZodType<
+  PutGuildsOnboardingResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildOnboardingResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type PutGuildsOnboardingResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildOnboardingResponse$Outbound;
+};
+
+/** @internal */
+export const PutGuildsOnboardingResponse$outboundSchema: z.ZodType<
+  PutGuildsOnboardingResponse$Outbound,
+  z.ZodTypeDef,
+  PutGuildsOnboardingResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildOnboardingResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutGuildsOnboardingResponse$ {
+  /** @deprecated use `PutGuildsOnboardingResponse$inboundSchema` instead. */
+  export const inboundSchema = PutGuildsOnboardingResponse$inboundSchema;
+  /** @deprecated use `PutGuildsOnboardingResponse$outboundSchema` instead. */
+  export const outboundSchema = PutGuildsOnboardingResponse$outboundSchema;
+  /** @deprecated use `PutGuildsOnboardingResponse$Outbound` instead. */
+  export type Outbound = PutGuildsOnboardingResponse$Outbound;
+}
+
+export function putGuildsOnboardingResponseToJSON(
+  putGuildsOnboardingResponse: PutGuildsOnboardingResponse,
+): string {
+  return JSON.stringify(
+    PutGuildsOnboardingResponse$outboundSchema.parse(
+      putGuildsOnboardingResponse,
+    ),
+  );
+}
+
+export function putGuildsOnboardingResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutGuildsOnboardingResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PutGuildsOnboardingResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutGuildsOnboardingResponse' from JSON`,
   );
 }

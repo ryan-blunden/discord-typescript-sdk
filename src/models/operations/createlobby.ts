@@ -5,15 +5,49 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+export const CreateLobbyFlags = {
+  One: 1,
+} as const;
+export type CreateLobbyFlags = ClosedEnum<typeof CreateLobbyFlags>;
 
 export type CreateLobbyRequestBody = {
   idleTimeoutSeconds?: number | null | undefined;
   members?: Array<components.LobbyMemberRequest> | null | undefined;
   metadata?: { [k: string]: string } | null | undefined;
+  flags?: CreateLobbyFlags | null | undefined;
+  overrideEventWebhooksUrl?: string | null | undefined;
 };
+
+export type CreateLobbyResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.LobbyResponse;
+};
+
+/** @internal */
+export const CreateLobbyFlags$inboundSchema: z.ZodNativeEnum<
+  typeof CreateLobbyFlags
+> = z.nativeEnum(CreateLobbyFlags);
+
+/** @internal */
+export const CreateLobbyFlags$outboundSchema: z.ZodNativeEnum<
+  typeof CreateLobbyFlags
+> = CreateLobbyFlags$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateLobbyFlags$ {
+  /** @deprecated use `CreateLobbyFlags$inboundSchema` instead. */
+  export const inboundSchema = CreateLobbyFlags$inboundSchema;
+  /** @deprecated use `CreateLobbyFlags$outboundSchema` instead. */
+  export const outboundSchema = CreateLobbyFlags$outboundSchema;
+}
 
 /** @internal */
 export const CreateLobbyRequestBody$inboundSchema: z.ZodType<
@@ -25,9 +59,12 @@ export const CreateLobbyRequestBody$inboundSchema: z.ZodType<
   members: z.nullable(z.array(components.LobbyMemberRequest$inboundSchema))
     .optional(),
   metadata: z.nullable(z.record(z.string())).optional(),
+  flags: z.nullable(CreateLobbyFlags$inboundSchema).optional(),
+  override_event_webhooks_url: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "idle_timeout_seconds": "idleTimeoutSeconds",
+    "override_event_webhooks_url": "overrideEventWebhooksUrl",
   });
 });
 
@@ -36,6 +73,8 @@ export type CreateLobbyRequestBody$Outbound = {
   idle_timeout_seconds?: number | null | undefined;
   members?: Array<components.LobbyMemberRequest$Outbound> | null | undefined;
   metadata?: { [k: string]: string } | null | undefined;
+  flags?: number | null | undefined;
+  override_event_webhooks_url?: string | null | undefined;
 };
 
 /** @internal */
@@ -48,9 +87,12 @@ export const CreateLobbyRequestBody$outboundSchema: z.ZodType<
   members: z.nullable(z.array(components.LobbyMemberRequest$outboundSchema))
     .optional(),
   metadata: z.nullable(z.record(z.string())).optional(),
+  flags: z.nullable(CreateLobbyFlags$outboundSchema).optional(),
+  overrideEventWebhooksUrl: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     idleTimeoutSeconds: "idle_timeout_seconds",
+    overrideEventWebhooksUrl: "override_event_webhooks_url",
   });
 });
 
@@ -82,5 +124,72 @@ export function createLobbyRequestBodyFromJSON(
     jsonString,
     (x) => CreateLobbyRequestBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateLobbyRequestBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateLobbyResponse$inboundSchema: z.ZodType<
+  CreateLobbyResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.LobbyResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateLobbyResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.LobbyResponse$Outbound;
+};
+
+/** @internal */
+export const CreateLobbyResponse$outboundSchema: z.ZodType<
+  CreateLobbyResponse$Outbound,
+  z.ZodTypeDef,
+  CreateLobbyResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.LobbyResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateLobbyResponse$ {
+  /** @deprecated use `CreateLobbyResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateLobbyResponse$inboundSchema;
+  /** @deprecated use `CreateLobbyResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateLobbyResponse$outboundSchema;
+  /** @deprecated use `CreateLobbyResponse$Outbound` instead. */
+  export type Outbound = CreateLobbyResponse$Outbound;
+}
+
+export function createLobbyResponseToJSON(
+  createLobbyResponse: CreateLobbyResponse,
+): string {
+  return JSON.stringify(
+    CreateLobbyResponse$outboundSchema.parse(createLobbyResponse),
+  );
+}
+
+export function createLobbyResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateLobbyResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateLobbyResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateLobbyResponse' from JSON`,
   );
 }

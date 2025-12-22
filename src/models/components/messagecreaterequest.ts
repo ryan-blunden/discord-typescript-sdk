@@ -26,6 +26,12 @@ import {
   ContainerComponentForMessageRequest$outboundSchema,
 } from "./containercomponentformessagerequest.js";
 import {
+  CustomClientThemeShareRequest,
+  CustomClientThemeShareRequest$inboundSchema,
+  CustomClientThemeShareRequest$Outbound,
+  CustomClientThemeShareRequest$outboundSchema,
+} from "./customclientthemesharerequest.js";
+import {
   FileComponentForMessageRequest,
   FileComponentForMessageRequest$inboundSchema,
   FileComponentForMessageRequest$Outbound,
@@ -117,6 +123,7 @@ export type MessageCreateRequest = {
   flags?: number | null | undefined;
   attachments?: Array<MessageAttachmentRequest> | null | undefined;
   poll?: PollCreateRequest | null | undefined;
+  sharedClientTheme?: CustomClientThemeShareRequest | null | undefined;
   confettiPotion?: ConfettiPotionCreateRequest | null | undefined;
   messageReference?: MessageReferenceRequest | null | undefined;
   nonce?: number | string | null | undefined;
@@ -273,6 +280,8 @@ export const MessageCreateRequest$inboundSchema: z.ZodType<
   attachments: z.nullable(z.array(MessageAttachmentRequest$inboundSchema))
     .optional(),
   poll: z.nullable(PollCreateRequest$inboundSchema).optional(),
+  shared_client_theme: z.nullable(CustomClientThemeShareRequest$inboundSchema)
+    .optional(),
   confetti_potion: z.nullable(ConfettiPotionCreateRequest$inboundSchema)
     .optional(),
   message_reference: z.nullable(MessageReferenceRequest$inboundSchema)
@@ -284,6 +293,7 @@ export const MessageCreateRequest$inboundSchema: z.ZodType<
   return remap$(v, {
     "allowed_mentions": "allowedMentions",
     "sticker_ids": "stickerIds",
+    "shared_client_theme": "sharedClientTheme",
     "confetti_potion": "confettiPotion",
     "message_reference": "messageReference",
     "enforce_nonce": "enforceNonce",
@@ -311,6 +321,10 @@ export type MessageCreateRequest$Outbound = {
   flags?: number | null | undefined;
   attachments?: Array<MessageAttachmentRequest$Outbound> | null | undefined;
   poll?: PollCreateRequest$Outbound | null | undefined;
+  shared_client_theme?:
+    | CustomClientThemeShareRequest$Outbound
+    | null
+    | undefined;
   confetti_potion?: ConfettiPotionCreateRequest$Outbound | null | undefined;
   message_reference?: MessageReferenceRequest$Outbound | null | undefined;
   nonce?: number | string | null | undefined;
@@ -346,6 +360,8 @@ export const MessageCreateRequest$outboundSchema: z.ZodType<
   attachments: z.nullable(z.array(MessageAttachmentRequest$outboundSchema))
     .optional(),
   poll: z.nullable(PollCreateRequest$outboundSchema).optional(),
+  sharedClientTheme: z.nullable(CustomClientThemeShareRequest$outboundSchema)
+    .optional(),
   confettiPotion: z.nullable(ConfettiPotionCreateRequest$outboundSchema)
     .optional(),
   messageReference: z.nullable(MessageReferenceRequest$outboundSchema)
@@ -357,6 +373,7 @@ export const MessageCreateRequest$outboundSchema: z.ZodType<
   return remap$(v, {
     allowedMentions: "allowed_mentions",
     stickerIds: "sticker_ids",
+    sharedClientTheme: "shared_client_theme",
     confettiPotion: "confetti_potion",
     messageReference: "message_reference",
     enforceNonce: "enforce_nonce",

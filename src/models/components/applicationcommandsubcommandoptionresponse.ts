@@ -76,12 +76,12 @@ export type Options =
 export type ApplicationCommandSubcommandOptionResponse = {
   type?: 1 | undefined;
   name: string;
-  nameLocalized?: string | null | undefined;
+  nameLocalized?: string | undefined;
   nameLocalizations?: { [k: string]: string } | null | undefined;
   description: string;
-  descriptionLocalized?: string | null | undefined;
+  descriptionLocalized?: string | undefined;
   descriptionLocalizations?: { [k: string]: string } | null | undefined;
-  required?: boolean | null | undefined;
+  required?: boolean | undefined;
   options?:
     | Array<
       | ApplicationCommandAttachmentOptionResponse
@@ -94,7 +94,6 @@ export type ApplicationCommandSubcommandOptionResponse = {
       | ApplicationCommandNumberOptionResponse
       | ApplicationCommandStringOptionResponse
     >
-    | null
     | undefined;
 };
 
@@ -174,26 +173,24 @@ export const ApplicationCommandSubcommandOptionResponse$inboundSchema:
     z.object({
       type: z.literal(1).optional(),
       name: z.string(),
-      name_localized: z.nullable(z.string()).optional(),
+      name_localized: z.string().optional(),
       name_localizations: z.nullable(z.record(z.string())).optional(),
       description: z.string(),
-      description_localized: z.nullable(z.string()).optional(),
+      description_localized: z.string().optional(),
       description_localizations: z.nullable(z.record(z.string())).optional(),
-      required: z.nullable(z.boolean()).optional(),
-      options: z.nullable(
-        z.array(
-          z.union([
-            ApplicationCommandAttachmentOptionResponse$inboundSchema,
-            ApplicationCommandBooleanOptionResponse$inboundSchema,
-            ApplicationCommandMentionableOptionResponse$inboundSchema,
-            ApplicationCommandRoleOptionResponse$inboundSchema,
-            ApplicationCommandUserOptionResponse$inboundSchema,
-            ApplicationCommandChannelOptionResponse$inboundSchema,
-            ApplicationCommandIntegerOptionResponse$inboundSchema,
-            ApplicationCommandNumberOptionResponse$inboundSchema,
-            ApplicationCommandStringOptionResponse$inboundSchema,
-          ]),
-        ),
+      required: z.boolean().optional(),
+      options: z.array(
+        z.union([
+          ApplicationCommandAttachmentOptionResponse$inboundSchema,
+          ApplicationCommandBooleanOptionResponse$inboundSchema,
+          ApplicationCommandMentionableOptionResponse$inboundSchema,
+          ApplicationCommandRoleOptionResponse$inboundSchema,
+          ApplicationCommandUserOptionResponse$inboundSchema,
+          ApplicationCommandChannelOptionResponse$inboundSchema,
+          ApplicationCommandIntegerOptionResponse$inboundSchema,
+          ApplicationCommandNumberOptionResponse$inboundSchema,
+          ApplicationCommandStringOptionResponse$inboundSchema,
+        ]),
       ).optional(),
     }).transform((v) => {
       return remap$(v, {
@@ -208,12 +205,12 @@ export const ApplicationCommandSubcommandOptionResponse$inboundSchema:
 export type ApplicationCommandSubcommandOptionResponse$Outbound = {
   type: 1;
   name: string;
-  name_localized?: string | null | undefined;
+  name_localized?: string | undefined;
   name_localizations?: { [k: string]: string } | null | undefined;
   description: string;
-  description_localized?: string | null | undefined;
+  description_localized?: string | undefined;
   description_localizations?: { [k: string]: string } | null | undefined;
-  required?: boolean | null | undefined;
+  required?: boolean | undefined;
   options?:
     | Array<
       | ApplicationCommandAttachmentOptionResponse$Outbound
@@ -226,7 +223,6 @@ export type ApplicationCommandSubcommandOptionResponse$Outbound = {
       | ApplicationCommandNumberOptionResponse$Outbound
       | ApplicationCommandStringOptionResponse$Outbound
     >
-    | null
     | undefined;
 };
 
@@ -239,26 +235,24 @@ export const ApplicationCommandSubcommandOptionResponse$outboundSchema:
   > = z.object({
     type: z.literal(1).default(1 as const),
     name: z.string(),
-    nameLocalized: z.nullable(z.string()).optional(),
+    nameLocalized: z.string().optional(),
     nameLocalizations: z.nullable(z.record(z.string())).optional(),
     description: z.string(),
-    descriptionLocalized: z.nullable(z.string()).optional(),
+    descriptionLocalized: z.string().optional(),
     descriptionLocalizations: z.nullable(z.record(z.string())).optional(),
-    required: z.nullable(z.boolean()).optional(),
-    options: z.nullable(
-      z.array(
-        z.union([
-          ApplicationCommandAttachmentOptionResponse$outboundSchema,
-          ApplicationCommandBooleanOptionResponse$outboundSchema,
-          ApplicationCommandMentionableOptionResponse$outboundSchema,
-          ApplicationCommandRoleOptionResponse$outboundSchema,
-          ApplicationCommandUserOptionResponse$outboundSchema,
-          ApplicationCommandChannelOptionResponse$outboundSchema,
-          ApplicationCommandIntegerOptionResponse$outboundSchema,
-          ApplicationCommandNumberOptionResponse$outboundSchema,
-          ApplicationCommandStringOptionResponse$outboundSchema,
-        ]),
-      ),
+    required: z.boolean().optional(),
+    options: z.array(
+      z.union([
+        ApplicationCommandAttachmentOptionResponse$outboundSchema,
+        ApplicationCommandBooleanOptionResponse$outboundSchema,
+        ApplicationCommandMentionableOptionResponse$outboundSchema,
+        ApplicationCommandRoleOptionResponse$outboundSchema,
+        ApplicationCommandUserOptionResponse$outboundSchema,
+        ApplicationCommandChannelOptionResponse$outboundSchema,
+        ApplicationCommandIntegerOptionResponse$outboundSchema,
+        ApplicationCommandNumberOptionResponse$outboundSchema,
+        ApplicationCommandStringOptionResponse$outboundSchema,
+      ]),
     ).optional(),
   }).transform((v) => {
     return remap$(v, {

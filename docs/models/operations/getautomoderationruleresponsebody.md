@@ -18,14 +18,25 @@ const value: components.DefaultKeywordRuleResponse = {
       metadata: {},
     },
   ],
+  enabled: true,
+  exemptRoles: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
+  exemptChannels: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
   triggerMetadata: {
     allowList: [
       "<value 1>",
+      "<value 2>",
     ],
     presets: [
-      944120,
-      737731,
-      917279,
+      127310,
+      528147,
     ],
   },
 };
@@ -40,11 +51,15 @@ const value: components.KeywordRuleResponse = {
   creatorId: "<value>",
   name: "<value>",
   actions: [],
+  enabled: false,
+  exemptRoles: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
+  exemptChannels: [],
   triggerMetadata: {
-    keywordFilter: [
-      "<value 1>",
-      "<value 2>",
-    ],
+    keywordFilter: [],
     regexPatterns: [
       "<value 1>",
       "<value 2>",
@@ -68,6 +83,14 @@ const value: components.MLSpamRuleResponse = {
       metadata: {},
     },
   ],
+  enabled: true,
+  exemptRoles: [
+    "<value 1>",
+    "<value 2>",
+  ],
+  exemptChannels: [
+    "<value 1>",
+  ],
   triggerMetadata: {},
 };
 ```
@@ -81,8 +104,19 @@ const value: components.MentionSpamRuleResponse = {
   creatorId: "<value>",
   name: "<value>",
   actions: [],
+  enabled: true,
+  exemptRoles: [
+    "<value 1>",
+    "<value 2>",
+  ],
+  exemptChannels: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
   triggerMetadata: {
-    mentionTotalLimit: 409323,
+    mentionTotalLimit: 795455,
+    mentionRaidProtectionEnabled: false,
   },
 };
 ```
@@ -100,6 +134,9 @@ const value: components.SpamLinkRuleResponse = {
       metadata: {},
     },
   ],
+  enabled: true,
+  exemptRoles: [],
+  exemptChannels: [],
   triggerMetadata: {},
 };
 ```

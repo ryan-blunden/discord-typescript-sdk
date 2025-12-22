@@ -6,103 +6,19 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type UpdateGuildRoleRequestBody = {
-  name?: string | null | undefined;
-  permissions?: number | null | undefined;
-  color?: number | null | undefined;
-  hoist?: boolean | null | undefined;
-  mentionable?: boolean | null | undefined;
-  icon?: string | null | undefined;
-  unicodeEmoji?: string | null | undefined;
-};
 
 export type UpdateGuildRoleRequest = {
   guildId: string;
   roleId: string;
-  requestBody: UpdateGuildRoleRequestBody;
+  updateRoleRequestPartial: components.UpdateRoleRequestPartial;
 };
 
-/** @internal */
-export const UpdateGuildRoleRequestBody$inboundSchema: z.ZodType<
-  UpdateGuildRoleRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  permissions: z.nullable(z.number().int()).optional(),
-  color: z.nullable(z.number().int()).optional(),
-  hoist: z.nullable(z.boolean()).optional(),
-  mentionable: z.nullable(z.boolean()).optional(),
-  icon: z.nullable(z.string()).optional(),
-  unicode_emoji: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "unicode_emoji": "unicodeEmoji",
-  });
-});
-
-/** @internal */
-export type UpdateGuildRoleRequestBody$Outbound = {
-  name?: string | null | undefined;
-  permissions?: number | null | undefined;
-  color?: number | null | undefined;
-  hoist?: boolean | null | undefined;
-  mentionable?: boolean | null | undefined;
-  icon?: string | null | undefined;
-  unicode_emoji?: string | null | undefined;
+export type UpdateGuildRoleResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildRoleResponse;
 };
-
-/** @internal */
-export const UpdateGuildRoleRequestBody$outboundSchema: z.ZodType<
-  UpdateGuildRoleRequestBody$Outbound,
-  z.ZodTypeDef,
-  UpdateGuildRoleRequestBody
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  permissions: z.nullable(z.number().int()).optional(),
-  color: z.nullable(z.number().int()).optional(),
-  hoist: z.nullable(z.boolean()).optional(),
-  mentionable: z.nullable(z.boolean()).optional(),
-  icon: z.nullable(z.string()).optional(),
-  unicodeEmoji: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    unicodeEmoji: "unicode_emoji",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateGuildRoleRequestBody$ {
-  /** @deprecated use `UpdateGuildRoleRequestBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateGuildRoleRequestBody$inboundSchema;
-  /** @deprecated use `UpdateGuildRoleRequestBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateGuildRoleRequestBody$outboundSchema;
-  /** @deprecated use `UpdateGuildRoleRequestBody$Outbound` instead. */
-  export type Outbound = UpdateGuildRoleRequestBody$Outbound;
-}
-
-export function updateGuildRoleRequestBodyToJSON(
-  updateGuildRoleRequestBody: UpdateGuildRoleRequestBody,
-): string {
-  return JSON.stringify(
-    UpdateGuildRoleRequestBody$outboundSchema.parse(updateGuildRoleRequestBody),
-  );
-}
-
-export function updateGuildRoleRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateGuildRoleRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateGuildRoleRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateGuildRoleRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateGuildRoleRequest$inboundSchema: z.ZodType<
@@ -112,12 +28,12 @@ export const UpdateGuildRoleRequest$inboundSchema: z.ZodType<
 > = z.object({
   guild_id: z.string(),
   role_id: z.string(),
-  RequestBody: z.lazy(() => UpdateGuildRoleRequestBody$inboundSchema),
+  UpdateRoleRequestPartial: components.UpdateRoleRequestPartial$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",
     "role_id": "roleId",
-    "RequestBody": "requestBody",
+    "UpdateRoleRequestPartial": "updateRoleRequestPartial",
   });
 });
 
@@ -125,7 +41,7 @@ export const UpdateGuildRoleRequest$inboundSchema: z.ZodType<
 export type UpdateGuildRoleRequest$Outbound = {
   guild_id: string;
   role_id: string;
-  RequestBody: UpdateGuildRoleRequestBody$Outbound;
+  UpdateRoleRequestPartial: components.UpdateRoleRequestPartial$Outbound;
 };
 
 /** @internal */
@@ -136,12 +52,12 @@ export const UpdateGuildRoleRequest$outboundSchema: z.ZodType<
 > = z.object({
   guildId: z.string(),
   roleId: z.string(),
-  requestBody: z.lazy(() => UpdateGuildRoleRequestBody$outboundSchema),
+  updateRoleRequestPartial: components.UpdateRoleRequestPartial$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     guildId: "guild_id",
     roleId: "role_id",
-    requestBody: "RequestBody",
+    updateRoleRequestPartial: "UpdateRoleRequestPartial",
   });
 });
 
@@ -173,5 +89,72 @@ export function updateGuildRoleRequestFromJSON(
     jsonString,
     (x) => UpdateGuildRoleRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateGuildRoleRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateGuildRoleResponse$inboundSchema: z.ZodType<
+  UpdateGuildRoleResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildRoleResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateGuildRoleResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildRoleResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateGuildRoleResponse$outboundSchema: z.ZodType<
+  UpdateGuildRoleResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateGuildRoleResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildRoleResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateGuildRoleResponse$ {
+  /** @deprecated use `UpdateGuildRoleResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateGuildRoleResponse$inboundSchema;
+  /** @deprecated use `UpdateGuildRoleResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateGuildRoleResponse$outboundSchema;
+  /** @deprecated use `UpdateGuildRoleResponse$Outbound` instead. */
+  export type Outbound = UpdateGuildRoleResponse$Outbound;
+}
+
+export function updateGuildRoleResponseToJSON(
+  updateGuildRoleResponse: UpdateGuildRoleResponse,
+): string {
+  return JSON.stringify(
+    UpdateGuildRoleResponse$outboundSchema.parse(updateGuildRoleResponse),
+  );
+}
+
+export function updateGuildRoleResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateGuildRoleResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateGuildRoleResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateGuildRoleResponse' from JSON`,
   );
 }

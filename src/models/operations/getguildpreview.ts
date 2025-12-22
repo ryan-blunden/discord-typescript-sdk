@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildPreviewRequest = {
   guildId: string;
+};
+
+export type GetGuildPreviewResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildPreviewResponse;
 };
 
 /** @internal */
@@ -71,5 +77,72 @@ export function getGuildPreviewRequestFromJSON(
     jsonString,
     (x) => GetGuildPreviewRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGuildPreviewRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildPreviewResponse$inboundSchema: z.ZodType<
+  GetGuildPreviewResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildPreviewResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGuildPreviewResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildPreviewResponse$Outbound;
+};
+
+/** @internal */
+export const GetGuildPreviewResponse$outboundSchema: z.ZodType<
+  GetGuildPreviewResponse$Outbound,
+  z.ZodTypeDef,
+  GetGuildPreviewResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildPreviewResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildPreviewResponse$ {
+  /** @deprecated use `GetGuildPreviewResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGuildPreviewResponse$inboundSchema;
+  /** @deprecated use `GetGuildPreviewResponse$outboundSchema` instead. */
+  export const outboundSchema = GetGuildPreviewResponse$outboundSchema;
+  /** @deprecated use `GetGuildPreviewResponse$Outbound` instead. */
+  export type Outbound = GetGuildPreviewResponse$Outbound;
+}
+
+export function getGuildPreviewResponseToJSON(
+  getGuildPreviewResponse: GetGuildPreviewResponse,
+): string {
+  return JSON.stringify(
+    GetGuildPreviewResponse$outboundSchema.parse(getGuildPreviewResponse),
+  );
+}
+
+export function getGuildPreviewResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildPreviewResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildPreviewResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildPreviewResponse' from JSON`,
   );
 }

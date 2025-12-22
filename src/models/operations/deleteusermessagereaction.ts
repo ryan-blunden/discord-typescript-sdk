@@ -15,6 +15,10 @@ export type DeleteUserMessageReactionRequest = {
   userId: string;
 };
 
+export type DeleteUserMessageReactionResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteUserMessageReactionRequest$inboundSchema: z.ZodType<
   DeleteUserMessageReactionRequest,
@@ -91,5 +95,70 @@ export function deleteUserMessageReactionRequestFromJSON(
     jsonString,
     (x) => DeleteUserMessageReactionRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteUserMessageReactionRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteUserMessageReactionResponse$inboundSchema: z.ZodType<
+  DeleteUserMessageReactionResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteUserMessageReactionResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteUserMessageReactionResponse$outboundSchema: z.ZodType<
+  DeleteUserMessageReactionResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteUserMessageReactionResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteUserMessageReactionResponse$ {
+  /** @deprecated use `DeleteUserMessageReactionResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteUserMessageReactionResponse$inboundSchema;
+  /** @deprecated use `DeleteUserMessageReactionResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteUserMessageReactionResponse$outboundSchema;
+  /** @deprecated use `DeleteUserMessageReactionResponse$Outbound` instead. */
+  export type Outbound = DeleteUserMessageReactionResponse$Outbound;
+}
+
+export function deleteUserMessageReactionResponseToJSON(
+  deleteUserMessageReactionResponse: DeleteUserMessageReactionResponse,
+): string {
+  return JSON.stringify(
+    DeleteUserMessageReactionResponse$outboundSchema.parse(
+      deleteUserMessageReactionResponse,
+    ),
+  );
+}
+
+export function deleteUserMessageReactionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteUserMessageReactionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteUserMessageReactionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteUserMessageReactionResponse' from JSON`,
   );
 }

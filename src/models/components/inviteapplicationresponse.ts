@@ -32,26 +32,25 @@ export type InviteApplicationResponse = {
   icon?: string | null | undefined;
   description: string;
   type?: 4 | null | undefined;
-  coverImage?: string | null | undefined;
-  primarySkuId?: string | null | undefined;
-  bot?: UserResponse | null | undefined;
-  slug?: string | null | undefined;
-  guildId?: string | null | undefined;
-  rpcOrigins?: Array<string | null> | null | undefined;
-  botPublic?: boolean | null | undefined;
-  botRequireCodeGrant?: boolean | null | undefined;
-  termsOfServiceUrl?: string | null | undefined;
-  privacyPolicyUrl?: string | null | undefined;
-  customInstallUrl?: string | null | undefined;
-  installParams?: ApplicationOAuth2InstallParamsResponse | null | undefined;
-  integrationTypesConfig?:
-    | { [k: string]: ApplicationIntegrationTypeConfigurationResponse }
-    | null
-    | undefined;
+  coverImage?: string | undefined;
+  primarySkuId?: string | undefined;
+  bot?: UserResponse | undefined;
+  slug?: string | undefined;
+  guildId?: string | undefined;
+  rpcOrigins?: Array<string | null> | undefined;
+  botPublic?: boolean | undefined;
+  botRequireCodeGrant?: boolean | undefined;
+  termsOfServiceUrl?: string | undefined;
+  privacyPolicyUrl?: string | undefined;
+  customInstallUrl?: string | undefined;
+  installParams?: ApplicationOAuth2InstallParamsResponse | undefined;
+  integrationTypesConfig?: {
+    [k: string]: ApplicationIntegrationTypeConfigurationResponse;
+  } | undefined;
   verifyKey: string;
   flags: number;
   maxParticipants?: number | null | undefined;
-  tags?: Array<string> | null | undefined;
+  tags?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -65,27 +64,26 @@ export const InviteApplicationResponse$inboundSchema: z.ZodType<
   icon: z.nullable(z.string()).optional(),
   description: z.string(),
   type: z.nullable(z.literal(4)).optional(),
-  cover_image: z.nullable(z.string()).optional(),
-  primary_sku_id: z.nullable(z.string()).optional(),
-  bot: z.nullable(UserResponse$inboundSchema).optional(),
-  slug: z.nullable(z.string()).optional(),
-  guild_id: z.nullable(z.string()).optional(),
-  rpc_origins: z.nullable(z.array(z.nullable(z.string()))).optional(),
-  bot_public: z.nullable(z.boolean()).optional(),
-  bot_require_code_grant: z.nullable(z.boolean()).optional(),
-  terms_of_service_url: z.nullable(z.string()).optional(),
-  privacy_policy_url: z.nullable(z.string()).optional(),
-  custom_install_url: z.nullable(z.string()).optional(),
-  install_params: z.nullable(
-    ApplicationOAuth2InstallParamsResponse$inboundSchema,
-  ).optional(),
-  integration_types_config: z.nullable(
-    z.record(ApplicationIntegrationTypeConfigurationResponse$inboundSchema),
+  cover_image: z.string().optional(),
+  primary_sku_id: z.string().optional(),
+  bot: UserResponse$inboundSchema.optional(),
+  slug: z.string().optional(),
+  guild_id: z.string().optional(),
+  rpc_origins: z.array(z.nullable(z.string())).optional(),
+  bot_public: z.boolean().optional(),
+  bot_require_code_grant: z.boolean().optional(),
+  terms_of_service_url: z.string().optional(),
+  privacy_policy_url: z.string().optional(),
+  custom_install_url: z.string().optional(),
+  install_params: ApplicationOAuth2InstallParamsResponse$inboundSchema
+    .optional(),
+  integration_types_config: z.record(
+    ApplicationIntegrationTypeConfigurationResponse$inboundSchema,
   ).optional(),
   verify_key: z.string(),
   flags: z.number().int(),
   max_participants: z.nullable(z.number().int()).optional(),
-  tags: z.nullable(z.array(z.string())).optional(),
+  tags: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "cover_image": "coverImage",
@@ -111,29 +109,25 @@ export type InviteApplicationResponse$Outbound = {
   icon?: string | null | undefined;
   description: string;
   type: 4 | null;
-  cover_image?: string | null | undefined;
-  primary_sku_id?: string | null | undefined;
-  bot?: UserResponse$Outbound | null | undefined;
-  slug?: string | null | undefined;
-  guild_id?: string | null | undefined;
-  rpc_origins?: Array<string | null> | null | undefined;
-  bot_public?: boolean | null | undefined;
-  bot_require_code_grant?: boolean | null | undefined;
-  terms_of_service_url?: string | null | undefined;
-  privacy_policy_url?: string | null | undefined;
-  custom_install_url?: string | null | undefined;
-  install_params?:
-    | ApplicationOAuth2InstallParamsResponse$Outbound
-    | null
-    | undefined;
-  integration_types_config?:
-    | { [k: string]: ApplicationIntegrationTypeConfigurationResponse$Outbound }
-    | null
-    | undefined;
+  cover_image?: string | undefined;
+  primary_sku_id?: string | undefined;
+  bot?: UserResponse$Outbound | undefined;
+  slug?: string | undefined;
+  guild_id?: string | undefined;
+  rpc_origins?: Array<string | null> | undefined;
+  bot_public?: boolean | undefined;
+  bot_require_code_grant?: boolean | undefined;
+  terms_of_service_url?: string | undefined;
+  privacy_policy_url?: string | undefined;
+  custom_install_url?: string | undefined;
+  install_params?: ApplicationOAuth2InstallParamsResponse$Outbound | undefined;
+  integration_types_config?: {
+    [k: string]: ApplicationIntegrationTypeConfigurationResponse$Outbound;
+  } | undefined;
   verify_key: string;
   flags: number;
   max_participants?: number | null | undefined;
-  tags?: Array<string> | null | undefined;
+  tags?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -147,27 +141,26 @@ export const InviteApplicationResponse$outboundSchema: z.ZodType<
   icon: z.nullable(z.string()).optional(),
   description: z.string(),
   type: z.nullable(z.literal(4).default(4 as const)),
-  coverImage: z.nullable(z.string()).optional(),
-  primarySkuId: z.nullable(z.string()).optional(),
-  bot: z.nullable(UserResponse$outboundSchema).optional(),
-  slug: z.nullable(z.string()).optional(),
-  guildId: z.nullable(z.string()).optional(),
-  rpcOrigins: z.nullable(z.array(z.nullable(z.string()))).optional(),
-  botPublic: z.nullable(z.boolean()).optional(),
-  botRequireCodeGrant: z.nullable(z.boolean()).optional(),
-  termsOfServiceUrl: z.nullable(z.string()).optional(),
-  privacyPolicyUrl: z.nullable(z.string()).optional(),
-  customInstallUrl: z.nullable(z.string()).optional(),
-  installParams: z.nullable(
-    ApplicationOAuth2InstallParamsResponse$outboundSchema,
-  ).optional(),
-  integrationTypesConfig: z.nullable(
-    z.record(ApplicationIntegrationTypeConfigurationResponse$outboundSchema),
+  coverImage: z.string().optional(),
+  primarySkuId: z.string().optional(),
+  bot: UserResponse$outboundSchema.optional(),
+  slug: z.string().optional(),
+  guildId: z.string().optional(),
+  rpcOrigins: z.array(z.nullable(z.string())).optional(),
+  botPublic: z.boolean().optional(),
+  botRequireCodeGrant: z.boolean().optional(),
+  termsOfServiceUrl: z.string().optional(),
+  privacyPolicyUrl: z.string().optional(),
+  customInstallUrl: z.string().optional(),
+  installParams: ApplicationOAuth2InstallParamsResponse$outboundSchema
+    .optional(),
+  integrationTypesConfig: z.record(
+    ApplicationIntegrationTypeConfigurationResponse$outboundSchema,
   ).optional(),
   verifyKey: z.string(),
   flags: z.number().int(),
   maxParticipants: z.nullable(z.number().int()).optional(),
-  tags: z.nullable(z.array(z.string())).optional(),
+  tags: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     coverImage: "cover_image",

@@ -17,6 +17,13 @@ let value: PollResponse = {
   allowMultiselect: false,
   layoutType: 141586,
   results: {
+    answerCounts: [
+      {
+        id: 664207,
+        count: 691381,
+        meVoted: false,
+      },
+    ],
     isFinalized: false,
   },
 };

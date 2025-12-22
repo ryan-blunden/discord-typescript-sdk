@@ -16,6 +16,10 @@ const value: components.FriendInviteResponse = {
 ```typescript
 const value: components.GroupDMInviteResponse = {
   code: "<value>",
+  channel: {
+    id: "<value>",
+    type: 2,
+  },
 };
 ```
 
@@ -24,6 +28,17 @@ const value: components.GroupDMInviteResponse = {
 ```typescript
 const value: components.GuildInviteResponse = {
   code: "<value>",
+  guild: {
+    id: "<value>",
+    name: "<value>",
+    features: [],
+    premiumSubscriptionCount: 820218,
+  },
+  guildId: "<value>",
+  channel: {
+    id: "<value>",
+    type: 2,
+  },
 };
 ```
 

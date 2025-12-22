@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetActiveGuildThreadsRequest = {
   guildId: string;
+};
+
+export type GetActiveGuildThreadsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ThreadsResponse;
 };
 
 /** @internal */
@@ -73,5 +79,74 @@ export function getActiveGuildThreadsRequestFromJSON(
     jsonString,
     (x) => GetActiveGuildThreadsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetActiveGuildThreadsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetActiveGuildThreadsResponse$inboundSchema: z.ZodType<
+  GetActiveGuildThreadsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ThreadsResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetActiveGuildThreadsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ThreadsResponse$Outbound;
+};
+
+/** @internal */
+export const GetActiveGuildThreadsResponse$outboundSchema: z.ZodType<
+  GetActiveGuildThreadsResponse$Outbound,
+  z.ZodTypeDef,
+  GetActiveGuildThreadsResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ThreadsResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetActiveGuildThreadsResponse$ {
+  /** @deprecated use `GetActiveGuildThreadsResponse$inboundSchema` instead. */
+  export const inboundSchema = GetActiveGuildThreadsResponse$inboundSchema;
+  /** @deprecated use `GetActiveGuildThreadsResponse$outboundSchema` instead. */
+  export const outboundSchema = GetActiveGuildThreadsResponse$outboundSchema;
+  /** @deprecated use `GetActiveGuildThreadsResponse$Outbound` instead. */
+  export type Outbound = GetActiveGuildThreadsResponse$Outbound;
+}
+
+export function getActiveGuildThreadsResponseToJSON(
+  getActiveGuildThreadsResponse: GetActiveGuildThreadsResponse,
+): string {
+  return JSON.stringify(
+    GetActiveGuildThreadsResponse$outboundSchema.parse(
+      getActiveGuildThreadsResponse,
+    ),
+  );
+}
+
+export function getActiveGuildThreadsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetActiveGuildThreadsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetActiveGuildThreadsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetActiveGuildThreadsResponse' from JSON`,
   );
 }

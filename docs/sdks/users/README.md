@@ -76,14 +76,15 @@ run();
 
 ### Response
 
-**Promise\<[components.UserPIIResponse](../../models/components/userpiiresponse.md)\>**
+**Promise\<[operations.GetMyUserResponse](../../models/operations/getmyuserresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateCurrent
 
@@ -149,14 +150,15 @@ run();
 
 ### Response
 
-**Promise\<[components.UserPIIResponse](../../models/components/userpiiresponse.md)\>**
+**Promise\<[operations.UpdateMyUserResponse](../../models/operations/updatemyuserresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getApplicationRoleConnection
 
@@ -222,14 +224,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationUserRoleConnectionResponse](../../models/components/applicationuserroleconnectionresponse.md)\>**
+**Promise\<[operations.GetApplicationUserRoleConnectionResponse](../../models/operations/getapplicationuserroleconnectionresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateApplicationRoleConnection
 
@@ -247,7 +250,7 @@ const discord = new Discord({
 async function run() {
   const result = await discord.users.updateApplicationRoleConnection({
     applicationId: "<value>",
-    requestBody: {},
+    updateApplicationUserRoleConnectionRequest: {},
   });
 
   console.log(result);
@@ -273,7 +276,7 @@ const discord = new DiscordCore({
 async function run() {
   const res = await usersUpdateApplicationRoleConnection(discord, {
     applicationId: "<value>",
-    requestBody: {},
+    updateApplicationUserRoleConnectionRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -297,14 +300,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationUserRoleConnectionResponse](../../models/components/applicationuserroleconnectionresponse.md)\>**
+**Promise\<[operations.UpdateApplicationUserRoleConnectionResponse](../../models/operations/updateapplicationuserroleconnectionresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createDM
 
@@ -366,14 +370,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateDmResponseBody](../../models/operations/createdmresponsebody.md)\>**
+**Promise\<[operations.CreateDmResponse](../../models/operations/createdmresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listConnections
 
@@ -435,14 +440,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ConnectedAccountResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListMyConnectionsResponse](../../models/operations/listmyconnectionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listGuilds
 
@@ -505,14 +511,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MyGuildResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListMyGuildsResponse](../../models/operations/listmyguildsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## leaveGuild
 
@@ -528,11 +535,11 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.users.leaveGuild({
+  const result = await discord.users.leaveGuild({
     guildId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -558,7 +565,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("usersLeaveGuild failed:", res.error);
   }
@@ -578,14 +585,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.LeaveGuildResponse](../../models/operations/leaveguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGuildMember
 
@@ -651,14 +659,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateGuildMemberResponse](../../models/components/privateguildmemberresponse.md)\>**
+**Promise\<[operations.GetMyGuildMemberResponse](../../models/operations/getmyguildmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -724,11 +733,12 @@ run();
 
 ### Response
 
-**Promise\<[components.UserResponse](../../models/components/userresponse.md)\>**
+**Promise\<[operations.GetUserResponse](../../models/operations/getuserresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

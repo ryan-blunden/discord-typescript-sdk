@@ -17,11 +17,11 @@ import {
 export type ApplicationCommandInteractionMetadataResponse = {
   id: string;
   type?: 1 | undefined;
-  user?: UserResponse | null | undefined;
+  user?: UserResponse | undefined;
   authorizingIntegrationOwners: { [k: string]: string };
-  originalResponseMessageId?: string | null | undefined;
-  targetUser?: UserResponse | null | undefined;
-  targetMessageId?: string | null | undefined;
+  originalResponseMessageId?: string | undefined;
+  targetUser?: UserResponse | undefined;
+  targetMessageId?: string | undefined;
 };
 
 /** @internal */
@@ -33,11 +33,11 @@ export const ApplicationCommandInteractionMetadataResponse$inboundSchema:
   > = z.object({
     id: z.string(),
     type: z.literal(1).optional(),
-    user: z.nullable(UserResponse$inboundSchema).optional(),
+    user: UserResponse$inboundSchema.optional(),
     authorizing_integration_owners: z.record(z.string()),
-    original_response_message_id: z.nullable(z.string()).optional(),
-    target_user: z.nullable(UserResponse$inboundSchema).optional(),
-    target_message_id: z.nullable(z.string()).optional(),
+    original_response_message_id: z.string().optional(),
+    target_user: UserResponse$inboundSchema.optional(),
+    target_message_id: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "authorizing_integration_owners": "authorizingIntegrationOwners",
@@ -51,11 +51,11 @@ export const ApplicationCommandInteractionMetadataResponse$inboundSchema:
 export type ApplicationCommandInteractionMetadataResponse$Outbound = {
   id: string;
   type: 1;
-  user?: UserResponse$Outbound | null | undefined;
+  user?: UserResponse$Outbound | undefined;
   authorizing_integration_owners: { [k: string]: string };
-  original_response_message_id?: string | null | undefined;
-  target_user?: UserResponse$Outbound | null | undefined;
-  target_message_id?: string | null | undefined;
+  original_response_message_id?: string | undefined;
+  target_user?: UserResponse$Outbound | undefined;
+  target_message_id?: string | undefined;
 };
 
 /** @internal */
@@ -67,11 +67,11 @@ export const ApplicationCommandInteractionMetadataResponse$outboundSchema:
   > = z.object({
     id: z.string(),
     type: z.literal(1).default(1 as const),
-    user: z.nullable(UserResponse$outboundSchema).optional(),
+    user: UserResponse$outboundSchema.optional(),
     authorizingIntegrationOwners: z.record(z.string()),
-    originalResponseMessageId: z.nullable(z.string()).optional(),
-    targetUser: z.nullable(UserResponse$outboundSchema).optional(),
-    targetMessageId: z.nullable(z.string()).optional(),
+    originalResponseMessageId: z.string().optional(),
+    targetUser: UserResponse$outboundSchema.optional(),
+    targetMessageId: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       authorizingIntegrationOwners: "authorizing_integration_owners",

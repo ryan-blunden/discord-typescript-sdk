@@ -11,7 +11,6 @@ import { stickersListGuildStickers } from "../funcs/stickersListGuildStickers.js
 import { stickersListPacks } from "../funcs/stickersListPacks.js";
 import { stickersUpdateGuildSticker } from "../funcs/stickersUpdateGuildSticker.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -22,7 +21,7 @@ export class Stickers extends ClientSDK {
   async listGuildStickers(
     request: operations.ListGuildStickersRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.GuildStickerResponse>> {
+  ): Promise<operations.ListGuildStickersResponse> {
     return unwrapAsync(stickersListGuildStickers(
       this,
       request,
@@ -36,7 +35,7 @@ export class Stickers extends ClientSDK {
   async createGuildSticker(
     request: operations.CreateGuildStickerRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildStickerResponse> {
+  ): Promise<operations.CreateGuildStickerResponse> {
     return unwrapAsync(stickersCreateGuildSticker(
       this,
       request,
@@ -50,7 +49,7 @@ export class Stickers extends ClientSDK {
   async getGuildSticker(
     request: operations.GetGuildStickerRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildStickerResponse> {
+  ): Promise<operations.GetGuildStickerResponse> {
     return unwrapAsync(stickersGetGuildSticker(
       this,
       request,
@@ -64,7 +63,7 @@ export class Stickers extends ClientSDK {
   async deleteGuildSticker(
     request: operations.DeleteGuildStickerRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteGuildStickerResponse | undefined> {
     return unwrapAsync(stickersDeleteGuildSticker(
       this,
       request,
@@ -78,7 +77,7 @@ export class Stickers extends ClientSDK {
   async updateGuildSticker(
     request: operations.UpdateGuildStickerRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildStickerResponse> {
+  ): Promise<operations.UpdateGuildStickerResponse> {
     return unwrapAsync(stickersUpdateGuildSticker(
       this,
       request,
@@ -92,7 +91,7 @@ export class Stickers extends ClientSDK {
   async listPacks(
     security?: operations.ListStickerPacksSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.StickerPackCollectionResponse> {
+  ): Promise<operations.ListStickerPacksResponse> {
     return unwrapAsync(stickersListPacks(
       this,
       security,
@@ -106,7 +105,7 @@ export class Stickers extends ClientSDK {
   async getPack(
     request: operations.GetStickerPackRequest,
     options?: RequestOptions,
-  ): Promise<components.StickerPackResponse> {
+  ): Promise<operations.GetStickerPackResponse> {
     return unwrapAsync(stickersGetPack(
       this,
       request,
@@ -120,7 +119,7 @@ export class Stickers extends ClientSDK {
   async get(
     request: operations.GetStickerRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetStickerResponseBody> {
+  ): Promise<operations.GetStickerResponse> {
     return unwrapAsync(stickersGet(
       this,
       request,

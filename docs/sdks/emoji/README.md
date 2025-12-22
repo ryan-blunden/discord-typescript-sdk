@@ -80,14 +80,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ListApplicationEmojisResponse](../../models/components/listapplicationemojisresponse.md)\>**
+**Promise\<[operations.ListApplicationEmojisResponse](../../models/operations/listapplicationemojisresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createApplicationEmoji
 
@@ -161,14 +162,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
+**Promise\<[operations.CreateApplicationEmojiResponse](../../models/operations/createapplicationemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getApplicationEmoji
 
@@ -236,14 +238,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
+**Promise\<[operations.GetApplicationEmojiResponse](../../models/operations/getapplicationemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteApplicationEmoji
 
@@ -259,12 +262,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.emoji.deleteApplicationEmoji({
+  const result = await discord.emoji.deleteApplicationEmoji({
     applicationId: "<value>",
     emojiId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -291,7 +294,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("emojiDeleteApplicationEmoji failed:", res.error);
   }
@@ -311,14 +314,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteApplicationEmojiResponse](../../models/operations/deleteapplicationemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateApplicationEmoji
 
@@ -388,14 +392,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
+**Promise\<[operations.UpdateApplicationEmojiResponse](../../models/operations/updateapplicationemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listGuildEmojis
 
@@ -461,14 +466,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildEmojisResponse](../../models/operations/listguildemojisresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createGuildEmoji
 
@@ -542,14 +548,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
+**Promise\<[operations.CreateGuildEmojiResponse](../../models/operations/createguildemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGuildEmoji
 
@@ -617,14 +624,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
+**Promise\<[operations.GetGuildEmojiResponse](../../models/operations/getguildemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteGuildEmoji
 
@@ -640,12 +648,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.emoji.deleteGuildEmoji({
+  const result = await discord.emoji.deleteGuildEmoji({
     guildId: "<value>",
     emojiId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -672,7 +680,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("emojiDeleteGuildEmoji failed:", res.error);
   }
@@ -692,14 +700,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildEmojiResponse](../../models/operations/deleteguildemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateGuildEmoji
 
@@ -769,11 +778,12 @@ run();
 
 ### Response
 
-**Promise\<[components.EmojiResponse](../../models/components/emojiresponse.md)\>**
+**Promise\<[operations.UpdateGuildEmojiResponse](../../models/operations/updateguildemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

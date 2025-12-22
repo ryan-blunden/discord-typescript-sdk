@@ -18,6 +18,16 @@ export type ListGuildInvitesResponseBody =
   | components.FriendInviteResponse
   | components.GuildInviteResponse;
 
+export type ListGuildInvitesResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<
+    | components.GroupDMInviteResponse
+    | components.FriendInviteResponse
+    | components.GuildInviteResponse
+    | null
+  >;
+};
+
 /** @internal */
 export const ListGuildInvitesRequest$inboundSchema: z.ZodType<
   ListGuildInvitesRequest,
@@ -138,5 +148,93 @@ export function listGuildInvitesResponseBodyFromJSON(
     jsonString,
     (x) => ListGuildInvitesResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListGuildInvitesResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListGuildInvitesResponse$inboundSchema: z.ZodType<
+  ListGuildInvitesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(
+    z.nullable(
+      z.union([
+        components.GroupDMInviteResponse$inboundSchema,
+        components.FriendInviteResponse$inboundSchema,
+        components.GuildInviteResponse$inboundSchema,
+      ]),
+    ),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListGuildInvitesResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<
+    | components.GroupDMInviteResponse$Outbound
+    | components.FriendInviteResponse$Outbound
+    | components.GuildInviteResponse$Outbound
+    | null
+  >;
+};
+
+/** @internal */
+export const ListGuildInvitesResponse$outboundSchema: z.ZodType<
+  ListGuildInvitesResponse$Outbound,
+  z.ZodTypeDef,
+  ListGuildInvitesResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(
+    z.nullable(
+      z.union([
+        components.GroupDMInviteResponse$outboundSchema,
+        components.FriendInviteResponse$outboundSchema,
+        components.GuildInviteResponse$outboundSchema,
+      ]),
+    ),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListGuildInvitesResponse$ {
+  /** @deprecated use `ListGuildInvitesResponse$inboundSchema` instead. */
+  export const inboundSchema = ListGuildInvitesResponse$inboundSchema;
+  /** @deprecated use `ListGuildInvitesResponse$outboundSchema` instead. */
+  export const outboundSchema = ListGuildInvitesResponse$outboundSchema;
+  /** @deprecated use `ListGuildInvitesResponse$Outbound` instead. */
+  export type Outbound = ListGuildInvitesResponse$Outbound;
+}
+
+export function listGuildInvitesResponseToJSON(
+  listGuildInvitesResponse: ListGuildInvitesResponse,
+): string {
+  return JSON.stringify(
+    ListGuildInvitesResponse$outboundSchema.parse(listGuildInvitesResponse),
+  );
+}
+
+export function listGuildInvitesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildInvitesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildInvitesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildInvitesResponse' from JSON`,
   );
 }

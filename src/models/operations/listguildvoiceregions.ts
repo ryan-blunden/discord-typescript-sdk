@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListGuildVoiceRegionsRequest = {
   guildId: string;
+};
+
+export type ListGuildVoiceRegionsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.VoiceRegionResponse>;
 };
 
 /** @internal */
@@ -73,5 +79,74 @@ export function listGuildVoiceRegionsRequestFromJSON(
     jsonString,
     (x) => ListGuildVoiceRegionsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListGuildVoiceRegionsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListGuildVoiceRegionsResponse$inboundSchema: z.ZodType<
+  ListGuildVoiceRegionsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(components.VoiceRegionResponse$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListGuildVoiceRegionsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<components.VoiceRegionResponse$Outbound>;
+};
+
+/** @internal */
+export const ListGuildVoiceRegionsResponse$outboundSchema: z.ZodType<
+  ListGuildVoiceRegionsResponse$Outbound,
+  z.ZodTypeDef,
+  ListGuildVoiceRegionsResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(components.VoiceRegionResponse$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListGuildVoiceRegionsResponse$ {
+  /** @deprecated use `ListGuildVoiceRegionsResponse$inboundSchema` instead. */
+  export const inboundSchema = ListGuildVoiceRegionsResponse$inboundSchema;
+  /** @deprecated use `ListGuildVoiceRegionsResponse$outboundSchema` instead. */
+  export const outboundSchema = ListGuildVoiceRegionsResponse$outboundSchema;
+  /** @deprecated use `ListGuildVoiceRegionsResponse$Outbound` instead. */
+  export type Outbound = ListGuildVoiceRegionsResponse$Outbound;
+}
+
+export function listGuildVoiceRegionsResponseToJSON(
+  listGuildVoiceRegionsResponse: ListGuildVoiceRegionsResponse,
+): string {
+  return JSON.stringify(
+    ListGuildVoiceRegionsResponse$outboundSchema.parse(
+      listGuildVoiceRegionsResponse,
+    ),
+  );
+}
+
+export function listGuildVoiceRegionsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildVoiceRegionsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListGuildVoiceRegionsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildVoiceRegionsResponse' from JSON`,
   );
 }

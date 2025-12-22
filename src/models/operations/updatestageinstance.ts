@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateStageInstanceRequestBody = {
@@ -16,6 +17,11 @@ export type UpdateStageInstanceRequestBody = {
 export type UpdateStageInstanceRequest = {
   channelId: string;
   requestBody: UpdateStageInstanceRequestBody;
+};
+
+export type UpdateStageInstanceResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.StageInstanceResponse;
 };
 
 /** @internal */
@@ -149,5 +155,74 @@ export function updateStageInstanceRequestFromJSON(
     jsonString,
     (x) => UpdateStageInstanceRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateStageInstanceRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateStageInstanceResponse$inboundSchema: z.ZodType<
+  UpdateStageInstanceResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.StageInstanceResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateStageInstanceResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.StageInstanceResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateStageInstanceResponse$outboundSchema: z.ZodType<
+  UpdateStageInstanceResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateStageInstanceResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.StageInstanceResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateStageInstanceResponse$ {
+  /** @deprecated use `UpdateStageInstanceResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateStageInstanceResponse$inboundSchema;
+  /** @deprecated use `UpdateStageInstanceResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateStageInstanceResponse$outboundSchema;
+  /** @deprecated use `UpdateStageInstanceResponse$Outbound` instead. */
+  export type Outbound = UpdateStageInstanceResponse$Outbound;
+}
+
+export function updateStageInstanceResponseToJSON(
+  updateStageInstanceResponse: UpdateStageInstanceResponse,
+): string {
+  return JSON.stringify(
+    UpdateStageInstanceResponse$outboundSchema.parse(
+      updateStageInstanceResponse,
+    ),
+  );
+}
+
+export function updateStageInstanceResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateStageInstanceResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateStageInstanceResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateStageInstanceResponse' from JSON`,
   );
 }

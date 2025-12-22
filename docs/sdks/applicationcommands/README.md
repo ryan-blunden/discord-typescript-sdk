@@ -86,14 +86,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListApplicationCommandsResponse](../../models/operations/listapplicationcommandsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## bulkSet
 
@@ -162,14 +163,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse[]](../../models/.md)\>**
+**Promise\<[operations.BulkSetApplicationCommandsResponse](../../models/operations/bulksetapplicationcommandsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## create
 
@@ -242,14 +244,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
+**Promise\<[operations.CreateApplicationCommandResponse](../../models/operations/createapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -318,14 +321,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
+**Promise\<[operations.GetApplicationCommandResponse](../../models/operations/getapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -339,14 +343,14 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  await discord.applicationCommands.delete({
+  const result = await discord.applicationCommands.delete({
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
     commandId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -373,7 +377,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("applicationCommandsDelete failed:", res.error);
   }
@@ -394,14 +398,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteApplicationCommandResponse](../../models/operations/deleteapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -472,14 +477,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
+**Promise\<[operations.UpdateApplicationCommandResponse](../../models/operations/updateapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listGuild
 
@@ -548,14 +554,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildApplicationCommandsResponse](../../models/operations/listguildapplicationcommandsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## bulkSetGuild
 
@@ -626,14 +633,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse[]](../../models/.md)\>**
+**Promise\<[operations.BulkSetGuildApplicationCommandsResponse](../../models/operations/bulksetguildapplicationcommandsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createGuild
 
@@ -708,14 +716,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
+**Promise\<[operations.CreateGuildApplicationCommandResponse](../../models/operations/createguildapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listGuildPermissions
 
@@ -784,14 +793,15 @@ run();
 
 ### Response
 
-**Promise\<[components.CommandPermissionsResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildApplicationCommandPermissionsResponse](../../models/operations/listguildapplicationcommandpermissionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGuild
 
@@ -862,14 +872,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
+**Promise\<[operations.GetGuildApplicationCommandResponse](../../models/operations/getguildapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteGuild
 
@@ -883,7 +894,7 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  await discord.applicationCommands.deleteGuild({
+  const result = await discord.applicationCommands.deleteGuild({
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     applicationId: "<value>",
@@ -891,7 +902,7 @@ async function run() {
     commandId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -919,7 +930,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("applicationCommandsDeleteGuild failed:", res.error);
   }
@@ -940,14 +951,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildApplicationCommandResponse](../../models/operations/deleteguildapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateGuild
 
@@ -1020,14 +1032,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationCommandResponse](../../models/components/applicationcommandresponse.md)\>**
+**Promise\<[operations.UpdateGuildApplicationCommandResponse](../../models/operations/updateguildapplicationcommandresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGuildPermissions
 
@@ -1098,14 +1111,15 @@ run();
 
 ### Response
 
-**Promise\<[components.CommandPermissionsResponse](../../models/components/commandpermissionsresponse.md)\>**
+**Promise\<[operations.GetGuildApplicationCommandPermissionsResponse](../../models/operations/getguildapplicationcommandpermissionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## setGuildPermissions
 
@@ -1178,11 +1192,12 @@ run();
 
 ### Response
 
-**Promise\<[components.CommandPermissionsResponse](../../models/components/commandpermissionsresponse.md)\>**
+**Promise\<[operations.SetGuildApplicationCommandPermissionsResponse](../../models/operations/setguildapplicationcommandpermissionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

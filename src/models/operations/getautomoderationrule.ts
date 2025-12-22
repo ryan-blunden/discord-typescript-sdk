@@ -24,6 +24,16 @@ export type GetAutoModerationRuleResponseBody =
   | components.MentionSpamRuleResponse
   | components.SpamLinkRuleResponse;
 
+export type GetAutoModerationRuleResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.DefaultKeywordRuleResponse
+    | components.KeywordRuleResponse
+    | components.MLSpamRuleResponse
+    | components.MentionSpamRuleResponse
+    | components.SpamLinkRuleResponse;
+};
+
 /** @internal */
 export const GetAutoModerationRuleRequest$inboundSchema: z.ZodType<
   GetAutoModerationRuleRequest,
@@ -158,5 +168,91 @@ export function getAutoModerationRuleResponseBodyFromJSON(
     jsonString,
     (x) => GetAutoModerationRuleResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetAutoModerationRuleResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAutoModerationRuleResponse$inboundSchema: z.ZodType<
+  GetAutoModerationRuleResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.DefaultKeywordRuleResponse$inboundSchema,
+    components.KeywordRuleResponse$inboundSchema,
+    components.MLSpamRuleResponse$inboundSchema,
+    components.MentionSpamRuleResponse$inboundSchema,
+    components.SpamLinkRuleResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetAutoModerationRuleResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.DefaultKeywordRuleResponse$Outbound
+    | components.KeywordRuleResponse$Outbound
+    | components.MLSpamRuleResponse$Outbound
+    | components.MentionSpamRuleResponse$Outbound
+    | components.SpamLinkRuleResponse$Outbound;
+};
+
+/** @internal */
+export const GetAutoModerationRuleResponse$outboundSchema: z.ZodType<
+  GetAutoModerationRuleResponse$Outbound,
+  z.ZodTypeDef,
+  GetAutoModerationRuleResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.DefaultKeywordRuleResponse$outboundSchema,
+    components.KeywordRuleResponse$outboundSchema,
+    components.MLSpamRuleResponse$outboundSchema,
+    components.MentionSpamRuleResponse$outboundSchema,
+    components.SpamLinkRuleResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAutoModerationRuleResponse$ {
+  /** @deprecated use `GetAutoModerationRuleResponse$inboundSchema` instead. */
+  export const inboundSchema = GetAutoModerationRuleResponse$inboundSchema;
+  /** @deprecated use `GetAutoModerationRuleResponse$outboundSchema` instead. */
+  export const outboundSchema = GetAutoModerationRuleResponse$outboundSchema;
+  /** @deprecated use `GetAutoModerationRuleResponse$Outbound` instead. */
+  export type Outbound = GetAutoModerationRuleResponse$Outbound;
+}
+
+export function getAutoModerationRuleResponseToJSON(
+  getAutoModerationRuleResponse: GetAutoModerationRuleResponse,
+): string {
+  return JSON.stringify(
+    GetAutoModerationRuleResponse$outboundSchema.parse(
+      getAutoModerationRuleResponse,
+    ),
+  );
+}
+
+export function getAutoModerationRuleResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAutoModerationRuleResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAutoModerationRuleResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAutoModerationRuleResponse' from JSON`,
   );
 }

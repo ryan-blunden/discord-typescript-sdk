@@ -23,7 +23,6 @@ let value: GuildPatchRequestPartial = {};
 | `afkTimeout`                  | *number*                      | :heavy_minus_sign:            | N/A                           |
 | `afkChannelId`                | *string*                      | :heavy_minus_sign:            | N/A                           |
 | `systemChannelId`             | *string*                      | :heavy_minus_sign:            | N/A                           |
-| `ownerId`                     | *string*                      | :heavy_minus_sign:            | N/A                           |
 | `splash`                      | *string*                      | :heavy_minus_sign:            | N/A                           |
 | `banner`                      | *string*                      | :heavy_minus_sign:            | N/A                           |
 | `systemChannelFlags`          | *number*                      | :heavy_minus_sign:            | N/A                           |

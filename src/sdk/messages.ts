@@ -20,7 +20,6 @@ import { messagesUpdateForm } from "../funcs/messagesUpdateForm.js";
 import { messagesUpdateJson } from "../funcs/messagesUpdateJson.js";
 import { messagesUpdateMultipart } from "../funcs/messagesUpdateMultipart.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -31,7 +30,7 @@ export class Messages extends ClientSDK {
   async list(
     request: operations.ListMessagesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.MessageResponse>> {
+  ): Promise<operations.ListMessagesResponse> {
     return unwrapAsync(messagesList(
       this,
       request,
@@ -45,7 +44,7 @@ export class Messages extends ClientSDK {
   async createJson(
     request: operations.CreateMessageJsonRequest,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.CreateMessageJsonResponse> {
     return unwrapAsync(messagesCreateJson(
       this,
       request,
@@ -59,7 +58,7 @@ export class Messages extends ClientSDK {
   async createForm(
     request: operations.CreateMessageFormRequest,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.CreateMessageFormResponse> {
     return unwrapAsync(messagesCreateForm(
       this,
       request,
@@ -73,7 +72,7 @@ export class Messages extends ClientSDK {
   async createMultipart(
     request: operations.CreateMessageMultipartRequest,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.CreateMessageMultipartResponse> {
     return unwrapAsync(messagesCreateMultipart(
       this,
       request,
@@ -87,7 +86,7 @@ export class Messages extends ClientSDK {
   async bulkDelete(
     request: operations.BulkDeleteMessagesRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.BulkDeleteMessagesResponse | undefined> {
     return unwrapAsync(messagesBulkDelete(
       this,
       request,
@@ -101,7 +100,7 @@ export class Messages extends ClientSDK {
   async get(
     request: operations.GetMessageRequest,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.GetMessageResponse> {
     return unwrapAsync(messagesGet(
       this,
       request,
@@ -115,7 +114,7 @@ export class Messages extends ClientSDK {
   async delete(
     request: operations.DeleteMessageRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteMessageResponse | undefined> {
     return unwrapAsync(messagesDelete(
       this,
       request,
@@ -129,7 +128,7 @@ export class Messages extends ClientSDK {
   async updateJson(
     request: operations.UpdateMessageJsonRequest,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.UpdateMessageJsonResponse> {
     return unwrapAsync(messagesUpdateJson(
       this,
       request,
@@ -143,7 +142,7 @@ export class Messages extends ClientSDK {
   async updateForm(
     request: operations.UpdateMessageFormRequest,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.UpdateMessageFormResponse> {
     return unwrapAsync(messagesUpdateForm(
       this,
       request,
@@ -157,7 +156,7 @@ export class Messages extends ClientSDK {
   async updateMultipart(
     request: operations.UpdateMessageMultipartRequest,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.UpdateMessageMultipartResponse> {
     return unwrapAsync(messagesUpdateMultipart(
       this,
       request,
@@ -171,7 +170,7 @@ export class Messages extends ClientSDK {
   async crosspost(
     request: operations.CrosspostMessageRequest,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.CrosspostMessageResponse> {
     return unwrapAsync(messagesCrosspost(
       this,
       request,
@@ -185,7 +184,7 @@ export class Messages extends ClientSDK {
   async deleteAllReactions(
     request: operations.DeleteAllMessageReactionsRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteAllMessageReactionsResponse | undefined> {
     return unwrapAsync(messagesDeleteAllReactions(
       this,
       request,
@@ -199,7 +198,7 @@ export class Messages extends ClientSDK {
   async listReactionsByEmoji(
     request: operations.ListMessageReactionsByEmojiRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.UserResponse>> {
+  ): Promise<operations.ListMessageReactionsByEmojiResponse> {
     return unwrapAsync(messagesListReactionsByEmoji(
       this,
       request,
@@ -213,7 +212,7 @@ export class Messages extends ClientSDK {
   async deleteAllReactionsForEmoji(
     request: operations.DeleteAllMessageReactionsByEmojiRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteAllMessageReactionsByEmojiResponse | undefined> {
     return unwrapAsync(messagesDeleteAllReactionsForEmoji(
       this,
       request,
@@ -227,7 +226,7 @@ export class Messages extends ClientSDK {
   async createReaction(
     request: operations.AddMyMessageReactionRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.AddMyMessageReactionResponse | undefined> {
     return unwrapAsync(messagesCreateReaction(
       this,
       request,
@@ -241,7 +240,7 @@ export class Messages extends ClientSDK {
   async deleteOwnReaction(
     request: operations.DeleteMyMessageReactionRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteMyMessageReactionResponse | undefined> {
     return unwrapAsync(messagesDeleteOwnReaction(
       this,
       request,
@@ -255,7 +254,7 @@ export class Messages extends ClientSDK {
   async deleteUserReaction(
     request: operations.DeleteUserMessageReactionRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteUserMessageReactionResponse | undefined> {
     return unwrapAsync(messagesDeleteUserReaction(
       this,
       request,

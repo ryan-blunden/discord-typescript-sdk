@@ -21,6 +21,11 @@ export type ExecuteSlackCompatibleWebhookRequest = {
   slackWebhook: components.SlackWebhook;
 };
 
+export type ExecuteSlackCompatibleWebhookResponse = {
+  headers: { [k: string]: Array<string> };
+  result: string;
+};
+
 /** @internal */
 export const ExecuteSlackCompatibleWebhookSecurity$inboundSchema: z.ZodType<
   ExecuteSlackCompatibleWebhookSecurity,
@@ -170,5 +175,77 @@ export function executeSlackCompatibleWebhookRequestFromJSON(
     (x) =>
       ExecuteSlackCompatibleWebhookRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ExecuteSlackCompatibleWebhookRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ExecuteSlackCompatibleWebhookResponse$inboundSchema: z.ZodType<
+  ExecuteSlackCompatibleWebhookResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ExecuteSlackCompatibleWebhookResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: string;
+};
+
+/** @internal */
+export const ExecuteSlackCompatibleWebhookResponse$outboundSchema: z.ZodType<
+  ExecuteSlackCompatibleWebhookResponse$Outbound,
+  z.ZodTypeDef,
+  ExecuteSlackCompatibleWebhookResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ExecuteSlackCompatibleWebhookResponse$ {
+  /** @deprecated use `ExecuteSlackCompatibleWebhookResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    ExecuteSlackCompatibleWebhookResponse$inboundSchema;
+  /** @deprecated use `ExecuteSlackCompatibleWebhookResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    ExecuteSlackCompatibleWebhookResponse$outboundSchema;
+  /** @deprecated use `ExecuteSlackCompatibleWebhookResponse$Outbound` instead. */
+  export type Outbound = ExecuteSlackCompatibleWebhookResponse$Outbound;
+}
+
+export function executeSlackCompatibleWebhookResponseToJSON(
+  executeSlackCompatibleWebhookResponse: ExecuteSlackCompatibleWebhookResponse,
+): string {
+  return JSON.stringify(
+    ExecuteSlackCompatibleWebhookResponse$outboundSchema.parse(
+      executeSlackCompatibleWebhookResponse,
+    ),
+  );
+}
+
+export function executeSlackCompatibleWebhookResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ExecuteSlackCompatibleWebhookResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ExecuteSlackCompatibleWebhookResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ExecuteSlackCompatibleWebhookResponse' from JSON`,
   );
 }

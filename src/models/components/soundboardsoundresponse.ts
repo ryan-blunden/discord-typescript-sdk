@@ -20,9 +20,9 @@ export type SoundboardSoundResponse = {
   volume: number;
   emojiId?: string | null | undefined;
   emojiName?: string | null | undefined;
-  guildId?: string | null | undefined;
+  guildId?: string | undefined;
   available: boolean;
-  user?: UserResponse | null | undefined;
+  user?: UserResponse | undefined;
 };
 
 /** @internal */
@@ -36,9 +36,9 @@ export const SoundboardSoundResponse$inboundSchema: z.ZodType<
   volume: z.number(),
   emoji_id: z.nullable(z.string()).optional(),
   emoji_name: z.nullable(z.string()).optional(),
-  guild_id: z.nullable(z.string()).optional(),
+  guild_id: z.string().optional(),
   available: z.boolean(),
-  user: z.nullable(UserResponse$inboundSchema).optional(),
+  user: UserResponse$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "sound_id": "soundId",
@@ -55,9 +55,9 @@ export type SoundboardSoundResponse$Outbound = {
   volume: number;
   emoji_id?: string | null | undefined;
   emoji_name?: string | null | undefined;
-  guild_id?: string | null | undefined;
+  guild_id?: string | undefined;
   available: boolean;
-  user?: UserResponse$Outbound | null | undefined;
+  user?: UserResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -71,9 +71,9 @@ export const SoundboardSoundResponse$outboundSchema: z.ZodType<
   volume: z.number(),
   emojiId: z.nullable(z.string()).optional(),
   emojiName: z.nullable(z.string()).optional(),
-  guildId: z.nullable(z.string()).optional(),
+  guildId: z.string().optional(),
   available: z.boolean(),
-  user: z.nullable(UserResponse$outboundSchema).optional(),
+  user: UserResponse$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     soundId: "sound_id",

@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListMyGuildsSecurity = {
@@ -17,6 +18,11 @@ export type ListMyGuildsRequest = {
   after?: string | undefined;
   limit?: number | undefined;
   withCounts?: boolean | undefined;
+};
+
+export type ListMyGuildsResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.MyGuildResponse>;
 };
 
 /** @internal */
@@ -149,5 +155,72 @@ export function listMyGuildsRequestFromJSON(
     jsonString,
     (x) => ListMyGuildsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListMyGuildsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListMyGuildsResponse$inboundSchema: z.ZodType<
+  ListMyGuildsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(components.MyGuildResponse$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListMyGuildsResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<components.MyGuildResponse$Outbound>;
+};
+
+/** @internal */
+export const ListMyGuildsResponse$outboundSchema: z.ZodType<
+  ListMyGuildsResponse$Outbound,
+  z.ZodTypeDef,
+  ListMyGuildsResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(components.MyGuildResponse$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListMyGuildsResponse$ {
+  /** @deprecated use `ListMyGuildsResponse$inboundSchema` instead. */
+  export const inboundSchema = ListMyGuildsResponse$inboundSchema;
+  /** @deprecated use `ListMyGuildsResponse$outboundSchema` instead. */
+  export const outboundSchema = ListMyGuildsResponse$outboundSchema;
+  /** @deprecated use `ListMyGuildsResponse$Outbound` instead. */
+  export type Outbound = ListMyGuildsResponse$Outbound;
+}
+
+export function listMyGuildsResponseToJSON(
+  listMyGuildsResponse: ListMyGuildsResponse,
+): string {
+  return JSON.stringify(
+    ListMyGuildsResponse$outboundSchema.parse(listMyGuildsResponse),
+  );
+}
+
+export function listMyGuildsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListMyGuildsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListMyGuildsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListMyGuildsResponse' from JSON`,
   );
 }

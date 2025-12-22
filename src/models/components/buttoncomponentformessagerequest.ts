@@ -8,21 +8,22 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  ComponentEmojiForMessageRequest,
-  ComponentEmojiForMessageRequest$inboundSchema,
-  ComponentEmojiForMessageRequest$Outbound,
-  ComponentEmojiForMessageRequest$outboundSchema,
-} from "./componentemojiformessagerequest.js";
+  ComponentEmojiForRequest,
+  ComponentEmojiForRequest$inboundSchema,
+  ComponentEmojiForRequest$Outbound,
+  ComponentEmojiForRequest$outboundSchema,
+} from "./componentemojiforrequest.js";
 
 export type ButtonComponentForMessageRequest = {
   type?: 1 | undefined;
+  id?: number | null | undefined;
   customId?: string | null | undefined;
   style?: 1 | undefined;
   label?: string | null | undefined;
   disabled?: boolean | null | undefined;
   url?: string | null | undefined;
   skuId?: string | null | undefined;
-  emoji?: ComponentEmojiForMessageRequest | null | undefined;
+  emoji?: ComponentEmojiForRequest | null | undefined;
 };
 
 /** @internal */
@@ -32,13 +33,14 @@ export const ButtonComponentForMessageRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal(1).optional(),
+  id: z.nullable(z.number().int()).optional(),
   custom_id: z.nullable(z.string()).optional(),
   style: z.literal(1).optional(),
   label: z.nullable(z.string()).optional(),
   disabled: z.nullable(z.boolean()).optional(),
   url: z.nullable(z.string()).optional(),
   sku_id: z.nullable(z.string()).optional(),
-  emoji: z.nullable(ComponentEmojiForMessageRequest$inboundSchema).optional(),
+  emoji: z.nullable(ComponentEmojiForRequest$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "custom_id": "customId",
@@ -49,13 +51,14 @@ export const ButtonComponentForMessageRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ButtonComponentForMessageRequest$Outbound = {
   type: 1;
+  id?: number | null | undefined;
   custom_id?: string | null | undefined;
   style: 1;
   label?: string | null | undefined;
   disabled?: boolean | null | undefined;
   url?: string | null | undefined;
   sku_id?: string | null | undefined;
-  emoji?: ComponentEmojiForMessageRequest$Outbound | null | undefined;
+  emoji?: ComponentEmojiForRequest$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -65,13 +68,14 @@ export const ButtonComponentForMessageRequest$outboundSchema: z.ZodType<
   ButtonComponentForMessageRequest
 > = z.object({
   type: z.literal(1).default(1 as const),
+  id: z.nullable(z.number().int()).optional(),
   customId: z.nullable(z.string()).optional(),
   style: z.literal(1).default(1 as const),
   label: z.nullable(z.string()).optional(),
   disabled: z.nullable(z.boolean()).optional(),
   url: z.nullable(z.string()).optional(),
   skuId: z.nullable(z.string()).optional(),
-  emoji: z.nullable(ComponentEmojiForMessageRequest$outboundSchema).optional(),
+  emoji: z.nullable(ComponentEmojiForRequest$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     customId: "custom_id",

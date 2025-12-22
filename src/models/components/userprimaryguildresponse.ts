@@ -3,28 +3,59 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type UserPrimaryGuildResponse = {};
+export type UserPrimaryGuildResponse = {
+  identityGuildId?: string | null | undefined;
+  identityEnabled?: boolean | null | undefined;
+  tag?: string | null | undefined;
+  badge?: string | null | undefined;
+};
 
 /** @internal */
 export const UserPrimaryGuildResponse$inboundSchema: z.ZodType<
   UserPrimaryGuildResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = z.object({
+  identity_guild_id: z.nullable(z.string()).optional(),
+  identity_enabled: z.nullable(z.boolean()).optional(),
+  tag: z.nullable(z.string()).optional(),
+  badge: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "identity_guild_id": "identityGuildId",
+    "identity_enabled": "identityEnabled",
+  });
+});
 
 /** @internal */
-export type UserPrimaryGuildResponse$Outbound = {};
+export type UserPrimaryGuildResponse$Outbound = {
+  identity_guild_id?: string | null | undefined;
+  identity_enabled?: boolean | null | undefined;
+  tag?: string | null | undefined;
+  badge?: string | null | undefined;
+};
 
 /** @internal */
 export const UserPrimaryGuildResponse$outboundSchema: z.ZodType<
   UserPrimaryGuildResponse$Outbound,
   z.ZodTypeDef,
   UserPrimaryGuildResponse
-> = z.object({});
+> = z.object({
+  identityGuildId: z.nullable(z.string()).optional(),
+  identityEnabled: z.nullable(z.boolean()).optional(),
+  tag: z.nullable(z.string()).optional(),
+  badge: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    identityGuildId: "identity_guild_id",
+    identityEnabled: "identity_enabled",
+  });
+});
 
 /**
  * @internal

@@ -6,99 +6,19 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type AddGuildMemberRequestBody = {
-  nick?: string | null | undefined;
-  roles?: Array<string | null> | null | undefined;
-  mute?: boolean | null | undefined;
-  deaf?: boolean | null | undefined;
-  accessToken: string;
-  flags?: number | null | undefined;
-};
 
 export type AddGuildMemberRequest = {
   guildId: string;
   userId: string;
-  requestBody: AddGuildMemberRequestBody;
+  botAddGuildMemberRequest: components.BotAddGuildMemberRequest;
 };
 
-/** @internal */
-export const AddGuildMemberRequestBody$inboundSchema: z.ZodType<
-  AddGuildMemberRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  nick: z.nullable(z.string()).optional(),
-  roles: z.nullable(z.array(z.nullable(z.string()))).optional(),
-  mute: z.nullable(z.boolean()).optional(),
-  deaf: z.nullable(z.boolean()).optional(),
-  access_token: z.string(),
-  flags: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "access_token": "accessToken",
-  });
-});
-
-/** @internal */
-export type AddGuildMemberRequestBody$Outbound = {
-  nick?: string | null | undefined;
-  roles?: Array<string | null> | null | undefined;
-  mute?: boolean | null | undefined;
-  deaf?: boolean | null | undefined;
-  access_token: string;
-  flags?: number | null | undefined;
+export type AddGuildMemberResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildMemberResponse;
 };
-
-/** @internal */
-export const AddGuildMemberRequestBody$outboundSchema: z.ZodType<
-  AddGuildMemberRequestBody$Outbound,
-  z.ZodTypeDef,
-  AddGuildMemberRequestBody
-> = z.object({
-  nick: z.nullable(z.string()).optional(),
-  roles: z.nullable(z.array(z.nullable(z.string()))).optional(),
-  mute: z.nullable(z.boolean()).optional(),
-  deaf: z.nullable(z.boolean()).optional(),
-  accessToken: z.string(),
-  flags: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accessToken: "access_token",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AddGuildMemberRequestBody$ {
-  /** @deprecated use `AddGuildMemberRequestBody$inboundSchema` instead. */
-  export const inboundSchema = AddGuildMemberRequestBody$inboundSchema;
-  /** @deprecated use `AddGuildMemberRequestBody$outboundSchema` instead. */
-  export const outboundSchema = AddGuildMemberRequestBody$outboundSchema;
-  /** @deprecated use `AddGuildMemberRequestBody$Outbound` instead. */
-  export type Outbound = AddGuildMemberRequestBody$Outbound;
-}
-
-export function addGuildMemberRequestBodyToJSON(
-  addGuildMemberRequestBody: AddGuildMemberRequestBody,
-): string {
-  return JSON.stringify(
-    AddGuildMemberRequestBody$outboundSchema.parse(addGuildMemberRequestBody),
-  );
-}
-
-export function addGuildMemberRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<AddGuildMemberRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AddGuildMemberRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AddGuildMemberRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const AddGuildMemberRequest$inboundSchema: z.ZodType<
@@ -108,12 +28,12 @@ export const AddGuildMemberRequest$inboundSchema: z.ZodType<
 > = z.object({
   guild_id: z.string(),
   user_id: z.string(),
-  RequestBody: z.lazy(() => AddGuildMemberRequestBody$inboundSchema),
+  BotAddGuildMemberRequest: components.BotAddGuildMemberRequest$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",
     "user_id": "userId",
-    "RequestBody": "requestBody",
+    "BotAddGuildMemberRequest": "botAddGuildMemberRequest",
   });
 });
 
@@ -121,7 +41,7 @@ export const AddGuildMemberRequest$inboundSchema: z.ZodType<
 export type AddGuildMemberRequest$Outbound = {
   guild_id: string;
   user_id: string;
-  RequestBody: AddGuildMemberRequestBody$Outbound;
+  BotAddGuildMemberRequest: components.BotAddGuildMemberRequest$Outbound;
 };
 
 /** @internal */
@@ -132,12 +52,12 @@ export const AddGuildMemberRequest$outboundSchema: z.ZodType<
 > = z.object({
   guildId: z.string(),
   userId: z.string(),
-  requestBody: z.lazy(() => AddGuildMemberRequestBody$outboundSchema),
+  botAddGuildMemberRequest: components.BotAddGuildMemberRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     guildId: "guild_id",
     userId: "user_id",
-    requestBody: "RequestBody",
+    botAddGuildMemberRequest: "BotAddGuildMemberRequest",
   });
 });
 
@@ -169,5 +89,72 @@ export function addGuildMemberRequestFromJSON(
     jsonString,
     (x) => AddGuildMemberRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'AddGuildMemberRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const AddGuildMemberResponse$inboundSchema: z.ZodType<
+  AddGuildMemberResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildMemberResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type AddGuildMemberResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildMemberResponse$Outbound;
+};
+
+/** @internal */
+export const AddGuildMemberResponse$outboundSchema: z.ZodType<
+  AddGuildMemberResponse$Outbound,
+  z.ZodTypeDef,
+  AddGuildMemberResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildMemberResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AddGuildMemberResponse$ {
+  /** @deprecated use `AddGuildMemberResponse$inboundSchema` instead. */
+  export const inboundSchema = AddGuildMemberResponse$inboundSchema;
+  /** @deprecated use `AddGuildMemberResponse$outboundSchema` instead. */
+  export const outboundSchema = AddGuildMemberResponse$outboundSchema;
+  /** @deprecated use `AddGuildMemberResponse$Outbound` instead. */
+  export type Outbound = AddGuildMemberResponse$Outbound;
+}
+
+export function addGuildMemberResponseToJSON(
+  addGuildMemberResponse: AddGuildMemberResponse,
+): string {
+  return JSON.stringify(
+    AddGuildMemberResponse$outboundSchema.parse(addGuildMemberResponse),
+  );
+}
+
+export function addGuildMemberResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<AddGuildMemberResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddGuildMemberResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddGuildMemberResponse' from JSON`,
   );
 }

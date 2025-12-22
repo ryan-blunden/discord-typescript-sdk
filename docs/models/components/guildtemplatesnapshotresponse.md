@@ -10,11 +10,11 @@ let value: GuildTemplateSnapshotResponse = {
   systemChannelFlags: 522019,
   roles: [
     {
-      id: 192696,
+      id: 260014,
       name: "<value>",
       permissions: "<value>",
-      color: 869107,
-      hoist: false,
+      color: 247266,
+      hoist: true,
       mentionable: false,
     },
   ],

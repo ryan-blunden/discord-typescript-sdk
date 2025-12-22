@@ -6,10 +6,16 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetStickerPackRequest = {
   packId: string;
+};
+
+export type GetStickerPackResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.StickerPackResponse;
 };
 
 /** @internal */
@@ -71,5 +77,72 @@ export function getStickerPackRequestFromJSON(
     jsonString,
     (x) => GetStickerPackRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetStickerPackRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetStickerPackResponse$inboundSchema: z.ZodType<
+  GetStickerPackResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.StickerPackResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetStickerPackResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.StickerPackResponse$Outbound;
+};
+
+/** @internal */
+export const GetStickerPackResponse$outboundSchema: z.ZodType<
+  GetStickerPackResponse$Outbound,
+  z.ZodTypeDef,
+  GetStickerPackResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.StickerPackResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetStickerPackResponse$ {
+  /** @deprecated use `GetStickerPackResponse$inboundSchema` instead. */
+  export const inboundSchema = GetStickerPackResponse$inboundSchema;
+  /** @deprecated use `GetStickerPackResponse$outboundSchema` instead. */
+  export const outboundSchema = GetStickerPackResponse$outboundSchema;
+  /** @deprecated use `GetStickerPackResponse$Outbound` instead. */
+  export type Outbound = GetStickerPackResponse$Outbound;
+}
+
+export function getStickerPackResponseToJSON(
+  getStickerPackResponse: GetStickerPackResponse,
+): string {
+  return JSON.stringify(
+    GetStickerPackResponse$outboundSchema.parse(getStickerPackResponse),
+  );
+}
+
+export function getStickerPackResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetStickerPackResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetStickerPackResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetStickerPackResponse' from JSON`,
   );
 }

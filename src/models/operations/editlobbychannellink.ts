@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EditLobbyChannelLinkSecurity = {
@@ -19,6 +20,11 @@ export type EditLobbyChannelLinkRequestBody = {
 export type EditLobbyChannelLinkRequest = {
   lobbyId: string;
   requestBody: EditLobbyChannelLinkRequestBody;
+};
+
+export type EditLobbyChannelLinkResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.LobbyResponse;
 };
 
 /** @internal */
@@ -215,5 +221,74 @@ export function editLobbyChannelLinkRequestFromJSON(
     jsonString,
     (x) => EditLobbyChannelLinkRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'EditLobbyChannelLinkRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const EditLobbyChannelLinkResponse$inboundSchema: z.ZodType<
+  EditLobbyChannelLinkResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.LobbyResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type EditLobbyChannelLinkResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.LobbyResponse$Outbound;
+};
+
+/** @internal */
+export const EditLobbyChannelLinkResponse$outboundSchema: z.ZodType<
+  EditLobbyChannelLinkResponse$Outbound,
+  z.ZodTypeDef,
+  EditLobbyChannelLinkResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.LobbyResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EditLobbyChannelLinkResponse$ {
+  /** @deprecated use `EditLobbyChannelLinkResponse$inboundSchema` instead. */
+  export const inboundSchema = EditLobbyChannelLinkResponse$inboundSchema;
+  /** @deprecated use `EditLobbyChannelLinkResponse$outboundSchema` instead. */
+  export const outboundSchema = EditLobbyChannelLinkResponse$outboundSchema;
+  /** @deprecated use `EditLobbyChannelLinkResponse$Outbound` instead. */
+  export type Outbound = EditLobbyChannelLinkResponse$Outbound;
+}
+
+export function editLobbyChannelLinkResponseToJSON(
+  editLobbyChannelLinkResponse: EditLobbyChannelLinkResponse,
+): string {
+  return JSON.stringify(
+    EditLobbyChannelLinkResponse$outboundSchema.parse(
+      editLobbyChannelLinkResponse,
+    ),
+  );
+}
+
+export function editLobbyChannelLinkResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<EditLobbyChannelLinkResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EditLobbyChannelLinkResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EditLobbyChannelLinkResponse' from JSON`,
   );
 }

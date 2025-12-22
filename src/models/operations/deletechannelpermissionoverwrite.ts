@@ -13,6 +13,10 @@ export type DeleteChannelPermissionOverwriteRequest = {
   overwriteId: string;
 };
 
+export type DeleteChannelPermissionOverwriteResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteChannelPermissionOverwriteRequest$inboundSchema: z.ZodType<
   DeleteChannelPermissionOverwriteRequest,
@@ -88,5 +92,78 @@ export function deleteChannelPermissionOverwriteRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'DeleteChannelPermissionOverwriteRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteChannelPermissionOverwriteResponse$inboundSchema: z.ZodType<
+  DeleteChannelPermissionOverwriteResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteChannelPermissionOverwriteResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteChannelPermissionOverwriteResponse$outboundSchema: z.ZodType<
+  DeleteChannelPermissionOverwriteResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteChannelPermissionOverwriteResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteChannelPermissionOverwriteResponse$ {
+  /** @deprecated use `DeleteChannelPermissionOverwriteResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteChannelPermissionOverwriteResponse$inboundSchema;
+  /** @deprecated use `DeleteChannelPermissionOverwriteResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteChannelPermissionOverwriteResponse$outboundSchema;
+  /** @deprecated use `DeleteChannelPermissionOverwriteResponse$Outbound` instead. */
+  export type Outbound = DeleteChannelPermissionOverwriteResponse$Outbound;
+}
+
+export function deleteChannelPermissionOverwriteResponseToJSON(
+  deleteChannelPermissionOverwriteResponse:
+    DeleteChannelPermissionOverwriteResponse,
+): string {
+  return JSON.stringify(
+    DeleteChannelPermissionOverwriteResponse$outboundSchema.parse(
+      deleteChannelPermissionOverwriteResponse,
+    ),
+  );
+}
+
+export function deleteChannelPermissionOverwriteResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteChannelPermissionOverwriteResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteChannelPermissionOverwriteResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeleteChannelPermissionOverwriteResponse' from JSON`,
   );
 }

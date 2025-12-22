@@ -19,7 +19,7 @@ export type ThreadMemberResponse = {
   userId: string;
   joinTimestamp: Date;
   flags: number;
-  member?: GuildMemberResponse | null | undefined;
+  member?: GuildMemberResponse | undefined;
 };
 
 /** @internal */
@@ -34,7 +34,7 @@ export const ThreadMemberResponse$inboundSchema: z.ZodType<
     new Date(v)
   ),
   flags: z.number().int(),
-  member: z.nullable(GuildMemberResponse$inboundSchema).optional(),
+  member: GuildMemberResponse$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "user_id": "userId",
@@ -48,7 +48,7 @@ export type ThreadMemberResponse$Outbound = {
   user_id: string;
   join_timestamp: string;
   flags: number;
-  member?: GuildMemberResponse$Outbound | null | undefined;
+  member?: GuildMemberResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -61,7 +61,7 @@ export const ThreadMemberResponse$outboundSchema: z.ZodType<
   userId: z.string(),
   joinTimestamp: z.date().transform(v => v.toISOString()),
   flags: z.number().int(),
-  member: z.nullable(GuildMemberResponse$outboundSchema).optional(),
+  member: GuildMemberResponse$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     userId: "user_id",

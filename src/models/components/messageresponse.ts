@@ -38,6 +38,12 @@ import {
   ContainerComponentResponse$outboundSchema,
 } from "./containercomponentresponse.js";
 import {
+  CustomClientThemeResponse,
+  CustomClientThemeResponse$inboundSchema,
+  CustomClientThemeResponse$Outbound,
+  CustomClientThemeResponse$outboundSchema,
+} from "./customclientthemeresponse.js";
+import {
   FileComponentResponse,
   FileComponentResponse$inboundSchema,
   FileComponentResponse$Outbound,
@@ -225,43 +231,37 @@ export type MessageResponse = {
     | ContainerComponentResponse
     | FileComponentResponse
   >;
-  resolved?: ResolvedObjectsResponse | null | undefined;
-  stickers?:
-    | Array<StandardStickerResponse | GuildStickerResponse>
-    | null
-    | undefined;
-  stickerItems?: Array<MessageStickerItemResponse> | null | undefined;
+  stickers?: Array<StandardStickerResponse | GuildStickerResponse> | undefined;
+  stickerItems?: Array<MessageStickerItemResponse> | undefined;
   id: string;
   channelId: string;
   author: UserResponse;
   pinned: boolean;
   mentionEveryone: boolean;
   tts: boolean;
-  call?: MessageCallResponse | null | undefined;
-  activity?: MessageActivityResponse | null | undefined;
-  application?: BasicApplicationResponse | null | undefined;
-  applicationId?: string | null | undefined;
-  interaction?: MessageInteractionResponse | null | undefined;
+  call?: MessageCallResponse | undefined;
+  activity?: MessageActivityResponse | undefined;
+  application?: BasicApplicationResponse | undefined;
+  applicationId?: string | undefined;
+  interaction?: MessageInteractionResponse | undefined;
   nonce?: number | string | null | undefined;
-  webhookId?: string | null | undefined;
-  messageReference?: MessageReferenceResponse | null | undefined;
-  thread?: ThreadResponse | null | undefined;
-  mentionChannels?:
-    | Array<MessageMentionChannelResponse | null>
-    | null
-    | undefined;
-  roleSubscriptionData?: MessageRoleSubscriptionDataResponse | null | undefined;
-  purchaseNotification?: PurchaseNotificationResponse | null | undefined;
-  position?: number | null | undefined;
-  poll?: PollResponse | null | undefined;
+  webhookId?: string | undefined;
+  messageReference?: MessageReferenceResponse | undefined;
+  thread?: ThreadResponse | undefined;
+  mentionChannels?: Array<MessageMentionChannelResponse | null> | undefined;
+  roleSubscriptionData?: MessageRoleSubscriptionDataResponse | undefined;
+  purchaseNotification?: PurchaseNotificationResponse | undefined;
+  position?: number | undefined;
+  resolved?: ResolvedObjectsResponse | undefined;
+  poll?: PollResponse | undefined;
+  sharedClientTheme?: CustomClientThemeResponse | null | undefined;
   interactionMetadata?:
     | MessageComponentInteractionMetadataResponse
     | ModalSubmitInteractionMetadataResponse
     | ApplicationCommandInteractionMetadataResponse
-    | null
     | undefined;
-  messageSnapshots?: Array<MessageSnapshotResponse> | null | undefined;
-  reactions?: Array<MessageReactionResponse> | null | undefined;
+  messageSnapshots?: Array<MessageSnapshotResponse> | undefined;
+  reactions?: Array<MessageReactionResponse> | undefined;
   referencedMessage?: BasicMessageResponse | null | undefined;
 };
 
@@ -516,54 +516,46 @@ export const MessageResponse$inboundSchema: z.ZodType<
       FileComponentResponse$inboundSchema,
     ]),
   ),
-  resolved: z.nullable(ResolvedObjectsResponse$inboundSchema).optional(),
-  stickers: z.nullable(
-    z.array(
-      z.union([
-        StandardStickerResponse$inboundSchema,
-        GuildStickerResponse$inboundSchema,
-      ]),
-    ),
+  stickers: z.array(
+    z.union([
+      StandardStickerResponse$inboundSchema,
+      GuildStickerResponse$inboundSchema,
+    ]),
   ).optional(),
-  sticker_items: z.nullable(z.array(MessageStickerItemResponse$inboundSchema))
-    .optional(),
+  sticker_items: z.array(MessageStickerItemResponse$inboundSchema).optional(),
   id: z.string(),
   channel_id: z.string(),
   author: UserResponse$inboundSchema,
   pinned: z.boolean(),
   mention_everyone: z.boolean(),
   tts: z.boolean(),
-  call: z.nullable(MessageCallResponse$inboundSchema).optional(),
-  activity: z.nullable(MessageActivityResponse$inboundSchema).optional(),
-  application: z.nullable(BasicApplicationResponse$inboundSchema).optional(),
-  application_id: z.nullable(z.string()).optional(),
-  interaction: z.nullable(MessageInteractionResponse$inboundSchema).optional(),
+  call: MessageCallResponse$inboundSchema.optional(),
+  activity: MessageActivityResponse$inboundSchema.optional(),
+  application: BasicApplicationResponse$inboundSchema.optional(),
+  application_id: z.string().optional(),
+  interaction: MessageInteractionResponse$inboundSchema.optional(),
   nonce: z.nullable(z.union([z.number().int(), z.string()])).optional(),
-  webhook_id: z.nullable(z.string()).optional(),
-  message_reference: z.nullable(MessageReferenceResponse$inboundSchema)
-    .optional(),
-  thread: z.nullable(ThreadResponse$inboundSchema).optional(),
-  mention_channels: z.nullable(
-    z.array(z.nullable(MessageMentionChannelResponse$inboundSchema)),
+  webhook_id: z.string().optional(),
+  message_reference: MessageReferenceResponse$inboundSchema.optional(),
+  thread: ThreadResponse$inboundSchema.optional(),
+  mention_channels: z.array(
+    z.nullable(MessageMentionChannelResponse$inboundSchema),
   ).optional(),
-  role_subscription_data: z.nullable(
-    MessageRoleSubscriptionDataResponse$inboundSchema,
-  ).optional(),
-  purchase_notification: z.nullable(PurchaseNotificationResponse$inboundSchema)
+  role_subscription_data: MessageRoleSubscriptionDataResponse$inboundSchema
     .optional(),
-  position: z.nullable(z.number().int()).optional(),
-  poll: z.nullable(PollResponse$inboundSchema).optional(),
-  interaction_metadata: z.nullable(
-    z.union([
-      MessageComponentInteractionMetadataResponse$inboundSchema,
-      ModalSubmitInteractionMetadataResponse$inboundSchema,
-      ApplicationCommandInteractionMetadataResponse$inboundSchema,
-    ]),
-  ).optional(),
-  message_snapshots: z.nullable(z.array(MessageSnapshotResponse$inboundSchema))
+  purchase_notification: PurchaseNotificationResponse$inboundSchema.optional(),
+  position: z.number().int().optional(),
+  resolved: ResolvedObjectsResponse$inboundSchema.optional(),
+  poll: PollResponse$inboundSchema.optional(),
+  shared_client_theme: z.nullable(CustomClientThemeResponse$inboundSchema)
     .optional(),
-  reactions: z.nullable(z.array(MessageReactionResponse$inboundSchema))
-    .optional(),
+  interaction_metadata: z.union([
+    MessageComponentInteractionMetadataResponse$inboundSchema,
+    ModalSubmitInteractionMetadataResponse$inboundSchema,
+    ApplicationCommandInteractionMetadataResponse$inboundSchema,
+  ]).optional(),
+  message_snapshots: z.array(MessageSnapshotResponse$inboundSchema).optional(),
+  reactions: z.array(MessageReactionResponse$inboundSchema).optional(),
   referenced_message: z.nullable(BasicMessageResponse$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -578,6 +570,7 @@ export const MessageResponse$inboundSchema: z.ZodType<
     "mention_channels": "mentionChannels",
     "role_subscription_data": "roleSubscriptionData",
     "purchase_notification": "purchaseNotification",
+    "shared_client_theme": "sharedClientTheme",
     "interaction_metadata": "interactionMetadata",
     "message_snapshots": "messageSnapshots",
     "referenced_message": "referencedMessage",
@@ -604,52 +597,43 @@ export type MessageResponse$Outbound = {
     | ContainerComponentResponse$Outbound
     | FileComponentResponse$Outbound
   >;
-  resolved?: ResolvedObjectsResponse$Outbound | null | undefined;
   stickers?:
     | Array<StandardStickerResponse$Outbound | GuildStickerResponse$Outbound>
-    | null
     | undefined;
-  sticker_items?: Array<MessageStickerItemResponse$Outbound> | null | undefined;
+  sticker_items?: Array<MessageStickerItemResponse$Outbound> | undefined;
   id: string;
   channel_id: string;
   author: UserResponse$Outbound;
   pinned: boolean;
   mention_everyone: boolean;
   tts: boolean;
-  call?: MessageCallResponse$Outbound | null | undefined;
-  activity?: MessageActivityResponse$Outbound | null | undefined;
-  application?: BasicApplicationResponse$Outbound | null | undefined;
-  application_id?: string | null | undefined;
-  interaction?: MessageInteractionResponse$Outbound | null | undefined;
+  call?: MessageCallResponse$Outbound | undefined;
+  activity?: MessageActivityResponse$Outbound | undefined;
+  application?: BasicApplicationResponse$Outbound | undefined;
+  application_id?: string | undefined;
+  interaction?: MessageInteractionResponse$Outbound | undefined;
   nonce?: number | string | null | undefined;
-  webhook_id?: string | null | undefined;
-  message_reference?: MessageReferenceResponse$Outbound | null | undefined;
-  thread?: ThreadResponse$Outbound | null | undefined;
+  webhook_id?: string | undefined;
+  message_reference?: MessageReferenceResponse$Outbound | undefined;
+  thread?: ThreadResponse$Outbound | undefined;
   mention_channels?:
     | Array<MessageMentionChannelResponse$Outbound | null>
-    | null
     | undefined;
   role_subscription_data?:
     | MessageRoleSubscriptionDataResponse$Outbound
-    | null
     | undefined;
-  purchase_notification?:
-    | PurchaseNotificationResponse$Outbound
-    | null
-    | undefined;
-  position?: number | null | undefined;
-  poll?: PollResponse$Outbound | null | undefined;
+  purchase_notification?: PurchaseNotificationResponse$Outbound | undefined;
+  position?: number | undefined;
+  resolved?: ResolvedObjectsResponse$Outbound | undefined;
+  poll?: PollResponse$Outbound | undefined;
+  shared_client_theme?: CustomClientThemeResponse$Outbound | null | undefined;
   interaction_metadata?:
     | MessageComponentInteractionMetadataResponse$Outbound
     | ModalSubmitInteractionMetadataResponse$Outbound
     | ApplicationCommandInteractionMetadataResponse$Outbound
-    | null
     | undefined;
-  message_snapshots?:
-    | Array<MessageSnapshotResponse$Outbound>
-    | null
-    | undefined;
-  reactions?: Array<MessageReactionResponse$Outbound> | null | undefined;
+  message_snapshots?: Array<MessageSnapshotResponse$Outbound> | undefined;
+  reactions?: Array<MessageReactionResponse$Outbound> | undefined;
   referenced_message?: BasicMessageResponse$Outbound | null | undefined;
 };
 
@@ -680,54 +664,46 @@ export const MessageResponse$outboundSchema: z.ZodType<
       FileComponentResponse$outboundSchema,
     ]),
   ),
-  resolved: z.nullable(ResolvedObjectsResponse$outboundSchema).optional(),
-  stickers: z.nullable(
-    z.array(
-      z.union([
-        StandardStickerResponse$outboundSchema,
-        GuildStickerResponse$outboundSchema,
-      ]),
-    ),
+  stickers: z.array(
+    z.union([
+      StandardStickerResponse$outboundSchema,
+      GuildStickerResponse$outboundSchema,
+    ]),
   ).optional(),
-  stickerItems: z.nullable(z.array(MessageStickerItemResponse$outboundSchema))
-    .optional(),
+  stickerItems: z.array(MessageStickerItemResponse$outboundSchema).optional(),
   id: z.string(),
   channelId: z.string(),
   author: UserResponse$outboundSchema,
   pinned: z.boolean(),
   mentionEveryone: z.boolean(),
   tts: z.boolean(),
-  call: z.nullable(MessageCallResponse$outboundSchema).optional(),
-  activity: z.nullable(MessageActivityResponse$outboundSchema).optional(),
-  application: z.nullable(BasicApplicationResponse$outboundSchema).optional(),
-  applicationId: z.nullable(z.string()).optional(),
-  interaction: z.nullable(MessageInteractionResponse$outboundSchema).optional(),
+  call: MessageCallResponse$outboundSchema.optional(),
+  activity: MessageActivityResponse$outboundSchema.optional(),
+  application: BasicApplicationResponse$outboundSchema.optional(),
+  applicationId: z.string().optional(),
+  interaction: MessageInteractionResponse$outboundSchema.optional(),
   nonce: z.nullable(z.union([z.number().int(), z.string()])).optional(),
-  webhookId: z.nullable(z.string()).optional(),
-  messageReference: z.nullable(MessageReferenceResponse$outboundSchema)
-    .optional(),
-  thread: z.nullable(ThreadResponse$outboundSchema).optional(),
-  mentionChannels: z.nullable(
-    z.array(z.nullable(MessageMentionChannelResponse$outboundSchema)),
+  webhookId: z.string().optional(),
+  messageReference: MessageReferenceResponse$outboundSchema.optional(),
+  thread: ThreadResponse$outboundSchema.optional(),
+  mentionChannels: z.array(
+    z.nullable(MessageMentionChannelResponse$outboundSchema),
   ).optional(),
-  roleSubscriptionData: z.nullable(
-    MessageRoleSubscriptionDataResponse$outboundSchema,
-  ).optional(),
-  purchaseNotification: z.nullable(PurchaseNotificationResponse$outboundSchema)
+  roleSubscriptionData: MessageRoleSubscriptionDataResponse$outboundSchema
     .optional(),
-  position: z.nullable(z.number().int()).optional(),
-  poll: z.nullable(PollResponse$outboundSchema).optional(),
-  interactionMetadata: z.nullable(
-    z.union([
-      MessageComponentInteractionMetadataResponse$outboundSchema,
-      ModalSubmitInteractionMetadataResponse$outboundSchema,
-      ApplicationCommandInteractionMetadataResponse$outboundSchema,
-    ]),
-  ).optional(),
-  messageSnapshots: z.nullable(z.array(MessageSnapshotResponse$outboundSchema))
+  purchaseNotification: PurchaseNotificationResponse$outboundSchema.optional(),
+  position: z.number().int().optional(),
+  resolved: ResolvedObjectsResponse$outboundSchema.optional(),
+  poll: PollResponse$outboundSchema.optional(),
+  sharedClientTheme: z.nullable(CustomClientThemeResponse$outboundSchema)
     .optional(),
-  reactions: z.nullable(z.array(MessageReactionResponse$outboundSchema))
-    .optional(),
+  interactionMetadata: z.union([
+    MessageComponentInteractionMetadataResponse$outboundSchema,
+    ModalSubmitInteractionMetadataResponse$outboundSchema,
+    ApplicationCommandInteractionMetadataResponse$outboundSchema,
+  ]).optional(),
+  messageSnapshots: z.array(MessageSnapshotResponse$outboundSchema).optional(),
+  reactions: z.array(MessageReactionResponse$outboundSchema).optional(),
   referencedMessage: z.nullable(BasicMessageResponse$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -742,6 +718,7 @@ export const MessageResponse$outboundSchema: z.ZodType<
     mentionChannels: "mention_channels",
     roleSubscriptionData: "role_subscription_data",
     purchaseNotification: "purchase_notification",
+    sharedClientTheme: "shared_client_theme",
     interactionMetadata: "interaction_metadata",
     messageSnapshots: "message_snapshots",
     referencedMessage: "referenced_message",

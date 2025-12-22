@@ -7,16 +7,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const Flags = {
+export const AddLobbyMemberFlags = {
   One: 1,
 } as const;
-export type Flags = ClosedEnum<typeof Flags>;
+export type AddLobbyMemberFlags = ClosedEnum<typeof AddLobbyMemberFlags>;
 
 export type AddLobbyMemberRequestBody = {
   metadata?: { [k: string]: string } | null | undefined;
-  flags?: Flags | null | undefined;
+  flags?: AddLobbyMemberFlags | null | undefined;
 };
 
 export type AddLobbyMemberRequest = {
@@ -25,24 +26,30 @@ export type AddLobbyMemberRequest = {
   requestBody: AddLobbyMemberRequestBody;
 };
 
-/** @internal */
-export const Flags$inboundSchema: z.ZodNativeEnum<typeof Flags> = z.nativeEnum(
-  Flags,
-);
+export type AddLobbyMemberResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.LobbyMemberResponse;
+};
 
 /** @internal */
-export const Flags$outboundSchema: z.ZodNativeEnum<typeof Flags> =
-  Flags$inboundSchema;
+export const AddLobbyMemberFlags$inboundSchema: z.ZodNativeEnum<
+  typeof AddLobbyMemberFlags
+> = z.nativeEnum(AddLobbyMemberFlags);
+
+/** @internal */
+export const AddLobbyMemberFlags$outboundSchema: z.ZodNativeEnum<
+  typeof AddLobbyMemberFlags
+> = AddLobbyMemberFlags$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Flags$ {
-  /** @deprecated use `Flags$inboundSchema` instead. */
-  export const inboundSchema = Flags$inboundSchema;
-  /** @deprecated use `Flags$outboundSchema` instead. */
-  export const outboundSchema = Flags$outboundSchema;
+export namespace AddLobbyMemberFlags$ {
+  /** @deprecated use `AddLobbyMemberFlags$inboundSchema` instead. */
+  export const inboundSchema = AddLobbyMemberFlags$inboundSchema;
+  /** @deprecated use `AddLobbyMemberFlags$outboundSchema` instead. */
+  export const outboundSchema = AddLobbyMemberFlags$outboundSchema;
 }
 
 /** @internal */
@@ -52,7 +59,7 @@ export const AddLobbyMemberRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   metadata: z.nullable(z.record(z.string())).optional(),
-  flags: z.nullable(Flags$inboundSchema).optional(),
+  flags: z.nullable(AddLobbyMemberFlags$inboundSchema).optional(),
 });
 
 /** @internal */
@@ -68,7 +75,7 @@ export const AddLobbyMemberRequestBody$outboundSchema: z.ZodType<
   AddLobbyMemberRequestBody
 > = z.object({
   metadata: z.nullable(z.record(z.string())).optional(),
-  flags: z.nullable(Flags$outboundSchema).optional(),
+  flags: z.nullable(AddLobbyMemberFlags$outboundSchema).optional(),
 });
 
 /**
@@ -171,5 +178,72 @@ export function addLobbyMemberRequestFromJSON(
     jsonString,
     (x) => AddLobbyMemberRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'AddLobbyMemberRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const AddLobbyMemberResponse$inboundSchema: z.ZodType<
+  AddLobbyMemberResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.LobbyMemberResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type AddLobbyMemberResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.LobbyMemberResponse$Outbound;
+};
+
+/** @internal */
+export const AddLobbyMemberResponse$outboundSchema: z.ZodType<
+  AddLobbyMemberResponse$Outbound,
+  z.ZodTypeDef,
+  AddLobbyMemberResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.LobbyMemberResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AddLobbyMemberResponse$ {
+  /** @deprecated use `AddLobbyMemberResponse$inboundSchema` instead. */
+  export const inboundSchema = AddLobbyMemberResponse$inboundSchema;
+  /** @deprecated use `AddLobbyMemberResponse$outboundSchema` instead. */
+  export const outboundSchema = AddLobbyMemberResponse$outboundSchema;
+  /** @deprecated use `AddLobbyMemberResponse$Outbound` instead. */
+  export type Outbound = AddLobbyMemberResponse$Outbound;
+}
+
+export function addLobbyMemberResponseToJSON(
+  addLobbyMemberResponse: AddLobbyMemberResponse,
+): string {
+  return JSON.stringify(
+    AddLobbyMemberResponse$outboundSchema.parse(addLobbyMemberResponse),
+  );
+}
+
+export function addLobbyMemberResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<AddLobbyMemberResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddLobbyMemberResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddLobbyMemberResponse' from JSON`,
   );
 }

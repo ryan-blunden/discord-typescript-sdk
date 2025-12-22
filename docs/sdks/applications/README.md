@@ -79,14 +79,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateApplicationResponse](../../models/components/privateapplicationresponse.md)\>**
+**Promise\<[operations.GetMyApplicationResponse](../../models/operations/getmyapplicationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateSelf
 
@@ -148,14 +149,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateApplicationResponse](../../models/components/privateapplicationresponse.md)\>**
+**Promise\<[operations.UpdateMyApplicationResponse](../../models/operations/updatemyapplicationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -221,14 +223,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateApplicationResponse](../../models/components/privateapplicationresponse.md)\>**
+**Promise\<[operations.GetApplicationResponse](../../models/operations/getapplicationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -296,14 +299,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateApplicationResponse](../../models/components/privateapplicationresponse.md)\>**
+**Promise\<[operations.UpdateApplicationResponse](../../models/operations/updateapplicationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getActivityInstance
 
@@ -371,14 +375,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmbeddedActivityInstance](../../models/components/embeddedactivityinstance.md)\>**
+**Promise\<[operations.ApplicationsGetActivityInstanceResponse](../../models/operations/applicationsgetactivityinstanceresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## uploadAttachment
 
@@ -451,14 +456,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ActivitiesAttachmentResponse](../../models/components/activitiesattachmentresponse.md)\>**
+**Promise\<[operations.UploadApplicationAttachmentResponse](../../models/operations/uploadapplicationattachmentresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGateway
 
@@ -516,14 +522,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GatewayResponse](../../models/components/gatewayresponse.md)\>**
+**Promise\<[operations.GetGatewayResponse](../../models/operations/getgatewayresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getBotGateway
 
@@ -584,14 +591,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GatewayBotResponse](../../models/components/gatewaybotresponse.md)\>**
+**Promise\<[operations.GetBotGatewayResponse](../../models/operations/getbotgatewayresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getOAuth2Authorization
 
@@ -653,14 +661,15 @@ run();
 
 ### Response
 
-**Promise\<[components.OAuth2GetAuthorizationResponse](../../models/components/oauth2getauthorizationresponse.md)\>**
+**Promise\<[operations.GetMyOauth2AuthorizationResponse](../../models/operations/getmyoauth2authorizationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getOAuth2Me
 
@@ -721,14 +730,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateApplicationResponse](../../models/components/privateapplicationresponse.md)\>**
+**Promise\<[operations.GetMyOauth2ApplicationResponse](../../models/operations/getmyoauth2applicationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getPublicKeys
 
@@ -786,14 +796,15 @@ run();
 
 ### Response
 
-**Promise\<[components.OAuth2GetKeys](../../models/components/oauth2getkeys.md)\>**
+**Promise\<[operations.GetPublicKeysResponse](../../models/operations/getpublickeysresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getOpenIDConnectUserInfo
 
@@ -855,14 +866,15 @@ run();
 
 ### Response
 
-**Promise\<[components.OAuth2GetOpenIDConnectUserInfoResponse](../../models/components/oauth2getopenidconnectuserinforesponse.md)\>**
+**Promise\<[operations.GetOpenidConnectUserinfoResponse](../../models/operations/getopenidconnectuserinforesponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## partnerSDKUnmergeProvisionalAccount
 
@@ -876,12 +888,12 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  await discord.applications.partnerSDKUnmergeProvisionalAccount({
+  const result = await discord.applications.partnerSDKUnmergeProvisionalAccount({
     clientId: "<value>",
     externalAuthToken: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -906,7 +918,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("applicationsPartnerSDKUnmergeProvisionalAccount failed:", res.error);
   }
@@ -927,14 +939,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.PartnerSDKUnmergeProvisionalAccountResponse](../../models/operations/partnersdkunmergeprovisionalaccountresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## partnerSDKToken
 
@@ -999,11 +1012,12 @@ run();
 
 ### Response
 
-**Promise\<[components.ProvisionalTokenResponse](../../models/components/provisionaltokenresponse.md)\>**
+**Promise\<[operations.PartnerSDKTokenResponse](../../models/operations/partnersdktokenresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

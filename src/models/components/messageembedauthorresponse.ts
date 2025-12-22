@@ -10,9 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MessageEmbedAuthorResponse = {
   name: string;
-  url?: string | null | undefined;
-  iconUrl?: string | null | undefined;
-  proxyIconUrl?: string | null | undefined;
+  url?: string | undefined;
+  iconUrl?: string | undefined;
+  proxyIconUrl?: string | undefined;
 };
 
 /** @internal */
@@ -22,9 +22,9 @@ export const MessageEmbedAuthorResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  url: z.nullable(z.string()).optional(),
-  icon_url: z.nullable(z.string()).optional(),
-  proxy_icon_url: z.nullable(z.string()).optional(),
+  url: z.string().optional(),
+  icon_url: z.string().optional(),
+  proxy_icon_url: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "icon_url": "iconUrl",
@@ -35,9 +35,9 @@ export const MessageEmbedAuthorResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type MessageEmbedAuthorResponse$Outbound = {
   name: string;
-  url?: string | null | undefined;
-  icon_url?: string | null | undefined;
-  proxy_icon_url?: string | null | undefined;
+  url?: string | undefined;
+  icon_url?: string | undefined;
+  proxy_icon_url?: string | undefined;
 };
 
 /** @internal */
@@ -47,9 +47,9 @@ export const MessageEmbedAuthorResponse$outboundSchema: z.ZodType<
   MessageEmbedAuthorResponse
 > = z.object({
   name: z.string(),
-  url: z.nullable(z.string()).optional(),
-  iconUrl: z.nullable(z.string()).optional(),
-  proxyIconUrl: z.nullable(z.string()).optional(),
+  url: z.string().optional(),
+  iconUrl: z.string().optional(),
+  proxyIconUrl: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     iconUrl: "icon_url",

@@ -12,9 +12,10 @@ let value: CreateOrJoinLobbyRequestBody = {
 
 ## Fields
 
-| Field                    | Type                     | Required                 | Description              |
-| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
-| `idleTimeoutSeconds`     | *number*                 | :heavy_minus_sign:       | N/A                      |
-| `lobbyMetadata`          | Record<string, *string*> | :heavy_minus_sign:       | N/A                      |
-| `memberMetadata`         | Record<string, *string*> | :heavy_minus_sign:       | N/A                      |
-| `secret`                 | *string*                 | :heavy_check_mark:       | N/A                      |
+| Field                                                | Type                                                 | Required                                             | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| `idleTimeoutSeconds`                                 | *number*                                             | :heavy_minus_sign:                                   | N/A                                                  |
+| `lobbyMetadata`                                      | Record<string, *string*>                             | :heavy_minus_sign:                                   | N/A                                                  |
+| `memberMetadata`                                     | Record<string, *string*>                             | :heavy_minus_sign:                                   | N/A                                                  |
+| `secret`                                             | *string*                                             | :heavy_check_mark:                                   | N/A                                                  |
+| `flags`                                              | [operations.Flags](../../models/operations/flags.md) | :heavy_minus_sign:                                   | N/A                                                  |

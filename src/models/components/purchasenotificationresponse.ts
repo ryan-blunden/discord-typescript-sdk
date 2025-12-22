@@ -16,7 +16,7 @@ import {
 
 export type PurchaseNotificationResponse = {
   type?: 0 | undefined;
-  guildProductPurchase?: GuildProductPurchaseResponse | null | undefined;
+  guildProductPurchase?: GuildProductPurchaseResponse | undefined;
 };
 
 /** @internal */
@@ -26,8 +26,7 @@ export const PurchaseNotificationResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal(0).optional(),
-  guild_product_purchase: z.nullable(GuildProductPurchaseResponse$inboundSchema)
-    .optional(),
+  guild_product_purchase: GuildProductPurchaseResponse$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "guild_product_purchase": "guildProductPurchase",
@@ -37,10 +36,7 @@ export const PurchaseNotificationResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type PurchaseNotificationResponse$Outbound = {
   type: 0;
-  guild_product_purchase?:
-    | GuildProductPurchaseResponse$Outbound
-    | null
-    | undefined;
+  guild_product_purchase?: GuildProductPurchaseResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -50,8 +46,7 @@ export const PurchaseNotificationResponse$outboundSchema: z.ZodType<
   PurchaseNotificationResponse
 > = z.object({
   type: z.literal(0).default(0 as const),
-  guildProductPurchase: z.nullable(GuildProductPurchaseResponse$outboundSchema)
-    .optional(),
+  guildProductPurchase: GuildProductPurchaseResponse$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     guildProductPurchase: "guild_product_purchase",

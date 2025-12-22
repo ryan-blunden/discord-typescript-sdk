@@ -16,6 +16,10 @@ export type LeaveLobbyRequest = {
   lobbyId: string;
 };
 
+export type LeaveLobbyResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const LeaveLobbySecurity$inboundSchema: z.ZodType<
   LeaveLobbySecurity,
@@ -137,5 +141,67 @@ export function leaveLobbyRequestFromJSON(
     jsonString,
     (x) => LeaveLobbyRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'LeaveLobbyRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const LeaveLobbyResponse$inboundSchema: z.ZodType<
+  LeaveLobbyResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type LeaveLobbyResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const LeaveLobbyResponse$outboundSchema: z.ZodType<
+  LeaveLobbyResponse$Outbound,
+  z.ZodTypeDef,
+  LeaveLobbyResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace LeaveLobbyResponse$ {
+  /** @deprecated use `LeaveLobbyResponse$inboundSchema` instead. */
+  export const inboundSchema = LeaveLobbyResponse$inboundSchema;
+  /** @deprecated use `LeaveLobbyResponse$outboundSchema` instead. */
+  export const outboundSchema = LeaveLobbyResponse$outboundSchema;
+  /** @deprecated use `LeaveLobbyResponse$Outbound` instead. */
+  export type Outbound = LeaveLobbyResponse$Outbound;
+}
+
+export function leaveLobbyResponseToJSON(
+  leaveLobbyResponse: LeaveLobbyResponse,
+): string {
+  return JSON.stringify(
+    LeaveLobbyResponse$outboundSchema.parse(leaveLobbyResponse),
+  );
+}
+
+export function leaveLobbyResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<LeaveLobbyResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => LeaveLobbyResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'LeaveLobbyResponse' from JSON`,
   );
 }

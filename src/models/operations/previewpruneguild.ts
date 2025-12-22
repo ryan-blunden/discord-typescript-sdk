@@ -6,9 +6,10 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type QueryParamIncludeRoles = string | Array<string | null>;
+export type IncludeRoles = string | Array<string | null>;
 
 export type PreviewPruneGuildRequest = {
   guildId: string;
@@ -16,51 +17,52 @@ export type PreviewPruneGuildRequest = {
   includeRoles?: string | Array<string | null> | undefined;
 };
 
+export type PreviewPruneGuildResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildPruneResponse;
+};
+
 /** @internal */
-export const QueryParamIncludeRoles$inboundSchema: z.ZodType<
-  QueryParamIncludeRoles,
+export const IncludeRoles$inboundSchema: z.ZodType<
+  IncludeRoles,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.nullable(z.string()))]);
 
 /** @internal */
-export type QueryParamIncludeRoles$Outbound = string | Array<string | null>;
+export type IncludeRoles$Outbound = string | Array<string | null>;
 
 /** @internal */
-export const QueryParamIncludeRoles$outboundSchema: z.ZodType<
-  QueryParamIncludeRoles$Outbound,
+export const IncludeRoles$outboundSchema: z.ZodType<
+  IncludeRoles$Outbound,
   z.ZodTypeDef,
-  QueryParamIncludeRoles
+  IncludeRoles
 > = z.union([z.string(), z.array(z.nullable(z.string()))]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace QueryParamIncludeRoles$ {
-  /** @deprecated use `QueryParamIncludeRoles$inboundSchema` instead. */
-  export const inboundSchema = QueryParamIncludeRoles$inboundSchema;
-  /** @deprecated use `QueryParamIncludeRoles$outboundSchema` instead. */
-  export const outboundSchema = QueryParamIncludeRoles$outboundSchema;
-  /** @deprecated use `QueryParamIncludeRoles$Outbound` instead. */
-  export type Outbound = QueryParamIncludeRoles$Outbound;
+export namespace IncludeRoles$ {
+  /** @deprecated use `IncludeRoles$inboundSchema` instead. */
+  export const inboundSchema = IncludeRoles$inboundSchema;
+  /** @deprecated use `IncludeRoles$outboundSchema` instead. */
+  export const outboundSchema = IncludeRoles$outboundSchema;
+  /** @deprecated use `IncludeRoles$Outbound` instead. */
+  export type Outbound = IncludeRoles$Outbound;
 }
 
-export function queryParamIncludeRolesToJSON(
-  queryParamIncludeRoles: QueryParamIncludeRoles,
-): string {
-  return JSON.stringify(
-    QueryParamIncludeRoles$outboundSchema.parse(queryParamIncludeRoles),
-  );
+export function includeRolesToJSON(includeRoles: IncludeRoles): string {
+  return JSON.stringify(IncludeRoles$outboundSchema.parse(includeRoles));
 }
 
-export function queryParamIncludeRolesFromJSON(
+export function includeRolesFromJSON(
   jsonString: string,
-): SafeParseResult<QueryParamIncludeRoles, SDKValidationError> {
+): SafeParseResult<IncludeRoles, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => QueryParamIncludeRoles$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'QueryParamIncludeRoles' from JSON`,
+    (x) => IncludeRoles$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'IncludeRoles' from JSON`,
   );
 }
 
@@ -133,5 +135,72 @@ export function previewPruneGuildRequestFromJSON(
     jsonString,
     (x) => PreviewPruneGuildRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PreviewPruneGuildRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PreviewPruneGuildResponse$inboundSchema: z.ZodType<
+  PreviewPruneGuildResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildPruneResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type PreviewPruneGuildResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildPruneResponse$Outbound;
+};
+
+/** @internal */
+export const PreviewPruneGuildResponse$outboundSchema: z.ZodType<
+  PreviewPruneGuildResponse$Outbound,
+  z.ZodTypeDef,
+  PreviewPruneGuildResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildPruneResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PreviewPruneGuildResponse$ {
+  /** @deprecated use `PreviewPruneGuildResponse$inboundSchema` instead. */
+  export const inboundSchema = PreviewPruneGuildResponse$inboundSchema;
+  /** @deprecated use `PreviewPruneGuildResponse$outboundSchema` instead. */
+  export const outboundSchema = PreviewPruneGuildResponse$outboundSchema;
+  /** @deprecated use `PreviewPruneGuildResponse$Outbound` instead. */
+  export type Outbound = PreviewPruneGuildResponse$Outbound;
+}
+
+export function previewPruneGuildResponseToJSON(
+  previewPruneGuildResponse: PreviewPruneGuildResponse,
+): string {
+  return JSON.stringify(
+    PreviewPruneGuildResponse$outboundSchema.parse(previewPruneGuildResponse),
+  );
+}
+
+export function previewPruneGuildResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PreviewPruneGuildResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PreviewPruneGuildResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PreviewPruneGuildResponse' from JSON`,
   );
 }

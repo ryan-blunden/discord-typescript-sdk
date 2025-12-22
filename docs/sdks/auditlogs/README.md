@@ -71,11 +71,12 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildAuditLogResponse](../../models/components/guildauditlogresponse.md)\>**
+**Promise\<[operations.ListGuildAuditLogEntriesResponse](../../models/operations/listguildauditlogentriesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

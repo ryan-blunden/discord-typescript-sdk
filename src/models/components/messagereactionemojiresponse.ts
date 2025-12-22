@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type MessageReactionEmojiResponse = {
   id?: string | null | undefined;
   name?: string | null | undefined;
-  animated?: boolean | null | undefined;
+  animated?: boolean | undefined;
 };
 
 /** @internal */
@@ -21,14 +21,14 @@ export const MessageReactionEmojiResponse$inboundSchema: z.ZodType<
 > = z.object({
   id: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),
-  animated: z.nullable(z.boolean()).optional(),
+  animated: z.boolean().optional(),
 });
 
 /** @internal */
 export type MessageReactionEmojiResponse$Outbound = {
   id?: string | null | undefined;
   name?: string | null | undefined;
-  animated?: boolean | null | undefined;
+  animated?: boolean | undefined;
 };
 
 /** @internal */
@@ -39,7 +39,7 @@ export const MessageReactionEmojiResponse$outboundSchema: z.ZodType<
 > = z.object({
   id: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),
-  animated: z.nullable(z.boolean()).optional(),
+  animated: z.boolean().optional(),
 });
 
 /**

@@ -54,6 +54,7 @@ export type ContainerComponentForMessageRequestComponents =
 
 export type ContainerComponentForMessageRequest = {
   type?: 1 | undefined;
+  id?: number | null | undefined;
   accentColor?: number | null | undefined;
   components: Array<
     | ActionRowComponentForMessageRequest
@@ -154,6 +155,7 @@ export const ContainerComponentForMessageRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal(1).optional(),
+  id: z.nullable(z.number().int()).optional(),
   accent_color: z.nullable(z.number().int()).optional(),
   components: z.array(
     z.union([
@@ -175,6 +177,7 @@ export const ContainerComponentForMessageRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ContainerComponentForMessageRequest$Outbound = {
   type: 1;
+  id?: number | null | undefined;
   accent_color?: number | null | undefined;
   components: Array<
     | ActionRowComponentForMessageRequest$Outbound
@@ -194,6 +197,7 @@ export const ContainerComponentForMessageRequest$outboundSchema: z.ZodType<
   ContainerComponentForMessageRequest
 > = z.object({
   type: z.literal(1).default(1 as const),
+  id: z.nullable(z.number().int()).optional(),
   accentColor: z.nullable(z.number().int()).optional(),
   components: z.array(
     z.union([

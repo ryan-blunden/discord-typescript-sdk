@@ -28,6 +28,14 @@ export type UpdateWebhookResponseBody =
   | components.ChannelFollowerWebhookResponse
   | components.GuildIncomingWebhookResponse;
 
+export type UpdateWebhookResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.ApplicationIncomingWebhookResponse
+    | components.ChannelFollowerWebhookResponse
+    | components.GuildIncomingWebhookResponse;
+};
+
 /** @internal */
 export const UpdateWebhookRequestBody$inboundSchema: z.ZodType<
   UpdateWebhookRequestBody,
@@ -219,5 +227,83 @@ export function updateWebhookResponseBodyFromJSON(
     jsonString,
     (x) => UpdateWebhookResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateWebhookResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateWebhookResponse$inboundSchema: z.ZodType<
+  UpdateWebhookResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.ApplicationIncomingWebhookResponse$inboundSchema,
+    components.ChannelFollowerWebhookResponse$inboundSchema,
+    components.GuildIncomingWebhookResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateWebhookResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.ApplicationIncomingWebhookResponse$Outbound
+    | components.ChannelFollowerWebhookResponse$Outbound
+    | components.GuildIncomingWebhookResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateWebhookResponse$outboundSchema: z.ZodType<
+  UpdateWebhookResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateWebhookResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.ApplicationIncomingWebhookResponse$outboundSchema,
+    components.ChannelFollowerWebhookResponse$outboundSchema,
+    components.GuildIncomingWebhookResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateWebhookResponse$ {
+  /** @deprecated use `UpdateWebhookResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateWebhookResponse$inboundSchema;
+  /** @deprecated use `UpdateWebhookResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateWebhookResponse$outboundSchema;
+  /** @deprecated use `UpdateWebhookResponse$Outbound` instead. */
+  export type Outbound = UpdateWebhookResponse$Outbound;
+}
+
+export function updateWebhookResponseToJSON(
+  updateWebhookResponse: UpdateWebhookResponse,
+): string {
+  return JSON.stringify(
+    UpdateWebhookResponse$outboundSchema.parse(updateWebhookResponse),
+  );
+}
+
+export function updateWebhookResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateWebhookResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateWebhookResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateWebhookResponse' from JSON`,
   );
 }

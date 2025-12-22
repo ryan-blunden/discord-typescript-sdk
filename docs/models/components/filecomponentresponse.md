@@ -9,8 +9,8 @@ let value: FileComponentResponse = {
   id: 601142,
   file: {
     id: "<value>",
-    url: "https://actual-testimonial.com/",
-    proxyUrl: "https://poor-toothpick.org/",
+    url: "https://authentic-juggernaut.org",
+    proxyUrl: "https://each-vista.net",
   },
   spoiler: true,
 };

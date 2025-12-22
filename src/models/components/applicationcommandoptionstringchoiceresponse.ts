@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ApplicationCommandOptionStringChoiceResponse = {
   name: string;
-  nameLocalized?: string | null | undefined;
+  nameLocalized?: string | undefined;
   nameLocalizations?: { [k: string]: string } | null | undefined;
   value: string;
 };
@@ -23,7 +23,7 @@ export const ApplicationCommandOptionStringChoiceResponse$inboundSchema:
     unknown
   > = z.object({
     name: z.string(),
-    name_localized: z.nullable(z.string()).optional(),
+    name_localized: z.string().optional(),
     name_localizations: z.nullable(z.record(z.string())).optional(),
     value: z.string(),
   }).transform((v) => {
@@ -36,7 +36,7 @@ export const ApplicationCommandOptionStringChoiceResponse$inboundSchema:
 /** @internal */
 export type ApplicationCommandOptionStringChoiceResponse$Outbound = {
   name: string;
-  name_localized?: string | null | undefined;
+  name_localized?: string | undefined;
   name_localizations?: { [k: string]: string } | null | undefined;
   value: string;
 };
@@ -49,7 +49,7 @@ export const ApplicationCommandOptionStringChoiceResponse$outboundSchema:
     ApplicationCommandOptionStringChoiceResponse
   > = z.object({
     name: z.string(),
-    nameLocalized: z.nullable(z.string()).optional(),
+    nameLocalized: z.string().optional(),
     nameLocalizations: z.nullable(z.record(z.string())).optional(),
     value: z.string(),
   }).transform((v) => {

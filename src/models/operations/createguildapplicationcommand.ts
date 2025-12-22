@@ -19,6 +19,11 @@ export type CreateGuildApplicationCommandRequest = {
   applicationCommandCreateRequest: components.ApplicationCommandCreateRequest;
 };
 
+export type CreateGuildApplicationCommandResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ApplicationCommandResponse;
+};
+
 /** @internal */
 export const CreateGuildApplicationCommandSecurity$inboundSchema: z.ZodType<
   CreateGuildApplicationCommandSecurity,
@@ -163,5 +168,77 @@ export function createGuildApplicationCommandRequestFromJSON(
     (x) =>
       CreateGuildApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateGuildApplicationCommandRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateGuildApplicationCommandResponse$inboundSchema: z.ZodType<
+  CreateGuildApplicationCommandResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ApplicationCommandResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateGuildApplicationCommandResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ApplicationCommandResponse$Outbound;
+};
+
+/** @internal */
+export const CreateGuildApplicationCommandResponse$outboundSchema: z.ZodType<
+  CreateGuildApplicationCommandResponse$Outbound,
+  z.ZodTypeDef,
+  CreateGuildApplicationCommandResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ApplicationCommandResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateGuildApplicationCommandResponse$ {
+  /** @deprecated use `CreateGuildApplicationCommandResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateGuildApplicationCommandResponse$inboundSchema;
+  /** @deprecated use `CreateGuildApplicationCommandResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateGuildApplicationCommandResponse$outboundSchema;
+  /** @deprecated use `CreateGuildApplicationCommandResponse$Outbound` instead. */
+  export type Outbound = CreateGuildApplicationCommandResponse$Outbound;
+}
+
+export function createGuildApplicationCommandResponseToJSON(
+  createGuildApplicationCommandResponse: CreateGuildApplicationCommandResponse,
+): string {
+  return JSON.stringify(
+    CreateGuildApplicationCommandResponse$outboundSchema.parse(
+      createGuildApplicationCommandResponse,
+    ),
+  );
+}
+
+export function createGuildApplicationCommandResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateGuildApplicationCommandResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateGuildApplicationCommandResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateGuildApplicationCommandResponse' from JSON`,
   );
 }

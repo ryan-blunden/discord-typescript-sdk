@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildBanRequest = {
   guildId: string;
   userId: string;
+};
+
+export type GetGuildBanResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildBanResponse;
 };
 
 /** @internal */
@@ -77,5 +83,72 @@ export function getGuildBanRequestFromJSON(
     jsonString,
     (x) => GetGuildBanRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGuildBanRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildBanResponse$inboundSchema: z.ZodType<
+  GetGuildBanResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildBanResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGuildBanResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildBanResponse$Outbound;
+};
+
+/** @internal */
+export const GetGuildBanResponse$outboundSchema: z.ZodType<
+  GetGuildBanResponse$Outbound,
+  z.ZodTypeDef,
+  GetGuildBanResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildBanResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildBanResponse$ {
+  /** @deprecated use `GetGuildBanResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGuildBanResponse$inboundSchema;
+  /** @deprecated use `GetGuildBanResponse$outboundSchema` instead. */
+  export const outboundSchema = GetGuildBanResponse$outboundSchema;
+  /** @deprecated use `GetGuildBanResponse$Outbound` instead. */
+  export type Outbound = GetGuildBanResponse$Outbound;
+}
+
+export function getGuildBanResponseToJSON(
+  getGuildBanResponse: GetGuildBanResponse,
+): string {
+  return JSON.stringify(
+    GetGuildBanResponse$outboundSchema.parse(getGuildBanResponse),
+  );
+}
+
+export function getGuildBanResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildBanResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildBanResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildBanResponse' from JSON`,
   );
 }

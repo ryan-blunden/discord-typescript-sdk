@@ -55,6 +55,11 @@ export type UpdateMessageMultipartRequest = {
   requestBody: UpdateMessageMultipartRequestBody;
 };
 
+export type UpdateMessageMultipartResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.MessageResponse;
+};
+
 /** @internal */
 export const UpdateMessageMultipartComponents$inboundSchema: z.ZodType<
   UpdateMessageMultipartComponents,
@@ -383,5 +388,74 @@ export function updateMessageMultipartRequestFromJSON(
     jsonString,
     (x) => UpdateMessageMultipartRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateMessageMultipartRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateMessageMultipartResponse$inboundSchema: z.ZodType<
+  UpdateMessageMultipartResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.MessageResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateMessageMultipartResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.MessageResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateMessageMultipartResponse$outboundSchema: z.ZodType<
+  UpdateMessageMultipartResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateMessageMultipartResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.MessageResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateMessageMultipartResponse$ {
+  /** @deprecated use `UpdateMessageMultipartResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateMessageMultipartResponse$inboundSchema;
+  /** @deprecated use `UpdateMessageMultipartResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateMessageMultipartResponse$outboundSchema;
+  /** @deprecated use `UpdateMessageMultipartResponse$Outbound` instead. */
+  export type Outbound = UpdateMessageMultipartResponse$Outbound;
+}
+
+export function updateMessageMultipartResponseToJSON(
+  updateMessageMultipartResponse: UpdateMessageMultipartResponse,
+): string {
+  return JSON.stringify(
+    UpdateMessageMultipartResponse$outboundSchema.parse(
+      updateMessageMultipartResponse,
+    ),
+  );
+}
+
+export function updateMessageMultipartResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateMessageMultipartResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateMessageMultipartResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateMessageMultipartResponse' from JSON`,
   );
 }

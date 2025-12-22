@@ -23,7 +23,7 @@ export type GuildStickerResponse = {
   description?: string | null | undefined;
   available: boolean;
   guildId: string;
-  user?: UserResponse | null | undefined;
+  user?: UserResponse | undefined;
 };
 
 /** @internal */
@@ -40,7 +40,7 @@ export const GuildStickerResponse$inboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   available: z.boolean(),
   guild_id: z.string(),
-  user: z.nullable(UserResponse$inboundSchema).optional(),
+  user: UserResponse$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "format_type": "formatType",
@@ -58,7 +58,7 @@ export type GuildStickerResponse$Outbound = {
   description?: string | null | undefined;
   available: boolean;
   guild_id: string;
-  user?: UserResponse$Outbound | null | undefined;
+  user?: UserResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -75,7 +75,7 @@ export const GuildStickerResponse$outboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   available: z.boolean(),
   guildId: z.string(),
-  user: z.nullable(UserResponse$outboundSchema).optional(),
+  user: UserResponse$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     formatType: "format_type",

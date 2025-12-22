@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildApplicationCommandSecurity = {
@@ -16,6 +17,11 @@ export type GetGuildApplicationCommandRequest = {
   applicationId: string;
   guildId: string;
   commandId: string;
+};
+
+export type GetGuildApplicationCommandResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ApplicationCommandResponse;
 };
 
 /** @internal */
@@ -156,5 +162,76 @@ export function getGuildApplicationCommandRequestFromJSON(
     jsonString,
     (x) => GetGuildApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGuildApplicationCommandRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildApplicationCommandResponse$inboundSchema: z.ZodType<
+  GetGuildApplicationCommandResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ApplicationCommandResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGuildApplicationCommandResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ApplicationCommandResponse$Outbound;
+};
+
+/** @internal */
+export const GetGuildApplicationCommandResponse$outboundSchema: z.ZodType<
+  GetGuildApplicationCommandResponse$Outbound,
+  z.ZodTypeDef,
+  GetGuildApplicationCommandResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ApplicationCommandResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildApplicationCommandResponse$ {
+  /** @deprecated use `GetGuildApplicationCommandResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGuildApplicationCommandResponse$inboundSchema;
+  /** @deprecated use `GetGuildApplicationCommandResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetGuildApplicationCommandResponse$outboundSchema;
+  /** @deprecated use `GetGuildApplicationCommandResponse$Outbound` instead. */
+  export type Outbound = GetGuildApplicationCommandResponse$Outbound;
+}
+
+export function getGuildApplicationCommandResponseToJSON(
+  getGuildApplicationCommandResponse: GetGuildApplicationCommandResponse,
+): string {
+  return JSON.stringify(
+    GetGuildApplicationCommandResponse$outboundSchema.parse(
+      getGuildApplicationCommandResponse,
+    ),
+  );
+}
+
+export function getGuildApplicationCommandResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildApplicationCommandResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetGuildApplicationCommandResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildApplicationCommandResponse' from JSON`,
   );
 }

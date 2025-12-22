@@ -19,9 +19,9 @@ export type AuditLogEntryResponse = {
   actionType?: 1 | undefined;
   userId?: string | null | undefined;
   targetId?: string | null | undefined;
-  changes?: Array<AuditLogObjectChangeResponse> | null | undefined;
-  options?: { [k: string]: string } | null | undefined;
-  reason?: string | null | undefined;
+  changes?: Array<AuditLogObjectChangeResponse> | undefined;
+  options?: { [k: string]: string } | undefined;
+  reason?: string | undefined;
 };
 
 /** @internal */
@@ -34,10 +34,9 @@ export const AuditLogEntryResponse$inboundSchema: z.ZodType<
   action_type: z.literal(1).optional(),
   user_id: z.nullable(z.string()).optional(),
   target_id: z.nullable(z.string()).optional(),
-  changes: z.nullable(z.array(AuditLogObjectChangeResponse$inboundSchema))
-    .optional(),
-  options: z.nullable(z.record(z.string())).optional(),
-  reason: z.nullable(z.string()).optional(),
+  changes: z.array(AuditLogObjectChangeResponse$inboundSchema).optional(),
+  options: z.record(z.string()).optional(),
+  reason: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "action_type": "actionType",
@@ -52,9 +51,9 @@ export type AuditLogEntryResponse$Outbound = {
   action_type: 1;
   user_id?: string | null | undefined;
   target_id?: string | null | undefined;
-  changes?: Array<AuditLogObjectChangeResponse$Outbound> | null | undefined;
-  options?: { [k: string]: string } | null | undefined;
-  reason?: string | null | undefined;
+  changes?: Array<AuditLogObjectChangeResponse$Outbound> | undefined;
+  options?: { [k: string]: string } | undefined;
+  reason?: string | undefined;
 };
 
 /** @internal */
@@ -67,10 +66,9 @@ export const AuditLogEntryResponse$outboundSchema: z.ZodType<
   actionType: z.literal(1).default(1 as const),
   userId: z.nullable(z.string()).optional(),
   targetId: z.nullable(z.string()).optional(),
-  changes: z.nullable(z.array(AuditLogObjectChangeResponse$outboundSchema))
-    .optional(),
-  options: z.nullable(z.record(z.string())).optional(),
-  reason: z.nullable(z.string()).optional(),
+  changes: z.array(AuditLogObjectChangeResponse$outboundSchema).optional(),
+  options: z.record(z.string()).optional(),
+  reason: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     actionType: "action_type",

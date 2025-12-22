@@ -28,12 +28,12 @@ import {
 export type DiscordIntegrationResponse = {
   type?: "discord" | undefined;
   name?: string | null | undefined;
-  account?: AccountResponse | null | undefined;
-  enabled?: boolean | null | undefined;
+  account: AccountResponse;
+  enabled: boolean;
   id: string;
   application: IntegrationApplicationResponse;
   scopes: Array<string>;
-  user?: UserResponse | null | undefined;
+  user?: UserResponse | undefined;
 };
 
 /** @internal */
@@ -44,24 +44,24 @@ export const DiscordIntegrationResponse$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("discord").optional(),
   name: z.nullable(z.string()).optional(),
-  account: z.nullable(AccountResponse$inboundSchema).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
+  account: AccountResponse$inboundSchema,
+  enabled: z.boolean(),
   id: z.string(),
   application: IntegrationApplicationResponse$inboundSchema,
   scopes: z.array(z.string()),
-  user: z.nullable(UserResponse$inboundSchema).optional(),
+  user: UserResponse$inboundSchema.optional(),
 });
 
 /** @internal */
 export type DiscordIntegrationResponse$Outbound = {
   type: "discord";
   name?: string | null | undefined;
-  account?: AccountResponse$Outbound | null | undefined;
-  enabled?: boolean | null | undefined;
+  account: AccountResponse$Outbound;
+  enabled: boolean;
   id: string;
   application: IntegrationApplicationResponse$Outbound;
   scopes: Array<string>;
-  user?: UserResponse$Outbound | null | undefined;
+  user?: UserResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -72,12 +72,12 @@ export const DiscordIntegrationResponse$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("discord").default("discord" as const),
   name: z.nullable(z.string()).optional(),
-  account: z.nullable(AccountResponse$outboundSchema).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
+  account: AccountResponse$outboundSchema,
+  enabled: z.boolean(),
   id: z.string(),
   application: IntegrationApplicationResponse$outboundSchema,
   scopes: z.array(z.string()),
-  user: z.nullable(UserResponse$outboundSchema).optional(),
+  user: UserResponse$outboundSchema.optional(),
 });
 
 /**

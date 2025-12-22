@@ -62,6 +62,11 @@ export type UpdateWebhookMessageMultipartRequest = {
   requestBody: UpdateWebhookMessageMultipartRequestBody;
 };
 
+export type UpdateWebhookMessageMultipartResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.MessageResponse;
+};
+
 /** @internal */
 export const UpdateWebhookMessageMultipartSecurity$inboundSchema: z.ZodType<
   UpdateWebhookMessageMultipartSecurity,
@@ -494,5 +499,77 @@ export function updateWebhookMessageMultipartRequestFromJSON(
     (x) =>
       UpdateWebhookMessageMultipartRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateWebhookMessageMultipartRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateWebhookMessageMultipartResponse$inboundSchema: z.ZodType<
+  UpdateWebhookMessageMultipartResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.MessageResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateWebhookMessageMultipartResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.MessageResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateWebhookMessageMultipartResponse$outboundSchema: z.ZodType<
+  UpdateWebhookMessageMultipartResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateWebhookMessageMultipartResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.MessageResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateWebhookMessageMultipartResponse$ {
+  /** @deprecated use `UpdateWebhookMessageMultipartResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateWebhookMessageMultipartResponse$inboundSchema;
+  /** @deprecated use `UpdateWebhookMessageMultipartResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateWebhookMessageMultipartResponse$outboundSchema;
+  /** @deprecated use `UpdateWebhookMessageMultipartResponse$Outbound` instead. */
+  export type Outbound = UpdateWebhookMessageMultipartResponse$Outbound;
+}
+
+export function updateWebhookMessageMultipartResponseToJSON(
+  updateWebhookMessageMultipartResponse: UpdateWebhookMessageMultipartResponse,
+): string {
+  return JSON.stringify(
+    UpdateWebhookMessageMultipartResponse$outboundSchema.parse(
+      updateWebhookMessageMultipartResponse,
+    ),
+  );
+}
+
+export function updateWebhookMessageMultipartResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateWebhookMessageMultipartResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateWebhookMessageMultipartResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateWebhookMessageMultipartResponse' from JSON`,
   );
 }

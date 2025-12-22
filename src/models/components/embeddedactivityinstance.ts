@@ -26,7 +26,7 @@ export type EmbeddedActivityInstance = {
   applicationId: string;
   instanceId: string;
   launchId: string;
-  location?: PrivateChannelLocation | GuildChannelLocation | null | undefined;
+  location: PrivateChannelLocation | GuildChannelLocation;
   users: Array<string>;
 };
 
@@ -91,12 +91,10 @@ export const EmbeddedActivityInstance$inboundSchema: z.ZodType<
   application_id: z.string(),
   instance_id: z.string(),
   launch_id: z.string(),
-  location: z.nullable(
-    z.union([
-      PrivateChannelLocation$inboundSchema,
-      GuildChannelLocation$inboundSchema,
-    ]),
-  ).optional(),
+  location: z.union([
+    PrivateChannelLocation$inboundSchema,
+    GuildChannelLocation$inboundSchema,
+  ]),
   users: z.array(z.string()),
 }).transform((v) => {
   return remap$(v, {
@@ -111,11 +109,7 @@ export type EmbeddedActivityInstance$Outbound = {
   application_id: string;
   instance_id: string;
   launch_id: string;
-  location?:
-    | PrivateChannelLocation$Outbound
-    | GuildChannelLocation$Outbound
-    | null
-    | undefined;
+  location: PrivateChannelLocation$Outbound | GuildChannelLocation$Outbound;
   users: Array<string>;
 };
 
@@ -128,12 +122,10 @@ export const EmbeddedActivityInstance$outboundSchema: z.ZodType<
   applicationId: z.string(),
   instanceId: z.string(),
   launchId: z.string(),
-  location: z.nullable(
-    z.union([
-      PrivateChannelLocation$outboundSchema,
-      GuildChannelLocation$outboundSchema,
-    ]),
-  ).optional(),
+  location: z.union([
+    PrivateChannelLocation$outboundSchema,
+    GuildChannelLocation$outboundSchema,
+  ]),
   users: z.array(z.string()),
 }).transform((v) => {
   return remap$(v, {

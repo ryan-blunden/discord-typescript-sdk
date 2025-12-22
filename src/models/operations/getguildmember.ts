@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildMemberRequest = {
   guildId: string;
   userId: string;
+};
+
+export type GetGuildMemberResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.GuildMemberResponse;
 };
 
 /** @internal */
@@ -77,5 +83,72 @@ export function getGuildMemberRequestFromJSON(
     jsonString,
     (x) => GetGuildMemberRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGuildMemberRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildMemberResponse$inboundSchema: z.ZodType<
+  GetGuildMemberResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.GuildMemberResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGuildMemberResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.GuildMemberResponse$Outbound;
+};
+
+/** @internal */
+export const GetGuildMemberResponse$outboundSchema: z.ZodType<
+  GetGuildMemberResponse$Outbound,
+  z.ZodTypeDef,
+  GetGuildMemberResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.GuildMemberResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildMemberResponse$ {
+  /** @deprecated use `GetGuildMemberResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGuildMemberResponse$inboundSchema;
+  /** @deprecated use `GetGuildMemberResponse$outboundSchema` instead. */
+  export const outboundSchema = GetGuildMemberResponse$outboundSchema;
+  /** @deprecated use `GetGuildMemberResponse$Outbound` instead. */
+  export type Outbound = GetGuildMemberResponse$Outbound;
+}
+
+export function getGuildMemberResponseToJSON(
+  getGuildMemberResponse: GetGuildMemberResponse,
+): string {
+  return JSON.stringify(
+    GetGuildMemberResponse$outboundSchema.parse(getGuildMemberResponse),
+  );
+}
+
+export function getGuildMemberResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildMemberResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildMemberResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildMemberResponse' from JSON`,
   );
 }

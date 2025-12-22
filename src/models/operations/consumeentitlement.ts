@@ -17,6 +17,10 @@ export type ConsumeEntitlementRequest = {
   entitlementId: string;
 };
 
+export type ConsumeEntitlementResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const ConsumeEntitlementSecurity$inboundSchema: z.ZodType<
   ConsumeEntitlementSecurity,
@@ -143,5 +147,67 @@ export function consumeEntitlementRequestFromJSON(
     jsonString,
     (x) => ConsumeEntitlementRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ConsumeEntitlementRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ConsumeEntitlementResponse$inboundSchema: z.ZodType<
+  ConsumeEntitlementResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type ConsumeEntitlementResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const ConsumeEntitlementResponse$outboundSchema: z.ZodType<
+  ConsumeEntitlementResponse$Outbound,
+  z.ZodTypeDef,
+  ConsumeEntitlementResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ConsumeEntitlementResponse$ {
+  /** @deprecated use `ConsumeEntitlementResponse$inboundSchema` instead. */
+  export const inboundSchema = ConsumeEntitlementResponse$inboundSchema;
+  /** @deprecated use `ConsumeEntitlementResponse$outboundSchema` instead. */
+  export const outboundSchema = ConsumeEntitlementResponse$outboundSchema;
+  /** @deprecated use `ConsumeEntitlementResponse$Outbound` instead. */
+  export type Outbound = ConsumeEntitlementResponse$Outbound;
+}
+
+export function consumeEntitlementResponseToJSON(
+  consumeEntitlementResponse: ConsumeEntitlementResponse,
+): string {
+  return JSON.stringify(
+    ConsumeEntitlementResponse$outboundSchema.parse(consumeEntitlementResponse),
+  );
+}
+
+export function consumeEntitlementResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ConsumeEntitlementResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ConsumeEntitlementResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ConsumeEntitlementResponse' from JSON`,
   );
 }

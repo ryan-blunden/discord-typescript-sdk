@@ -15,6 +15,7 @@ import {
 
 export type ThumbnailComponentForMessageRequest = {
   type?: 1 | undefined;
+  id?: number | null | undefined;
   description?: string | null | undefined;
   spoiler?: boolean | null | undefined;
   media: UnfurledMediaRequest;
@@ -27,6 +28,7 @@ export const ThumbnailComponentForMessageRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal(1).optional(),
+  id: z.nullable(z.number().int()).optional(),
   description: z.nullable(z.string()).optional(),
   spoiler: z.nullable(z.boolean()).optional(),
   media: UnfurledMediaRequest$inboundSchema,
@@ -35,6 +37,7 @@ export const ThumbnailComponentForMessageRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ThumbnailComponentForMessageRequest$Outbound = {
   type: 1;
+  id?: number | null | undefined;
   description?: string | null | undefined;
   spoiler?: boolean | null | undefined;
   media: UnfurledMediaRequest$Outbound;
@@ -47,6 +50,7 @@ export const ThumbnailComponentForMessageRequest$outboundSchema: z.ZodType<
   ThumbnailComponentForMessageRequest
 > = z.object({
   type: z.literal(1).default(1 as const),
+  id: z.nullable(z.number().int()).optional(),
   description: z.nullable(z.string()).optional(),
   spoiler: z.nullable(z.boolean()).optional(),
   media: UnfurledMediaRequest$outboundSchema,

@@ -14,7 +14,7 @@ import {
 } from "./minimalcontentmessageresponse.js";
 
 export type MessageSnapshotResponse = {
-  message?: MinimalContentMessageResponse | null | undefined;
+  message: MinimalContentMessageResponse;
 };
 
 /** @internal */
@@ -23,12 +23,12 @@ export const MessageSnapshotResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  message: z.nullable(MinimalContentMessageResponse$inboundSchema).optional(),
+  message: MinimalContentMessageResponse$inboundSchema,
 });
 
 /** @internal */
 export type MessageSnapshotResponse$Outbound = {
-  message?: MinimalContentMessageResponse$Outbound | null | undefined;
+  message: MinimalContentMessageResponse$Outbound;
 };
 
 /** @internal */
@@ -37,7 +37,7 @@ export const MessageSnapshotResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MessageSnapshotResponse
 > = z.object({
-  message: z.nullable(MinimalContentMessageResponse$outboundSchema).optional(),
+  message: MinimalContentMessageResponse$outboundSchema,
 });
 
 /**

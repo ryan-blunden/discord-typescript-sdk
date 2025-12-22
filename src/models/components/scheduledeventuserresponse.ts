@@ -23,8 +23,8 @@ import {
 export type ScheduledEventUserResponse = {
   guildScheduledEventId: string;
   userId: string;
-  user?: UserResponse | null | undefined;
-  member?: GuildMemberResponse | null | undefined;
+  user?: UserResponse | undefined;
+  member?: GuildMemberResponse | undefined;
 };
 
 /** @internal */
@@ -35,8 +35,8 @@ export const ScheduledEventUserResponse$inboundSchema: z.ZodType<
 > = z.object({
   guild_scheduled_event_id: z.string(),
   user_id: z.string(),
-  user: z.nullable(UserResponse$inboundSchema).optional(),
-  member: z.nullable(GuildMemberResponse$inboundSchema).optional(),
+  user: UserResponse$inboundSchema.optional(),
+  member: GuildMemberResponse$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "guild_scheduled_event_id": "guildScheduledEventId",
@@ -48,8 +48,8 @@ export const ScheduledEventUserResponse$inboundSchema: z.ZodType<
 export type ScheduledEventUserResponse$Outbound = {
   guild_scheduled_event_id: string;
   user_id: string;
-  user?: UserResponse$Outbound | null | undefined;
-  member?: GuildMemberResponse$Outbound | null | undefined;
+  user?: UserResponse$Outbound | undefined;
+  member?: GuildMemberResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -60,8 +60,8 @@ export const ScheduledEventUserResponse$outboundSchema: z.ZodType<
 > = z.object({
   guildScheduledEventId: z.string(),
   userId: z.string(),
-  user: z.nullable(UserResponse$outboundSchema).optional(),
-  member: z.nullable(GuildMemberResponse$outboundSchema).optional(),
+  user: UserResponse$outboundSchema.optional(),
+  member: GuildMemberResponse$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     guildScheduledEventId: "guild_scheduled_event_id",

@@ -16,11 +16,13 @@ import {
 
 export type UserSelectComponentForMessageRequest = {
   type?: 1 | undefined;
+  id?: number | null | undefined;
   customId: string;
   placeholder?: string | null | undefined;
   minValues?: number | null | undefined;
   maxValues?: number | null | undefined;
   disabled?: boolean | null | undefined;
+  required?: boolean | null | undefined;
   defaultValues?: Array<UserSelectDefaultValue> | null | undefined;
 };
 
@@ -31,11 +33,13 @@ export const UserSelectComponentForMessageRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal(1).optional(),
+  id: z.nullable(z.number().int()).optional(),
   custom_id: z.string(),
   placeholder: z.nullable(z.string()).optional(),
   min_values: z.nullable(z.number().int()).optional(),
   max_values: z.nullable(z.number().int()).optional(),
   disabled: z.nullable(z.boolean()).optional(),
+  required: z.nullable(z.boolean()).optional(),
   default_values: z.nullable(z.array(UserSelectDefaultValue$inboundSchema))
     .optional(),
 }).transform((v) => {
@@ -50,11 +54,13 @@ export const UserSelectComponentForMessageRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type UserSelectComponentForMessageRequest$Outbound = {
   type: 1;
+  id?: number | null | undefined;
   custom_id: string;
   placeholder?: string | null | undefined;
   min_values?: number | null | undefined;
   max_values?: number | null | undefined;
   disabled?: boolean | null | undefined;
+  required?: boolean | null | undefined;
   default_values?: Array<UserSelectDefaultValue$Outbound> | null | undefined;
 };
 
@@ -65,11 +71,13 @@ export const UserSelectComponentForMessageRequest$outboundSchema: z.ZodType<
   UserSelectComponentForMessageRequest
 > = z.object({
   type: z.literal(1).default(1 as const),
+  id: z.nullable(z.number().int()).optional(),
   customId: z.string(),
   placeholder: z.nullable(z.string()).optional(),
   minValues: z.nullable(z.number().int()).optional(),
   maxValues: z.nullable(z.number().int()).optional(),
   disabled: z.nullable(z.boolean()).optional(),
+  required: z.nullable(z.boolean()).optional(),
   defaultValues: z.nullable(z.array(UserSelectDefaultValue$outboundSchema))
     .optional(),
 }).transform((v) => {

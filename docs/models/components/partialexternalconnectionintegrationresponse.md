@@ -7,6 +7,9 @@ import { PartialExternalConnectionIntegrationResponse } from "@ryan.blunden/disc
 
 let value: PartialExternalConnectionIntegrationResponse = {
   id: "<value>",
+  account: {
+    id: "<id>",
+  },
 };
 ```
 
@@ -17,4 +20,4 @@ let value: PartialExternalConnectionIntegrationResponse = {
 | `id`                                                                     | *string*                                                                 | :heavy_check_mark:                                                       | N/A                                                                      |
 | `type`                                                                   | *string*                                                                 | :heavy_check_mark:                                                       | N/A                                                                      |
 | `name`                                                                   | *string*                                                                 | :heavy_minus_sign:                                                       | N/A                                                                      |
-| `account`                                                                | [components.AccountResponse](../../models/components/accountresponse.md) | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `account`                                                                | [components.AccountResponse](../../models/components/accountresponse.md) | :heavy_check_mark:                                                       | N/A                                                                      |

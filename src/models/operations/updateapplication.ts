@@ -14,6 +14,11 @@ export type UpdateApplicationRequest = {
   applicationFormPartial: components.ApplicationFormPartial;
 };
 
+export type UpdateApplicationResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.PrivateApplicationResponse;
+};
+
 /** @internal */
 export const UpdateApplicationRequest$inboundSchema: z.ZodType<
   UpdateApplicationRequest,
@@ -78,5 +83,72 @@ export function updateApplicationRequestFromJSON(
     jsonString,
     (x) => UpdateApplicationRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateApplicationRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateApplicationResponse$inboundSchema: z.ZodType<
+  UpdateApplicationResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.PrivateApplicationResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateApplicationResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.PrivateApplicationResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateApplicationResponse$outboundSchema: z.ZodType<
+  UpdateApplicationResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateApplicationResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.PrivateApplicationResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateApplicationResponse$ {
+  /** @deprecated use `UpdateApplicationResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateApplicationResponse$inboundSchema;
+  /** @deprecated use `UpdateApplicationResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateApplicationResponse$outboundSchema;
+  /** @deprecated use `UpdateApplicationResponse$Outbound` instead. */
+  export type Outbound = UpdateApplicationResponse$Outbound;
+}
+
+export function updateApplicationResponseToJSON(
+  updateApplicationResponse: UpdateApplicationResponse,
+): string {
+  return JSON.stringify(
+    UpdateApplicationResponse$outboundSchema.parse(updateApplicationResponse),
+  );
+}
+
+export function updateApplicationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateApplicationResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateApplicationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateApplicationResponse' from JSON`,
   );
 }

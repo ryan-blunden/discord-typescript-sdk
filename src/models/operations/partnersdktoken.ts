@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PartnerSDKTokenSecurity = {
@@ -17,6 +18,11 @@ export type PartnerSDKTokenRequestBody = {
   clientSecret?: string | null | undefined;
   externalAuthToken: string;
   externalAuthType?: "OIDC" | undefined;
+};
+
+export type PartnerSDKTokenResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ProvisionalTokenResponse;
 };
 
 /** @internal */
@@ -155,5 +161,72 @@ export function partnerSDKTokenRequestBodyFromJSON(
     jsonString,
     (x) => PartnerSDKTokenRequestBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PartnerSDKTokenRequestBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const PartnerSDKTokenResponse$inboundSchema: z.ZodType<
+  PartnerSDKTokenResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ProvisionalTokenResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type PartnerSDKTokenResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ProvisionalTokenResponse$Outbound;
+};
+
+/** @internal */
+export const PartnerSDKTokenResponse$outboundSchema: z.ZodType<
+  PartnerSDKTokenResponse$Outbound,
+  z.ZodTypeDef,
+  PartnerSDKTokenResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ProvisionalTokenResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PartnerSDKTokenResponse$ {
+  /** @deprecated use `PartnerSDKTokenResponse$inboundSchema` instead. */
+  export const inboundSchema = PartnerSDKTokenResponse$inboundSchema;
+  /** @deprecated use `PartnerSDKTokenResponse$outboundSchema` instead. */
+  export const outboundSchema = PartnerSDKTokenResponse$outboundSchema;
+  /** @deprecated use `PartnerSDKTokenResponse$Outbound` instead. */
+  export type Outbound = PartnerSDKTokenResponse$Outbound;
+}
+
+export function partnerSDKTokenResponseToJSON(
+  partnerSDKTokenResponse: PartnerSDKTokenResponse,
+): string {
+  return JSON.stringify(
+    PartnerSDKTokenResponse$outboundSchema.parse(partnerSDKTokenResponse),
+  );
+}
+
+export function partnerSDKTokenResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PartnerSDKTokenResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PartnerSDKTokenResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PartnerSDKTokenResponse' from JSON`,
   );
 }

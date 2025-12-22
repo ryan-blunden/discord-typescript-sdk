@@ -13,6 +13,10 @@ export type DeleteGuildSoundboardSoundRequest = {
   soundId: string;
 };
 
+export type DeleteGuildSoundboardSoundResponse = {
+  headers: { [k: string]: Array<string> };
+};
+
 /** @internal */
 export const DeleteGuildSoundboardSoundRequest$inboundSchema: z.ZodType<
   DeleteGuildSoundboardSoundRequest,
@@ -80,5 +84,71 @@ export function deleteGuildSoundboardSoundRequestFromJSON(
     jsonString,
     (x) => DeleteGuildSoundboardSoundRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteGuildSoundboardSoundRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteGuildSoundboardSoundResponse$inboundSchema: z.ZodType<
+  DeleteGuildSoundboardSoundResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type DeleteGuildSoundboardSoundResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteGuildSoundboardSoundResponse$outboundSchema: z.ZodType<
+  DeleteGuildSoundboardSoundResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteGuildSoundboardSoundResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteGuildSoundboardSoundResponse$ {
+  /** @deprecated use `DeleteGuildSoundboardSoundResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteGuildSoundboardSoundResponse$inboundSchema;
+  /** @deprecated use `DeleteGuildSoundboardSoundResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteGuildSoundboardSoundResponse$outboundSchema;
+  /** @deprecated use `DeleteGuildSoundboardSoundResponse$Outbound` instead. */
+  export type Outbound = DeleteGuildSoundboardSoundResponse$Outbound;
+}
+
+export function deleteGuildSoundboardSoundResponseToJSON(
+  deleteGuildSoundboardSoundResponse: DeleteGuildSoundboardSoundResponse,
+): string {
+  return JSON.stringify(
+    DeleteGuildSoundboardSoundResponse$outboundSchema.parse(
+      deleteGuildSoundboardSoundResponse,
+    ),
+  );
+}
+
+export function deleteGuildSoundboardSoundResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteGuildSoundboardSoundResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteGuildSoundboardSoundResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteGuildSoundboardSoundResponse' from JSON`,
   );
 }

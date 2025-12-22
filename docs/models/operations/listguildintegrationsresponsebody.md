@@ -7,14 +7,19 @@
 
 ```typescript
 const value: components.DiscordIntegrationResponse = {
+  account: {
+    id: "<id>",
+  },
+  enabled: false,
   id: "<value>",
   application: {
     id: "<value>",
     name: "<value>",
-    description: "meh scrape while solace why busily wherever",
+    description: "despite satirize premium squirm",
   },
   scopes: [
     "<value 1>",
+    "<value 2>",
   ],
 };
 ```
@@ -23,13 +28,17 @@ const value: components.DiscordIntegrationResponse = {
 
 ```typescript
 const value: components.ExternalConnectionIntegrationResponse = {
+  account: {
+    id: "<id>",
+  },
+  enabled: false,
   id: "<id>",
   user: {
     id: "<value>",
-    username: "Braulio60",
+    username: "Jeffery46",
     discriminator: "<value>",
-    publicFlags: 484824,
-    flags: 238527,
+    publicFlags: 573721,
+    flags: 285972,
   },
 };
 ```
@@ -38,6 +47,10 @@ const value: components.ExternalConnectionIntegrationResponse = {
 
 ```typescript
 const value: components.GuildSubscriptionIntegrationResponse = {
+  account: {
+    id: "<id>",
+  },
+  enabled: false,
   id: "<value>",
 };
 ```

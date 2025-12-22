@@ -15,14 +15,25 @@ let value: DefaultKeywordRuleResponse = {
       metadata: {},
     },
   ],
+  enabled: true,
+  exemptRoles: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
+  exemptChannels: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
   triggerMetadata: {
     allowList: [
       "<value 1>",
+      "<value 2>",
     ],
     presets: [
-      944120,
-      737731,
-      917279,
+      127310,
+      528147,
     ],
   },
 };
@@ -39,7 +50,7 @@ let value: DefaultKeywordRuleResponse = {
 | `eventType`                                                                                                                  | *number*                                                                                                                     | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
 | `actions`                                                                                                                    | *components.Actions*[]                                                                                                       | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
 | `triggerType`                                                                                                                | *number*                                                                                                                     | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
-| `enabled`                                                                                                                    | *boolean*                                                                                                                    | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
-| `exemptRoles`                                                                                                                | *string*[]                                                                                                                   | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
-| `exemptChannels`                                                                                                             | *string*[]                                                                                                                   | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `enabled`                                                                                                                    | *boolean*                                                                                                                    | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `exemptRoles`                                                                                                                | *string*[]                                                                                                                   | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `exemptChannels`                                                                                                             | *string*[]                                                                                                                   | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
 | `triggerMetadata`                                                                                                            | [components.DefaultKeywordListTriggerMetadataResponse](../../models/components/defaultkeywordlisttriggermetadataresponse.md) | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |

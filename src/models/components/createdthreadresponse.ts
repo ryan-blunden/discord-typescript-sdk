@@ -55,19 +55,19 @@ export type CreatedThreadResponse = {
   guildId: string;
   name: string;
   parentId?: string | null | undefined;
-  rateLimitPerUser?: number | null | undefined;
-  bitrate?: number | null | undefined;
-  userLimit?: number | null | undefined;
+  rateLimitPerUser?: number | undefined;
+  bitrate?: number | undefined;
+  userLimit?: number | undefined;
   rtcRegion?: string | null | undefined;
-  videoQualityMode?: 1 | null | undefined;
+  videoQualityMode?: 1 | undefined;
   permissions?: string | null | undefined;
   ownerId: string;
-  threadMetadata?: ThreadMetadataResponse | null | undefined;
+  threadMetadata: ThreadMetadataResponse;
   messageCount: number;
   memberCount: number;
   totalMessageSent: number;
-  appliedTags?: Array<string> | null | undefined;
-  member?: ThreadMemberResponse | null | undefined;
+  appliedTags?: Array<string> | undefined;
+  member?: ThreadMemberResponse | undefined;
 };
 
 /** @internal */
@@ -107,19 +107,19 @@ export const CreatedThreadResponse$inboundSchema: z.ZodType<
   guild_id: z.string(),
   name: z.string(),
   parent_id: z.nullable(z.string()).optional(),
-  rate_limit_per_user: z.nullable(z.number().int()).optional(),
-  bitrate: z.nullable(z.number().int()).optional(),
-  user_limit: z.nullable(z.number().int()).optional(),
+  rate_limit_per_user: z.number().int().optional(),
+  bitrate: z.number().int().optional(),
+  user_limit: z.number().int().optional(),
   rtc_region: z.nullable(z.string()).optional(),
-  video_quality_mode: z.nullable(z.literal(1)).optional(),
+  video_quality_mode: z.literal(1).optional(),
   permissions: z.nullable(z.string()).optional(),
   owner_id: z.string(),
-  thread_metadata: z.nullable(ThreadMetadataResponse$inboundSchema).optional(),
+  thread_metadata: ThreadMetadataResponse$inboundSchema,
   message_count: z.number().int(),
   member_count: z.number().int(),
   total_message_sent: z.number().int(),
-  applied_tags: z.nullable(z.array(z.string())).optional(),
-  member: z.nullable(ThreadMemberResponse$inboundSchema).optional(),
+  applied_tags: z.array(z.string()).optional(),
+  member: ThreadMemberResponse$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "last_message_id": "lastMessageId",
@@ -149,19 +149,19 @@ export type CreatedThreadResponse$Outbound = {
   guild_id: string;
   name: string;
   parent_id?: string | null | undefined;
-  rate_limit_per_user?: number | null | undefined;
-  bitrate?: number | null | undefined;
-  user_limit?: number | null | undefined;
+  rate_limit_per_user?: number | undefined;
+  bitrate?: number | undefined;
+  user_limit?: number | undefined;
   rtc_region?: string | null | undefined;
-  video_quality_mode: 1 | null;
+  video_quality_mode: 1;
   permissions?: string | null | undefined;
   owner_id: string;
-  thread_metadata?: ThreadMetadataResponse$Outbound | null | undefined;
+  thread_metadata: ThreadMetadataResponse$Outbound;
   message_count: number;
   member_count: number;
   total_message_sent: number;
-  applied_tags?: Array<string> | null | undefined;
-  member?: ThreadMemberResponse$Outbound | null | undefined;
+  applied_tags?: Array<string> | undefined;
+  member?: ThreadMemberResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -179,19 +179,19 @@ export const CreatedThreadResponse$outboundSchema: z.ZodType<
   guildId: z.string(),
   name: z.string(),
   parentId: z.nullable(z.string()).optional(),
-  rateLimitPerUser: z.nullable(z.number().int()).optional(),
-  bitrate: z.nullable(z.number().int()).optional(),
-  userLimit: z.nullable(z.number().int()).optional(),
+  rateLimitPerUser: z.number().int().optional(),
+  bitrate: z.number().int().optional(),
+  userLimit: z.number().int().optional(),
   rtcRegion: z.nullable(z.string()).optional(),
-  videoQualityMode: z.nullable(z.literal(1).default(1 as const)),
+  videoQualityMode: z.literal(1).default(1 as const),
   permissions: z.nullable(z.string()).optional(),
   ownerId: z.string(),
-  threadMetadata: z.nullable(ThreadMetadataResponse$outboundSchema).optional(),
+  threadMetadata: ThreadMetadataResponse$outboundSchema,
   messageCount: z.number().int(),
   memberCount: z.number().int(),
   totalMessageSent: z.number().int(),
-  appliedTags: z.nullable(z.array(z.string())).optional(),
-  member: z.nullable(ThreadMemberResponse$outboundSchema).optional(),
+  appliedTags: z.array(z.string()).optional(),
+  member: ThreadMemberResponse$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     lastMessageId: "last_message_id",

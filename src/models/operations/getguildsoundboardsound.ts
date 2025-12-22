@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetGuildSoundboardSoundRequest = {
   guildId: string;
   soundId: string;
+};
+
+export type GetGuildSoundboardSoundResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.SoundboardSoundResponse;
 };
 
 /** @internal */
@@ -79,5 +85,74 @@ export function getGuildSoundboardSoundRequestFromJSON(
     jsonString,
     (x) => GetGuildSoundboardSoundRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGuildSoundboardSoundRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetGuildSoundboardSoundResponse$inboundSchema: z.ZodType<
+  GetGuildSoundboardSoundResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.SoundboardSoundResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetGuildSoundboardSoundResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.SoundboardSoundResponse$Outbound;
+};
+
+/** @internal */
+export const GetGuildSoundboardSoundResponse$outboundSchema: z.ZodType<
+  GetGuildSoundboardSoundResponse$Outbound,
+  z.ZodTypeDef,
+  GetGuildSoundboardSoundResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.SoundboardSoundResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetGuildSoundboardSoundResponse$ {
+  /** @deprecated use `GetGuildSoundboardSoundResponse$inboundSchema` instead. */
+  export const inboundSchema = GetGuildSoundboardSoundResponse$inboundSchema;
+  /** @deprecated use `GetGuildSoundboardSoundResponse$outboundSchema` instead. */
+  export const outboundSchema = GetGuildSoundboardSoundResponse$outboundSchema;
+  /** @deprecated use `GetGuildSoundboardSoundResponse$Outbound` instead. */
+  export type Outbound = GetGuildSoundboardSoundResponse$Outbound;
+}
+
+export function getGuildSoundboardSoundResponseToJSON(
+  getGuildSoundboardSoundResponse: GetGuildSoundboardSoundResponse,
+): string {
+  return JSON.stringify(
+    GetGuildSoundboardSoundResponse$outboundSchema.parse(
+      getGuildSoundboardSoundResponse,
+    ),
+  );
+}
+
+export function getGuildSoundboardSoundResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGuildSoundboardSoundResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGuildSoundboardSoundResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGuildSoundboardSoundResponse' from JSON`,
   );
 }

@@ -18,7 +18,7 @@ export type VoiceStateResponse = {
   channelId?: string | null | undefined;
   deaf: boolean;
   guildId?: string | null | undefined;
-  member?: GuildMemberResponse | null | undefined;
+  member?: GuildMemberResponse | undefined;
   mute: boolean;
   requestToSpeakTimestamp?: Date | null | undefined;
   suppress: boolean;
@@ -39,7 +39,7 @@ export const VoiceStateResponse$inboundSchema: z.ZodType<
   channel_id: z.nullable(z.string()).optional(),
   deaf: z.boolean(),
   guild_id: z.nullable(z.string()).optional(),
-  member: z.nullable(GuildMemberResponse$inboundSchema).optional(),
+  member: GuildMemberResponse$inboundSchema.optional(),
   mute: z.boolean(),
   request_to_speak_timestamp: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -70,7 +70,7 @@ export type VoiceStateResponse$Outbound = {
   channel_id?: string | null | undefined;
   deaf: boolean;
   guild_id?: string | null | undefined;
-  member?: GuildMemberResponse$Outbound | null | undefined;
+  member?: GuildMemberResponse$Outbound | undefined;
   mute: boolean;
   request_to_speak_timestamp?: string | null | undefined;
   suppress: boolean;
@@ -91,7 +91,7 @@ export const VoiceStateResponse$outboundSchema: z.ZodType<
   channelId: z.nullable(z.string()).optional(),
   deaf: z.boolean(),
   guildId: z.nullable(z.string()).optional(),
-  member: z.nullable(GuildMemberResponse$outboundSchema).optional(),
+  member: GuildMemberResponse$outboundSchema.optional(),
   mute: z.boolean(),
   requestToSpeakTimestamp: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),

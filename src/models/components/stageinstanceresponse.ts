@@ -14,7 +14,7 @@ export type StageInstanceResponse = {
   topic: string;
   privacyLevel?: 1 | undefined;
   id: string;
-  discoverableDisabled?: boolean | null | undefined;
+  discoverableDisabled: boolean;
   guildScheduledEventId?: string | null | undefined;
 };
 
@@ -29,7 +29,7 @@ export const StageInstanceResponse$inboundSchema: z.ZodType<
   topic: z.string(),
   privacy_level: z.literal(1).optional(),
   id: z.string(),
-  discoverable_disabled: z.nullable(z.boolean()).optional(),
+  discoverable_disabled: z.boolean(),
   guild_scheduled_event_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -48,7 +48,7 @@ export type StageInstanceResponse$Outbound = {
   topic: string;
   privacy_level: 1;
   id: string;
-  discoverable_disabled?: boolean | null | undefined;
+  discoverable_disabled: boolean;
   guild_scheduled_event_id?: string | null | undefined;
 };
 
@@ -63,7 +63,7 @@ export const StageInstanceResponse$outboundSchema: z.ZodType<
   topic: z.string(),
   privacyLevel: z.literal(1).default(1 as const),
   id: z.string(),
-  discoverableDisabled: z.nullable(z.boolean()).optional(),
+  discoverableDisabled: z.boolean(),
   guildScheduledEventId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

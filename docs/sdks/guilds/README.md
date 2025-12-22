@@ -5,9 +5,7 @@
 
 ### Available Operations
 
-* [create](#create) - Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.
 * [get](#get) - Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.
-* [delete](#delete) - Delete a guild permanently. User must be owner. Returns 204 No Content on success. Fires a Guild Delete Gateway event.
 * [update](#update) - Modify a guild's settings. Requires the MANAGE_GUILD permission. Returns the updated guild object on success. Fires a Guild Update Gateway event.
 * [listBans](#listbans) - Returns a list of ban objects for the users banned from this guild. Requires the BAN_MEMBERS permission.
 * [getBan](#getban) - Returns a ban object for the given user or a 404 not found if the ban cannot be found. Requires the BAN_MEMBERS permission.
@@ -29,7 +27,6 @@
 * [updateMember](#updatemember) - Modify attributes of a guild member. Returns a 200 OK with the guild member as the body. Fires a Guild Member Update Gateway event. If the channel_id is set to null, this will force the target user to be disconnected from voice.
 * [addMemberRole](#addmemberrole) - Adds a role to a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
 * [removeMemberRole](#removememberrole) - Removes a role from a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
-* [setMfaLevel](#setmfalevel) - Modify a guild's MFA level. Requires guild ownership. Returns the updated level on success. Fires a Guild Update Gateway event.
 * [getOnboarding](#getonboarding) - Returns the Onboarding object for the guild.
 * [updateOnboarding](#updateonboarding) - Modifies the onboarding configuration of the guild. Returns a 200 with the Onboarding object for the guild. Requires the MANAGE_GUILD and MANAGE_ROLES permissions.
 * [getPreview](#getpreview) - Returns the guild preview object for the given id. If the user is not in the guild, then the guild must be discoverable.
@@ -50,79 +47,6 @@
 * [updateWidgetSettings](#updatewidgetsettings) - Modify a guild widget settings object for the guild. All attributes may be passed in with JSON and modified. Requires the MANAGE_GUILD permission. Returns the updated guild widget settings object. Fires a Guild Update Gateway event.
 * [getWidget](#getwidget) - Returns the widget for the guild. Fires an Invite Create Gateway event when an invite channel is defined and a new Invite is generated.
 * [getWidgetPng](#getwidgetpng) - Returns a PNG image widget for the guild. Requires no permissions or authentication.
-
-## create
-
-Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.create({
-    name: "<value>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsCreate } from "@ryan.blunden/discord-sdk/funcs/guildsCreate.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsCreate(discord, {
-    name: "<value>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("guildsCreate failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.GuildCreateRequest](../../models/components/guildcreaterequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.GuildResponse](../../models/components/guildresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
 
 ## get
 
@@ -188,87 +112,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildWithCountsResponse](../../models/components/guildwithcountsresponse.md)\>**
+**Promise\<[operations.GetGuildResponse](../../models/operations/getguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## delete
-
-Delete a guild permanently. User must be owner. Returns 204 No Content on success. Fires a Guild Delete Gateway event.
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  await discord.guilds.delete({
-    guildId: "<value>",
-  });
-
-
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsDelete } from "@ryan.blunden/discord-sdk/funcs/guildsDelete.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsDelete(discord, {
-    guildId: "<value>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    
-  } else {
-    console.log("guildsDelete failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteGuildRequest](../../models/operations/deleteguildrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<void\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -336,14 +188,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildResponse](../../models/components/guildresponse.md)\>**
+**Promise\<[operations.UpdateGuildResponse](../../models/operations/updateguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listBans
 
@@ -409,14 +262,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildBanResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildBansResponse](../../models/operations/listguildbansresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getBan
 
@@ -484,14 +338,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildBanResponse](../../models/components/guildbanresponse.md)\>**
+**Promise\<[operations.GetGuildBanResponse](../../models/operations/getguildbanresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createBan
 
@@ -507,13 +362,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.createBan({
+  const result = await discord.guilds.createBan({
     guildId: "<value>",
     userId: "<value>",
-    requestBody: {},
+    banUserFromGuildRequest: {},
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -537,11 +392,11 @@ async function run() {
   const res = await guildsCreateBan(discord, {
     guildId: "<value>",
     userId: "<value>",
-    requestBody: {},
+    banUserFromGuildRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsCreateBan failed:", res.error);
   }
@@ -561,14 +416,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.BanUserFromGuildResponse](../../models/operations/banuserfromguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## removeBan
 
@@ -584,12 +440,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.removeBan({
+  const result = await discord.guilds.removeBan({
     guildId: "<value>",
     userId: "<value>",
+    unbanUserFromGuildRequest: {},
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -613,10 +470,11 @@ async function run() {
   const res = await guildsRemoveBan(discord, {
     guildId: "<value>",
     userId: "<value>",
+    unbanUserFromGuildRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsRemoveBan failed:", res.error);
   }
@@ -636,14 +494,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.UnbanUserFromGuildResponse](../../models/operations/unbanuserfromguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## bulkBan
 
@@ -661,7 +520,7 @@ const discord = new Discord({
 async function run() {
   const result = await discord.guilds.bulkBan({
     guildId: "<value>",
-    requestBody: {
+    bulkBanUsersRequest: {
       userIds: [
         "<value 1>",
       ],
@@ -691,7 +550,7 @@ const discord = new DiscordCore({
 async function run() {
   const res = await guildsBulkBan(discord, {
     guildId: "<value>",
-    requestBody: {
+    bulkBanUsersRequest: {
       userIds: [
         "<value 1>",
       ],
@@ -719,14 +578,15 @@ run();
 
 ### Response
 
-**Promise\<[components.BulkBanUsersResponse](../../models/components/bulkbanusersresponse.md)\>**
+**Promise\<[operations.BulkBanUsersFromGuildResponse](../../models/operations/bulkbanusersfromguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listChannels
 
@@ -793,14 +653,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.ListGuildChannelsResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildChannelsResponse](../../models/operations/listguildchannelsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createChannel
 
@@ -872,14 +733,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildChannelResponse](../../models/components/guildchannelresponse.md)\>**
+**Promise\<[operations.CreateGuildChannelResponse](../../models/operations/createguildchannelresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateChannelPositions
 
@@ -895,14 +757,14 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.updateChannelPositions({
+  const result = await discord.guilds.updateChannelPositions({
     guildId: "<value>",
     requestBody: [
       {},
     ],
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -931,7 +793,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsUpdateChannelPositions failed:", res.error);
   }
@@ -951,14 +813,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.BulkUpdateGuildChannelsResponse](../../models/operations/bulkupdateguildchannelsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listIntegrations
 
@@ -1024,14 +887,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.ListGuildIntegrationsResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildIntegrationsResponse](../../models/operations/listguildintegrationsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteIntegration
 
@@ -1047,12 +911,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.deleteIntegration({
+  const result = await discord.guilds.deleteIntegration({
     guildId: "<value>",
     integrationId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1079,7 +943,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsDeleteIntegration failed:", res.error);
   }
@@ -1099,14 +963,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildIntegrationResponse](../../models/operations/deleteguildintegrationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listInvites
 
@@ -1172,14 +1037,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.ListGuildInvitesResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildInvitesResponse](../../models/operations/listguildinvitesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listMembers
 
@@ -1245,14 +1111,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildMemberResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildMembersResponse](../../models/operations/listguildmembersresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateCurrentMember
 
@@ -1320,14 +1187,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateGuildMemberResponse](../../models/components/privateguildmemberresponse.md)\>**
+**Promise\<[operations.UpdateMyGuildMemberResponse](../../models/operations/updatemyguildmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## searchMembers
 
@@ -1397,14 +1265,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildMemberResponse[]](../../models/.md)\>**
+**Promise\<[operations.SearchGuildMembersResponse](../../models/operations/searchguildmembersresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getMember
 
@@ -1472,14 +1341,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildMemberResponse](../../models/components/guildmemberresponse.md)\>**
+**Promise\<[operations.GetGuildMemberResponse](../../models/operations/getguildmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## addMember
 
@@ -1498,7 +1368,7 @@ async function run() {
   const result = await discord.guilds.addMember({
     guildId: "<value>",
     userId: "<value>",
-    requestBody: {
+    botAddGuildMemberRequest: {
       accessToken: "<value>",
     },
   });
@@ -1527,7 +1397,7 @@ async function run() {
   const res = await guildsAddMember(discord, {
     guildId: "<value>",
     userId: "<value>",
-    requestBody: {
+    botAddGuildMemberRequest: {
       accessToken: "<value>",
     },
   });
@@ -1553,14 +1423,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildMemberResponse](../../models/components/guildmemberresponse.md)\>**
+**Promise\<[operations.AddGuildMemberResponse](../../models/operations/addguildmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## removeMember
 
@@ -1576,12 +1447,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.removeMember({
+  const result = await discord.guilds.removeMember({
     guildId: "<value>",
     userId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1608,7 +1479,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsRemoveMember failed:", res.error);
   }
@@ -1628,14 +1499,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildMemberResponse](../../models/operations/deleteguildmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateMember
 
@@ -1705,14 +1577,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildMemberResponse](../../models/components/guildmemberresponse.md)\>**
+**Promise\<[operations.UpdateGuildMemberResponse](../../models/operations/updateguildmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## addMemberRole
 
@@ -1728,13 +1601,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.addMemberRole({
+  const result = await discord.guilds.addMemberRole({
     guildId: "<value>",
     userId: "<value>",
     roleId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1762,7 +1635,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsAddMemberRole failed:", res.error);
   }
@@ -1782,14 +1655,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.AddGuildMemberRoleResponse](../../models/operations/addguildmemberroleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## removeMemberRole
 
@@ -1805,13 +1679,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.removeMemberRole({
+  const result = await discord.guilds.removeMemberRole({
     guildId: "<value>",
     userId: "<value>",
     roleId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1839,7 +1713,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsRemoveMemberRole failed:", res.error);
   }
@@ -1859,89 +1733,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildMemberRoleResponse](../../models/operations/deleteguildmemberroleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## setMfaLevel
-
-Modify a guild's MFA level. Requires guild ownership. Returns the updated level on success. Fires a Guild Update Gateway event.
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guilds.setMfaLevel({
-    guildId: "<value>",
-    requestBody: {},
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildsSetMfaLevel } from "@ryan.blunden/discord-sdk/funcs/guildsSetMfaLevel.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildsSetMfaLevel(discord, {
-    guildId: "<value>",
-    requestBody: {},
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("guildsSetMfaLevel failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.SetGuildMfaLevelRequest](../../models/operations/setguildmfalevelrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.GuildMFALevelResponse](../../models/components/guildmfalevelresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getOnboarding
 
@@ -2007,14 +1807,15 @@ run();
 
 ### Response
 
-**Promise\<[components.UserGuildOnboardingResponse](../../models/components/userguildonboardingresponse.md)\>**
+**Promise\<[operations.GetGuildsOnboardingResponse](../../models/operations/getguildsonboardingresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateOnboarding
 
@@ -2082,14 +1883,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildOnboardingResponse](../../models/components/guildonboardingresponse.md)\>**
+**Promise\<[operations.PutGuildsOnboardingResponse](../../models/operations/putguildsonboardingresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getPreview
 
@@ -2155,14 +1957,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildPreviewResponse](../../models/components/guildpreviewresponse.md)\>**
+**Promise\<[operations.GetGuildPreviewResponse](../../models/operations/getguildpreviewresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## previewPrune
 
@@ -2228,14 +2031,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildPruneResponse](../../models/components/guildpruneresponse.md)\>**
+**Promise\<[operations.PreviewPruneGuildResponse](../../models/operations/previewpruneguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## prune
 
@@ -2253,7 +2057,7 @@ const discord = new Discord({
 async function run() {
   const result = await discord.guilds.prune({
     guildId: "<value>",
-    requestBody: {},
+    pruneGuildRequest: {},
   });
 
   console.log(result);
@@ -2279,7 +2083,7 @@ const discord = new DiscordCore({
 async function run() {
   const res = await guildsPrune(discord, {
     guildId: "<value>",
-    requestBody: {},
+    pruneGuildRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -2303,14 +2107,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildPruneResponse](../../models/components/guildpruneresponse.md)\>**
+**Promise\<[operations.PruneGuildResponse](../../models/operations/pruneguildresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listVoiceRegions
 
@@ -2376,14 +2181,15 @@ run();
 
 ### Response
 
-**Promise\<[components.VoiceRegionResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildVoiceRegionsResponse](../../models/operations/listguildvoiceregionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listRoles
 
@@ -2449,14 +2255,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildRoleResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildRolesResponse](../../models/operations/listguildrolesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createRole
 
@@ -2474,7 +2281,7 @@ const discord = new Discord({
 async function run() {
   const result = await discord.guilds.createRole({
     guildId: "<value>",
-    requestBody: {},
+    createRoleRequest: {},
   });
 
   console.log(result);
@@ -2500,7 +2307,7 @@ const discord = new DiscordCore({
 async function run() {
   const res = await guildsCreateRole(discord, {
     guildId: "<value>",
-    requestBody: {},
+    createRoleRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -2524,14 +2331,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildRoleResponse](../../models/components/guildroleresponse.md)\>**
+**Promise\<[operations.CreateGuildRoleResponse](../../models/operations/createguildroleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateRolePositions
 
@@ -2599,14 +2407,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildRoleResponse[]](../../models/.md)\>**
+**Promise\<[operations.BulkUpdateGuildRolesResponse](../../models/operations/bulkupdateguildrolesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getRole
 
@@ -2674,14 +2483,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildRoleResponse](../../models/components/guildroleresponse.md)\>**
+**Promise\<[operations.GetGuildRoleResponse](../../models/operations/getguildroleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteRole
 
@@ -2697,12 +2507,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guilds.deleteRole({
+  const result = await discord.guilds.deleteRole({
     guildId: "<value>",
     roleId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -2729,7 +2539,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildsDeleteRole failed:", res.error);
   }
@@ -2749,14 +2559,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildRoleResponse](../../models/operations/deleteguildroleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateRole
 
@@ -2775,7 +2586,7 @@ async function run() {
   const result = await discord.guilds.updateRole({
     guildId: "<value>",
     roleId: "<value>",
-    requestBody: {},
+    updateRoleRequestPartial: {},
   });
 
   console.log(result);
@@ -2802,7 +2613,7 @@ async function run() {
   const res = await guildsUpdateRole(discord, {
     guildId: "<value>",
     roleId: "<value>",
-    requestBody: {},
+    updateRoleRequestPartial: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -2826,14 +2637,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildRoleResponse](../../models/components/guildroleresponse.md)\>**
+**Promise\<[operations.UpdateGuildRoleResponse](../../models/operations/updateguildroleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listActiveThreads
 
@@ -2899,14 +2711,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ThreadsResponse](../../models/components/threadsresponse.md)\>**
+**Promise\<[operations.GetActiveGuildThreadsResponse](../../models/operations/getactiveguildthreadsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getVanityUrl
 
@@ -2972,14 +2785,15 @@ run();
 
 ### Response
 
-**Promise\<[components.VanityURLResponse](../../models/components/vanityurlresponse.md)\>**
+**Promise\<[operations.GetGuildVanityUrlResponse](../../models/operations/getguildvanityurlresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getWelcomeScreen
 
@@ -3045,14 +2859,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildWelcomeScreenResponse](../../models/components/guildwelcomescreenresponse.md)\>**
+**Promise\<[operations.GetGuildWelcomeScreenResponse](../../models/operations/getguildwelcomescreenresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateWelcomeScreen
 
@@ -3120,14 +2935,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildWelcomeScreenResponse](../../models/components/guildwelcomescreenresponse.md)\>**
+**Promise\<[operations.UpdateGuildWelcomeScreenResponse](../../models/operations/updateguildwelcomescreenresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getWidgetSettings
 
@@ -3193,14 +3009,15 @@ run();
 
 ### Response
 
-**Promise\<[components.WidgetSettingsResponse](../../models/components/widgetsettingsresponse.md)\>**
+**Promise\<[operations.GetGuildWidgetSettingsResponse](../../models/operations/getguildwidgetsettingsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateWidgetSettings
 
@@ -3268,14 +3085,15 @@ run();
 
 ### Response
 
-**Promise\<[components.WidgetSettingsResponse](../../models/components/widgetsettingsresponse.md)\>**
+**Promise\<[operations.UpdateGuildWidgetSettingsResponse](../../models/operations/updateguildwidgetsettingsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getWidget
 
@@ -3338,14 +3156,15 @@ run();
 
 ### Response
 
-**Promise\<[components.WidgetResponse](../../models/components/widgetresponse.md)\>**
+**Promise\<[operations.GetGuildWidgetResponse](../../models/operations/getguildwidgetresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getWidgetPng
 
@@ -3408,11 +3227,12 @@ run();
 
 ### Response
 
-**Promise\<[string](../../models/.md)\>**
+**Promise\<[operations.GetGuildWidgetPngResponse](../../models/operations/getguildwidgetpngresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

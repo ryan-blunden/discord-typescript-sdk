@@ -18,6 +18,11 @@ export type CreateLobbyMessageRequest = {
   sdkMessageRequest: components.SDKMessageRequest;
 };
 
+export type CreateLobbyMessageResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.LobbyMessageResponse;
+};
+
 /** @internal */
 export const CreateLobbyMessageSecurity$inboundSchema: z.ZodType<
   CreateLobbyMessageSecurity,
@@ -144,5 +149,72 @@ export function createLobbyMessageRequestFromJSON(
     jsonString,
     (x) => CreateLobbyMessageRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateLobbyMessageRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateLobbyMessageResponse$inboundSchema: z.ZodType<
+  CreateLobbyMessageResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.LobbyMessageResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type CreateLobbyMessageResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.LobbyMessageResponse$Outbound;
+};
+
+/** @internal */
+export const CreateLobbyMessageResponse$outboundSchema: z.ZodType<
+  CreateLobbyMessageResponse$Outbound,
+  z.ZodTypeDef,
+  CreateLobbyMessageResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.LobbyMessageResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateLobbyMessageResponse$ {
+  /** @deprecated use `CreateLobbyMessageResponse$inboundSchema` instead. */
+  export const inboundSchema = CreateLobbyMessageResponse$inboundSchema;
+  /** @deprecated use `CreateLobbyMessageResponse$outboundSchema` instead. */
+  export const outboundSchema = CreateLobbyMessageResponse$outboundSchema;
+  /** @deprecated use `CreateLobbyMessageResponse$Outbound` instead. */
+  export type Outbound = CreateLobbyMessageResponse$Outbound;
+}
+
+export function createLobbyMessageResponseToJSON(
+  createLobbyMessageResponse: CreateLobbyMessageResponse,
+): string {
+  return JSON.stringify(
+    CreateLobbyMessageResponse$outboundSchema.parse(createLobbyMessageResponse),
+  );
+}
+
+export function createLobbyMessageResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateLobbyMessageResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateLobbyMessageResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateLobbyMessageResponse' from JSON`,
   );
 }

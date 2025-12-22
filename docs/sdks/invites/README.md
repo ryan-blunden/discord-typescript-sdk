@@ -69,14 +69,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.InviteResolveResponseBody](../../models/operations/inviteresolveresponsebody.md)\>**
+**Promise\<[operations.InviteResolveResponse](../../models/operations/inviteresolveresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -142,11 +143,12 @@ run();
 
 ### Response
 
-**Promise\<[operations.InviteRevokeResponseBody](../../models/operations/inviterevokeresponsebody.md)\>**
+**Promise\<[operations.InviteRevokeResponse](../../models/operations/inviterevokeresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

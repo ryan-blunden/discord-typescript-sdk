@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type ApplicationUserRoleConnectionResponse = {
   platformName?: string | null | undefined;
   platformUsername?: string | null | undefined;
-  metadata?: { [k: string]: string } | null | undefined;
+  metadata?: { [k: string]: string } | undefined;
 };
 
 /** @internal */
@@ -22,7 +22,7 @@ export const ApplicationUserRoleConnectionResponse$inboundSchema: z.ZodType<
 > = z.object({
   platform_name: z.nullable(z.string()).optional(),
   platform_username: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
+  metadata: z.record(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "platform_name": "platformName",
@@ -34,7 +34,7 @@ export const ApplicationUserRoleConnectionResponse$inboundSchema: z.ZodType<
 export type ApplicationUserRoleConnectionResponse$Outbound = {
   platform_name?: string | null | undefined;
   platform_username?: string | null | undefined;
-  metadata?: { [k: string]: string } | null | undefined;
+  metadata?: { [k: string]: string } | undefined;
 };
 
 /** @internal */
@@ -45,7 +45,7 @@ export const ApplicationUserRoleConnectionResponse$outboundSchema: z.ZodType<
 > = z.object({
   platformName: z.nullable(z.string()).optional(),
   platformUsername: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
+  metadata: z.record(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     platformName: "platform_name",

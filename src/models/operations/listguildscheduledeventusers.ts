@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListGuildScheduledEventUsersRequest = {
@@ -15,6 +16,11 @@ export type ListGuildScheduledEventUsersRequest = {
   limit?: number | undefined;
   before?: string | undefined;
   after?: string | undefined;
+};
+
+export type ListGuildScheduledEventUsersResponse = {
+  headers: { [k: string]: Array<string> };
+  result: Array<components.ScheduledEventUserResponse>;
 };
 
 /** @internal */
@@ -100,5 +106,77 @@ export function listGuildScheduledEventUsersRequestFromJSON(
     (x) =>
       ListGuildScheduledEventUsersRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListGuildScheduledEventUsersRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListGuildScheduledEventUsersResponse$inboundSchema: z.ZodType<
+  ListGuildScheduledEventUsersResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.array(components.ScheduledEventUserResponse$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type ListGuildScheduledEventUsersResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: Array<components.ScheduledEventUserResponse$Outbound>;
+};
+
+/** @internal */
+export const ListGuildScheduledEventUsersResponse$outboundSchema: z.ZodType<
+  ListGuildScheduledEventUsersResponse$Outbound,
+  z.ZodTypeDef,
+  ListGuildScheduledEventUsersResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.array(components.ScheduledEventUserResponse$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListGuildScheduledEventUsersResponse$ {
+  /** @deprecated use `ListGuildScheduledEventUsersResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    ListGuildScheduledEventUsersResponse$inboundSchema;
+  /** @deprecated use `ListGuildScheduledEventUsersResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    ListGuildScheduledEventUsersResponse$outboundSchema;
+  /** @deprecated use `ListGuildScheduledEventUsersResponse$Outbound` instead. */
+  export type Outbound = ListGuildScheduledEventUsersResponse$Outbound;
+}
+
+export function listGuildScheduledEventUsersResponseToJSON(
+  listGuildScheduledEventUsersResponse: ListGuildScheduledEventUsersResponse,
+): string {
+  return JSON.stringify(
+    ListGuildScheduledEventUsersResponse$outboundSchema.parse(
+      listGuildScheduledEventUsersResponse,
+    ),
+  );
+}
+
+export function listGuildScheduledEventUsersResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ListGuildScheduledEventUsersResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListGuildScheduledEventUsersResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListGuildScheduledEventUsersResponse' from JSON`,
   );
 }

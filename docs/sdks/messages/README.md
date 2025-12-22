@@ -87,14 +87,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListMessagesResponse](../../models/operations/listmessagesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createJson
 
@@ -162,14 +163,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.CreateMessageJsonResponse](../../models/operations/createmessagejsonresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createForm
 
@@ -237,14 +239,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.CreateMessageFormResponse](../../models/operations/createmessageformresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createMultipart
 
@@ -312,14 +315,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.CreateMessageMultipartResponse](../../models/operations/createmessagemultipartresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## bulkDelete
 
@@ -335,7 +339,7 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.bulkDelete({
+  const result = await discord.messages.bulkDelete({
     channelId: "<value>",
     requestBody: {
       messages: [
@@ -344,7 +348,7 @@ async function run() {
     },
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -375,7 +379,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesBulkDelete failed:", res.error);
   }
@@ -395,14 +399,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.BulkDeleteMessagesResponse](../../models/operations/bulkdeletemessagesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -470,14 +475,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.GetMessageResponse](../../models/operations/getmessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -493,12 +499,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.delete({
+  const result = await discord.messages.delete({
     channelId: "<value>",
     messageId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -525,7 +531,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesDelete failed:", res.error);
   }
@@ -545,14 +551,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteMessageResponse](../../models/operations/deletemessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateJson
 
@@ -622,14 +629,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateMessageJsonResponse](../../models/operations/updatemessagejsonresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateForm
 
@@ -699,14 +707,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateMessageFormResponse](../../models/operations/updatemessageformresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateMultipart
 
@@ -776,14 +785,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateMessageMultipartResponse](../../models/operations/updatemessagemultipartresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## crosspost
 
@@ -851,14 +861,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.CrosspostMessageResponse](../../models/operations/crosspostmessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteAllReactions
 
@@ -874,12 +885,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.deleteAllReactions({
+  const result = await discord.messages.deleteAllReactions({
     channelId: "<value>",
     messageId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -906,7 +917,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesDeleteAllReactions failed:", res.error);
   }
@@ -926,14 +937,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteAllMessageReactionsResponse](../../models/operations/deleteallmessagereactionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listReactionsByEmoji
 
@@ -1003,14 +1015,15 @@ run();
 
 ### Response
 
-**Promise\<[components.UserResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListMessageReactionsByEmojiResponse](../../models/operations/listmessagereactionsbyemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteAllReactionsForEmoji
 
@@ -1026,13 +1039,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.deleteAllReactionsForEmoji({
+  const result = await discord.messages.deleteAllReactionsForEmoji({
     channelId: "<value>",
     messageId: "<value>",
     emojiName: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1060,7 +1073,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesDeleteAllReactionsForEmoji failed:", res.error);
   }
@@ -1080,14 +1093,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteAllMessageReactionsByEmojiResponse](../../models/operations/deleteallmessagereactionsbyemojiresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createReaction
 
@@ -1103,13 +1117,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.createReaction({
+  const result = await discord.messages.createReaction({
     channelId: "<value>",
     messageId: "<value>",
     emojiName: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1137,7 +1151,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesCreateReaction failed:", res.error);
   }
@@ -1157,14 +1171,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.AddMyMessageReactionResponse](../../models/operations/addmymessagereactionresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteOwnReaction
 
@@ -1180,13 +1195,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.deleteOwnReaction({
+  const result = await discord.messages.deleteOwnReaction({
     channelId: "<value>",
     messageId: "<value>",
     emojiName: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1214,7 +1229,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesDeleteOwnReaction failed:", res.error);
   }
@@ -1234,14 +1249,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteMyMessageReactionResponse](../../models/operations/deletemymessagereactionresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteUserReaction
 
@@ -1257,14 +1273,14 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.messages.deleteUserReaction({
+  const result = await discord.messages.deleteUserReaction({
     channelId: "<value>",
     messageId: "<value>",
     emojiName: "<value>",
     userId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1293,7 +1309,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("messagesDeleteUserReaction failed:", res.error);
   }
@@ -1313,11 +1329,12 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteUserMessageReactionResponse](../../models/operations/deleteusermessagereactionresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

@@ -33,6 +33,15 @@ export type UpdateChannelResponseBody =
   | components.ThreadResponse
   | components.GuildChannelResponse;
 
+export type UpdateChannelResponse = {
+  headers: { [k: string]: Array<string> };
+  result:
+    | components.PrivateChannelResponse
+    | components.PrivateGroupChannelResponse
+    | components.ThreadResponse
+    | components.GuildChannelResponse;
+};
+
 /** @internal */
 export const UpdateChannelRequestBody$inboundSchema: z.ZodType<
   UpdateChannelRequestBody,
@@ -235,5 +244,86 @@ export function updateChannelResponseBodyFromJSON(
     jsonString,
     (x) => UpdateChannelResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateChannelResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateChannelResponse$inboundSchema: z.ZodType<
+  UpdateChannelResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: z.union([
+    components.PrivateChannelResponse$inboundSchema,
+    components.PrivateGroupChannelResponse$inboundSchema,
+    components.ThreadResponse$inboundSchema,
+    components.GuildChannelResponse$inboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateChannelResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result:
+    | components.PrivateChannelResponse$Outbound
+    | components.PrivateGroupChannelResponse$Outbound
+    | components.ThreadResponse$Outbound
+    | components.GuildChannelResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateChannelResponse$outboundSchema: z.ZodType<
+  UpdateChannelResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateChannelResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: z.union([
+    components.PrivateChannelResponse$outboundSchema,
+    components.PrivateGroupChannelResponse$outboundSchema,
+    components.ThreadResponse$outboundSchema,
+    components.GuildChannelResponse$outboundSchema,
+  ]),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateChannelResponse$ {
+  /** @deprecated use `UpdateChannelResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateChannelResponse$inboundSchema;
+  /** @deprecated use `UpdateChannelResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateChannelResponse$outboundSchema;
+  /** @deprecated use `UpdateChannelResponse$Outbound` instead. */
+  export type Outbound = UpdateChannelResponse$Outbound;
+}
+
+export function updateChannelResponseToJSON(
+  updateChannelResponse: UpdateChannelResponse,
+): string {
+  return JSON.stringify(
+    UpdateChannelResponse$outboundSchema.parse(updateChannelResponse),
+  );
+}
+
+export function updateChannelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateChannelResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateChannelResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateChannelResponse' from JSON`,
   );
 }

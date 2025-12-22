@@ -20,6 +20,11 @@ export type UpdateApplicationCommandRequest = {
     components.ApplicationCommandPatchRequestPartial;
 };
 
+export type UpdateApplicationCommandResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.ApplicationCommandResponse;
+};
+
 /** @internal */
 export const UpdateApplicationCommandSecurity$inboundSchema: z.ZodType<
   UpdateApplicationCommandSecurity,
@@ -160,5 +165,74 @@ export function updateApplicationCommandRequestFromJSON(
     jsonString,
     (x) => UpdateApplicationCommandRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateApplicationCommandRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateApplicationCommandResponse$inboundSchema: z.ZodType<
+  UpdateApplicationCommandResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.ApplicationCommandResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateApplicationCommandResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.ApplicationCommandResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateApplicationCommandResponse$outboundSchema: z.ZodType<
+  UpdateApplicationCommandResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateApplicationCommandResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.ApplicationCommandResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateApplicationCommandResponse$ {
+  /** @deprecated use `UpdateApplicationCommandResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateApplicationCommandResponse$inboundSchema;
+  /** @deprecated use `UpdateApplicationCommandResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateApplicationCommandResponse$outboundSchema;
+  /** @deprecated use `UpdateApplicationCommandResponse$Outbound` instead. */
+  export type Outbound = UpdateApplicationCommandResponse$Outbound;
+}
+
+export function updateApplicationCommandResponseToJSON(
+  updateApplicationCommandResponse: UpdateApplicationCommandResponse,
+): string {
+  return JSON.stringify(
+    UpdateApplicationCommandResponse$outboundSchema.parse(
+      updateApplicationCommandResponse,
+    ),
+  );
+}
+
+export function updateApplicationCommandResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateApplicationCommandResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateApplicationCommandResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateApplicationCommandResponse' from JSON`,
   );
 }

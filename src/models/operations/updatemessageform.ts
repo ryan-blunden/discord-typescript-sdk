@@ -15,6 +15,11 @@ export type UpdateMessageFormRequest = {
   messageEditRequestPartial: components.MessageEditRequestPartial;
 };
 
+export type UpdateMessageFormResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.MessageResponse;
+};
+
 /** @internal */
 export const UpdateMessageFormRequest$inboundSchema: z.ZodType<
   UpdateMessageFormRequest,
@@ -85,5 +90,72 @@ export function updateMessageFormRequestFromJSON(
     jsonString,
     (x) => UpdateMessageFormRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateMessageFormRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateMessageFormResponse$inboundSchema: z.ZodType<
+  UpdateMessageFormResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.MessageResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type UpdateMessageFormResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.MessageResponse$Outbound;
+};
+
+/** @internal */
+export const UpdateMessageFormResponse$outboundSchema: z.ZodType<
+  UpdateMessageFormResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateMessageFormResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.MessageResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateMessageFormResponse$ {
+  /** @deprecated use `UpdateMessageFormResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateMessageFormResponse$inboundSchema;
+  /** @deprecated use `UpdateMessageFormResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateMessageFormResponse$outboundSchema;
+  /** @deprecated use `UpdateMessageFormResponse$Outbound` instead. */
+  export type Outbound = UpdateMessageFormResponse$Outbound;
+}
+
+export function updateMessageFormResponseToJSON(
+  updateMessageFormResponse: UpdateMessageFormResponse,
+): string {
+  return JSON.stringify(
+    UpdateMessageFormResponse$outboundSchema.parse(updateMessageFormResponse),
+  );
+}
+
+export function updateMessageFormResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateMessageFormResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateMessageFormResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateMessageFormResponse' from JSON`,
   );
 }

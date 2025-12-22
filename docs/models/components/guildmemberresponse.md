@@ -14,10 +14,10 @@ let value: GuildMemberResponse = {
   ],
   user: {
     id: "<value>",
-    username: "Braulio60",
+    username: "Jeffery46",
     discriminator: "<value>",
-    publicFlags: 484824,
-    flags: 238527,
+    publicFlags: 573721,
+    flags: 285972,
   },
   mute: true,
   deaf: true,
@@ -38,6 +38,7 @@ let value: GuildMemberResponse = {
 | `pending`                                                                                          | *boolean*                                                                                          | :heavy_check_mark:                                                                                 | N/A                                                                                                |
 | `premiumSince`                                                                                     | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)      | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
 | `roles`                                                                                            | *string*[]                                                                                         | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `collectibles`                                                                                     | [components.UserCollectiblesResponse](../../models/components/usercollectiblesresponse.md)         | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
 | `user`                                                                                             | [components.UserResponse](../../models/components/userresponse.md)                                 | :heavy_check_mark:                                                                                 | N/A                                                                                                |
 | `mute`                                                                                             | *boolean*                                                                                          | :heavy_check_mark:                                                                                 | N/A                                                                                                |
 | `deaf`                                                                                             | *boolean*                                                                                          | :heavy_check_mark:                                                                                 | N/A                                                                                                |

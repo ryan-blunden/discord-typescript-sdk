@@ -6,85 +6,18 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type UpdateVoiceStateRequestBody = {
-  suppress?: boolean | null | undefined;
-  channelId?: string | null | undefined;
-};
 
 export type UpdateVoiceStateRequest = {
   guildId: string;
   userId: string;
-  requestBody: UpdateVoiceStateRequestBody;
+  updateVoiceStateRequestPartial: components.UpdateVoiceStateRequestPartial;
 };
 
-/** @internal */
-export const UpdateVoiceStateRequestBody$inboundSchema: z.ZodType<
-  UpdateVoiceStateRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  suppress: z.nullable(z.boolean()).optional(),
-  channel_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "channel_id": "channelId",
-  });
-});
-
-/** @internal */
-export type UpdateVoiceStateRequestBody$Outbound = {
-  suppress?: boolean | null | undefined;
-  channel_id?: string | null | undefined;
+export type UpdateVoiceStateResponse = {
+  headers: { [k: string]: Array<string> };
 };
-
-/** @internal */
-export const UpdateVoiceStateRequestBody$outboundSchema: z.ZodType<
-  UpdateVoiceStateRequestBody$Outbound,
-  z.ZodTypeDef,
-  UpdateVoiceStateRequestBody
-> = z.object({
-  suppress: z.nullable(z.boolean()).optional(),
-  channelId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    channelId: "channel_id",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateVoiceStateRequestBody$ {
-  /** @deprecated use `UpdateVoiceStateRequestBody$inboundSchema` instead. */
-  export const inboundSchema = UpdateVoiceStateRequestBody$inboundSchema;
-  /** @deprecated use `UpdateVoiceStateRequestBody$outboundSchema` instead. */
-  export const outboundSchema = UpdateVoiceStateRequestBody$outboundSchema;
-  /** @deprecated use `UpdateVoiceStateRequestBody$Outbound` instead. */
-  export type Outbound = UpdateVoiceStateRequestBody$Outbound;
-}
-
-export function updateVoiceStateRequestBodyToJSON(
-  updateVoiceStateRequestBody: UpdateVoiceStateRequestBody,
-): string {
-  return JSON.stringify(
-    UpdateVoiceStateRequestBody$outboundSchema.parse(
-      updateVoiceStateRequestBody,
-    ),
-  );
-}
-
-export function updateVoiceStateRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateVoiceStateRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateVoiceStateRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateVoiceStateRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateVoiceStateRequest$inboundSchema: z.ZodType<
@@ -94,12 +27,13 @@ export const UpdateVoiceStateRequest$inboundSchema: z.ZodType<
 > = z.object({
   guild_id: z.string(),
   user_id: z.string(),
-  RequestBody: z.lazy(() => UpdateVoiceStateRequestBody$inboundSchema),
+  UpdateVoiceStateRequestPartial:
+    components.UpdateVoiceStateRequestPartial$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "guild_id": "guildId",
     "user_id": "userId",
-    "RequestBody": "requestBody",
+    "UpdateVoiceStateRequestPartial": "updateVoiceStateRequestPartial",
   });
 });
 
@@ -107,7 +41,8 @@ export const UpdateVoiceStateRequest$inboundSchema: z.ZodType<
 export type UpdateVoiceStateRequest$Outbound = {
   guild_id: string;
   user_id: string;
-  RequestBody: UpdateVoiceStateRequestBody$Outbound;
+  UpdateVoiceStateRequestPartial:
+    components.UpdateVoiceStateRequestPartial$Outbound;
 };
 
 /** @internal */
@@ -118,12 +53,13 @@ export const UpdateVoiceStateRequest$outboundSchema: z.ZodType<
 > = z.object({
   guildId: z.string(),
   userId: z.string(),
-  requestBody: z.lazy(() => UpdateVoiceStateRequestBody$outboundSchema),
+  updateVoiceStateRequestPartial:
+    components.UpdateVoiceStateRequestPartial$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     guildId: "guild_id",
     userId: "user_id",
-    requestBody: "RequestBody",
+    updateVoiceStateRequestPartial: "UpdateVoiceStateRequestPartial",
   });
 });
 
@@ -155,5 +91,67 @@ export function updateVoiceStateRequestFromJSON(
     jsonString,
     (x) => UpdateVoiceStateRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateVoiceStateRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateVoiceStateResponse$inboundSchema: z.ZodType<
+  UpdateVoiceStateResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+  });
+});
+
+/** @internal */
+export type UpdateVoiceStateResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const UpdateVoiceStateResponse$outboundSchema: z.ZodType<
+  UpdateVoiceStateResponse$Outbound,
+  z.ZodTypeDef,
+  UpdateVoiceStateResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateVoiceStateResponse$ {
+  /** @deprecated use `UpdateVoiceStateResponse$inboundSchema` instead. */
+  export const inboundSchema = UpdateVoiceStateResponse$inboundSchema;
+  /** @deprecated use `UpdateVoiceStateResponse$outboundSchema` instead. */
+  export const outboundSchema = UpdateVoiceStateResponse$outboundSchema;
+  /** @deprecated use `UpdateVoiceStateResponse$Outbound` instead. */
+  export type Outbound = UpdateVoiceStateResponse$Outbound;
+}
+
+export function updateVoiceStateResponseToJSON(
+  updateVoiceStateResponse: UpdateVoiceStateResponse,
+): string {
+  return JSON.stringify(
+    UpdateVoiceStateResponse$outboundSchema.parse(updateVoiceStateResponse),
+  );
+}
+
+export function updateVoiceStateResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateVoiceStateResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateVoiceStateResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateVoiceStateResponse' from JSON`,
   );
 }

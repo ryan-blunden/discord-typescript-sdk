@@ -17,8 +17,8 @@ import {
 export type ResourceChannelResponse = {
   channelId: string;
   title: string;
-  emoji?: SettingsEmojiResponse | null | undefined;
-  icon?: string | null | undefined;
+  emoji?: SettingsEmojiResponse | undefined;
+  icon?: string | undefined;
   description: string;
 };
 
@@ -30,8 +30,8 @@ export const ResourceChannelResponse$inboundSchema: z.ZodType<
 > = z.object({
   channel_id: z.string(),
   title: z.string(),
-  emoji: z.nullable(SettingsEmojiResponse$inboundSchema).optional(),
-  icon: z.nullable(z.string()).optional(),
+  emoji: SettingsEmojiResponse$inboundSchema.optional(),
+  icon: z.string().optional(),
   description: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -43,8 +43,8 @@ export const ResourceChannelResponse$inboundSchema: z.ZodType<
 export type ResourceChannelResponse$Outbound = {
   channel_id: string;
   title: string;
-  emoji?: SettingsEmojiResponse$Outbound | null | undefined;
-  icon?: string | null | undefined;
+  emoji?: SettingsEmojiResponse$Outbound | undefined;
+  icon?: string | undefined;
   description: string;
 };
 
@@ -56,8 +56,8 @@ export const ResourceChannelResponse$outboundSchema: z.ZodType<
 > = z.object({
   channelId: z.string(),
   title: z.string(),
-  emoji: z.nullable(SettingsEmojiResponse$outboundSchema).optional(),
-  icon: z.nullable(z.string()).optional(),
+  emoji: SettingsEmojiResponse$outboundSchema.optional(),
+  icon: z.string().optional(),
   description: z.string(),
 }).transform((v) => {
   return remap$(v, {

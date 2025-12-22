@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetEntitlementSecurity = {
@@ -15,6 +16,11 @@ export type GetEntitlementSecurity = {
 export type GetEntitlementRequest = {
   applicationId: string;
   entitlementId: string;
+};
+
+export type GetEntitlementResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.EntitlementResponse;
 };
 
 /** @internal */
@@ -143,5 +149,72 @@ export function getEntitlementRequestFromJSON(
     jsonString,
     (x) => GetEntitlementRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetEntitlementRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEntitlementResponse$inboundSchema: z.ZodType<
+  GetEntitlementResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.EntitlementResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetEntitlementResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.EntitlementResponse$Outbound;
+};
+
+/** @internal */
+export const GetEntitlementResponse$outboundSchema: z.ZodType<
+  GetEntitlementResponse$Outbound,
+  z.ZodTypeDef,
+  GetEntitlementResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.EntitlementResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetEntitlementResponse$ {
+  /** @deprecated use `GetEntitlementResponse$inboundSchema` instead. */
+  export const inboundSchema = GetEntitlementResponse$inboundSchema;
+  /** @deprecated use `GetEntitlementResponse$outboundSchema` instead. */
+  export const outboundSchema = GetEntitlementResponse$outboundSchema;
+  /** @deprecated use `GetEntitlementResponse$Outbound` instead. */
+  export type Outbound = GetEntitlementResponse$Outbound;
+}
+
+export function getEntitlementResponseToJSON(
+  getEntitlementResponse: GetEntitlementResponse,
+): string {
+  return JSON.stringify(
+    GetEntitlementResponse$outboundSchema.parse(getEntitlementResponse),
+  );
+}
+
+export function getEntitlementResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEntitlementResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetEntitlementResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEntitlementResponse' from JSON`,
   );
 }

@@ -12,6 +12,7 @@ let value: InviteGuildResponse = {
     "<value 1>",
     "<value 2>",
   ],
+  premiumSubscriptionCount: 210169,
 };
 ```
 
@@ -30,4 +31,4 @@ let value: InviteGuildResponse = {
 | `vanityUrlCode`            | *string*                   | :heavy_minus_sign:         | N/A                        |
 | `nsfwLevel`                | *number*                   | :heavy_minus_sign:         | N/A                        |
 | `nsfw`                     | *boolean*                  | :heavy_minus_sign:         | N/A                        |
-| `premiumSubscriptionCount` | *number*                   | :heavy_minus_sign:         | N/A                        |
+| `premiumSubscriptionCount` | *number*                   | :heavy_check_mark:         | N/A                        |

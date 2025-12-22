@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetMessageRequest = {
   channelId: string;
   messageId: string;
+};
+
+export type GetMessageResponse = {
+  headers: { [k: string]: Array<string> };
+  result: components.MessageResponse;
 };
 
 /** @internal */
@@ -77,5 +83,72 @@ export function getMessageRequestFromJSON(
     jsonString,
     (x) => GetMessageRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetMessageRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetMessageResponse$inboundSchema: z.ZodType<
+  GetMessageResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Headers: z.record(z.array(z.string())),
+  Result: components.MessageResponse$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Headers": "headers",
+    "Result": "result",
+  });
+});
+
+/** @internal */
+export type GetMessageResponse$Outbound = {
+  Headers: { [k: string]: Array<string> };
+  Result: components.MessageResponse$Outbound;
+};
+
+/** @internal */
+export const GetMessageResponse$outboundSchema: z.ZodType<
+  GetMessageResponse$Outbound,
+  z.ZodTypeDef,
+  GetMessageResponse
+> = z.object({
+  headers: z.record(z.array(z.string())),
+  result: components.MessageResponse$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    headers: "Headers",
+    result: "Result",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetMessageResponse$ {
+  /** @deprecated use `GetMessageResponse$inboundSchema` instead. */
+  export const inboundSchema = GetMessageResponse$inboundSchema;
+  /** @deprecated use `GetMessageResponse$outboundSchema` instead. */
+  export const outboundSchema = GetMessageResponse$outboundSchema;
+  /** @deprecated use `GetMessageResponse$Outbound` instead. */
+  export type Outbound = GetMessageResponse$Outbound;
+}
+
+export function getMessageResponseToJSON(
+  getMessageResponse: GetMessageResponse,
+): string {
+  return JSON.stringify(
+    GetMessageResponse$outboundSchema.parse(getMessageResponse),
+  );
+}
+
+export function getMessageResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetMessageResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetMessageResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetMessageResponse' from JSON`,
   );
 }

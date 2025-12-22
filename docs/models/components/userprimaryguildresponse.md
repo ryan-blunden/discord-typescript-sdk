@@ -10,5 +10,9 @@ let value: UserPrimaryGuildResponse = {};
 
 ## Fields
 
-| Field       | Type        | Required    | Description |
-| ----------- | ----------- | ----------- | ----------- |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `identityGuildId`  | *string*           | :heavy_minus_sign: | N/A                |
+| `identityEnabled`  | *boolean*          | :heavy_minus_sign: | N/A                |
+| `tag`              | *string*           | :heavy_minus_sign: | N/A                |
+| `badge`            | *string*           | :heavy_minus_sign: | N/A                |

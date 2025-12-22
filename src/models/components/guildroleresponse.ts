@@ -8,6 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  GuildRoleColorsResponse,
+  GuildRoleColorsResponse$inboundSchema,
+  GuildRoleColorsResponse$Outbound,
+  GuildRoleColorsResponse$outboundSchema,
+} from "./guildrolecolorsresponse.js";
+import {
   GuildRoleTagsResponse,
   GuildRoleTagsResponse$inboundSchema,
   GuildRoleTagsResponse$Outbound,
@@ -21,12 +27,14 @@ export type GuildRoleResponse = {
   permissions: string;
   position: number;
   color: number;
+  colors: GuildRoleColorsResponse;
   hoist: boolean;
   managed: boolean;
   mentionable: boolean;
   icon?: string | null | undefined;
   unicodeEmoji?: string | null | undefined;
-  tags?: GuildRoleTagsResponse | null | undefined;
+  tags?: GuildRoleTagsResponse | undefined;
+  flags: number;
 };
 
 /** @internal */
@@ -41,12 +49,14 @@ export const GuildRoleResponse$inboundSchema: z.ZodType<
   permissions: z.string(),
   position: z.number().int(),
   color: z.number().int(),
+  colors: GuildRoleColorsResponse$inboundSchema,
   hoist: z.boolean(),
   managed: z.boolean(),
   mentionable: z.boolean(),
   icon: z.nullable(z.string()).optional(),
   unicode_emoji: z.nullable(z.string()).optional(),
-  tags: z.nullable(GuildRoleTagsResponse$inboundSchema).optional(),
+  tags: GuildRoleTagsResponse$inboundSchema.optional(),
+  flags: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     "unicode_emoji": "unicodeEmoji",
@@ -61,12 +71,14 @@ export type GuildRoleResponse$Outbound = {
   permissions: string;
   position: number;
   color: number;
+  colors: GuildRoleColorsResponse$Outbound;
   hoist: boolean;
   managed: boolean;
   mentionable: boolean;
   icon?: string | null | undefined;
   unicode_emoji?: string | null | undefined;
-  tags?: GuildRoleTagsResponse$Outbound | null | undefined;
+  tags?: GuildRoleTagsResponse$Outbound | undefined;
+  flags: number;
 };
 
 /** @internal */
@@ -81,12 +93,14 @@ export const GuildRoleResponse$outboundSchema: z.ZodType<
   permissions: z.string(),
   position: z.number().int(),
   color: z.number().int(),
+  colors: GuildRoleColorsResponse$outboundSchema,
   hoist: z.boolean(),
   managed: z.boolean(),
   mentionable: z.boolean(),
   icon: z.nullable(z.string()).optional(),
   unicodeEmoji: z.nullable(z.string()).optional(),
-  tags: z.nullable(GuildRoleTagsResponse$outboundSchema).optional(),
+  tags: GuildRoleTagsResponse$outboundSchema.optional(),
+  flags: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     unicodeEmoji: "unicode_emoji",

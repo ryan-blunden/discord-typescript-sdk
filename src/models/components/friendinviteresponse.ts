@@ -23,16 +23,16 @@ import {
 export type FriendInviteResponse = {
   type?: 0 | undefined;
   code: string;
-  inviter?: UserResponse | null | undefined;
-  maxAge?: number | null | undefined;
-  createdAt?: Date | null | undefined;
+  inviter?: UserResponse | undefined;
+  maxAge?: number | undefined;
+  createdAt?: Date | undefined;
   expiresAt?: Date | null | undefined;
-  friendsCount?: number | null | undefined;
+  friendsCount?: number | undefined;
   channel?: InviteChannelResponse | null | undefined;
-  isContact?: boolean | null | undefined;
-  uses?: number | null | undefined;
-  maxUses?: number | null | undefined;
-  flags?: number | null | undefined;
+  isContact?: boolean | undefined;
+  uses?: number | undefined;
+  maxUses?: number | undefined;
+  flags?: number | undefined;
 };
 
 /** @internal */
@@ -43,20 +43,19 @@ export const FriendInviteResponse$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal(0).optional(),
   code: z.string(),
-  inviter: z.nullable(UserResponse$inboundSchema).optional(),
-  max_age: z.nullable(z.number().int()).optional(),
-  created_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
+  inviter: UserResponse$inboundSchema.optional(),
+  max_age: z.number().int().optional(),
+  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
   expires_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  friends_count: z.nullable(z.number().int()).optional(),
+  friends_count: z.number().int().optional(),
   channel: z.nullable(InviteChannelResponse$inboundSchema).optional(),
-  is_contact: z.nullable(z.boolean()).optional(),
-  uses: z.nullable(z.number().int()).optional(),
-  max_uses: z.nullable(z.number().int()).optional(),
-  flags: z.nullable(z.number().int()).optional(),
+  is_contact: z.boolean().optional(),
+  uses: z.number().int().optional(),
+  max_uses: z.number().int().optional(),
+  flags: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_age": "maxAge",
@@ -72,16 +71,16 @@ export const FriendInviteResponse$inboundSchema: z.ZodType<
 export type FriendInviteResponse$Outbound = {
   type: 0;
   code: string;
-  inviter?: UserResponse$Outbound | null | undefined;
-  max_age?: number | null | undefined;
-  created_at?: string | null | undefined;
+  inviter?: UserResponse$Outbound | undefined;
+  max_age?: number | undefined;
+  created_at?: string | undefined;
   expires_at?: string | null | undefined;
-  friends_count?: number | null | undefined;
+  friends_count?: number | undefined;
   channel?: InviteChannelResponse$Outbound | null | undefined;
-  is_contact?: boolean | null | undefined;
-  uses?: number | null | undefined;
-  max_uses?: number | null | undefined;
-  flags?: number | null | undefined;
+  is_contact?: boolean | undefined;
+  uses?: number | undefined;
+  max_uses?: number | undefined;
+  flags?: number | undefined;
 };
 
 /** @internal */
@@ -92,16 +91,16 @@ export const FriendInviteResponse$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal(0).default(0 as const),
   code: z.string(),
-  inviter: z.nullable(UserResponse$outboundSchema).optional(),
-  maxAge: z.nullable(z.number().int()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  inviter: UserResponse$outboundSchema.optional(),
+  maxAge: z.number().int().optional(),
+  createdAt: z.date().transform(v => v.toISOString()).optional(),
   expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  friendsCount: z.nullable(z.number().int()).optional(),
+  friendsCount: z.number().int().optional(),
   channel: z.nullable(InviteChannelResponse$outboundSchema).optional(),
-  isContact: z.nullable(z.boolean()).optional(),
-  uses: z.nullable(z.number().int()).optional(),
-  maxUses: z.nullable(z.number().int()).optional(),
-  flags: z.nullable(z.number().int()).optional(),
+  isContact: z.boolean().optional(),
+  uses: z.number().int().optional(),
+  maxUses: z.number().int().optional(),
+  flags: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     maxAge: "max_age",

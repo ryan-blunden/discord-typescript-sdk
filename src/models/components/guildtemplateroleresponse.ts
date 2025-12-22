@@ -7,12 +7,19 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  GuildTemplateRoleColorsResponse,
+  GuildTemplateRoleColorsResponse$inboundSchema,
+  GuildTemplateRoleColorsResponse$Outbound,
+  GuildTemplateRoleColorsResponse$outboundSchema,
+} from "./guildtemplaterolecolorsresponse.js";
 
 export type GuildTemplateRoleResponse = {
   id: number;
   name: string;
   permissions: string;
   color: number;
+  colors?: GuildTemplateRoleColorsResponse | null | undefined;
   hoist: boolean;
   mentionable: boolean;
   icon?: string | null | undefined;
@@ -29,6 +36,7 @@ export const GuildTemplateRoleResponse$inboundSchema: z.ZodType<
   name: z.string(),
   permissions: z.string(),
   color: z.number().int(),
+  colors: z.nullable(GuildTemplateRoleColorsResponse$inboundSchema).optional(),
   hoist: z.boolean(),
   mentionable: z.boolean(),
   icon: z.nullable(z.string()).optional(),
@@ -45,6 +53,7 @@ export type GuildTemplateRoleResponse$Outbound = {
   name: string;
   permissions: string;
   color: number;
+  colors?: GuildTemplateRoleColorsResponse$Outbound | null | undefined;
   hoist: boolean;
   mentionable: boolean;
   icon?: string | null | undefined;
@@ -61,6 +70,7 @@ export const GuildTemplateRoleResponse$outboundSchema: z.ZodType<
   name: z.string(),
   permissions: z.string(),
   color: z.number().int(),
+  colors: z.nullable(GuildTemplateRoleColorsResponse$outboundSchema).optional(),
   hoist: z.boolean(),
   mentionable: z.boolean(),
   icon: z.nullable(z.string()).optional(),
