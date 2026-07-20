@@ -6,27 +6,34 @@
 import { DiscordIntegrationResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: DiscordIntegrationResponse = {
+  type: "guild_subscription",
+  name: "<value>",
+  account: {
+    id: "<id>",
+    name: null,
+  },
+  enabled: true,
   id: "<value>",
   application: {
     id: "<value>",
     name: "<value>",
-    description: "meh scrape while solace why busily wherever",
+    icon: "<value>",
+    description: "beside off upon knowledgeable hence king",
+    type: 4,
   },
-  scopes: [
-    "<value 1>",
-  ],
+  scopes: [],
 };
 ```
 
 ## Fields
 
-| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                 | *string*                                                                                               | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
-| `name`                                                                                                 | *string*                                                                                               | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
-| `account`                                                                                              | [components.AccountResponse](../../models/components/accountresponse.md)                               | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
-| `enabled`                                                                                              | *boolean*                                                                                              | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
-| `id`                                                                                                   | *string*                                                                                               | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
-| `application`                                                                                          | [components.IntegrationApplicationResponse](../../models/components/integrationapplicationresponse.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
-| `scopes`                                                                                               | *string*[]                                                                                             | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
-| `user`                                                                                                 | [components.UserResponse](../../models/components/userresponse.md)                                     | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                       | [components.DiscordIntegrationResponseType](../../models/components/discordintegrationresponsetype.md)       | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `name`                                                                                                       | *string*                                                                                                     | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `account`                                                                                                    | [components.AccountResponse](../../models/components/accountresponse.md)                                     | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `enabled`                                                                                                    | *boolean*                                                                                                    | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `id`                                                                                                         | *string*                                                                                                     | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `application`                                                                                                | [components.IntegrationApplicationResponse](../../models/components/integrationapplicationresponse.md)       | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `scopes`                                                                                                     | [components.DiscordIntegrationResponseScopes](../../models/components/discordintegrationresponsescopes.md)[] | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `user`                                                                                                       | [components.UserResponse](../../models/components/userresponse.md)                                           | :heavy_minus_sign:                                                                                           | N/A                                                                                                          |

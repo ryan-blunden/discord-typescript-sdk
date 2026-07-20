@@ -7,14 +7,15 @@ import { ApplicationCommandPermission } from "@ryan.blunden/discord-sdk/models/c
 
 let value: ApplicationCommandPermission = {
   id: "<value>",
-  permission: true,
+  type: 2,
+  permission: false,
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | N/A                |
-| `type`             | *number*           | :heavy_check_mark: | N/A                |
-| `permission`       | *boolean*          | :heavy_check_mark: | N/A                |
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                       | *string*                                                                                                   | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `type`                                                                                                     | [components.ApplicationCommandPermissionType](../../models/components/applicationcommandpermissiontype.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `permission`                                                                                               | *boolean*                                                                                                  | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

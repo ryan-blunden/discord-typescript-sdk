@@ -4,7 +4,9 @@
 
 import { channelsAddGroupDMRecipient } from "../funcs/channelsAddGroupDMRecipient.js";
 import { channelsAddThreadMember } from "../funcs/channelsAddThreadMember.js";
-import { channelsCreateInvite } from "../funcs/channelsCreateInvite.js";
+import { channelsCreateInviteForm } from "../funcs/channelsCreateInviteForm.js";
+import { channelsCreateInviteJson } from "../funcs/channelsCreateInviteJson.js";
+import { channelsCreateInviteMultipart } from "../funcs/channelsCreateInviteMultipart.js";
 import { channelsDelete } from "../funcs/channelsDelete.js";
 import { channelsDeletePermissionOverwrite } from "../funcs/channelsDeletePermissionOverwrite.js";
 import { channelsFollow } from "../funcs/channelsFollow.js";
@@ -29,7 +31,6 @@ import { channelsTriggerTypingIndicator } from "../funcs/channelsTriggerTypingIn
 import { channelsUnpinMessage } from "../funcs/channelsUnpinMessage.js";
 import { channelsUpdate } from "../funcs/channelsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -40,7 +41,7 @@ export class Channels extends ClientSDK {
   async get(
     request: operations.GetChannelRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetChannelResponseBody> {
+  ): Promise<operations.GetChannelResponse> {
     return unwrapAsync(channelsGet(
       this,
       request,
@@ -54,7 +55,7 @@ export class Channels extends ClientSDK {
   async delete(
     request: operations.DeleteChannelRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteChannelResponseBody> {
+  ): Promise<operations.DeleteChannelResponse> {
     return unwrapAsync(channelsDelete(
       this,
       request,
@@ -68,7 +69,7 @@ export class Channels extends ClientSDK {
   async update(
     request: operations.UpdateChannelRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateChannelResponseBody> {
+  ): Promise<operations.UpdateChannelResponse> {
     return unwrapAsync(channelsUpdate(
       this,
       request,
@@ -82,7 +83,7 @@ export class Channels extends ClientSDK {
   async follow(
     request: operations.FollowChannelRequest,
     options?: RequestOptions,
-  ): Promise<components.ChannelFollowerResponse> {
+  ): Promise<operations.FollowChannelResponse> {
     return unwrapAsync(channelsFollow(
       this,
       request,
@@ -96,7 +97,7 @@ export class Channels extends ClientSDK {
   async listInvites(
     request: operations.ListChannelInvitesRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.ResponseBody>> {
+  ): Promise<operations.ListChannelInvitesResponse> {
     return unwrapAsync(channelsListInvites(
       this,
       request,
@@ -107,11 +108,39 @@ export class Channels extends ClientSDK {
   /**
    * Create a new invite object for the channel.
    */
-  async createInvite(
-    request: operations.CreateChannelInviteRequest,
+  async createInviteJson(
+    request: operations.CreateChannelInviteJsonRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateChannelInviteResponseBody | undefined> {
-    return unwrapAsync(channelsCreateInvite(
+  ): Promise<operations.CreateChannelInviteJsonResponse | undefined> {
+    return unwrapAsync(channelsCreateInviteJson(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a new invite object for the channel.
+   */
+  async createInviteForm(
+    request: operations.CreateChannelInviteFormRequest,
+    options?: RequestOptions,
+  ): Promise<operations.CreateChannelInviteFormResponse | undefined> {
+    return unwrapAsync(channelsCreateInviteForm(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a new invite object for the channel.
+   */
+  async createInviteMultipart(
+    request: operations.CreateChannelInviteMultipartRequest,
+    options?: RequestOptions,
+  ): Promise<operations.CreateChannelInviteMultipartResponse | undefined> {
+    return unwrapAsync(channelsCreateInviteMultipart(
       this,
       request,
       options,
@@ -124,7 +153,7 @@ export class Channels extends ClientSDK {
   async startThreadFromMessage(
     request: operations.CreateThreadFromMessageRequest,
     options?: RequestOptions,
-  ): Promise<components.ThreadResponse> {
+  ): Promise<operations.CreateThreadFromMessageResponse> {
     return unwrapAsync(channelsStartThreadFromMessage(
       this,
       request,
@@ -138,7 +167,7 @@ export class Channels extends ClientSDK {
   async setPermissionOverwrite(
     request: operations.SetChannelPermissionOverwriteRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.SetChannelPermissionOverwriteResponse | undefined> {
     return unwrapAsync(channelsSetPermissionOverwrite(
       this,
       request,
@@ -152,7 +181,7 @@ export class Channels extends ClientSDK {
   async deletePermissionOverwrite(
     request: operations.DeleteChannelPermissionOverwriteRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteChannelPermissionOverwriteResponse | undefined> {
     return unwrapAsync(channelsDeletePermissionOverwrite(
       this,
       request,
@@ -166,7 +195,7 @@ export class Channels extends ClientSDK {
   async listPinnedMessages(
     request: operations.DeprecatedListPinsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.MessageResponse>> {
+  ): Promise<operations.DeprecatedListPinsResponse> {
     return unwrapAsync(channelsListPinnedMessages(
       this,
       request,
@@ -180,7 +209,7 @@ export class Channels extends ClientSDK {
   async pinMessage(
     request: operations.DeprecatedCreatePinRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeprecatedCreatePinResponse | undefined> {
     return unwrapAsync(channelsPinMessage(
       this,
       request,
@@ -194,7 +223,7 @@ export class Channels extends ClientSDK {
   async unpinMessage(
     request: operations.DeprecatedDeletePinRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeprecatedDeletePinResponse | undefined> {
     return unwrapAsync(channelsUnpinMessage(
       this,
       request,
@@ -208,7 +237,7 @@ export class Channels extends ClientSDK {
   async addGroupDMRecipient(
     request: operations.AddGroupDmUserRequest,
     options?: RequestOptions,
-  ): Promise<operations.AddGroupDmUserResponseBody | undefined> {
+  ): Promise<operations.AddGroupDmUserResponse | undefined> {
     return unwrapAsync(channelsAddGroupDMRecipient(
       this,
       request,
@@ -222,7 +251,7 @@ export class Channels extends ClientSDK {
   async removeGroupDMRecipient(
     request: operations.DeleteGroupDmUserRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteGroupDmUserResponse | undefined> {
     return unwrapAsync(channelsRemoveGroupDMRecipient(
       this,
       request,
@@ -236,7 +265,7 @@ export class Channels extends ClientSDK {
   async listThreadMembers(
     request: operations.ListThreadMembersRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.ThreadMemberResponse>> {
+  ): Promise<operations.ListThreadMembersResponse> {
     return unwrapAsync(channelsListThreadMembers(
       this,
       request,
@@ -250,7 +279,7 @@ export class Channels extends ClientSDK {
   async joinThread(
     request: operations.JoinThreadRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.JoinThreadResponse | undefined> {
     return unwrapAsync(channelsJoinThread(
       this,
       request,
@@ -264,7 +293,7 @@ export class Channels extends ClientSDK {
   async leaveThread(
     request: operations.LeaveThreadRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.LeaveThreadResponse | undefined> {
     return unwrapAsync(channelsLeaveThread(
       this,
       request,
@@ -278,7 +307,7 @@ export class Channels extends ClientSDK {
   async getThreadMember(
     request: operations.GetThreadMemberRequest,
     options?: RequestOptions,
-  ): Promise<components.ThreadMemberResponse> {
+  ): Promise<operations.GetThreadMemberResponse> {
     return unwrapAsync(channelsGetThreadMember(
       this,
       request,
@@ -292,7 +321,7 @@ export class Channels extends ClientSDK {
   async addThreadMember(
     request: operations.AddThreadMemberRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.AddThreadMemberResponse | undefined> {
     return unwrapAsync(channelsAddThreadMember(
       this,
       request,
@@ -306,7 +335,7 @@ export class Channels extends ClientSDK {
   async removeThreadMember(
     request: operations.DeleteThreadMemberRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteThreadMemberResponse | undefined> {
     return unwrapAsync(channelsRemoveThreadMember(
       this,
       request,
@@ -320,7 +349,7 @@ export class Channels extends ClientSDK {
   async startThread(
     request: operations.CreateThreadRequest,
     options?: RequestOptions,
-  ): Promise<components.CreatedThreadResponse> {
+  ): Promise<operations.CreateThreadResponse> {
     return unwrapAsync(channelsStartThread(
       this,
       request,
@@ -334,7 +363,7 @@ export class Channels extends ClientSDK {
   async listPrivateArchivedThreads(
     request: operations.ListPrivateArchivedThreadsRequest,
     options?: RequestOptions,
-  ): Promise<components.ThreadsResponse> {
+  ): Promise<operations.ListPrivateArchivedThreadsResponse> {
     return unwrapAsync(channelsListPrivateArchivedThreads(
       this,
       request,
@@ -348,7 +377,7 @@ export class Channels extends ClientSDK {
   async listPublicArchivedThreads(
     request: operations.ListPublicArchivedThreadsRequest,
     options?: RequestOptions,
-  ): Promise<components.ThreadsResponse> {
+  ): Promise<operations.ListPublicArchivedThreadsResponse> {
     return unwrapAsync(channelsListPublicArchivedThreads(
       this,
       request,
@@ -362,7 +391,7 @@ export class Channels extends ClientSDK {
   async searchThreads(
     request: operations.ThreadSearchRequest,
     options?: RequestOptions,
-  ): Promise<components.ThreadSearchResponse> {
+  ): Promise<operations.ThreadSearchResponse> {
     return unwrapAsync(channelsSearchThreads(
       this,
       request,
@@ -376,7 +405,7 @@ export class Channels extends ClientSDK {
   async triggerTypingIndicator(
     request: operations.TriggerTypingIndicatorRequest,
     options?: RequestOptions,
-  ): Promise<components.TypingIndicatorResponse | undefined> {
+  ): Promise<operations.TriggerTypingIndicatorResponse | undefined> {
     return unwrapAsync(channelsTriggerTypingIndicator(
       this,
       request,
@@ -390,7 +419,7 @@ export class Channels extends ClientSDK {
   async listJoinedPrivateArchivedThreads(
     request: operations.ListMyPrivateArchivedThreadsRequest,
     options?: RequestOptions,
-  ): Promise<components.ThreadsResponse> {
+  ): Promise<operations.ListMyPrivateArchivedThreadsResponse> {
     return unwrapAsync(channelsListJoinedPrivateArchivedThreads(
       this,
       request,

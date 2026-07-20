@@ -7,30 +7,36 @@ import { LobbyMessageResponse } from "@ryan.blunden/discord-sdk/models/component
 
 let value: LobbyMessageResponse = {
   id: "<value>",
+  type: 18,
   content: "<value>",
   lobbyId: "<value>",
   channelId: "<value>",
   author: {
     id: "<value>",
-    username: "Sterling_Quitzon50",
+    username: "Darryl.Olson",
+    avatar: "https://picsum.photos/seed/gvSHPC/2249/2747",
     discriminator: "<value>",
-    publicFlags: 770437,
-    flags: 859724,
+    publicFlags: 803196,
+    flags: 561096,
+    globalName: "<value>",
+    primaryGuild: null,
   },
-  flags: 462906,
+  flags: 651111,
 };
 ```
 
 ## Fields
 
-| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `id`                                                               | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
-| `type`                                                             | *number*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
-| `content`                                                          | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
-| `lobbyId`                                                          | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
-| `channelId`                                                        | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
-| `author`                                                           | [components.UserResponse](../../models/components/userresponse.md) | :heavy_check_mark:                                                 | N/A                                                                |
-| `metadata`                                                         | Record<string, *string*>                                           | :heavy_minus_sign:                                                 | N/A                                                                |
-| `flags`                                                            | *number*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
-| `applicationId`                                                    | *string*                                                           | :heavy_minus_sign:                                                 | N/A                                                                |
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `id`                                                                                           | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `type`                                                                                         | [components.MessageType](../../models/components/messagetype.md)                               | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `content`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `lobbyId`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `channelId`                                                                                    | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `author`                                                                                       | [components.UserResponse](../../models/components/userresponse.md)                             | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `lobbyMember`                                                                                  | [components.MessageLobbyMemberResponse](../../models/components/messagelobbymemberresponse.md) | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `metadata`                                                                                     | Record<string, *string*>                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `moderationMetadata`                                                                           | Record<string, *string*>                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `flags`                                                                                        | *number*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `applicationId`                                                                                | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |

@@ -8,7 +8,9 @@ import { IntegrationApplicationResponse } from "@ryan.blunden/discord-sdk/models
 let value: IntegrationApplicationResponse = {
   id: "<value>",
   name: "<value>",
-  description: "meh shabby off",
+  icon: null,
+  description: "countess uncomfortable ouch shameful bolster",
+  type: 4,
 };
 ```
 
@@ -18,9 +20,9 @@ let value: IntegrationApplicationResponse = {
 | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
 | `id`                                                               | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
 | `name`                                                             | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
-| `icon`                                                             | *string*                                                           | :heavy_minus_sign:                                                 | N/A                                                                |
+| `icon`                                                             | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
 | `description`                                                      | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
-| `type`                                                             | *number*                                                           | :heavy_minus_sign:                                                 | N/A                                                                |
+| `type`                                                             | *4*                                                                | :heavy_check_mark:                                                 | N/A                                                                |
 | `coverImage`                                                       | *string*                                                           | :heavy_minus_sign:                                                 | N/A                                                                |
 | `primarySkuId`                                                     | *string*                                                           | :heavy_minus_sign:                                                 | N/A                                                                |
 | `bot`                                                              | [components.UserResponse](../../models/components/userresponse.md) | :heavy_minus_sign:                                                 | N/A                                                                |

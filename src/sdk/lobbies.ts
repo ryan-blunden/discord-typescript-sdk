@@ -12,7 +12,6 @@ import { lobbiesRemoveMember } from "../funcs/lobbiesRemoveMember.js";
 import { lobbiesSendMessage } from "../funcs/lobbiesSendMessage.js";
 import { lobbiesUpdate } from "../funcs/lobbiesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -24,7 +23,7 @@ export class Lobbies extends ClientSDK {
     security: operations.CreateOrJoinLobbySecurity,
     request: operations.CreateOrJoinLobbyRequestBody,
     options?: RequestOptions,
-  ): Promise<components.LobbyResponse> {
+  ): Promise<operations.CreateOrJoinLobbyResponse> {
     return unwrapAsync(lobbiesCreateOrJoin(
       this,
       security,
@@ -39,7 +38,7 @@ export class Lobbies extends ClientSDK {
   async create(
     request: operations.CreateLobbyRequestBody,
     options?: RequestOptions,
-  ): Promise<components.LobbyResponse> {
+  ): Promise<operations.CreateLobbyResponse> {
     return unwrapAsync(lobbiesCreate(
       this,
       request,
@@ -53,7 +52,7 @@ export class Lobbies extends ClientSDK {
   async get(
     request: operations.GetLobbyRequest,
     options?: RequestOptions,
-  ): Promise<components.LobbyResponse> {
+  ): Promise<operations.GetLobbyResponse> {
     return unwrapAsync(lobbiesGet(
       this,
       request,
@@ -67,7 +66,7 @@ export class Lobbies extends ClientSDK {
   async update(
     request: operations.EditLobbyRequest,
     options?: RequestOptions,
-  ): Promise<components.LobbyResponse> {
+  ): Promise<operations.EditLobbyResponse> {
     return unwrapAsync(lobbiesUpdate(
       this,
       request,
@@ -82,7 +81,7 @@ export class Lobbies extends ClientSDK {
     security: operations.EditLobbyChannelLinkSecurity,
     request: operations.EditLobbyChannelLinkRequest,
     options?: RequestOptions,
-  ): Promise<components.LobbyResponse> {
+  ): Promise<operations.EditLobbyChannelLinkResponse> {
     return unwrapAsync(lobbiesConnectToChannel(
       this,
       security,
@@ -98,7 +97,7 @@ export class Lobbies extends ClientSDK {
     security: operations.LeaveLobbySecurity,
     request: operations.LeaveLobbyRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.LeaveLobbyResponse | undefined> {
     return unwrapAsync(lobbiesLeave(
       this,
       security,
@@ -113,7 +112,7 @@ export class Lobbies extends ClientSDK {
   async addMember(
     request: operations.AddLobbyMemberRequest,
     options?: RequestOptions,
-  ): Promise<components.LobbyMemberResponse> {
+  ): Promise<operations.AddLobbyMemberResponse> {
     return unwrapAsync(lobbiesAddMember(
       this,
       request,
@@ -127,7 +126,7 @@ export class Lobbies extends ClientSDK {
   async removeMember(
     request: operations.DeleteLobbyMemberRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteLobbyMemberResponse | undefined> {
     return unwrapAsync(lobbiesRemoveMember(
       this,
       request,
@@ -142,7 +141,7 @@ export class Lobbies extends ClientSDK {
     security: operations.CreateLobbyMessageSecurity,
     request: operations.CreateLobbyMessageRequest,
     options?: RequestOptions,
-  ): Promise<components.LobbyMessageResponse> {
+  ): Promise<operations.CreateLobbyMessageResponse> {
     return unwrapAsync(lobbiesSendMessage(
       this,
       security,

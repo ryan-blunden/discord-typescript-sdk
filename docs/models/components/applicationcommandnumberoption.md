@@ -6,9 +6,9 @@
 import { ApplicationCommandNumberOption } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ApplicationCommandNumberOption = {
+  type: 10,
   name: "<value>",
-  description:
-    "pension relieve mmm loyally daintily best incidentally rewrite every",
+  description: "below around impact ultimately",
 };
 ```
 
@@ -16,7 +16,7 @@ let value: ApplicationCommandNumberOption = {
 
 | Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
 | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                               | *number*                                                                                                             | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+| `type`                                                                                                               | [components.ApplicationCommandNumberOptionType](../../models/components/applicationcommandnumberoptiontype.md)       | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
 | `name`                                                                                                               | *string*                                                                                                             | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
 | `nameLocalizations`                                                                                                  | Record<string, *string*>                                                                                             | :heavy_minus_sign:                                                                                                   | N/A                                                                                                                  |
 | `description`                                                                                                        | *string*                                                                                                             | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |

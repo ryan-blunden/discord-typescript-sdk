@@ -9,6 +9,7 @@ let value: UpdateWebhookMessageMultipartRequest = {
   webhookId: "<value>",
   webhookToken: "<value>",
   messageId: "<value>",
+  requestBody: {},
 };
 ```
 

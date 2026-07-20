@@ -8,7 +8,6 @@ import { entitlementsDeleteTest } from "../funcs/entitlementsDeleteTest.js";
 import { entitlementsGet } from "../funcs/entitlementsGet.js";
 import { entitlementsList } from "../funcs/entitlementsList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -20,7 +19,7 @@ export class Entitlements extends ClientSDK {
     security: operations.GetEntitlementsSecurity,
     request: operations.GetEntitlementsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.EntitlementResponse | null>> {
+  ): Promise<operations.GetEntitlementsResponse> {
     return unwrapAsync(entitlementsList(
       this,
       security,
@@ -35,7 +34,7 @@ export class Entitlements extends ClientSDK {
   async createTest(
     request: operations.CreateEntitlementRequest,
     options?: RequestOptions,
-  ): Promise<components.EntitlementResponse> {
+  ): Promise<operations.CreateEntitlementResponse> {
     return unwrapAsync(entitlementsCreateTest(
       this,
       request,
@@ -50,7 +49,7 @@ export class Entitlements extends ClientSDK {
     security: operations.GetEntitlementSecurity,
     request: operations.GetEntitlementRequest,
     options?: RequestOptions,
-  ): Promise<components.EntitlementResponse> {
+  ): Promise<operations.GetEntitlementResponse> {
     return unwrapAsync(entitlementsGet(
       this,
       security,
@@ -66,7 +65,7 @@ export class Entitlements extends ClientSDK {
     security: operations.DeleteEntitlementSecurity,
     request: operations.DeleteEntitlementRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteEntitlementResponse | undefined> {
     return unwrapAsync(entitlementsDeleteTest(
       this,
       security,
@@ -82,7 +81,7 @@ export class Entitlements extends ClientSDK {
     security: operations.ConsumeEntitlementSecurity,
     request: operations.ConsumeEntitlementRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.ConsumeEntitlementResponse | undefined> {
     return unwrapAsync(entitlementsConsume(
       this,
       security,
