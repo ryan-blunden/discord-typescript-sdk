@@ -6,7 +6,6 @@ import { applicationRoleConnectionMetadataDeleteUserConnection } from "../funcs/
 import { applicationRoleConnectionMetadataList } from "../funcs/applicationRoleConnectionMetadataList.js";
 import { applicationRoleConnectionMetadataUpdate } from "../funcs/applicationRoleConnectionMetadataUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -17,7 +16,7 @@ export class ApplicationRoleConnectionMetadata extends ClientSDK {
   async list(
     request: operations.GetApplicationRoleConnectionsMetadataRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.ApplicationRoleConnectionsMetadataItemResponse>> {
+  ): Promise<operations.GetApplicationRoleConnectionsMetadataResponse> {
     return unwrapAsync(applicationRoleConnectionMetadataList(
       this,
       request,
@@ -31,7 +30,7 @@ export class ApplicationRoleConnectionMetadata extends ClientSDK {
   async update(
     request: operations.UpdateApplicationRoleConnectionsMetadataRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.ApplicationRoleConnectionsMetadataItemResponse>> {
+  ): Promise<operations.UpdateApplicationRoleConnectionsMetadataResponse> {
     return unwrapAsync(applicationRoleConnectionMetadataUpdate(
       this,
       request,
@@ -45,7 +44,9 @@ export class ApplicationRoleConnectionMetadata extends ClientSDK {
   async deleteUserConnection(
     request: operations.DeleteApplicationUserRoleConnectionRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<
+    operations.DeleteApplicationUserRoleConnectionResponse | undefined
+  > {
     return unwrapAsync(applicationRoleConnectionMetadataDeleteUserConnection(
       this,
       request,

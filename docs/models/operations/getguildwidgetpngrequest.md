@@ -12,7 +12,7 @@ let value: GetGuildWidgetPngRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `guildId`          | *string*           | :heavy_check_mark: | N/A                |
-| `style`            | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `guildId`                                                                    | *string*                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `style`                                                                      | [components.WidgetImageStyles](../../models/components/widgetimagestyles.md) | :heavy_minus_sign:                                                           | shield style widget with Discord icon and guild members online count         |

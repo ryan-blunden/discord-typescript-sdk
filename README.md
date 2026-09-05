@@ -67,10 +67,7 @@ bun add @ryan.blunden/discord-sdk
 ### Yarn
 
 ```bash
-yarn add @ryan.blunden/discord-sdk zod
-
-# Note that Yarn does not install peer dependencies automatically. You will need
-# to install zod as shown above.
+yarn add @ryan.blunden/discord-sdk
 ```
 
 
@@ -180,7 +177,9 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.applications.getMe();
+  const result = await discord.listPins({
+    channelId: "<value>",
+  });
 
   console.log(result);
 }
@@ -210,7 +209,9 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.applications.getMe();
+  const result = await discord.listPins({
+    channelId: "<value>",
+  });
 
   console.log(result);
 }
@@ -228,11 +229,8 @@ import { Discord } from "@ryan.blunden/discord-sdk";
 const discord = new Discord();
 
 async function run() {
-  const result = await discord.applications.uploadAttachment({}, {
-    applicationId: "<value>",
-    requestBody: {
-      file: "<value>",
-    },
+  const result = await discord.createLinkedLobbyGuildInviteForSelf({}, {
+    lobbyId: "<value>",
   });
 
   console.log(result);
@@ -249,7 +247,39 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [applicationCommands](docs/sdks/applicationcommands/README.md)
+### [Discord SDK](docs/sdks/discord/README.md)
+
+* [listPins](docs/sdks/discord/README.md#listpins)
+* [createPin](docs/sdks/discord/README.md#createpin)
+* [deletePin](docs/sdks/discord/README.md#deletepin)
+* [updateVoiceChannelStatus](docs/sdks/discord/README.md#updatevoicechannelstatus) - Set a voice channel's status.
+* [guildSearch](docs/sdks/discord/README.md#guildsearch)
+* [getGuildJoinRequests](docs/sdks/discord/README.md#getguildjoinrequests) - List join requests for guild, optionally filtered by application status
+* [actionGuildJoinRequest](docs/sdks/discord/README.md#actionguildjoinrequest) - Approve or reject guild join request
+* [guildRoleMemberCounts](docs/sdks/discord/README.md#guildrolemembercounts)
+* [createGuildScheduledEventException](docs/sdks/discord/README.md#createguildscheduledeventexception) - Create an exception to a recurring guild scheduled event
+* [deleteGuildScheduledEventException](docs/sdks/discord/README.md#deleteguildscheduledeventexception) - Delete an exception to a recurring guild scheduled event
+* [updateGuildScheduledEventException](docs/sdks/discord/README.md#updateguildscheduledeventexception) - Modify an exception to a recurring guild scheduled event
+* [countGuildScheduledEventUsers](docs/sdks/discord/README.md#countguildscheduledeventusers) - Get the count of users subscribed to a guild scheduled event
+* [listGuildScheduledEventExceptionUsers](docs/sdks/discord/README.md#listguildscheduledeventexceptionusers) - Get a list of users subscribed to a guild scheduled event exception
+* [createInteractionResponse](docs/sdks/discord/README.md#createinteractionresponse)
+* [getInviteTargetUsers](docs/sdks/discord/README.md#getinvitetargetusers) - Get the target users for an invite.
+* [updateInviteTargetUsers](docs/sdks/discord/README.md#updateinvitetargetusers) - Update the target users for an existing invite.
+* [getInviteTargetUsersJobStatus](docs/sdks/discord/README.md#getinvitetargetusersjobstatus) - Get the target users job status for an invite.
+* [deleteLobby](docs/sdks/discord/README.md#deletelobby) - Deletes the specified lobby if it exists. It is safe to call even if the lobby is already deleted.
+* [createLinkedLobbyGuildInviteForSelf](docs/sdks/discord/README.md#createlinkedlobbyguildinviteforself)
+* [bulkUpdateLobbyMembers](docs/sdks/discord/README.md#bulkupdatelobbymembers)
+* [createLinkedLobbyGuildInviteForUser](docs/sdks/discord/README.md#createlinkedlobbyguildinviteforuser)
+* [getLobbyMessages](docs/sdks/discord/README.md#getlobbymessages)
+* [updateLobbyMessageExternalModerationMetadata](docs/sdks/discord/README.md#updatelobbymessageexternalmoderationmetadata) - Update the external moderation metadata for a lobby message.
+* [updateUserMessageExternalModerationMetadata](docs/sdks/discord/README.md#updateusermessageexternalmoderationmetadata) - Update the external moderation metadata for a user message (DM).
+* [botPartnerSDKUnmergeProvisionalAccount](docs/sdks/discord/README.md#botpartnersdkunmergeprovisionalaccount)
+* [botPartnerSDKToken](docs/sdks/discord/README.md#botpartnersdktoken)
+* [getSkuSubscriptions](docs/sdks/discord/README.md#getskusubscriptions) - Returns all subscriptions containing the SKU, filtered by user.
+* [getSkuSubscription](docs/sdks/discord/README.md#getskusubscription) - Get a subscription by its ID.
+* [getCurrentUserApplicationEntitlements](docs/sdks/discord/README.md#getcurrentuserapplicationentitlements)
+
+### [ApplicationCommands](docs/sdks/applicationcommands/README.md)
 
 * [list](docs/sdks/applicationcommands/README.md#list) - Fetch all global commands for your application.
 * [bulkSet](docs/sdks/applicationcommands/README.md#bulkset) - Takes a list of application commands, overwriting the existing global command list for this application.
@@ -267,13 +297,13 @@ run();
 * [getGuildPermissions](docs/sdks/applicationcommands/README.md#getguildpermissions) - Fetches command permissions for a specific command for your application in a guild.
 * [setGuildPermissions](docs/sdks/applicationcommands/README.md#setguildpermissions) - Edits command permissions for a specific command for your application in a guild.
 
-### [applicationRoleConnectionMetadata](docs/sdks/applicationroleconnectionmetadata/README.md)
+### [ApplicationRoleConnectionMetadata](docs/sdks/applicationroleconnectionmetadata/README.md)
 
 * [list](docs/sdks/applicationroleconnectionmetadata/README.md#list) - Returns a list of application role connection metadata objects for the given application.
 * [update](docs/sdks/applicationroleconnectionmetadata/README.md#update) - Updates and returns a list of application role connection metadata objects for the given application. An application can have a maximum of 5 metadata records.
 * [deleteUserConnection](docs/sdks/applicationroleconnectionmetadata/README.md#deleteuserconnection) - Deletes the application role connection for the user.
 
-### [applications](docs/sdks/applications/README.md)
+### [Applications](docs/sdks/applications/README.md)
 
 * [getMe](docs/sdks/applications/README.md#getme) - Returns the application object associated with the requesting bot user.
 * [updateSelf](docs/sdks/applications/README.md#updateself) - Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated. Returns the updated application object on success.
@@ -290,11 +320,11 @@ run();
 * [partnerSDKUnmergeProvisionalAccount](docs/sdks/applications/README.md#partnersdkunmergeprovisionalaccount) - Unmerges a provisional account.
 * [partnerSDKToken](docs/sdks/applications/README.md#partnersdktoken) - Gets a token for the partner SDK.
 
-### [auditLogs](docs/sdks/auditlogs/README.md)
+### [AuditLogs](docs/sdks/auditlogs/README.md)
 
 * [list](docs/sdks/auditlogs/README.md#list) - Returns an audit log object for the guild. Requires the VIEW_AUDIT_LOG permission.
 
-### [autoModeration](docs/sdks/automoderation/README.md)
+### [AutoModeration](docs/sdks/automoderation/README.md)
 
 * [listRules](docs/sdks/automoderation/README.md#listrules) - Get a list of all rules currently configured for the guild. Returns a list of auto moderation rule objects for the given guild. This endpoint requires the MANAGE_GUILD permission.
 * [createRule](docs/sdks/automoderation/README.md#createrule) - Create a new rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Create Gateway event.
@@ -302,14 +332,16 @@ run();
 * [deleteRule](docs/sdks/automoderation/README.md#deleterule) - Delete a rule. Returns a 204 on success. Fires an Auto Moderation Rule Delete Gateway event.
 * [updateRule](docs/sdks/automoderation/README.md#updaterule) - Modify an existing rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Update Gateway event.
 
-### [channels](docs/sdks/channels/README.md)
+### [Channels](docs/sdks/channels/README.md)
 
 * [get](docs/sdks/channels/README.md#get) - Returns a channel object for the given channel ID.
 * [delete](docs/sdks/channels/README.md#delete) - Delete a channel, or close a private message. Requires the MANAGE_CHANNELS permission for the guild, or MANAGE_THREADS if the channel is a thread. Returns a channel object on success. Fires a Channel Delete Gateway event (or Thread Delete if the channel was a thread).
 * [update](docs/sdks/channels/README.md#update) - Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.
 * [follow](docs/sdks/channels/README.md#follow) - Follow an Announcement Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. Returns a followed channel object. Fires a Webhooks Update Gateway event for the target channel.
 * [listInvites](docs/sdks/channels/README.md#listinvites) - Returns a list of invite objects (with invite metadata) for the channel.
-* [createInvite](docs/sdks/channels/README.md#createinvite) - Create a new invite object for the channel.
+* [createInviteJson](docs/sdks/channels/README.md#createinvitejson) - Create a new invite object for the channel.
+* [createInviteForm](docs/sdks/channels/README.md#createinviteform) - Create a new invite object for the channel.
+* [createInviteMultipart](docs/sdks/channels/README.md#createinvitemultipart) - Create a new invite object for the channel.
 * [startThreadFromMessage](docs/sdks/channels/README.md#startthreadfrommessage) - Creates a new thread from an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create and a Message Update Gateway event.
 * [setPermissionOverwrite](docs/sdks/channels/README.md#setpermissionoverwrite) - Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
 * [deletePermissionOverwrite](docs/sdks/channels/README.md#deletepermissionoverwrite) - Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
@@ -331,8 +363,7 @@ run();
 * [triggerTypingIndicator](docs/sdks/channels/README.md#triggertypingindicator) - Post a typing indicator for the specified channel, which expires after 10 seconds. Returns a 204 empty response on success. Fires a Typing Start Gateway event.
 * [listJoinedPrivateArchivedThreads](docs/sdks/channels/README.md#listjoinedprivatearchivedthreads) - Returns archived threads in the channel that are of type PRIVATE_THREAD, and the user has joined. Threads are ordered by their id, in descending order. Requires the READ_MESSAGE_HISTORY permission.
 
-
-### [emoji](docs/sdks/emoji/README.md)
+### [Emoji](docs/sdks/emoji/README.md)
 
 * [listApplicationEmojis](docs/sdks/emoji/README.md#listapplicationemojis) - Returns an object containing a list of emoji objects for the given application under the items key. Includes a user object for the team member that uploaded the emoji from the app's settings, or for the bot user if uploaded using the API.
 * [createApplicationEmoji](docs/sdks/emoji/README.md#createapplicationemoji) - Create a new emoji for the application. Returns the new emoji object on success.
@@ -345,7 +376,7 @@ run();
 * [deleteGuildEmoji](docs/sdks/emoji/README.md#deleteguildemoji) - Delete the given emoji. For emojis created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other emojis, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns 204 No Content on success. Fires a Guild Emojis Update Gateway event.
 * [updateGuildEmoji](docs/sdks/emoji/README.md#updateguildemoji) - Modify the given emoji. For emojis created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other emojis, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns the updated emoji object on success. Fires a Guild Emojis Update Gateway event.
 
-### [entitlements](docs/sdks/entitlements/README.md)
+### [Entitlements](docs/sdks/entitlements/README.md)
 
 * [list](docs/sdks/entitlements/README.md#list) - Returns all entitlements for a given app, active and expired.
 * [createTest](docs/sdks/entitlements/README.md#createtest) - Creates a test entitlement to a given SKU for a given guild or user. Discord will act as though that user or guild has entitlement to your premium offering. This endpoint returns a partial entitlement object.
@@ -353,11 +384,9 @@ run();
 * [deleteTest](docs/sdks/entitlements/README.md#deletetest) - Deletes a currently-active test entitlement. Discord will act as though that user or guild no longer has entitlement to your premium offering. Returns 204 No Content on success.
 * [consume](docs/sdks/entitlements/README.md#consume) - For One-Time Purchase consumable SKUs, marks a given entitlement for the user as consumed. The entitlement will have consumed: true when using List Entitlements. Returns a 204 No Content on success.
 
-### [guilds](docs/sdks/guilds/README.md)
+### [Guilds](docs/sdks/guilds/README.md)
 
-* [create](docs/sdks/guilds/README.md#create) - Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.
 * [get](docs/sdks/guilds/README.md#get) - Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.
-* [delete](docs/sdks/guilds/README.md#delete) - Delete a guild permanently. User must be owner. Returns 204 No Content on success. Fires a Guild Delete Gateway event.
 * [update](docs/sdks/guilds/README.md#update) - Modify a guild's settings. Requires the MANAGE_GUILD permission. Returns the updated guild object on success. Fires a Guild Update Gateway event.
 * [listBans](docs/sdks/guilds/README.md#listbans) - Returns a list of ban objects for the users banned from this guild. Requires the BAN_MEMBERS permission.
 * [getBan](docs/sdks/guilds/README.md#getban) - Returns a ban object for the given user or a 404 not found if the ban cannot be found. Requires the BAN_MEMBERS permission.
@@ -367,6 +396,7 @@ run();
 * [listChannels](docs/sdks/guilds/README.md#listchannels) - Returns a list of guild channel objects. Does not include threads.
 * [createChannel](docs/sdks/guilds/README.md#createchannel) - Create a new channel object for the guild. Requires the MANAGE_CHANNELS permission. If setting permission overwrites, only permissions your bot has in the guild can be allowed/denied. Setting MANAGE_ROLES permission in channels is only possible for guild administrators. Returns the new channel object on success. Fires a Channel Create Gateway event.
 * [updateChannelPositions](docs/sdks/guilds/README.md#updatechannelpositions) - Modify the positions of a set of channel objects for the guild. Requires MANAGE_CHANNELS permission. Returns a 204 empty response on success. Fires multiple Channel Update Gateway events.
+* [updateIncidentActions](docs/sdks/guilds/README.md#updateincidentactions) - Modifies the incident actions of the guild. Returns a 200 with the Incidents Data object for the guild. Requires the MANAGE_GUILD permission.
 * [listIntegrations](docs/sdks/guilds/README.md#listintegrations) - Returns a list of integration objects for the guild. Requires the MANAGE_GUILD permission.
 * [deleteIntegration](docs/sdks/guilds/README.md#deleteintegration) - Delete the attached integration object for the guild. Deletes any associated webhooks and kicks the associated bot if there is one. Requires the MANAGE_GUILD permission. Returns a 204 empty response on success. Fires Guild Integrations Update and Integration Delete Gateway events.
 * [listInvites](docs/sdks/guilds/README.md#listinvites) - Returns a list of invite objects (with invite metadata) for the guild. Requires the MANAGE_GUILD permission.
@@ -379,7 +409,6 @@ run();
 * [updateMember](docs/sdks/guilds/README.md#updatemember) - Modify attributes of a guild member. Returns a 200 OK with the guild member as the body. Fires a Guild Member Update Gateway event. If the channel_id is set to null, this will force the target user to be disconnected from voice.
 * [addMemberRole](docs/sdks/guilds/README.md#addmemberrole) - Adds a role to a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
 * [removeMemberRole](docs/sdks/guilds/README.md#removememberrole) - Removes a role from a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
-* [setMfaLevel](docs/sdks/guilds/README.md#setmfalevel) - Modify a guild's MFA level. Requires guild ownership. Returns the updated level on success. Fires a Guild Update Gateway event.
 * [getOnboarding](docs/sdks/guilds/README.md#getonboarding) - Returns the Onboarding object for the guild.
 * [updateOnboarding](docs/sdks/guilds/README.md#updateonboarding) - Modifies the onboarding configuration of the guild. Returns a 200 with the Onboarding object for the guild. Requires the MANAGE_GUILD and MANAGE_ROLES permissions.
 * [getPreview](docs/sdks/guilds/README.md#getpreview) - Returns the guild preview object for the given id. If the user is not in the guild, then the guild must be discoverable.
@@ -401,7 +430,7 @@ run();
 * [getWidget](docs/sdks/guilds/README.md#getwidget) - Returns the widget for the guild. Fires an Invite Create Gateway event when an invite channel is defined and a new Invite is generated.
 * [getWidgetPng](docs/sdks/guilds/README.md#getwidgetpng) - Returns a PNG image widget for the guild. Requires no permissions or authentication.
 
-### [guildScheduledEvents](docs/sdks/guildscheduledevents/README.md)
+### [GuildScheduledEvents](docs/sdks/guildscheduledevents/README.md)
 
 * [list](docs/sdks/guildscheduledevents/README.md#list) - Returns a list of guild scheduled event objects for the given guild.
 * [create](docs/sdks/guildscheduledevents/README.md#create) - Create a guild scheduled event in the guild. Returns a guild scheduled event object on success. Fires a Guild Scheduled Event Create Gateway event.
@@ -410,10 +439,9 @@ run();
 * [update](docs/sdks/guildscheduledevents/README.md#update) - Modify a guild scheduled event. Returns the modified guild scheduled event object on success. Fires a Guild Scheduled Event Update Gateway event.
 * [getUsers](docs/sdks/guildscheduledevents/README.md#getusers) - Get a list of guild scheduled event users subscribed to a guild scheduled event. Returns a list of guild scheduled event user objects on success. Guild member data, if it exists, is included if the with_member query parameter is set.
 
-### [guildTemplates](docs/sdks/guildtemplates/README.md)
+### [GuildTemplates](docs/sdks/guildtemplates/README.md)
 
 * [get](docs/sdks/guildtemplates/README.md#get) - Returns a guild template object for the given code.
-* [createGuild](docs/sdks/guildtemplates/README.md#createguild) - Create a new guild based on a template. Returns a guild object on success. Fires a Guild Create Gateway event.
 * [getNewMemberWelcome](docs/sdks/guildtemplates/README.md#getnewmemberwelcome) - Returns the welcome screen object for the guild.
 * [list](docs/sdks/guildtemplates/README.md#list) - Returns an array of guild template objects. Requires the MANAGE_GUILD permission.
 * [create](docs/sdks/guildtemplates/README.md#create) - Creates a template for the guild. Requires the MANAGE_GUILD permission. Returns the created guild template object on success.
@@ -421,12 +449,12 @@ run();
 * [delete](docs/sdks/guildtemplates/README.md#delete) - Deletes the template. Requires the MANAGE_GUILD permission. Returns the deleted guild template object on success.
 * [update](docs/sdks/guildtemplates/README.md#update) - Modifies the template's metadata. Requires the MANAGE_GUILD permission. Returns the guild template object on success.
 
-### [invites](docs/sdks/invites/README.md)
+### [Invites](docs/sdks/invites/README.md)
 
 * [get](docs/sdks/invites/README.md#get) - Returns an invite object for the given code.
 * [delete](docs/sdks/invites/README.md#delete) - Delete an invite. Requires the MANAGE_CHANNELS permission on the channel this invite belongs to, or MANAGE_GUILD to remove any invite across the guild. Returns an invite object on success.
 
-### [lobbies](docs/sdks/lobbies/README.md)
+### [Lobbies](docs/sdks/lobbies/README.md)
 
 * [createOrJoin](docs/sdks/lobbies/README.md#createorjoin) - Creates a new lobby or joins an existing one. Returns a lobby object on success.
 * [create](docs/sdks/lobbies/README.md#create) - Creates a new lobby. Returns a lobby object on success.
@@ -438,7 +466,7 @@ run();
 * [removeMember](docs/sdks/lobbies/README.md#removemember) - Removes a user from a lobby.
 * [sendMessage](docs/sdks/lobbies/README.md#sendmessage) - Sends a message to the lobby.
 
-### [messages](docs/sdks/messages/README.md)
+### [Messages](docs/sdks/messages/README.md)
 
 * [list](docs/sdks/messages/README.md#list) - Returns the messages for a channel. If operating on a guild channel, this endpoint requires the VIEW_CHANNEL permission to be present on the current user.
 * [createJson](docs/sdks/messages/README.md#createjson) - Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -458,12 +486,12 @@ run();
 * [deleteOwnReaction](docs/sdks/messages/README.md#deleteownreaction) - Delete a reaction the current user has made for the message. Returns a 204 empty response on success.
 * [deleteUserReaction](docs/sdks/messages/README.md#deleteuserreaction) - Deletes another user's reaction. This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
 
-### [polls](docs/sdks/polls/README.md)
+### [Polls](docs/sdks/polls/README.md)
 
 * [getAnswerVoters](docs/sdks/polls/README.md#getanswervoters) - Get a list of users that voted for a specific answer in a poll.
 * [expire](docs/sdks/polls/README.md#expire) - Immediately ends the poll. You cannot end polls from other users. Returns a message object. Fires a Message Update Gateway event.
 
-### [soundboards](docs/sdks/soundboards/README.md)
+### [Soundboards](docs/sdks/soundboards/README.md)
 
 * [sendSoundboardSound](docs/sdks/soundboards/README.md#sendsoundboardsound) - Sends a soundboard sound to a channel.
 * [listGuildSoundboardSounds](docs/sdks/soundboards/README.md#listguildsoundboardsounds) - Returns a list of soundboard sound objects for the given guild.
@@ -473,14 +501,14 @@ run();
 * [updateGuildSoundboardSound](docs/sdks/soundboards/README.md#updateguildsoundboardsound) - Update a soundboard sound in a guild. Returns the updated soundboard sound object on success.
 * [getSoundboardDefaultSounds](docs/sdks/soundboards/README.md#getsoundboarddefaultsounds) - Returns a list of the default sounds available in the soundboard.
 
-### [stageInstances](docs/sdks/stageinstances/README.md)
+### [StageInstances](docs/sdks/stageinstances/README.md)
 
 * [create](docs/sdks/stageinstances/README.md#create) - Creates a new Stage instance associated to a Stage channel. Returns that Stage instance. Fires a Stage Instance Create Gateway event. Requires the user to be a moderator of the Stage channel.
 * [get](docs/sdks/stageinstances/README.md#get) - Gets the stage instance associated with the Stage channel, if it exists.
 * [delete](docs/sdks/stageinstances/README.md#delete) - Deletes the Stage instance. Returns 204 No Content. Fires a Stage Instance Delete Gateway event. Requires the user to be a moderator of the Stage channel.
 * [update](docs/sdks/stageinstances/README.md#update) - Updates fields of an existing Stage instance. Returns the updated Stage instance. Fires a Stage Instance Update Gateway event. Requires the user to be a moderator of the Stage channel.
 
-### [stickers](docs/sdks/stickers/README.md)
+### [Stickers](docs/sdks/stickers/README.md)
 
 * [listGuildStickers](docs/sdks/stickers/README.md#listguildstickers) - Returns an array of sticker objects for the given guild. Includes user fields if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
 * [createGuildSticker](docs/sdks/stickers/README.md#createguildsticker) - Create a new sticker for the guild. Send a multipart/form-data body. Requires the CREATE_GUILD_EXPRESSIONS permission. Returns the new sticker object on success. Fires a Guild Stickers Update Gateway event.
@@ -491,7 +519,7 @@ run();
 * [getPack](docs/sdks/stickers/README.md#getpack) - Returns a sticker pack object for the given sticker pack ID.
 * [get](docs/sdks/stickers/README.md#get) - Returns a sticker object for the given sticker ID.
 
-### [users](docs/sdks/users/README.md)
+### [Users](docs/sdks/users/README.md)
 
 * [getCurrent](docs/sdks/users/README.md#getcurrent) - Returns the user object of the requester's account. For OAuth2, this requires the identify scope, which will return the object without an email, and optionally the email scope, which returns the object with an email if the user has one.
 * [updateCurrent](docs/sdks/users/README.md#updatecurrent) - Modify the requester's user account settings. Returns a user object on success. Fires a User Update Gateway event.
@@ -504,7 +532,7 @@ run();
 * [getGuildMember](docs/sdks/users/README.md#getguildmember) - Returns a guild member object for the current user. Requires the guilds.members.read OAuth2 scope.
 * [get](docs/sdks/users/README.md#get) - Returns a user object for a given user ID.
 
-### [voice](docs/sdks/voice/README.md)
+### [Voice](docs/sdks/voice/README.md)
 
 * [getCurrentUserState](docs/sdks/voice/README.md#getcurrentuserstate) - Returns the current user's voice state in the guild.
 * [updateCurrentUserState](docs/sdks/voice/README.md#updatecurrentuserstate) - Updates the current user's voice state. Returns 204 No Content on success. Fires a Voice State Update Gateway event.
@@ -512,7 +540,7 @@ run();
 * [updateUserState](docs/sdks/voice/README.md#updateuserstate) - Updates another user's voice state. Fires a Voice State Update Gateway event.
 * [listRegions](docs/sdks/voice/README.md#listregions) - Returns an array of voice region objects that can be used when setting a voice or stage channel's rtc_region.
 
-### [webhooks](docs/sdks/webhooks/README.md)
+### [Webhooks](docs/sdks/webhooks/README.md)
 
 * [listForChannel](docs/sdks/webhooks/README.md#listforchannel) - Returns a list of channel webhook objects. Requires the MANAGE_WEBHOOKS permission.
 * [create](docs/sdks/webhooks/README.md#create) - Creates a new webhook and returns a webhook object on success. Requires the MANAGE_WEBHOOKS permission. Fires a Webhooks Update Gateway event.
@@ -521,6 +549,7 @@ run();
 * [delete](docs/sdks/webhooks/README.md#delete) - Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. Returns a 204 No Content response on success. Fires a Webhooks Update Gateway event.
 * [update](docs/sdks/webhooks/README.md#update) - Modify a webhook. Requires the MANAGE_WEBHOOKS permission. Returns the updated webhook object on success. Fires a Webhooks Update Gateway event.
 * [getWithToken](docs/sdks/webhooks/README.md#getwithtoken) - Same as above, except this call does not require authentication and returns no user in the webhook object.
+* [execute](docs/sdks/webhooks/README.md#execute) - Refer to Uploading Files for details on attachments and multipart/form-data requests. Returns a message or 204 No Content depending on the wait query parameter.
 * [deleteWithToken](docs/sdks/webhooks/README.md#deletewithtoken) - Same as above, except this call does not require authentication.
 * [updateWithToken](docs/sdks/webhooks/README.md#updatewithtoken) - Same as above, except this call does not require authentication, does not accept a channel_id parameter in the body, and does not return a user in the webhook object.
 * [executeGithub](docs/sdks/webhooks/README.md#executegithub) - Add a new webhook to your GitHub repo (in the repo's settings), and use this endpoint as the "Payload URL."
@@ -554,6 +583,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
+- [`actionGuildJoinRequest`](docs/sdks/discord/README.md#actionguildjoinrequest) - Approve or reject guild join request
 - [`applicationCommandsBulkSet`](docs/sdks/applicationcommands/README.md#bulkset) - Takes a list of application commands, overwriting the existing global command list for this application.
 - [`applicationCommandsBulkSetGuild`](docs/sdks/applicationcommands/README.md#bulksetguild) - Takes a list of application commands, overwriting the existing command list for this application for the targeted guild.
 - [`applicationCommandsCreate`](docs/sdks/applicationcommands/README.md#create) - Create a new global command. New global commands will be available in all guilds after 1 hour.
@@ -592,9 +622,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`autoModerationGetRule`](docs/sdks/automoderation/README.md#getrule) - Get a single rule. Returns an auto moderation rule object. This endpoint requires the MANAGE_GUILD permission.
 - [`autoModerationListRules`](docs/sdks/automoderation/README.md#listrules) - Get a list of all rules currently configured for the guild. Returns a list of auto moderation rule objects for the given guild. This endpoint requires the MANAGE_GUILD permission.
 - [`autoModerationUpdateRule`](docs/sdks/automoderation/README.md#updaterule) - Modify an existing rule. Returns an auto moderation rule on success. Fires an Auto Moderation Rule Update Gateway event.
+- [`botPartnerSDKToken`](docs/sdks/discord/README.md#botpartnersdktoken)
+- [`botPartnerSDKUnmergeProvisionalAccount`](docs/sdks/discord/README.md#botpartnersdkunmergeprovisionalaccount)
+- [`bulkUpdateLobbyMembers`](docs/sdks/discord/README.md#bulkupdatelobbymembers)
 - [`channelsAddGroupDMRecipient`](docs/sdks/channels/README.md#addgroupdmrecipient) - Adds a recipient to a Group DM using their access token.
 - [`channelsAddThreadMember`](docs/sdks/channels/README.md#addthreadmember) - Adds another member to a thread. Requires the ability to send messages in the thread. Also requires the thread is not archived. Returns a 204 empty response if the member is successfully added or was already a member of the thread. Fires a Thread Members Update Gateway event.
-- [`channelsCreateInvite`](docs/sdks/channels/README.md#createinvite) - Create a new invite object for the channel.
+- [`channelsCreateInviteForm`](docs/sdks/channels/README.md#createinviteform) - Create a new invite object for the channel.
+- [`channelsCreateInviteJson`](docs/sdks/channels/README.md#createinvitejson) - Create a new invite object for the channel.
+- [`channelsCreateInviteMultipart`](docs/sdks/channels/README.md#createinvitemultipart) - Create a new invite object for the channel.
 - [`channelsDelete`](docs/sdks/channels/README.md#delete) - Delete a channel, or close a private message. Requires the MANAGE_CHANNELS permission for the guild, or MANAGE_THREADS if the channel is a thread. Returns a channel object on success. Fires a Channel Delete Gateway event (or Thread Delete if the channel was a thread).
 - [`channelsDeletePermissionOverwrite`](docs/sdks/channels/README.md#deletepermissionoverwrite) - Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
 - [`channelsFollow`](docs/sdks/channels/README.md#follow) - Follow an Announcement Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. Returns a followed channel object. Fires a Webhooks Update Gateway event for the target channel.
@@ -618,6 +653,15 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`channelsTriggerTypingIndicator`](docs/sdks/channels/README.md#triggertypingindicator) - Post a typing indicator for the specified channel, which expires after 10 seconds. Returns a 204 empty response on success. Fires a Typing Start Gateway event.
 - [`channelsUnpinMessage`](docs/sdks/channels/README.md#unpinmessage) - Unpin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 204 empty response on success. Fires a Channel Pins Update Gateway event.
 - [`channelsUpdate`](docs/sdks/channels/README.md#update) - Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.
+- [`countGuildScheduledEventUsers`](docs/sdks/discord/README.md#countguildscheduledeventusers) - Get the count of users subscribed to a guild scheduled event
+- [`createGuildScheduledEventException`](docs/sdks/discord/README.md#createguildscheduledeventexception) - Create an exception to a recurring guild scheduled event
+- [`createInteractionResponse`](docs/sdks/discord/README.md#createinteractionresponse)
+- [`createLinkedLobbyGuildInviteForSelf`](docs/sdks/discord/README.md#createlinkedlobbyguildinviteforself)
+- [`createLinkedLobbyGuildInviteForUser`](docs/sdks/discord/README.md#createlinkedlobbyguildinviteforuser)
+- [`createPin`](docs/sdks/discord/README.md#createpin)
+- [`deleteGuildScheduledEventException`](docs/sdks/discord/README.md#deleteguildscheduledeventexception) - Delete an exception to a recurring guild scheduled event
+- [`deleteLobby`](docs/sdks/discord/README.md#deletelobby) - Deletes the specified lobby if it exists. It is safe to call even if the lobby is already deleted.
+- [`deletePin`](docs/sdks/discord/README.md#deletepin)
 - [`emojiCreateApplicationEmoji`](docs/sdks/emoji/README.md#createapplicationemoji) - Create a new emoji for the application. Returns the new emoji object on success.
 - [`emojiCreateGuildEmoji`](docs/sdks/emoji/README.md#createguildemoji) - Create a new emoji for the guild. Requires the CREATE_GUILD_EXPRESSIONS permission. Returns the new emoji object on success. Fires a Guild Emojis Update Gateway event.
 - [`emojiDeleteApplicationEmoji`](docs/sdks/emoji/README.md#deleteapplicationemoji) - Delete the given emoji. Returns 204 No Content on success.
@@ -633,6 +677,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`entitlementsDeleteTest`](docs/sdks/entitlements/README.md#deletetest) - Deletes a currently-active test entitlement. Discord will act as though that user or guild no longer has entitlement to your premium offering. Returns 204 No Content on success.
 - [`entitlementsGet`](docs/sdks/entitlements/README.md#get) - Returns an entitlement.
 - [`entitlementsList`](docs/sdks/entitlements/README.md#list) - Returns all entitlements for a given app, active and expired.
+- [`getCurrentUserApplicationEntitlements`](docs/sdks/discord/README.md#getcurrentuserapplicationentitlements)
+- [`getGuildJoinRequests`](docs/sdks/discord/README.md#getguildjoinrequests) - List join requests for guild, optionally filtered by application status
+- [`getInviteTargetUsers`](docs/sdks/discord/README.md#getinvitetargetusers) - Get the target users for an invite.
+- [`getInviteTargetUsersJobStatus`](docs/sdks/discord/README.md#getinvitetargetusersjobstatus) - Get the target users job status for an invite.
+- [`getLobbyMessages`](docs/sdks/discord/README.md#getlobbymessages)
+- [`getSkuSubscription`](docs/sdks/discord/README.md#getskusubscription) - Get a subscription by its ID.
+- [`getSkuSubscriptions`](docs/sdks/discord/README.md#getskusubscriptions) - Returns all subscriptions containing the SKU, filtered by user.
+- [`guildRoleMemberCounts`](docs/sdks/discord/README.md#guildrolemembercounts)
 - [`guildsAddMember`](docs/sdks/guilds/README.md#addmember) - Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. Returns a 201 Created with the guild member as the body, or 204 No Content if the user is already a member of the guild. Fires a Guild Member Add Gateway event.
 - [`guildsAddMemberRole`](docs/sdks/guilds/README.md#addmemberrole) - Adds a role to a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
 - [`guildsBulkBan`](docs/sdks/guilds/README.md#bulkban) - Ban up to 200 users from a guild, and optionally delete previous messages sent by the banned users. Requires both the BAN_MEMBERS and MANAGE_GUILD permissions. Returns a 200 response on success, including the fields banned_users with the IDs of the banned users and failed_users with IDs that could not be banned or were already banned.
@@ -642,13 +694,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`guildScheduledEventsGetUsers`](docs/sdks/guildscheduledevents/README.md#getusers) - Get a list of guild scheduled event users subscribed to a guild scheduled event. Returns a list of guild scheduled event user objects on success. Guild member data, if it exists, is included if the with_member query parameter is set.
 - [`guildScheduledEventsList`](docs/sdks/guildscheduledevents/README.md#list) - Returns a list of guild scheduled event objects for the given guild.
 - [`guildScheduledEventsUpdate`](docs/sdks/guildscheduledevents/README.md#update) - Modify a guild scheduled event. Returns the modified guild scheduled event object on success. Fires a Guild Scheduled Event Update Gateway event.
-- [`guildsCreate`](docs/sdks/guilds/README.md#create) - Create a new guild. Returns a guild object on success. Fires a Guild Create Gateway event.
 - [`guildsCreateBan`](docs/sdks/guilds/README.md#createban) - Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the BAN_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Ban Add Gateway event.
 - [`guildsCreateChannel`](docs/sdks/guilds/README.md#createchannel) - Create a new channel object for the guild. Requires the MANAGE_CHANNELS permission. If setting permission overwrites, only permissions your bot has in the guild can be allowed/denied. Setting MANAGE_ROLES permission in channels is only possible for guild administrators. Returns the new channel object on success. Fires a Channel Create Gateway event.
 - [`guildsCreateRole`](docs/sdks/guilds/README.md#createrole) - Create a new role for the guild. Requires the MANAGE_ROLES permission. Returns the new role object on success. Fires a Guild Role Create Gateway event. All JSON params are optional.
-- [`guildsDelete`](docs/sdks/guilds/README.md#delete) - Delete a guild permanently. User must be owner. Returns 204 No Content on success. Fires a Guild Delete Gateway event.
 - [`guildsDeleteIntegration`](docs/sdks/guilds/README.md#deleteintegration) - Delete the attached integration object for the guild. Deletes any associated webhooks and kicks the associated bot if there is one. Requires the MANAGE_GUILD permission. Returns a 204 empty response on success. Fires Guild Integrations Update and Integration Delete Gateway events.
 - [`guildsDeleteRole`](docs/sdks/guilds/README.md#deleterole) - Delete a guild role. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Role Delete Gateway event.
+- [`guildSearch`](docs/sdks/discord/README.md#guildsearch)
 - [`guildsGet`](docs/sdks/guilds/README.md#get) - Returns the guild object for the given id. If with_counts is set to true, this endpoint will also return approximate_member_count and approximate_presence_count for the guild.
 - [`guildsGetBan`](docs/sdks/guilds/README.md#getban) - Returns a ban object for the given user or a 404 not found if the ban cannot be found. Requires the BAN_MEMBERS permission.
 - [`guildsGetMember`](docs/sdks/guilds/README.md#getmember) - Returns a guild member object for the specified user.
@@ -674,10 +725,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`guildsRemoveMember`](docs/sdks/guilds/README.md#removemember) - Remove a member from a guild. Requires KICK_MEMBERS permission. Returns a 204 empty response on success. Fires a Guild Member Remove Gateway event.
 - [`guildsRemoveMemberRole`](docs/sdks/guilds/README.md#removememberrole) - Removes a role from a guild member. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Guild Member Update Gateway event.
 - [`guildsSearchMembers`](docs/sdks/guilds/README.md#searchmembers) - Returns a list of guild member objects whose username or nickname starts with a provided string.
-- [`guildsSetMfaLevel`](docs/sdks/guilds/README.md#setmfalevel) - Modify a guild's MFA level. Requires guild ownership. Returns the updated level on success. Fires a Guild Update Gateway event.
 - [`guildsUpdate`](docs/sdks/guilds/README.md#update) - Modify a guild's settings. Requires the MANAGE_GUILD permission. Returns the updated guild object on success. Fires a Guild Update Gateway event.
 - [`guildsUpdateChannelPositions`](docs/sdks/guilds/README.md#updatechannelpositions) - Modify the positions of a set of channel objects for the guild. Requires MANAGE_CHANNELS permission. Returns a 204 empty response on success. Fires multiple Channel Update Gateway events.
 - [`guildsUpdateCurrentMember`](docs/sdks/guilds/README.md#updatecurrentmember) - Modifies the current member in a guild. Returns a 200 with the updated member object on success. Fires a Guild Member Update Gateway event.
+- [`guildsUpdateIncidentActions`](docs/sdks/guilds/README.md#updateincidentactions) - Modifies the incident actions of the guild. Returns a 200 with the Incidents Data object for the guild. Requires the MANAGE_GUILD permission.
 - [`guildsUpdateMember`](docs/sdks/guilds/README.md#updatemember) - Modify attributes of a guild member. Returns a 200 OK with the guild member as the body. Fires a Guild Member Update Gateway event. If the channel_id is set to null, this will force the target user to be disconnected from voice.
 - [`guildsUpdateOnboarding`](docs/sdks/guilds/README.md#updateonboarding) - Modifies the onboarding configuration of the guild. Returns a 200 with the Onboarding object for the guild. Requires the MANAGE_GUILD and MANAGE_ROLES permissions.
 - [`guildsUpdateRole`](docs/sdks/guilds/README.md#updaterole) - Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated role on success. Fires a Guild Role Update Gateway event.
@@ -685,7 +736,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`guildsUpdateWelcomeScreen`](docs/sdks/guilds/README.md#updatewelcomescreen) - Modify the guild's Welcome Screen. Requires the MANAGE_GUILD permission. Returns the updated Welcome Screen object. May fire a Guild Update Gateway event.
 - [`guildsUpdateWidgetSettings`](docs/sdks/guilds/README.md#updatewidgetsettings) - Modify a guild widget settings object for the guild. All attributes may be passed in with JSON and modified. Requires the MANAGE_GUILD permission. Returns the updated guild widget settings object. Fires a Guild Update Gateway event.
 - [`guildTemplatesCreate`](docs/sdks/guildtemplates/README.md#create) - Creates a template for the guild. Requires the MANAGE_GUILD permission. Returns the created guild template object on success.
-- [`guildTemplatesCreateGuild`](docs/sdks/guildtemplates/README.md#createguild) - Create a new guild based on a template. Returns a guild object on success. Fires a Guild Create Gateway event.
 - [`guildTemplatesDelete`](docs/sdks/guildtemplates/README.md#delete) - Deletes the template. Requires the MANAGE_GUILD permission. Returns the deleted guild template object on success.
 - [`guildTemplatesGet`](docs/sdks/guildtemplates/README.md#get) - Returns a guild template object for the given code.
 - [`guildTemplatesGetNewMemberWelcome`](docs/sdks/guildtemplates/README.md#getnewmemberwelcome) - Returns the welcome screen object for the guild.
@@ -694,6 +744,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`guildTemplatesUpdate`](docs/sdks/guildtemplates/README.md#update) - Modifies the template's metadata. Requires the MANAGE_GUILD permission. Returns the guild template object on success.
 - [`invitesDelete`](docs/sdks/invites/README.md#delete) - Delete an invite. Requires the MANAGE_CHANNELS permission on the channel this invite belongs to, or MANAGE_GUILD to remove any invite across the guild. Returns an invite object on success.
 - [`invitesGet`](docs/sdks/invites/README.md#get) - Returns an invite object for the given code.
+- [`listGuildScheduledEventExceptionUsers`](docs/sdks/discord/README.md#listguildscheduledeventexceptionusers) - Get a list of users subscribed to a guild scheduled event exception
+- [`listPins`](docs/sdks/discord/README.md#listpins)
 - [`lobbiesAddMember`](docs/sdks/lobbies/README.md#addmember) - Adds a user to a lobby.
 - [`lobbiesConnectToChannel`](docs/sdks/lobbies/README.md#connecttochannel) - Connects a lobby to a channel.
 - [`lobbiesCreate`](docs/sdks/lobbies/README.md#create) - Creates a new lobby. Returns a lobby object on success.
@@ -741,6 +793,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`stickersListGuildStickers`](docs/sdks/stickers/README.md#listguildstickers) - Returns an array of sticker objects for the given guild. Includes user fields if the bot has the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission.
 - [`stickersListPacks`](docs/sdks/stickers/README.md#listpacks) - Returns a list of available sticker packs.
 - [`stickersUpdateGuildSticker`](docs/sdks/stickers/README.md#updateguildsticker) - Modify the given sticker. For stickers created by the current user, requires either the CREATE_GUILD_EXPRESSIONS or MANAGE_GUILD_EXPRESSIONS permission. For other stickers, requires the MANAGE_GUILD_EXPRESSIONS permission. Returns the updated sticker object on success. Fires a Guild Stickers Update Gateway event.
+- [`updateGuildScheduledEventException`](docs/sdks/discord/README.md#updateguildscheduledeventexception) - Modify an exception to a recurring guild scheduled event
+- [`updateInviteTargetUsers`](docs/sdks/discord/README.md#updateinvitetargetusers) - Update the target users for an existing invite.
+- [`updateLobbyMessageExternalModerationMetadata`](docs/sdks/discord/README.md#updatelobbymessageexternalmoderationmetadata) - Update the external moderation metadata for a lobby message.
+- [`updateUserMessageExternalModerationMetadata`](docs/sdks/discord/README.md#updateusermessageexternalmoderationmetadata) - Update the external moderation metadata for a user message (DM).
+- [`updateVoiceChannelStatus`](docs/sdks/discord/README.md#updatevoicechannelstatus) - Set a voice channel's status.
 - [`usersCreateDM`](docs/sdks/users/README.md#createdm) - Create a new DM channel with a user. Returns a DM channel object (if one already exists, it will be returned instead).
 - [`usersGet`](docs/sdks/users/README.md#get) - Returns a user object for a given user ID.
 - [`usersGetApplicationRoleConnection`](docs/sdks/users/README.md#getapplicationroleconnection) - Returns the application role connection for the user. Requires an OAuth2 access token with role_connections.write scope for the application specified in the path.
@@ -761,6 +818,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`webhooksDeleteMessage`](docs/sdks/webhooks/README.md#deletemessage) - Deletes a message that was created by the webhook. Returns a 204 No Content response on success.
 - [`webhooksDeleteOriginalMessage`](docs/sdks/webhooks/README.md#deleteoriginalmessage) - Deletes the initial webhook message.
 - [`webhooksDeleteWithToken`](docs/sdks/webhooks/README.md#deletewithtoken) - Same as above, except this call does not require authentication.
+- [`webhooksExecute`](docs/sdks/webhooks/README.md#execute) - Refer to Uploading Files for details on attachments and multipart/form-data requests. Returns a message or 204 No Content depending on the wait query parameter.
 - [`webhooksExecuteGithub`](docs/sdks/webhooks/README.md#executegithub) - Add a new webhook to your GitHub repo (in the repo's settings), and use this endpoint as the "Payload URL."
 - [`webhooksExecuteSlack`](docs/sdks/webhooks/README.md#executeslack) - Refer to Slack's documentation for more information. We do not support Slack's channel, icon_emoji, mrkdwn, or mrkdwn_in properties.
 - [`webhooksGet`](docs/sdks/webhooks/README.md#get) - Returns the new webhook object for the given id.
@@ -795,7 +853,9 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.applications.getMe({
+  const result = await discord.listPins({
+    channelId: "<value>",
+  }, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -834,7 +894,9 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.applications.getMe();
+  const result = await discord.listPins({
+    channelId: "<value>",
+  });
 
   console.log(result);
 }
@@ -847,16 +909,15 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-This table shows properties which are common on error classes. For full details see [error classes](#error-classes).
+[`DiscordError`](./src/models/errors/discorderror.ts) is the base class for all HTTP error responses. It has the following properties:
 
 | Property            | Type       | Description                                                                             |
 | ------------------- | ---------- | --------------------------------------------------------------------------------------- |
-| `error.name`        | `string`   | Error class name eg `APIError`                                                          |
 | `error.message`     | `string`   | Error message                                                                           |
-| `error.statusCode`  | `number`   | HTTP status code eg `404`                                                               |
-| `error.contentType` | `string`   | HTTP content type eg `application/json`                                                 |
+| `error.statusCode`  | `number`   | HTTP response status code eg `404`                                                      |
+| `error.headers`     | `Headers`  | HTTP response headers                                                                   |
 | `error.body`        | `string`   | HTTP body. Can be empty string if no body is returned.                                  |
-| `error.rawResponse` | `Response` | Raw HTTP response. Access to headers and more.                                          |
+| `error.rawResponse` | `Response` | Raw HTTP response                                                                       |
 | `error.data$`       |            | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
 ### Example
@@ -870,24 +931,26 @@ const discord = new Discord({
 
 async function run() {
   try {
-    const result = await discord.applications.getMe();
+    const result = await discord.listPins({
+      channelId: "<value>",
+    });
 
     console.log(result);
   } catch (error) {
-    // Depending on the method different errors may be thrown
-    if (error instanceof errors.ErrorResponse) {
-      console.log(error.message);
-      console.log(error.data$.code); // number
-      console.log(error.data$.message); // string
-      console.log(error.data$.errors); // components.ErrorDetails
-    }
-
-    // Fallback error class, if no other more specific error class is matched
-    if (error instanceof errors.APIError) {
+    // The base class for HTTP error responses
+    if (error instanceof errors.DiscordError) {
       console.log(error.message);
       console.log(error.statusCode);
       console.log(error.body);
-      console.log(error.rawResponse.headers);
+      console.log(error.headers);
+
+      // Depending on the method different errors may be thrown
+      if (error instanceof errors.RatelimitedResponse) {
+        console.log(error.data$.code); // number
+        console.log(error.data$.message); // string
+        console.log(error.data$.retryAfter); // number
+        console.log(error.data$.global); // boolean
+      }
     }
   }
 }
@@ -897,15 +960,27 @@ run();
 ```
 
 ### Error Classes
-* [`ErrorResponse`](docs/models/errors/errorresponse.md): Errors object returned by the Discord API. Status code `4XX`.
-* `APIError`: The fallback error class, if no other more specific error class is matched.
-* `SDKValidationError`: Type mismatch between the data returned from the server and the structure expected by the SDK. This can also be thrown for invalid method arguments. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
-* Network errors:
-    * `ConnectionError`: HTTP client was unable to make a request to a server.
-    * `RequestTimeoutError`: HTTP request timed out due to an AbortSignal signal.
-    * `RequestAbortedError`: HTTP request was aborted by the client.
-    * `InvalidRequestError`: Any input used to create a request is invalid.
-    * `UnexpectedClientError`: Unrecognised or unexpected error.
+**Primary errors:**
+* [`DiscordError`](./src/models/errors/discorderror.ts): The base class for HTTP error responses.
+  * [`RatelimitedResponse`](./src/models/errors/ratelimitedresponse.ts): Ratelimit error object returned by the Discord API. Status code `429`.
+  * [`ErrorResponse`](./src/models/errors/errorresponse.ts): Errors object returned by the Discord API. Status code `4XX`.
+
+<details><summary>Less common errors (6)</summary>
+
+<br />
+
+**Network errors:**
+* [`ConnectionError`](./src/models/errors/httpclienterrors.ts): HTTP client was unable to make a request to a server.
+* [`RequestTimeoutError`](./src/models/errors/httpclienterrors.ts): HTTP request timed out due to an AbortSignal signal.
+* [`RequestAbortedError`](./src/models/errors/httpclienterrors.ts): HTTP request was aborted by the client.
+* [`InvalidRequestError`](./src/models/errors/httpclienterrors.ts): Any input used to create a request is invalid.
+* [`UnexpectedClientError`](./src/models/errors/httpclienterrors.ts): Unrecognised or unexpected error.
+
+
+**Inherit from [`DiscordError`](./src/models/errors/discorderror.ts)**:
+* [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
+
+</details>
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
@@ -923,7 +998,9 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.applications.getMe();
+  const result = await discord.listPins({
+    channelId: "<value>",
+  });
 
   console.log(result);
 }
@@ -946,19 +1023,23 @@ The `HTTPClient` constructor takes an optional `fetcher` argument that can be
 used to integrate a third-party HTTP client or when writing tests to mock out
 the HTTP client and feed in fixtures.
 
-The following example shows how to use the `"beforeRequest"` hook to to add a
-custom header and a timeout to requests and how to use the `"requestError"` hook
-to log errors:
+The following example shows how to:
+- route requests through a proxy server using [undici](https://www.npmjs.com/package/undici)'s ProxyAgent
+- use the `"beforeRequest"` hook to add a custom header and a timeout to requests
+- use the `"requestError"` hook to log errors
 
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
+import { ProxyAgent } from "undici";
 import { HTTPClient } from "@ryan.blunden/discord-sdk/lib/http";
 
+const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
+
 const httpClient = new HTTPClient({
-  // fetcher takes a function that has the same signature as native `fetch`.
-  fetcher: (request) => {
-    return fetch(request);
-  }
+  // 'fetcher' takes a function that has the same signature as native 'fetch'.
+  fetcher: (input, init) =>
+    // 'dispatcher' is specific to undici and not part of the standard Fetch API.
+    fetch(input, { ...init, dispatcher } as RequestInit),
 });
 
 httpClient.addHook("beforeRequest", (request) => {
@@ -978,7 +1059,7 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new Discord({ httpClient });
+const sdk = new Discord({ httpClient: httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 

@@ -8,16 +8,11 @@ import { PrivateGroupChannelResponse } from "@ryan.blunden/discord-sdk/models/co
 let value: PrivateGroupChannelResponse = {
   id: "<value>",
   type: 0,
-  flags: 29105,
-  recipients: [
-    {
-      id: "<value>",
-      username: "Bennie93",
-      discriminator: "<value>",
-      publicFlags: 175853,
-      flags: 411991,
-    },
-  ],
+  flags: 385842,
+  recipients: [],
+  name: null,
+  icon: "<value>",
+  ownerId: "<value>",
 };
 ```
 
@@ -31,8 +26,8 @@ let value: PrivateGroupChannelResponse = {
 | `flags`                                                                                                  | *number*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `lastPinTimestamp`                                                                                       | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)            | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
 | `recipients`                                                                                             | [components.UserResponse](../../models/components/userresponse.md)[]                                     | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
-| `name`                                                                                                   | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
-| `icon`                                                                                                   | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
-| `ownerId`                                                                                                | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
+| `name`                                                                                                   | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `icon`                                                                                                   | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `ownerId`                                                                                                | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `managed`                                                                                                | *boolean*                                                                                                | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
 | `applicationId`                                                                                          | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |

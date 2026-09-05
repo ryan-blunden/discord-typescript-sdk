@@ -6,8 +6,9 @@
 import { UserCommunicationDisabledActionResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: UserCommunicationDisabledActionResponse = {
+  type: 1,
   metadata: {
-    durationSeconds: 5411,
+    durationSeconds: 122685,
   },
 };
 ```
@@ -16,5 +17,5 @@ let value: UserCommunicationDisabledActionResponse = {
 
 | Field                                                                                                                                    | Type                                                                                                                                     | Required                                                                                                                                 | Description                                                                                                                              |
 | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                   | *number*                                                                                                                                 | :heavy_check_mark:                                                                                                                       | N/A                                                                                                                                      |
+| `type`                                                                                                                                   | [components.UserCommunicationDisabledActionResponseType](../../models/components/usercommunicationdisabledactionresponsetype.md)         | :heavy_check_mark:                                                                                                                       | N/A                                                                                                                                      |
 | `metadata`                                                                                                                               | [components.UserCommunicationDisabledActionMetadataResponse](../../models/components/usercommunicationdisabledactionmetadataresponse.md) | :heavy_check_mark:                                                                                                                       | N/A                                                                                                                                      |

@@ -1,5 +1,4 @@
 # AutoModeration
-(*autoModeration*)
 
 ## Overview
 
@@ -17,6 +16,7 @@ Get a list of all rules currently configured for the guild. Returns a list of au
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_auto_moderation_rules" method="get" path="/guilds/{guild_id}/auto-moderation/rules" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -75,14 +75,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.ListAutoModerationRulesResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ListAutoModerationRulesResponse](../../models/operations/listautomoderationrulesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createRule
 
@@ -90,6 +91,7 @@ Create a new rule. Returns an auto moderation rule on success. Fires an Auto Mod
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_auto_moderation_rule" method="post" path="/guilds/{guild_id}/auto-moderation/rules" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -102,6 +104,8 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
+      eventType: 1,
+      triggerType: 1,
       triggerMetadata: {},
     },
   });
@@ -131,6 +135,8 @@ async function run() {
     guildId: "<value>",
     requestBody: {
       name: "<value>",
+      eventType: 1,
+      triggerType: 1,
       triggerMetadata: {},
     },
   });
@@ -156,14 +162,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateAutoModerationRuleResponseBody](../../models/operations/createautomoderationruleresponsebody.md)\>**
+**Promise\<[operations.CreateAutoModerationRuleResponse](../../models/operations/createautomoderationruleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getRule
 
@@ -171,6 +178,7 @@ Get a single rule. Returns an auto moderation rule object. This endpoint require
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_auto_moderation_rule" method="get" path="/guilds/{guild_id}/auto-moderation/rules/{rule_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -231,14 +239,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetAutoModerationRuleResponseBody](../../models/operations/getautomoderationruleresponsebody.md)\>**
+**Promise\<[operations.GetAutoModerationRuleResponse](../../models/operations/getautomoderationruleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteRule
 
@@ -246,6 +255,7 @@ Delete a rule. Returns a 204 on success. Fires an Auto Moderation Rule Delete Ga
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_auto_moderation_rule" method="delete" path="/guilds/{guild_id}/auto-moderation/rules/{rule_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -254,12 +264,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.autoModeration.deleteRule({
+  const result = await discord.autoModeration.deleteRule({
     guildId: "<value>",
     ruleId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -286,7 +296,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("autoModerationDeleteRule failed:", res.error);
   }
@@ -306,14 +316,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteAutoModerationRuleResponse](../../models/operations/deleteautomoderationruleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateRule
 
@@ -321,6 +332,7 @@ Modify an existing rule. Returns an auto moderation rule on success. Fires an Au
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_auto_moderation_rule" method="patch" path="/guilds/{guild_id}/auto-moderation/rules/{rule_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -332,7 +344,10 @@ async function run() {
   const result = await discord.autoModeration.updateRule({
     guildId: "<value>",
     ruleId: "<value>",
-    requestBody: {},
+    requestBody: {
+      eventType: 1,
+      triggerType: 1,
+    },
   });
 
   console.log(result);
@@ -359,7 +374,10 @@ async function run() {
   const res = await autoModerationUpdateRule(discord, {
     guildId: "<value>",
     ruleId: "<value>",
-    requestBody: {},
+    requestBody: {
+      eventType: 1,
+      triggerType: 1,
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -383,11 +401,12 @@ run();
 
 ### Response
 
-**Promise\<[operations.UpdateAutoModerationRuleResponseBody](../../models/operations/updateautomoderationruleresponsebody.md)\>**
+**Promise\<[operations.UpdateAutoModerationRuleResponse](../../models/operations/updateautomoderationruleresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
