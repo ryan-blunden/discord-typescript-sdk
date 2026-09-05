@@ -14,13 +14,11 @@ export class Invites extends ClientSDK {
    */
   async get(
     request: operations.InviteResolveRequest,
-    security?: operations.InviteResolveSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<operations.InviteResolveResponseBody> {
+  ): Promise<operations.InviteResolveResponse> {
     return unwrapAsync(invitesGet(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -31,7 +29,7 @@ export class Invites extends ClientSDK {
   async delete(
     request: operations.InviteRevokeRequest,
     options?: RequestOptions,
-  ): Promise<operations.InviteRevokeResponseBody> {
+  ): Promise<operations.InviteRevokeResponse> {
     return unwrapAsync(invitesDelete(
       this,
       request,

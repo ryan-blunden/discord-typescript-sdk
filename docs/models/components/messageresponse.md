@@ -6,45 +6,42 @@
 import { MessageResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: MessageResponse = {
+  type: 11,
   content: "<value>",
   mentions: [],
   mentionRoles: [
     "<value 1>",
+    "<value 2>",
   ],
   attachments: [
     {
       id: "<value>",
       filename: "example.file",
-      size: 569291,
-      url: "https://married-schnitzel.name/",
-      proxyUrl: "https://gorgeous-printer.biz/",
+      size: 875209,
+      url: "https://fair-molasses.biz/",
+      proxyUrl: "https://doting-technologist.com/",
     },
   ],
-  embeds: [
-    {
-      type: "<value>",
-    },
-  ],
-  timestamp: new Date("2023-08-21T23:25:11.984Z"),
-  flags: 586750,
-  components: [
-    {
-      id: 822824,
-      content: "<value>",
-    },
-  ],
+  embeds: [],
+  timestamp: new Date("2025-06-30T09:37:03.787Z"),
+  editedTimestamp: new Date("2025-08-30T12:08:51.499Z"),
+  flags: 36171,
+  components: [],
   id: "<value>",
   channelId: "<value>",
   author: {
     id: "<value>",
-    username: "Sterling_Quitzon50",
+    username: "Darryl.Olson",
+    avatar: "https://picsum.photos/seed/gvSHPC/2249/2747",
     discriminator: "<value>",
-    publicFlags: 770437,
-    flags: 859724,
+    publicFlags: 803196,
+    flags: 561096,
+    globalName: "<value>",
+    primaryGuild: null,
   },
-  pinned: true,
-  mentionEveryone: false,
-  tts: true,
+  pinned: false,
+  mentionEveryone: true,
+  tts: false,
 };
 ```
 
@@ -52,17 +49,16 @@ let value: MessageResponse = {
 
 | Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                           | *number*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `type`                                                                                                           | [components.MessageType](../../models/components/messagetype.md)                                                 | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `content`                                                                                                        | *string*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `mentions`                                                                                                       | [components.UserResponse](../../models/components/userresponse.md)[]                                             | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `mentionRoles`                                                                                                   | *string*[]                                                                                                       | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `attachments`                                                                                                    | [components.MessageAttachmentResponse](../../models/components/messageattachmentresponse.md)[]                   | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `embeds`                                                                                                         | [components.MessageEmbedResponse](../../models/components/messageembedresponse.md)[]                             | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `timestamp`                                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                    | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
-| `editedTimestamp`                                                                                                | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                    | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `editedTimestamp`                                                                                                | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                    | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `flags`                                                                                                          | *number*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `components`                                                                                                     | *components.MessageResponseComponents*[]                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
-| `resolved`                                                                                                       | [components.ResolvedObjectsResponse](../../models/components/resolvedobjectsresponse.md)                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `stickers`                                                                                                       | *components.Stickers*[]                                                                                          | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `stickerItems`                                                                                                   | [components.MessageStickerItemResponse](../../models/components/messagestickeritemresponse.md)[]                 | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `id`                                                                                                             | *string*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
@@ -73,7 +69,7 @@ let value: MessageResponse = {
 | `tts`                                                                                                            | *boolean*                                                                                                        | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `call`                                                                                                           | [components.MessageCallResponse](../../models/components/messagecallresponse.md)                                 | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `activity`                                                                                                       | [components.MessageActivityResponse](../../models/components/messageactivityresponse.md)                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
-| `application`                                                                                                    | [components.BasicApplicationResponse](../../models/components/basicapplicationresponse.md)                       | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `application`                                                                                                    | [components.BasicApplicationResponseWithBot](../../models/components/basicapplicationresponsewithbot.md)         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `applicationId`                                                                                                  | *string*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `interaction`                                                                                                    | [components.MessageInteractionResponse](../../models/components/messageinteractionresponse.md)                   | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `nonce`                                                                                                          | *components.Nonce*                                                                                               | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
@@ -84,8 +80,11 @@ let value: MessageResponse = {
 | `roleSubscriptionData`                                                                                           | [components.MessageRoleSubscriptionDataResponse](../../models/components/messagerolesubscriptiondataresponse.md) | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `purchaseNotification`                                                                                           | [components.PurchaseNotificationResponse](../../models/components/purchasenotificationresponse.md)               | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `position`                                                                                                       | *number*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `resolved`                                                                                                       | [components.ResolvedObjectsResponse](../../models/components/resolvedobjectsresponse.md)                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `poll`                                                                                                           | [components.PollResponse](../../models/components/pollresponse.md)                                               | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `sharedClientTheme`                                                                                              | [components.CustomClientThemeResponse](../../models/components/customclientthemeresponse.md)                     | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `interactionMetadata`                                                                                            | *components.InteractionMetadata*                                                                                 | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `messageSnapshots`                                                                                               | [components.MessageSnapshotResponse](../../models/components/messagesnapshotresponse.md)[]                       | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `lobbyMember`                                                                                                    | [components.MessageLobbyMemberResponse](../../models/components/messagelobbymemberresponse.md)                   | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `reactions`                                                                                                      | [components.MessageReactionResponse](../../models/components/messagereactionresponse.md)[]                       | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `referencedMessage`                                                                                              | [components.BasicMessageResponse](../../models/components/basicmessageresponse.md)                               | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |

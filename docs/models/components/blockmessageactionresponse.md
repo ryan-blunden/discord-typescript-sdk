@@ -6,6 +6,7 @@
 import { BlockMessageActionResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: BlockMessageActionResponse = {
+  type: 3,
   metadata: {},
 };
 ```
@@ -14,5 +15,5 @@ let value: BlockMessageActionResponse = {
 
 | Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
 | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                         | *number*                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `type`                                                                                                         | [components.BlockMessageActionResponseType](../../models/components/blockmessageactionresponsetype.md)         | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
 | `metadata`                                                                                                     | [components.BlockMessageActionMetadataResponse](../../models/components/blockmessageactionmetadataresponse.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

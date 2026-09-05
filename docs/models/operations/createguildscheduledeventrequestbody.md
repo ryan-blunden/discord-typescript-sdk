@@ -8,7 +8,9 @@
 ```typescript
 const value: components.ExternalScheduledEventCreateRequest = {
   name: "<value>",
-  scheduledStartTime: new Date("2023-06-15T15:59:24.588Z"),
+  scheduledStartTime: new Date("2026-12-12T06:26:29.900Z"),
+  privacyLevel: 2,
+  entityType: 1,
   entityMetadata: {
     location: "<value>",
   },
@@ -20,7 +22,9 @@ const value: components.ExternalScheduledEventCreateRequest = {
 ```typescript
 const value: components.StageScheduledEventCreateRequest = {
   name: "<value>",
-  scheduledStartTime: new Date("2024-06-03T06:03:20.319Z"),
+  scheduledStartTime: new Date("2026-09-12T06:03:17.513Z"),
+  privacyLevel: 2,
+  entityType: 3,
 };
 ```
 
@@ -29,7 +33,9 @@ const value: components.StageScheduledEventCreateRequest = {
 ```typescript
 const value: components.VoiceScheduledEventCreateRequest = {
   name: "<value>",
-  scheduledStartTime: new Date("2025-01-03T04:02:45.501Z"),
+  scheduledStartTime: new Date("2025-12-10T19:26:34.579Z"),
+  privacyLevel: 2,
+  entityType: 0,
 };
 ```
 

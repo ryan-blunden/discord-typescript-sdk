@@ -20,4 +20,5 @@ let value: MessageAttachmentRequest = {
 | `durationSecs`     | *number*           | :heavy_minus_sign: | N/A                |
 | `waveform`         | *string*           | :heavy_minus_sign: | N/A                |
 | `title`            | *string*           | :heavy_minus_sign: | N/A                |
+| `isSpoiler`        | *boolean*          | :heavy_minus_sign: | N/A                |
 | `isRemix`          | *boolean*          | :heavy_minus_sign: | N/A                |

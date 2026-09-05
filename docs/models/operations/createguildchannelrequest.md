@@ -7,6 +7,9 @@ import { CreateGuildChannelRequest } from "@ryan.blunden/discord-sdk/models/oper
 
 let value: CreateGuildChannelRequest = {
   guildId: "<value>",
+  createGuildChannelRequest: {
+    name: "<value>",
+  },
 };
 ```
 

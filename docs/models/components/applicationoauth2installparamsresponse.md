@@ -7,8 +7,7 @@ import { ApplicationOAuth2InstallParamsResponse } from "@ryan.blunden/discord-sd
 
 let value: ApplicationOAuth2InstallParamsResponse = {
   scopes: [
-    "<value 1>",
-    "<value 2>",
+    "connections",
   ],
   permissions: "<value>",
 };
@@ -16,7 +15,7 @@ let value: ApplicationOAuth2InstallParamsResponse = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `scopes`           | *string*[]         | :heavy_check_mark: | N/A                |
-| `permissions`      | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                    | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `scopes`                                                 | [components.Scopes](../../models/components/scopes.md)[] | :heavy_check_mark:                                       | N/A                                                      |
+| `permissions`                                            | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
