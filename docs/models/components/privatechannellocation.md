@@ -7,14 +7,15 @@ import { PrivateChannelLocation } from "@ryan.blunden/discord-sdk/models/compone
 
 let value: PrivateChannelLocation = {
   id: "<id>",
+  kind: "gc",
   channelId: "<value>",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | N/A                |
-| `kind`             | *string*           | :heavy_check_mark: | N/A                |
-| `channelId`        | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `id`                                                                                           | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `kind`                                                                                         | [components.PrivateChannelLocationKind](../../models/components/privatechannellocationkind.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `channelId`                                                                                    | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |

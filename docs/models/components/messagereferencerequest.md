@@ -18,4 +18,4 @@ let value: MessageReferenceRequest = {
 | `channelId`        | *string*           | :heavy_minus_sign: | N/A                |
 | `messageId`        | *string*           | :heavy_check_mark: | N/A                |
 | `failIfNotExists`  | *boolean*          | :heavy_minus_sign: | N/A                |
-| `type`             | *number*           | :heavy_minus_sign: | N/A                |
+| `type`             | *0*                | :heavy_minus_sign: | N/A                |

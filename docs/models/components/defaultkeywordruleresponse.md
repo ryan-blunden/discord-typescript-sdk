@@ -10,19 +10,27 @@ let value: DefaultKeywordRuleResponse = {
   guildId: "<value>",
   creatorId: "<value>",
   name: "<value>",
-  actions: [
-    {
-      metadata: {},
-    },
+  eventType: 2,
+  actions: [],
+  triggerType: 4,
+  enabled: false,
+  exemptRoles: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
+  exemptChannels: [
+    "<value 1>",
+    "<value 2>",
   ],
   triggerMetadata: {
     allowList: [
       "<value 1>",
+      "<value 2>",
+      "<value 3>",
     ],
     presets: [
-      944120,
-      737731,
-      917279,
+      1,
     ],
   },
 };
@@ -36,10 +44,10 @@ let value: DefaultKeywordRuleResponse = {
 | `guildId`                                                                                                                    | *string*                                                                                                                     | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
 | `creatorId`                                                                                                                  | *string*                                                                                                                     | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
 | `name`                                                                                                                       | *string*                                                                                                                     | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
-| `eventType`                                                                                                                  | *number*                                                                                                                     | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `eventType`                                                                                                                  | [components.AutomodEventType](../../models/components/automodeventtype.md)                                                   | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
 | `actions`                                                                                                                    | *components.Actions*[]                                                                                                       | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
-| `triggerType`                                                                                                                | *number*                                                                                                                     | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
-| `enabled`                                                                                                                    | *boolean*                                                                                                                    | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
-| `exemptRoles`                                                                                                                | *string*[]                                                                                                                   | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
-| `exemptChannels`                                                                                                             | *string*[]                                                                                                                   | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `triggerType`                                                                                                                | [components.TriggerType](../../models/components/triggertype.md)                                                             | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `enabled`                                                                                                                    | *boolean*                                                                                                                    | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `exemptRoles`                                                                                                                | *string*[]                                                                                                                   | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `exemptChannels`                                                                                                             | *string*[]                                                                                                                   | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
 | `triggerMetadata`                                                                                                            | [components.DefaultKeywordListTriggerMetadataResponse](../../models/components/defaultkeywordlisttriggermetadataresponse.md) | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |

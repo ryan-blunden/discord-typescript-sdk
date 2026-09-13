@@ -7,10 +7,11 @@
 
 ```typescript
 const value: components.ActionRowComponentForMessageRequest = {
+  type: 22,
   components: [
     {
+      type: 9,
       customId: "<id>",
-      options: [],
     },
   ],
 };
@@ -20,8 +21,9 @@ const value: components.ActionRowComponentForMessageRequest = {
 
 ```typescript
 const value: components.FileComponentForMessageRequest = {
+  type: 17,
   file: {
-    url: "https://enchanted-pneumonia.info",
+    url: "https://rigid-import.com/",
   },
 };
 ```
@@ -30,7 +32,14 @@ const value: components.FileComponentForMessageRequest = {
 
 ```typescript
 const value: components.MediaGalleryComponentForMessageRequest = {
-  items: [],
+  type: 8,
+  items: [
+    {
+      media: {
+        url: "https://optimal-tuba.info",
+      },
+    },
+  ],
 };
 ```
 
@@ -38,25 +47,30 @@ const value: components.MediaGalleryComponentForMessageRequest = {
 
 ```typescript
 const value: components.SectionComponentForMessageRequest = {
-  components: [
-    {
-      content: "<value>",
+  type: 17,
+  components: [],
+  accessory: {
+    type: 17,
+    media: {
+      url: "https://optimal-tuba.info",
     },
-  ],
-  accessory: {},
+  },
 };
 ```
 
 ### `components.SeparatorComponentForMessageRequest`
 
 ```typescript
-const value: components.SeparatorComponentForMessageRequest = {};
+const value: components.SeparatorComponentForMessageRequest = {
+  type: 3,
+};
 ```
 
 ### `components.TextDisplayComponentForMessageRequest`
 
 ```typescript
 const value: components.TextDisplayComponentForMessageRequest = {
+  type: 10,
   content: "<value>",
 };
 ```

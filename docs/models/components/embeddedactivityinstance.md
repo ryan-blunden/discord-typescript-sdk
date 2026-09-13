@@ -9,7 +9,16 @@ let value: EmbeddedActivityInstance = {
   applicationId: "<value>",
   instanceId: "<id>",
   launchId: "<id>",
-  users: [],
+  location: {
+    id: "<id>",
+    kind: "gc",
+    channelId: "<value>",
+    guildId: "<value>",
+  },
+  users: [
+    "<value 1>",
+    "<value 2>",
+  ],
 };
 ```
 
@@ -20,5 +29,5 @@ let value: EmbeddedActivityInstance = {
 | `applicationId`       | *string*              | :heavy_check_mark:    | N/A                   |
 | `instanceId`          | *string*              | :heavy_check_mark:    | N/A                   |
 | `launchId`            | *string*              | :heavy_check_mark:    | N/A                   |
-| `location`            | *components.Location* | :heavy_minus_sign:    | N/A                   |
+| `location`            | *components.Location* | :heavy_check_mark:    | N/A                   |
 | `users`               | *string*[]            | :heavy_check_mark:    | N/A                   |

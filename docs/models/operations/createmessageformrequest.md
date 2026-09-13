@@ -7,6 +7,7 @@ import { CreateMessageFormRequest } from "@ryan.blunden/discord-sdk/models/opera
 
 let value: CreateMessageFormRequest = {
   channelId: "<value>",
+  messageCreateRequest: {},
 };
 ```
 

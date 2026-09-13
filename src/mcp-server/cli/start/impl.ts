@@ -50,7 +50,8 @@ async function startStdio(flags: StartCommandFlags) {
     logger,
     allowedTools: flags.tool,
     scopes: flags.scope,
-    ...{ botToken: flags["bot-token"] ?? "" },
+    botToken: flags["bot-token"] ?? "",
+
     serverURL: flags["server-url"],
     serverIdx: flags["server-index"],
   });
@@ -71,7 +72,8 @@ async function startSSE(flags: StartCommandFlags) {
     logger,
     allowedTools: flags.tool,
     scopes: flags.scope,
-    ...{ botToken: flags["bot-token"] ?? "" },
+    botToken: flags["bot-token"] ?? "",
+
     serverURL: flags["server-url"],
     serverIdx: flags["server-index"],
   });
