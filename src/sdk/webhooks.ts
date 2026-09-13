@@ -7,6 +7,7 @@ import { webhooksDelete } from "../funcs/webhooksDelete.js";
 import { webhooksDeleteMessage } from "../funcs/webhooksDeleteMessage.js";
 import { webhooksDeleteOriginalMessage } from "../funcs/webhooksDeleteOriginalMessage.js";
 import { webhooksDeleteWithToken } from "../funcs/webhooksDeleteWithToken.js";
+import { webhooksExecute } from "../funcs/webhooksExecute.js";
 import { webhooksExecuteGithub } from "../funcs/webhooksExecuteGithub.js";
 import { webhooksExecuteSlack } from "../funcs/webhooksExecuteSlack.js";
 import { webhooksGet } from "../funcs/webhooksGet.js";
@@ -24,7 +25,6 @@ import { webhooksUpdateOriginalMessageJson } from "../funcs/webhooksUpdateOrigin
 import { webhooksUpdateOriginalMessageMultipart } from "../funcs/webhooksUpdateOriginalMessageMultipart.js";
 import { webhooksUpdateWithToken } from "../funcs/webhooksUpdateWithToken.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -35,7 +35,7 @@ export class Webhooks extends ClientSDK {
   async listForChannel(
     request: operations.ListChannelWebhooksRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.ListChannelWebhooksResponseBody>> {
+  ): Promise<operations.ListChannelWebhooksResponse> {
     return unwrapAsync(webhooksListForChannel(
       this,
       request,
@@ -49,7 +49,7 @@ export class Webhooks extends ClientSDK {
   async create(
     request: operations.CreateWebhookRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildIncomingWebhookResponse> {
+  ): Promise<operations.CreateWebhookResponse> {
     return unwrapAsync(webhooksCreate(
       this,
       request,
@@ -63,7 +63,7 @@ export class Webhooks extends ClientSDK {
   async listForGuild(
     request: operations.GetGuildWebhooksRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.GetGuildWebhooksResponseBody>> {
+  ): Promise<operations.GetGuildWebhooksResponse> {
     return unwrapAsync(webhooksListForGuild(
       this,
       request,
@@ -77,7 +77,7 @@ export class Webhooks extends ClientSDK {
   async get(
     request: operations.GetWebhookRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetWebhookResponseBody> {
+  ): Promise<operations.GetWebhookResponse> {
     return unwrapAsync(webhooksGet(
       this,
       request,
@@ -91,7 +91,7 @@ export class Webhooks extends ClientSDK {
   async delete(
     request: operations.DeleteWebhookRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteWebhookResponse | undefined> {
     return unwrapAsync(webhooksDelete(
       this,
       request,
@@ -105,7 +105,7 @@ export class Webhooks extends ClientSDK {
   async update(
     request: operations.UpdateWebhookRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateWebhookResponseBody> {
+  ): Promise<operations.UpdateWebhookResponse> {
     return unwrapAsync(webhooksUpdate(
       this,
       request,
@@ -118,13 +118,25 @@ export class Webhooks extends ClientSDK {
    */
   async getWithToken(
     request: operations.GetWebhookByTokenRequest,
-    security?: operations.GetWebhookByTokenSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<operations.GetWebhookByTokenResponseBody> {
+  ): Promise<operations.GetWebhookByTokenResponse> {
     return unwrapAsync(webhooksGetWithToken(
       this,
       request,
-      security,
+      options,
+    ));
+  }
+
+  /**
+   * Refer to Uploading Files for details on attachments and multipart/form-data requests. Returns a message or 204 No Content depending on the wait query parameter.
+   */
+  async execute(
+    request: operations.ExecuteWebhookRequest,
+    options?: RequestOptions,
+  ): Promise<operations.ExecuteWebhookResponse | undefined> {
+    return unwrapAsync(webhooksExecute(
+      this,
+      request,
       options,
     ));
   }
@@ -134,13 +146,11 @@ export class Webhooks extends ClientSDK {
    */
   async deleteWithToken(
     request: operations.DeleteWebhookByTokenRequest,
-    security?: operations.DeleteWebhookByTokenSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteWebhookByTokenResponse | undefined> {
     return unwrapAsync(webhooksDeleteWithToken(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -150,13 +160,11 @@ export class Webhooks extends ClientSDK {
    */
   async updateWithToken(
     request: operations.UpdateWebhookByTokenRequest,
-    security?: operations.UpdateWebhookByTokenSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<operations.UpdateWebhookByTokenResponseBody> {
+  ): Promise<operations.UpdateWebhookByTokenResponse> {
     return unwrapAsync(webhooksUpdateWithToken(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -166,13 +174,11 @@ export class Webhooks extends ClientSDK {
    */
   async executeGithub(
     request: operations.ExecuteGithubCompatibleWebhookRequest,
-    security?: operations.ExecuteGithubCompatibleWebhookSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.ExecuteGithubCompatibleWebhookResponse | undefined> {
     return unwrapAsync(webhooksExecuteGithub(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -182,13 +188,11 @@ export class Webhooks extends ClientSDK {
    */
   async getOriginalMessage(
     request: operations.GetOriginalWebhookMessageRequest,
-    security?: operations.GetOriginalWebhookMessageSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.GetOriginalWebhookMessageResponse> {
     return unwrapAsync(webhooksGetOriginalMessage(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -198,13 +202,11 @@ export class Webhooks extends ClientSDK {
    */
   async deleteOriginalMessage(
     request: operations.DeleteOriginalWebhookMessageRequest,
-    security?: operations.DeleteOriginalWebhookMessageSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteOriginalWebhookMessageResponse | undefined> {
     return unwrapAsync(webhooksDeleteOriginalMessage(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -214,13 +216,11 @@ export class Webhooks extends ClientSDK {
    */
   async updateOriginalMessageJson(
     request: operations.UpdateOriginalWebhookMessageJsonRequest,
-    security?: operations.UpdateOriginalWebhookMessageJsonSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.UpdateOriginalWebhookMessageJsonResponse> {
     return unwrapAsync(webhooksUpdateOriginalMessageJson(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -230,13 +230,11 @@ export class Webhooks extends ClientSDK {
    */
   async updateOriginalMessageForm(
     request: operations.UpdateOriginalWebhookMessageFormRequest,
-    security?: operations.UpdateOriginalWebhookMessageFormSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.UpdateOriginalWebhookMessageFormResponse> {
     return unwrapAsync(webhooksUpdateOriginalMessageForm(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -246,15 +244,11 @@ export class Webhooks extends ClientSDK {
    */
   async updateOriginalMessageMultipart(
     request: operations.UpdateOriginalWebhookMessageMultipartRequest,
-    security?:
-      | operations.UpdateOriginalWebhookMessageMultipartSecurity
-      | undefined,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.UpdateOriginalWebhookMessageMultipartResponse> {
     return unwrapAsync(webhooksUpdateOriginalMessageMultipart(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -264,13 +258,11 @@ export class Webhooks extends ClientSDK {
    */
   async getMessage(
     request: operations.GetWebhookMessageRequest,
-    security?: operations.GetWebhookMessageSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.GetWebhookMessageResponse> {
     return unwrapAsync(webhooksGetMessage(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -280,13 +272,11 @@ export class Webhooks extends ClientSDK {
    */
   async deleteMessage(
     request: operations.DeleteWebhookMessageRequest,
-    security?: operations.DeleteWebhookMessageSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteWebhookMessageResponse | undefined> {
     return unwrapAsync(webhooksDeleteMessage(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -296,13 +286,11 @@ export class Webhooks extends ClientSDK {
    */
   async updateMessageJson(
     request: operations.UpdateWebhookMessageJsonRequest,
-    security?: operations.UpdateWebhookMessageJsonSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.UpdateWebhookMessageJsonResponse> {
     return unwrapAsync(webhooksUpdateMessageJson(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -312,13 +300,11 @@ export class Webhooks extends ClientSDK {
    */
   async updateMessageForm(
     request: operations.UpdateWebhookMessageFormRequest,
-    security?: operations.UpdateWebhookMessageFormSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.UpdateWebhookMessageFormResponse> {
     return unwrapAsync(webhooksUpdateMessageForm(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -328,13 +314,11 @@ export class Webhooks extends ClientSDK {
    */
   async updateMessageMultipart(
     request: operations.UpdateWebhookMessageMultipartRequest,
-    security?: operations.UpdateWebhookMessageMultipartSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.UpdateWebhookMessageMultipartResponse> {
     return unwrapAsync(webhooksUpdateMessageMultipart(
       this,
       request,
-      security,
       options,
     ));
   }
@@ -344,13 +328,11 @@ export class Webhooks extends ClientSDK {
    */
   async executeSlack(
     request: operations.ExecuteSlackCompatibleWebhookRequest,
-    security?: operations.ExecuteSlackCompatibleWebhookSecurity | undefined,
     options?: RequestOptions,
-  ): Promise<string> {
+  ): Promise<operations.ExecuteSlackCompatibleWebhookResponse> {
     return unwrapAsync(webhooksExecuteSlack(
       this,
       request,
-      security,
       options,
     ));
   }

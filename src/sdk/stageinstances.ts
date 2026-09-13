@@ -7,7 +7,6 @@ import { stageInstancesDelete } from "../funcs/stageInstancesDelete.js";
 import { stageInstancesGet } from "../funcs/stageInstancesGet.js";
 import { stageInstancesUpdate } from "../funcs/stageInstancesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -18,7 +17,7 @@ export class StageInstances extends ClientSDK {
   async create(
     request: operations.CreateStageInstanceRequestBody,
     options?: RequestOptions,
-  ): Promise<components.StageInstanceResponse> {
+  ): Promise<operations.CreateStageInstanceResponse> {
     return unwrapAsync(stageInstancesCreate(
       this,
       request,
@@ -32,7 +31,7 @@ export class StageInstances extends ClientSDK {
   async get(
     request: operations.GetStageInstanceRequest,
     options?: RequestOptions,
-  ): Promise<components.StageInstanceResponse> {
+  ): Promise<operations.GetStageInstanceResponse> {
     return unwrapAsync(stageInstancesGet(
       this,
       request,
@@ -46,7 +45,7 @@ export class StageInstances extends ClientSDK {
   async delete(
     request: operations.DeleteStageInstanceRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteStageInstanceResponse | undefined> {
     return unwrapAsync(stageInstancesDelete(
       this,
       request,
@@ -60,7 +59,7 @@ export class StageInstances extends ClientSDK {
   async update(
     request: operations.UpdateStageInstanceRequest,
     options?: RequestOptions,
-  ): Promise<components.StageInstanceResponse> {
+  ): Promise<operations.UpdateStageInstanceResponse> {
     return unwrapAsync(stageInstancesUpdate(
       this,
       request,

@@ -7,6 +7,7 @@
 
 ```typescript
 const value: components.RoleSelectDefaultValue = {
+  type: "user",
   id: "<value>",
 };
 ```
@@ -15,6 +16,7 @@ const value: components.RoleSelectDefaultValue = {
 
 ```typescript
 const value: components.UserSelectDefaultValue = {
+  type: "channel",
   id: "<value>",
 };
 ```

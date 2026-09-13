@@ -9,7 +9,6 @@ import { guildScheduledEventsGetUsers } from "../funcs/guildScheduledEventsGetUs
 import { guildScheduledEventsList } from "../funcs/guildScheduledEventsList.js";
 import { guildScheduledEventsUpdate } from "../funcs/guildScheduledEventsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -20,7 +19,7 @@ export class GuildScheduledEvents extends ClientSDK {
   async list(
     request: operations.ListGuildScheduledEventsRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.ListGuildScheduledEventsResponseBody>> {
+  ): Promise<operations.ListGuildScheduledEventsResponse> {
     return unwrapAsync(guildScheduledEventsList(
       this,
       request,
@@ -34,7 +33,7 @@ export class GuildScheduledEvents extends ClientSDK {
   async create(
     request: operations.CreateGuildScheduledEventRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateGuildScheduledEventResponseBody> {
+  ): Promise<operations.CreateGuildScheduledEventResponse> {
     return unwrapAsync(guildScheduledEventsCreate(
       this,
       request,
@@ -48,7 +47,7 @@ export class GuildScheduledEvents extends ClientSDK {
   async get(
     request: operations.GetGuildScheduledEventRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetGuildScheduledEventResponseBody> {
+  ): Promise<operations.GetGuildScheduledEventResponse> {
     return unwrapAsync(guildScheduledEventsGet(
       this,
       request,
@@ -62,7 +61,7 @@ export class GuildScheduledEvents extends ClientSDK {
   async delete(
     request: operations.DeleteGuildScheduledEventRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteGuildScheduledEventResponse | undefined> {
     return unwrapAsync(guildScheduledEventsDelete(
       this,
       request,
@@ -76,7 +75,7 @@ export class GuildScheduledEvents extends ClientSDK {
   async update(
     request: operations.UpdateGuildScheduledEventRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateGuildScheduledEventResponseBody> {
+  ): Promise<operations.UpdateGuildScheduledEventResponse> {
     return unwrapAsync(guildScheduledEventsUpdate(
       this,
       request,
@@ -90,7 +89,7 @@ export class GuildScheduledEvents extends ClientSDK {
   async getUsers(
     request: operations.ListGuildScheduledEventUsersRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.ScheduledEventUserResponse>> {
+  ): Promise<operations.ListGuildScheduledEventUsersResponse> {
     return unwrapAsync(guildScheduledEventsGetUsers(
       this,
       request,

@@ -6,22 +6,24 @@
 import { ThumbnailComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ThumbnailComponentResponse = {
-  id: 720891,
+  type: 17,
+  id: 136536,
   media: {
     id: "<value>",
-    url: "https://yellow-repeat.org",
-    proxyUrl: "https://major-gastropod.name",
+    url: "https://faint-maintainer.biz",
+    proxyUrl: "https://dead-density.biz/",
   },
+  description: "really while for hungry mmm",
   spoiler: true,
 };
 ```
 
 ## Fields
 
-| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `type`                                                                               | *number*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `id`                                                                                 | *number*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `media`                                                                              | [components.UnfurledMediaResponse](../../models/components/unfurledmediaresponse.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `description`                                                                        | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
-| `spoiler`                                                                            | *boolean*                                                                            | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                 | [components.ThumbnailComponentResponseType](../../models/components/thumbnailcomponentresponsetype.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `id`                                                                                                   | *number*                                                                                               | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `media`                                                                                                | [components.UnfurledMediaResponse](../../models/components/unfurledmediaresponse.md)                   | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `description`                                                                                          | *string*                                                                                               | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `spoiler`                                                                                              | *boolean*                                                                                              | :heavy_check_mark:                                                                                     | N/A                                                                                                    |

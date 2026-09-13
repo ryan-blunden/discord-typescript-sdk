@@ -8,11 +8,11 @@
 ```typescript
 const value: components.GuildChannelResponse = {
   id: "<value>",
-  type: 0,
-  flags: 849560,
+  type: 10,
+  flags: 206744,
   guildId: "<value>",
   name: "<value>",
-  position: 864386,
+  position: 501107,
 };
 ```
 
@@ -21,15 +21,23 @@ const value: components.GuildChannelResponse = {
 ```typescript
 const value: components.PrivateChannelResponse = {
   id: "<value>",
-  type: 13,
-  flags: 251055,
+  type: 10,
+  flags: 533007,
   recipients: [
     {
       id: "<value>",
-      username: "Bennie93",
+      username: "Delphia.Ferry",
+      avatar: "https://picsum.photos/seed/YEPx72ML/2168/1884",
       discriminator: "<value>",
-      publicFlags: 175853,
-      flags: 411991,
+      publicFlags: 936875,
+      flags: 646435,
+      globalName: "<value>",
+      primaryGuild: {
+        identityGuildId: "<value>",
+        identityEnabled: false,
+        tag: "<value>",
+        badge: "<value>",
+      },
     },
   ],
 };
@@ -41,16 +49,11 @@ const value: components.PrivateChannelResponse = {
 const value: components.PrivateGroupChannelResponse = {
   id: "<value>",
   type: 0,
-  flags: 29105,
-  recipients: [
-    {
-      id: "<value>",
-      username: "Bennie93",
-      discriminator: "<value>",
-      publicFlags: 175853,
-      flags: 411991,
-    },
-  ],
+  flags: 385842,
+  recipients: [],
+  name: null,
+  icon: "<value>",
+  ownerId: "<value>",
 };
 ```
 
@@ -59,14 +62,20 @@ const value: components.PrivateGroupChannelResponse = {
 ```typescript
 const value: components.ThreadResponse = {
   id: "<value>",
-  type: 14,
-  flags: 767761,
+  type: 5,
+  flags: 385033,
   guildId: "<value>",
   name: "<value>",
   ownerId: "<value>",
-  messageCount: 973464,
-  memberCount: 499430,
-  totalMessageSent: 246379,
+  threadMetadata: {
+    archived: true,
+    archiveTimestamp: new Date("2026-11-25T20:10:25.377Z"),
+    autoArchiveDuration: 4320,
+    locked: true,
+  },
+  messageCount: 728828,
+  memberCount: 947468,
+  totalMessageSent: 112473,
 };
 ```
 

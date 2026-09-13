@@ -1,5 +1,4 @@
 # ApplicationRoleConnectionMetadata
-(*applicationRoleConnectionMetadata*)
 
 ## Overview
 
@@ -15,6 +14,7 @@ Returns a list of application role connection metadata objects for the given app
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_application_role_connections_metadata" method="get" path="/applications/{application_id}/role-connections/metadata" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -73,14 +73,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationRoleConnectionsMetadataItemResponse[]](../../models/.md)\>**
+**Promise\<[operations.GetApplicationRoleConnectionsMetadataResponse](../../models/operations/getapplicationroleconnectionsmetadataresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -88,6 +89,7 @@ Updates and returns a list of application role connection metadata objects for t
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_application_role_connections_metadata" method="put" path="/applications/{application_id}/role-connections/metadata" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -148,14 +150,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ApplicationRoleConnectionsMetadataItemResponse[]](../../models/.md)\>**
+**Promise\<[operations.UpdateApplicationRoleConnectionsMetadataResponse](../../models/operations/updateapplicationroleconnectionsmetadataresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteUserConnection
 
@@ -163,19 +166,18 @@ Deletes the application role connection for the user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_application_user_role_connection" method="delete" path="/users/@me/applications/{application_id}/role-connection" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
+const discord = new Discord();
 
 async function run() {
-  await discord.applicationRoleConnectionMetadata.deleteUserConnection({
+  const result = await discord.applicationRoleConnectionMetadata.deleteUserConnection({
     applicationId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -191,9 +193,7 @@ import { applicationRoleConnectionMetadataDeleteUserConnection } from "@ryan.blu
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
+const discord = new DiscordCore();
 
 async function run() {
   const res = await applicationRoleConnectionMetadataDeleteUserConnection(discord, {
@@ -201,7 +201,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("applicationRoleConnectionMetadataDeleteUserConnection failed:", res.error);
   }
@@ -221,11 +221,12 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteApplicationUserRoleConnectionResponse](../../models/operations/deleteapplicationuserroleconnectionresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

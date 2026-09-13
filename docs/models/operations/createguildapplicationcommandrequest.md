@@ -8,6 +8,9 @@ import { CreateGuildApplicationCommandRequest } from "@ryan.blunden/discord-sdk/
 let value: CreateGuildApplicationCommandRequest = {
   applicationId: "<value>",
   guildId: "<value>",
+  applicationCommandCreateRequest: {
+    name: "<value>",
+  },
 };
 ```
 

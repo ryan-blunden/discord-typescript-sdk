@@ -7,6 +7,7 @@ import { WebhookSourceGuildResponse } from "@ryan.blunden/discord-sdk/models/com
 
 let value: WebhookSourceGuildResponse = {
   id: "<value>",
+  icon: "<value>",
   name: "<value>",
 };
 ```
@@ -16,5 +17,5 @@ let value: WebhookSourceGuildResponse = {
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `id`               | *string*           | :heavy_check_mark: | N/A                |
-| `icon`             | *string*           | :heavy_minus_sign: | N/A                |
+| `icon`             | *string*           | :heavy_check_mark: | N/A                |
 | `name`             | *string*           | :heavy_check_mark: | N/A                |

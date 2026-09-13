@@ -4,14 +4,13 @@
 
 import { DiscordCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
-import { APIError } from "../models/errors/apierror.js";
+import { DiscordError } from "../models/errors/discorderror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -20,6 +19,7 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
@@ -34,15 +34,17 @@ export function usersUpdateApplicationRoleConnection(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ApplicationUserRoleConnectionResponse,
+    operations.UpdateApplicationUserRoleConnectionResponse,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | DiscordError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
@@ -59,15 +61,17 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.ApplicationUserRoleConnectionResponse,
+      operations.UpdateApplicationUserRoleConnectionResponse,
+      | errors.RatelimitedResponse
       | errors.ErrorResponse
-      | APIError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | DiscordError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -83,7 +87,11 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON(
+    "body",
+    payload.UpdateApplicationUserRoleConnectionRequest,
+    { explode: true },
+  );
 
   const pathParams = {
     application_id: encodeSimple("application_id", payload.application_id, {
@@ -91,7 +99,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/users/@me/applications/{application_id}/role-connection",
   )(pathParams);
@@ -101,19 +108,15 @@ async function $do(
     Accept: "application/json",
   }));
 
-  const secConfig = await extractSecurity(client._options.botToken);
-  const securityInput = secConfig == null ? {} : { botToken: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
-
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "update_application_user_role_connection",
     oAuth2Scopes: ["role_connections.write"],
 
-    resolvedSecurity: requestSecurity,
+    resolvedSecurity: null,
 
-    securitySource: client._options.botToken,
+    securitySource: null,
     retryConfig: options?.retries
       || client._options.retryConfig
       || { strategy: "none" },
@@ -121,7 +124,6 @@ async function $do(
   };
 
   const requestRes = client._createRequest(context, {
-    security: requestSecurity,
     method: "PUT",
     baseURL: options?.serverURL,
     path: path,
@@ -137,7 +139,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -151,20 +154,27 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.ApplicationUserRoleConnectionResponse,
+    operations.UpdateApplicationUserRoleConnectionResponse,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | DiscordError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
-    M.json(200, components.ApplicationUserRoleConnectionResponse$inboundSchema),
-    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema),
+    M.json(
+      200,
+      operations.UpdateApplicationUserRoleConnectionResponse$inboundSchema,
+      { hdrs: true, key: "Result" },
+    ),
+    M.jsonErr(429, errors.RatelimitedResponse$inboundSchema, { hdrs: true }),
+    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema, { hdrs: true }),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

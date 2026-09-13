@@ -8,6 +8,7 @@ import { AddLobbyMemberRequest } from "@ryan.blunden/discord-sdk/models/operatio
 let value: AddLobbyMemberRequest = {
   lobbyId: "<value>",
   userId: "<value>",
+  requestBody: {},
 };
 ```
 
