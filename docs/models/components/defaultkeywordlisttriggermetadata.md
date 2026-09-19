@@ -10,7 +10,7 @@ let value: DefaultKeywordListTriggerMetadata = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `allowList`        | *string*[]         | :heavy_minus_sign: | N/A                |
-| `presets`          | *number*[]         | :heavy_minus_sign: | N/A                |
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `allowList`                                                                                  | *string*[]                                                                                   | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `presets`                                                                                    | [components.AutomodKeywordPresetType](../../models/components/automodkeywordpresettype.md)[] | :heavy_minus_sign:                                                                           | N/A                                                                                          |

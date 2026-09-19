@@ -7,6 +7,7 @@ import { UpdateApplicationRequest } from "@ryan.blunden/discord-sdk/models/opera
 
 let value: UpdateApplicationRequest = {
   applicationId: "<value>",
+  applicationFormPartial: {},
 };
 ```
 

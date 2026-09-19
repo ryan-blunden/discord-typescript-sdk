@@ -18,7 +18,6 @@ import { applicationCommandsSetGuildPermissions } from "../funcs/applicationComm
 import { applicationCommandsUpdate } from "../funcs/applicationCommandsUpdate.js";
 import { applicationCommandsUpdateGuild } from "../funcs/applicationCommandsUpdateGuild.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -30,7 +29,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.ListApplicationCommandsSecurity,
     request: operations.ListApplicationCommandsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.ApplicationCommandResponse>> {
+  ): Promise<operations.ListApplicationCommandsResponse> {
     return unwrapAsync(applicationCommandsList(
       this,
       security,
@@ -46,7 +45,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.BulkSetApplicationCommandsSecurity,
     request: operations.BulkSetApplicationCommandsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.ApplicationCommandResponse>> {
+  ): Promise<operations.BulkSetApplicationCommandsResponse> {
     return unwrapAsync(applicationCommandsBulkSet(
       this,
       security,
@@ -62,7 +61,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.CreateApplicationCommandSecurity,
     request: operations.CreateApplicationCommandRequest,
     options?: RequestOptions,
-  ): Promise<components.ApplicationCommandResponse> {
+  ): Promise<operations.CreateApplicationCommandResponse> {
     return unwrapAsync(applicationCommandsCreate(
       this,
       security,
@@ -78,7 +77,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.GetApplicationCommandSecurity,
     request: operations.GetApplicationCommandRequest,
     options?: RequestOptions,
-  ): Promise<components.ApplicationCommandResponse> {
+  ): Promise<operations.GetApplicationCommandResponse> {
     return unwrapAsync(applicationCommandsGet(
       this,
       security,
@@ -94,7 +93,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.DeleteApplicationCommandSecurity,
     request: operations.DeleteApplicationCommandRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteApplicationCommandResponse | undefined> {
     return unwrapAsync(applicationCommandsDelete(
       this,
       security,
@@ -110,7 +109,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.UpdateApplicationCommandSecurity,
     request: operations.UpdateApplicationCommandRequest,
     options?: RequestOptions,
-  ): Promise<components.ApplicationCommandResponse> {
+  ): Promise<operations.UpdateApplicationCommandResponse> {
     return unwrapAsync(applicationCommandsUpdate(
       this,
       security,
@@ -126,7 +125,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.ListGuildApplicationCommandsSecurity,
     request: operations.ListGuildApplicationCommandsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.ApplicationCommandResponse>> {
+  ): Promise<operations.ListGuildApplicationCommandsResponse> {
     return unwrapAsync(applicationCommandsListGuild(
       this,
       security,
@@ -142,7 +141,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.BulkSetGuildApplicationCommandsSecurity,
     request: operations.BulkSetGuildApplicationCommandsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.ApplicationCommandResponse>> {
+  ): Promise<operations.BulkSetGuildApplicationCommandsResponse> {
     return unwrapAsync(applicationCommandsBulkSetGuild(
       this,
       security,
@@ -158,7 +157,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.CreateGuildApplicationCommandSecurity,
     request: operations.CreateGuildApplicationCommandRequest,
     options?: RequestOptions,
-  ): Promise<components.ApplicationCommandResponse> {
+  ): Promise<operations.CreateGuildApplicationCommandResponse> {
     return unwrapAsync(applicationCommandsCreateGuild(
       this,
       security,
@@ -174,7 +173,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.ListGuildApplicationCommandPermissionsSecurity,
     request: operations.ListGuildApplicationCommandPermissionsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.CommandPermissionsResponse>> {
+  ): Promise<operations.ListGuildApplicationCommandPermissionsResponse> {
     return unwrapAsync(applicationCommandsListGuildPermissions(
       this,
       security,
@@ -190,7 +189,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.GetGuildApplicationCommandSecurity,
     request: operations.GetGuildApplicationCommandRequest,
     options?: RequestOptions,
-  ): Promise<components.ApplicationCommandResponse> {
+  ): Promise<operations.GetGuildApplicationCommandResponse> {
     return unwrapAsync(applicationCommandsGetGuild(
       this,
       security,
@@ -206,7 +205,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.DeleteGuildApplicationCommandSecurity,
     request: operations.DeleteGuildApplicationCommandRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteGuildApplicationCommandResponse | undefined> {
     return unwrapAsync(applicationCommandsDeleteGuild(
       this,
       security,
@@ -222,7 +221,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.UpdateGuildApplicationCommandSecurity,
     request: operations.UpdateGuildApplicationCommandRequest,
     options?: RequestOptions,
-  ): Promise<components.ApplicationCommandResponse> {
+  ): Promise<operations.UpdateGuildApplicationCommandResponse> {
     return unwrapAsync(applicationCommandsUpdateGuild(
       this,
       security,
@@ -238,7 +237,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.GetGuildApplicationCommandPermissionsSecurity,
     request: operations.GetGuildApplicationCommandPermissionsRequest,
     options?: RequestOptions,
-  ): Promise<components.CommandPermissionsResponse> {
+  ): Promise<operations.GetGuildApplicationCommandPermissionsResponse> {
     return unwrapAsync(applicationCommandsGetGuildPermissions(
       this,
       security,
@@ -254,7 +253,7 @@ export class ApplicationCommands extends ClientSDK {
     security: operations.SetGuildApplicationCommandPermissionsSecurity,
     request: operations.SetGuildApplicationCommandPermissionsRequest,
     options?: RequestOptions,
-  ): Promise<components.CommandPermissionsResponse> {
+  ): Promise<operations.SetGuildApplicationCommandPermissionsResponse> {
     return unwrapAsync(applicationCommandsSetGuildPermissions(
       this,
       security,

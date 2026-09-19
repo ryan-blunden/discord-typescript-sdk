@@ -9,6 +9,7 @@ let value: UpdateGuildApplicationCommandRequest = {
   applicationId: "<value>",
   guildId: "<value>",
   commandId: "<value>",
+  applicationCommandPatchRequestPartial: {},
 };
 ```
 

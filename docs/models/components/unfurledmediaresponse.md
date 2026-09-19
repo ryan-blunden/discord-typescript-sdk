@@ -22,3 +22,4 @@ let value: UnfurledMediaResponse = {
 | `width`            | *number*           | :heavy_minus_sign: | N/A                |
 | `height`           | *number*           | :heavy_minus_sign: | N/A                |
 | `contentType`      | *string*           | :heavy_minus_sign: | N/A                |
+| `attachmentId`     | *string*           | :heavy_minus_sign: | N/A                |

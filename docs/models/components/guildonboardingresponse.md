@@ -10,6 +10,7 @@ let value: GuildOnboardingResponse = {
   prompts: [],
   defaultChannelIds: [],
   enabled: false,
+  mode: 0,
 };
 ```
 
@@ -21,3 +22,4 @@ let value: GuildOnboardingResponse = {
 | `prompts`                                                                                    | [components.OnboardingPromptResponse](../../models/components/onboardingpromptresponse.md)[] | :heavy_check_mark:                                                                           | N/A                                                                                          |
 | `defaultChannelIds`                                                                          | *string*[]                                                                                   | :heavy_check_mark:                                                                           | N/A                                                                                          |
 | `enabled`                                                                                    | *boolean*                                                                                    | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `mode`                                                                                       | [components.GuildOnboardingMode](../../models/components/guildonboardingmode.md)             | :heavy_check_mark:                                                                           | N/A                                                                                          |

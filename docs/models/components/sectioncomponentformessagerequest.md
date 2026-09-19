@@ -6,12 +6,14 @@
 import { SectionComponentForMessageRequest } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: SectionComponentForMessageRequest = {
-  components: [
-    {
-      content: "<value>",
+  type: 17,
+  components: [],
+  accessory: {
+    type: 17,
+    media: {
+      url: "https://optimal-tuba.info",
     },
-  ],
-  accessory: {},
+  },
 };
 ```
 
@@ -19,6 +21,7 @@ let value: SectionComponentForMessageRequest = {
 
 | Field                                                                                                                  | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
 | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                 | *number*                                                                                                               | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
+| `type`                                                                                                                 | [components.SectionComponentForMessageRequestType](../../models/components/sectioncomponentformessagerequesttype.md)   | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
+| `id`                                                                                                                   | *number*                                                                                                               | :heavy_minus_sign:                                                                                                     | N/A                                                                                                                    |
 | `components`                                                                                                           | [components.TextDisplayComponentForMessageRequest](../../models/components/textdisplaycomponentformessagerequest.md)[] | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
 | `accessory`                                                                                                            | *components.SectionComponentForMessageRequestAccessory*                                                                | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |

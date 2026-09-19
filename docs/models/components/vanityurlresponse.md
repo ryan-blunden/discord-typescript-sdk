@@ -6,7 +6,8 @@
 import { VanityURLResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: VanityURLResponse = {
-  uses: 196983,
+  code: "<value>",
+  uses: 301597,
 };
 ```
 
@@ -14,6 +15,6 @@ let value: VanityURLResponse = {
 
 | Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `code`                                                                                 | *string*                                                                               | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `code`                                                                                 | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
 | `uses`                                                                                 | *number*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
 | `error`                                                                                | [components.VanityURLErrorResponse](../../models/components/vanityurlerrorresponse.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |
