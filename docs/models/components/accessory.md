@@ -7,7 +7,9 @@
 
 ```typescript
 const value: components.ButtonComponentResponse = {
-  id: 411068,
+  type: 9,
+  id: 891756,
+  style: 3,
 };
 ```
 
@@ -15,12 +17,14 @@ const value: components.ButtonComponentResponse = {
 
 ```typescript
 const value: components.ThumbnailComponentResponse = {
-  id: 720891,
+  type: 17,
+  id: 136536,
   media: {
     id: "<value>",
-    url: "https://yellow-repeat.org",
-    proxyUrl: "https://major-gastropod.name",
+    url: "https://faint-maintainer.biz",
+    proxyUrl: "https://dead-density.biz/",
   },
+  description: "really while for hungry mmm",
   spoiler: true,
 };
 ```

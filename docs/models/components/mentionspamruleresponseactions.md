@@ -7,6 +7,7 @@
 
 ```typescript
 const value: components.BlockMessageActionResponse = {
+  type: 3,
   metadata: {},
 };
 ```
@@ -15,6 +16,7 @@ const value: components.BlockMessageActionResponse = {
 
 ```typescript
 const value: components.FlagToChannelActionResponse = {
+  type: 4,
   metadata: {
     channelId: "<value>",
   },
@@ -25,6 +27,7 @@ const value: components.FlagToChannelActionResponse = {
 
 ```typescript
 const value: components.QuarantineUserActionResponse = {
+  type: 1,
   metadata: {},
 };
 ```
@@ -33,8 +36,9 @@ const value: components.QuarantineUserActionResponse = {
 
 ```typescript
 const value: components.UserCommunicationDisabledActionResponse = {
+  type: 1,
   metadata: {
-    durationSeconds: 5411,
+    durationSeconds: 122685,
   },
 };
 ```

@@ -1,12 +1,10 @@
 # GuildTemplates
-(*guildTemplates*)
 
 ## Overview
 
 ### Available Operations
 
 * [get](#get) - Returns a guild template object for the given code.
-* [createGuild](#createguild) - Create a new guild based on a template. Returns a guild object on success. Fires a Guild Create Gateway event.
 * [getNewMemberWelcome](#getnewmemberwelcome) - Returns the welcome screen object for the guild.
 * [list](#list) - Returns an array of guild template objects. Requires the MANAGE_GUILD permission.
 * [create](#create) - Creates a template for the guild. Requires the MANAGE_GUILD permission. Returns the created guild template object on success.
@@ -20,10 +18,13 @@ Returns a guild template object for the given code.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_template" method="get" path="/guilds/templates/{code}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.guildTemplates.get({
@@ -46,7 +47,9 @@ import { guildTemplatesGet } from "@ryan.blunden/discord-sdk/funcs/guildTemplate
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await guildTemplatesGet(discord, {
@@ -68,100 +71,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.GetGuildTemplateRequest](../../models/operations/getguildtemplaterequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.GetGuildTemplateSecurity](../../models/operations/getguildtemplatesecurity.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.GuildTemplateResponse](../../models/components/guildtemplateresponse.md)\>**
+**Promise\<[operations.GetGuildTemplateResponse](../../models/operations/getguildtemplateresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
-
-## createGuild
-
-Create a new guild based on a template. Returns a guild object on success. Fires a Guild Create Gateway event.
-
-### Example Usage
-
-```typescript
-import { Discord } from "@ryan.blunden/discord-sdk";
-
-const discord = new Discord({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const result = await discord.guildTemplates.createGuild({
-    code: "<value>",
-    requestBody: {
-      name: "<value>",
-    },
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { guildTemplatesCreateGuild } from "@ryan.blunden/discord-sdk/funcs/guildTemplatesCreateGuild.js";
-
-// Use `DiscordCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const discord = new DiscordCore({
-  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
-});
-
-async function run() {
-  const res = await guildTemplatesCreateGuild(discord, {
-    code: "<value>",
-    requestBody: {
-      name: "<value>",
-    },
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("guildTemplatesCreateGuild failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CreateGuildFromTemplateRequest](../../models/operations/createguildfromtemplaterequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.GuildResponse](../../models/components/guildresponse.md)\>**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getNewMemberWelcome
 
@@ -169,6 +93,7 @@ Returns the welcome screen object for the guild.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_new_member_welcome" method="get" path="/guilds/{guild_id}/new-member-welcome" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -227,14 +152,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildHomeSettingsResponse](../../models/components/guildhomesettingsresponse.md)\>**
+**Promise\<[operations.GetGuildNewMemberWelcomeResponse](../../models/operations/getguildnewmemberwelcomeresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## list
 
@@ -242,6 +168,7 @@ Returns an array of guild template objects. Requires the MANAGE_GUILD permission
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_templates" method="get" path="/guilds/{guild_id}/templates" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -300,14 +227,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildTemplateResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildTemplatesResponse](../../models/operations/listguildtemplatesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## create
 
@@ -315,6 +243,7 @@ Creates a template for the guild. Requires the MANAGE_GUILD permission. Returns 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_guild_template" method="post" path="/guilds/{guild_id}/templates" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -379,14 +308,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildTemplateResponse](../../models/components/guildtemplateresponse.md)\>**
+**Promise\<[operations.CreateGuildTemplateResponse](../../models/operations/createguildtemplateresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## sync
 
@@ -394,6 +324,7 @@ Syncs the template to the guild's current state. Requires the MANAGE_GUILD permi
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="sync_guild_template" method="put" path="/guilds/{guild_id}/templates/{code}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -454,14 +385,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildTemplateResponse](../../models/components/guildtemplateresponse.md)\>**
+**Promise\<[operations.SyncGuildTemplateResponse](../../models/operations/syncguildtemplateresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -469,6 +401,7 @@ Deletes the template. Requires the MANAGE_GUILD permission. Returns the deleted 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_guild_template" method="delete" path="/guilds/{guild_id}/templates/{code}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -529,14 +462,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildTemplateResponse](../../models/components/guildtemplateresponse.md)\>**
+**Promise\<[operations.DeleteGuildTemplateResponse](../../models/operations/deleteguildtemplateresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -544,6 +478,7 @@ Modifies the template's metadata. Requires the MANAGE_GUILD permission. Returns 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_guild_template" method="patch" path="/guilds/{guild_id}/templates/{code}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -606,11 +541,12 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildTemplateResponse](../../models/components/guildtemplateresponse.md)\>**
+**Promise\<[operations.UpdateGuildTemplateResponse](../../models/operations/updateguildtemplateresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

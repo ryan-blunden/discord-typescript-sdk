@@ -7,7 +7,15 @@
 
 ```typescript
 const value: components.ActionRowComponentResponse = {
-  id: 158862,
+  type: 4,
+  id: 986061,
+  components: [
+    {
+      type: 14,
+      id: 364020,
+      style: 2,
+    },
+  ],
 };
 ```
 
@@ -15,8 +23,17 @@ const value: components.ActionRowComponentResponse = {
 
 ```typescript
 const value: components.ContainerComponentResponse = {
-  id: 963943,
-  components: [],
+  type: 23,
+  id: 398043,
+  accentColor: 54599,
+  components: [
+    {
+      type: 7,
+      id: 388461,
+      spacing: 2,
+      divider: true,
+    },
+  ],
   spoiler: false,
 };
 ```
@@ -25,12 +42,15 @@ const value: components.ContainerComponentResponse = {
 
 ```typescript
 const value: components.FileComponentResponse = {
-  id: 601142,
+  type: 13,
+  id: 173185,
   file: {
     id: "<value>",
-    url: "https://actual-testimonial.com/",
-    proxyUrl: "https://poor-toothpick.org/",
+    url: "https://untidy-chow.biz/",
+    proxyUrl: "https://utilized-verve.com",
   },
+  name: "<value>",
+  size: 13814,
   spoiler: true,
 };
 ```
@@ -39,8 +59,19 @@ const value: components.FileComponentResponse = {
 
 ```typescript
 const value: components.MediaGalleryComponentResponse = {
-  id: 467586,
-  items: [],
+  type: 10,
+  id: 388742,
+  items: [
+    {
+      media: {
+        id: "<value>",
+        url: "https://faint-maintainer.biz",
+        proxyUrl: "https://dead-density.biz/",
+      },
+      description: "toward armchair intensely redraw approach",
+      spoiler: true,
+    },
+  ],
 };
 ```
 
@@ -48,21 +79,26 @@ const value: components.MediaGalleryComponentResponse = {
 
 ```typescript
 const value: components.SectionComponentResponse = {
-  id: 664036,
+  type: 14,
+  id: 713017,
   components: [
     {
-      id: 822824,
+      type: 22,
+      id: 849900,
       content: "<value>",
     },
   ],
   accessory: {
-    id: 849900,
+    type: 23,
+    id: 744514,
     media: {
       id: "<value>",
-      url: "https://yellow-repeat.org",
-      proxyUrl: "https://major-gastropod.name",
+      url: "https://faint-maintainer.biz",
+      proxyUrl: "https://dead-density.biz/",
     },
-    spoiler: true,
+    description:
+      "aftermath recompense showy knife beside throughout draft service",
+    spoiler: false,
   },
 };
 ```
@@ -71,7 +107,9 @@ const value: components.SectionComponentResponse = {
 
 ```typescript
 const value: components.SeparatorComponentResponse = {
-  id: 171711,
+  type: 4,
+  id: 766653,
+  spacing: 2,
   divider: false,
 };
 ```
@@ -80,7 +118,8 @@ const value: components.SeparatorComponentResponse = {
 
 ```typescript
 const value: components.TextDisplayComponentResponse = {
-  id: 121571,
+  type: 3,
+  id: 16908,
   content: "<value>",
 };
 ```

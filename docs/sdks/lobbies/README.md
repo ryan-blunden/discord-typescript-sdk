@@ -1,5 +1,4 @@
 # Lobbies
-(*lobbies*)
 
 ## Overview
 
@@ -21,6 +20,7 @@ Creates a new lobby or joins an existing one. Returns a lobby object on success.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_or_join_lobby" method="put" path="/lobbies" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -80,14 +80,15 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyResponse](../../models/components/lobbyresponse.md)\>**
+**Promise\<[operations.CreateOrJoinLobbyResponse](../../models/operations/createorjoinlobbyresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## create
 
@@ -95,6 +96,7 @@ Creates a new lobby. Returns a lobby object on success.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_lobby" method="post" path="/lobbies" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -149,14 +151,15 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyResponse](../../models/components/lobbyresponse.md)\>**
+**Promise\<[operations.CreateLobbyResponse](../../models/operations/createlobbyresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -164,6 +167,7 @@ Returns the lobby object for the given id.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_lobby" method="get" path="/lobbies/{lobby_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -222,14 +226,15 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyResponse](../../models/components/lobbyresponse.md)\>**
+**Promise\<[operations.GetLobbyResponse](../../models/operations/getlobbyresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -237,6 +242,7 @@ Updates a lobby. Returns a lobby object on success.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="edit_lobby" method="patch" path="/lobbies/{lobby_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -297,14 +303,15 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyResponse](../../models/components/lobbyresponse.md)\>**
+**Promise\<[operations.EditLobbyResponse](../../models/operations/editlobbyresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## connectToChannel
 
@@ -312,6 +319,7 @@ Connects a lobby to a channel.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="edit_lobby_channel_link" method="patch" path="/lobbies/{lobby_id}/channel-linking" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -373,14 +381,15 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyResponse](../../models/components/lobbyresponse.md)\>**
+**Promise\<[operations.EditLobbyChannelLinkResponse](../../models/operations/editlobbychannellinkresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## leave
 
@@ -388,19 +397,20 @@ Removes the current user from the specified lobby. It is safe to call this even 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="leave_lobby" method="delete" path="/lobbies/{lobby_id}/members/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
 const discord = new Discord();
 
 async function run() {
-  await discord.lobbies.leave({
+  const result = await discord.lobbies.leave({
     botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
   }, {
     lobbyId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -426,7 +436,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("lobbiesLeave failed:", res.error);
   }
@@ -447,14 +457,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.LeaveLobbyResponse](../../models/operations/leavelobbyresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## addMember
 
@@ -462,6 +473,7 @@ Adds a user to a lobby.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="add_lobby_member" method="put" path="/lobbies/{lobby_id}/members/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -524,14 +536,15 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyMemberResponse](../../models/components/lobbymemberresponse.md)\>**
+**Promise\<[operations.AddLobbyMemberResponse](../../models/operations/addlobbymemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## removeMember
 
@@ -539,6 +552,7 @@ Removes a user from a lobby.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_lobby_member" method="delete" path="/lobbies/{lobby_id}/members/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -547,12 +561,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.lobbies.removeMember({
+  const result = await discord.lobbies.removeMember({
     lobbyId: "<value>",
     userId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -579,7 +593,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("lobbiesRemoveMember failed:", res.error);
   }
@@ -599,14 +613,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteLobbyMemberResponse](../../models/operations/deletelobbymemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## sendMessage
 
@@ -614,6 +629,7 @@ Sends a message to the lobby.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_lobby_message" method="post" path="/lobbies/{lobby_id}/messages" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -675,11 +691,12 @@ run();
 
 ### Response
 
-**Promise\<[components.LobbyMessageResponse](../../models/components/lobbymessageresponse.md)\>**
+**Promise\<[operations.CreateLobbyMessageResponse](../../models/operations/createlobbymessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

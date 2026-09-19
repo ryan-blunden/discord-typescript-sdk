@@ -11,33 +11,64 @@ let value: GuildAuditLogResponse = {
   integrations: [
     {
       id: "<value>",
-    },
-  ],
-  webhooks: [],
-  guildScheduledEvents: [],
-  threads: [
-    {
-      id: "<value>",
-      type: 11,
-      flags: 257651,
-      guildId: "<value>",
+      type: "discord",
       name: "<value>",
-      ownerId: "<value>",
-      messageCount: 159639,
-      memberCount: 279313,
-      totalMessageSent: 568672,
+      account: {
+        id: "<id>",
+        name: null,
+      },
     },
   ],
+  webhooks: [
+    {
+      applicationId: "<value>",
+      avatar: "https://loremflickr.com/1420/3831?lock=3431572960378690",
+      channelId: "<value>",
+      id: "<value>",
+      name: "<value>",
+      type: 2,
+    },
+  ],
+  guildScheduledEvents: [],
+  threads: [],
   applicationCommands: [
     {
       id: "<value>",
       applicationId: "<value>",
       version: "<value>",
+      defaultMemberPermissions: "<value>",
+      type: 3,
       name: "<value>",
-      description: "onto midst uh-huh knit",
+      description: "which instead fatal",
     },
   ],
-  autoModerationRules: [],
+  autoModerationRules: [
+    {
+      id: "<value>",
+      guildId: "<value>",
+      creatorId: "<value>",
+      name: "<value>",
+      eventType: 2,
+      actions: [
+        {
+          type: 1,
+          metadata: {
+            durationSeconds: 122685,
+          },
+        },
+      ],
+      triggerType: 6,
+      enabled: true,
+      exemptRoles: [
+        "<value 1>",
+        "<value 2>",
+      ],
+      exemptChannels: [
+        "<value 1>",
+      ],
+      triggerMetadata: {},
+    },
+  ],
 };
 ```
 
