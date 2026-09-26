@@ -7,12 +7,17 @@ import { BulkBanUsersFromGuildRequest } from "@ryan.blunden/discord-sdk/models/o
 
 let value: BulkBanUsersFromGuildRequest = {
   guildId: "<value>",
+  bulkBanUsersRequest: {
+    userIds: [
+      "<value 1>",
+    ],
+  },
 };
 ```
 
 ## Fields
 
-| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `guildId`                                                                                                  | *string*                                                                                                   | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
-| `requestBody`                                                                                              | [operations.BulkBanUsersFromGuildRequestBody](../../models/operations/bulkbanusersfromguildrequestbody.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `guildId`                                                                        | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `bulkBanUsersRequest`                                                            | [components.BulkBanUsersRequest](../../models/components/bulkbanusersrequest.md) | :heavy_check_mark:                                                               | N/A                                                                              |

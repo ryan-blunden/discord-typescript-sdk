@@ -7,6 +7,10 @@ import { CreateApplicationEmojiRequest } from "@ryan.blunden/discord-sdk/models/
 
 let value: CreateApplicationEmojiRequest = {
   applicationId: "<value>",
+  requestBody: {
+    name: "<value>",
+    image: "https://loremflickr.com/3927/3910?lock=619683604326242",
+  },
 };
 ```
 

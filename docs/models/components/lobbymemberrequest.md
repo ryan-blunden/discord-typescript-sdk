@@ -17,3 +17,4 @@ let value: LobbyMemberRequest = {
 | `id`                                                 | *string*                                             | :heavy_check_mark:                                   | N/A                                                  |
 | `metadata`                                           | Record<string, *string*>                             | :heavy_minus_sign:                                   | N/A                                                  |
 | `flags`                                              | [components.Flags](../../models/components/flags.md) | :heavy_minus_sign:                                   | N/A                                                  |
+| `additionalName`                                     | *string*                                             | :heavy_minus_sign:                                   | N/A                                                  |
