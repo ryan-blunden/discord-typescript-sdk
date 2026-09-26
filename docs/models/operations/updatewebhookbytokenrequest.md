@@ -8,6 +8,7 @@ import { UpdateWebhookByTokenRequest } from "@ryan.blunden/discord-sdk/models/op
 let value: UpdateWebhookByTokenRequest = {
   webhookId: "<value>",
   webhookToken: "<value>",
+  requestBody: {},
 };
 ```
 

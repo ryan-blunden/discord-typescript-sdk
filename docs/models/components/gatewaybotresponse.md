@@ -8,12 +8,12 @@ import { GatewayBotResponse } from "@ryan.blunden/discord-sdk/models/components"
 let value: GatewayBotResponse = {
   url: "https://strict-anticodon.net/",
   sessionStartLimit: {
-    maxConcurrency: 486325,
-    remaining: 876715,
-    resetAfter: 874203,
-    total: 965192,
+    maxConcurrency: 445602,
+    remaining: 674604,
+    resetAfter: 787187,
+    total: 471973,
   },
-  shards: 194387,
+  shards: 486325,
 };
 ```
 

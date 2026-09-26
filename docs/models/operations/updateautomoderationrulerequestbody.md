@@ -27,3 +27,9 @@ const value: components.MLSpamUpsertRequestPartial = {};
 const value: components.MentionSpamUpsertRequestPartial = {};
 ```
 
+### `components.UserProfileUpsertRequestPartial`
+
+```typescript
+const value: components.UserProfileUpsertRequestPartial = {};
+```
+

@@ -7,14 +7,20 @@ import { ThreadResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ThreadResponse = {
   id: "<value>",
-  type: 14,
-  flags: 767761,
+  type: 5,
+  flags: 385033,
   guildId: "<value>",
   name: "<value>",
   ownerId: "<value>",
-  messageCount: 973464,
-  memberCount: 499430,
-  totalMessageSent: 246379,
+  threadMetadata: {
+    archived: true,
+    archiveTimestamp: new Date("2026-11-25T20:10:25.377Z"),
+    autoArchiveDuration: 4320,
+    locked: true,
+  },
+  messageCount: 728828,
+  memberCount: 947468,
+  totalMessageSent: 112473,
 };
 ```
 
@@ -34,10 +40,10 @@ let value: ThreadResponse = {
 | `bitrate`                                                                                     | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `userLimit`                                                                                   | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `rtcRegion`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `videoQualityMode`                                                                            | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `videoQualityMode`                                                                            | [components.VideoQualityModes](../../models/components/videoqualitymodes.md)                  | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `permissions`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `ownerId`                                                                                     | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `threadMetadata`                                                                              | [components.ThreadMetadataResponse](../../models/components/threadmetadataresponse.md)        | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `threadMetadata`                                                                              | [components.ThreadMetadataResponse](../../models/components/threadmetadataresponse.md)        | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `messageCount`                                                                                | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `memberCount`                                                                                 | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `totalMessageSent`                                                                            | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

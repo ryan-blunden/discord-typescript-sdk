@@ -32,7 +32,7 @@ export const tool$soundboardsUpdateGuildSoundboardSound: ToolDefinition<
       };
     }
 
-    const value = result.value;
+    const value = result.value.result;
 
     return formatResult(value, apiCall);
   },
