@@ -6,7 +6,16 @@
 import { GuildWelcomeScreenResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: GuildWelcomeScreenResponse = {
-  welcomeChannels: [],
+  description:
+    "obesity pigsty foolishly failing besides vulgarise at advertisement bogus aw",
+  welcomeChannels: [
+    {
+      channelId: "<value>",
+      description: "kick gullible meh orientate forenenst square",
+      emojiId: "<value>",
+      emojiName: "<value>",
+    },
+  ],
 };
 ```
 
@@ -14,5 +23,5 @@ let value: GuildWelcomeScreenResponse = {
 
 | Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
 | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `description`                                                                                                  | *string*                                                                                                       | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+| `description`                                                                                                  | *string*                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
 | `welcomeChannels`                                                                                              | [components.GuildWelcomeScreenChannelResponse](../../models/components/guildwelcomescreenchannelresponse.md)[] | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

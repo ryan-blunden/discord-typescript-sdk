@@ -8,6 +8,8 @@ import { GuildWelcomeScreenChannelResponse } from "@ryan.blunden/discord-sdk/mod
 let value: GuildWelcomeScreenChannelResponse = {
   channelId: "<value>",
   description: "for authentic spew nor excepting hm zany amount",
+  emojiId: "<value>",
+  emojiName: "<value>",
 };
 ```
 
@@ -17,5 +19,5 @@ let value: GuildWelcomeScreenChannelResponse = {
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `channelId`        | *string*           | :heavy_check_mark: | N/A                |
 | `description`      | *string*           | :heavy_check_mark: | N/A                |
-| `emojiId`          | *string*           | :heavy_minus_sign: | N/A                |
-| `emojiName`        | *string*           | :heavy_minus_sign: | N/A                |
+| `emojiId`          | *string*           | :heavy_check_mark: | N/A                |
+| `emojiName`        | *string*           | :heavy_check_mark: | N/A                |

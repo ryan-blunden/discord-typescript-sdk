@@ -7,7 +7,9 @@
 
 ```typescript
 const value: components.ButtonComponentResponse = {
-  id: 411068,
+  type: 9,
+  id: 891756,
+  style: 3,
 };
 ```
 
@@ -15,8 +17,11 @@ const value: components.ButtonComponentResponse = {
 
 ```typescript
 const value: components.ChannelSelectComponentResponse = {
-  id: 834531,
+  type: 19,
+  id: 833488,
   customId: "<id>",
+  minValues: 504832,
+  maxValues: 314958,
 };
 ```
 
@@ -24,8 +29,11 @@ const value: components.ChannelSelectComponentResponse = {
 
 ```typescript
 const value: components.MentionableSelectComponentResponse = {
-  id: 648452,
+  type: 13,
+  id: 701760,
   customId: "<id>",
+  minValues: 721153,
+  maxValues: 771428,
 };
 ```
 
@@ -33,8 +41,11 @@ const value: components.MentionableSelectComponentResponse = {
 
 ```typescript
 const value: components.RoleSelectComponentResponse = {
-  id: 702349,
+  type: 17,
+  id: 67803,
   customId: "<id>",
+  minValues: 646963,
+  maxValues: 878944,
 };
 ```
 
@@ -42,8 +53,11 @@ const value: components.RoleSelectComponentResponse = {
 
 ```typescript
 const value: components.StringSelectComponentResponse = {
-  id: 98263,
+  type: 2,
+  id: 842174,
   customId: "<id>",
+  minValues: 77339,
+  maxValues: 445843,
   options: [
     {
       label: "<value>",
@@ -57,8 +71,13 @@ const value: components.StringSelectComponentResponse = {
 
 ```typescript
 const value: components.TextInputComponentResponse = {
-  id: 383138,
+  type: 8,
+  id: 245530,
   customId: "<id>",
+  style: 2,
+  label: "<value>",
+  minLength: 684349,
+  maxLength: 346492,
 };
 ```
 
@@ -66,8 +85,11 @@ const value: components.TextInputComponentResponse = {
 
 ```typescript
 const value: components.UserSelectComponentResponse = {
-  id: 552290,
+  type: 12,
+  id: 704554,
   customId: "<id>",
+  minValues: 332898,
+  maxValues: 921854,
 };
 ```
 

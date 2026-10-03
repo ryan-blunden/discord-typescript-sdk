@@ -6,13 +6,21 @@
 import { MediaGalleryComponentForMessageRequest } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: MediaGalleryComponentForMessageRequest = {
-  items: [],
+  type: 8,
+  items: [
+    {
+      media: {
+        url: "https://optimal-tuba.info",
+      },
+    },
+  ],
 };
 ```
 
 ## Fields
 
-| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `type`                                                                                     | *number*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
-| `items`                                                                                    | [components.MediaGalleryItemRequest](../../models/components/mediagalleryitemrequest.md)[] | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                         | [components.MediaGalleryComponentForMessageRequestType](../../models/components/mediagallerycomponentformessagerequesttype.md) | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+| `id`                                                                                                                           | *number*                                                                                                                       | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |
+| `items`                                                                                                                        | [components.MediaGalleryItemRequest](../../models/components/mediagalleryitemrequest.md)[]                                     | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
