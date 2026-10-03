@@ -13,7 +13,6 @@ import { emojiListGuildEmojis } from "../funcs/emojiListGuildEmojis.js";
 import { emojiUpdateApplicationEmoji } from "../funcs/emojiUpdateApplicationEmoji.js";
 import { emojiUpdateGuildEmoji } from "../funcs/emojiUpdateGuildEmoji.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -24,7 +23,7 @@ export class Emoji extends ClientSDK {
   async listApplicationEmojis(
     request: operations.ListApplicationEmojisRequest,
     options?: RequestOptions,
-  ): Promise<components.ListApplicationEmojisResponse> {
+  ): Promise<operations.ListApplicationEmojisResponse> {
     return unwrapAsync(emojiListApplicationEmojis(
       this,
       request,
@@ -38,7 +37,7 @@ export class Emoji extends ClientSDK {
   async createApplicationEmoji(
     request: operations.CreateApplicationEmojiRequest,
     options?: RequestOptions,
-  ): Promise<components.EmojiResponse> {
+  ): Promise<operations.CreateApplicationEmojiResponse> {
     return unwrapAsync(emojiCreateApplicationEmoji(
       this,
       request,
@@ -52,7 +51,7 @@ export class Emoji extends ClientSDK {
   async getApplicationEmoji(
     request: operations.GetApplicationEmojiRequest,
     options?: RequestOptions,
-  ): Promise<components.EmojiResponse> {
+  ): Promise<operations.GetApplicationEmojiResponse> {
     return unwrapAsync(emojiGetApplicationEmoji(
       this,
       request,
@@ -66,7 +65,7 @@ export class Emoji extends ClientSDK {
   async deleteApplicationEmoji(
     request: operations.DeleteApplicationEmojiRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteApplicationEmojiResponse | undefined> {
     return unwrapAsync(emojiDeleteApplicationEmoji(
       this,
       request,
@@ -80,7 +79,7 @@ export class Emoji extends ClientSDK {
   async updateApplicationEmoji(
     request: operations.UpdateApplicationEmojiRequest,
     options?: RequestOptions,
-  ): Promise<components.EmojiResponse> {
+  ): Promise<operations.UpdateApplicationEmojiResponse> {
     return unwrapAsync(emojiUpdateApplicationEmoji(
       this,
       request,
@@ -94,7 +93,7 @@ export class Emoji extends ClientSDK {
   async listGuildEmojis(
     request: operations.ListGuildEmojisRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.EmojiResponse>> {
+  ): Promise<operations.ListGuildEmojisResponse> {
     return unwrapAsync(emojiListGuildEmojis(
       this,
       request,
@@ -108,7 +107,7 @@ export class Emoji extends ClientSDK {
   async createGuildEmoji(
     request: operations.CreateGuildEmojiRequest,
     options?: RequestOptions,
-  ): Promise<components.EmojiResponse> {
+  ): Promise<operations.CreateGuildEmojiResponse> {
     return unwrapAsync(emojiCreateGuildEmoji(
       this,
       request,
@@ -122,7 +121,7 @@ export class Emoji extends ClientSDK {
   async getGuildEmoji(
     request: operations.GetGuildEmojiRequest,
     options?: RequestOptions,
-  ): Promise<components.EmojiResponse> {
+  ): Promise<operations.GetGuildEmojiResponse> {
     return unwrapAsync(emojiGetGuildEmoji(
       this,
       request,
@@ -136,7 +135,7 @@ export class Emoji extends ClientSDK {
   async deleteGuildEmoji(
     request: operations.DeleteGuildEmojiRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteGuildEmojiResponse | undefined> {
     return unwrapAsync(emojiDeleteGuildEmoji(
       this,
       request,
@@ -150,7 +149,7 @@ export class Emoji extends ClientSDK {
   async updateGuildEmoji(
     request: operations.UpdateGuildEmojiRequest,
     options?: RequestOptions,
-  ): Promise<components.EmojiResponse> {
+  ): Promise<operations.UpdateGuildEmojiResponse> {
     return unwrapAsync(emojiUpdateGuildEmoji(
       this,
       request,

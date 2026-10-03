@@ -12,17 +12,17 @@ let value: ThreadSearchRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `channelId`        | *string*           | :heavy_check_mark: | N/A                |
-| `name`             | *string*           | :heavy_minus_sign: | N/A                |
-| `slop`             | *number*           | :heavy_minus_sign: | N/A                |
-| `minId`            | *string*           | :heavy_minus_sign: | N/A                |
-| `maxId`            | *string*           | :heavy_minus_sign: | N/A                |
-| `tag`              | *operations.Tag*   | :heavy_minus_sign: | N/A                |
-| `tagSetting`       | *string*           | :heavy_minus_sign: | N/A                |
-| `archived`         | *boolean*          | :heavy_minus_sign: | N/A                |
-| `sortBy`           | *string*           | :heavy_minus_sign: | N/A                |
-| `sortOrder`        | *string*           | :heavy_minus_sign: | N/A                |
-| `limit`            | *number*           | :heavy_minus_sign: | N/A                |
-| `offset`           | *number*           | :heavy_minus_sign: | N/A                |
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `channelId`                                                                            | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `name`                                                                                 | *string*                                                                               | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `slop`                                                                                 | *number*                                                                               | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `minId`                                                                                | *string*                                                                               | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `maxId`                                                                                | *string*                                                                               | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `tag`                                                                                  | *operations.Tag*                                                                       | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `tagSetting`                                                                           | [components.ThreadSearchTagSetting](../../models/components/threadsearchtagsetting.md) | :heavy_minus_sign:                                                                     | The thread tags must contain all tags in the search query                              |
+| `archived`                                                                             | *boolean*                                                                              | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `sortBy`                                                                               | [components.ThreadSortingMode](../../models/components/threadsortingmode.md)           | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `sortOrder`                                                                            | [components.SortingOrder](../../models/components/sortingorder.md)                     | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `limit`                                                                                | *number*                                                                               | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `offset`                                                                               | *number*                                                                               | :heavy_minus_sign:                                                                     | N/A                                                                                    |

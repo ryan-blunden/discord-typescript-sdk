@@ -3,13 +3,13 @@
  */
 
 import { DiscordCore } from "../core.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { resolveSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
-import { APIError } from "../models/errors/apierror.js";
+import { DiscordError } from "../models/errors/discorderror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -18,6 +18,7 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
@@ -32,15 +33,17 @@ export function applicationsGetOAuth2Authorization(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.OAuth2GetAuthorizationResponse,
+    operations.GetMyOauth2AuthorizationResponse,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | DiscordError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
@@ -57,15 +60,17 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.OAuth2GetAuthorizationResponse,
+      operations.GetMyOauth2AuthorizationResponse,
+      | errors.RatelimitedResponse
       | errors.ErrorResponse
-      | APIError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | DiscordError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -90,7 +95,42 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "get_my_oauth2_authorization",
-    oAuth2Scopes: null,
+    oAuth2Scopes: [
+      "activities.invites.write",
+      "activities.read",
+      "activities.write",
+      "applications.builds.read",
+      "applications.builds.upload",
+      "applications.commands",
+      "applications.commands.permissions.update",
+      "applications.commands.update",
+      "applications.entitlements",
+      "applications.store.update",
+      "bot",
+      "connections",
+      "dm_channels.read",
+      "email",
+      "gdm.join",
+      "guilds",
+      "guilds.join",
+      "guilds.members.read",
+      "identify",
+      "messages.read",
+      "openid",
+      "relationships.read",
+      "role_connections.write",
+      "rpc",
+      "rpc.activities.write",
+      "rpc.notifications.read",
+      "rpc.screenshare.read",
+      "rpc.screenshare.write",
+      "rpc.video.read",
+      "rpc.video.write",
+      "rpc.voice.read",
+      "rpc.voice.write",
+      "voice",
+      "webhook.incoming",
+    ],
 
     resolvedSecurity: requestSecurity,
 
@@ -117,7 +157,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -131,20 +172,26 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.OAuth2GetAuthorizationResponse,
+    operations.GetMyOauth2AuthorizationResponse,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | DiscordError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
-    M.json(200, components.OAuth2GetAuthorizationResponse$inboundSchema),
-    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema),
+    M.json(200, operations.GetMyOauth2AuthorizationResponse$inboundSchema, {
+      hdrs: true,
+      key: "Result",
+    }),
+    M.jsonErr(429, errors.RatelimitedResponse$inboundSchema, { hdrs: true }),
+    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema, { hdrs: true }),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

@@ -1,0 +1,24 @@
+# FileUploadComponentForModalRequest
+
+## Example Usage
+
+```typescript
+import { FileUploadComponentForModalRequest } from "@ryan.blunden/discord-sdk/models/components";
+
+let value: FileUploadComponentForModalRequest = {
+  type: 8,
+  customId: "<id>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                  | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                 | [components.FileUploadComponentForModalRequestType](../../models/components/fileuploadcomponentformodalrequesttype.md) | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
+| `id`                                                                                                                   | *number*                                                                                                               | :heavy_minus_sign:                                                                                                     | N/A                                                                                                                    |
+| `customId`                                                                                                             | *string*                                                                                                               | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
+| `minValues`                                                                                                            | *number*                                                                                                               | :heavy_minus_sign:                                                                                                     | N/A                                                                                                                    |
+| `maxValues`                                                                                                            | *number*                                                                                                               | :heavy_minus_sign:                                                                                                     | N/A                                                                                                                    |
+| `required`                                                                                                             | *boolean*                                                                                                              | :heavy_minus_sign:                                                                                                     | N/A                                                                                                                    |
+| `fileTypes`                                                                                                            | *string*[]                                                                                                             | :heavy_minus_sign:                                                                                                     | N/A                                                                                                                    |

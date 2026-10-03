@@ -7,6 +7,9 @@ import { CreateWebhookRequest } from "@ryan.blunden/discord-sdk/models/operation
 
 let value: CreateWebhookRequest = {
   channelId: "<value>",
+  requestBody: {
+    name: "<value>",
+  },
 };
 ```
 

@@ -1,5 +1,4 @@
 # Applications
-(*applications*)
 
 ## Overview
 
@@ -26,6 +25,7 @@ Returns the application object associated with the requesting bot user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_my_application" method="get" path="/applications/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -79,14 +79,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateApplicationResponse](../../models/components/privateapplicationresponse.md)\>**
+**Promise\<[operations.GetMyApplicationResponse](../../models/operations/getmyapplicationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateSelf
 
@@ -94,6 +95,7 @@ Edit properties of the app associated with the requesting bot user. Only propert
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_my_application" method="patch" path="/applications/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -148,14 +150,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateApplicationResponse](../../models/components/privateapplicationresponse.md)\>**
+**Promise\<[operations.UpdateMyApplicationResponse](../../models/operations/updatemyapplicationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -163,6 +166,7 @@ Returns information about a specific application.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_application" method="get" path="/applications/{application_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -221,14 +225,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateApplicationResponse](../../models/components/privateapplicationresponse.md)\>**
+**Promise\<[operations.GetApplicationResponse](../../models/operations/getapplicationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -236,6 +241,7 @@ Updates an application. Returns the updated application object on success.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_application" method="patch" path="/applications/{application_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -296,14 +302,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateApplicationResponse](../../models/components/privateapplicationresponse.md)\>**
+**Promise\<[operations.UpdateApplicationResponse](../../models/operations/updateapplicationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getActivityInstance
 
@@ -311,6 +318,7 @@ Returns a serialized activity instance, if it exists. Useful for preventing unwa
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="applications_get_activity_instance" method="get" path="/applications/{application_id}/activity-instances/{instance_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -371,14 +379,15 @@ run();
 
 ### Response
 
-**Promise\<[components.EmbeddedActivityInstance](../../models/components/embeddedactivityinstance.md)\>**
+**Promise\<[operations.ApplicationsGetActivityInstanceResponse](../../models/operations/applicationsgetactivityinstanceresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## uploadAttachment
 
@@ -386,6 +395,7 @@ Uploads an attachment for an application.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="upload_application_attachment" method="post" path="/applications/{application_id}/attachment" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -451,14 +461,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ActivitiesAttachmentResponse](../../models/components/activitiesattachmentresponse.md)\>**
+**Promise\<[operations.UploadApplicationAttachmentResponse](../../models/operations/uploadapplicationattachmentresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGateway
 
@@ -466,10 +477,13 @@ Returns an object with a single valid WSS URL, which the client can use for conn
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_gateway" method="get" path="/gateway" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.applications.getGateway();
@@ -490,7 +504,9 @@ import { applicationsGetGateway } from "@ryan.blunden/discord-sdk/funcs/applicat
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await applicationsGetGateway(discord);
@@ -509,21 +525,21 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [operations.GetGatewaySecurity](../../models/operations/getgatewaysecurity.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.GatewayResponse](../../models/components/gatewayresponse.md)\>**
+**Promise\<[operations.GetGatewayResponse](../../models/operations/getgatewayresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getBotGateway
 
@@ -531,6 +547,7 @@ Returns an object with the same information as Get Gateway, plus a shards key, c
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_bot_gateway" method="get" path="/gateway/bot" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -584,14 +601,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GatewayBotResponse](../../models/components/gatewaybotresponse.md)\>**
+**Promise\<[operations.GetBotGatewayResponse](../../models/operations/getbotgatewayresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getOAuth2Authorization
 
@@ -599,6 +617,7 @@ Returns info about the current authorization.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_my_oauth2_authorization" method="get" path="/oauth2/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -653,14 +672,15 @@ run();
 
 ### Response
 
-**Promise\<[components.OAuth2GetAuthorizationResponse](../../models/components/oauth2getauthorizationresponse.md)\>**
+**Promise\<[operations.GetMyOauth2AuthorizationResponse](../../models/operations/getmyoauth2authorizationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getOAuth2Me
 
@@ -668,6 +688,7 @@ Returns the OAuth2 application object associated with the requesting bot user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_my_oauth2_application" method="get" path="/oauth2/applications/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -721,14 +742,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PrivateApplicationResponse](../../models/components/privateapplicationresponse.md)\>**
+**Promise\<[operations.GetMyOauth2ApplicationResponse](../../models/operations/getmyoauth2applicationresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getPublicKeys
 
@@ -736,10 +758,13 @@ Returns a list of public keys used for verifying signatures.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_public_keys" method="get" path="/oauth2/keys" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.applications.getPublicKeys();
@@ -760,7 +785,9 @@ import { applicationsGetPublicKeys } from "@ryan.blunden/discord-sdk/funcs/appli
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await applicationsGetPublicKeys(discord);
@@ -779,21 +806,21 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [operations.GetPublicKeysSecurity](../../models/operations/getpublickeyssecurity.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.OAuth2GetKeys](../../models/components/oauth2getkeys.md)\>**
+**Promise\<[operations.GetPublicKeysResponse](../../models/operations/getpublickeysresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getOpenIDConnectUserInfo
 
@@ -801,6 +828,7 @@ Returns the user info for the current user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_openid_connect_userinfo" method="get" path="/oauth2/userinfo" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -855,14 +883,15 @@ run();
 
 ### Response
 
-**Promise\<[components.OAuth2GetOpenIDConnectUserInfoResponse](../../models/components/oauth2getopenidconnectuserinforesponse.md)\>**
+**Promise\<[operations.GetOpenidConnectUserinfoResponse](../../models/operations/getopenidconnectuserinforesponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## partnerSDKUnmergeProvisionalAccount
 
@@ -870,18 +899,22 @@ Unmerges a provisional account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="partner_sdk_unmerge_provisional_account" method="post" path="/partner-sdk/provisional-accounts/unmerge" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
-  await discord.applications.partnerSDKUnmergeProvisionalAccount({
+  const result = await discord.applications.partnerSDKUnmergeProvisionalAccount({
     clientId: "<value>",
     externalAuthToken: "<value>",
+    externalAuthType: "OIDC",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -897,16 +930,19 @@ import { applicationsPartnerSDKUnmergeProvisionalAccount } from "@ryan.blunden/d
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await applicationsPartnerSDKUnmergeProvisionalAccount(discord, {
     clientId: "<value>",
     externalAuthToken: "<value>",
+    externalAuthType: "OIDC",
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("applicationsPartnerSDKUnmergeProvisionalAccount failed:", res.error);
   }
@@ -920,21 +956,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.PartnerSDKUnmergeProvisionalAccountRequestBody](../../models/operations/partnersdkunmergeprovisionalaccountrequestbody.md)                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.PartnerSDKUnmergeProvisionalAccountSecurity](../../models/operations/partnersdkunmergeprovisionalaccountsecurity.md)                                               | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.PartnerSDKUnmergeProvisionalAccountResponse](../../models/operations/partnersdkunmergeprovisionalaccountresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## partnerSDKToken
 
@@ -942,15 +978,19 @@ Gets a token for the partner SDK.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="partner_sdk_token" method="post" path="/partner-sdk/token" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.applications.partnerSDKToken({
     clientId: "<value>",
     externalAuthToken: "<value>",
+    externalAuthType: "OIDC",
   });
 
   console.log(result);
@@ -969,12 +1009,15 @@ import { applicationsPartnerSDKToken } from "@ryan.blunden/discord-sdk/funcs/app
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await applicationsPartnerSDKToken(discord, {
     clientId: "<value>",
     externalAuthToken: "<value>",
+    externalAuthType: "OIDC",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -992,18 +1035,18 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.PartnerSDKTokenRequestBody](../../models/operations/partnersdktokenrequestbody.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.PartnerSDKTokenSecurity](../../models/operations/partnersdktokensecurity.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.ProvisionalTokenResponse](../../models/components/provisionaltokenresponse.md)\>**
+**Promise\<[operations.PartnerSDKTokenResponse](../../models/operations/partnersdktokenresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

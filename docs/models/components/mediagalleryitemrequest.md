@@ -7,7 +7,7 @@ import { MediaGalleryItemRequest } from "@ryan.blunden/discord-sdk/models/compon
 
 let value: MediaGalleryItemRequest = {
   media: {
-    url: "https://square-fishery.net/",
+    url: "https://optimal-tuba.info",
   },
 };
 ```

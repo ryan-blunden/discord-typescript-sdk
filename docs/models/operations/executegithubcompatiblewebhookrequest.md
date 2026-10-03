@@ -8,6 +8,14 @@ import { ExecuteGithubCompatibleWebhookRequest } from "@ryan.blunden/discord-sdk
 let value: ExecuteGithubCompatibleWebhookRequest = {
   webhookId: "<value>",
   webhookToken: "<value>",
+  githubWebhook: {
+    sender: {
+      id: 601167,
+      login: "Wilburn11",
+      htmlUrl: "https://unwilling-bench.com",
+      avatarUrl: "https://liquid-soliloquy.info/",
+    },
+  },
 };
 ```
 
