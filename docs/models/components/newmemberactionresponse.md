@@ -7,8 +7,9 @@ import { NewMemberActionResponse } from "@ryan.blunden/discord-sdk/models/compon
 
 let value: NewMemberActionResponse = {
   channelId: "<value>",
+  actionType: 1,
   title: "<value>",
-  description: "viciously innovate mature vicinity ah outdo via",
+  description: "ugh hm dull apropos alongside icy unibody ack",
 };
 ```
 
@@ -17,7 +18,7 @@ let value: NewMemberActionResponse = {
 | Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `channelId`                                                                          | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `actionType`                                                                         | *number*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `actionType`                                                                         | [components.NewMemberActionType](../../models/components/newmemberactiontype.md)     | :heavy_check_mark:                                                                   | N/A                                                                                  |
 | `title`                                                                              | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
 | `description`                                                                        | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
 | `emoji`                                                                              | [components.SettingsEmojiResponse](../../models/components/settingsemojiresponse.md) | :heavy_minus_sign:                                                                   | N/A                                                                                  |

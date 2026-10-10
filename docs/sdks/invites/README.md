@@ -1,5 +1,4 @@
 # Invites
-(*invites*)
 
 ## Overview
 
@@ -14,10 +13,13 @@ Returns an invite object for the given code.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="invite_resolve" method="get" path="/invites/{code}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.invites.get({
@@ -40,7 +42,9 @@ import { invitesGet } from "@ryan.blunden/discord-sdk/funcs/invitesGet.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await invitesGet(discord, {
@@ -62,21 +66,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.InviteResolveRequest](../../models/operations/inviteresolverequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.InviteResolveSecurity](../../models/operations/inviteresolvesecurity.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.InviteResolveResponseBody](../../models/operations/inviteresolveresponsebody.md)\>**
+**Promise\<[operations.InviteResolveResponse](../../models/operations/inviteresolveresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -84,6 +88,7 @@ Delete an invite. Requires the MANAGE_CHANNELS permission on the channel this in
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="invite_revoke" method="delete" path="/invites/{code}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -142,11 +147,12 @@ run();
 
 ### Response
 
-**Promise\<[operations.InviteRevokeResponseBody](../../models/operations/inviterevokeresponsebody.md)\>**
+**Promise\<[operations.InviteRevokeResponse](../../models/operations/inviterevokeresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

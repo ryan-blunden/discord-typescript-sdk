@@ -17,3 +17,5 @@ let value: InviteResolveRequest = {
 | `code`                  | *string*                | :heavy_check_mark:      | N/A                     |
 | `withCounts`            | *boolean*               | :heavy_minus_sign:      | N/A                     |
 | `guildScheduledEventId` | *string*                | :heavy_minus_sign:      | N/A                     |
+| `targetChannelId`       | *string*                | :heavy_minus_sign:      | N/A                     |
+| `targetMessageId`       | *string*                | :heavy_minus_sign:      | N/A                     |

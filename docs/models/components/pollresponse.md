@@ -13,10 +13,17 @@ let value: PollResponse = {
       pollMedia: {},
     },
   ],
-  expiry: new Date("2025-09-04T21:01:01.853Z"),
+  expiry: new Date("2026-09-04T21:01:01.853Z"),
   allowMultiselect: false,
   layoutType: 141586,
   results: {
+    answerCounts: [
+      {
+        id: 664207,
+        count: 691381,
+        meVoted: false,
+      },
+    ],
     isFinalized: false,
   },
 };
@@ -27,8 +34,8 @@ let value: PollResponse = {
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `question`                                                                                    | [components.PollMediaResponse](../../models/components/pollmediaresponse.md)                  | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `answers`                                                                                     | [components.PollAnswerResponse](../../models/components/pollanswerresponse.md)[]              | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `expiry`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `allowMultiselect`                                                                            | *boolean*                                                                                     | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `answers`                                                                                     | [components.PollAnswerResponse](../../models/components/pollanswerresponse.md)[]              | :heavy_check_mark:                                                                            | Each of the answers available in the poll                                                     |
+| `expiry`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | The time when the poll ends                                                                   |
+| `allowMultiselect`                                                                            | *boolean*                                                                                     | :heavy_check_mark:                                                                            | Whether a user can select multiple answers                                                    |
 | `layoutType`                                                                                  | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `results`                                                                                     | [components.PollResultsResponse](../../models/components/pollresultsresponse.md)              | :heavy_check_mark:                                                                            | N/A                                                                                           |

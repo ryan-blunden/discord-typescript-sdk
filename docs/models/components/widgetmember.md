@@ -8,8 +8,10 @@ import { WidgetMember } from "@ryan.blunden/discord-sdk/models/components";
 let value: WidgetMember = {
   id: "<id>",
   username: "Lelah83",
+  discriminator: "0000",
+  avatar: "https://picsum.photos/seed/LCR6I/3375/1778",
   status: "<value>",
-  avatarUrl: "https://tense-hydrocarbon.org",
+  avatarUrl: "https://blaring-orchid.org/",
 };
 ```
 
@@ -19,8 +21,8 @@ let value: WidgetMember = {
 | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `id`                                                                   | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
 | `username`                                                             | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
-| `discriminator`                                                        | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
-| `avatar`                                                               | *any*                                                                  | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `discriminator`                                                        | *"0000"*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
+| `avatar`                                                               | *any*                                                                  | :heavy_check_mark:                                                     | N/A                                                                    |
 | `status`                                                               | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
 | `avatarUrl`                                                            | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
 | `activity`                                                             | [components.WidgetActivity](../../models/components/widgetactivity.md) | :heavy_minus_sign:                                                     | N/A                                                                    |

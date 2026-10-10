@@ -6,21 +6,26 @@
 import { SectionComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: SectionComponentResponse = {
-  id: 664036,
+  type: 14,
+  id: 713017,
   components: [
     {
-      id: 822824,
+      type: 22,
+      id: 849900,
       content: "<value>",
     },
   ],
   accessory: {
-    id: 849900,
+    type: 23,
+    id: 744514,
     media: {
       id: "<value>",
-      url: "https://yellow-repeat.org",
-      proxyUrl: "https://major-gastropod.name",
+      url: "https://faint-maintainer.biz",
+      proxyUrl: "https://dead-density.biz/",
     },
-    spoiler: true,
+    description:
+      "aftermath recompense showy knife beside throughout draft service",
+    spoiler: false,
   },
 };
 ```
@@ -29,7 +34,7 @@ let value: SectionComponentResponse = {
 
 | Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
 | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `type`                                                                                               | *number*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `type`                                                                                               | [components.SectionComponentResponseType](../../models/components/sectioncomponentresponsetype.md)   | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
 | `id`                                                                                                 | *number*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
 | `components`                                                                                         | [components.TextDisplayComponentResponse](../../models/components/textdisplaycomponentresponse.md)[] | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
 | `accessory`                                                                                          | *components.Accessory*                                                                               | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
