@@ -10,7 +10,6 @@ import { soundboardsListGuildSoundboardSounds } from "../funcs/soundboardsListGu
 import { soundboardsSendSoundboardSound } from "../funcs/soundboardsSendSoundboardSound.js";
 import { soundboardsUpdateGuildSoundboardSound } from "../funcs/soundboardsUpdateGuildSoundboardSound.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -21,7 +20,7 @@ export class Soundboards extends ClientSDK {
   async sendSoundboardSound(
     request: operations.SendSoundboardSoundRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.SendSoundboardSoundResponse | undefined> {
     return unwrapAsync(soundboardsSendSoundboardSound(
       this,
       request,
@@ -35,7 +34,7 @@ export class Soundboards extends ClientSDK {
   async listGuildSoundboardSounds(
     request: operations.ListGuildSoundboardSoundsRequest,
     options?: RequestOptions,
-  ): Promise<components.ListGuildSoundboardSoundsResponse> {
+  ): Promise<operations.ListGuildSoundboardSoundsResponse> {
     return unwrapAsync(soundboardsListGuildSoundboardSounds(
       this,
       request,
@@ -49,7 +48,7 @@ export class Soundboards extends ClientSDK {
   async createGuildSoundboardSound(
     request: operations.CreateGuildSoundboardSoundRequest,
     options?: RequestOptions,
-  ): Promise<components.SoundboardSoundResponse> {
+  ): Promise<operations.CreateGuildSoundboardSoundResponse> {
     return unwrapAsync(soundboardsCreateGuildSoundboardSound(
       this,
       request,
@@ -63,7 +62,7 @@ export class Soundboards extends ClientSDK {
   async getGuildSoundboardSound(
     request: operations.GetGuildSoundboardSoundRequest,
     options?: RequestOptions,
-  ): Promise<components.SoundboardSoundResponse> {
+  ): Promise<operations.GetGuildSoundboardSoundResponse> {
     return unwrapAsync(soundboardsGetGuildSoundboardSound(
       this,
       request,
@@ -77,7 +76,7 @@ export class Soundboards extends ClientSDK {
   async deleteGuildSoundboardSound(
     request: operations.DeleteGuildSoundboardSoundRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteGuildSoundboardSoundResponse | undefined> {
     return unwrapAsync(soundboardsDeleteGuildSoundboardSound(
       this,
       request,
@@ -91,7 +90,7 @@ export class Soundboards extends ClientSDK {
   async updateGuildSoundboardSound(
     request: operations.UpdateGuildSoundboardSoundRequest,
     options?: RequestOptions,
-  ): Promise<components.SoundboardSoundResponse> {
+  ): Promise<operations.UpdateGuildSoundboardSoundResponse> {
     return unwrapAsync(soundboardsUpdateGuildSoundboardSound(
       this,
       request,
@@ -104,7 +103,7 @@ export class Soundboards extends ClientSDK {
    */
   async getSoundboardDefaultSounds(
     options?: RequestOptions,
-  ): Promise<Array<components.SoundboardSoundResponse>> {
+  ): Promise<operations.GetSoundboardDefaultSoundsResponse> {
     return unwrapAsync(soundboardsGetSoundboardDefaultSounds(
       this,
       options,

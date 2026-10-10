@@ -7,6 +7,7 @@ import { GuildChannelLocation } from "@ryan.blunden/discord-sdk/models/component
 
 let value: GuildChannelLocation = {
   id: "<id>",
+  kind: "party",
   channelId: "<value>",
   guildId: "<value>",
 };
@@ -14,9 +15,9 @@ let value: GuildChannelLocation = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | N/A                |
-| `kind`             | *string*           | :heavy_check_mark: | N/A                |
-| `channelId`        | *string*           | :heavy_check_mark: | N/A                |
-| `guildId`          | *string*           | :heavy_check_mark: | N/A                |
+| Field                                              | Type                                               | Required                                           | Description                                        |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| `id`                                               | *string*                                           | :heavy_check_mark:                                 | N/A                                                |
+| `kind`                                             | [components.Kind](../../models/components/kind.md) | :heavy_check_mark:                                 | N/A                                                |
+| `channelId`                                        | *string*                                           | :heavy_check_mark:                                 | N/A                                                |
+| `guildId`                                          | *string*                                           | :heavy_check_mark:                                 | N/A                                                |
