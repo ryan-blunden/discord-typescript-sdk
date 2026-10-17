@@ -12,6 +12,6 @@ let value: EntityMetadataExternalResponse = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `location`         | *string*           | :heavy_check_mark: | N/A                |
+| Field                          | Type                           | Required                       | Description                    |
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| `location`                     | *string*                       | :heavy_check_mark:             | Location of the external event |

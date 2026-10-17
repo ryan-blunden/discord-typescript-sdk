@@ -8,6 +8,7 @@ import { UpdateGuildMemberRequest } from "@ryan.blunden/discord-sdk/models/opera
 let value: UpdateGuildMemberRequest = {
   guildId: "<value>",
   userId: "<value>",
+  requestBody: {},
 };
 ```
 
