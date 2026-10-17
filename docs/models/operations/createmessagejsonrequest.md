@@ -7,6 +7,7 @@ import { CreateMessageJsonRequest } from "@ryan.blunden/discord-sdk/models/opera
 
 let value: CreateMessageJsonRequest = {
   channelId: "<value>",
+  messageCreateRequest: {},
 };
 ```
 

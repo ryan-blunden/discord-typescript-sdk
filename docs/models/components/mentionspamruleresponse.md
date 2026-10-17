@@ -10,9 +10,22 @@ let value: MentionSpamRuleResponse = {
   guildId: "<value>",
   creatorId: "<value>",
   name: "<value>",
+  eventType: 1,
   actions: [],
+  triggerType: 4,
+  enabled: false,
+  exemptRoles: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
+  exemptChannels: [
+    "<value 1>",
+    "<value 2>",
+  ],
   triggerMetadata: {
-    mentionTotalLimit: 409323,
+    mentionTotalLimit: 205400,
+    mentionRaidProtectionEnabled: true,
   },
 };
 ```
@@ -25,10 +38,10 @@ let value: MentionSpamRuleResponse = {
 | `guildId`                                                                                                      | *string*                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
 | `creatorId`                                                                                                    | *string*                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
 | `name`                                                                                                         | *string*                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
-| `eventType`                                                                                                    | *number*                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `eventType`                                                                                                    | [components.AutomodEventType](../../models/components/automodeventtype.md)                                     | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
 | `actions`                                                                                                      | *components.MentionSpamRuleResponseActions*[]                                                                  | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
-| `triggerType`                                                                                                  | *number*                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
-| `enabled`                                                                                                      | *boolean*                                                                                                      | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
-| `exemptRoles`                                                                                                  | *string*[]                                                                                                     | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
-| `exemptChannels`                                                                                               | *string*[]                                                                                                     | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+| `triggerType`                                                                                                  | [components.MentionSpamRuleResponseTriggerType](../../models/components/mentionspamruleresponsetriggertype.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `enabled`                                                                                                      | *boolean*                                                                                                      | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `exemptRoles`                                                                                                  | *string*[]                                                                                                     | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `exemptChannels`                                                                                               | *string*[]                                                                                                     | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
 | `triggerMetadata`                                                                                              | [components.MentionSpamTriggerMetadataResponse](../../models/components/mentionspamtriggermetadataresponse.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
