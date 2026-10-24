@@ -20,7 +20,7 @@ export const tool$guildScheduledEventsDelete: ToolDefinition<typeof args> = {
     const [result, apiCall] = await guildScheduledEventsDelete(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -1,5 +1,4 @@
 # Soundboards
-(*soundboards*)
 
 ## Overview
 
@@ -19,6 +18,7 @@ Sends a soundboard sound to a channel.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="send_soundboard_sound" method="post" path="/channels/{channel_id}/send-soundboard-sound" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -27,14 +27,14 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.soundboards.sendSoundboardSound({
+  const result = await discord.soundboards.sendSoundboardSound({
     channelId: "<value>",
     soundboardSoundSendRequest: {
       soundId: "<value>",
     },
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -63,7 +63,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("soundboardsSendSoundboardSound failed:", res.error);
   }
@@ -83,14 +83,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.SendSoundboardSoundResponse](../../models/operations/sendsoundboardsoundresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listGuildSoundboardSounds
 
@@ -98,6 +99,7 @@ Returns a list of soundboard sound objects for the given guild.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_soundboard_sounds" method="get" path="/guilds/{guild_id}/soundboard-sounds" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -156,14 +158,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ListGuildSoundboardSoundsResponse](../../models/components/listguildsoundboardsoundsresponse.md)\>**
+**Promise\<[operations.ListGuildSoundboardSoundsResponse](../../models/operations/listguildsoundboardsoundsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## createGuildSoundboardSound
 
@@ -171,6 +174,7 @@ Create a new soundboard sound for the guild. Returns the new soundboard sound ob
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_guild_soundboard_sound" method="post" path="/guilds/{guild_id}/soundboard-sounds" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -237,14 +241,15 @@ run();
 
 ### Response
 
-**Promise\<[components.SoundboardSoundResponse](../../models/components/soundboardsoundresponse.md)\>**
+**Promise\<[operations.CreateGuildSoundboardSoundResponse](../../models/operations/createguildsoundboardsoundresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getGuildSoundboardSound
 
@@ -252,6 +257,7 @@ Returns a soundboard sound object for the given guild and sound IDs.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_soundboard_sound" method="get" path="/guilds/{guild_id}/soundboard-sounds/{sound_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -312,14 +318,15 @@ run();
 
 ### Response
 
-**Promise\<[components.SoundboardSoundResponse](../../models/components/soundboardsoundresponse.md)\>**
+**Promise\<[operations.GetGuildSoundboardSoundResponse](../../models/operations/getguildsoundboardsoundresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteGuildSoundboardSound
 
@@ -327,6 +334,7 @@ Delete a soundboard sound from a guild. Returns 204 No Content on success.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_guild_soundboard_sound" method="delete" path="/guilds/{guild_id}/soundboard-sounds/{sound_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -335,12 +343,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.soundboards.deleteGuildSoundboardSound({
+  const result = await discord.soundboards.deleteGuildSoundboardSound({
     guildId: "<value>",
     soundId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -367,7 +375,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("soundboardsDeleteGuildSoundboardSound failed:", res.error);
   }
@@ -387,14 +395,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildSoundboardSoundResponse](../../models/operations/deleteguildsoundboardsoundresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateGuildSoundboardSound
 
@@ -402,6 +411,7 @@ Update a soundboard sound in a guild. Returns the updated soundboard sound objec
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_guild_soundboard_sound" method="patch" path="/guilds/{guild_id}/soundboard-sounds/{sound_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -464,14 +474,15 @@ run();
 
 ### Response
 
-**Promise\<[components.SoundboardSoundResponse](../../models/components/soundboardsoundresponse.md)\>**
+**Promise\<[operations.UpdateGuildSoundboardSoundResponse](../../models/operations/updateguildsoundboardsoundresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getSoundboardDefaultSounds
 
@@ -479,6 +490,7 @@ Returns a list of the default sounds available in the soundboard.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_soundboard_default_sounds" method="get" path="/soundboard-default-sounds" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -532,11 +544,12 @@ run();
 
 ### Response
 
-**Promise\<[components.SoundboardSoundResponse[]](../../models/.md)\>**
+**Promise\<[operations.GetSoundboardDefaultSoundsResponse](../../models/operations/getsoundboarddefaultsoundsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

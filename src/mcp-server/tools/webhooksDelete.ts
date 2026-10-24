@@ -20,7 +20,7 @@ export const tool$webhooksDelete: ToolDefinition<typeof args> = {
     const [result, apiCall] = await webhooksDelete(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

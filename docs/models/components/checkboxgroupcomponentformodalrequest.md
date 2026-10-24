@@ -1,0 +1,25 @@
+# CheckboxGroupComponentForModalRequest
+
+## Example Usage
+
+```typescript
+import { CheckboxGroupComponentForModalRequest } from "@ryan.blunden/discord-sdk/models/components";
+
+let value: CheckboxGroupComponentForModalRequest = {
+  type: 10,
+  customId: "<id>",
+  options: [],
+};
+```
+
+## Fields
+
+| Field                                                                                                                        | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                       | [components.CheckboxGroupComponentForModalRequestType](../../models/components/checkboxgroupcomponentformodalrequesttype.md) | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `id`                                                                                                                         | *number*                                                                                                                     | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `customId`                                                                                                                   | *string*                                                                                                                     | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `minValues`                                                                                                                  | *number*                                                                                                                     | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `maxValues`                                                                                                                  | *number*                                                                                                                     | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `required`                                                                                                                   | *boolean*                                                                                                                    | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `options`                                                                                                                    | [components.CheckboxGroupOptionForRequest](../../models/components/checkboxgroupoptionforrequest.md)[]                       | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |

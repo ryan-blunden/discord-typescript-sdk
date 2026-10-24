@@ -7,12 +7,13 @@ import { ModalSubmitInteractionMetadataResponse } from "@ryan.blunden/discord-sd
 
 let value: ModalSubmitInteractionMetadataResponse = {
   id: "<value>",
+  type: 4,
   authorizingIntegrationOwners: {
     "key": "<value>",
-    "key1": "<value>",
   },
   triggeringInteractionMetadata: {
     id: "<value>",
+    type: 4,
     authorizingIntegrationOwners: {
       "key": "<value>",
     },
@@ -22,11 +23,11 @@ let value: ModalSubmitInteractionMetadataResponse = {
 
 ## Fields
 
-| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `id`                                                               | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
-| `type`                                                             | *number*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
-| `user`                                                             | [components.UserResponse](../../models/components/userresponse.md) | :heavy_minus_sign:                                                 | N/A                                                                |
-| `authorizingIntegrationOwners`                                     | Record<string, *string*>                                           | :heavy_check_mark:                                                 | N/A                                                                |
-| `originalResponseMessageId`                                        | *string*                                                           | :heavy_minus_sign:                                                 | N/A                                                                |
-| `triggeringInteractionMetadata`                                    | *components.TriggeringInteractionMetadata*                         | :heavy_check_mark:                                                 | N/A                                                                |
+| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                           | *string*                                                                                                                       | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+| `type`                                                                                                                         | [components.ModalSubmitInteractionMetadataResponseType](../../models/components/modalsubmitinteractionmetadataresponsetype.md) | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+| `user`                                                                                                                         | [components.UserResponse](../../models/components/userresponse.md)                                                             | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |
+| `authorizingIntegrationOwners`                                                                                                 | Record<string, *string*>                                                                                                       | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+| `originalResponseMessageId`                                                                                                    | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |
+| `triggeringInteractionMetadata`                                                                                                | *components.TriggeringInteractionMetadata*                                                                                     | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |

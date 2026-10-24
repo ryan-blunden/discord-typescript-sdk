@@ -1,5 +1,4 @@
 # Channels
-(*channels*)
 
 ## Overview
 
@@ -10,7 +9,9 @@
 * [update](#update) - Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters.
 * [follow](#follow) - Follow an Announcement Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. Returns a followed channel object. Fires a Webhooks Update Gateway event for the target channel.
 * [listInvites](#listinvites) - Returns a list of invite objects (with invite metadata) for the channel.
-* [createInvite](#createinvite) - Create a new invite object for the channel.
+* [createInviteJson](#createinvitejson) - Create a new invite object for the channel.
+* [createInviteForm](#createinviteform) - Create a new invite object for the channel.
+* [createInviteMultipart](#createinvitemultipart) - Create a new invite object for the channel.
 * [startThreadFromMessage](#startthreadfrommessage) - Creates a new thread from an existing message. Returns a channel on success, and a 400 BAD REQUEST on invalid parameters. Fires a Thread Create and a Message Update Gateway event.
 * [setPermissionOverwrite](#setpermissionoverwrite) - Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
 * [deletePermissionOverwrite](#deletepermissionoverwrite) - Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. Returns a 204 empty response on success. Fires a Channel Update Gateway event.
@@ -38,6 +39,7 @@ Returns a channel object for the given channel ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_channel" method="get" path="/channels/{channel_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -96,14 +98,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetChannelResponseBody](../../models/operations/getchannelresponsebody.md)\>**
+**Promise\<[operations.GetChannelResponse](../../models/operations/getchannelresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -111,6 +114,7 @@ Delete a channel, or close a private message. Requires the MANAGE_CHANNELS permi
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_channel" method="delete" path="/channels/{channel_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -169,14 +173,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.DeleteChannelResponseBody](../../models/operations/deletechannelresponsebody.md)\>**
+**Promise\<[operations.DeleteChannelResponse](../../models/operations/deletechannelresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -184,6 +189,7 @@ Update a channel's settings. Returns a channel on success, and a 400 BAD REQUEST
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_channel" method="patch" path="/channels/{channel_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -194,7 +200,12 @@ const discord = new Discord({
 async function run() {
   const result = await discord.channels.update({
     channelId: "<value>",
-    requestBody: {},
+    requestBody: {
+      videoQualityMode: 1,
+      defaultAutoArchiveDuration: 60,
+      defaultSortOrder: 0,
+      defaultForumLayout: 0,
+    },
   });
 
   console.log(result);
@@ -220,7 +231,12 @@ const discord = new DiscordCore({
 async function run() {
   const res = await channelsUpdate(discord, {
     channelId: "<value>",
-    requestBody: {},
+    requestBody: {
+      videoQualityMode: 1,
+      defaultAutoArchiveDuration: 60,
+      defaultSortOrder: 0,
+      defaultForumLayout: 0,
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -244,14 +260,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.UpdateChannelResponseBody](../../models/operations/updatechannelresponsebody.md)\>**
+**Promise\<[operations.UpdateChannelResponse](../../models/operations/updatechannelresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## follow
 
@@ -259,6 +276,7 @@ Follow an Announcement Channel to send messages to a target channel. Requires th
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="follow_channel" method="post" path="/channels/{channel_id}/followers" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -323,14 +341,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ChannelFollowerResponse](../../models/components/channelfollowerresponse.md)\>**
+**Promise\<[operations.FollowChannelResponse](../../models/operations/followchannelresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listInvites
 
@@ -338,6 +357,7 @@ Returns a list of invite objects (with invite metadata) for the channel.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_channel_invites" method="get" path="/channels/{channel_id}/invites" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -396,21 +416,23 @@ run();
 
 ### Response
 
-**Promise\<[operations.ResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ListChannelInvitesResponse](../../models/operations/listchannelinvitesresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
-## createInvite
+## createInviteJson
 
 Create a new invite object for the channel.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_channel_invite_json" method="post" path="/channels/{channel_id}/invites" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -419,9 +441,11 @@ const discord = new Discord({
 });
 
 async function run() {
-  const result = await discord.channels.createInvite({
+  const result = await discord.channels.createInviteJson({
     channelId: "<value>",
-    requestBody: {},
+    requestBody: {
+      targetType: 1,
+    },
   });
 
   console.log(result);
@@ -436,7 +460,7 @@ The standalone function version of this method:
 
 ```typescript
 import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
-import { channelsCreateInvite } from "@ryan.blunden/discord-sdk/funcs/channelsCreateInvite.js";
+import { channelsCreateInviteJson } from "@ryan.blunden/discord-sdk/funcs/channelsCreateInviteJson.js";
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -445,15 +469,17 @@ const discord = new DiscordCore({
 });
 
 async function run() {
-  const res = await channelsCreateInvite(discord, {
+  const res = await channelsCreateInviteJson(discord, {
     channelId: "<value>",
-    requestBody: {},
+    requestBody: {
+      targetType: 1,
+    },
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("channelsCreateInvite failed:", res.error);
+    console.log("channelsCreateInviteJson failed:", res.error);
   }
 }
 
@@ -464,21 +490,184 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CreateChannelInviteRequest](../../models/operations/createchannelinviterequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.CreateChannelInviteJsonRequest](../../models/operations/createchannelinvitejsonrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.CreateChannelInviteResponseBody](../../models/operations/createchannelinviteresponsebody.md)\>**
+**Promise\<[operations.CreateChannelInviteJsonResponse](../../models/operations/createchannelinvitejsonresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
+
+## createInviteForm
+
+Create a new invite object for the channel.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="create_channel_invite_form" method="post" path="/channels/{channel_id}/invites" -->
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.channels.createInviteForm({
+    channelId: "<value>",
+    requestBody: {
+      targetType: 1,
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { channelsCreateInviteForm } from "@ryan.blunden/discord-sdk/funcs/channelsCreateInviteForm.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await channelsCreateInviteForm(discord, {
+    channelId: "<value>",
+    requestBody: {
+      targetType: 1,
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("channelsCreateInviteForm failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.CreateChannelInviteFormRequest](../../models/operations/createchannelinviteformrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.CreateChannelInviteFormResponse](../../models/operations/createchannelinviteformresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
+
+## createInviteMultipart
+
+Create a new invite object for the channel.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="create_channel_invite_multipart" method="post" path="/channels/{channel_id}/invites" -->
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.channels.createInviteMultipart({
+    channelId: "<value>",
+    requestBody: {
+      targetType: 1,
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { channelsCreateInviteMultipart } from "@ryan.blunden/discord-sdk/funcs/channelsCreateInviteMultipart.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await channelsCreateInviteMultipart(discord, {
+    channelId: "<value>",
+    requestBody: {
+      targetType: 1,
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("channelsCreateInviteMultipart failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.CreateChannelInviteMultipartRequest](../../models/operations/createchannelinvitemultipartrequest.md)                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.CreateChannelInviteMultipartResponse](../../models/operations/createchannelinvitemultipartresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## startThreadFromMessage
 
@@ -486,6 +675,7 @@ Creates a new thread from an existing message. Returns a channel on success, and
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_thread_from_message" method="post" path="/channels/{channel_id}/messages/{message_id}/threads" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -552,14 +742,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ThreadResponse](../../models/components/threadresponse.md)\>**
+**Promise\<[operations.CreateThreadFromMessageResponse](../../models/operations/createthreadfrommessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## setPermissionOverwrite
 
@@ -567,6 +758,7 @@ Edit the channel permission overwrites for a user or role in a channel. Only usa
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="set_channel_permission_overwrite" method="put" path="/channels/{channel_id}/permissions/{overwrite_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -575,13 +767,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.channels.setPermissionOverwrite({
+  const result = await discord.channels.setPermissionOverwrite({
     channelId: "<value>",
     overwriteId: "<value>",
     requestBody: {},
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -609,7 +801,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("channelsSetPermissionOverwrite failed:", res.error);
   }
@@ -629,14 +821,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.SetChannelPermissionOverwriteResponse](../../models/operations/setchannelpermissionoverwriteresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deletePermissionOverwrite
 
@@ -644,6 +837,7 @@ Delete a channel permission overwrite for a user or role in a channel. Only usab
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_channel_permission_overwrite" method="delete" path="/channels/{channel_id}/permissions/{overwrite_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -652,12 +846,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.channels.deletePermissionOverwrite({
+  const result = await discord.channels.deletePermissionOverwrite({
     channelId: "<value>",
     overwriteId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -684,7 +878,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("channelsDeletePermissionOverwrite failed:", res.error);
   }
@@ -704,14 +898,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteChannelPermissionOverwriteResponse](../../models/operations/deletechannelpermissionoverwriteresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listPinnedMessages
 
@@ -719,6 +914,7 @@ Returns all pinned messages in the channel as an array of message objects.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deprecated_list_pins" method="get" path="/channels/{channel_id}/pins" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -777,14 +973,15 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse[]](../../models/.md)\>**
+**Promise\<[operations.DeprecatedListPinsResponse](../../models/operations/deprecatedlistpinsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## pinMessage
 
@@ -792,6 +989,7 @@ Pin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a 2
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deprecated_create_pin" method="put" path="/channels/{channel_id}/pins/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -800,12 +998,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.channels.pinMessage({
+  const result = await discord.channels.pinMessage({
     channelId: "<value>",
     messageId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -832,7 +1030,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("channelsPinMessage failed:", res.error);
   }
@@ -852,14 +1050,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeprecatedCreatePinResponse](../../models/operations/deprecatedcreatepinresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## unpinMessage
 
@@ -867,6 +1066,7 @@ Unpin a message in a channel. Requires the MANAGE_MESSAGES permission. Returns a
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deprecated_delete_pin" method="delete" path="/channels/{channel_id}/pins/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -875,12 +1075,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.channels.unpinMessage({
+  const result = await discord.channels.unpinMessage({
     channelId: "<value>",
     messageId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -907,7 +1107,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("channelsUnpinMessage failed:", res.error);
   }
@@ -927,14 +1127,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeprecatedDeletePinResponse](../../models/operations/deprecateddeletepinresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## addGroupDMRecipient
 
@@ -942,6 +1143,7 @@ Adds a recipient to a Group DM using their access token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="add_group_dm_user" method="put" path="/channels/{channel_id}/recipients/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1004,14 +1206,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.AddGroupDmUserResponseBody](../../models/operations/addgroupdmuserresponsebody.md)\>**
+**Promise\<[operations.AddGroupDmUserResponse](../../models/operations/addgroupdmuserresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## removeGroupDMRecipient
 
@@ -1019,6 +1222,7 @@ Removes a recipient from a Group DM.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_group_dm_user" method="delete" path="/channels/{channel_id}/recipients/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1027,12 +1231,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.channels.removeGroupDMRecipient({
+  const result = await discord.channels.removeGroupDMRecipient({
     channelId: "<value>",
     userId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1059,7 +1263,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("channelsRemoveGroupDMRecipient failed:", res.error);
   }
@@ -1079,14 +1283,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGroupDmUserResponse](../../models/operations/deletegroupdmuserresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listThreadMembers
 
@@ -1094,6 +1299,7 @@ Returns array of thread member objects that are members of the thread.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_thread_members" method="get" path="/channels/{channel_id}/thread-members" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1152,14 +1358,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ThreadMemberResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListThreadMembersResponse](../../models/operations/listthreadmembersresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## joinThread
 
@@ -1167,6 +1374,7 @@ Adds the current user to a thread. Also requires the thread is not archived. Ret
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="join_thread" method="put" path="/channels/{channel_id}/thread-members/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1175,11 +1383,11 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.channels.joinThread({
+  const result = await discord.channels.joinThread({
     channelId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1205,7 +1413,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("channelsJoinThread failed:", res.error);
   }
@@ -1225,14 +1433,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.JoinThreadResponse](../../models/operations/jointhreadresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## leaveThread
 
@@ -1240,6 +1449,7 @@ Removes the current user from a thread. Also requires the thread is not archived
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="leave_thread" method="delete" path="/channels/{channel_id}/thread-members/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1248,11 +1458,11 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.channels.leaveThread({
+  const result = await discord.channels.leaveThread({
     channelId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1278,7 +1488,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("channelsLeaveThread failed:", res.error);
   }
@@ -1298,14 +1508,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.LeaveThreadResponse](../../models/operations/leavethreadresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getThreadMember
 
@@ -1313,6 +1524,7 @@ Returns a thread member object for the specified user if they are a member of th
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_thread_member" method="get" path="/channels/{channel_id}/thread-members/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1373,14 +1585,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ThreadMemberResponse](../../models/components/threadmemberresponse.md)\>**
+**Promise\<[operations.GetThreadMemberResponse](../../models/operations/getthreadmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## addThreadMember
 
@@ -1388,6 +1601,7 @@ Adds another member to a thread. Requires the ability to send messages in the th
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="add_thread_member" method="put" path="/channels/{channel_id}/thread-members/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1396,12 +1610,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.channels.addThreadMember({
+  const result = await discord.channels.addThreadMember({
     channelId: "<value>",
     userId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1428,7 +1642,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("channelsAddThreadMember failed:", res.error);
   }
@@ -1448,14 +1662,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.AddThreadMemberResponse](../../models/operations/addthreadmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## removeThreadMember
 
@@ -1463,6 +1678,7 @@ Removes another member from a thread. Requires the MANAGE_THREADS permission, or
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_thread_member" method="delete" path="/channels/{channel_id}/thread-members/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1471,12 +1687,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.channels.removeThreadMember({
+  const result = await discord.channels.removeThreadMember({
     channelId: "<value>",
     userId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1503,7 +1719,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("channelsRemoveThreadMember failed:", res.error);
   }
@@ -1523,14 +1739,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteThreadMemberResponse](../../models/operations/deletethreadmemberresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## startThread
 
@@ -1538,6 +1755,7 @@ Creates a new thread that is not connected to an existing message. Returns a cha
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_thread" method="post" path="/channels/{channel_id}/threads" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1550,6 +1768,7 @@ async function run() {
     channelId: "<value>",
     requestBody: {
       name: "<value>",
+      autoArchiveDuration: 60,
       message: {},
     },
   });
@@ -1579,6 +1798,7 @@ async function run() {
     channelId: "<value>",
     requestBody: {
       name: "<value>",
+      autoArchiveDuration: 60,
       message: {},
     },
   });
@@ -1604,14 +1824,15 @@ run();
 
 ### Response
 
-**Promise\<[components.CreatedThreadResponse](../../models/components/createdthreadresponse.md)\>**
+**Promise\<[operations.CreateThreadResponse](../../models/operations/createthreadresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listPrivateArchivedThreads
 
@@ -1619,6 +1840,7 @@ Returns archived threads in the channel that are of type PRIVATE_THREAD. Threads
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_private_archived_threads" method="get" path="/channels/{channel_id}/threads/archived/private" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1677,14 +1899,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ThreadsResponse](../../models/components/threadsresponse.md)\>**
+**Promise\<[operations.ListPrivateArchivedThreadsResponse](../../models/operations/listprivatearchivedthreadsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listPublicArchivedThreads
 
@@ -1692,6 +1915,7 @@ Returns archived threads in the channel that are public. When called on a GUILD_
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_public_archived_threads" method="get" path="/channels/{channel_id}/threads/archived/public" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1750,14 +1974,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ThreadsResponse](../../models/components/threadsresponse.md)\>**
+**Promise\<[operations.ListPublicArchivedThreadsResponse](../../models/operations/listpublicarchivedthreadsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## searchThreads
 
@@ -1765,6 +1990,7 @@ Search for threads in a channel.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="thread_search" method="get" path="/channels/{channel_id}/threads/search" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1775,6 +2001,8 @@ const discord = new Discord({
 async function run() {
   const result = await discord.channels.searchThreads({
     channelId: "<value>",
+    sortBy: "relevance",
+    sortOrder: "asc",
   });
 
   console.log(result);
@@ -1800,6 +2028,8 @@ const discord = new DiscordCore({
 async function run() {
   const res = await channelsSearchThreads(discord, {
     channelId: "<value>",
+    sortBy: "relevance",
+    sortOrder: "asc",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1823,14 +2053,15 @@ run();
 
 ### Response
 
-**Promise\<[components.ThreadSearchResponse](../../models/components/threadsearchresponse.md)\>**
+**Promise\<[operations.ThreadSearchResponse](../../models/operations/threadsearchresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## triggerTypingIndicator
 
@@ -1838,6 +2069,7 @@ Post a typing indicator for the specified channel, which expires after 10 second
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="trigger_typing_indicator" method="post" path="/channels/{channel_id}/typing" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1896,14 +2128,15 @@ run();
 
 ### Response
 
-**Promise\<[components.TypingIndicatorResponse](../../models/components/typingindicatorresponse.md)\>**
+**Promise\<[operations.TriggerTypingIndicatorResponse](../../models/operations/triggertypingindicatorresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listJoinedPrivateArchivedThreads
 
@@ -1911,6 +2144,7 @@ Returns archived threads in the channel that are of type PRIVATE_THREAD, and the
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_my_private_archived_threads" method="get" path="/channels/{channel_id}/users/@me/threads/archived/private" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -1969,11 +2203,12 @@ run();
 
 ### Response
 
-**Promise\<[components.ThreadsResponse](../../models/components/threadsresponse.md)\>**
+**Promise\<[operations.ListMyPrivateArchivedThreadsResponse](../../models/operations/listmyprivatearchivedthreadsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
