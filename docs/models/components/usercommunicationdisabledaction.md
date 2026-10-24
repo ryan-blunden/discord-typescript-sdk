@@ -6,6 +6,7 @@
 import { UserCommunicationDisabledAction } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: UserCommunicationDisabledAction = {
+  type: 1,
   metadata: {},
 };
 ```
@@ -14,5 +15,5 @@ let value: UserCommunicationDisabledAction = {
 
 | Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
 | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                   | *number*                                                                                                                 | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
+| `type`                                                                                                                   | [components.UserCommunicationDisabledActionType](../../models/components/usercommunicationdisabledactiontype.md)         | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
 | `metadata`                                                                                                               | [components.UserCommunicationDisabledActionMetadata](../../models/components/usercommunicationdisabledactionmetadata.md) | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
