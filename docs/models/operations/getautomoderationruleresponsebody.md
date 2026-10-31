@@ -13,19 +13,27 @@ const value: components.DefaultKeywordRuleResponse = {
   guildId: "<value>",
   creatorId: "<value>",
   name: "<value>",
-  actions: [
-    {
-      metadata: {},
-    },
+  eventType: 2,
+  actions: [],
+  triggerType: 4,
+  enabled: false,
+  exemptRoles: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
+  exemptChannels: [
+    "<value 1>",
+    "<value 2>",
   ],
   triggerMetadata: {
     allowList: [
       "<value 1>",
+      "<value 2>",
+      "<value 3>",
     ],
     presets: [
-      944120,
-      737731,
-      917279,
+      1,
     ],
   },
 };
@@ -39,18 +47,36 @@ const value: components.KeywordRuleResponse = {
   guildId: "<value>",
   creatorId: "<value>",
   name: "<value>",
-  actions: [],
+  eventType: 1,
+  actions: [
+    {
+      type: 1,
+      metadata: {
+        durationSeconds: 122685,
+      },
+    },
+  ],
+  triggerType: 6,
+  enabled: true,
+  exemptRoles: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
+  exemptChannels: [
+    "<value 1>",
+    "<value 2>",
+  ],
   triggerMetadata: {
-    keywordFilter: [
-      "<value 1>",
-      "<value 2>",
-    ],
+    keywordFilter: [],
     regexPatterns: [
       "<value 1>",
       "<value 2>",
-      "<value 3>",
     ],
-    allowList: [],
+    allowList: [
+      "<value 1>",
+      "<value 2>",
+    ],
   },
 };
 ```
@@ -63,10 +89,17 @@ const value: components.MLSpamRuleResponse = {
   guildId: "<value>",
   creatorId: "<value>",
   name: "<value>",
-  actions: [
-    {
-      metadata: {},
-    },
+  eventType: 2,
+  actions: [],
+  triggerType: 4,
+  enabled: false,
+  exemptRoles: [
+    "<value 1>",
+  ],
+  exemptChannels: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
   triggerMetadata: {},
 };
@@ -80,27 +113,59 @@ const value: components.MentionSpamRuleResponse = {
   guildId: "<value>",
   creatorId: "<value>",
   name: "<value>",
+  eventType: 1,
   actions: [],
+  triggerType: 4,
+  enabled: false,
+  exemptRoles: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
+  exemptChannels: [
+    "<value 1>",
+    "<value 2>",
+  ],
   triggerMetadata: {
-    mentionTotalLimit: 409323,
+    mentionTotalLimit: 205400,
+    mentionRaidProtectionEnabled: true,
   },
 };
 ```
 
-### `components.SpamLinkRuleResponse`
+### `components.UserProfileRuleResponse`
 
 ```typescript
-const value: components.SpamLinkRuleResponse = {
+const value: components.UserProfileRuleResponse = {
   id: "<value>",
   guildId: "<value>",
   creatorId: "<value>",
   name: "<value>",
-  actions: [
-    {
-      metadata: {},
-    },
+  eventType: 2,
+  actions: [],
+  triggerType: 3,
+  enabled: false,
+  exemptRoles: [
+    "<value 1>",
+    "<value 2>",
   ],
-  triggerMetadata: {},
+  exemptChannels: [],
+  triggerMetadata: {
+    keywordFilter: [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
+    regexPatterns: [
+      "<value 1>",
+      "<value 2>",
+    ],
+    allowList: [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
+  },
 };
 ```
 

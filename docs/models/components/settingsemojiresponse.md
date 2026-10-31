@@ -5,13 +5,17 @@
 ```typescript
 import { SettingsEmojiResponse } from "@ryan.blunden/discord-sdk/models/components";
 
-let value: SettingsEmojiResponse = {};
+let value: SettingsEmojiResponse = {
+  id: "<value>",
+  name: "<value>",
+  animated: false,
+};
 ```
 
 ## Fields
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_minus_sign: | N/A                |
-| `name`             | *string*           | :heavy_minus_sign: | N/A                |
-| `animated`         | *boolean*          | :heavy_minus_sign: | N/A                |
+| `id`               | *string*           | :heavy_check_mark: | N/A                |
+| `name`             | *string*           | :heavy_check_mark: | N/A                |
+| `animated`         | *boolean*          | :heavy_check_mark: | N/A                |

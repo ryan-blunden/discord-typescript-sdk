@@ -16,4 +16,4 @@ let value: ListGuildMembersRequest = {
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `guildId`          | *string*           | :heavy_check_mark: | N/A                |
 | `limit`            | *number*           | :heavy_minus_sign: | N/A                |
-| `after`            | *number*           | :heavy_minus_sign: | N/A                |
+| `after`            | *string*           | :heavy_minus_sign: | N/A                |

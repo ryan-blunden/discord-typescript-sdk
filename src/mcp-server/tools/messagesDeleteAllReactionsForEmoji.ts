@@ -22,7 +22,7 @@ export const tool$messagesDeleteAllReactionsForEmoji: ToolDefinition<
     const [result, apiCall] = await messagesDeleteAllReactionsForEmoji(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

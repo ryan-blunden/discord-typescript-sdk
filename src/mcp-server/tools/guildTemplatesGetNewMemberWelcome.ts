@@ -21,7 +21,7 @@ export const tool$guildTemplatesGetNewMemberWelcome: ToolDefinition<
     const [result, apiCall] = await guildTemplatesGetNewMemberWelcome(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
@@ -31,7 +31,7 @@ export const tool$guildTemplatesGetNewMemberWelcome: ToolDefinition<
       };
     }
 
-    const value = result.value;
+    const value = result.value?.result;
 
     return formatResult(value, apiCall);
   },
