@@ -6,8 +6,9 @@
 import { ApplicationCommandIntegerOption } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ApplicationCommandIntegerOption = {
+  type: 4,
   name: "<value>",
-  description: "adviser monasticism hence elevation discourse",
+  description: "qua unfurl vaguely comestible toward",
 };
 ```
 
@@ -15,7 +16,7 @@ let value: ApplicationCommandIntegerOption = {
 
 | Field                                                                                                                  | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
 | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                 | *number*                                                                                                               | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
+| `type`                                                                                                                 | [components.ApplicationCommandIntegerOptionType](../../models/components/applicationcommandintegeroptiontype.md)       | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
 | `name`                                                                                                                 | *string*                                                                                                               | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
 | `nameLocalizations`                                                                                                    | Record<string, *string*>                                                                                               | :heavy_minus_sign:                                                                                                     | N/A                                                                                                                    |
 | `description`                                                                                                          | *string*                                                                                                               | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
