@@ -6,15 +6,19 @@
 ### `components.ButtonComponentForMessageRequest`
 
 ```typescript
-const value: components.ButtonComponentForMessageRequest = {};
+const value: components.ButtonComponentForMessageRequest = {
+  type: 5,
+  style: 4,
+};
 ```
 
 ### `components.ThumbnailComponentForMessageRequest`
 
 ```typescript
 const value: components.ThumbnailComponentForMessageRequest = {
+  type: 6,
   media: {
-    url: "https://square-fishery.net/",
+    url: "https://optimal-tuba.info",
   },
 };
 ```
