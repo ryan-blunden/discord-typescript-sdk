@@ -7,8 +7,10 @@
 
 ```typescript
 const value: components.ApplicationCommandAttachmentOptionResponse = {
+  type: 1,
   name: "<value>",
-  description: "gosh meh gosh",
+  description:
+    "lest indeed yowza gallivant dimly energetically so reassemble afterwards",
 };
 ```
 
@@ -16,9 +18,9 @@ const value: components.ApplicationCommandAttachmentOptionResponse = {
 
 ```typescript
 const value: components.ApplicationCommandBooleanOptionResponse = {
+  type: 10,
   name: "<value>",
-  description:
-    "indeed after whether acidly round huzzah fluctuate per whenever",
+  description: "closely plus er nervously glow scratch busily psst rekindle",
 };
 ```
 
@@ -26,9 +28,10 @@ const value: components.ApplicationCommandBooleanOptionResponse = {
 
 ```typescript
 const value: components.ApplicationCommandChannelOptionResponse = {
+  type: 11,
   name: "<value>",
   description:
-    "key riser mean bravely quantify woot before blah dreamily fooey",
+    "segregate maestro impure harp both meaningfully despite providence reorient eek",
 };
 ```
 
@@ -36,8 +39,9 @@ const value: components.ApplicationCommandChannelOptionResponse = {
 
 ```typescript
 const value: components.ApplicationCommandIntegerOptionResponse = {
+  type: 8,
   name: "<value>",
-  description: "phew voluminous royal however into inasmuch muffled pick",
+  description: "hose milky vibrant gee ditch pfft calculating vibrant handy",
 };
 ```
 
@@ -45,9 +49,9 @@ const value: components.ApplicationCommandIntegerOptionResponse = {
 
 ```typescript
 const value: components.ApplicationCommandMentionableOptionResponse = {
+  type: 11,
   name: "<value>",
-  description:
-    "amongst justly than zowie following phooey past dazzling near typeface",
+  description: "split sadly circa surprised questionably next overload",
 };
 ```
 
@@ -55,8 +59,9 @@ const value: components.ApplicationCommandMentionableOptionResponse = {
 
 ```typescript
 const value: components.ApplicationCommandNumberOptionResponse = {
+  type: 8,
   name: "<value>",
-  description: "winged inside dim queasily store insignificant cone pro",
+  description: "pointless gripping provided gah huzzah wherever volleyball",
 };
 ```
 
@@ -64,9 +69,9 @@ const value: components.ApplicationCommandNumberOptionResponse = {
 
 ```typescript
 const value: components.ApplicationCommandRoleOptionResponse = {
+  type: 9,
   name: "<value>",
-  description:
-    "suffocate worldly orchestrate option gadzooks whoa vanadyl or versus",
+  description: "dusk frizzy duh incidentally exploration warmly on",
 };
 ```
 
@@ -74,8 +79,10 @@ const value: components.ApplicationCommandRoleOptionResponse = {
 
 ```typescript
 const value: components.ApplicationCommandStringOptionResponse = {
+  type: 6,
   name: "<value>",
-  description: "bogus damaged oh eek council ski abaft",
+  description:
+    "sleepily aha worth dulcimer arbitrate crushing oof um lazy conceal",
 };
 ```
 
@@ -83,9 +90,9 @@ const value: components.ApplicationCommandStringOptionResponse = {
 
 ```typescript
 const value: components.ApplicationCommandSubcommandGroupOptionResponse = {
+  type: 10,
   name: "<value>",
-  description:
-    "gadzooks terribly improbable source ack miscalculate hm though stylish hm",
+  description: "who yum till elliptical gah on plus fooey unimportant ugh",
 };
 ```
 
@@ -93,8 +100,10 @@ const value: components.ApplicationCommandSubcommandGroupOptionResponse = {
 
 ```typescript
 const value: components.ApplicationCommandSubcommandOptionResponse = {
+  type: 2,
   name: "<value>",
-  description: "even lest zowie",
+  description:
+    "yuck and vanish usually informal inveigle apropos since sweatshop",
 };
 ```
 
@@ -102,8 +111,10 @@ const value: components.ApplicationCommandSubcommandOptionResponse = {
 
 ```typescript
 const value: components.ApplicationCommandUserOptionResponse = {
+  type: 3,
   name: "<value>",
-  description: "down wherever upon quarrelsomely",
+  description:
+    "tenant ah blah conjecture gosh to wheel e-mail eventually nimble",
 };
 ```
 

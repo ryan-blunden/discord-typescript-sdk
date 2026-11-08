@@ -6,6 +6,7 @@
 import { FlagToChannelAction } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: FlagToChannelAction = {
+  type: 2,
   metadata: {
     channelId: "<value>",
   },
@@ -16,5 +17,5 @@ let value: FlagToChannelAction = {
 
 | Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `type`                                                                                           | *number*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `type`                                                                                           | [components.FlagToChannelActionType](../../models/components/flagtochannelactiontype.md)         | :heavy_check_mark:                                                                               | N/A                                                                                              |
 | `metadata`                                                                                       | [components.FlagToChannelActionMetadata](../../models/components/flagtochannelactionmetadata.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

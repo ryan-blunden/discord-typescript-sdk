@@ -20,7 +20,7 @@ export const tool$webhooksUpdate: ToolDefinition<typeof args> = {
     const [result, apiCall] = await webhooksUpdate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
@@ -30,7 +30,7 @@ export const tool$webhooksUpdate: ToolDefinition<typeof args> = {
       };
     }
 
-    const value = result.value;
+    const value = result.value.result;
 
     return formatResult(value, apiCall);
   },

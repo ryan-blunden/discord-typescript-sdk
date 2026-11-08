@@ -7,15 +7,23 @@ import { PrivateChannelResponse } from "@ryan.blunden/discord-sdk/models/compone
 
 let value: PrivateChannelResponse = {
   id: "<value>",
-  type: 13,
-  flags: 251055,
+  type: 10,
+  flags: 533007,
   recipients: [
     {
       id: "<value>",
-      username: "Bennie93",
+      username: "Delphia.Ferry",
+      avatar: "https://picsum.photos/seed/YEPx72ML/2168/1884",
       discriminator: "<value>",
-      publicFlags: 175853,
-      flags: 411991,
+      publicFlags: 936875,
+      flags: 646435,
+      globalName: "<value>",
+      primaryGuild: {
+        identityGuildId: "<value>",
+        identityEnabled: false,
+        tag: "<value>",
+        badge: "<value>",
+      },
     },
   ],
 };

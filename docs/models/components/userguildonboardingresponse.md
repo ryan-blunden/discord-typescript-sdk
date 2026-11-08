@@ -15,22 +15,24 @@ let value: UserGuildOnboardingResponse = {
         {
           id: "<value>",
           title: "<value>",
-          description: "silent forsaken reckon",
-          emoji: {},
-          roleIds: [
-            "<value 1>",
-            "<value 2>",
-            "<value 3>",
-          ],
+          description:
+            "rapid yum that nautical triangular reward provided cleave tuxedo sheepishly",
+          emoji: {
+            id: "<value>",
+            name: null,
+            animated: false,
+          },
+          roleIds: [],
           channelIds: [
             "<value 1>",
             "<value 2>",
           ],
         },
       ],
-      singleSelect: true,
+      singleSelect: false,
       required: true,
       inOnboarding: false,
+      type: 0,
     },
   ],
   defaultChannelIds: [
@@ -39,6 +41,7 @@ let value: UserGuildOnboardingResponse = {
     "<value 3>",
   ],
   enabled: true,
+  mode: 0,
 };
 ```
 
@@ -50,3 +53,4 @@ let value: UserGuildOnboardingResponse = {
 | `prompts`                                                                                    | [components.OnboardingPromptResponse](../../models/components/onboardingpromptresponse.md)[] | :heavy_check_mark:                                                                           | N/A                                                                                          |
 | `defaultChannelIds`                                                                          | *string*[]                                                                                   | :heavy_check_mark:                                                                           | N/A                                                                                          |
 | `enabled`                                                                                    | *boolean*                                                                                    | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `mode`                                                                                       | [components.GuildOnboardingMode](../../models/components/guildonboardingmode.md)             | :heavy_check_mark:                                                                           | N/A                                                                                          |
