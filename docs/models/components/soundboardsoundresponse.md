@@ -9,7 +9,9 @@ let value: SoundboardSoundResponse = {
   name: "<value>",
   soundId: "<value>",
   volume: 951.15,
-  available: false,
+  emojiId: "<value>",
+  emojiName: "<value>",
+  available: true,
 };
 ```
 
@@ -20,8 +22,8 @@ let value: SoundboardSoundResponse = {
 | `name`                                                             | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
 | `soundId`                                                          | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
 | `volume`                                                           | *number*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
-| `emojiId`                                                          | *string*                                                           | :heavy_minus_sign:                                                 | N/A                                                                |
-| `emojiName`                                                        | *string*                                                           | :heavy_minus_sign:                                                 | N/A                                                                |
+| `emojiId`                                                          | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
+| `emojiName`                                                        | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
 | `guildId`                                                          | *string*                                                           | :heavy_minus_sign:                                                 | N/A                                                                |
 | `available`                                                        | *boolean*                                                          | :heavy_check_mark:                                                 | N/A                                                                |
 | `user`                                                             | [components.UserResponse](../../models/components/userresponse.md) | :heavy_minus_sign:                                                 | N/A                                                                |

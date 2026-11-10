@@ -20,7 +20,7 @@ export const tool$messagesGet: ToolDefinition<typeof args> = {
     const [result, apiCall] = await messagesGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
@@ -30,7 +30,7 @@ export const tool$messagesGet: ToolDefinition<typeof args> = {
       };
     }
 
-    const value = result.value;
+    const value = result.value.result;
 
     return formatResult(value, apiCall);
   },

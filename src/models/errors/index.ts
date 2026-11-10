@@ -3,6 +3,9 @@
  */
 
 export * from "./apierror.js";
+export * from "./discorderror.js";
 export * from "./errorresponse.js";
 export * from "./httpclienterrors.js";
+export * from "./ratelimitedresponse.js";
+export * from "./responsevalidationerror.js";
 export * from "./sdkvalidationerror.js";
