@@ -6,6 +6,7 @@
 import { QuarantineUserActionResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: QuarantineUserActionResponse = {
+  type: 1,
   metadata: {},
 };
 ```
@@ -14,5 +15,5 @@ let value: QuarantineUserActionResponse = {
 
 | Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
 | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                             | *number*                                                                                                           | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `type`                                                                                                             | [components.QuarantineUserActionResponseType](../../models/components/quarantineuseractionresponsetype.md)         | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
 | `metadata`                                                                                                         | [components.QuarantineUserActionMetadataResponse](../../models/components/quarantineuseractionmetadataresponse.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |

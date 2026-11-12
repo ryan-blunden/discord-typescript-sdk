@@ -20,7 +20,7 @@ export const tool$guildsUpdateChannelPositions: ToolDefinition<typeof args> = {
     const [result, apiCall] = await guildsUpdateChannelPositions(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

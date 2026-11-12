@@ -1,5 +1,4 @@
 # Webhooks
-(*webhooks*)
 
 ## Overview
 
@@ -12,6 +11,7 @@
 * [delete](#delete) - Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. Returns a 204 No Content response on success. Fires a Webhooks Update Gateway event.
 * [update](#update) - Modify a webhook. Requires the MANAGE_WEBHOOKS permission. Returns the updated webhook object on success. Fires a Webhooks Update Gateway event.
 * [getWithToken](#getwithtoken) - Same as above, except this call does not require authentication and returns no user in the webhook object.
+* [execute](#execute) - Refer to Uploading Files for details on attachments and multipart/form-data requests. Returns a message or 204 No Content depending on the wait query parameter.
 * [deleteWithToken](#deletewithtoken) - Same as above, except this call does not require authentication.
 * [updateWithToken](#updatewithtoken) - Same as above, except this call does not require authentication, does not accept a channel_id parameter in the body, and does not return a user in the webhook object.
 * [executeGithub](#executegithub) - Add a new webhook to your GitHub repo (in the repo's settings), and use this endpoint as the "Payload URL."
@@ -33,6 +33,7 @@ Returns a list of channel webhook objects. Requires the MANAGE_WEBHOOKS permissi
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_channel_webhooks" method="get" path="/channels/{channel_id}/webhooks" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -91,14 +92,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.ListChannelWebhooksResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ListChannelWebhooksResponse](../../models/operations/listchannelwebhooksresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## create
 
@@ -106,6 +108,7 @@ Creates a new webhook and returns a webhook object on success. Requires the MANA
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_webhook" method="post" path="/channels/{channel_id}/webhooks" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -170,14 +173,15 @@ run();
 
 ### Response
 
-**Promise\<[components.GuildIncomingWebhookResponse](../../models/components/guildincomingwebhookresponse.md)\>**
+**Promise\<[operations.CreateWebhookResponse](../../models/operations/createwebhookresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listForGuild
 
@@ -185,6 +189,7 @@ Returns a list of guild webhook objects. Requires the MANAGE_WEBHOOKS permission
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_webhooks" method="get" path="/guilds/{guild_id}/webhooks" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -243,14 +248,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetGuildWebhooksResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.GetGuildWebhooksResponse](../../models/operations/getguildwebhooksresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -258,6 +264,7 @@ Returns the new webhook object for the given id.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_webhook" method="get" path="/webhooks/{webhook_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -316,14 +323,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetWebhookResponseBody](../../models/operations/getwebhookresponsebody.md)\>**
+**Promise\<[operations.GetWebhookResponse](../../models/operations/getwebhookresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -331,6 +339,7 @@ Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. Returns a
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_webhook" method="delete" path="/webhooks/{webhook_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -339,11 +348,11 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.webhooks.delete({
+  const result = await discord.webhooks.delete({
     webhookId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -369,7 +378,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("webhooksDelete failed:", res.error);
   }
@@ -389,14 +398,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteWebhookResponse](../../models/operations/deletewebhookresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -404,6 +414,7 @@ Modify a webhook. Requires the MANAGE_WEBHOOKS permission. Returns the updated w
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_webhook" method="patch" path="/webhooks/{webhook_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -464,14 +475,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.UpdateWebhookResponseBody](../../models/operations/updatewebhookresponsebody.md)\>**
+**Promise\<[operations.UpdateWebhookResponse](../../models/operations/updatewebhookresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getWithToken
 
@@ -479,10 +491,13 @@ Same as above, except this call does not require authentication and returns no u
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_webhook_by_token" method="get" path="/webhooks/{webhook_id}/{webhook_token}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.webhooks.getWithToken({
@@ -506,7 +521,9 @@ import { webhooksGetWithToken } from "@ryan.blunden/discord-sdk/funcs/webhooksGe
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksGetWithToken(discord, {
@@ -529,21 +546,100 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.GetWebhookByTokenRequest](../../models/operations/getwebhookbytokenrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.GetWebhookByTokenSecurity](../../models/operations/getwebhookbytokensecurity.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetWebhookByTokenResponseBody](../../models/operations/getwebhookbytokenresponsebody.md)\>**
+**Promise\<[operations.GetWebhookByTokenResponse](../../models/operations/getwebhookbytokenresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
+
+## execute
+
+Refer to Uploading Files for details on attachments and multipart/form-data requests. Returns a message or 204 No Content depending on the wait query parameter.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="execute_webhook" method="post" path="/webhooks/{webhook_id}/{webhook_token}" -->
+```typescript
+import { Discord } from "@ryan.blunden/discord-sdk";
+
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const result = await discord.webhooks.execute({
+    webhookId: "<value>",
+    webhookToken: "<value>",
+    requestBody: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { DiscordCore } from "@ryan.blunden/discord-sdk/core.js";
+import { webhooksExecute } from "@ryan.blunden/discord-sdk/funcs/webhooksExecute.js";
+
+// Use `DiscordCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
+
+async function run() {
+  const res = await webhooksExecute(discord, {
+    webhookId: "<value>",
+    webhookToken: "<value>",
+    requestBody: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksExecute failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ExecuteWebhookRequest](../../models/operations/executewebhookrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.ExecuteWebhookResponse](../../models/operations/executewebhookresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteWithToken
 
@@ -551,18 +647,21 @@ Same as above, except this call does not require authentication.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_webhook_by_token" method="delete" path="/webhooks/{webhook_id}/{webhook_token}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
-  await discord.webhooks.deleteWithToken({
+  const result = await discord.webhooks.deleteWithToken({
     webhookId: "<value>",
     webhookToken: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -578,7 +677,9 @@ import { webhooksDeleteWithToken } from "@ryan.blunden/discord-sdk/funcs/webhook
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksDeleteWithToken(discord, {
@@ -587,7 +688,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("webhooksDeleteWithToken failed:", res.error);
   }
@@ -601,21 +702,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.DeleteWebhookByTokenRequest](../../models/operations/deletewebhookbytokenrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.DeleteWebhookByTokenSecurity](../../models/operations/deletewebhookbytokensecurity.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteWebhookByTokenResponse](../../models/operations/deletewebhookbytokenresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateWithToken
 
@@ -623,10 +724,13 @@ Same as above, except this call does not require authentication, does not accept
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_webhook_by_token" method="patch" path="/webhooks/{webhook_id}/{webhook_token}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.webhooks.updateWithToken({
@@ -651,7 +755,9 @@ import { webhooksUpdateWithToken } from "@ryan.blunden/discord-sdk/funcs/webhook
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksUpdateWithToken(discord, {
@@ -675,21 +781,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.UpdateWebhookByTokenRequest](../../models/operations/updatewebhookbytokenrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.UpdateWebhookByTokenSecurity](../../models/operations/updatewebhookbytokensecurity.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.UpdateWebhookByTokenResponseBody](../../models/operations/updatewebhookbytokenresponsebody.md)\>**
+**Promise\<[operations.UpdateWebhookByTokenResponse](../../models/operations/updatewebhookbytokenresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## executeGithub
 
@@ -697,13 +803,16 @@ Add a new webhook to your GitHub repo (in the repo's settings), and use this end
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="execute_github_compatible_webhook" method="post" path="/webhooks/{webhook_id}/{webhook_token}/github" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
-  await discord.webhooks.executeGithub({
+  const result = await discord.webhooks.executeGithub({
     webhookId: "<value>",
     webhookToken: "<value>",
     githubWebhook: {
@@ -716,7 +825,7 @@ async function run() {
     },
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -732,7 +841,9 @@ import { webhooksExecuteGithub } from "@ryan.blunden/discord-sdk/funcs/webhooksE
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksExecuteGithub(discord, {
@@ -749,7 +860,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("webhooksExecuteGithub failed:", res.error);
   }
@@ -763,21 +874,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.ExecuteGithubCompatibleWebhookRequest](../../models/operations/executegithubcompatiblewebhookrequest.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.ExecuteGithubCompatibleWebhookSecurity](../../models/operations/executegithubcompatiblewebhooksecurity.md)                                                         | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.ExecuteGithubCompatibleWebhookResponse](../../models/operations/executegithubcompatiblewebhookresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getOriginalMessage
 
@@ -785,10 +896,13 @@ Returns the initial webhook message.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_original_webhook_message" method="get" path="/webhooks/{webhook_id}/{webhook_token}/messages/@original" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.webhooks.getOriginalMessage({
@@ -812,7 +926,9 @@ import { webhooksGetOriginalMessage } from "@ryan.blunden/discord-sdk/funcs/webh
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksGetOriginalMessage(discord, {
@@ -835,21 +951,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.GetOriginalWebhookMessageRequest](../../models/operations/getoriginalwebhookmessagerequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.GetOriginalWebhookMessageSecurity](../../models/operations/getoriginalwebhookmessagesecurity.md)                                                                   | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.GetOriginalWebhookMessageResponse](../../models/operations/getoriginalwebhookmessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteOriginalMessage
 
@@ -857,18 +973,21 @@ Deletes the initial webhook message.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_original_webhook_message" method="delete" path="/webhooks/{webhook_id}/{webhook_token}/messages/@original" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
-  await discord.webhooks.deleteOriginalMessage({
+  const result = await discord.webhooks.deleteOriginalMessage({
     webhookId: "<value>",
     webhookToken: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -884,7 +1003,9 @@ import { webhooksDeleteOriginalMessage } from "@ryan.blunden/discord-sdk/funcs/w
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksDeleteOriginalMessage(discord, {
@@ -893,7 +1014,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("webhooksDeleteOriginalMessage failed:", res.error);
   }
@@ -907,21 +1028,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.DeleteOriginalWebhookMessageRequest](../../models/operations/deleteoriginalwebhookmessagerequest.md)                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.DeleteOriginalWebhookMessageSecurity](../../models/operations/deleteoriginalwebhookmessagesecurity.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteOriginalWebhookMessageResponse](../../models/operations/deleteoriginalwebhookmessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateOriginalMessageJson
 
@@ -929,10 +1050,13 @@ Edits the initial webhook message.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_original_webhook_message_json" method="patch" path="/webhooks/{webhook_id}/{webhook_token}/messages/@original" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.webhooks.updateOriginalMessageJson({
@@ -957,7 +1081,9 @@ import { webhooksUpdateOriginalMessageJson } from "@ryan.blunden/discord-sdk/fun
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksUpdateOriginalMessageJson(discord, {
@@ -981,21 +1107,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.UpdateOriginalWebhookMessageJsonRequest](../../models/operations/updateoriginalwebhookmessagejsonrequest.md)                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.UpdateOriginalWebhookMessageJsonSecurity](../../models/operations/updateoriginalwebhookmessagejsonsecurity.md)                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateOriginalWebhookMessageJsonResponse](../../models/operations/updateoriginalwebhookmessagejsonresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateOriginalMessageForm
 
@@ -1003,10 +1129,13 @@ Edits the initial webhook message.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_original_webhook_message_form" method="patch" path="/webhooks/{webhook_id}/{webhook_token}/messages/@original" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.webhooks.updateOriginalMessageForm({
@@ -1031,7 +1160,9 @@ import { webhooksUpdateOriginalMessageForm } from "@ryan.blunden/discord-sdk/fun
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksUpdateOriginalMessageForm(discord, {
@@ -1055,21 +1186,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.UpdateOriginalWebhookMessageFormRequest](../../models/operations/updateoriginalwebhookmessageformrequest.md)                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.UpdateOriginalWebhookMessageFormSecurity](../../models/operations/updateoriginalwebhookmessageformsecurity.md)                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateOriginalWebhookMessageFormResponse](../../models/operations/updateoriginalwebhookmessageformresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateOriginalMessageMultipart
 
@@ -1077,10 +1208,13 @@ Edits the initial webhook message.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_original_webhook_message_multipart" method="patch" path="/webhooks/{webhook_id}/{webhook_token}/messages/@original" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.webhooks.updateOriginalMessageMultipart({
@@ -1105,7 +1239,9 @@ import { webhooksUpdateOriginalMessageMultipart } from "@ryan.blunden/discord-sd
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksUpdateOriginalMessageMultipart(discord, {
@@ -1129,21 +1265,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.UpdateOriginalWebhookMessageMultipartRequest](../../models/operations/updateoriginalwebhookmessagemultipartrequest.md)                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.UpdateOriginalWebhookMessageMultipartSecurity](../../models/operations/updateoriginalwebhookmessagemultipartsecurity.md)                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateOriginalWebhookMessageMultipartResponse](../../models/operations/updateoriginalwebhookmessagemultipartresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getMessage
 
@@ -1151,10 +1287,13 @@ Returns a previously-sent webhook message from the same token. Returns a message
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_webhook_message" method="get" path="/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.webhooks.getMessage({
@@ -1179,7 +1318,9 @@ import { webhooksGetMessage } from "@ryan.blunden/discord-sdk/funcs/webhooksGetM
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksGetMessage(discord, {
@@ -1203,21 +1344,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.GetWebhookMessageRequest](../../models/operations/getwebhookmessagerequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.GetWebhookMessageSecurity](../../models/operations/getwebhookmessagesecurity.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.GetWebhookMessageResponse](../../models/operations/getwebhookmessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## deleteMessage
 
@@ -1225,19 +1366,22 @@ Deletes a message that was created by the webhook. Returns a 204 No Content resp
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_webhook_message" method="delete" path="/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
-  await discord.webhooks.deleteMessage({
+  const result = await discord.webhooks.deleteMessage({
     webhookId: "<value>",
     webhookToken: "<value>",
     messageId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -1253,7 +1397,9 @@ import { webhooksDeleteMessage } from "@ryan.blunden/discord-sdk/funcs/webhooksD
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksDeleteMessage(discord, {
@@ -1263,7 +1409,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("webhooksDeleteMessage failed:", res.error);
   }
@@ -1277,21 +1423,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.DeleteWebhookMessageRequest](../../models/operations/deletewebhookmessagerequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.DeleteWebhookMessageSecurity](../../models/operations/deletewebhookmessagesecurity.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteWebhookMessageResponse](../../models/operations/deletewebhookmessageresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateMessageJson
 
@@ -1299,10 +1445,13 @@ Edits a previously-sent webhook message from the same token. Returns a message o
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_webhook_message_json" method="patch" path="/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.webhooks.updateMessageJson({
@@ -1328,7 +1477,9 @@ import { webhooksUpdateMessageJson } from "@ryan.blunden/discord-sdk/funcs/webho
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksUpdateMessageJson(discord, {
@@ -1353,21 +1504,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.UpdateWebhookMessageJsonRequest](../../models/operations/updatewebhookmessagejsonrequest.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.UpdateWebhookMessageJsonSecurity](../../models/operations/updatewebhookmessagejsonsecurity.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateWebhookMessageJsonResponse](../../models/operations/updatewebhookmessagejsonresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateMessageForm
 
@@ -1375,10 +1526,13 @@ Edits a previously-sent webhook message from the same token. Returns a message o
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_webhook_message_form" method="patch" path="/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.webhooks.updateMessageForm({
@@ -1404,7 +1558,9 @@ import { webhooksUpdateMessageForm } from "@ryan.blunden/discord-sdk/funcs/webho
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksUpdateMessageForm(discord, {
@@ -1429,21 +1585,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.UpdateWebhookMessageFormRequest](../../models/operations/updatewebhookmessageformrequest.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.UpdateWebhookMessageFormSecurity](../../models/operations/updatewebhookmessageformsecurity.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateWebhookMessageFormResponse](../../models/operations/updatewebhookmessageformresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateMessageMultipart
 
@@ -1451,10 +1607,13 @@ Edits a previously-sent webhook message from the same token. Returns a message o
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_webhook_message_multipart" method="patch" path="/webhooks/{webhook_id}/{webhook_token}/messages/{message_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.webhooks.updateMessageMultipart({
@@ -1480,7 +1639,9 @@ import { webhooksUpdateMessageMultipart } from "@ryan.blunden/discord-sdk/funcs/
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksUpdateMessageMultipart(discord, {
@@ -1505,21 +1666,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.UpdateWebhookMessageMultipartRequest](../../models/operations/updatewebhookmessagemultipartrequest.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.UpdateWebhookMessageMultipartSecurity](../../models/operations/updatewebhookmessagemultipartsecurity.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.UpdateWebhookMessageMultipartResponse](../../models/operations/updatewebhookmessagemultipartresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## executeSlack
 
@@ -1527,10 +1688,13 @@ Refer to Slack's documentation for more information. We do not support Slack's c
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="execute_slack_compatible_webhook" method="post" path="/webhooks/{webhook_id}/{webhook_token}/slack" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
-const discord = new Discord();
+const discord = new Discord({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const result = await discord.webhooks.executeSlack({
@@ -1555,7 +1719,9 @@ import { webhooksExecuteSlack } from "@ryan.blunden/discord-sdk/funcs/webhooksEx
 
 // Use `DiscordCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const discord = new DiscordCore();
+const discord = new DiscordCore({
+  botToken: process.env["DISCORD_BOT_TOKEN"] ?? "",
+});
 
 async function run() {
   const res = await webhooksExecuteSlack(discord, {
@@ -1579,18 +1745,18 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.ExecuteSlackCompatibleWebhookRequest](../../models/operations/executeslackcompatiblewebhookrequest.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [operations.ExecuteSlackCompatibleWebhookSecurity](../../models/operations/executeslackcompatiblewebhooksecurity.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[string](../../models/.md)\>**
+**Promise\<[operations.ExecuteSlackCompatibleWebhookResponse](../../models/operations/executeslackcompatiblewebhookresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

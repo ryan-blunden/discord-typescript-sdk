@@ -6,9 +6,10 @@
 import { ApplicationCommandStringOption } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ApplicationCommandStringOption = {
+  type: 10,
   name: "<value>",
   description:
-    "zowie well-to-do furthermore gallery ravage rebuke fairly oh when each",
+    "supposing self-assured ack yum finally since reassuringly partially",
 };
 ```
 
@@ -16,7 +17,7 @@ let value: ApplicationCommandStringOption = {
 
 | Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
 | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                               | *number*                                                                                                             | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+| `type`                                                                                                               | [components.ApplicationCommandStringOptionType](../../models/components/applicationcommandstringoptiontype.md)       | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
 | `name`                                                                                                               | *string*                                                                                                             | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
 | `nameLocalizations`                                                                                                  | Record<string, *string*>                                                                                             | :heavy_minus_sign:                                                                                                   | N/A                                                                                                                  |
 | `description`                                                                                                        | *string*                                                                                                             | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
