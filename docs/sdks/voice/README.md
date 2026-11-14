@@ -1,5 +1,4 @@
 # Voice
-(*voice*)
 
 ## Overview
 
@@ -17,6 +16,7 @@ Returns the current user's voice state in the guild.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_self_voice_state" method="get" path="/guilds/{guild_id}/voice-states/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -75,14 +75,15 @@ run();
 
 ### Response
 
-**Promise\<[components.VoiceStateResponse](../../models/components/voicestateresponse.md)\>**
+**Promise\<[operations.GetSelfVoiceStateResponse](../../models/operations/getselfvoicestateresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateCurrentUserState
 
@@ -90,6 +91,7 @@ Updates the current user's voice state. Returns 204 No Content on success. Fires
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_self_voice_state" method="patch" path="/guilds/{guild_id}/voice-states/@me" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -98,12 +100,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.voice.updateCurrentUserState({
+  const result = await discord.voice.updateCurrentUserState({
     guildId: "<value>",
-    requestBody: {},
+    updateSelfVoiceStateRequestPartial: {},
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -126,11 +128,11 @@ const discord = new DiscordCore({
 async function run() {
   const res = await voiceUpdateCurrentUserState(discord, {
     guildId: "<value>",
-    requestBody: {},
+    updateSelfVoiceStateRequestPartial: {},
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("voiceUpdateCurrentUserState failed:", res.error);
   }
@@ -150,14 +152,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.UpdateSelfVoiceStateResponse](../../models/operations/updateselfvoicestateresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getUserState
 
@@ -165,6 +168,7 @@ Returns the specified user's voice state in the guild.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_voice_state" method="get" path="/guilds/{guild_id}/voice-states/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -225,14 +229,15 @@ run();
 
 ### Response
 
-**Promise\<[components.VoiceStateResponse](../../models/components/voicestateresponse.md)\>**
+**Promise\<[operations.GetVoiceStateResponse](../../models/operations/getvoicestateresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## updateUserState
 
@@ -240,6 +245,7 @@ Updates another user's voice state. Fires a Voice State Update Gateway event.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_voice_state" method="patch" path="/guilds/{guild_id}/voice-states/{user_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -248,13 +254,13 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.voice.updateUserState({
+  const result = await discord.voice.updateUserState({
     guildId: "<value>",
     userId: "<value>",
-    requestBody: {},
+    updateVoiceStateRequestPartial: {},
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -278,11 +284,11 @@ async function run() {
   const res = await voiceUpdateUserState(discord, {
     guildId: "<value>",
     userId: "<value>",
-    requestBody: {},
+    updateVoiceStateRequestPartial: {},
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("voiceUpdateUserState failed:", res.error);
   }
@@ -302,14 +308,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.UpdateVoiceStateResponse](../../models/operations/updatevoicestateresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## listRegions
 
@@ -317,6 +324,7 @@ Returns an array of voice region objects that can be used when setting a voice o
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_voice_regions" method="get" path="/voice/regions" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -370,11 +378,12 @@ run();
 
 ### Response
 
-**Promise\<[components.VoiceRegionResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListVoiceRegionsResponse](../../models/operations/listvoiceregionsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |

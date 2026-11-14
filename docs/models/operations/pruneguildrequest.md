@@ -7,12 +7,13 @@ import { PruneGuildRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: PruneGuildRequest = {
   guildId: "<value>",
+  pruneGuildRequest: {},
 };
 ```
 
 ## Fields
 
-| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `guildId`                                                                            | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `requestBody`                                                                        | [operations.PruneGuildRequestBody](../../models/operations/pruneguildrequestbody.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `guildId`                                                                    | *string*                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `pruneGuildRequest`                                                          | [components.PruneGuildRequest](../../models/components/pruneguildrequest.md) | :heavy_check_mark:                                                           | N/A                                                                          |

@@ -4,7 +4,6 @@
 
 import { auditLogsList } from "../funcs/auditLogsList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -15,7 +14,7 @@ export class AuditLogs extends ClientSDK {
   async list(
     request: operations.ListGuildAuditLogEntriesRequest,
     options?: RequestOptions,
-  ): Promise<components.GuildAuditLogResponse> {
+  ): Promise<operations.ListGuildAuditLogEntriesResponse> {
     return unwrapAsync(auditLogsList(
       this,
       request,
