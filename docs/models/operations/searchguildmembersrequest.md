@@ -7,7 +7,6 @@ import { SearchGuildMembersRequest } from "@ryan.blunden/discord-sdk/models/oper
 
 let value: SearchGuildMembersRequest = {
   guildId: "<value>",
-  limit: 687004,
   query: "<value>",
 };
 ```
@@ -17,5 +16,5 @@ let value: SearchGuildMembersRequest = {
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `guildId`          | *string*           | :heavy_check_mark: | N/A                |
-| `limit`            | *number*           | :heavy_check_mark: | N/A                |
+| `limit`            | *number*           | :heavy_minus_sign: | N/A                |
 | `query`            | *string*           | :heavy_check_mark: | N/A                |

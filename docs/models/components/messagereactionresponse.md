@@ -6,16 +6,19 @@
 import { MessageReactionResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: MessageReactionResponse = {
-  emoji: {},
-  count: 416828,
+  emoji: {
+    id: "<value>",
+    name: "<value>",
+  },
+  count: 108844,
   countDetails: {
-    burst: 984198,
-    normal: 108844,
+    burst: 295555,
+    normal: 960143,
   },
   burstColors: [
     "<value 1>",
   ],
-  meBurst: false,
+  meBurst: true,
   me: true,
 };
 ```
