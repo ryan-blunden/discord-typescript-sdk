@@ -7,12 +7,15 @@ import { BulkUpdateGuildRolesRequest } from "@ryan.blunden/discord-sdk/models/op
 
 let value: BulkUpdateGuildRolesRequest = {
   guildId: "<value>",
+  requestBody: [
+    {},
+  ],
 };
 ```
 
 ## Fields
 
-| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `guildId`                                                                                                  | *string*                                                                                                   | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
-| `requestBody`                                                                                              | [operations.BulkUpdateGuildRolesRequestBody](../../models/operations/bulkupdateguildrolesrequestbody.md)[] | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `guildId`                                                                                        | *string*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `requestBody`                                                                                    | [components.UpdateRolePositionsRequest](../../models/components/updaterolepositionsrequest.md)[] | :heavy_check_mark:                                                                               | N/A                                                                                              |

@@ -1,5 +1,4 @@
 # GuildScheduledEvents
-(*guildScheduledEvents*)
 
 ## Overview
 
@@ -18,6 +17,7 @@ Returns a list of guild scheduled event objects for the given guild.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_scheduled_events" method="get" path="/guilds/{guild_id}/scheduled-events" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -76,14 +76,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.ListGuildScheduledEventsResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildScheduledEventsResponse](../../models/operations/listguildscheduledeventsresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## create
 
@@ -91,6 +92,7 @@ Create a guild scheduled event in the guild. Returns a guild scheduled event obj
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create_guild_scheduled_event" method="post" path="/guilds/{guild_id}/scheduled-events" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -104,6 +106,8 @@ async function run() {
     requestBody: {
       name: "<value>",
       scheduledStartTime: new Date("2024-03-28T07:26:43.121Z"),
+      privacyLevel: 2,
+      entityType: 0,
       entityMetadata: {
         location: "<value>",
       },
@@ -136,6 +140,8 @@ async function run() {
     requestBody: {
       name: "<value>",
       scheduledStartTime: new Date("2024-03-28T07:26:43.121Z"),
+      privacyLevel: 2,
+      entityType: 0,
       entityMetadata: {
         location: "<value>",
       },
@@ -163,14 +169,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateGuildScheduledEventResponseBody](../../models/operations/createguildscheduledeventresponsebody.md)\>**
+**Promise\<[operations.CreateGuildScheduledEventResponse](../../models/operations/createguildscheduledeventresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## get
 
@@ -178,6 +185,7 @@ Get a guild scheduled event. Returns a guild scheduled event object on success.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_guild_scheduled_event" method="get" path="/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -238,14 +246,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetGuildScheduledEventResponseBody](../../models/operations/getguildscheduledeventresponsebody.md)\>**
+**Promise\<[operations.GetGuildScheduledEventResponse](../../models/operations/getguildscheduledeventresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## delete
 
@@ -253,6 +262,7 @@ Delete a guild scheduled event. Returns a 204 on success. Fires a Guild Schedule
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_guild_scheduled_event" method="delete" path="/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -261,12 +271,12 @@ const discord = new Discord({
 });
 
 async function run() {
-  await discord.guildScheduledEvents.delete({
+  const result = await discord.guildScheduledEvents.delete({
     guildId: "<value>",
     guildScheduledEventId: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -293,7 +303,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("guildScheduledEventsDelete failed:", res.error);
   }
@@ -313,14 +323,15 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteGuildScheduledEventResponse](../../models/operations/deleteguildscheduledeventresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## update
 
@@ -328,6 +339,7 @@ Modify a guild scheduled event. Returns the modified guild scheduled event objec
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="update_guild_scheduled_event" method="patch" path="/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -339,7 +351,11 @@ async function run() {
   const result = await discord.guildScheduledEvents.update({
     guildId: "<value>",
     guildScheduledEventId: "<value>",
-    requestBody: {},
+    requestBody: {
+      status: 1,
+      entityType: 0,
+      privacyLevel: 2,
+    },
   });
 
   console.log(result);
@@ -366,7 +382,11 @@ async function run() {
   const res = await guildScheduledEventsUpdate(discord, {
     guildId: "<value>",
     guildScheduledEventId: "<value>",
-    requestBody: {},
+    requestBody: {
+      status: 1,
+      entityType: 0,
+      privacyLevel: 2,
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -390,14 +410,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.UpdateGuildScheduledEventResponseBody](../../models/operations/updateguildscheduledeventresponsebody.md)\>**
+**Promise\<[operations.UpdateGuildScheduledEventResponse](../../models/operations/updateguildscheduledeventresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## getUsers
 
@@ -405,6 +426,7 @@ Get a list of guild scheduled event users subscribed to a guild scheduled event.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_guild_scheduled_event_users" method="get" path="/guilds/{guild_id}/scheduled-events/{guild_scheduled_event_id}/users" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -465,11 +487,12 @@ run();
 
 ### Response
 
-**Promise\<[components.ScheduledEventUserResponse[]](../../models/.md)\>**
+**Promise\<[operations.ListGuildScheduledEventUsersResponse](../../models/operations/listguildscheduledeventusersresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
