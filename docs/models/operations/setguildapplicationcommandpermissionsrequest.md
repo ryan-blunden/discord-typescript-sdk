@@ -9,6 +9,7 @@ let value: SetGuildApplicationCommandPermissionsRequest = {
   applicationId: "<value>",
   guildId: "<value>",
   commandId: "<value>",
+  requestBody: {},
 };
 ```
 

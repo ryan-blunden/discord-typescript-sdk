@@ -8,6 +8,7 @@ import { UpdateMessageJsonRequest } from "@ryan.blunden/discord-sdk/models/opera
 let value: UpdateMessageJsonRequest = {
   channelId: "<value>",
   messageId: "<value>",
+  messageEditRequestPartial: {},
 };
 ```
 

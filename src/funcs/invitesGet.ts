@@ -4,13 +4,14 @@
 
 import { DiscordCore } from "../core.js";
 import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { resolveSecurity } from "../lib/security.js";
+import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import { APIError } from "../models/errors/apierror.js";
+import { DiscordError } from "../models/errors/discorderror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -19,6 +20,7 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
@@ -30,25 +32,25 @@ import { Result } from "../types/fp.js";
 export function invitesGet(
   client: DiscordCore,
   request: operations.InviteResolveRequest,
-  security?: operations.InviteResolveSecurity | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.InviteResolveResponseBody,
+    operations.InviteResolveResponse,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | DiscordError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
     client,
     request,
-    security,
     options,
   ));
 }
@@ -56,20 +58,21 @@ export function invitesGet(
 async function $do(
   client: DiscordCore,
   request: operations.InviteResolveRequest,
-  security?: operations.InviteResolveSecurity | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.InviteResolveResponseBody,
+      operations.InviteResolveResponse,
+      | errors.RatelimitedResponse
       | errors.ErrorResponse
-      | APIError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | DiscordError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -91,11 +94,12 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/invites/{code}")(pathParams);
 
   const query = encodeFormQuery({
     "guild_scheduled_event_id": payload.guild_scheduled_event_id,
+    "target_channel_id": payload.target_channel_id,
+    "target_message_id": payload.target_message_id,
     "with_counts": payload.with_counts,
   });
 
@@ -103,15 +107,9 @@ async function $do(
     Accept: "application/json",
   }));
 
-  const requestSecurity = resolveSecurity(
-    [
-      {
-        fieldName: "Authorization",
-        type: "apiKey:header",
-        value: security?.botToken,
-      },
-    ],
-  );
+  const secConfig = await extractSecurity(client._options.botToken);
+  const securityInput = secConfig == null ? {} : { botToken: secConfig };
+  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     options: client._options,
@@ -121,7 +119,7 @@ async function $do(
 
     resolvedSecurity: requestSecurity,
 
-    securitySource: security,
+    securitySource: client._options.botToken,
     retryConfig: options?.retries
       || client._options.retryConfig
       || { strategy: "none" },
@@ -146,7 +144,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -160,20 +159,26 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.InviteResolveResponseBody,
+    operations.InviteResolveResponse,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | DiscordError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
-    M.json(200, operations.InviteResolveResponseBody$inboundSchema),
-    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema),
+    M.json(200, operations.InviteResolveResponse$inboundSchema, {
+      hdrs: true,
+      key: "Result",
+    }),
+    M.jsonErr(429, errors.RatelimitedResponse$inboundSchema, { hdrs: true }),
+    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema, { hdrs: true }),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

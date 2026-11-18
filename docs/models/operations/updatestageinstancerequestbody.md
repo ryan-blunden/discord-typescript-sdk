@@ -10,7 +10,7 @@ let value: UpdateStageInstanceRequestBody = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `topic`            | *string*           | :heavy_minus_sign: | N/A                |
-| `privacyLevel`     | *number*           | :heavy_minus_sign: | N/A                |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `topic`                                                                                          | *string*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `privacyLevel`                                                                                   | [components.StageInstancesPrivacyLevels](../../models/components/stageinstancesprivacylevels.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |

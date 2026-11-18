@@ -13,7 +13,7 @@ export const tool$soundboardsGetSoundboardDefaultSounds: ToolDefinition = {
   tool: async (client, ctx) => {
     const [result, apiCall] = await soundboardsGetSoundboardDefaultSounds(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
@@ -23,7 +23,7 @@ export const tool$soundboardsGetSoundboardDefaultSounds: ToolDefinition = {
       };
     }
 
-    const value = result.value;
+    const value = result.value.result;
 
     return formatResult(value, apiCall);
   },
