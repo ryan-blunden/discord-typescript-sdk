@@ -7,6 +7,11 @@ import { CreateGuildStickerRequest } from "@ryan.blunden/discord-sdk/models/oper
 
 let value: CreateGuildStickerRequest = {
   guildId: "<value>",
+  requestBody: {
+    name: "<value>",
+    tags: "<value>",
+    file: "<value>",
+  },
 };
 ```
 

@@ -14,10 +14,10 @@ let value: GetAnswerVotersRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `channelId`        | *string*           | :heavy_check_mark: | N/A                |
-| `messageId`        | *string*           | :heavy_check_mark: | N/A                |
-| `answerId`         | *number*           | :heavy_check_mark: | N/A                |
-| `after`            | *string*           | :heavy_minus_sign: | N/A                |
-| `limit`            | *number*           | :heavy_minus_sign: | N/A                |
+| Field                | Type                 | Required             | Description          |
+| -------------------- | -------------------- | -------------------- | -------------------- |
+| `channelId`          | *string*             | :heavy_check_mark:   | N/A                  |
+| `messageId`          | *string*             | :heavy_check_mark:   | N/A                  |
+| `answerId`           | *number*             | :heavy_check_mark:   | The ID of the answer |
+| `after`              | *string*             | :heavy_minus_sign:   | N/A                  |
+| `limit`              | *number*             | :heavy_minus_sign:   | N/A                  |

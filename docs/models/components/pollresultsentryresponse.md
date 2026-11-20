@@ -8,13 +8,14 @@ import { PollResultsEntryResponse } from "@ryan.blunden/discord-sdk/models/compo
 let value: PollResultsEntryResponse = {
   id: 409343,
   count: 158823,
+  meVoted: true,
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *number*           | :heavy_check_mark: | N/A                |
-| `count`            | *number*           | :heavy_check_mark: | N/A                |
-| `meVoted`          | *boolean*          | :heavy_minus_sign: | N/A                |
+| Field                                          | Type                                           | Required                                       | Description                                    |
+| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| `id`                                           | *number*                                       | :heavy_check_mark:                             | The answer_id                                  |
+| `count`                                        | *number*                                       | :heavy_check_mark:                             | The number of votes for this answer            |
+| `meVoted`                                      | *boolean*                                      | :heavy_check_mark:                             | Whether the current user voted for this answer |
