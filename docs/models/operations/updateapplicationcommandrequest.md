@@ -6,8 +6,9 @@
 import { UpdateApplicationCommandRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateApplicationCommandRequest = {
-  applicationId: "<value>",
-  commandId: "<value>",
+  applicationId: "0",
+  commandId: "0",
+  applicationCommandPatchRequestPartial: {},
 };
 ```
 

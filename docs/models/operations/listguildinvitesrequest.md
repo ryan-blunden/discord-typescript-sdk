@@ -6,7 +6,7 @@
 import { ListGuildInvitesRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListGuildInvitesRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 

@@ -6,7 +6,7 @@
 import { JoinThreadRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: JoinThreadRequest = {
-  channelId: "<value>",
+  channelId: "0",
 };
 ```
 

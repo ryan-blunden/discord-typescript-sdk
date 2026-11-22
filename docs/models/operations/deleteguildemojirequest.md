@@ -6,8 +6,8 @@
 import { DeleteGuildEmojiRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteGuildEmojiRequest = {
-  guildId: "<value>",
-  emojiId: "<value>",
+  guildId: "0",
+  emojiId: "0",
 };
 ```
 

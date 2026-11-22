@@ -6,7 +6,8 @@
 import { UpdateChannelRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateChannelRequest = {
-  channelId: "<value>",
+  channelId: "0",
+  requestBody: {},
 };
 ```
 

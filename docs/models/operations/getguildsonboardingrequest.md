@@ -6,7 +6,7 @@
 import { GetGuildsOnboardingRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetGuildsOnboardingRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 

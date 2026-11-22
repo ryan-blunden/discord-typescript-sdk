@@ -6,11 +6,7 @@
 import { GetEntitlementsRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetEntitlementsRequest = {
-  applicationId: "<value>",
-  skuIds: [
-    "<value 1>",
-    "<value 2>",
-  ],
+  applicationId: "0",
 };
 ```
 
@@ -20,7 +16,7 @@ let value: GetEntitlementsRequest = {
 | ------------------- | ------------------- | ------------------- | ------------------- |
 | `applicationId`     | *string*            | :heavy_check_mark:  | N/A                 |
 | `userId`            | *string*            | :heavy_minus_sign:  | N/A                 |
-| `skuIds`            | *operations.SkuIds* | :heavy_check_mark:  | N/A                 |
+| `skuIds`            | *operations.SkuIds* | :heavy_minus_sign:  | N/A                 |
 | `guildId`           | *string*            | :heavy_minus_sign:  | N/A                 |
 | `before`            | *string*            | :heavy_minus_sign:  | N/A                 |
 | `after`             | *string*            | :heavy_minus_sign:  | N/A                 |

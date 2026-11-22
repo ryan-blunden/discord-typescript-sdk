@@ -8,14 +8,15 @@ import { PartnerSDKUnmergeProvisionalAccountRequestBody } from "@ryan.blunden/di
 let value: PartnerSDKUnmergeProvisionalAccountRequestBody = {
   clientId: "<value>",
   externalAuthToken: "<value>",
+  externalAuthType: "EPIC_ONLINE_SERVICES_ID_TOKEN",
 };
 ```
 
 ## Fields
 
-| Field               | Type                | Required            | Description         |
-| ------------------- | ------------------- | ------------------- | ------------------- |
-| `clientId`          | *string*            | :heavy_check_mark:  | N/A                 |
-| `clientSecret`      | *string*            | :heavy_minus_sign:  | N/A                 |
-| `externalAuthToken` | *string*            | :heavy_check_mark:  | N/A                 |
-| `externalAuthType`  | *string*            | :heavy_check_mark:  | N/A                 |
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `clientId`                                                                                                       | *string*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `clientSecret`                                                                                                   | *string*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `externalAuthToken`                                                                                              | *string*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `externalAuthType`                                                                                               | [components.ApplicationIdentityProviderAuthType](../../models/components/applicationidentityproviderauthtype.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |

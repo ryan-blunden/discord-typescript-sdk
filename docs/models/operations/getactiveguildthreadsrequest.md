@@ -6,7 +6,7 @@
 import { GetActiveGuildThreadsRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetActiveGuildThreadsRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 

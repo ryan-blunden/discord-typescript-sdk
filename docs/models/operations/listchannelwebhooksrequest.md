@@ -6,7 +6,7 @@
 import { ListChannelWebhooksRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListChannelWebhooksRequest = {
-  channelId: "<value>",
+  channelId: "0",
 };
 ```
 

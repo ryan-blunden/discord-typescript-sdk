@@ -6,8 +6,9 @@
 import { SetChannelPermissionOverwriteRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: SetChannelPermissionOverwriteRequest = {
-  channelId: "<value>",
-  overwriteId: "<value>",
+  channelId: "0",
+  overwriteId: "0",
+  requestBody: {},
 };
 ```
 

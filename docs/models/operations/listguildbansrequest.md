@@ -6,7 +6,7 @@
 import { ListGuildBansRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListGuildBansRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 

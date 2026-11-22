@@ -6,7 +6,7 @@
 import { DeleteGuildTemplateRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteGuildTemplateRequest = {
-  guildId: "<value>",
+  guildId: "0",
   code: "<value>",
 };
 ```

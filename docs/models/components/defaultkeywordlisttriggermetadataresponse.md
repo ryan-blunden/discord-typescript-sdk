@@ -12,16 +12,14 @@ let value: DefaultKeywordListTriggerMetadataResponse = {
     "<value 3>",
   ],
   presets: [
-    941578,
-    933614,
-    428692,
+    3,
   ],
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `allowList`        | *string*[]         | :heavy_check_mark: | N/A                |
-| `presets`          | *number*[]         | :heavy_check_mark: | N/A                |
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `allowList`                                                                                  | *string*[]                                                                                   | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `presets`                                                                                    | [components.AutomodKeywordPresetType](../../models/components/automodkeywordpresettype.md)[] | :heavy_check_mark:                                                                           | N/A                                                                                          |

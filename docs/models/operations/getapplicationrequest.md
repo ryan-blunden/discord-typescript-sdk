@@ -6,7 +6,7 @@
 import { GetApplicationRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetApplicationRequest = {
-  applicationId: "<value>",
+  applicationId: "0",
 };
 ```
 

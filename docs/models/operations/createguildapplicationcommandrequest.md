@@ -6,8 +6,11 @@
 import { CreateGuildApplicationCommandRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: CreateGuildApplicationCommandRequest = {
-  applicationId: "<value>",
-  guildId: "<value>",
+  applicationId: "0",
+  guildId: "0",
+  applicationCommandCreateRequest: {
+    name: "<value>",
+  },
 };
 ```
 

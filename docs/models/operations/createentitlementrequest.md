@@ -6,7 +6,12 @@
 import { CreateEntitlementRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: CreateEntitlementRequest = {
-  applicationId: "<value>",
+  applicationId: "0",
+  createEntitlementRequestData: {
+    skuId: "<value>",
+    ownerId: "<value>",
+    ownerType: 179717,
+  },
 };
 ```
 

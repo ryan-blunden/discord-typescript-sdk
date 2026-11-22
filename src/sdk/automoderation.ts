@@ -18,7 +18,7 @@ export class AutoModeration extends ClientSDK {
   async listRules(
     request: operations.ListAutoModerationRulesRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.ListAutoModerationRulesResponseBody | null>> {
+  ): Promise<operations.ListAutoModerationRulesResponse> {
     return unwrapAsync(autoModerationListRules(
       this,
       request,
@@ -32,7 +32,7 @@ export class AutoModeration extends ClientSDK {
   async createRule(
     request: operations.CreateAutoModerationRuleRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateAutoModerationRuleResponseBody> {
+  ): Promise<operations.CreateAutoModerationRuleResponse> {
     return unwrapAsync(autoModerationCreateRule(
       this,
       request,
@@ -46,7 +46,7 @@ export class AutoModeration extends ClientSDK {
   async getRule(
     request: operations.GetAutoModerationRuleRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetAutoModerationRuleResponseBody> {
+  ): Promise<operations.GetAutoModerationRuleResponse> {
     return unwrapAsync(autoModerationGetRule(
       this,
       request,
@@ -60,7 +60,7 @@ export class AutoModeration extends ClientSDK {
   async deleteRule(
     request: operations.DeleteAutoModerationRuleRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteAutoModerationRuleResponse | undefined> {
     return unwrapAsync(autoModerationDeleteRule(
       this,
       request,
@@ -74,7 +74,7 @@ export class AutoModeration extends ClientSDK {
   async updateRule(
     request: operations.UpdateAutoModerationRuleRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateAutoModerationRuleResponseBody> {
+  ): Promise<operations.UpdateAutoModerationRuleResponse> {
     return unwrapAsync(autoModerationUpdateRule(
       this,
       request,

@@ -6,9 +6,10 @@
 import { UpdateWebhookMessageMultipartRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateWebhookMessageMultipartRequest = {
-  webhookId: "<value>",
+  webhookId: "0",
   webhookToken: "<value>",
-  messageId: "<value>",
+  messageId: "0",
+  requestBody: {},
 };
 ```
 

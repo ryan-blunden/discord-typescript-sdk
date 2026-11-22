@@ -6,8 +6,8 @@
 import { CrosspostMessageRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: CrosspostMessageRequest = {
-  channelId: "<value>",
-  messageId: "<value>",
+  channelId: "0",
+  messageId: "0",
 };
 ```
 

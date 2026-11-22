@@ -6,8 +6,8 @@
 import { DeleteEntitlementRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteEntitlementRequest = {
-  applicationId: "<value>",
-  entitlementId: "<value>",
+  applicationId: "0",
+  entitlementId: "0",
 };
 ```
 

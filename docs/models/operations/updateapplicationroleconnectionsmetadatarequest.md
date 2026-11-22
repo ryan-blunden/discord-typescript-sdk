@@ -6,7 +6,15 @@
 import { UpdateApplicationRoleConnectionsMetadataRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateApplicationRoleConnectionsMetadataRequest = {
-  applicationId: "<value>",
+  applicationId: "0",
+  requestBody: [
+    {
+      type: 7,
+      key: "<key>",
+      name: "<value>",
+      description: "fervently fen acidly unto challenge source",
+    },
+  ],
 };
 ```
 

@@ -6,7 +6,7 @@
 import { DeleteApplicationUserRoleConnectionRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteApplicationUserRoleConnectionRequest = {
-  applicationId: "<value>",
+  applicationId: "0",
 };
 ```
 

@@ -6,7 +6,7 @@
 import { ListGuildVoiceRegionsRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListGuildVoiceRegionsRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 

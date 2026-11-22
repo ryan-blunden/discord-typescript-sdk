@@ -6,8 +6,13 @@
 import { BulkSetGuildApplicationCommandsRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: BulkSetGuildApplicationCommandsRequest = {
-  applicationId: "<value>",
-  guildId: "<value>",
+  applicationId: "0",
+  guildId: "0",
+  requestBody: [
+    {
+      name: "<value>",
+    },
+  ],
 };
 ```
 
