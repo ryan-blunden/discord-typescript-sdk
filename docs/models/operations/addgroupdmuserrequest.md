@@ -6,8 +6,9 @@
 import { AddGroupDmUserRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: AddGroupDmUserRequest = {
-  channelId: "<value>",
-  userId: "<value>",
+  channelId: "0",
+  userId: "0",
+  requestBody: {},
 };
 ```
 

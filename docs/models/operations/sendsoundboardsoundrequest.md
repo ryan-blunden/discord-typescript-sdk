@@ -6,7 +6,10 @@
 import { SendSoundboardSoundRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: SendSoundboardSoundRequest = {
-  channelId: "<value>",
+  channelId: "0",
+  soundboardSoundSendRequest: {
+    soundId: "<value>",
+  },
 };
 ```
 

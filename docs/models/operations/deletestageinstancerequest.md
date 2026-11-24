@@ -6,7 +6,7 @@
 import { DeleteStageInstanceRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteStageInstanceRequest = {
-  channelId: "<value>",
+  channelId: "0",
 };
 ```
 

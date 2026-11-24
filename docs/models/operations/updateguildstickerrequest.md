@@ -6,8 +6,9 @@
 import { UpdateGuildStickerRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateGuildStickerRequest = {
-  guildId: "<value>",
-  stickerId: "<value>",
+  guildId: "0",
+  stickerId: "0",
+  requestBody: {},
 };
 ```
 

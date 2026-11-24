@@ -6,8 +6,8 @@
 import { GetThreadMemberRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetThreadMemberRequest = {
-  channelId: "<value>",
-  userId: "<value>",
+  channelId: "0",
+  userId: "0",
 };
 ```
 

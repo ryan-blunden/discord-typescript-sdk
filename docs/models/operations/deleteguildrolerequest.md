@@ -6,8 +6,8 @@
 import { DeleteGuildRoleRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteGuildRoleRequest = {
-  guildId: "<value>",
-  roleId: "<value>",
+  guildId: "0",
+  roleId: "0",
 };
 ```
 

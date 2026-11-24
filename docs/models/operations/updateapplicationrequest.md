@@ -6,7 +6,8 @@
 import { UpdateApplicationRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateApplicationRequest = {
-  applicationId: "<value>",
+  applicationId: "0",
+  applicationFormPartial: {},
 };
 ```
 

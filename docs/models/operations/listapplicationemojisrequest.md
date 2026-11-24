@@ -6,7 +6,7 @@
 import { ListApplicationEmojisRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListApplicationEmojisRequest = {
-  applicationId: "<value>",
+  applicationId: "0",
 };
 ```
 

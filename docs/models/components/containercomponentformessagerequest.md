@@ -6,15 +6,27 @@
 import { ContainerComponentForMessageRequest } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ContainerComponentForMessageRequest = {
-  components: [],
+  type: 9,
+  components: [
+    {
+      type: 22,
+      components: [
+        {
+          type: 2,
+          customId: "<id>",
+        },
+      ],
+    },
+  ],
 };
 ```
 
 ## Fields
 
-| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `type`                                                       | *number*                                                     | :heavy_check_mark:                                           | N/A                                                          |
-| `accentColor`                                                | *number*                                                     | :heavy_minus_sign:                                           | N/A                                                          |
-| `components`                                                 | *components.ContainerComponentForMessageRequestComponents*[] | :heavy_check_mark:                                           | N/A                                                          |
-| `spoiler`                                                    | *boolean*                                                    | :heavy_minus_sign:                                           | N/A                                                          |
+| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                   | [components.ContainerComponentForMessageRequestType](../../models/components/containercomponentformessagerequesttype.md) | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
+| `id`                                                                                                                     | *number*                                                                                                                 | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |
+| `accentColor`                                                                                                            | *number*                                                                                                                 | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |
+| `components`                                                                                                             | *components.ContainerComponentForMessageRequestComponents*[]                                                             | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
+| `spoiler`                                                                                                                | *boolean*                                                                                                                | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |

@@ -6,13 +6,14 @@
 import { CreateGuildRoleRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: CreateGuildRoleRequest = {
-  guildId: "<value>",
+  guildId: "0",
+  createRoleRequest: {},
 };
 ```
 
 ## Fields
 
-| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `guildId`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `requestBody`                                                                                  | [operations.CreateGuildRoleRequestBody](../../models/operations/createguildrolerequestbody.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `guildId`                                                                    | *string*                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `createRoleRequest`                                                          | [components.CreateRoleRequest](../../models/components/createrolerequest.md) | :heavy_check_mark:                                                           | N/A                                                                          |

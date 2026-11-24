@@ -6,7 +6,7 @@
 import { DeprecatedListPinsRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeprecatedListPinsRequest = {
-  channelId: "<value>",
+  channelId: "0",
 };
 ```
 

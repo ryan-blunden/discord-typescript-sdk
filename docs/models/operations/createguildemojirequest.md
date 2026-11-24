@@ -6,7 +6,11 @@
 import { CreateGuildEmojiRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: CreateGuildEmojiRequest = {
-  guildId: "<value>",
+  guildId: "0",
+  requestBody: {
+    name: "<value>",
+    image: "https://loremflickr.com/446/544?lock=2197460622145316",
+  },
 };
 ```
 

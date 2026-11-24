@@ -6,7 +6,7 @@
 import { SyncGuildTemplateRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: SyncGuildTemplateRequest = {
-  guildId: "<value>",
+  guildId: "0",
   code: "<value>",
 };
 ```

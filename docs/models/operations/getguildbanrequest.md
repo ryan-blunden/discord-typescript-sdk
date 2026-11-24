@@ -6,8 +6,8 @@
 import { GetGuildBanRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetGuildBanRequest = {
-  guildId: "<value>",
-  userId: "<value>",
+  guildId: "0",
+  userId: "0",
 };
 ```
 

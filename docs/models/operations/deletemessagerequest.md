@@ -6,8 +6,8 @@
 import { DeleteMessageRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteMessageRequest = {
-  channelId: "<value>",
-  messageId: "<value>",
+  channelId: "0",
+  messageId: "0",
 };
 ```
 

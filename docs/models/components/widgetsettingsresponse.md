@@ -7,6 +7,7 @@ import { WidgetSettingsResponse } from "@ryan.blunden/discord-sdk/models/compone
 
 let value: WidgetSettingsResponse = {
   enabled: true,
+  channelId: "<value>",
 };
 ```
 
@@ -15,4 +16,4 @@ let value: WidgetSettingsResponse = {
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `enabled`          | *boolean*          | :heavy_check_mark: | N/A                |
-| `channelId`        | *string*           | :heavy_minus_sign: | N/A                |
+| `channelId`        | *string*           | :heavy_check_mark: | N/A                |

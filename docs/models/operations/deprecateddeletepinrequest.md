@@ -6,8 +6,8 @@
 import { DeprecatedDeletePinRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeprecatedDeletePinRequest = {
-  channelId: "<value>",
-  messageId: "<value>",
+  channelId: "0",
+  messageId: "0",
 };
 ```
 

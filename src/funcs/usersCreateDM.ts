@@ -4,6 +4,7 @@
 
 import { DiscordCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -11,7 +12,7 @@ import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import * as components from "../models/components/index.js";
-import { APIError } from "../models/errors/apierror.js";
+import { DiscordError } from "../models/errors/discorderror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -20,6 +21,7 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
@@ -27,6 +29,8 @@ import { Result } from "../types/fp.js";
 
 /**
  * Create a new DM channel with a user. Returns a DM channel object (if one already exists, it will be returned instead).
+ *
+ * If set, this operation will use {@link Security.botToken} from the global security.
  */
 export function usersCreateDM(
   client: DiscordCore,
@@ -34,15 +38,17 @@ export function usersCreateDM(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.CreateDmResponseBody,
+    operations.CreateDmResponse,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | DiscordError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
@@ -59,15 +65,17 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.CreateDmResponseBody,
+      operations.CreateDmResponse,
+      | errors.RatelimitedResponse
       | errors.ErrorResponse
-      | APIError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | DiscordError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -93,13 +101,13 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.botToken);
   const securityInput = secConfig == null ? {} : { botToken: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "create_dm",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 
@@ -127,7 +135,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -141,20 +150,26 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.CreateDmResponseBody,
+    operations.CreateDmResponse,
+    | errors.RatelimitedResponse
     | errors.ErrorResponse
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | DiscordError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
-    M.json(200, operations.CreateDmResponseBody$inboundSchema),
-    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema),
+    M.json(200, operations.CreateDmResponse$inboundSchema, {
+      hdrs: true,
+      key: "Result",
+    }),
+    M.jsonErr(429, errors.RatelimitedResponse$inboundSchema, { hdrs: true }),
+    M.jsonErr("4XX", errors.ErrorResponse$inboundSchema, { hdrs: true }),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

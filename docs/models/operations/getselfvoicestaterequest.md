@@ -6,7 +6,7 @@
 import { GetSelfVoiceStateRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetSelfVoiceStateRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 

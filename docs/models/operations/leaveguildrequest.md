@@ -6,7 +6,7 @@
 import { LeaveGuildRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: LeaveGuildRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 
