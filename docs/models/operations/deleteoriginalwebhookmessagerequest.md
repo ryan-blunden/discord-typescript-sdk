@@ -6,7 +6,7 @@
 import { DeleteOriginalWebhookMessageRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteOriginalWebhookMessageRequest = {
-  webhookId: "<value>",
+  webhookId: "0",
   webhookToken: "<value>",
 };
 ```

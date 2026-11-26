@@ -1,0 +1,15 @@
+# ExternalScheduledEventCreateRequestEntityType
+
+## Example Usage
+
+```typescript
+import { ExternalScheduledEventCreateRequestEntityType } from "@ryan.blunden/discord-sdk/models/components";
+
+let value: ExternalScheduledEventCreateRequestEntityType = 0;
+```
+
+## Values
+
+```typescript
+0 | 1 | 2 | 3
+```

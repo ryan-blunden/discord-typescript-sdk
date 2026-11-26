@@ -6,18 +6,18 @@
 import { ListGuildAuditLogEntriesRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListGuildAuditLogEntriesRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `guildId`          | *string*           | :heavy_check_mark: | N/A                |
-| `userId`           | *string*           | :heavy_minus_sign: | N/A                |
-| `targetId`         | *string*           | :heavy_minus_sign: | N/A                |
-| `actionType`       | *number*           | :heavy_minus_sign: | N/A                |
-| `before`           | *string*           | :heavy_minus_sign: | N/A                |
-| `after`            | *string*           | :heavy_minus_sign: | N/A                |
-| `limit`            | *number*           | :heavy_minus_sign: | N/A                |
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `guildId`                                                                        | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `userId`                                                                         | *string*                                                                         | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `targetId`                                                                       | *string*                                                                         | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `actionType`                                                                     | [components.AuditLogActionTypes](../../models/components/auditlogactiontypes.md) | :heavy_minus_sign:                                                               | Channels were reordered                                                          |
+| `before`                                                                         | *string*                                                                         | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `after`                                                                          | *string*                                                                         | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `limit`                                                                          | *number*                                                                         | :heavy_minus_sign:                                                               | N/A                                                                              |

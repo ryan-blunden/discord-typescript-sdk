@@ -6,8 +6,8 @@
 import { DeleteMyMessageReactionRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteMyMessageReactionRequest = {
-  channelId: "<value>",
-  messageId: "<value>",
+  channelId: "0",
+  messageId: "0",
   emojiName: "<value>",
 };
 ```

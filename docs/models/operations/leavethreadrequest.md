@@ -6,7 +6,7 @@
 import { LeaveThreadRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: LeaveThreadRequest = {
-  channelId: "<value>",
+  channelId: "0",
 };
 ```
 

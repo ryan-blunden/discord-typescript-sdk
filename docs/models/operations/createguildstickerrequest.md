@@ -6,7 +6,12 @@
 import { CreateGuildStickerRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: CreateGuildStickerRequest = {
-  guildId: "<value>",
+  guildId: "0",
+  requestBody: {
+    name: "<value>",
+    tags: "<value>",
+    file: "<value>",
+  },
 };
 ```
 

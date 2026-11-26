@@ -6,7 +6,7 @@
 import { GetWebhookByTokenRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetWebhookByTokenRequest = {
-  webhookId: "<value>",
+  webhookId: "0",
   webhookToken: "<value>",
 };
 ```

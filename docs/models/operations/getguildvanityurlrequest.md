@@ -6,7 +6,7 @@
 import { GetGuildVanityUrlRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetGuildVanityUrlRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 

@@ -6,7 +6,8 @@
 import { CreateLobbyMessageRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: CreateLobbyMessageRequest = {
-  lobbyId: "<value>",
+  lobbyId: "0",
+  sdkMessageRequest: {},
 };
 ```
 

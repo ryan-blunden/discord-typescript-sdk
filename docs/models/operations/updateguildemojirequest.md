@@ -6,8 +6,9 @@
 import { UpdateGuildEmojiRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateGuildEmojiRequest = {
-  guildId: "<value>",
-  emojiId: "<value>",
+  guildId: "0",
+  emojiId: "0",
+  requestBody: {},
 };
 ```
 

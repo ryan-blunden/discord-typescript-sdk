@@ -6,8 +6,8 @@
 import { DeleteGuildSoundboardSoundRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteGuildSoundboardSoundRequest = {
-  guildId: "<value>",
-  soundId: "<value>",
+  guildId: "0",
+  soundId: "0",
 };
 ```
 

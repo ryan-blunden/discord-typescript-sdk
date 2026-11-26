@@ -5,7 +5,6 @@
 import { pollsExpire } from "../funcs/pollsExpire.js";
 import { pollsGetAnswerVoters } from "../funcs/pollsGetAnswerVoters.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -16,7 +15,7 @@ export class Polls extends ClientSDK {
   async getAnswerVoters(
     request: operations.GetAnswerVotersRequest,
     options?: RequestOptions,
-  ): Promise<components.PollAnswerDetailsResponse> {
+  ): Promise<operations.GetAnswerVotersResponse> {
     return unwrapAsync(pollsGetAnswerVoters(
       this,
       request,
@@ -30,7 +29,7 @@ export class Polls extends ClientSDK {
   async expire(
     request: operations.PollExpireRequest,
     options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
+  ): Promise<operations.PollExpireResponse> {
     return unwrapAsync(pollsExpire(
       this,
       request,

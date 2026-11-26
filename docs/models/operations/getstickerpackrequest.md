@@ -6,7 +6,7 @@
 import { GetStickerPackRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetStickerPackRequest = {
-  packId: "<value>",
+  packId: "0",
 };
 ```
 

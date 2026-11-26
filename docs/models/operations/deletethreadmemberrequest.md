@@ -6,8 +6,8 @@
 import { DeleteThreadMemberRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteThreadMemberRequest = {
-  channelId: "<value>",
-  userId: "<value>",
+  channelId: "0",
+  userId: "0",
 };
 ```
 

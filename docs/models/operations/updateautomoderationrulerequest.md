@@ -6,8 +6,9 @@
 import { UpdateAutoModerationRuleRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateAutoModerationRuleRequest = {
-  guildId: "<value>",
-  ruleId: "<value>",
+  guildId: "0",
+  ruleId: "0",
+  requestBody: {},
 };
 ```
 

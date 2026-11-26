@@ -6,8 +6,8 @@
 import { GetGuildSoundboardSoundRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetGuildSoundboardSoundRequest = {
-  guildId: "<value>",
-  soundId: "<value>",
+  guildId: "0",
+  soundId: "0",
 };
 ```
 

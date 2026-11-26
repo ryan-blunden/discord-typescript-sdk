@@ -6,7 +6,8 @@
 import { EditLobbyRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: EditLobbyRequest = {
-  lobbyId: "<value>",
+  lobbyId: "0",
+  requestBody: {},
 };
 ```
 

@@ -6,8 +6,9 @@
 import { UpdateApplicationEmojiRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateApplicationEmojiRequest = {
-  applicationId: "<value>",
-  emojiId: "<value>",
+  applicationId: "0",
+  emojiId: "0",
+  requestBody: {},
 };
 ```
 

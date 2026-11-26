@@ -6,7 +6,7 @@
 import { ApplicationsGetActivityInstanceRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ApplicationsGetActivityInstanceRequest = {
-  applicationId: "<value>",
+  applicationId: "0",
   instanceId: "<id>",
 };
 ```

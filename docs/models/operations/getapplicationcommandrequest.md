@@ -6,8 +6,8 @@
 import { GetApplicationCommandRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetApplicationCommandRequest = {
-  applicationId: "<value>",
-  commandId: "<value>",
+  applicationId: "0",
+  commandId: "0",
 };
 ```
 

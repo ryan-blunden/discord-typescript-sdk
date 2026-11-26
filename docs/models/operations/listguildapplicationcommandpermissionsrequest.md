@@ -6,8 +6,8 @@
 import { ListGuildApplicationCommandPermissionsRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListGuildApplicationCommandPermissionsRequest = {
-  applicationId: "<value>",
-  guildId: "<value>",
+  applicationId: "0",
+  guildId: "0",
 };
 ```
 

@@ -6,8 +6,8 @@
 import { GetApplicationEmojiRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetApplicationEmojiRequest = {
-  applicationId: "<value>",
-  emojiId: "<value>",
+  applicationId: "0",
+  emojiId: "0",
 };
 ```
 

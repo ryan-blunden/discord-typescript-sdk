@@ -6,7 +6,7 @@
 import { GetApplicationRoleConnectionsMetadataRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetApplicationRoleConnectionsMetadataRequest = {
-  applicationId: "<value>",
+  applicationId: "0",
 };
 ```
 

@@ -21,7 +21,7 @@ export const tool$channelsSetPermissionOverwrite: ToolDefinition<typeof args> =
       const [result, apiCall] = await channelsSetPermissionOverwrite(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

@@ -6,8 +6,8 @@
 import { DeleteLobbyMemberRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteLobbyMemberRequest = {
-  lobbyId: "<value>",
-  userId: "<value>",
+  lobbyId: "0",
+  userId: "0",
 };
 ```
 

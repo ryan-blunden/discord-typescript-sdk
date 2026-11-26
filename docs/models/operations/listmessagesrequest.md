@@ -6,7 +6,7 @@
 import { ListMessagesRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListMessagesRequest = {
-  channelId: "<value>",
+  channelId: "0",
 };
 ```
 
