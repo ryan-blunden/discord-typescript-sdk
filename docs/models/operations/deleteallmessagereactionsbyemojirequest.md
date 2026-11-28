@@ -6,8 +6,8 @@
 import { DeleteAllMessageReactionsByEmojiRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteAllMessageReactionsByEmojiRequest = {
-  channelId: "<value>",
-  messageId: "<value>",
+  channelId: "0",
+  messageId: "0",
   emojiName: "<value>",
 };
 ```

@@ -9,6 +9,8 @@ let value: ForumTagResponse = {
   id: "<value>",
   name: "<value>",
   moderated: true,
+  emojiId: "<value>",
+  emojiName: "<value>",
 };
 ```
 
@@ -19,5 +21,5 @@ let value: ForumTagResponse = {
 | `id`               | *string*           | :heavy_check_mark: | N/A                |
 | `name`             | *string*           | :heavy_check_mark: | N/A                |
 | `moderated`        | *boolean*          | :heavy_check_mark: | N/A                |
-| `emojiId`          | *string*           | :heavy_minus_sign: | N/A                |
-| `emojiName`        | *string*           | :heavy_minus_sign: | N/A                |
+| `emojiId`          | *string*           | :heavy_check_mark: | N/A                |
+| `emojiName`        | *string*           | :heavy_check_mark: | N/A                |

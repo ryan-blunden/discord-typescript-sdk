@@ -6,8 +6,8 @@
 import { DeleteApplicationEmojiRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteApplicationEmojiRequest = {
-  applicationId: "<value>",
-  emojiId: "<value>",
+  applicationId: "0",
+  emojiId: "0",
 };
 ```
 

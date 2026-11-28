@@ -6,7 +6,7 @@
 import { GetUserRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetUserRequest = {
-  userId: "<value>",
+  userId: "0",
 };
 ```
 

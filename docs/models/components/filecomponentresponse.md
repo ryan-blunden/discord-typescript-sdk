@@ -6,23 +6,25 @@
 import { FileComponentResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: FileComponentResponse = {
-  id: 601142,
+  type: 13,
+  id: 173185,
   file: {
     id: "<value>",
-    url: "https://actual-testimonial.com/",
-    proxyUrl: "https://poor-toothpick.org/",
+    url: "https://untidy-chow.biz/",
   },
+  name: "<value>",
+  size: 961209,
   spoiler: true,
 };
 ```
 
 ## Fields
 
-| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `type`                                                                               | *number*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `id`                                                                                 | *number*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `file`                                                                               | [components.UnfurledMediaResponse](../../models/components/unfurledmediaresponse.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `name`                                                                               | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
-| `size`                                                                               | *number*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
-| `spoiler`                                                                            | *boolean*                                                                            | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `type`                                                                                       | [components.FileComponentResponseType](../../models/components/filecomponentresponsetype.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `id`                                                                                         | *number*                                                                                     | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `file`                                                                                       | [components.UnfurledMediaResponse](../../models/components/unfurledmediaresponse.md)         | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `name`                                                                                       | *string*                                                                                     | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `size`                                                                                       | *number*                                                                                     | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `spoiler`                                                                                    | *boolean*                                                                                    | :heavy_check_mark:                                                                           | N/A                                                                                          |

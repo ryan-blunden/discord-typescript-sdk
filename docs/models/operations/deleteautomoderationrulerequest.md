@@ -6,8 +6,8 @@
 import { DeleteAutoModerationRuleRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteAutoModerationRuleRequest = {
-  guildId: "<value>",
-  ruleId: "<value>",
+  guildId: "0",
+  ruleId: "0",
 };
 ```
 

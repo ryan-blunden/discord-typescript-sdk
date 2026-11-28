@@ -6,8 +6,8 @@
 import { PollExpireRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: PollExpireRequest = {
-  channelId: "<value>",
-  messageId: "<value>",
+  channelId: "0",
+  messageId: "0",
 };
 ```
 

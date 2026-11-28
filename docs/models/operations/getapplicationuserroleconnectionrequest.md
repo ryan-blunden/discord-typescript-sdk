@@ -6,7 +6,7 @@
 import { GetApplicationUserRoleConnectionRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetApplicationUserRoleConnectionRequest = {
-  applicationId: "<value>",
+  applicationId: "0",
 };
 ```
 

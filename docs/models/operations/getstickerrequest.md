@@ -6,7 +6,7 @@
 import { GetStickerRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetStickerRequest = {
-  stickerId: "<value>",
+  stickerId: "0",
 };
 ```
 

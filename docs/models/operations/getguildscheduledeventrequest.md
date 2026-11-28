@@ -6,8 +6,8 @@
 import { GetGuildScheduledEventRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetGuildScheduledEventRequest = {
-  guildId: "<value>",
-  guildScheduledEventId: "<value>",
+  guildId: "0",
+  guildScheduledEventId: "0",
 };
 ```
 

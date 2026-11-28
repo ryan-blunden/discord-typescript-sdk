@@ -6,8 +6,9 @@
 import { UpdateGuildMemberRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateGuildMemberRequest = {
-  guildId: "<value>",
-  userId: "<value>",
+  guildId: "0",
+  userId: "0",
+  requestBody: {},
 };
 ```
 

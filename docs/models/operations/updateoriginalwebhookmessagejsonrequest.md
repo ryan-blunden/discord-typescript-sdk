@@ -6,8 +6,9 @@
 import { UpdateOriginalWebhookMessageJsonRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateOriginalWebhookMessageJsonRequest = {
-  webhookId: "<value>",
+  webhookId: "0",
   webhookToken: "<value>",
+  incomingWebhookUpdateRequestPartial: {},
 };
 ```
 

@@ -6,20 +6,22 @@
 import { ApplicationCommandUserOptionResponse } from "@ryan.blunden/discord-sdk/models/components";
 
 let value: ApplicationCommandUserOptionResponse = {
+  type: 3,
   name: "<value>",
-  description: "down wherever upon quarrelsomely",
+  description:
+    "tenant ah blah conjecture gosh to wheel e-mail eventually nimble",
 };
 ```
 
 ## Fields
 
-| Field                      | Type                       | Required                   | Description                |
-| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
-| `type`                     | *number*                   | :heavy_check_mark:         | N/A                        |
-| `name`                     | *string*                   | :heavy_check_mark:         | N/A                        |
-| `nameLocalized`            | *string*                   | :heavy_minus_sign:         | N/A                        |
-| `nameLocalizations`        | Record<string, *string*>   | :heavy_minus_sign:         | N/A                        |
-| `description`              | *string*                   | :heavy_check_mark:         | N/A                        |
-| `descriptionLocalized`     | *string*                   | :heavy_minus_sign:         | N/A                        |
-| `descriptionLocalizations` | Record<string, *string*>   | :heavy_minus_sign:         | N/A                        |
-| `required`                 | *boolean*                  | :heavy_minus_sign:         | N/A                        |
+| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                     | [components.ApplicationCommandUserOptionResponseType](../../models/components/applicationcommanduseroptionresponsetype.md) | :heavy_check_mark:                                                                                                         | N/A                                                                                                                        |
+| `name`                                                                                                                     | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | N/A                                                                                                                        |
+| `nameLocalized`                                                                                                            | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | N/A                                                                                                                        |
+| `nameLocalizations`                                                                                                        | Record<string, *string*>                                                                                                   | :heavy_minus_sign:                                                                                                         | N/A                                                                                                                        |
+| `description`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | N/A                                                                                                                        |
+| `descriptionLocalized`                                                                                                     | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | N/A                                                                                                                        |
+| `descriptionLocalizations`                                                                                                 | Record<string, *string*>                                                                                                   | :heavy_minus_sign:                                                                                                         | N/A                                                                                                                        |
+| `required`                                                                                                                 | *boolean*                                                                                                                  | :heavy_minus_sign:                                                                                                         | N/A                                                                                                                        |

@@ -6,7 +6,10 @@
 import { UploadApplicationAttachmentRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UploadApplicationAttachmentRequest = {
-  applicationId: "<value>",
+  applicationId: "0",
+  requestBody: {
+    file: "<value>",
+  },
 };
 ```
 

@@ -23,7 +23,7 @@ export const tool$applicationRoleConnectionMetadataUpdate: ToolDefinition<
     const [result, apiCall] = await applicationRoleConnectionMetadataUpdate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
@@ -33,7 +33,7 @@ export const tool$applicationRoleConnectionMetadataUpdate: ToolDefinition<
       };
     }
 
-    const value = result.value;
+    const value = result.value.result;
 
     return formatResult(value, apiCall);
   },

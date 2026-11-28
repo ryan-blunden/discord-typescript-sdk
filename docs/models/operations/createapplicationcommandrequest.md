@@ -6,7 +6,10 @@
 import { CreateApplicationCommandRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: CreateApplicationCommandRequest = {
-  applicationId: "<value>",
+  applicationId: "0",
+  applicationCommandCreateRequest: {
+    name: "<value>",
+  },
 };
 ```
 

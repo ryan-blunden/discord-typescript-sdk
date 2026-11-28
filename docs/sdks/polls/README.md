@@ -1,5 +1,4 @@
 # Polls
-(*polls*)
 
 ## Overview
 
@@ -14,6 +13,7 @@ Get a list of users that voted for a specific answer in a poll.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get_answer_voters" method="get" path="/channels/{channel_id}/polls/{message_id}/answers/{answer_id}" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -76,14 +76,15 @@ run();
 
 ### Response
 
-**Promise\<[components.PollAnswerDetailsResponse](../../models/components/pollanswerdetailsresponse.md)\>**
+**Promise\<[operations.GetAnswerVotersResponse](../../models/operations/getanswervotersresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
 
 ## expire
 
@@ -91,6 +92,7 @@ Immediately ends the poll. You cannot end polls from other users. Returns a mess
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="poll_expire" method="post" path="/channels/{channel_id}/polls/{message_id}/expire" -->
 ```typescript
 import { Discord } from "@ryan.blunden/discord-sdk";
 
@@ -151,11 +153,12 @@ run();
 
 ### Response
 
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+**Promise\<[operations.PollExpireResponse](../../models/operations/pollexpireresponse.md)\>**
 
 ### Errors
 
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 4XX                  | application/json     |
-| errors.APIError      | 5XX                  | \*/\*                |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.RatelimitedResponse | 429                        | application/json           |
+| errors.ErrorResponse       | 4XX                        | application/json           |
+| errors.APIError            | 5XX                        | \*/\*                      |
