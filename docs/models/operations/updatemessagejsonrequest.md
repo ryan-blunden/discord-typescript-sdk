@@ -6,8 +6,9 @@
 import { UpdateMessageJsonRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateMessageJsonRequest = {
-  channelId: "<value>",
-  messageId: "<value>",
+  channelId: "0",
+  messageId: "0",
+  messageEditRequestPartial: {},
 };
 ```
 

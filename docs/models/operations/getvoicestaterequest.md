@@ -6,8 +6,8 @@
 import { GetVoiceStateRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetVoiceStateRequest = {
-  guildId: "<value>",
-  userId: "<value>",
+  guildId: "0",
+  userId: "0",
 };
 ```
 

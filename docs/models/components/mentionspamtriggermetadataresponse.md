@@ -7,6 +7,7 @@ import { MentionSpamTriggerMetadataResponse } from "@ryan.blunden/discord-sdk/mo
 
 let value: MentionSpamTriggerMetadataResponse = {
   mentionTotalLimit: 474487,
+  mentionRaidProtectionEnabled: true,
 };
 ```
 
@@ -15,4 +16,4 @@ let value: MentionSpamTriggerMetadataResponse = {
 | Field                          | Type                           | Required                       | Description                    |
 | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
 | `mentionTotalLimit`            | *number*                       | :heavy_check_mark:             | N/A                            |
-| `mentionRaidProtectionEnabled` | *boolean*                      | :heavy_minus_sign:             | N/A                            |
+| `mentionRaidProtectionEnabled` | *boolean*                      | :heavy_check_mark:             | N/A                            |

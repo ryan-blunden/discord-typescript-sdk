@@ -6,7 +6,7 @@
 import { ListChannelInvitesRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListChannelInvitesRequest = {
-  channelId: "<value>",
+  channelId: "0",
 };
 ```
 

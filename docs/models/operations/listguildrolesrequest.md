@@ -6,7 +6,7 @@
 import { ListGuildRolesRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListGuildRolesRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 

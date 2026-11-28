@@ -7,7 +7,7 @@ import * as components from "../../models/components/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: components.ApplicationFormPartial$inboundSchema,
+  request: components.ApplicationUpdateFormPartial$inboundSchema,
 };
 
 export const tool$applicationsUpdateSelf: ToolDefinition<typeof args> = {
@@ -20,7 +20,7 @@ export const tool$applicationsUpdateSelf: ToolDefinition<typeof args> = {
     const [result, apiCall] = await applicationsUpdateSelf(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
@@ -30,7 +30,7 @@ export const tool$applicationsUpdateSelf: ToolDefinition<typeof args> = {
       };
     }
 
-    const value = result.value;
+    const value = result.value.result;
 
     return formatResult(value, apiCall);
   },

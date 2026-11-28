@@ -6,8 +6,8 @@
 import { GetEntitlementRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetEntitlementRequest = {
-  applicationId: "<value>",
-  entitlementId: "<value>",
+  applicationId: "0",
+  entitlementId: "0",
 };
 ```
 

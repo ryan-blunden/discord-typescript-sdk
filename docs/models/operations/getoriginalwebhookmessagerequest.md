@@ -6,7 +6,7 @@
 import { GetOriginalWebhookMessageRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetOriginalWebhookMessageRequest = {
-  webhookId: "<value>",
+  webhookId: "0",
   webhookToken: "<value>",
 };
 ```

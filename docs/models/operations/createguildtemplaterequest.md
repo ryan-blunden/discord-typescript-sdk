@@ -6,7 +6,10 @@
 import { CreateGuildTemplateRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: CreateGuildTemplateRequest = {
-  guildId: "<value>",
+  guildId: "0",
+  requestBody: {
+    name: "<value>",
+  },
 };
 ```
 

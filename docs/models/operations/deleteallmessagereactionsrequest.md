@@ -6,8 +6,8 @@
 import { DeleteAllMessageReactionsRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteAllMessageReactionsRequest = {
-  channelId: "<value>",
-  messageId: "<value>",
+  channelId: "0",
+  messageId: "0",
 };
 ```
 

@@ -6,8 +6,8 @@
 import { DeleteGuildScheduledEventRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteGuildScheduledEventRequest = {
-  guildId: "<value>",
-  guildScheduledEventId: "<value>",
+  guildId: "0",
+  guildScheduledEventId: "0",
 };
 ```
 

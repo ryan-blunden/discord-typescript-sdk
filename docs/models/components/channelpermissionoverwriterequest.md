@@ -12,9 +12,9 @@ let value: ChannelPermissionOverwriteRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | N/A                |
-| `type`             | *number*           | :heavy_minus_sign: | N/A                |
-| `allow`            | *number*           | :heavy_minus_sign: | N/A                |
-| `deny`             | *number*           | :heavy_minus_sign: | N/A                |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `id`                                                                                             | *string*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `type`                                                                                           | [components.ChannelPermissionOverwrites](../../models/components/channelpermissionoverwrites.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `allow`                                                                                          | *number*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `deny`                                                                                           | *number*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |

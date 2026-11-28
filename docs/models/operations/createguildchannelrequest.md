@@ -6,7 +6,10 @@
 import { CreateGuildChannelRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: CreateGuildChannelRequest = {
-  guildId: "<value>",
+  guildId: "0",
+  createGuildChannelRequest: {
+    name: "<value>",
+  },
 };
 ```
 

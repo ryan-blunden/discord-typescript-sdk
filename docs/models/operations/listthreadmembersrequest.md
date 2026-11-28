@@ -6,7 +6,7 @@
 import { ListThreadMembersRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListThreadMembersRequest = {
-  channelId: "<value>",
+  channelId: "0",
 };
 ```
 

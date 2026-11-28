@@ -6,7 +6,7 @@
 import { GetGuildWidgetRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetGuildWidgetRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 

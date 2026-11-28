@@ -8,17 +8,21 @@ import { UnfurledMediaResponse } from "@ryan.blunden/discord-sdk/models/componen
 let value: UnfurledMediaResponse = {
   id: "<value>",
   url: "https://grumpy-spork.name",
-  proxyUrl: "https://practical-linseed.biz/",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | N/A                |
-| `url`              | *string*           | :heavy_check_mark: | N/A                |
-| `proxyUrl`         | *string*           | :heavy_check_mark: | N/A                |
-| `width`            | *number*           | :heavy_minus_sign: | N/A                |
-| `height`           | *number*           | :heavy_minus_sign: | N/A                |
-| `contentType`      | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `id`                                                                                             | *string*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `url`                                                                                            | *string*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `proxyUrl`                                                                                       | *string*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `width`                                                                                          | *number*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `height`                                                                                         | *number*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `placeholder`                                                                                    | *string*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `placeholderVersion`                                                                             | *number*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `contentScanMetadata`                                                                            | [components.ContentScanMetadataResponse](../../models/components/contentscanmetadataresponse.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `contentType`                                                                                    | *string*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `flags`                                                                                          | *number*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `attachmentId`                                                                                   | *string*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |

@@ -6,7 +6,7 @@
 import { ListApplicationCommandsRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListApplicationCommandsRequest = {
-  applicationId: "<value>",
+  applicationId: "0",
 };
 ```
 

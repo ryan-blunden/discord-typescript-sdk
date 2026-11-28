@@ -6,7 +6,7 @@
 import { GetChannelRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetChannelRequest = {
-  channelId: "<value>",
+  channelId: "0",
 };
 ```
 

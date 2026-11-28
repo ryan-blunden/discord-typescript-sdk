@@ -6,7 +6,10 @@
 import { BulkUpdateGuildChannelsRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: BulkUpdateGuildChannelsRequest = {
-  guildId: "<value>",
+  guildId: "0",
+  requestBody: [
+    {},
+  ],
 };
 ```
 

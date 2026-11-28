@@ -6,7 +6,7 @@
 import { ListGuildMembersRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListGuildMembersRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 
@@ -16,4 +16,4 @@ let value: ListGuildMembersRequest = {
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `guildId`          | *string*           | :heavy_check_mark: | N/A                |
 | `limit`            | *number*           | :heavy_minus_sign: | N/A                |
-| `after`            | *number*           | :heavy_minus_sign: | N/A                |
+| `after`            | *string*           | :heavy_minus_sign: | N/A                |

@@ -6,8 +6,8 @@
 import { GetAutoModerationRuleRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetAutoModerationRuleRequest = {
-  guildId: "<value>",
-  ruleId: "<value>",
+  guildId: "0",
+  ruleId: "0",
 };
 ```
 

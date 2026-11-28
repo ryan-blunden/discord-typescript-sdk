@@ -6,7 +6,7 @@
 import { TriggerTypingIndicatorRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: TriggerTypingIndicatorRequest = {
-  channelId: "<value>",
+  channelId: "0",
 };
 ```
 

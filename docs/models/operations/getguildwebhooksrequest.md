@@ -6,7 +6,7 @@
 import { GetGuildWebhooksRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: GetGuildWebhooksRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 

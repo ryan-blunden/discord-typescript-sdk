@@ -6,7 +6,7 @@
 import { ListPublicArchivedThreadsRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListPublicArchivedThreadsRequest = {
-  channelId: "<value>",
+  channelId: "0",
 };
 ```
 

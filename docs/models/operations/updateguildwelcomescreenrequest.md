@@ -6,7 +6,8 @@
 import { UpdateGuildWelcomeScreenRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateGuildWelcomeScreenRequest = {
-  guildId: "<value>",
+  guildId: "0",
+  welcomeScreenPatchRequestPartial: {},
 };
 ```
 

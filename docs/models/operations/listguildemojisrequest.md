@@ -6,7 +6,7 @@
 import { ListGuildEmojisRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: ListGuildEmojisRequest = {
-  guildId: "<value>",
+  guildId: "0",
 };
 ```
 

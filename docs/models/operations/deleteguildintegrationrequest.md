@@ -6,8 +6,8 @@
 import { DeleteGuildIntegrationRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: DeleteGuildIntegrationRequest = {
-  guildId: "<value>",
-  integrationId: "<value>",
+  guildId: "0",
+  integrationId: "0",
 };
 ```
 

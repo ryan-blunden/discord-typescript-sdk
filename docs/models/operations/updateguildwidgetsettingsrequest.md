@@ -6,7 +6,8 @@
 import { UpdateGuildWidgetSettingsRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: UpdateGuildWidgetSettingsRequest = {
-  guildId: "<value>",
+  guildId: "0",
+  requestBody: {},
 };
 ```
 

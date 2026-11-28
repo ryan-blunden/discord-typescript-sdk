@@ -6,7 +6,8 @@
 import { CreateMessageFormRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: CreateMessageFormRequest = {
-  channelId: "<value>",
+  channelId: "0",
+  messageCreateRequest: {},
 };
 ```
 

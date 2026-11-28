@@ -6,7 +6,7 @@
 import { LeaveLobbyRequest } from "@ryan.blunden/discord-sdk/models/operations";
 
 let value: LeaveLobbyRequest = {
-  lobbyId: "<value>",
+  lobbyId: "0",
 };
 ```
 

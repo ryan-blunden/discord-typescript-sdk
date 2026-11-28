@@ -8,10 +8,10 @@ import { MediaGalleryItemResponse } from "@ryan.blunden/discord-sdk/models/compo
 let value: MediaGalleryItemResponse = {
   media: {
     id: "<value>",
-    url: "https://yellow-repeat.org",
-    proxyUrl: "https://major-gastropod.name",
+    url: "https://faint-maintainer.biz",
   },
-  spoiler: false,
+  description: "oof sizzling circa out rebel innovation granular worth",
+  spoiler: true,
 };
 ```
 
@@ -20,5 +20,5 @@ let value: MediaGalleryItemResponse = {
 | Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `media`                                                                              | [components.UnfurledMediaResponse](../../models/components/unfurledmediaresponse.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `description`                                                                        | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `description`                                                                        | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
 | `spoiler`                                                                            | *boolean*                                                                            | :heavy_check_mark:                                                                   | N/A                                                                                  |
